@@ -4454,9 +4454,14 @@
             Sorts the entire tree of menu items recursively by name with respects to numbers.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.SortMenuItemsByName(System.Collections.Generic.IEnumerable{Sirenix.OdinInspector.Editor.OdinMenuItem},System.Boolean)">
+        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.SortMenuItemsByName(System.Collections.Generic.IEnumerable{Sirenix.OdinInspector.Editor.OdinMenuItem},System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
-            Sorts the collection of menu items recursively by name with respects to numbers.
+            Sorts the collection of menu items recursively by name with respects to numbers. This is a stable sort, meaning that equivalently ordered items will remain in the same order as they start.
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.SortMenuItemsByName(System.Collections.Generic.IEnumerable{Sirenix.OdinInspector.Editor.OdinMenuItem},System.Comparison{Sirenix.OdinInspector.Editor.OdinMenuItem})">
+            <summary>
+            Sorts the collection of menu items recursively using a given custom comparison. This is a stable sort, meaning that equivalently ordered items will remain in the same order as they start.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.AddObjectAtPath(Sirenix.OdinInspector.Editor.OdinMenuTree,System.String,System.Object,System.Boolean)">
@@ -8890,6 +8895,11 @@
         <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.GetComponent``1">
             <summary>
             Gets the component of a given type on the property, or null if the property does not have a component of the given type.
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.MarkSerializationRootDirty">
+            <summary>
+            Marks the property's serialization root values dirty if they are derived from UnityEngine.Object.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.RecordForUndo(System.String,System.Boolean)">

@@ -647,6 +647,11 @@
             Indicates that the member should not be drawn as a value reference, if it becomes a reference to another value in the tree. Beware, and use with care! This may lead to infinite draw loops!
             </summary>
         </member>
+        <member name="T:Sirenix.OdinInspector.DontValidateAttribute">
+            <summary>
+            Tells the validation system that this member should not be validated. It will not show validation messages in the inspector, and it will not be scanned by the project validator.
+            </summary>
+        </member>
         <member name="T:Sirenix.OdinInspector.EnableGUIAttribute">
             <summary>
             <para>An attribute that enables GUI.</para>
@@ -4500,6 +4505,11 @@
         <member name="F:Sirenix.OdinInspector.OnValueChangedAttribute.InvokeOnUndoRedo">
             <summary>
             Whether to perform the action when an undo or redo event occurs via UnityEditor.Undo.undoRedoPerformed. True by default.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.OnValueChangedAttribute.InvokeOnInitialize">
+            <summary>
+            Whether to perform the action when the property is initialized. This will generally happen when the property is first viewed/queried (IE when the inspector is first opened, or when its containing foldout is first expanded, etc), and whenever its type or a parent type changes, or it is otherwise forced to rebuild.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.OnValueChangedAttribute.#ctor(System.String,System.Boolean)">
