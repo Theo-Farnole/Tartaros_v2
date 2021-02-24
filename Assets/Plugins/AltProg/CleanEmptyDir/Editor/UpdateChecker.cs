@@ -19,9 +19,11 @@ namespace AltProg.CleanEmptyDir
 
         // Action: message, button text, button link
         public static Action<Message> OnDone;
-        static WWW www;
+#pragma warning disable CS0618 // Type or member is obsolete
+		static WWW www;
+#pragma warning restore CS0618 // Type or member is obsolete
 
-        static UpdateChecker()
+		static UpdateChecker()
         {
             www = null;
         }
@@ -33,9 +35,11 @@ namespace AltProg.CleanEmptyDir
             if (www != null)
                 return;
 
-            www = new WWW("http://update.altprog.com/CleanEmptyDir.json");
+#pragma warning disable CS0618 // Type or member is obsolete
+			www = new WWW("http://update.altprog.com/CleanEmptyDir.json");
+#pragma warning restore CS0618 // Type or member is obsolete
 
-            EditorApplication.update += EditorApplication_Update;
+			EditorApplication.update += EditorApplication_Update;
         }
 
         static void EditorApplication_Update()
