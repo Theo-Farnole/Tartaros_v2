@@ -1,7 +1,9 @@
 ﻿namespace Tartaros.Entities
 {
-    public interface IEntityBehaviourData
-    {
-        void SpawnRequiredComponentsAndConfigureIt();
-    }
+	using UnityEngine;
+
+	public interface IEntityBehaviourData
+	{
+		void SpawnRequiredComponents(GameObject entityRoot);
+	}
 }
