@@ -1,42 +1,37 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using UnityEngine;
-
-namespace Lortedo.Utilities.Pattern
+﻿namespace Tartaros.Utilities
 {
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
-    {
-        private static T _instance = null;
+	using UnityEngine;
 
-        public static T Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    T[] instances =
-                        FindObjectsOfType<T>();
+	public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+	{
+		private static T _instance = null;
 
-                    if (instances.Length > 1)
-                    {
-                        Debug.LogWarning(instances[0].name + " There is more than one instance of " + typeof(T) + " Singleton. ");
-                    }
-                    if (instances != null && instances.Length > 0)
-                    {
-                        _instance = instances[0];
-                    }
-                }
+		public static T Instance
+		{
+			get
+			{
+				if (_instance == null)
+				{
+					T[] instances =
+						FindObjectsOfType<T>();
 
-                return _instance;
-            }
-        }
+					if (instances.Length > 1)
+					{
+						Debug.LogWarning(instances[0].name + " There is more than one instance of " + typeof(T) + " Singleton. ");
+					}
+					if (instances != null && instances.Length > 0)
+					{
+						_instance = instances[0];
+					}
+				}
 
-        void OnDestroy()
-        {
-            _instance = null;
-        }
-    }
+				return _instance;
+			}
+		}
+
+		void OnDestroy()
+		{
+			_instance = null;
+		}
+	}
 }
