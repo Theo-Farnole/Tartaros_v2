@@ -5,7 +5,7 @@
 
 	internal class ViewModelManager : MonoBehaviour
 	{
-		#region Fields
+		#region Fields		
 		[SerializeField]
 		private Transform _viewedMeshParent = null;
 
@@ -19,23 +19,7 @@
 			_meshLoader = new ModelLoader();
 		}
 
-		private void OnEnable()
-		{
-			UIManager.Instance.MeshConfigurationChanged -= Instance_MeshConfigurationChanged;
-			UIManager.Instance.MeshConfigurationChanged += Instance_MeshConfigurationChanged;
-		}
-
-		private void OnDisable()
-		{
-			UIManager.Instance.MeshConfigurationChanged -= Instance_MeshConfigurationChanged;
-		}
-
-		private void Instance_MeshConfigurationChanged(object sender, UIManager.MeshConfigurationChangedArgs e)
-		{
-			RefreshMesh(e.meshPathConfiguration);
-		}
-
-		void RefreshMesh(MeshPathConfiguration meshConfiguration)
+		public void SetMeshConfiguration(MeshPathConfiguration meshConfiguration)
 		{
 			if (_currentDisplayMesh != null)
 			{
@@ -46,6 +30,9 @@
 			_currentDisplayMesh.transform.parent = _viewedMeshParent;
 			_currentDisplayMesh.transform.localPosition = Vector3.zero;
 		}
+
+		public void Rotate90Degrees() => _currentDisplayMesh.transform.Rotate(0, 90, 0);
+		public void RotateAnti90Degrees() => _currentDisplayMesh.transform.Rotate(0, -90, 0);
 		#endregion Methods
 	}
 }

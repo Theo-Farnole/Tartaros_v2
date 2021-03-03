@@ -3,10 +3,14 @@
 	using System;
 	using Tartaros.MeshViewer;
 	using UnityEngine;
+	using UnityEngine.UI;
 
 	internal class UIManager : Singleton<UIManager>
 	{
 		#region Fields
+		[SerializeField]
+		private ViewModelManager _viewModelManager = null;
+
 		[SerializeField]
 		private FolderInputField _modelFolderInput = null;
 
@@ -15,23 +19,24 @@
 
 		[SerializeField]
 		private FileInputField _materialFileInput = null;
+
+		[SerializeField]
+		private Button _rotate90Degrees = null;
+
+		[SerializeField]
+		private Button _rotateAnti90Degrees = null;
 		#endregion Fields
 
-		#region Events
-		internal class MeshConfigurationChangedArgs : EventArgs
+		#region Methods
+		private void Start()
 		{
-			public readonly MeshPathConfiguration meshPathConfiguration;
+			_rotate90Degrees.onClick.RemoveListener(_viewModelManager.Rotate90Degrees);
+			_rotate90Degrees.onClick.AddListener(_viewModelManager.Rotate90Degrees);
 
-			public MeshConfigurationChangedArgs(MeshPathConfiguration meshPathConfiguration)
-			{
-				this.meshPathConfiguration = meshPathConfiguration;
-			}
+			_rotateAnti90Degrees.onClick.RemoveListener(_viewModelManager.RotateAnti90Degrees);
+			_rotateAnti90Degrees.onClick.AddListener(_viewModelManager.RotateAnti90Degrees);
 		}
 
-		internal event EventHandler<MeshConfigurationChangedArgs> MeshConfigurationChanged = null;
-		#endregion Events
-
-		#region Methods
 		private void OnEnable()
 		{
 			_modelFolderInput.OnPathChanged -= ModelFolderInput_OnPathChanged;
@@ -53,17 +58,17 @@
 
 		private void ModalFileInput_OnPathChanged(object sender, FileInputField.PathChangedArgs e)
 		{
-			InvokeMeshConfigurationChangedEvent();
+			UpdateViewModelManagerConfiguration();
 		}
 
 		private void MeshFileInput_PathChanged(object sender, FileInputField.PathChangedArgs e)
 		{
-			InvokeMeshConfigurationChangedEvent();
+			UpdateViewModelManagerConfiguration();
 		}
 
 		private void ModelFolderInput_OnPathChanged(object sender, FolderInputField.PathChangedArgs e)
 		{
-			InvokeMeshConfigurationChangedEvent();
+			UpdateViewModelManagerConfiguration();
 		}
 
 		private MeshPathConfiguration GetMeshPathConfiguration()
@@ -71,9 +76,9 @@
 			return new MeshPathConfiguration(_modelFolderInput.Path);
 		}
 
-		private void InvokeMeshConfigurationChangedEvent()
+		private void UpdateViewModelManagerConfiguration()
 		{
-			MeshConfigurationChanged?.Invoke(this, new MeshConfigurationChangedArgs(GetMeshPathConfiguration()));
+			_viewModelManager.SetMeshConfiguration(GetMeshPathConfiguration());
 		}
 		#endregion Methods
 	}
