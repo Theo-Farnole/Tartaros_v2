@@ -78,7 +78,7 @@ namespace AmplifyImpostors
 				if( ImportData.TryGetValue( assetPath, out data ) )
 				{
 					TextureImporter textureImporter = (TextureImporter)assetImporter;
-					textureImporter.sRGBTexture = data.SRGB;
+					textureImporter.RGBTexture = data.SRGB;
 					textureImporter.alphaSource = data.Alpha ? TextureImporterAlphaSource.FromInput : TextureImporterAlphaSource.None;
 					textureImporter.textureCompression = (TextureImporterCompression)data.Compression;
 					if( data.MaxSize > -1 )
