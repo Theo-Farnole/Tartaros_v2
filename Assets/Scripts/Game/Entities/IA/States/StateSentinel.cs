@@ -6,5 +6,12 @@ using Tartaros.Entities;
 
 public class StateSentinel : AEntityState
 {
+	public StateSentinel(Entity stateOwner) : base(stateOwner)
+	{
+	}
 
+	public override void OnUpdate()
+	{
+		throw new System.NotImplementedException();
+	}
 }

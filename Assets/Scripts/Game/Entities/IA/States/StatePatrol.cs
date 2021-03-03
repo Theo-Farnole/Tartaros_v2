@@ -6,5 +6,14 @@ using Tartaros.Entities;
 
 public class StatePatrol : AEntityState
 {
-    Vector3[] targetPoints;
+    readonly Vector3[] targetPoints;
+
+	public StatePatrol(Entity stateOwner) : base(stateOwner)
+	{
+	}
+
+	public override void OnUpdate()
+	{
+		throw new System.NotImplementedException();
+	}
 }
