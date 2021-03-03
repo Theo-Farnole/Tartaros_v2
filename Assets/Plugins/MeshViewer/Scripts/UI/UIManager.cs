@@ -4,7 +4,7 @@
 	using Tartaros.MeshViewer;
 	using UnityEngine;
 
-	public class UIManager : Singleton<UIManager>
+	internal class UIManager : Singleton<UIManager>
 	{
 		#region Fields
 		[SerializeField]

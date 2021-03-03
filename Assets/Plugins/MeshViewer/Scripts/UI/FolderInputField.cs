@@ -7,7 +7,7 @@ namespace Tartaros.MeshViewer.UI
 	using SFB;
 	using System;
 
-	public class FolderInputField : MonoBehaviour
+	internal class FolderInputField : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]

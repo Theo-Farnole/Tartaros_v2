@@ -7,7 +7,7 @@ namespace Tartaros.MeshViewer.UI
 	using SFB;
 	using System;
 
-	public class FileInputField : MonoBehaviour
+	internal class FileInputField : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
