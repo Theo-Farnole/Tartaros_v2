@@ -20,14 +20,14 @@
 		{
 			if (_databases.ContainsKey(typeof(T)) == false)
 			{
-				Debug.LogErrorFormat(DBG_ERROR_DB_NOT_REGISTER, typeof(T).Name, nameof(RegisterDatabase));
+				Debug.LogErrorFormat(DBG_ERROR_DB_NOT_REGISTER, typeof(T).Name, nameof(RegisterService));
 				return default;
 			}
 
 			return (T)_databases[typeof(T)];
 		}
 
-		public void RegisterDatabase<T>(T database)
+		public void RegisterService<T>(T database)
 		{
 			if (_databases.ContainsKey(typeof(T)))
 			{
