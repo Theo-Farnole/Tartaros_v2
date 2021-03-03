@@ -17,17 +17,17 @@
 		private Material CreateMaterial(string modelFolder)
 		{
 			Material mat = new Material(Shader.Find("Standard"));
-			mat.SetTexture("_MainTex", LoadImage(modelFolder, "Albedo"));
 
-			// TODO TF: ao
-			// TODO TF: normal
+			mat.SetTexture("_MainTex", LoadImage(modelFolder, "Albedo"));
+			mat.SetTexture("_Occlusion", LoadImage(modelFolder, "AO"));
+			mat.SetTexture("_BumpMap", LoadImage(modelFolder, "Normal"));
 
 			return mat;
 		}
 
 		private Texture LoadImage(string modelFolder, string imageType)
 		{
-			if (FileHelper.TryGetFileWithSearchPattern(modelFolder, string.Format("*{0}*", imageType), out string filename))
+			if (FileHelper.TryGetFileWithSearchPattern(modelFolder, string.Format("{0} NOT .meta", imageType), out string filename))
 			{
 				byte[] bytes = File.ReadAllBytes(filename);
 				Texture2D texture = new Texture2D(2, 2);
