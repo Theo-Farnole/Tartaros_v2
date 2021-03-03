@@ -44,6 +44,7 @@
 
 			_currentDisplayMesh = _meshLoader.Load(meshConfiguration);
 			_currentDisplayMesh.transform.parent = _viewedMeshParent;
+			_currentDisplayMesh.transform.localPosition = Vector3.zero;
 		}
 		#endregion Methods
 	}
