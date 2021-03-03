@@ -1,6 +1,6 @@
 ﻿namespace Tartaros.Utilities
 {
-	public abstract class AGenericFSM<T>
+	public class GenericFSM<T>
 	{
 		#region Fields
 		private AState<T> _currentState = null;		

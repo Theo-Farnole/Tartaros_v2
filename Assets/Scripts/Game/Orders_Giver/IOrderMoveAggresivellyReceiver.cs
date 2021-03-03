@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.OrderGiver
 {
     using UnityEngine;
+
     public interface IOrderMoveAggresivellyReceiver
     {
         void MoveAggressively(Vector3 position);

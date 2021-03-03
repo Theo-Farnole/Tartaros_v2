@@ -3,7 +3,7 @@
 	using UnityEngine;
 
 	[System.Serializable]
-	public struct Bounds
+	public struct Bounds1D
 	{
 		#region Fields
 		[SerializeField]
@@ -14,7 +14,7 @@
 		#endregion Fields
 
 		#region Properties
-		public Bounds(int min, int max)
+		public Bounds1D(int min, int max)
 		{
 			this.min = min;
 			this.max = max;

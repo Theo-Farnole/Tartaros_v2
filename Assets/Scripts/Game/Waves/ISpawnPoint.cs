@@ -5,6 +5,6 @@
     public interface ISpawnPoint
     {
         SpawnPointIdentifier Identifier { get; }
-        Vector3 SapwnPoint { get; }
+        Vector3 SpawnPoint { get; }
     }
 }

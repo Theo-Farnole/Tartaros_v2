@@ -6,10 +6,10 @@
 	{
 		#region Fields
 		[SerializeField]
-		public Bounds boundsY;
+		public Bounds1D boundsY;
 
 		[SerializeField]
-		public Bounds boundsX;
+		public Bounds1D boundsX;
 		#endregion Fields
 
 		#region Properties
@@ -23,11 +23,11 @@
 		#region Ctor
 		public Bounds2D(int minX, int maxX, int minY, int maxY)
 		{
-			boundsX = new Bounds(minX, maxX);
-			boundsY = new Bounds(minY, maxY);
+			boundsX = new Bounds1D(minX, maxX);
+			boundsY = new Bounds1D(minY, maxY);
 		}
 
-		public Bounds2D(Bounds boundsX, Bounds boundsY)
+		public Bounds2D(Bounds1D boundsX, Bounds1D boundsY)
 		{
 			this.boundsX = boundsX;
 			this.boundsY = boundsY;

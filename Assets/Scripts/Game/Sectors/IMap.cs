@@ -4,7 +4,7 @@
     using Tartaros.Utilities;
     public interface IMap
     {
-        Utilities.Bounds MapBounds { get; }
+        Bounds1D MapBounds { get; }
         bool CanBuild(Vector2 buildingPosition, Vector2 buildingSize);
     }
 }
