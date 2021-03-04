@@ -1,5 +1,7 @@
 ﻿namespace Tartaros.MeshViewer
 {
+	using System.IO;
+	using System.Linq;
 	using UnityEngine;
 
 	internal static class FileHelper
@@ -26,25 +28,26 @@
 			}
 		}
 
-		public static bool TryGetFileWithSearchPattern(string directoryPath, string searchPattern, out string filename)
+		public static bool TryGetFile(string directoryPath, string searchPattern, out string filename)
 		{
-			string[] fbxFiles = System.IO.Directory.GetFiles(directoryPath, searchPattern);
+			string[] files = Directory.GetFiles(directoryPath)
+				.Where(name => !name.EndsWith(".meta") && name.Contains(searchPattern))
+				.ToArray();
 
-			if (fbxFiles.Length == 1)
-			{
-				filename = fbxFiles[0];
-				return true;
-			}
-			else if (fbxFiles.Length > 1)
-			{
-				Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", searchPattern);
-				filename = fbxFiles[0];
-				return true;
-			}
-			else
+			if (files.Length == 0)
 			{
 				filename = null;
 				return false;
+			}
+			else
+			{
+				if (files.Length > 1)
+				{
+					Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", searchPattern);
+				}
+
+				filename = files[0];
+				return true;
 			}
 		}
 	}

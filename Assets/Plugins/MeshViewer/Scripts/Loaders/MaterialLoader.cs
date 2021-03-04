@@ -27,7 +27,7 @@
 
 		private Texture LoadImage(string modelFolder, string imageType)
 		{
-			if (FileHelper.TryGetFileWithSearchPattern(modelFolder, string.Format("{0} NOT .meta", imageType), out string filename))
+			if (FileHelper.TryGetFile(modelFolder, imageType, out string filename))
 			{
 				byte[] bytes = File.ReadAllBytes(filename);
 				Texture2D texture = new Texture2D(2, 2);
