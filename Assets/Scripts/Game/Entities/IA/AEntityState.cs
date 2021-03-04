@@ -6,6 +6,7 @@
 	{
 		public AEntityState(Entity stateOwner) : base(stateOwner)
 		{
+
 		}
 	}
 }
