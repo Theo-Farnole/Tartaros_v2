@@ -14,7 +14,6 @@
 			matLoader.ApplyMaterialsToGameObject(model);
 
 			return model;
-
 		}
 	}
 }

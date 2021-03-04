@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.MeshViewer.UI
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using Tartaros.MeshViewer;
 	using UnityEngine;
@@ -8,17 +9,29 @@
 	internal class UIManager : Singleton<UIManager>
 	{
 		#region Fields
+		private const string GROUP_SETUP = "Setup";
+
 		[SerializeField]
 		private ViewModelManager _viewModelManager = null;
 
 		[SerializeField]
-		private FolderInputField _modelFolderInput = null;
+		private FolderInputField _modelFolder = null;
 
+		[FoldoutGroup(GROUP_SETUP)]
 		[SerializeField]
-		private FileInputField _meshFileInput = null;
+		private FileInputField _meshPath = null;
 
+		[FoldoutGroup(GROUP_SETUP)]
 		[SerializeField]
-		private FileInputField _materialFileInput = null;
+		private FileInputField _albedoPath = null;
+
+		[FoldoutGroup(GROUP_SETUP)]
+		[SerializeField]
+		private FileInputField _normalPath = null;
+
+		[FoldoutGroup(GROUP_SETUP)]
+		[SerializeField]
+		private FileInputField _aoPath = null;
 
 		[SerializeField]
 		private Button _rotate90Degrees = null;
@@ -39,46 +52,68 @@
 
 		private void OnEnable()
 		{
-			_modelFolderInput.OnPathChanged -= ModelFolderInput_OnPathChanged;
-			_modelFolderInput.OnPathChanged += ModelFolderInput_OnPathChanged;
+			_modelFolder.OnPathChanged -= ModelPathChanged;
+			_modelFolder.OnPathChanged += ModelPathChanged;
 
-			_meshFileInput.OnPathChanged -= MeshFileInput_PathChanged;
-			_meshFileInput.OnPathChanged += MeshFileInput_PathChanged;
+			_meshPath.OnPathChanged -= MeshPathChanged;
+			_meshPath.OnPathChanged += MeshPathChanged;
 
-			_materialFileInput.OnPathChanged -= ModalFileInput_OnPathChanged;
-			_materialFileInput.OnPathChanged += ModalFileInput_OnPathChanged;
+			_albedoPath.OnPathChanged -= TexturePathChanged;
+			_albedoPath.OnPathChanged += TexturePathChanged;
+
+			_normalPath.OnPathChanged -= TexturePathChanged;
+			_normalPath.OnPathChanged += TexturePathChanged;
+
+			_aoPath.OnPathChanged -= TexturePathChanged;
+			_aoPath.OnPathChanged += TexturePathChanged;
 		}
 
 		private void OnDisable()
 		{
-			_modelFolderInput.OnPathChanged -= ModelFolderInput_OnPathChanged;
-			_meshFileInput.OnPathChanged -= MeshFileInput_PathChanged;
-			_materialFileInput.OnPathChanged -= ModalFileInput_OnPathChanged;
+			_modelFolder.OnPathChanged -= ModelPathChanged;
+			_meshPath.OnPathChanged -= MeshPathChanged;
+			_albedoPath.OnPathChanged -= TexturePathChanged;
+			_normalPath.OnPathChanged -= TexturePathChanged;
+			_aoPath.OnPathChanged -= TexturePathChanged;
 		}
 
-		private void ModalFileInput_OnPathChanged(object sender, FileInputField.PathChangedArgs e)
+		private void ModelPathChanged(object sender, FolderInputField.PathChangedArgs e)
 		{
-			UpdateViewModelManagerConfiguration();
+			UpdatePathInputs();
 		}
 
-		private void MeshFileInput_PathChanged(object sender, FileInputField.PathChangedArgs e)
+		private void TexturePathChanged(object sender, FileInputField.PathChangedArgs e)
 		{
-			UpdateViewModelManagerConfiguration();
+			UpdateViewedModel();
 		}
 
-		private void ModelFolderInput_OnPathChanged(object sender, FolderInputField.PathChangedArgs e)
+		private void MeshPathChanged(object sender, FileInputField.PathChangedArgs e)
 		{
-			UpdateViewModelManagerConfiguration();
+			UpdateViewedModel();
 		}
 
-		private ModelPath GetMeshPathConfiguration()
+		private void UpdatePathInputs()
 		{
-			return ModelPath.CreateFromFolder(_modelFolderInput.Path);
+			ModelPath modelPath = ModelPath.CreateFromFolder(_modelFolder.Path);
+
+			_meshPath.Path = modelPath.meshPath;
+			_albedoPath.Path = modelPath.texturesPath.AlbedoPath;
+			_normalPath.Path = modelPath.texturesPath.NormalPath;
+			_aoPath.Path = modelPath.texturesPath.AoPath;
+
+			UpdateViewedModel();
+		}		
+
+		private void UpdateViewedModel()
+		{
+			ModelPath modelPath = GetCurrentModelPath();
+
+			_viewModelManager.SetMeshConfiguration(modelPath);
 		}
 
-		private void UpdateViewModelManagerConfiguration()
+		private ModelPath GetCurrentModelPath()
 		{
-			_viewModelManager.SetMeshConfiguration(GetMeshPathConfiguration());
+			return new ModelPath(_meshPath.Path, new TexturesPath(_albedoPath.Path, _normalPath.Path, _aoPath.Path));
 		}
 		#endregion Methods
 	}

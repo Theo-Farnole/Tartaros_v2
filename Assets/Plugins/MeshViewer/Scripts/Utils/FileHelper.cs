@@ -36,6 +36,7 @@
 
 			if (files.Length == 0)
 			{
+				Debug.LogWarningFormat("No found file containing {0} in directory {1}.", searchPattern, directoryPath);
 				return null;
 			}
 			else if (files.Length > 1)
@@ -71,6 +72,8 @@
 
 		public static Texture2D LoadTexture(string textureFilePath)
 		{
+			if (string.IsNullOrEmpty(textureFilePath) == true) throw new System.ArgumentException("Path is null or empty.");
+
 			byte[] bytes = File.ReadAllBytes(textureFilePath);
 			Texture2D texture = new Texture2D(2, 2);
 			texture.LoadImage(bytes);
