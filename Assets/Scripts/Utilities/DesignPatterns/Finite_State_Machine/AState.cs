@@ -3,7 +3,7 @@
 	public abstract class AState<T>
 	{
 		#region Fields
-		private T _stateOwner = default;
+		private readonly T _stateOwner = default;
 		#endregion Fields
 
 		#region Ctor
