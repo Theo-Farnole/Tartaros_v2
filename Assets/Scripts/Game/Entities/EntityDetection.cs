@@ -14,6 +14,7 @@
         #region Methods
         Entity GetNearest(SearchQuary searchQuary)
         {
+
             throw new System.NotImplementedException();
         } 
         #endregion
