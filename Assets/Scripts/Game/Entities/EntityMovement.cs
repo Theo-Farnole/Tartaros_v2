@@ -53,7 +53,7 @@
         }
         void StopMovement()
         {
-            _navMeshAgent.isStopped = false
+            _navMeshAgent.isStopped = false;
         }
         #endregion
     }
