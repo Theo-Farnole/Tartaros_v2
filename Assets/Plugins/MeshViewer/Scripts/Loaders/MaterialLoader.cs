@@ -5,40 +5,35 @@
 
 	internal class MaterialLoader
 	{
-		public void ApplyMaterialsToGameObject(GameObject model, string modelPath)
-		{
-			string modelFolder = Path.GetDirectoryName(modelPath);
+		#region Fields
+		public readonly TexturesPath texturesPath = null;
+		#endregion Fields
 
-			Material mat = CreateMaterial(modelFolder);
+		#region Ctor
+		public MaterialLoader(TexturesPath texturesPath)
+		{
+			this.texturesPath = texturesPath;
+		}
+		#endregion Ctor
+
+		#region Methods
+		public void ApplyMaterialsToGameObject(GameObject model)
+		{
+			Material mat = CreateMaterial();
 
 			model.GetComponentInChildren<Renderer>().material = mat;
 		}
 
-		private Material CreateMaterial(string modelFolder)
+		private Material CreateMaterial()
 		{
 			Material mat = new Material(Shader.Find("Standard"));
 
-			mat.SetTexture("_MainTex", LoadImage(modelFolder, "Albedo"));
-			mat.SetTexture("_Occlusion", LoadImage(modelFolder, "AO"));
-			mat.SetTexture("_BumpMap", LoadImage(modelFolder, "Normal"));
+			mat.SetTexture("_MainTex", texturesPath.AlbedoTexture);
+			mat.SetTexture("_Occlusion", texturesPath.AOTexture);
+			mat.SetTexture("_BumpMap", texturesPath.NormalTexture);
 
 			return mat;
 		}
-
-		private Texture LoadImage(string modelFolder, string imageType)
-		{
-			if (FileHelper.TryGetFileWithSearchPattern(modelFolder, string.Format("{0} NOT .meta", imageType), out string filename))
-			{
-				byte[] bytes = File.ReadAllBytes(filename);
-				Texture2D texture = new Texture2D(2, 2);
-				texture.LoadImage(bytes);
-				return texture;
-			}
-			else
-			{
-				Debug.LogWarningFormat("Cannot load texture of type {0}.", imageType);
-				return null;
-			}
-		}
+		#endregion Methods
 	}
 }

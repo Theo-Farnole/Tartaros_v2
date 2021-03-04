@@ -1,19 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Tartaros.Utilities;
-using Tartaros.Entities;
-
-public class StateAttack : AEntityState
+﻿namespace Tartaros.Entities.State
 {
-    Entity target;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using Tartaros.Utilities;
+    using Tartaros.Entities;
 
-	public StateAttack(Entity stateOwner) : base(stateOwner)
-	{
-	}
+    public class StateAttack : AEntityState
+    {
+        private readonly Entity _target = null;
 
-	public override void OnUpdate()
-	{
-		throw new System.NotImplementedException();
-	}
+        public StateAttack(Entity stateOwner, Entity target) : base(stateOwner)
+        {
+            _target = target;
+        }
+
+        public override void OnUpdate()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

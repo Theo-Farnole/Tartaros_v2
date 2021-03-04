@@ -1,5 +1,7 @@
 ﻿namespace Tartaros.MeshViewer
 {
+	using System.IO;
+	using System.Linq;
 	using UnityEngine;
 
 	internal static class FileHelper
@@ -26,26 +28,53 @@
 			}
 		}
 
-		public static bool TryGetFileWithSearchPattern(string directoryPath, string searchPattern, out string filename)
+		public static string GetFile(string directoryPath, string searchPattern)
 		{
-			string[] fbxFiles = System.IO.Directory.GetFiles(directoryPath, searchPattern);
+			string[] files = Directory.GetFiles(directoryPath)
+				.Where(name => !name.EndsWith(".meta") && name.Contains(searchPattern))
+				.ToArray();
 
-			if (fbxFiles.Length == 1)
+			if (files.Length == 0)
 			{
-				filename = fbxFiles[0];
-				return true;
+				return null;
 			}
-			else if (fbxFiles.Length > 1)
+			else if (files.Length > 1)
 			{
 				Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", searchPattern);
-				filename = fbxFiles[0];
-				return true;
 			}
-			else
+
+			return files[0];
+		}
+
+		public static bool TryGetFile(string directoryPath, string searchPattern, out string filename)
+		{
+			string[] files = Directory.GetFiles(directoryPath)
+				.Where(name => !name.EndsWith(".meta") && name.Contains(searchPattern))
+				.ToArray();
+
+			if (files.Length == 0)
 			{
 				filename = null;
 				return false;
 			}
+			else
+			{
+				if (files.Length > 1)
+				{
+					Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", searchPattern);
+				}
+
+				filename = files[0];
+				return true;
+			}
+		}
+
+		public static Texture2D LoadTexture(string textureFilePath)
+		{
+			byte[] bytes = File.ReadAllBytes(textureFilePath);
+			Texture2D texture = new Texture2D(2, 2);
+			texture.LoadImage(bytes);
+			return texture;
 		}
 	}
 }

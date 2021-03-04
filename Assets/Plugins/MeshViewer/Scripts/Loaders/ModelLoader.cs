@@ -6,18 +6,15 @@
 
 	internal class ModelLoader
 	{
-		public GameObject Load(string meshPath)
+		public GameObject Load(ModelPath modelPath)
 		{
-			GameObject model = new OBJLoader().Load(meshPath);
+			GameObject model = new OBJLoader().Load(modelPath.meshPath);
 
-			new MaterialLoader().ApplyMaterialsToGameObject(model, meshPath);
+			MaterialLoader matLoader = new MaterialLoader(modelPath.texturesPath);
+			matLoader.ApplyMaterialsToGameObject(model);
 
 			return model;
-		}
 
-		public GameObject Load(MeshPathConfiguration meshPathConfiguration)
-		{
-			return Load(meshPathConfiguration.meshPath);
 		}
 	}
 }

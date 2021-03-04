@@ -1,19 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Tartaros.Utilities;
-using Tartaros.Entities;
-
-public class StatePatrol : AEntityState
+﻿namespace Tartaros.Entities.State
 {
-    readonly Vector3[] targetPoints;
+	using System.Collections;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using Tartaros.Utilities;
+	using Tartaros.Entities;
 
-	public StatePatrol(Entity stateOwner) : base(stateOwner)
+	public class StatePatrol : AEntityState
 	{
-	}
+		private readonly Vector3[] _targetPoints;
 
-	public override void OnUpdate()
-	{
-		throw new System.NotImplementedException();
+		public StatePatrol(Entity stateOwner, Vector3[] targetPoints) : base(stateOwner)
+		{
+			_targetPoints = targetPoints;
+		}
+
+		public override void OnUpdate()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

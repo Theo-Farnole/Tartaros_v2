@@ -71,9 +71,9 @@
 			UpdateViewModelManagerConfiguration();
 		}
 
-		private MeshPathConfiguration GetMeshPathConfiguration()
+		private ModelPath GetMeshPathConfiguration()
 		{
-			return new MeshPathConfiguration(_modelFolderInput.Path);
+			return ModelPath.CreateFromFolder(_modelFolderInput.Path);
 		}
 
 		private void UpdateViewModelManagerConfiguration()

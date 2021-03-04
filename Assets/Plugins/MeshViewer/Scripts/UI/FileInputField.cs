@@ -20,11 +20,11 @@ namespace Tartaros.MeshViewer.UI
 		private string _filePanelTitle = "Open File";
 
 		[SerializeField]
-		private string _fileExtensions = "";
+		private string[] _fileExtensions = new string[0];
 		#endregion Fields
 
 		#region Properties
-		public string Path => _pathOutput.text;
+		public string Path { get => _pathOutput.text; set => _pathOutput.text = value; }
 		#endregion Properties
 
 		#region Events
@@ -59,7 +59,12 @@ namespace Tartaros.MeshViewer.UI
 
 		private void OnExplorerButtonClicked()
 		{
-			string[] selectedFile = StandaloneFileBrowser.OpenFilePanel(_filePanelTitle, "", _fileExtensions, false);			
+			ExtensionFilter[] extensionFilters = new ExtensionFilter[]
+			{
+				new ExtensionFilter("", _fileExtensions)
+			};
+
+			string[] selectedFile = StandaloneFileBrowser.OpenFilePanel(_filePanelTitle, "", extensionFilters, false);
 
 			if (selectedFile.Length == 0)
 			{
