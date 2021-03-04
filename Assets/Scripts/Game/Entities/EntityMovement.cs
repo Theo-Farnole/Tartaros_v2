@@ -12,7 +12,6 @@
 
         #region Fields
         private EntityMovementData _entityMovementData = null;
-        private Vector3 _destination = Vector3.zero;
         private NavMeshAgent _navMeshAgent = null;
         #endregion
 
@@ -28,8 +27,8 @@
         #region Methods
         private void Awake()
         {
-            if (GetComponent<NavMeshAgent>() != null)
-                _navMeshAgent = GetComponent<NavMeshAgent>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            
         }
 
         private void Update()
@@ -50,13 +49,11 @@
 
         void MoveToPoint(Vector3 point)
         {
-            _navMeshAgent.SetDestination(_destination);
-            throw new System.NotImplementedException();
+            _navMeshAgent.SetDestination(point);
         }
         void StopMovement()
         {
-            _navMeshAgent.isStopped = false;
-            throw new System.NotImplementedException();
+            _navMeshAgent.isStopped = false
         }
         #endregion
     }

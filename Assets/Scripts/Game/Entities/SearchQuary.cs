@@ -4,10 +4,10 @@
     [Flags]
     public enum SearchQuary
     {
-        Ally,
-        Enemy,
-        Neutral,
-        Building,
-        Unit
+        Ally = 0,
+        Enemy = 1,
+        Neutral = 2,
+        Building = 3,
+        Unit = 4
     }
 }
