@@ -28,6 +28,24 @@
 			}
 		}
 
+		public static string GetFile(string directoryPath, string searchPattern)
+		{
+			string[] files = Directory.GetFiles(directoryPath)
+				.Where(name => !name.EndsWith(".meta") && name.Contains(searchPattern))
+				.ToArray();
+
+			if (files.Length == 0)
+			{
+				return null;
+			}
+			else if (files.Length > 1)
+			{
+				Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", searchPattern);
+			}
+
+			return files[0];
+		}
+
 		public static bool TryGetFile(string directoryPath, string searchPattern, out string filename)
 		{
 			string[] files = Directory.GetFiles(directoryPath)
@@ -49,6 +67,14 @@
 				filename = files[0];
 				return true;
 			}
+		}
+
+		public static Texture2D LoadTexture(string textureFilePath)
+		{
+			byte[] bytes = File.ReadAllBytes(textureFilePath);
+			Texture2D texture = new Texture2D(2, 2);
+			texture.LoadImage(bytes);
+			return texture;
 		}
 	}
 }

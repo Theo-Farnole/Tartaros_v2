@@ -19,7 +19,7 @@
 			_meshLoader = new ModelLoader();
 		}
 
-		public void SetMeshConfiguration(MeshPathConfiguration meshConfiguration)
+		public void SetMeshConfiguration(ModelPath meshConfiguration)
 		{
 			if (_currentDisplayMesh != null)
 			{
