@@ -24,7 +24,7 @@ namespace Tartaros.MeshViewer.UI
 		#endregion Fields
 
 		#region Properties
-		public string Path => _pathOutput.text;
+		public string Path { get => _pathOutput.text; set => _pathOutput.text = value; }
 		#endregion Properties
 
 		#region Events
@@ -59,7 +59,7 @@ namespace Tartaros.MeshViewer.UI
 
 		private void OnExplorerButtonClicked()
 		{
-			string[] selectedFile = StandaloneFileBrowser.OpenFilePanel(_filePanelTitle, "", _fileExtensions, false);			
+			string[] selectedFile = StandaloneFileBrowser.OpenFilePanel(_filePanelTitle, "", _fileExtensions, false);
 
 			if (selectedFile.Length == 0)
 			{
