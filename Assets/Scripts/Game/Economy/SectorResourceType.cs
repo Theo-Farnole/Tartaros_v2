@@ -2,7 +2,7 @@
 {
     public enum SectorRessourceType
     {
-        Wood,
+        Iron,
         Stone,
         Food
     }

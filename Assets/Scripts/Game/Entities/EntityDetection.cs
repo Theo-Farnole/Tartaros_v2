@@ -16,6 +16,8 @@
         #region Methods
         Entity GetNearest(SearchQuary searchQuary)
         {
+            if (searchQuary.HasFlag(SearchQuary.Ally))
+
             _nearEntities.Clear();
             Transform entity = transform;
 
