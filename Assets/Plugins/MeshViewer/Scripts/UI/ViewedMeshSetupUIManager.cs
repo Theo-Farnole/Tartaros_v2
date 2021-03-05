@@ -1,18 +1,13 @@
 ﻿namespace Tartaros.MeshViewer.UI
 {
 	using Sirenix.OdinInspector;
-	using System;
 	using Tartaros.MeshViewer;
 	using UnityEngine;
-	using UnityEngine.UI;
 
-	internal class UIManager : Singleton<UIManager>
+	internal class ViewedMeshSetupUIManager : Singleton<ViewedMeshSetupUIManager>
 	{
 		#region Fields
 		private const string GROUP_SETUP = "Setup";
-
-		[SerializeField]
-		private ViewModelManager _viewModelManager = null;
 
 		[SerializeField]
 		private FolderInputField _modelFolder = null;
@@ -33,21 +28,13 @@
 		[SerializeField]
 		private FileInputField _aoPath = null;
 
-		[SerializeField]
-		private Button _rotate90Degrees = null;
-
-		[SerializeField]
-		private Button _rotateAnti90Degrees = null;
+		private ViewModelManager _viewModelManager = null;
 		#endregion Fields
 
 		#region Methods
 		private void Start()
 		{
-			_rotate90Degrees.onClick.RemoveListener(_viewModelManager.Rotate90Degrees);
-			_rotate90Degrees.onClick.AddListener(_viewModelManager.Rotate90Degrees);
-
-			_rotateAnti90Degrees.onClick.RemoveListener(_viewModelManager.RotateAnti90Degrees);
-			_rotateAnti90Degrees.onClick.AddListener(_viewModelManager.RotateAnti90Degrees);
+			_viewModelManager = ViewModelManager.Instance;
 		}
 
 		private void OnEnable()

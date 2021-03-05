@@ -3,7 +3,7 @@
 	using Tartaros.MeshViewer.UI;
 	using UnityEngine;
 
-	internal class ViewModelManager : MonoBehaviour
+	internal class ViewModelManager : Singleton<ViewModelManager>
 	{
 		#region Fields		
 		[SerializeField]
@@ -31,8 +31,22 @@
 			_currentDisplayMesh.transform.localPosition = Vector3.zero;
 		}
 
-		public void Rotate90Degrees() => _currentDisplayMesh.transform.Rotate(0, 90, 0);
-		public void RotateAnti90Degrees() => _currentDisplayMesh.transform.Rotate(0, -90, 0);
+		public void Rotate90Degrees()
+		{
+			_currentDisplayMesh.transform.Rotate(0, 90, 0);
+		}
+
+		public void RotateAnti90Degrees()
+		{
+			_currentDisplayMesh.transform.Rotate(0, -90, 0);
+		}
+
+		public void SetScale(float scale)
+		{
+			if (_currentDisplayMesh == null) return;
+
+			_currentDisplayMesh.transform.localScale = Vector3.one * scale;
+		}
 		#endregion Methods
 	}
 }
