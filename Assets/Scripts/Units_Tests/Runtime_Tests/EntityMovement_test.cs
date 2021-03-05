@@ -37,7 +37,6 @@ public class EntityMovement_test : MonoBehaviour
         entityMovement.MoveToPoint(targetPoint);
 
         yield return new WaitForSeconds(2);
-
         
         Assert.IsTrue(NearlyEquals(targetPoint, AdjustEntityPosition(entityMovement)));
     }

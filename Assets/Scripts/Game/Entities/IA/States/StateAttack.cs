@@ -9,10 +9,18 @@
     public class StateAttack : AEntityState
     {
         private readonly Entity _target = null;
+        private readonly EntityAttack _entityAttack = null;
 
         public StateAttack(Entity stateOwner, Entity target) : base(stateOwner)
         {
             _target = target;
+        }
+
+        public override void OnStateEnter()
+        {
+            base.OnStateEnter();
+
+          
         }
 
         public override void OnUpdate()

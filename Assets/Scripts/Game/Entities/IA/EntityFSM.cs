@@ -23,7 +23,9 @@
 
 		void SetState(AEntityState newState)
         {
-
+			_currentState.OnStateExit();
+			_currentState = newState;
+			_currentState.OnStateEnter();
         }
 
 		void AddFuturState(AEntityState futurState)

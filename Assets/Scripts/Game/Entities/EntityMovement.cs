@@ -29,7 +29,7 @@
         #region Events
         public class DestinationReachedArgs : EventArgs
         {
-
+            
         }
 
         public event EventHandler<DestinationReachedArgs> DestinationReached = null;
@@ -52,13 +52,31 @@
 
         bool CanMoveToPoint(Vector3 point)
         {
-            throw new System.NotImplementedException();
+            var _navMeshPath = new NavMeshPath();
+
+            _navMeshAgent.CalculatePath(point, _navMeshPath);
+
+            if (_navMeshPath.status == NavMeshPathStatus.PathInvalid || _navMeshPath.status == NavMeshPathStatus.PathPartial)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void MoveToPoint(Vector3 point)
         {
-            _navMeshAgent.isStopped = false;
-            _navMeshAgent.SetDestination(point);
+            if (CanMoveToPoint(point))
+            {
+                _navMeshAgent.isStopped = false;
+                _navMeshAgent.SetDestination(point);
+            }
+            else
+            {
+                
+            }
         }
         public void StopMovement()
         {
