@@ -13,6 +13,15 @@
         [SerializeField]
         private float _separationRange = 1;
 
+        public EntityMovementData(float speed, float separationRange)
+        {
+            _speed = speed;
+            _separationRange = separationRange;
+        }
+
+        public float Speed => _speed;
+        public float SeparationRange => _separationRange;
+
         void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
         {
             throw new System.NotImplementedException();

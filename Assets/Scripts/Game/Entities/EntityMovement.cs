@@ -13,6 +13,17 @@
         #region Fields
         private EntityMovementData _entityMovementData = null;
         private NavMeshAgent _navMeshAgent = null;
+
+        public EntityMovementData EntityMovementData
+        {
+            get => _entityMovementData;
+
+            set
+            {
+                _entityMovementData = value;
+                _navMeshAgent.speed = _entityMovementData.Speed;
+            }
+        }
         #endregion
 
         #region Events
@@ -27,8 +38,7 @@
         #region Methods
         private void Awake()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            
+            _navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         }
 
         private void Update()
@@ -40,20 +50,19 @@
             }
         }
 
-
-
         bool CanMoveToPoint(Vector3 point)
         {
             throw new System.NotImplementedException();
         }
 
-        void MoveToPoint(Vector3 point)
-        {
-            _navMeshAgent.SetDestination(point);
-        }
-        void StopMovement()
+        public void MoveToPoint(Vector3 point)
         {
             _navMeshAgent.isStopped = false;
+            _navMeshAgent.SetDestination(point);
+        }
+        public void StopMovement()
+        {
+            _navMeshAgent.isStopped = true;
         }
         #endregion
     }
