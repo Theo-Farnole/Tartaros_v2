@@ -12,7 +12,14 @@ namespace Tartaros.MeshViewer
 		#endregion Fields
 
 		#region Properties
-		public Texture AlbedoTexture => FileHelper.LoadTexture(AlbedoPath);
+		public Texture AlbedoTexture
+		{
+			get
+			{
+				return FileHelper.LoadTexture(AlbedoPath);
+			}
+		}
+
 		public Texture NormalTexture => FileHelper.LoadTexture(NormalPath);
 		public Texture AOTexture => FileHelper.LoadTexture(AoPath);
 

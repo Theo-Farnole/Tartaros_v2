@@ -72,7 +72,11 @@
 
 		public static Texture2D LoadTexture(string textureFilePath)
 		{
-			if (string.IsNullOrEmpty(textureFilePath) == true) throw new System.ArgumentException("Path is null or empty.");
+			if (string.IsNullOrEmpty(textureFilePath) == true)
+			{
+				Debug.LogError("Path is null or empty.");
+				return null;
+			}
 
 			byte[] bytes = File.ReadAllBytes(textureFilePath);
 			Texture2D texture = new Texture2D(2, 2);

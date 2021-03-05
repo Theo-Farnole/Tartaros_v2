@@ -79,6 +79,11 @@ namespace Tartaros.MeshViewer.UI
 		{
 			OnPathChanged?.Invoke(this, new PathChangedArgs(_pathOutput.text));
 		}
+
+		public void SetPathWithoutNotify(string path)
+		{
+			_pathOutput.SetTextWithoutNotify(path);
+		}
 		#endregion Methods
 	}
 }

@@ -96,13 +96,13 @@
 		{
 			ModelPath modelPath = ModelPath.CreateFromFolder(_modelFolder.Path);
 
-			_meshPath.Path = modelPath.meshPath;
-			_albedoPath.Path = modelPath.texturesPath.AlbedoPath;
-			_normalPath.Path = modelPath.texturesPath.NormalPath;
-			_aoPath.Path = modelPath.texturesPath.AoPath;
+			_meshPath.SetPathWithoutNotify(modelPath.meshPath);
+			_albedoPath.SetPathWithoutNotify(modelPath.texturesPath.AlbedoPath);
+			_normalPath.SetPathWithoutNotify(modelPath.texturesPath.NormalPath);
+			_aoPath.SetPathWithoutNotify(modelPath.texturesPath.AoPath);
 
 			UpdateViewedModel();
-		}		
+		}
 
 		private void UpdateViewedModel()
 		{
