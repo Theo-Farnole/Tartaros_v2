@@ -9,13 +9,28 @@
 	public class StateMove : AEntityState
 	{
 		private readonly Vector3 _targetPoint = Vector3.zero;
+		private readonly EntityMovement _entityMovement; 
 
 		public StateMove(Entity stateOwner, Vector3 targetPoint) : base(stateOwner)
 		{
 			_targetPoint = targetPoint;
 		}
 
-		public override void OnUpdate()
+		public override void OnStateEnter()
+        {
+			base.OnStateEnter();
+
+			_entityMovement.MoveToPoint(_targetPoint);
+        }
+
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+
+			_entityMovement.StopMovement();
+        }
+
+        public override void OnUpdate()
 		{
 			throw new System.NotImplementedException();
 		}

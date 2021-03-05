@@ -2,7 +2,10 @@
     "name": "Tartaros.Tests.Runtime",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "Tartaros",
+        "NavMeshComponents",
+        "NavMeshComponentsEditor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

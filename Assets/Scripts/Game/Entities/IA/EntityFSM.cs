@@ -7,6 +7,8 @@
 	{
 		#region Fields
 		private GenericFSM<Entity> _finiteStateMachine = new GenericFSM<Entity>();
+
+		private AEntityState _currentState;
 		#endregion Fields
 
 		#region Methods		
@@ -18,6 +20,16 @@
 				_finiteStateMachine.OnUpdate();
 			}
 		}
+
+		void SetState(AEntityState newState)
+        {
+
+        }
+
+		void AddFuturState(AEntityState futurState)
+        {
+
+        }
 		#endregion Methods
 	}
 }
