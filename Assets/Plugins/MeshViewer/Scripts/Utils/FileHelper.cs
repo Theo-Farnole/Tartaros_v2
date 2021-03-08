@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.MeshViewer
 {
+	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
 	using UnityEngine;
@@ -28,23 +29,62 @@
 			}
 		}
 
-		public static string GetFile(string directoryPath, string searchPattern)
+		/// <summary>
+		/// Ignore .metafile
+		/// </summary>
+		public static string GetFile(string directoryPath, string filename)
 		{
 			string[] files = Directory.GetFiles(directoryPath)
-				.Where(name => !name.EndsWith(".meta") && name.Contains(searchPattern))
+				.Where(name => !name.EndsWith(".meta") && name.Contains(filename))
 				.ToArray();
 
 			if (files.Length == 0)
 			{
-				Debug.LogWarningFormat("No found file containing {0} in directory {1}.", searchPattern, directoryPath);
+				Debug.LogWarningFormat("No found file containing {0} in directory {1}.", filename, directoryPath);
 				return null;
 			}
 			else if (files.Length > 1)
 			{
-				Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", searchPattern);
+				Debug.LogWarningFormat("Founded more than one file with search pattern {0}. Some problems can happen", filename);
 			}
 
 			return files[0];
+		}
+
+		public static string GetFile(string directoryPath, string[] extensions)
+		{
+			string[] files = GetFilesWithExtension(directoryPath, extensions);			
+
+			if (files.Length == 0)
+			{
+				string extensionsAsString = string.Join(",", extensions);
+				Debug.LogWarningFormat("No found file of extensions {0} in directory {1}.", extensionsAsString, directoryPath);
+				return null;
+			}
+			else if (files.Length > 1)
+			{
+				Debug.LogWarningFormat("Founded more than one file with the extensions {0}. Some problems can happen", extensions);
+			}
+
+			return files[0];
+		}
+
+		private static string[] GetFilesWithExtension(string directoryPath, string[] extensions)
+		{
+			IEnumerable<string> filesEnumeration = Directory.GetFiles(directoryPath);
+			List<string> files = new List<string>();
+
+			foreach (var extension in extensions)
+			{
+				string extWithDot = string.Format(".{0}", extension);
+
+				IEnumerable<string> filesOfExtensions = filesEnumeration
+					.Where(filename => filename.EndsWith(extWithDot));
+
+				files.AddRange(filesOfExtensions);
+			}
+
+			return files.ToArray();
 		}
 
 		public static bool TryGetFile(string directoryPath, string searchPattern, out string filename)
