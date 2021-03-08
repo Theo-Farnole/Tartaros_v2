@@ -1,7 +1,5 @@
 ﻿namespace Tartaros.MeshViewer
 {
-	using Dummiesman;
-	using Plugins.FBXImporter;
 	using System.IO;
 	using UnityEngine;
 	using UnityMeshImporter;
