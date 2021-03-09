@@ -5,37 +5,55 @@
 	using UnityEngine;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Attack;
+	using Tartaros.ServicesLocator;
 
 	public class EntityDetection : MonoBehaviour
 	{
 		#region Fields
 		private EntityDetectionData _entityDetectionData = null;
 		private EntityAttackData _entityAttackData = null;
-		private List<Transform> _nearEntities = new List<Transform>();
-
-		public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
-		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
-
-		private float _viewRadius;
-		private float _attackRange = 1;
+		private EntitiesKDTrees _entitiesKDTrees = null;
 		#endregion
 
+		#region Properties
+		public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
+		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
+		#endregion Properties
+
 		#region Methods
+		private void Start()
+		{
+			_entitiesKDTrees = Services.Instance.Get<EntitiesKDTrees>();
+		}
 
-
-		public Entity GetNearest(SearchQuary searchQuary)
+		public Entity GetNearest(SearchQuary searchQuery)
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public IAttackable GetNearestAttackableEnemy()
+		public IAttackable GetNearestAttackableOpponent()
 		{
-			throw new System.NotImplementedException();
+			IEnumerable<Entity> opponents = _entitiesKDTrees.GetNearestOpponentsEntities(transform.position);
+			IEnumerator<Entity> opponentsEnumerator = opponents.GetEnumerator();
+
+			while (opponentsEnumerator.Current != null)
+			{
+				if (opponentsEnumerator.Current.TryGetComponent(out IAttackable attackable))
+				{
+					return attackable;
+				}
+				else
+				{
+					opponentsEnumerator.MoveNext();
+				}
+			}
+
+			return null;
 		}
 
 		public bool IsNearestEnemyInDetectionRange()
 		{
-			Entity nearestEntity = GetNearest(SearchQuary.Enemy | SearchQuary.Unit | SearchQuary.Building);
+			Entity nearestEntity = _entitiesKDTrees.GetNearestOpponentEntity(transform.position);
 
 			return IsInDetectionRange(nearestEntity);
 		}
@@ -50,7 +68,10 @@
 			return Vector3.Distance(transform.position, point) <= _entityDetectionData.DetectionRange;
 		}
 
-		public bool IsInAttackRange(Entity nearest, float attackRange) => IsInAttackRange(nearest.transform.position, attackRange);
+		public bool IsInAttackRange(Entity nearest, float attackRange)
+		{
+			return IsInAttackRange(nearest.transform.position, attackRange);
+		}
 
 		public bool IsInAttackRange(Vector3 point, float attackRange)
 		{

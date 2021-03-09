@@ -34,7 +34,7 @@
 		{
 			if (_entityDetection.IsNearestEnemyInDetectionRange())
 			{
-				IAttackable target = _entityDetection.GetNearestAttackableEnemy();
+				IAttackable target = _entityDetection.GetNearestAttackableOpponent();
 				_stateOwner.GetComponent<EntityFSM>().SetState(new StateAttack(_stateOwner, target));
 			}
 		}
