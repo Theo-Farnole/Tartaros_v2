@@ -18,7 +18,7 @@
 
 		void ISelection.AddToSelection(ISelectable selectable)
 		{
-			if (_selectedObjets.Contains(selectable) == true)
+			if ((this as ISelection).IsSelected(selectable) == true)
 			{
 				Debug.LogErrorFormat("Error while trying to add to selection: selectable \"{0}\" is already in selection.", GetSelectableName(selectable));
 				return;
@@ -29,7 +29,7 @@
 
 		void ISelection.RemoveFromSelection(ISelectable selectable)
 		{
-			if (_selectedObjets.Contains(selectable) == false)
+			if ((this as ISelection).IsSelected(selectable) == false)
 			{
 				Debug.LogErrorFormat("Error while trying to remove from selection: selectable \"{0}\" is not in selection.", GetSelectableName(selectable));
 				return;
@@ -43,7 +43,26 @@
 			_selectedObjets.Clear();
 		}
 
-		private static string GetSelectableName(ISelectable selectable)
+		bool ISelection.IsSelected(ISelectable selectable)
+		{
+			return _selectedObjets.Contains(selectable);
+		}
+
+		void ISelection.AlternateSelection(ISelectable selectable)
+		{
+			var selfSelection = this as ISelection;
+
+			if (selfSelection.IsSelected(selectable))
+			{
+				selfSelection.RemoveFromSelection(selectable);
+			}
+			else
+			{
+				selfSelection.AddToSelection(selectable);
+			}
+		}
+
+		private string GetSelectableName(ISelectable selectable)
 		{
 			return selectable is MonoBehaviour obj ? obj.name : selectable.ToString();
 		}
