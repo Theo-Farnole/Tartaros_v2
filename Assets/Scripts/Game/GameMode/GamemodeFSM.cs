@@ -1,18 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GamemodeFSM : MonoBehaviour
+﻿namespace Tartaros.Gamemode
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using Tartaros.Utilities;
 
-    // Update is called once per frame
-    void Update()
+    public class GamemodeFSM : GenericFSM<GamemodeManager>
     {
-        
+        private GenericFSM<GamemodeManager> _finiteStateMachine = new GenericFSM<GamemodeManager>();
+
+        #region Methods		
+        private void Update()
+        {
+            if (_finiteStateMachine != null)
+            {
+                _finiteStateMachine.OnUpdate();
+            }
+        }
+
+        public void SetState(AGameState newState)
+        {
+            _finiteStateMachine.CurrentState = newState;
+        }
+        #endregion Methods
     }
+}
 }
