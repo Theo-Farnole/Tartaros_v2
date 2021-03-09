@@ -28,6 +28,16 @@
 			selectable.OnSelected();
 		}
 
+		void ISelection.AddToSelection(ISelectable[] selectables)
+		{
+			if (selectables == null) return;
+
+			foreach (ISelectable selectable in selectables)
+			{
+				(this as ISelection).AddToSelection(selectable);
+			}
+		}
+
 		void ISelection.RemoveFromSelection(ISelectable selectable)
 		{
 			if ((this as ISelection).IsSelected(selectable) == false)
