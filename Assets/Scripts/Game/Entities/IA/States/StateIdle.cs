@@ -8,11 +8,21 @@
 
 	public class StateIdle : AEntityState
 	{
+
+		private readonly EntityMovement _entityMovement = null; 
 		public StateIdle(Entity stateOwner) : base(stateOwner)
 		{
+			_entityMovement = stateOwner.GetComponent<EntityMovement>();
 		}
 
-		public override void OnUpdate()
+        public override void OnStateEnter()
+        {
+            base.OnStateEnter();
+
+			_entityMovement.StopMovement();
+        }
+
+        public override void OnUpdate()
 		{
 			throw new System.NotImplementedException();
 		}
