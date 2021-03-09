@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Services
+﻿namespace Tartaros.ServicesLocator
 {
 	using System;
 	using System.Collections.Generic;
