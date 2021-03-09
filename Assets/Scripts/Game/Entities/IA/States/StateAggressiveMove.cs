@@ -1,22 +1,19 @@
 ﻿namespace Tartaros.Entities.State
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Utilities;
 	using Tartaros.Entities;
-	using Tartaros.Entities.Attack;
+	using UnityEngine;
 
 	public class StateAggressiveMove : AEntityState
 	{
-		private readonly Vector3 _targetPoint = Vector3.zero;
-		private readonly EntityAttack _entityAttack = null;
+		private readonly Vector3 _targetPoint = Vector3.zero;		
 		private readonly EntityDetection _entityDetection = null;
-		private readonly EntityMovement _entityMovement = null; 
+		private readonly EntityMovement _entityMovement = null;
 
 		public StateAggressiveMove(Entity stateOwner, Vector3 targetPoint) : base(stateOwner)
 		{
 			_targetPoint = targetPoint;
+			_entityDetection = stateOwner.GetComponent<EntityDetection>();
+			_entityMovement = stateOwner.GetComponent<EntityMovement>();
 		}
 
 		public override void OnStateEnter()
@@ -26,24 +23,20 @@
 			_entityMovement.MoveToPoint(_targetPoint);
 		}
 
-        public override void OnStateExit()
-        {
-            base.OnStateExit();
+		public override void OnStateExit()
+		{
+			base.OnStateExit();
 
 			_entityMovement.StopMovement();
+		}
 
-			var nearest = _entityDetection.GetNearest(SearchQuary.Enemy | SearchQuary.Unit | SearchQuary.Building);
-			IAttackable target = nearest.GetComponent<IAttackable>();
-			_stateOwner.GetComponent<EntityFSM>().SetState(new StateAttack(_stateOwner, target));
-        }
-
-        public override void OnUpdate()
+		public override void OnUpdate()
 		{
-            if (_entityDetection.IsNearestIsInDetectionRange())
-            {
-				OnStateExit();
-            }
-            throw new System.NotImplementedException();
-        }
+			if (_entityDetection.IsNearestEnemyInDetectionRange())
+			{
+				IAttackable target = _entityDetection.GetNearestAttackableEnemy();
+				_stateOwner.GetComponent<EntityFSM>().SetState(new StateAttack(_stateOwner, target));
+			}
+		}
 	}
 }
