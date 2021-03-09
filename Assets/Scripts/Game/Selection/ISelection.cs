@@ -2,11 +2,8 @@
 {
     public interface ISelection
     {
-        ISelectable[] SelectedObject { get; }
-
-        void Select();
-        void Unselected();
-        void AddToSelection();
-        void RemoveToSelection();
+        void ClearSelection();
+        void AddToSelection(ISelectable selectable);
+        void RemoveFromSelection(ISelectable selectable);
     }
 }
