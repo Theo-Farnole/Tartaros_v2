@@ -6,7 +6,7 @@
        
         void TakeDamage(int damage);
 
-        Transform TransformAttackble { get; }
+        Transform Transform { get; }
 
     }
 }

@@ -50,9 +50,11 @@
 			return Vector3.Distance(transform.position, point) <= _entityDetectionData.DetectionRange;
 		}
 
-		public bool IsInAttackRange(Entity nearest, float attackRange)
+		public bool IsInAttackRange(Entity nearest, float attackRange) => IsInAttackRange(nearest.transform.position, attackRange);
+
+		public bool IsInAttackRange(Vector3 point, float attackRange)
 		{
-			float distance = Vector3.Distance(this.transform.position, nearest.transform.position);
+			float distance = Vector3.Distance(this.transform.position, point);
 
 			return distance <= attackRange;
 		}

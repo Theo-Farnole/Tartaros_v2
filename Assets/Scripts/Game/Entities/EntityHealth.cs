@@ -1,69 +1,72 @@
-﻿namespace Tartaros.Entities
+﻿namespace Tartaros.Entities.Health
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using Tartaros.Entities;
-    using System;
+	using System;
+	using UnityEngine;
 
-    public class EntityHealth : MonoBehaviour, IAttackable
-    {
+	public class EntityHealth : MonoBehaviour, IAttackable
+	{
+		#region Fields
+		private float _currentHealth = 0;
 
-        #region Fields
-        private float _currentHealth = 0;
-        private Coroutine _timeWithouTakingDamage = null;
-
-        Transform IAttackable.TransformAttackble => transform;
+		private Coroutine _healthRegenerationCoroutine = null;
+		private EntityHealthData _entityHealthData = null;
+		#endregion
 
 
-        private EntityHealthData _entityHealthData = null;
-        public EntityHealthData EntityHealthData { get => _entityHealthData; set => _entityHealthData = value; }
 
 
-        #endregion
+		#region Properties
+		Transform IAttackable.Transform => transform;
+		public EntityHealthData EntityHealthData { get => _entityHealthData; set => _entityHealthData = value; }
+		public bool IsAlive => _currentHealth > 0;
+		public bool IsDead => IsAlive == false;
+		public int MaxHealth => EntityHealthData.Health;
+		public bool IsFullHealth => CurrentHealth == MaxHealth;
+
+		public float CurrentHealth
+		{
+			get => _currentHealth;
+
+			set
+			{
+				_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+			}
+		}
+		#endregion Properties
 
 
-        #region Events
-        public class DamageTakenArgs : EventArgs
-        {
-
-        }
-
-        public event EventHandler<DamageTakenArgs> DamageTaken = null;
-        #endregion
-
-        #region Methods
-
-        private void Awake()
-        {
-            _currentHealth = EntityHealthData.Health;
-        }
-
-        void RegenerateHealth()
-        {
-            _currentHealth += _entityHealthData.HealthPointsRegenerationPerSeconds;
-        }
 
 
-        void IAttackable.TakeDamage(int damage)
-        {
-            _currentHealth -= damage;
-            DamageTaken?.Invoke(this, new DamageTakenArgs());
-            StopCoroutine(_timeWithouTakingDamage);
-            _timeWithouTakingDamage = StartCoroutine(TimeWithoutTakingDamage());
-        }
-        #endregion
+		#region Events
+		public class DamageTakenArgs : EventArgs
+		{
 
-        IEnumerator TimeWithoutTakingDamage()
-        {
-            yield return new WaitForSeconds(_entityHealthData.RegenerationDelayWithoutTakingDamage);
+		}
 
-            while (true)
-            {
-                RegenerateHealth();
-                yield return new WaitForEndOfFrame();
-            }
-        }
-    }
+		public event EventHandler<DamageTakenArgs> DamageTaken = null;
+		#endregion
+
+		#region Methods
+
+		private void Awake()
+		{
+			_currentHealth = EntityHealthData.Health;
+		}
+
+		void IAttackable.TakeDamage(int damage)
+		{
+			CurrentHealth -= damage;
+
+			DamageTaken?.Invoke(this, new DamageTakenArgs());
+
+			if (IsDead)
+			{
+				GetComponent<Entity>().Kill();
+			}
+		}
+
+
+		#endregion
+	}
 
 }

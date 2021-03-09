@@ -3,7 +3,7 @@
 	public class GenericFSM<T>
 	{
 		#region Fields
-		private AState<T> _currentState = null;		
+		private AState<T> _currentState = null;
 		#endregion Fields
 
 		#region Properties

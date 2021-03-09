@@ -15,6 +15,11 @@
 			GenerateRequiredComponents();
 		}
 
+		public void Kill()
+		{
+			Destroy(gameObject);
+		}
+
 		void GenerateRequiredComponents()
 		{
 			foreach (IEntityBehaviourData behaviour in _entityData.Behaviours)
