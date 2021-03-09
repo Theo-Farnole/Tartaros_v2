@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Camera
+﻿namespace Tartaros.CameraSystem
 {
     using System.Collections;
     using System.Collections.Generic;
