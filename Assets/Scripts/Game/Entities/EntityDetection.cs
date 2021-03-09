@@ -4,35 +4,60 @@
     using System.Collections.Generic;
     using UnityEngine;
     using Tartaros.Entities;
+    using Tartaros.Entities.Attack;
 
     public class EntityDetection : MonoBehaviour
     {
         #region Fields
-        private EntityDetectionData _data = null;
+        private EntityDetectionData _entityDetectionData = null;
+        private EntityAttackData _entityAttackData = null;
         private List<Transform> _nearEntities = new List<Transform>();
-        private float _viewRadius; 
+
+        public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
+        public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
+
+        private float _viewRadius;
+        private float _attackRange = 1;
         #endregion
 
         #region Methods
-        Entity GetNearest(SearchQuary searchQuary)
+
+
+        public Entity GetNearest(SearchQuary searchQuary)
         {
-            if (searchQuary.HasFlag(SearchQuary.Ally))
+            throw new System.NotImplementedException();
+        }
 
-            _nearEntities.Clear();
-            Transform entity = transform;
+        public bool IsNearestIsInDetectionRange()
+        {
+            Vector3 nearest = GetNearest(SearchQuary.Enemy | SearchQuary.Unit | SearchQuary.Building).transform.position;
+            float distance = Vector3.Distance(this.transform.position, nearest);
 
-            Collider[] targetsInViewRadius = Physics.OverlapSphere(entity.position, _viewRadius);
-            for (int i = 0; i < targetsInViewRadius.Length; i++)
+            if(distance <= _entityDetectionData.DetectionRange)
             {
-                Transform target = targetsInViewRadius[i].transform;
-                if(target != entity)
-                {
-
-                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
+
             throw new System.NotImplementedException();
-        } 
+        }
+
+
+
+        public bool IsInAttackRange(Entity nearest, float attackRange)
+        {
+            float distance = Vector3.Distance(this.transform.position, nearest.transform.position);
+            if (distance <= attackRange)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
         #endregion
     }
 }

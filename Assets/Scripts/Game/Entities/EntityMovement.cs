@@ -50,7 +50,7 @@
             }
         }
 
-        bool CanMoveToPoint(Vector3 point)
+        public bool CanMoveToPoint(Vector3 point)
         {
             var _navMeshPath = new NavMeshPath();
 

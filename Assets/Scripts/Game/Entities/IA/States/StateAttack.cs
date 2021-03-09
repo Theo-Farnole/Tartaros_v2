@@ -8,10 +8,10 @@
 
     public class StateAttack : AEntityState
     {
-        private readonly Entity _target = null;
+        private readonly IAttackable _target = null;
         private readonly EntityAttack _entityAttack = null;
 
-        public StateAttack(Entity stateOwner, Entity target) : base(stateOwner)
+        public StateAttack(Entity stateOwner, IAttackable target) : base(stateOwner)
         {
             _target = target;
         }
@@ -20,7 +20,8 @@
         {
             base.OnStateEnter();
 
-          
+            _entityAttack.DoDamage(_target);
+            //if (_target is IAttackable attackable)
         }
 
         public override void OnUpdate()

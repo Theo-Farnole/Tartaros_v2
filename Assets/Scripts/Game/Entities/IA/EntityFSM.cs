@@ -21,7 +21,7 @@
 			}
 		}
 
-		void SetState(AEntityState newState)
+		public void SetState(AEntityState newState)
         {
 			_currentState.OnStateExit();
 			_currentState = newState;

@@ -11,6 +11,8 @@
     {
         #region Fields
         private EntityAttackData _entityAttackData = null;
+        private EntityDetection _entityDetection = null;
+        private EntityMovement _entityMovement = null;
         public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
 
 
@@ -19,17 +21,22 @@
         #region Methods
         private void Awake()
         {
-
+            _entityDetection = GetComponent<EntityDetection>();
+            _entityMovement = GetComponent<EntityMovement>();
         }
 
         public void DoDamage(IAttackable target)
         {
-            target.TakeDamage(_entityAttackData.Damage);
-        }
+            var nearestEnemie = _entityDetection.GetNearest(SearchQuary.Enemy | SearchQuary.Unit);
 
-        bool IsInAttackRange()
-        {
-            throw new System.NotImplementedException();
+            if (_entityDetection.IsInAttackRange(nearestEnemie, _entityAttackData.AttackRange))
+            {
+                target.TakeDamage(_entityAttackData.Damage);
+            }
+            else
+            {
+                _entityMovement.MoveToPoint(target.TransformAttackble.position);
+            }
         }
         #endregion
     }
