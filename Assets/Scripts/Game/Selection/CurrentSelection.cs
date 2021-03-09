@@ -25,6 +25,7 @@
 			}
 
 			_selectedObjets.Add(selectable);
+			selectable.OnSelected();
 		}
 
 		void ISelection.RemoveFromSelection(ISelectable selectable)
@@ -36,6 +37,7 @@
 			}
 
 			_selectedObjets.Remove(selectable);
+			selectable.OnUnselected();
 		}
 
 		void ISelection.ClearSelection()

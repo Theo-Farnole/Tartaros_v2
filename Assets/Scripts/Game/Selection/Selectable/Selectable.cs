@@ -1,12 +1,14 @@
 ﻿namespace Tartaros.Selection
 {
 	using System;
-	using System.Collections;
-	using System.Collections.Generic;
 	using UnityEngine;
 
 	public class Selectable : MonoBehaviour, ISelectable
 	{
+		#region Fields
+		private ISelectionEffect _selectionEffect = null;
+		#endregion Fields
+
 		#region Properties
 		bool ISelectable.CanBeSelected { get; }
 		#endregion Properties
@@ -17,14 +19,19 @@
 		#endregion Events
 
 		#region Methods
+		void Awake()
+		{
+			_selectionEffect = GetComponent<ISelectionEffect>();
+		}
+
 		void ISelectable.OnSelected()
 		{
-			throw new NotImplementedException();
+			_selectionEffect.OnSelected();
 		}
 
 		void ISelectable.OnUnselected()
 		{
-			throw new NotImplementedException();
+			_selectionEffect.OnUnselected();
 		}
 		#endregion Methods
 	}

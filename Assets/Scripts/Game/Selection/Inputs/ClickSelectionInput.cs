@@ -1,24 +1,43 @@
 ﻿namespace Tartaros.Selection
 {
+	using Sirenix.OdinInspector;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
+	using UnityEngine.InputSystem;
 
-	public class ClickSelectionInput : MonoBehaviour
+	public class ClickSelectionInput : SerializedMonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
 		private ISelection _selection = null;
+
+		private GameInputs _gameInputs = null;
 		#endregion Fields
 
 		#region Methods
-		private void Update()
+		private void Awake()
 		{
-			if (Input.GetMouseButtonDown(0))
+			_gameInputs = new GameInputs();
+		}
+
+		private void OnEnable()
+		{
+			_gameInputs.Player.Enable();
+
+			_gameInputs.Player.SelectEntity.performed -= OnSelectEntity;
+			_gameInputs.Player.SelectEntity.performed += OnSelectEntity;
+		}
+
+		private void OnDisable()
+		{
+			_gameInputs.Player.SelectEntity.performed -= OnSelectEntity;
+		}
+
+		private void OnSelectEntity(InputAction.CallbackContext obj)
+		{
+			if (CanSelect() && TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
 			{
-				if (CanSelect() && TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
-				{
-					_selection.AlternateSelection(selectableUnderCursor);
-				}
+				_selection.AlternateSelection(selectableUnderCursor);
 			}
 		}
 
@@ -38,7 +57,8 @@
 
 		private bool RaycastUnderCursor(out RaycastHit hit)
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Vector2 mousePosition = Mouse.current.position.ReadValue();
+			Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
 			return Physics.Raycast(ray, out hit, Mathf.Infinity);
 		}
@@ -50,7 +70,14 @@
 
 		private bool IsPointerOverUI()
 		{
-			return EventSystem.current.IsPointerOverGameObject(-1);
+			if (EventSystem.current == null)
+			{
+				return false;
+			}
+			else
+			{
+				return EventSystem.current.IsPointerOverGameObject(-1);
+			}
 		}
 		#endregion Methods
 	}
