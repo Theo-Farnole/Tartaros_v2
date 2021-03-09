@@ -1,24 +1,26 @@
 ﻿namespace Tartaros.Selection
 {
-    using System;
+	using System;
+	using UnityEngine;
 
-    public class SelectedArgs : EventArgs
-    {
+	public class SelectedArgs : EventArgs
+	{
 
-    }
-    public class UnSelectedArgs : EventArgs
-    {
+	}
+	public class UnSelectedArgs : EventArgs
+	{
 
-    }
-    public interface ISelectable
-    {
-        bool CanBeSelected { get; }
-        void OnSelected();
-        void OnUnselected();
+	}
+	public interface ISelectable
+	{
+		bool CanBeSelected { get; }
+		Vector3 Position { get; }
+		void OnSelected();
+		void OnUnselected();
 
-        event EventHandler<SelectedArgs> Selected;
+		event EventHandler<SelectedArgs> Selected;
 
-        event EventHandler<UnSelectedArgs> UnSelected;
+		event EventHandler<UnSelectedArgs> UnSelected;
 
-    }
+	}
 }

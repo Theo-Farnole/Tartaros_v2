@@ -25,6 +25,22 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""StartSelectionRectangle"",
+                    ""type"": ""Button"",
+                    ""id"": ""c33b29a2-f664-47e6-bcce-5f1c903415ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EndSelectionRectangle"",
+                    ""type"": ""Button"",
+                    ""id"": ""9821828c-1ad5-4a5a-9467-16768e68bf04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -36,6 +52,28 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SelectEntity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c68f7eb3-bfee-489d-9763-3e8a8701a24f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartSelectionRectangle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de9ab0c0-4086-481a-ac2d-42c987af0263"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EndSelectionRectangle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -108,6 +146,8 @@ public class @GameInputs : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_SelectEntity = m_Player.FindAction("SelectEntity", throwIfNotFound: true);
+        m_Player_StartSelectionRectangle = m_Player.FindAction("StartSelectionRectangle", throwIfNotFound: true);
+        m_Player_EndSelectionRectangle = m_Player.FindAction("EndSelectionRectangle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -158,11 +198,15 @@ public class @GameInputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_SelectEntity;
+    private readonly InputAction m_Player_StartSelectionRectangle;
+    private readonly InputAction m_Player_EndSelectionRectangle;
     public struct PlayerActions
     {
         private @GameInputs m_Wrapper;
         public PlayerActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @SelectEntity => m_Wrapper.m_Player_SelectEntity;
+        public InputAction @StartSelectionRectangle => m_Wrapper.m_Player_StartSelectionRectangle;
+        public InputAction @EndSelectionRectangle => m_Wrapper.m_Player_EndSelectionRectangle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -175,6 +219,12 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @SelectEntity.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEntity;
                 @SelectEntity.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEntity;
                 @SelectEntity.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEntity;
+                @StartSelectionRectangle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartSelectionRectangle;
+                @StartSelectionRectangle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartSelectionRectangle;
+                @StartSelectionRectangle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartSelectionRectangle;
+                @EndSelectionRectangle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndSelectionRectangle;
+                @EndSelectionRectangle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndSelectionRectangle;
+                @EndSelectionRectangle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndSelectionRectangle;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -182,6 +232,12 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @SelectEntity.started += instance.OnSelectEntity;
                 @SelectEntity.performed += instance.OnSelectEntity;
                 @SelectEntity.canceled += instance.OnSelectEntity;
+                @StartSelectionRectangle.started += instance.OnStartSelectionRectangle;
+                @StartSelectionRectangle.performed += instance.OnStartSelectionRectangle;
+                @StartSelectionRectangle.canceled += instance.OnStartSelectionRectangle;
+                @EndSelectionRectangle.started += instance.OnEndSelectionRectangle;
+                @EndSelectionRectangle.performed += instance.OnEndSelectionRectangle;
+                @EndSelectionRectangle.canceled += instance.OnEndSelectionRectangle;
             }
         }
     }
@@ -234,5 +290,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnSelectEntity(InputAction.CallbackContext context);
+        void OnStartSelectionRectangle(InputAction.CallbackContext context);
+        void OnEndSelectionRectangle(InputAction.CallbackContext context);
     }
 }
