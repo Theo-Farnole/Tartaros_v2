@@ -5,7 +5,6 @@
     using UnityEngine;
     using Tartaros.Gamemode;
 
-
     public class GamemodeManager : MonoBehaviour
     {
      
