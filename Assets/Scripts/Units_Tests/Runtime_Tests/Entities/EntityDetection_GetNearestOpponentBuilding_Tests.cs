@@ -10,7 +10,6 @@
 	public class EntityDetection_GetNearestOpponentBuilding_Tests
 	{
 		#region Fields
-		private EntitiesKDTrees _entitiesKDTrees = null;
 		private EntityDetection _playerEntDetection = null;
 		private Entity _enemyEntity = null;
 		#endregion Fields
@@ -22,7 +21,7 @@
 			LogAssert.ignoreFailingMessages = true;
 
 			SetupHelper.CreateService();
-			_entitiesKDTrees = SetupHelper.CreateEntitiesKDTree();
+			SetupHelper.CreateEntitiesKDTree();
 
 			yield return null;
 		}

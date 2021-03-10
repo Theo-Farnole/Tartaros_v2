@@ -44,9 +44,9 @@
 
 		public IAttackable GetNearestAttackableOpponent()
 		{
-			var opponents = GetOpponentsOrderByDistance();
+			IEnumerable<Entity> opponents = GetOpponentsOrderByDistance();
 
-			foreach (var entity in opponents)
+			foreach (Entity entity in opponents)
 			{
 				if (entity.TryGetComponent(out IAttackable attackable))
 				{
