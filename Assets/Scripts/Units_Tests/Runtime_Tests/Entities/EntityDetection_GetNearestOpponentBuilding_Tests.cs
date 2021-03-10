@@ -8,7 +8,7 @@
 	using UnityEngine;
 	using UnityEngine.TestTools;
 
-	public class EntityDetection_Tests
+	public class EntityDetection_GetNearestOpponentBuilding_Tests
 	{
 		#region Fields
 		private EntitiesKDTrees _entitiesKDTrees = null;
