@@ -1,11 +1,9 @@
-﻿namespace Tartaros.Entities
+﻿namespace Tartaros.Entities.Detection
 {
-	using System.Collections;
 	using System.Collections.Generic;
-	using UnityEngine;
 	using Tartaros.Entities;
-	using Tartaros.Entities.Attack;
 	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
 	public class EntityDetection : MonoBehaviour
 	{
@@ -75,7 +73,7 @@
 
 		public bool IsInAttackRange(Vector3 point, float attackRange)
 		{
-			float distance = Vector3.Distance(this.transform.position, point);
+			float distance = Vector3.Distance(transform.position, point);
 
 			return distance <= attackRange;
 		}

@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Entities.State
 {
 	using Tartaros.Entities;
+	using Tartaros.Entities.Detection;
 	using UnityEngine;
 
 	public class StateAggressiveMove : AEntityState

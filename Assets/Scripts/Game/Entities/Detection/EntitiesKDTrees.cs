@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Entities
+﻿namespace Tartaros.Entities.Detection
 {
 	using System.Collections.Generic;
 	using Tartaros.ServicesLocator;
