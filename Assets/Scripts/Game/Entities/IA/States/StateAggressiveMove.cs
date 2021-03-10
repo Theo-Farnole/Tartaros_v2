@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Entities.State
 {
 	using Tartaros.Entities;
+	using Tartaros.Entities.Detection;
 	using UnityEngine;
 
 	public class StateAggressiveMove : AEntityState
@@ -32,7 +33,7 @@
 
 		public override void OnUpdate()
 		{
-			if (_entityDetection.IsNearestEnemyInDetectionRange())
+			if (_entityDetection.IsNearestOpponentInDetectionRange())
 			{
 				IAttackable target = _entityDetection.GetNearestAttackableOpponent();
 				_stateOwner.GetComponent<EntityFSM>().SetState(new StateAttack(_stateOwner, target));

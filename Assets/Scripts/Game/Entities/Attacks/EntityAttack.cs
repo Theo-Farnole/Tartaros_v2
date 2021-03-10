@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Entities.Attack
 {
 	using Tartaros.Entities;
+	using Tartaros.Entities.Detection;
 	using UnityEngine;
 
 	public class EntityAttack : MonoBehaviour
