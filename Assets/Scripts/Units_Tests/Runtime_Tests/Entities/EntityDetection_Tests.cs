@@ -56,32 +56,13 @@
 		{			
 			LogAssert.ignoreFailingMessages = true;
 
-			Entity playerEnt = CreateEntity(Vector3.zero, Team.Player, playerType, "Player");
-			_playerEntDetection = AddDetectionBehaviour(playerEnt, 5);
+			Entity playerEnt = EntitiesTestsSetupHelper.CreateEntity(Vector3.zero, Team.Player, playerType, "Player");
+			_playerEntDetection = EntitiesTestsSetupHelper.AddDetectionBehaviour(playerEnt, 5);
 
-			_enemyEntity = CreateEntity(new Vector3(0, 1, 1), Team.Enemy, enemyType, "Enemy");
+			_enemyEntity = EntitiesTestsSetupHelper.CreateEntity(new Vector3(0, 1, 1), Team.Enemy, enemyType, "Enemy");
 
 			yield return null;			
-		}
-
-		private static Entity CreateEntity(Vector3 position, Team team, EntityType entityType, string name)
-		{
-			GameObject entityObject = new GameObject(name);
-			entityObject.transform.position = position;
-
-			Entity entity = entityObject.AddComponent<Entity>();
-			entity.Initialize(team, entityType);
-
-			return entity;
-		}
-
-		private static EntityDetection AddDetectionBehaviour(Entity entity, float detectionRange)
-		{
-			EntityDetection entityDetection = entity.gameObject.AddComponent<EntityDetection>();
-			entityDetection.EntityDetectionData = new EntityDetectionData(detectionRange);
-
-			return entityDetection;
-		}
+		}		
 		#endregion Methods
 	}
 }
