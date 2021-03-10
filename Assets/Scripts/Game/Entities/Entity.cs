@@ -11,10 +11,12 @@
 		private EntityData _entityData = null;
 
 		private Team _team = Team.Player;
+		private EntityType _entityType = EntityType.Unit;
 		#endregion Fields
 
 		#region Properties
 		public Team Team => _team;
+		public EntityType entityType => _entityType;
 		#endregion Properties
 
 		#region Events
@@ -56,6 +58,12 @@
 			EntityKilled?.Invoke(this, new EntityKilledArgs(this));
 
 			Destroy(gameObject);
+		}
+
+		public void Initialize(Team team, EntityType entityType)
+		{
+			_team = team;
+			_entityType = entityType;
 		}
 
 		void GenerateRequiredComponents()
