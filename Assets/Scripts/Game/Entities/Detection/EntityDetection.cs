@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -19,24 +20,13 @@
 		#region Properties
 		public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
 		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
-		public Team OpponentTeam => Entity.Team.GetOpponent();
-		private Entity Entity
-		{
-			get
-			{
-				if (_entity == null)
-				{
-					_entity = GetComponent<Entity>();
-				}
-
-				return _entity;
-			}
-		}
+		public Team OpponentTeam => _entity.Team.GetOpponent();
 		#endregion Properties
 
 		#region Methods
 		private void Awake()
 		{
+			_entity = GetComponent<Entity>();
 			_entitiesKDTrees = Services.Instance.Get<EntitiesKDTrees>();
 		}
 
@@ -80,6 +70,31 @@
 			return null;
 		}
 
+		public Entity GetNearestAllyUnit()
+		{
+			return GetNearestAllyByType(EntityType.Unit);
+		}
+
+		public Entity GetNearestAllyBuilding()
+		{
+			return GetNearestAllyByType(EntityType.Building);
+		}
+
+		public Entity GetNearestAllyByType(EntityType entityType)
+		{
+			IEnumerable<Entity> allies = GetAlliesOrderByDistance();
+
+			foreach (Entity entity in allies)
+			{
+				if (entity.entityType == entityType)
+				{
+					return entity;
+				}
+			}
+
+			return null;
+		}
+
 		public bool IsNearestOpponentInDetectionRange()
 		{
 			Entity nearestEntity = _entitiesKDTrees.FindClosest(OpponentTeam, transform.position);
@@ -113,6 +128,14 @@
 		private IEnumerable<Entity> GetOpponentsOrderByDistance()
 		{
 			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);
+
+			return enumerable;
+		}
+
+		private IEnumerable<Entity> GetAlliesOrderByDistance()
+		{
+			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(_entity.Team, transform.position)
+				.Where(ally => ally != _entity);
 
 			return enumerable;
 		}
