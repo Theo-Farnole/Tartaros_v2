@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_SphereGalaxyMap
+  m_Name: M_SphereGalaxyMapSections
   m_Shader: {fileID: 4800000, guid: ef87f9ac75c3406499a26bdc411b3ac3, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -63,8 +63,8 @@ Material:
     - _StarScale: 2
     - _Step: 2
     - _TextureScale: 10
-    - _Voro2AngleSpeed: 100
-    - _Voro2Power: 1.11
+    - _Voro2AngleSpeed: 20
+    - _Voro2Power: -0.5
     - _Voro2Scale: 10
     - _VoroPower: 1.5
     - _VoroScale: 10
@@ -73,11 +73,13 @@ Material:
     - _Anchor: {r: 0, g: 0, b: 0, a: 0}
     - _Color0: {r: 16, g: 16, b: 16, a: 1}
     - _CubemapNormal: {r: 0, g: 0, b: 0, a: 0}
-    - _FresnelBSP: {r: 0, g: 100, b: 7.56, a: 0}
+    - _FresnelBSP: {r: 0, g: 100, b: 0.5, a: 0}
     - _FresnelBSP1: {r: 1.78, g: -1.5, b: 0.5, a: 0}
     - _FresnelColor: {r: 0.39215687, g: 0, b: 2, a: 1}
-    - _FresnelColor2: {r: 0, g: 0.13462424, b: 1, a: 1}
+    - _FresnelColor2: {r: 0.14150257, g: 0, b: 0.21568628, a: 1}
     - _GalaxySpeed: {r: 1, g: 1, b: 0, a: 0}
     - _OffsetSpeed: {r: 10, g: 0, b: 0, a: 0}
     - _StarColor: {r: 0.26666668, g: 0.1254902, b: 0, a: 1}
     - _TexAnchor: {r: 0, g: 0, b: 0, a: 0}
+    - _Voro1Speed: {r: 0.5, g: 0, b: 0, a: 0}
+    - _Voro2Speed: {r: -0.5, g: 0, b: 0, a: 0}
