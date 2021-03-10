@@ -5,7 +5,7 @@
 	using Tartaros.Entities.Detection;
 	using UnityEngine;
 
-	public class EntityDetection_IsInRange_Tests
+	public class EntityDetection_IsDetectionInRange_Tests
 	{
 		#region Fields
 		private const int DETECTION_RANGE = 5;
