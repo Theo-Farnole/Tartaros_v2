@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Tests
 {
 	using Tartaros.Entities;
+	using Tartaros.Entities.Attack;
 	using Tartaros.Entities.Detection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -34,6 +35,14 @@
 			entityDetection.EntityDetectionData = new EntityDetectionData(detectionRange);
 
 			return entityDetection;
+		}
+
+		public static EntityAttack AddAttackBehaviour(Entity entity, float attackRange)
+		{
+			EntityAttack entityAttack = entity.gameObject.AddComponent<EntityAttack>();
+			entityAttack.EntityAttackData = new EntityAttackData(0, 0, attackRange, null, null);
+
+			return entityAttack;
 		}
 	}
 }
