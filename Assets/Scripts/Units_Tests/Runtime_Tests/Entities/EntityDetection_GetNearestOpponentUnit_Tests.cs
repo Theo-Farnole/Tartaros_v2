@@ -7,7 +7,7 @@
 	using UnityEngine;
 	using UnityEngine.TestTools;
 
-	public class EntityDetection_GetNearestOpponentBuilding_Tests
+	public class EntityDetection_GetNearestOpponentUnit_Tests
 	{
 		#region Fields
 		private EntitiesKDTrees _entitiesKDTrees = null;
@@ -34,20 +34,20 @@
 		}
 
 		[UnityTest]
-		public IEnumerator When_OpponentIsBuilding_Should_ReturnTrue()
+		public IEnumerator When_OpponentIsUnit_Should_ReturnTrue()
 		{
-			yield return SetupPlayerAndEnemy(EntityType.Unit, EntityType.Building);
+			yield return SetupPlayerAndEnemy(EntityType.Unit, EntityType.Unit);
 
-			Assert.AreEqual(_enemyEntity, _playerEntDetection.GetNearestOpponentBuilding());
+			Assert.AreEqual(_enemyEntity, _playerEntDetection.GetNearestOpponentUnit());
 		}
 
 
 		[UnityTest]
-		public IEnumerator When_OpponentIsUnit_Should_ReturnNull()
+		public IEnumerator When_OpponentIsBuilding_Should_ReturnNull()
 		{
-			yield return SetupPlayerAndEnemy(EntityType.Unit, EntityType.Unit);
+			yield return SetupPlayerAndEnemy(EntityType.Unit, EntityType.Building);
 
-			Assert.AreEqual(null, _playerEntDetection.GetNearestOpponentBuilding());
+			Assert.AreEqual(null, _playerEntDetection.GetNearestOpponentUnit());
 		}
 
 

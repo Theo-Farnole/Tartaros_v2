@@ -60,6 +60,11 @@
 			return GetNearestOpponentByType(EntityType.Unit);
 		}
 
+		public Entity GetNearestOpponentBuilding()
+		{
+			return GetNearestOpponentByType(EntityType.Building);
+		}
+
 		public Entity GetNearestOpponentByType(EntityType entityType)
 		{
 			IEnumerable<Entity> opponents = GetOpponentsOrderByDistance();
