@@ -51,7 +51,7 @@
             Vector3 deltaPosition = Vector3.zero;
 
             ProccessTranslateScreenEdge(deltaTime, ref deltaPosition);
-            //ProccessZoom(deltaTime, ref deltaPosition);
+            ProccessZoom(deltaTime, ref deltaPosition);
 
             TranslateCamera(deltaPosition);
         }
@@ -74,7 +74,7 @@
 
         private void ProccessTranslateKeyboardInput(float deltaTime, ref Vector3 deltaPosition)
         {
-            //TODO: put input controls 
+            throw new System.NotImplementedException();
         }
         
 
