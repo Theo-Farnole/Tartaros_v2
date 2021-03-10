@@ -22,8 +22,8 @@
 		{
 			LogAssert.ignoreFailingMessages = true;
 
-			new GameObject("Services").AddComponent<Services>();
-			_entitiesKDTrees = new GameObject("Entities KD Tree").AddComponent<EntitiesKDTrees>();
+			_entitiesKDTrees = SetupHelper.CreateEntitiesKDTree();
+			SetupHelper.CreateService();
 
 			yield return null;
 		}
@@ -56,10 +56,10 @@
 		{			
 			LogAssert.ignoreFailingMessages = true;
 
-			Entity playerEnt = EntitiesTestsSetupHelper.CreateEntity(Vector3.zero, Team.Player, playerType, "Player");
-			_playerEntDetection = EntitiesTestsSetupHelper.AddDetectionBehaviour(playerEnt, 5);
+			Entity playerEnt = SetupHelper.CreateEntity(Vector3.zero, Team.Player, playerType, "Player");
+			_playerEntDetection = SetupHelper.AddDetectionBehaviour(playerEnt, 5);
 
-			_enemyEntity = EntitiesTestsSetupHelper.CreateEntity(new Vector3(0, 1, 1), Team.Enemy, enemyType, "Enemy");
+			_enemyEntity = SetupHelper.CreateEntity(new Vector3(0, 1, 1), Team.Enemy, enemyType, "Enemy");
 
 			yield return null;			
 		}		

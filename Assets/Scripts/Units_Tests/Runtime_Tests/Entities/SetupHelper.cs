@@ -2,10 +2,21 @@
 {
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
+	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public static class EntitiesTestsSetupHelper
+	internal static class SetupHelper
 	{
+		public static Services CreateService()
+		{
+			return new GameObject("Services").AddComponent<Services>();
+		}
+
+		public static EntitiesKDTrees CreateEntitiesKDTree()
+		{
+			return new GameObject("Entities KD Tree").AddComponent<EntitiesKDTrees>();
+		}
+
 		public static Entity CreateEntity(Vector3 position, Team team, EntityType entityType, string name)
 		{
 			GameObject entityObject = new GameObject(name);
