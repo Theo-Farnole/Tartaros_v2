@@ -3,7 +3,7 @@
 	using Tartaros.MeshViewer.UI;
 	using UnityEngine;
 
-	internal class ViewModelManager : Singleton<ViewModelManager>
+	internal class ViewModelManager : MeshViewerSingleton<ViewModelManager>
 	{
 		#region Fields		
 		[SerializeField]

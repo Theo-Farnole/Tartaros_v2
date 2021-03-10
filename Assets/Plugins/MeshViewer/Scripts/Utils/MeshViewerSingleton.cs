@@ -1,8 +1,9 @@
 ﻿namespace Tartaros.MeshViewer
 {
+	using Tartaros.Utilities;
 	using UnityEngine;
 
-	internal class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+	internal class MeshViewerSingleton<T> : MonoBehaviour where T : MonoBehaviour
 	{
 		private static T _instance = null;
 
@@ -13,7 +14,7 @@
 				if (_instance == null)
 				{
 					T[] instances =
-						FindObjectsOfType<T>();
+						FindObjectsOfType<T>();					
 
 					if (instances.Length > 1)
 					{
