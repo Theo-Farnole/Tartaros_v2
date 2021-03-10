@@ -6,6 +6,7 @@
 	{
 		#region Fields
 		private GenericFSM<GamemodeManager> _finiteStateMachine = new GenericFSM<GamemodeManager>();
+		private AGameState _currentState = null;
 		#endregion Fields
 
 		#region Methods		
