@@ -11,16 +11,19 @@
 		private EntityDetectionData _entityDetectionData = null;
 		private EntityAttackData _entityAttackData = null;
 		private EntitiesKDTrees _entitiesKDTrees = null;
+		private Entity _entity = null;
 		#endregion
 
 		#region Properties
 		public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
 		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
+		public Team OpponentTeam => _entity.Team.GetOpponent();
 		#endregion Properties
 
 		#region Methods
 		private void Start()
 		{
+			_entity = GetComponent<Entity>();
 			_entitiesKDTrees = Services.Instance.Get<EntitiesKDTrees>();
 		}
 
@@ -31,7 +34,7 @@
 
 		public IAttackable GetNearestAttackableOpponent()
 		{
-			IEnumerable<Entity> opponents = _entitiesKDTrees.GetNearestEnemyEntities(transform.position);
+			IEnumerable<Entity> opponents = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);
 			IEnumerator<Entity> opponentsEnumerator = opponents.GetEnumerator();
 
 			while (opponentsEnumerator.Current != null)
@@ -51,7 +54,7 @@
 
 		public bool IsNearestOpponentInDetectionRange()
 		{
-			Entity nearestEntity = _entitiesKDTrees.GetNearestEnemyEntity(transform.position);
+			Entity nearestEntity = _entitiesKDTrees.FindClosest(OpponentTeam, transform.position);
 
 			return IsInDetectionRange(nearestEntity);
 		}

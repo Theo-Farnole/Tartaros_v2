@@ -18,7 +18,7 @@
 
 		private void Start()
 		{
-			_kdTrees = new Dictionary<Team, KdTree<Entity>()
+			_kdTrees = new Dictionary<Team, KdTree<Entity>>()
 			{
 				{  Team.Player, new KdTree<Entity>(true) },
 				{  Team.Enemy,  new KdTree<Entity>(true) }
