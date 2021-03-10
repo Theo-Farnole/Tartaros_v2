@@ -1,16 +1,17 @@
 ﻿namespace Tartaros.CameraSystem
 {
-    using System.Collections;
-    using System.Collections.Generic;
+    using Sirenix.OdinInspector;
+    using Sirenix.Serialization;
     using UnityEngine;
     using Tartaros.CameraSystem;
 
-    public class CameraData : ScriptableObject
+    public class CameraData : SerializedScriptableObject
     {
+        [OdinSerialize]
         CameraZoomData _zoom = null;
-
+        [OdinSerialize]
         CameraKeyboardPanData _keyboardPan = null;
-
+        [OdinSerialize]
         CameraScreenEdgePanData _cameraScreenEdgePan = null;
 
         public CameraData(CameraZoomData zoom, CameraKeyboardPanData keyboardPan, CameraScreenEdgePanData cameraScreenEdgePan)

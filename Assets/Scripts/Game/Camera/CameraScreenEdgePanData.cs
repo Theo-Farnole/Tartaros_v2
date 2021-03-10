@@ -8,7 +8,7 @@
     {
         float _speed = 1;
 
-        float _borderThickness = 0;
+        float _borderThickness = 3;
 
         public CameraScreenEdgePanData(float speed, float borderThickness)
         {

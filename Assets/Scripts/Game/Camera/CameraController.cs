@@ -8,21 +8,24 @@
     using Tartaros.ServicesLocator;
     using Tartaros.Utilities;
 
+
     [RequireComponent(typeof(Camera))]
     public class CameraController : MonoBehaviour
     {
         #region Fields
+        //public GameInputs _input = null;
         private CameraData _cameraData = null;
         private Camera _camera = null;
         private IMap _Imap = null;
 
         #endregion
+
         #region Properties
         public CameraController(CameraData data, Camera camera)
         {
             _cameraData = data;
             _camera = camera;
-        } 
+        }
         #endregion
 
         #region Methods
@@ -37,13 +40,18 @@
             _camera = GetComponent<Camera>();
         }
 
+        private void Update()
+        {
+            MovementManager();
+        }
+
         private void MovementManager()
         {
             float deltaTime = Time.deltaTime;
             Vector3 deltaPosition = Vector3.zero;
 
             ProccessTranslateScreenEdge(deltaTime, ref deltaPosition);
-            ProccessZoom(deltaTime, ref deltaPosition);
+            //ProccessZoom(deltaTime, ref deltaPosition);
 
             TranslateCamera(deltaPosition);
         }
@@ -64,6 +72,11 @@
                 deltaPosition.z -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
         }
 
+        private void ProccessTranslateKeyboardInput(float deltaTime, ref Vector3 deltaPosition)
+        {
+            //TODO: put input controls 
+        }
+        
 
         private void ProccessZoom(float deltaTime, ref Vector3 deltaPosition)
         {
