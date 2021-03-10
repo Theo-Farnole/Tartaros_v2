@@ -33,7 +33,7 @@
 
 		public override void OnUpdate()
 		{
-			if (_entityDetection.IsNearestEnemyInDetectionRange())
+			if (_entityDetection.IsNearestOpponentInDetectionRange())
 			{
 				IAttackable target = _entityDetection.GetNearestAttackableOpponent();
 				_stateOwner.GetComponent<EntityFSM>().SetState(new StateAttack(_stateOwner, target));

@@ -31,7 +31,7 @@
 
 		public IAttackable GetNearestAttackableOpponent()
 		{
-			IEnumerable<Entity> opponents = _entitiesKDTrees.GetNearestOpponentsEntities(transform.position);
+			IEnumerable<Entity> opponents = _entitiesKDTrees.GetNearestEnemyEntities(transform.position);
 			IEnumerator<Entity> opponentsEnumerator = opponents.GetEnumerator();
 
 			while (opponentsEnumerator.Current != null)
@@ -49,9 +49,9 @@
 			return null;
 		}
 
-		public bool IsNearestEnemyInDetectionRange()
+		public bool IsNearestOpponentInDetectionRange()
 		{
-			Entity nearestEntity = _entitiesKDTrees.GetNearestOpponentEntity(transform.position);
+			Entity nearestEntity = _entitiesKDTrees.GetNearestEnemyEntity(transform.position);
 
 			return IsInDetectionRange(nearestEntity);
 		}

@@ -3,6 +3,6 @@
 	public enum Team
 	{
 		Player,
-		Opponent
+		Enemy
 	}
 }

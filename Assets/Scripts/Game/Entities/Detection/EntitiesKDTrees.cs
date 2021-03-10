@@ -7,8 +7,7 @@
 	public class EntitiesKDTrees : MonoBehaviour
 	{
 		#region Fields
-		private KdTree<Entity> _playerEntitiesTree = null;
-		private KdTree<Entity> _opponentEntitiesTree = null;
+		private Dictionary<Team, KdTree<Entity>> _kdTrees = new Dictionary<Team, KdTree<Entity>>();
 		#endregion Fields
 
 		#region Methods
@@ -19,8 +18,11 @@
 
 		private void Start()
 		{
-			_playerEntitiesTree = new KdTree<Entity>(true);
-			_opponentEntitiesTree = new KdTree<Entity>(true);
+			_kdTrees = new Dictionary<Team, KdTree<Entity>()
+			{
+				{  Team.Player, new KdTree<Entity>(true) },
+				{  Team.Enemy,  new KdTree<Entity>(true) }
+			};
 		}
 
 		private void OnEnable()
@@ -40,49 +42,19 @@
 
 		private void Entity_EntitySpawned(object sender, Entity.EntitySpawnedArgs e)
 		{
-			switch (e.entity.Team)
-			{
-				case Team.Player:
-					AddPlayerEntity(e.entity);
-					break;
-
-				case Team.Opponent:
-					AddOpponentEntity(e.entity);
-					break;
-
-				default:
-					throw new System.NotImplementedException();
-			}
+			AddEntityFromKDTree(e.entity.Team, e.entity);
 		}
 
 		private void Entity_EntityKilled(object sender, Entity.EntityKilledArgs e)
 		{
-			switch (e.entity.Team)
-			{
-				case Team.Player:
-					RemovePlayerEntity(e.entity);
-					break;
-
-				case Team.Opponent:
-					AddPlayerEntity(e.entity);
-					break;
-
-				default:
-					throw new System.NotImplementedException();
-			}
+			RemoveEntityFromKDTree(e.entity.Team, e.entity);
 		}
 
-		public Entity GetNearestOpponentEntity(Vector3 position) => _opponentEntitiesTree.FindClosest(position);
-		public IEnumerable<Entity> GetNearestOpponentsEntities(Vector3 position) => _opponentEntitiesTree.FindClose(position);
+		public Entity FindClosest(Team entityTeamToGet, Vector3 position) => _kdTrees[entityTeamToGet].FindClosest(position);
+		public IEnumerable<Entity> FindClose(Team entityTeamToGet, Vector3 position) => _kdTrees[entityTeamToGet].FindClose(position);
 
-		public Entity GetNearestPlayerEntity(Vector3 position) => _playerEntitiesTree.FindClosest(position);
-		public IEnumerable<Entity> GetNearestPlayerEntities(Vector3 position) => _opponentEntitiesTree.FindClose(position);
-
-		public void AddOpponentEntity(Entity entity) => _opponentEntitiesTree.Add(entity);
-		public void RemoveOpponentEntity(Entity entity) => _opponentEntitiesTree.RemoveAll(x => x == entity);
-
-		public void AddPlayerEntity(Entity entity) => _playerEntitiesTree.Add(entity);
-		public void RemovePlayerEntity(Entity entity) => _playerEntitiesTree.RemoveAll(x => x == entity);
+		private void AddEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].Add(entity);
+		private void RemoveEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].RemoveAll(x => x == entity);
 		#endregion Methods
 	}
 }
