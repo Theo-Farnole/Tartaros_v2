@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities.Detection
 {
+	using System;
 	using System.Collections.Generic;
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
@@ -10,42 +11,64 @@
 		#region Fields
 		private EntityDetectionData _entityDetectionData = null;
 		private EntityAttackData _entityAttackData = null;
-		private EntitiesKDTrees _entitiesKDTrees = null;
 		private Entity _entity = null;
+
+		private EntitiesKDTrees _entitiesKDTrees = null;
 		#endregion
 
 		#region Properties
 		public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
 		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
-		public Team OpponentTeam => _entity.Team.GetOpponent();
+		public Team OpponentTeam => Entity.Team.GetOpponent();
+		private Entity Entity
+		{
+			get
+			{
+				if (_entity == null)
+				{
+					_entity = GetComponent<Entity>();
+				}
+
+				return _entity;
+			}
+		}
 		#endregion Properties
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
-			_entity = GetComponent<Entity>();
 			_entitiesKDTrees = Services.Instance.Get<EntitiesKDTrees>();
-		}
-
-		public Entity GetNearest(SearchQuary searchQuery)
-		{
-			throw new System.NotImplementedException();
 		}
 
 		public IAttackable GetNearestAttackableOpponent()
 		{
-			IEnumerable<Entity> opponents = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);
-			IEnumerator<Entity> opponentsEnumerator = opponents.GetEnumerator();
+			var opponents = GetOpponentsOrderByDistance();
 
-			while (opponentsEnumerator.Current != null)
+			foreach (var entity in opponents)
 			{
-				if (opponentsEnumerator.Current.TryGetComponent(out IAttackable attackable))
+				if (entity.TryGetComponent(out IAttackable attackable))
 				{
 					return attackable;
 				}
-				else
+			}
+
+			return null;
+		}
+
+		public Entity GetNearestOpponentUnit()
+		{
+			return GetNearestOpponentByType(EntityType.Unit);
+		}
+
+		public Entity GetNearestOpponentByType(EntityType entityType)
+		{
+			IEnumerable<Entity> opponents = GetOpponentsOrderByDistance();
+
+			foreach (Entity entity in opponents)
+			{
+				if (entity.entityType == entityType)
 				{
-					opponentsEnumerator.MoveNext();
+					return entity;
 				}
 			}
 
@@ -79,6 +102,14 @@
 			float distance = Vector3.Distance(transform.position, point);
 
 			return distance <= attackRange;
+		}
+
+
+		private IEnumerable<Entity> GetOpponentsOrderByDistance()
+		{
+			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);
+
+			return enumerable;
 		}
 		#endregion
 	}

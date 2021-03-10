@@ -7,21 +7,18 @@
 	public class EntitiesKDTrees : MonoBehaviour
 	{
 		#region Fields
-		private Dictionary<Team, KdTree<Entity>> _kdTrees = new Dictionary<Team, KdTree<Entity>>();
+		private Dictionary<Team, KdTree<Entity>> _kdTrees = null;
 		#endregion Fields
 
 		#region Methods
 		private void Awake()
 		{
 			Services.Instance.RegisterService(this);
-		}
 
-		private void Start()
-		{
 			_kdTrees = new Dictionary<Team, KdTree<Entity>>()
 			{
-				{  Team.Player, new KdTree<Entity>(true) },
-				{  Team.Enemy,  new KdTree<Entity>(true) }
+				{ Team.Player, new KdTree<Entity>(true) },
+				{ Team.Enemy,  new KdTree<Entity>(true) }
 			};
 		}
 

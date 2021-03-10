@@ -68,6 +68,12 @@
 
 		void GenerateRequiredComponents()
 		{
+			if (_entityData == null)
+			{
+				Debug.LogErrorFormat("Missing entity data in \"{0}\". Aborting components generation.", name);
+				return;
+			}
+
 			foreach (IEntityBehaviourData behaviour in _entityData.Behaviours)
 			{
 				behaviour.SpawnRequiredComponents(gameObject);
