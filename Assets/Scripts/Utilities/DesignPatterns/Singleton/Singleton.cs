@@ -31,6 +31,8 @@
 			}
 		}
 
+		public static bool HasInstance => Instance != null;
+
 		void OnDestroy()
 		{
 			_instance = null;
