@@ -7,16 +7,17 @@
     using Tartaros.Sectors;
     using Tartaros.ServicesLocator;
     using Tartaros.Utilities;
-
+    using UnityEngine.InputSystem;
 
     [RequireComponent(typeof(Camera))]
     public class CameraController : MonoBehaviour
     {
         #region Fields
-        //public GameInputs _input = null;
-        private CameraData _cameraData = null;
+        private GameInputs _input = null;
+        public CameraData _cameraData = null;
         private Camera _camera = null;
         private IMap _Imap = null;
+
 
         #endregion
 
@@ -29,15 +30,24 @@
         #endregion
 
         #region Methods
-        private void Start()
-        {
-            _Imap = Services.Instance.Get<IMap>();
-        }
 
 
         private void Awake()
         {
             _camera = GetComponent<Camera>();
+            _input = new GameInputs();
+            _input.Camera.Enable();
+        }
+
+        private void Start()
+        {
+            if (Services.HasInstance)
+            {
+                if (Services.Instance.TryGet<IMap>(out IMap map))
+                {
+                    _Imap = map;
+                }
+            }
         }
 
         private void Update()
@@ -51,6 +61,7 @@
             Vector3 deltaPosition = Vector3.zero;
 
             ProccessTranslateScreenEdge(deltaTime, ref deltaPosition);
+            ProccessTranslateKeyboardInput(deltaTime, ref deltaPosition);
             ProccessZoom(deltaTime, ref deltaPosition);
 
             TranslateCamera(deltaPosition);
@@ -59,36 +70,49 @@
         private void ProccessTranslateScreenEdge(float deltaTime, ref Vector3 deltaPosition)
         {
 
-            if (Input.mousePosition.x >= Screen.width - _cameraData.CameraScreenEdgePan.BorderThickness)
+            if (_input.Camera.MousePosition.ReadValue<Vector2>().x >= Screen.width - _cameraData.CameraScreenEdgePan.BorderThickness)
                 deltaPosition.x += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
 
-            if (Input.mousePosition.x <= _cameraData.CameraScreenEdgePan.BorderThickness)
+            if (_input.Camera.MousePosition.ReadValue<Vector2>().x <= _cameraData.CameraScreenEdgePan.BorderThickness)
                 deltaPosition.x -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
 
-            if (Input.mousePosition.y >= Screen.width - _cameraData.CameraScreenEdgePan.BorderThickness)
+            if (_input.Camera.MousePosition.ReadValue<Vector2>().y >= Screen.height - _cameraData.CameraScreenEdgePan.BorderThickness)
                 deltaPosition.z += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
 
-            if (Input.mousePosition.y <= _cameraData.CameraScreenEdgePan.BorderThickness)
+            if (_input.Camera.MousePosition.ReadValue<Vector2>().y <= _cameraData.CameraScreenEdgePan.BorderThickness)
                 deltaPosition.z -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
         }
 
         private void ProccessTranslateKeyboardInput(float deltaTime, ref Vector3 deltaPosition)
         {
-            throw new System.NotImplementedException();
+            if (_input.Camera.Forward.phase == InputActionPhase.Performed)
+                deltaPosition.z += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+
+
+            if (_input.Camera.Backward.phase == InputActionPhase.Performed)
+                deltaPosition.z -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+
+
+            if (_input.Camera.Right.phase == InputActionPhase.Performed)
+                deltaPosition.x += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+
+
+            if (_input.Camera.Left.phase == InputActionPhase.Performed)
+                deltaPosition.x -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
         }
-        
+
 
         private void ProccessZoom(float deltaTime, ref Vector3 deltaPosition)
         {
-            float inputDelta = Input.mouseScrollDelta.y;
+            float inputDelta = _input.Camera.Zoom.ReadValue<Vector2>().y;
             deltaPosition.y += inputDelta * deltaTime * _cameraData.CameraZoomData.ZoomSpeed;
         }
 
         private void TranslateCamera(Vector3 position)
         {
-            Vector3 forward = transform.forward;
+            Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
             Vector3 right = transform.right;
-            Vector3 up = forward;
+            Vector3 up = transform.forward;
 
             Vector3 deltaForward = position.z * forward;
             Vector3 deltaRight = position.x * right;
