@@ -31,6 +31,7 @@
 			mat.SetTexture("_MainTex", texturesPath.AlbedoTexture);
 			mat.SetTexture("_Occlusion", texturesPath.AOTexture);
 			mat.SetTexture("_BumpMap", texturesPath.NormalTexture);
+			mat.SetFloat("_Glossiness", 0);
 
 			return mat;
 		}
