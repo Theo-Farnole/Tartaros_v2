@@ -18,5 +18,8 @@
         {
             base.OnStateExit();
         }
+
+        public override void OnUpdate()
+        { }
     }
 }
