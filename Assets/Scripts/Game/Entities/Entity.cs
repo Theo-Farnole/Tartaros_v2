@@ -140,7 +140,7 @@
 
 		void IOrderStopReceiver.Stop()
 		{
-			_entityFSM.Stop()
+			_entityFSM.Stop();
 		}
 		#endregion IOrders
 		#endregion Methods
