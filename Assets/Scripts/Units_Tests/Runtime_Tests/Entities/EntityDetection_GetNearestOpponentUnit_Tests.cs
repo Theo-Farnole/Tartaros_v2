@@ -4,11 +4,10 @@
 	using System.Collections;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
-	using Tartaros.ServicesLocator;
 	using UnityEngine;
 	using UnityEngine.TestTools;
 
-	public class EntityDetection_Tests
+	public class EntityDetection_GetNearestOpponentUnit_Tests
 	{
 		#region Fields
 		private EntitiesKDTrees _entitiesKDTrees = null;
@@ -22,8 +21,8 @@
 		{
 			LogAssert.ignoreFailingMessages = true;
 
-			new GameObject("Services").AddComponent<Services>();
-			_entitiesKDTrees = new GameObject("Entities KD Tree").AddComponent<EntitiesKDTrees>();
+			SetupHelper.CreateService();
+			_entitiesKDTrees = SetupHelper.CreateEntitiesKDTree();
 
 			yield return null;
 		}
@@ -35,7 +34,7 @@
 		}
 
 		[UnityTest]
-		public IEnumerator GetNearestOpponentUnit_When_OpponentUnit_Should_ReturnTrue()
+		public IEnumerator When_OpponentIsUnit_Should_ReturnTrue()
 		{
 			yield return SetupPlayerAndEnemy(EntityType.Unit, EntityType.Unit);
 
@@ -44,7 +43,7 @@
 
 
 		[UnityTest]
-		public IEnumerator GetNearestOpponentUnit_When_OpponentBuilding_Should_ReturnNull()
+		public IEnumerator When_OpponentIsBuilding_Should_ReturnNull()
 		{
 			yield return SetupPlayerAndEnemy(EntityType.Unit, EntityType.Building);
 
@@ -53,16 +52,16 @@
 
 
 		private IEnumerator SetupPlayerAndEnemy(EntityType playerType, EntityType enemyType)
-		{			
+		{
 			LogAssert.ignoreFailingMessages = true;
 
-			Entity playerEnt = EntitiesTestsSetupHelper.CreateEntity(Vector3.zero, Team.Player, playerType, "Player");
-			_playerEntDetection = EntitiesTestsSetupHelper.AddDetectionBehaviour(playerEnt, 5);
+			Entity playerEnt = SetupHelper.CreateEntity(Vector3.zero, Team.Player, playerType, "Player");
+			_playerEntDetection = SetupHelper.AddDetectionBehaviour(playerEnt, 5);
 
-			_enemyEntity = EntitiesTestsSetupHelper.CreateEntity(new Vector3(0, 1, 1), Team.Enemy, enemyType, "Enemy");
+			_enemyEntity = SetupHelper.CreateEntity(new Vector3(0, 1, 1), Team.Enemy, enemyType, "Enemy");
 
-			yield return null;			
-		}		
+			yield return null;
+		}
 		#endregion Methods
 	}
 }
