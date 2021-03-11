@@ -9,7 +9,7 @@
     {
         private readonly GamemodeFSM _gamemodeFSM;
 
-        void SetState(AGameState _state)
+        public void SetState(AGameState _state)
         {
             _gamemodeFSM.SetState(_state);
         }

@@ -4,7 +4,7 @@
 	using Tartaros.MeshViewer;
 	using UnityEngine;
 
-	internal class ViewedMeshSetupUIManager : Singleton<ViewedMeshSetupUIManager>
+	internal class ViewedMeshSetupUIManager : MeshViewerSingleton<ViewedMeshSetupUIManager>
 	{
 		#region Fields
 		private const string GROUP_SETUP = "Setup";

@@ -36,7 +36,7 @@
 
 		public bool CanAttack(IAttackable target)
 		{
-			return _entityDetection.IsInAttackRange(target.Transform.position, _entityAttackData.AttackRange);
+			return _entityDetection.IsInAttackRange(target.Transform.position);
 		}
 		#endregion
 	}

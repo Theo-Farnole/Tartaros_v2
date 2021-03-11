@@ -3,9 +3,11 @@
 	using Tartaros.MeshViewer.UI;
 	using UnityEngine;
 
-	internal class ViewModelManager : Singleton<ViewModelManager>
+	internal class ViewModelManager : MeshViewerSingleton<ViewModelManager>
 	{
 		#region Fields		
+		private const float DEFAULT_SCALE = 0.01f;
+
 		[SerializeField]
 		private Transform _viewedMeshParent = null;
 
@@ -45,7 +47,7 @@
 		{
 			if (_currentDisplayMesh == null) return;
 
-			_currentDisplayMesh.transform.localScale = Vector3.one * scale;
+			_currentDisplayMesh.transform.localScale = Vector3.one * scale * DEFAULT_SCALE;
 		}
 		#endregion Methods
 	}

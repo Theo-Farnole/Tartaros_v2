@@ -15,6 +15,8 @@
 					T[] instances =
 						FindObjectsOfType<T>();
 
+					if (instances.Length == 0) throw new NoSingletonInstanceFound<T>();
+
 					if (instances.Length > 1)
 					{
 						Debug.LogWarning(instances[0].name + " There is more than one instance of " + typeof(T) + " Singleton. ");
