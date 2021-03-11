@@ -27,11 +27,6 @@
 			CallAction<IOrderStopReceiver>(ctx => ctx.Stop());
 		}
 
-		public void StopAdditive()
-		{
-			CallAction<IOrderStopReceiver>(ctx => ctx.StopAdditive());
-		}
-
 		public void Move(Vector3 position)
 		{
 			CallAction<IOrderMoveReceiver>(ctx => ctx.Move(position));
