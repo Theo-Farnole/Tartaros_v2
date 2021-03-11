@@ -1,10 +1,10 @@
 ﻿namespace Tartaros.OrderGiver
 {
-    using UnityEngine;
+	using Tartaros.Entities.Movement;
 
-    public interface IOrderPatrolReceiver
-    {
-        void Patrol(Vector3[] waypoints);
-        void PatrolAdditive(Vector3[] waypoints);
-    }
+	public interface IOrderPatrolReceiver
+	{
+		void Patrol(PatrolPoints waypoints);
+		void PatrolAdditive(PatrolPoints waypoints);
+	}
 }
