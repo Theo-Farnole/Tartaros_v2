@@ -34,8 +34,6 @@
 
 		private void Start()
 		{
-			Debug.Log("Start");
-
 			if (TryGetComponent(out EntityAttack entityAttack))
 			{
 				_attackRange = entityAttack.EntityAttackData.AttackRange;
@@ -55,6 +53,11 @@
 			}
 
 			return null;
+		}
+
+		public Entity GetNearestOpponent()
+		{
+			return _entitiesKDTrees.FindClosest(OpponentTeam, transform.position);
 		}
 
 		public Entity GetNearestOpponentUnit()
@@ -109,9 +112,16 @@
 
 		public bool IsNearestOpponentInDetectionRange()
 		{
-			Entity nearestEntity = _entitiesKDTrees.FindClosest(OpponentTeam, transform.position);
+			Entity nearestEntity = GetNearestOpponent();
 
-			return IsInDetectionRange(nearestEntity);
+			if (nearestEntity == null)
+			{
+				return false;
+			}
+			else
+			{
+				return IsInDetectionRange(nearestEntity);
+			}
 		}
 
 		public bool IsInDetectionRange(Entity entity)
