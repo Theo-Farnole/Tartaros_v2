@@ -2,6 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using System;
+	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Movement;
@@ -87,9 +88,20 @@
 
 		private T[] GetSelectablesAs<T>()
 		{
-			return _selection.SelectedSelectables
-				.OfType<T>()
-				.ToArray();
+			List<T> output = new List<T>(_selection.SelectedSelectables.Length);
+
+			foreach (var x in _selection.SelectedSelectables)
+			{
+				if (x.GameObject.TryGetComponent(out Entity entity))
+				{
+					if (entity is T convertedEntity)
+					{
+						output.Add(convertedEntity);
+					}
+				}
+			}
+
+			return output.ToArray();
 		}
 		#endregion Methods
 	}

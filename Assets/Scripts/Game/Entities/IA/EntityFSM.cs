@@ -1,12 +1,14 @@
 ﻿namespace Tartaros.Entities
 {
+	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
-	public class EntityFSM : MonoBehaviour
+	public partial class EntityFSM : MonoBehaviour
 	{
 		#region Fields
+		[OnInspectorGUI("OnInspectorGUI")]
 		private GenericFSM<Entity> _finiteStateMachine = new GenericFSM<Entity>();
 
 		private Queue<AEntityState> _statesQueue = new Queue<AEntityState>();
@@ -45,4 +47,25 @@
 		}
 		#endregion Methods
 	}
+
+#if UNITY_EDITOR
+	public partial class EntityFSM
+	{
+#pragma warning disable IDE0051 // Remove unused private members
+		void OnInspectorGUI()
+#pragma warning restore IDE0051 // Remove unused private members
+		{
+			if (Application.isPlaying)
+			{
+
+				AState<Entity> currentState = _finiteStateMachine.CurrentState;
+				string currentStateType = currentState != null ? currentState.GetType().Name : "NO STATE";
+
+				string currentStateMessage = string.Format("Current state: {0}", currentStateType);
+
+				GUILayout.Label(currentStateMessage);
+			}
+		}
+	}
+#endif
 }

@@ -11,16 +11,15 @@
 		public StateMove(Entity stateOwner, Vector3 targetPoint) : base(stateOwner)
 		{
 			_targetPoint = targetPoint;
+
+			_entityMovement = stateOwner.GetComponent<EntityMovement>();
 		}
 
 		public override void OnStateEnter()
 		{
 			base.OnStateEnter();
 
-			if (_entityMovement.CanMoveToPoint(_targetPoint))
-			{
-				_entityMovement.MoveToPoint(_targetPoint);
-			}
+			_entityMovement.MoveToPoint(_targetPoint);
 
 			_entityMovement.DestinationReached -= DestinationReached;
 			_entityMovement.DestinationReached += DestinationReached;
@@ -32,13 +31,11 @@
 
 			_entityMovement.StopMovement();
 			_entityMovement.DestinationReached -= DestinationReached;
-		}
-
-		public override void OnUpdate()
-		{ }
+		}		
 
 		private void DestinationReached(object sender, EntityMovement.DestinationReachedArgs e)
 		{
+			Debug.Log("Destination reached");
 			_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
 		}
 

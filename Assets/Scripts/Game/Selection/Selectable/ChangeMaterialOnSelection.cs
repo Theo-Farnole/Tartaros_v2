@@ -1,23 +1,30 @@
 ﻿namespace Tartaros.Selection
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using UnityEngine;
 
-	[RequireComponent(typeof(Renderer))]
 	class ChangeMaterialOnSelection : MonoBehaviour, ISelectionEffect
 	{
 		#region Fields
 		[SerializeField]
+		[SuffixLabel("self if null")]
+		private Renderer _renderer = null;
+
+		[SerializeField]
 		private Material _selectedMaterial = null;
 
 		private Material _unselectedMaterial = null;
-		private Renderer _renderer = null; 
 		#endregion Fields
 
 		#region Methods
 		void Start()
 		{
-			_renderer = GetComponent<Renderer>();
+			if (_renderer == null)
+			{
+				_renderer = GetComponent<Renderer>();
+			}
+
 			_unselectedMaterial = _renderer.material;
 		}
 
@@ -29,7 +36,7 @@
 		void ISelectionEffect.OnUnselected()
 		{
 			_renderer.material = _unselectedMaterial;
-		} 
+		}
 		#endregion Methods
 	}
 }

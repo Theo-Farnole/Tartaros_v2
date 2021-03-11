@@ -12,6 +12,7 @@
 		#region Properties
 		bool ISelectable.CanBeSelected { get; }
 		Vector3 ISelectable.Position => transform.position;
+		GameObject ISelectable.GameObject => gameObject;
 		#endregion Properties
 
 		#region Events

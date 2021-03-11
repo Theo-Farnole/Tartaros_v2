@@ -15,6 +15,8 @@
 	{
 		bool CanBeSelected { get; }
 		Vector3 Position { get; }
+		GameObject GameObject { get; }
+
 		void OnSelected();
 		void OnUnselected();
 
