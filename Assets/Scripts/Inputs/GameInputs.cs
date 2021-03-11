@@ -200,6 +200,33 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Orders"",
+            ""id"": ""08912f36-c1dc-40c0-a5df-a8f205026f9a"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveToOrAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c11cbff-133e-43fc-ad4f-f98b35e67126"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c4b495c5-129b-49d7-b22a-12053be1ade9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveToOrAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -278,6 +305,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
         m_Camera_Right = m_Camera.FindAction("Right", throwIfNotFound: true);
         m_Camera_Left = m_Camera.FindAction("Left", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
+        // Orders
+        m_Orders = asset.FindActionMap("Orders", throwIfNotFound: true);
+        m_Orders_MoveToOrAttack = m_Orders.FindAction("MoveToOrAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -445,6 +475,39 @@ public class @GameInputs : IInputActionCollection, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Orders
+    private readonly InputActionMap m_Orders;
+    private IOrdersActions m_OrdersActionsCallbackInterface;
+    private readonly InputAction m_Orders_MoveToOrAttack;
+    public struct OrdersActions
+    {
+        private @GameInputs m_Wrapper;
+        public OrdersActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveToOrAttack => m_Wrapper.m_Orders_MoveToOrAttack;
+        public InputActionMap Get() { return m_Wrapper.m_Orders; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(OrdersActions set) { return set.Get(); }
+        public void SetCallbacks(IOrdersActions instance)
+        {
+            if (m_Wrapper.m_OrdersActionsCallbackInterface != null)
+            {
+                @MoveToOrAttack.started -= m_Wrapper.m_OrdersActionsCallbackInterface.OnMoveToOrAttack;
+                @MoveToOrAttack.performed -= m_Wrapper.m_OrdersActionsCallbackInterface.OnMoveToOrAttack;
+                @MoveToOrAttack.canceled -= m_Wrapper.m_OrdersActionsCallbackInterface.OnMoveToOrAttack;
+            }
+            m_Wrapper.m_OrdersActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveToOrAttack.started += instance.OnMoveToOrAttack;
+                @MoveToOrAttack.performed += instance.OnMoveToOrAttack;
+                @MoveToOrAttack.canceled += instance.OnMoveToOrAttack;
+            }
+        }
+    }
+    public OrdersActions @Orders => new OrdersActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -504,5 +567,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+    }
+    public interface IOrdersActions
+    {
+        void OnMoveToOrAttack(InputAction.CallbackContext context);
     }
 }

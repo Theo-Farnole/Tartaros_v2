@@ -18,10 +18,5 @@
         {
             base.OnStateExit();
         }
-
-        public override void OnUpdate()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

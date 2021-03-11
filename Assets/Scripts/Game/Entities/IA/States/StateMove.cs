@@ -1,10 +1,7 @@
 ﻿namespace Tartaros.Entities.State
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Utilities;
 	using Tartaros.Entities;
+	using UnityEngine;
 
 	public class StateMove : AEntityState
 	{
@@ -37,9 +34,12 @@
 			_entityMovement.DestinationReached -= DestinationReached;
 		}
 
+		public override void OnUpdate()
+		{ }
+
 		private void DestinationReached(object sender, EntityMovement.DestinationReachedArgs e)
 		{
-			_stateOwner.GetComponent<EntityFSM>().SetState(null);
+			_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
 		}
 
 	}

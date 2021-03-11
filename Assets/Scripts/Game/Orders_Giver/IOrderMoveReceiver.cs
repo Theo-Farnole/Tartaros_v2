@@ -5,8 +5,8 @@
     public interface IOrderMoveReceiver
     {
         void Move(Vector3 position);
-        void Move(Transform target);
+        void Move(Transform toFollow);
         void MoveAdditive(Vector3 position);
-        void MoveAdditive(Transform target);
+        void MoveAdditive(Transform toFollow);
     }
 }

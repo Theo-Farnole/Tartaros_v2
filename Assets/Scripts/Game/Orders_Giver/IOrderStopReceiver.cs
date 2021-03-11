@@ -3,6 +3,5 @@
     public interface IOrderStopReceiver
     {
         void Stop();
-        void StopAdditive();
     }
 }
