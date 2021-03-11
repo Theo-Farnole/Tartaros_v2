@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    [System.Serializable]
     public class CameraScreenEdgePanData 
     {
+        [SerializeField]
         float _speed = 1;
-
+        [SerializeField]
         float _borderThickness = 3;
 
         public CameraScreenEdgePanData(float speed, float borderThickness)

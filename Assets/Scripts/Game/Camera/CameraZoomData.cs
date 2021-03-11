@@ -6,10 +6,12 @@
     using Tartaros.Utilities;
     using Tartaros.CameraSystem;
 
+    [System.Serializable]
     public class CameraZoomData
     {
+        [SerializeField]
         Bounds1D _zoomBounds = default;
-
+        [SerializeField]
         float _zoomSpeed = 1;
 
         public CameraZoomData(Bounds1D zoomBoudns, float zoomSpeed)

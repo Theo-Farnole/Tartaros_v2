@@ -22,11 +22,44 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: _zoom
-      Entry: 6
+      Entry: 7
+      Data: 0|Tartaros.CameraSystem.CameraZoomData, Tartaros
+    - Name: _zoomBounds
+      Entry: 7
+      Data: Tartaros.Utilities.Bounds1D, Tartaros
+    - Name: min
+      Entry: 3
+      Data: 0
+    - Name: max
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _zoomSpeed
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
       Data: 
     - Name: _keyboardPan
-      Entry: 6
+      Entry: 7
+      Data: 1|Tartaros.CameraSystem.CameraKeyboardPanData, Tartaros
+    - Name: _speed
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
       Data: 
     - Name: _cameraScreenEdgePan
-      Entry: 6
+      Entry: 7
+      Data: 2|Tartaros.CameraSystem.CameraScreenEdgePanData, Tartaros
+    - Name: _speed
+      Entry: 4
+      Data: 5
+    - Name: _borderThickness
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
       Data: 
