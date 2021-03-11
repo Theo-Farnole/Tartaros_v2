@@ -187,6 +187,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Orders",
+            "id": "08912f36-c1dc-40c0-a5df-a8f205026f9a",
+            "actions": [
+                {
+                    "name": "MoveToOrAttack",
+                    "type": "Button",
+                    "id": "3c11cbff-133e-43fc-ad4f-f98b35e67126",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c4b495c5-129b-49d7-b22a-12053be1ade9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveToOrAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
