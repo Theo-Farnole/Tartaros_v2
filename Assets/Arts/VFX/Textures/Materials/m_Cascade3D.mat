@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Cascade3D
+  m_Name: m_Cascade3D
   m_Shader: {fileID: 4800000, guid: 9ce9b312c5539534fb32afd8cc3c9e2f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -48,6 +48,7 @@ Material:
     - _Opacity: 1.5
     - _Remap: 0.1
     - _RippleAmount: 2
+    - _RippleAmount2: 2
     - _Tiling: 1
     - _VertexOffset: 2
     - _VertexScale: -17
@@ -56,6 +57,8 @@ Material:
     - _VoroSpeed: 2
     - __dirty: 0
     m_Colors:
+    - _MainColor: {r: 0, g: 0.7686272, b: 1, a: 1}
+    - _MainColor2: {r: 0, g: 0.7686272, b: 1, a: 1}
     - _OpacityMap12: {r: 1, g: 1, b: 0, a: 0}
     - _RADIAL_Center: {r: 0, g: 0, b: 0, a: 0}
     - _RADIAL_Offset: {r: 0, g: 0, b: 0, a: 0}
@@ -67,3 +70,4 @@ Material:
     - _UV_Offset: {r: 0.5, g: 0, b: 0, a: 0}
     - _Vector0: {r: -0.16, g: 0, b: 0, a: 0}
     - _Vector1: {r: 0.5, g: 0, b: 0, a: 0}
+    - _VoroTiling: {r: 0, g: 0, b: 0, a: 0}

@@ -10,6 +10,10 @@
 		List<ISelectable> _selectedObjets = new List<ISelectable>();
 		#endregion Fields
 
+		#region Properties
+		ISelectable[] ISelection.SelectedSelectables => _selectedObjets.ToArray();
+		#endregion Properties
+
 		#region Methods
 		void Awake()
 		{
