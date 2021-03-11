@@ -26,9 +26,28 @@
 			return (T)_databases[typeof(T)];
 		}
 
+		public bool TryGet<T>(out T service)
+		{
+			if (HasService<T>())
+			{
+				service = Get<T>();
+				return true;
+			}
+			else
+			{
+				service = default;
+				return false;
+			}
+		}
+
+		public bool HasService<T>()
+		{
+			return _databases.ContainsKey(typeof(T));
+		}
+
 		public void RegisterService<T>(T database)
 		{
-			if (_databases.ContainsKey(typeof(T)))
+			if (HasService<T>() == true)
 			{
 				_databases[typeof(T)] = database;
 			}
