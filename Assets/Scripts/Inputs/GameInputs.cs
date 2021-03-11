@@ -218,7 +218,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c4b495c5-129b-49d7-b22a-12053be1ade9"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
