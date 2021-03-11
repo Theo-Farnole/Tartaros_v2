@@ -47,7 +47,7 @@
 
 		void OnInputFieldChanged(string inputFieldText)
 		{
-			if (int.TryParse(inputFieldText, out int sliderValue))
+			if (float.TryParse(inputFieldText, out float sliderValue))
 			{
 				_slider.value = sliderValue;
 			}
