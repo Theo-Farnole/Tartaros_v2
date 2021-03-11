@@ -21,6 +21,12 @@
 			}
 		}
 
+		public void Stop()
+		{
+			_statesQueue.Clear();
+			SetState(null);
+		}
+
 		public void MarkCurrentStateAsFinish()
 		{
 			if (_statesQueue.Count != 0) return;
