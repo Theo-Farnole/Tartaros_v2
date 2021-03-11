@@ -39,7 +39,7 @@
 
 		private void DestinationReached(object sender, EntityMovement.DestinationReachedArgs e)
 		{
-			_stateOwner.GetComponent<EntityFSM>().SetState(null);
+			_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
 		}
 
 	}
