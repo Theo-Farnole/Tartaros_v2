@@ -31,7 +31,20 @@
 			}
 		}
 
-		public static bool HasInstance => Instance != null;
+		public static bool HasInstance
+		{
+			get
+			{
+				try
+				{
+					return Instance != null;
+				}
+				catch (NoSingletonInstanceFound<T>)
+				{
+					return false;
+				}
+			}
+		}
 
 		void OnDestroy()
 		{
