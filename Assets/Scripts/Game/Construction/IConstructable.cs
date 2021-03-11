@@ -1,4 +1,5 @@
-﻿namespace Tartaros.Construction
+﻿
+namespace Tartaros.Construction
 {
     using UnityEngine;
 

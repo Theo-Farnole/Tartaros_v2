@@ -41,13 +41,13 @@
 
         private void Start()
         {
-            if (Services.HasInstance)
-            {
-                if (Services.Instance.TryGet<IMap>(out IMap map))
-                {
-                    _Imap = map;
-                }
-            }
+            //if (Services.HasInstance)
+            //{
+            //    if (Services.Instance.TryGet<IMap>(out IMap map))
+            //    {
+            //        _Imap = map;
+            //    }
+            //}
         }
 
         private void Update()
