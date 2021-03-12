@@ -6,6 +6,11 @@
 
 	public static class MonoBehaviourExtension
 	{
+		public static bool TryGetComponentInParent<T>(this MonoBehaviour monoBehaviour, out T entity)
+		{
+			return monoBehaviour.gameObject.TryGetComponentInParent(out entity);
+		}
+
 		/// <summary>
 		/// Execute task after realtime.
 		/// </summary>
