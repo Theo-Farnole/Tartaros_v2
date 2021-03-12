@@ -76,7 +76,7 @@
 
 			foreach (Entity entity in opponents)
 			{
-				if (entity.entityType == entityType)
+				if (entity.EntityType == entityType)
 				{
 					return entity;
 				}
@@ -101,7 +101,7 @@
 
 			foreach (Entity entity in allies)
 			{
-				if (entity.entityType == entityType)
+				if (entity.EntityType == entityType)
 				{
 					return entity;
 				}
