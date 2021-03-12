@@ -227,6 +227,71 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Construction"",
+            ""id"": ""d917b864-b3e9-44aa-b098-f9df615e47e2"",
+            ""actions"": [
+                {
+                    ""name"": ""EnterConstruction"",
+                    ""type"": ""Button"",
+                    ""id"": ""100c7992-e6c2-4d11-a02b-a5d20c7daa41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ValidateConstruction"",
+                    ""type"": ""Button"",
+                    ""id"": ""75c8d75a-18f1-4fa1-b65d-bc7d5b9a2a67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ExitConstruction"",
+                    ""type"": ""Button"",
+                    ""id"": ""256fde4f-7cec-4d3a-87c3-8b1f478a4d26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""33a757ec-b2ae-4e24-b408-19f6a0b5b78a"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnterConstruction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91cb0233-9f0d-4fc4-aa79-7bcf664a7d3f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ValidateConstruction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32b92bdb-1423-4a54-9f67-e8aae1e8436a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExitConstruction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -308,6 +373,11 @@ public class @GameInputs : IInputActionCollection, IDisposable
         // Orders
         m_Orders = asset.FindActionMap("Orders", throwIfNotFound: true);
         m_Orders_MoveToOrAttack = m_Orders.FindAction("MoveToOrAttack", throwIfNotFound: true);
+        // Construction
+        m_Construction = asset.FindActionMap("Construction", throwIfNotFound: true);
+        m_Construction_EnterConstruction = m_Construction.FindAction("EnterConstruction", throwIfNotFound: true);
+        m_Construction_ValidateConstruction = m_Construction.FindAction("ValidateConstruction", throwIfNotFound: true);
+        m_Construction_ExitConstruction = m_Construction.FindAction("ExitConstruction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -508,6 +578,55 @@ public class @GameInputs : IInputActionCollection, IDisposable
         }
     }
     public OrdersActions @Orders => new OrdersActions(this);
+
+    // Construction
+    private readonly InputActionMap m_Construction;
+    private IConstructionActions m_ConstructionActionsCallbackInterface;
+    private readonly InputAction m_Construction_EnterConstruction;
+    private readonly InputAction m_Construction_ValidateConstruction;
+    private readonly InputAction m_Construction_ExitConstruction;
+    public struct ConstructionActions
+    {
+        private @GameInputs m_Wrapper;
+        public ConstructionActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @EnterConstruction => m_Wrapper.m_Construction_EnterConstruction;
+        public InputAction @ValidateConstruction => m_Wrapper.m_Construction_ValidateConstruction;
+        public InputAction @ExitConstruction => m_Wrapper.m_Construction_ExitConstruction;
+        public InputActionMap Get() { return m_Wrapper.m_Construction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ConstructionActions set) { return set.Get(); }
+        public void SetCallbacks(IConstructionActions instance)
+        {
+            if (m_Wrapper.m_ConstructionActionsCallbackInterface != null)
+            {
+                @EnterConstruction.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnEnterConstruction;
+                @EnterConstruction.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnEnterConstruction;
+                @EnterConstruction.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnEnterConstruction;
+                @ValidateConstruction.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnValidateConstruction;
+                @ValidateConstruction.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnValidateConstruction;
+                @ValidateConstruction.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnValidateConstruction;
+                @ExitConstruction.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnExitConstruction;
+                @ExitConstruction.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnExitConstruction;
+                @ExitConstruction.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnExitConstruction;
+            }
+            m_Wrapper.m_ConstructionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @EnterConstruction.started += instance.OnEnterConstruction;
+                @EnterConstruction.performed += instance.OnEnterConstruction;
+                @EnterConstruction.canceled += instance.OnEnterConstruction;
+                @ValidateConstruction.started += instance.OnValidateConstruction;
+                @ValidateConstruction.performed += instance.OnValidateConstruction;
+                @ValidateConstruction.canceled += instance.OnValidateConstruction;
+                @ExitConstruction.started += instance.OnExitConstruction;
+                @ExitConstruction.performed += instance.OnExitConstruction;
+                @ExitConstruction.canceled += instance.OnExitConstruction;
+            }
+        }
+    }
+    public ConstructionActions @Construction => new ConstructionActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -571,5 +690,11 @@ public class @GameInputs : IInputActionCollection, IDisposable
     public interface IOrdersActions
     {
         void OnMoveToOrAttack(InputAction.CallbackContext context);
+    }
+    public interface IConstructionActions
+    {
+        void OnEnterConstruction(InputAction.CallbackContext context);
+        void OnValidateConstruction(InputAction.CallbackContext context);
+        void OnExitConstruction(InputAction.CallbackContext context);
     }
 }
