@@ -9,16 +9,17 @@
     using Tartaros.Gamemode;
     using Tartaros.Utilities;
     using UnityEngine.InputSystem;
+    using Tartaros.ServicesLocator;
 
     public class ConstructionManager : MonoBehaviour
     {
         #region Fields
         private readonly ConstructionManagerData _contstructionManagerData = null;
         private GamemodeManager _gamemodeManager = null;
-        private IBuildingPreviewPosition _IBuildingPreviewPosition = null;
-        private GameInputs _inputs = null;
         private BuildingPreview _buildingPreview = null;
 
+        private IBuildingPreviewPosition _IBuildingPreviewPosition = null;
+        private IBuildingInputManager _input = null;
         private IConstructable _testConstructable = null;
         #endregion
 
@@ -26,9 +27,7 @@
 
         private void Awake()
         {
-            _inputs = new GameInputs();
-            _inputs.Camera.Enable();
-
+            _input = GetComponent<IBuildingInputManager>();
             _testConstructable = GetComponent<IConstructable>();
 
             _IBuildingPreviewPosition = GetComponent<IBuildingPreviewPosition>();
@@ -36,34 +35,52 @@
                 Debug.LogError("Add compenent IbuildingPreviewPosition");
         }
 
+        private void Start()
+        {
+            if (Services.HasInstance)
+            {
+                if (Services.Instance.TryGet<GamemodeManager>(out GamemodeManager gameModeManager))
+                {
+                    _gamemodeManager = gameModeManager;
+                }
+                else
+                {
+                    Debug.LogError("Don't find GameModeManger");
+                }
+            }
+        }
+
         private void Update()
         {
-            if (_inputs.Camera.Forward.phase == InputActionPhase.Performed)
+            if (_input.CheckEnterConstructionMode())
             {
                 if (_buildingPreview == null)
                 {
                     EnterConstructionMode(_testConstructable, new Price());
                 }
-                else
-                {
-                    _buildingPreview.DestroyMethod();
-                    EnterConstructionMode(_testConstructable, new Price());
-                }
             }
 
             if (_buildingPreview != null)
-                _buildingPreview.SetBuildingPreviewPosition(_IBuildingPreviewPosition.GetBuildingPosition());
-        }
-
-
-        private void OnDrawGizmos()
-        {
-            if (Application.isPlaying)
             {
-                //Gizmos.color = Color.red;
-                //Gizmos.DrawSphere(_IBuildingPreviewPosition.GetBuildingPosition(), 1f);
+                if(_input.CheckLeaveWithoutConstruct())
+                {
+                    ExitConstructionModeWithoutConstruct();
+                }
+
+                _buildingPreview.SetBuildingPreviewPosition(_IBuildingPreviewPosition.GetPreviewPosition());
+                ConstructBuilding();
             }
         }
+
+
+        //private void OnDrawGizmos()
+        //{
+        //    if (Application.isPlaying)
+        //    {
+        //        Gizmos.color = Color.red;
+        //        Gizmos.DrawSphere(_IBuildingPreviewPosition.GetBuildingPosition(), 0.5f);
+        //    }
+        //}
 
         private bool CanEnterConstruction(Price constructionPrice)
         {
@@ -72,28 +89,35 @@
 
         public void EnterConstructionMode(IConstructable toBuild, Price constructionPrice)
         {
+            _gamemodeManager.SetState(new ConstructionState(_gamemodeManager));
             _buildingPreview = new BuildingPreview();
-            _buildingPreview.InstanciateBuildingPreview(toBuild, _IBuildingPreviewPosition.GetBuildingPosition());
-            Debug.Log("number");
+            _buildingPreview.InstanciateBuildingPreview(toBuild, _IBuildingPreviewPosition.GetPreviewPosition());
 
         }
 
         public void ExitConstructionMode()
         {
+            _buildingPreview.DestroyMethod();
+            _buildingPreview = null;
+
             _gamemodeManager.SetState(new PlayState(_gamemodeManager));
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         public void ExitConstructionModeWithoutConstruct()
         {
-            _gamemodeManager.SetState(new PlayState(_gamemodeManager));
-            throw new System.NotImplementedException();
+            ExitConstructionMode();
+            //throw new System.NotImplementedException();
         }
 
         public void ConstructBuilding()
         {
-
-            throw new System.NotImplementedException();
+            if(_input.CheckConstruct())
+            {
+                GameObject buildingConstruct = GameObject.Instantiate(_testConstructable.ModelPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
+                ExitConstructionMode();
+            }
+            //throw new System.NotImplementedException();
         }
 
         bool CanConstructBuilding()

@@ -44,7 +44,7 @@
             _plane = new Plane(Vector3.up, _planeDistanceFromCamera);
         }
 
-        Vector3 IBuildingPreviewPosition.GetBuildingPosition()
+        Vector3 IBuildingPreviewPosition.GetPreviewPosition()
         {
             return MousePositionOnGround();
         }
