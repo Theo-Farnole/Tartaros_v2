@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using UnityEngine;
-    public class SetBuildingPreviewPositionWithPlane : MonoBehaviour, IBuildingPreviewPosition
+    public class SetBuildingPreviewPositionWithPlane : IBuildingPreviewPosition
     {
 
         private Vector3 _planeDistanceFromCamera;
@@ -11,18 +11,14 @@
         private GameInputs _inputs = null;
         private float _offsetHeightMap = 0;
 
-
-        private void Awake()
+        public SetBuildingPreviewPositionWithPlane()
         {
             _inputs = new GameInputs();
             _inputs.Camera.Enable();
-        }
 
-
-        private void Start()
-        {
             InstanciatePlane();
         }
+
 
         private Vector3 MousePositionOnGround()
         {

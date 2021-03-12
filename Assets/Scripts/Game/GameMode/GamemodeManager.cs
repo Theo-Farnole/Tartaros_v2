@@ -4,11 +4,16 @@
     using System.Collections.Generic;
     using UnityEngine;
     using Tartaros.Gamemode;
+    using Tartaros.ServicesLocator;
 
     public class GamemodeManager : MonoBehaviour
     {
         private GamemodeFSM _gamemodeFSM;
 
+        private void Awake()
+        {
+            Services.Instance.RegisterService<GamemodeManager>(this);
+        }
 
         private void OnEnable()
         {
