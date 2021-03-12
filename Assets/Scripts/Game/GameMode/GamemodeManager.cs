@@ -7,8 +7,13 @@
 
     public class GamemodeManager : MonoBehaviour
     {
-        private readonly GamemodeFSM _gamemodeFSM;
+        private GamemodeFSM _gamemodeFSM;
 
+
+        private void OnEnable()
+        {
+            _gamemodeFSM = new GamemodeFSM();
+        }
         public void SetState(AGameState _state)
         {
             _gamemodeFSM.SetState(_state);

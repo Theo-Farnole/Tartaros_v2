@@ -21,6 +21,7 @@
 		public void SetState(AGameState newState)
 		{
 			_finiteStateMachine.CurrentState = newState;
+			_currentState = newState;
 		}
 		#endregion Methods
 	}
