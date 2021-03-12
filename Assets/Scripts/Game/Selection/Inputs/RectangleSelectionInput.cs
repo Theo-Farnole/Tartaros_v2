@@ -32,7 +32,7 @@
 		private void Awake()
 		{
 			_gameInputs = new GameInputs();
-			_gameInputs.Player.Enable();
+			_gameInputs.Selection.Enable();
 		}
 
 		private void Update()
@@ -47,17 +47,17 @@
 
 		private void OnEnable()
 		{
-			_gameInputs.Player.StartSelectionRectangle.performed -= StartSelectionRectangle_performed;
-			_gameInputs.Player.StartSelectionRectangle.performed += StartSelectionRectangle_performed;
+			_gameInputs.Selection.StartSelectionRectangle.performed -= StartSelectionRectangle_performed;
+			_gameInputs.Selection.StartSelectionRectangle.performed += StartSelectionRectangle_performed;
 
-			_gameInputs.Player.EndSelectionRectangle.performed -= EndSelectionRectangle_performed;
-			_gameInputs.Player.EndSelectionRectangle.performed += EndSelectionRectangle_performed;
+			_gameInputs.Selection.EndSelectionRectangle.performed -= EndSelectionRectangle_performed;
+			_gameInputs.Selection.EndSelectionRectangle.performed += EndSelectionRectangle_performed;
 		}
 
 		private void OnDisable()
 		{
-			_gameInputs.Player.StartSelectionRectangle.performed -= StartSelectionRectangle_performed;
-			_gameInputs.Player.EndSelectionRectangle.performed -= EndSelectionRectangle_performed;
+			_gameInputs.Selection.StartSelectionRectangle.performed -= StartSelectionRectangle_performed;
+			_gameInputs.Selection.EndSelectionRectangle.performed -= EndSelectionRectangle_performed;
 		}
 
 		private void StartSelectionRectangle_performed(InputAction.CallbackContext obj)

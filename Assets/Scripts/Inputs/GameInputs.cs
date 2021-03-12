@@ -15,7 +15,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
     ""name"": ""GameInputs"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Selection"",
             ""id"": ""1db53977-1f0c-4322-9e90-3f2dff6269b7"",
             ""actions"": [
                 {
@@ -38,6 +38,14 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": ""EndSelectionRectangle"",
                     ""type"": ""Button"",
                     ""id"": ""9821828c-1ad5-4a5a-9467-16768e68bf04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EnableAdditiveSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""c1cce685-3c57-4d03-9117-3e402595bb40"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -74,6 +82,17 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""EndSelectionRectangle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30b5de86-63e6-4694-b84d-4463ac4f6ea0"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableAdditiveSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -357,11 +376,12 @@ public class @GameInputs : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_SelectEntity = m_Player.FindAction("SelectEntity", throwIfNotFound: true);
-        m_Player_StartSelectionRectangle = m_Player.FindAction("StartSelectionRectangle", throwIfNotFound: true);
-        m_Player_EndSelectionRectangle = m_Player.FindAction("EndSelectionRectangle", throwIfNotFound: true);
+        // Selection
+        m_Selection = asset.FindActionMap("Selection", throwIfNotFound: true);
+        m_Selection_SelectEntity = m_Selection.FindAction("SelectEntity", throwIfNotFound: true);
+        m_Selection_StartSelectionRectangle = m_Selection.FindAction("StartSelectionRectangle", throwIfNotFound: true);
+        m_Selection_EndSelectionRectangle = m_Selection.FindAction("EndSelectionRectangle", throwIfNotFound: true);
+        m_Selection_EnableAdditiveSelection = m_Selection.FindAction("EnableAdditiveSelection", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
@@ -424,39 +444,44 @@ public class @GameInputs : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_SelectEntity;
-    private readonly InputAction m_Player_StartSelectionRectangle;
-    private readonly InputAction m_Player_EndSelectionRectangle;
-    public struct PlayerActions
+    // Selection
+    private readonly InputActionMap m_Selection;
+    private ISelectionActions m_SelectionActionsCallbackInterface;
+    private readonly InputAction m_Selection_SelectEntity;
+    private readonly InputAction m_Selection_StartSelectionRectangle;
+    private readonly InputAction m_Selection_EndSelectionRectangle;
+    private readonly InputAction m_Selection_EnableAdditiveSelection;
+    public struct SelectionActions
     {
         private @GameInputs m_Wrapper;
-        public PlayerActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SelectEntity => m_Wrapper.m_Player_SelectEntity;
-        public InputAction @StartSelectionRectangle => m_Wrapper.m_Player_StartSelectionRectangle;
-        public InputAction @EndSelectionRectangle => m_Wrapper.m_Player_EndSelectionRectangle;
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public SelectionActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectEntity => m_Wrapper.m_Selection_SelectEntity;
+        public InputAction @StartSelectionRectangle => m_Wrapper.m_Selection_StartSelectionRectangle;
+        public InputAction @EndSelectionRectangle => m_Wrapper.m_Selection_EndSelectionRectangle;
+        public InputAction @EnableAdditiveSelection => m_Wrapper.m_Selection_EnableAdditiveSelection;
+        public InputActionMap Get() { return m_Wrapper.m_Selection; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerActions instance)
+        public static implicit operator InputActionMap(SelectionActions set) { return set.Get(); }
+        public void SetCallbacks(ISelectionActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
+            if (m_Wrapper.m_SelectionActionsCallbackInterface != null)
             {
-                @SelectEntity.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEntity;
-                @SelectEntity.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEntity;
-                @SelectEntity.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEntity;
-                @StartSelectionRectangle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartSelectionRectangle;
-                @StartSelectionRectangle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartSelectionRectangle;
-                @StartSelectionRectangle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartSelectionRectangle;
-                @EndSelectionRectangle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndSelectionRectangle;
-                @EndSelectionRectangle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndSelectionRectangle;
-                @EndSelectionRectangle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndSelectionRectangle;
+                @SelectEntity.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnSelectEntity;
+                @SelectEntity.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnSelectEntity;
+                @SelectEntity.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnSelectEntity;
+                @StartSelectionRectangle.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnStartSelectionRectangle;
+                @StartSelectionRectangle.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnStartSelectionRectangle;
+                @StartSelectionRectangle.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnStartSelectionRectangle;
+                @EndSelectionRectangle.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEndSelectionRectangle;
+                @EndSelectionRectangle.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEndSelectionRectangle;
+                @EndSelectionRectangle.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEndSelectionRectangle;
+                @EnableAdditiveSelection.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEnableAdditiveSelection;
+                @EnableAdditiveSelection.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEnableAdditiveSelection;
+                @EnableAdditiveSelection.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEnableAdditiveSelection;
             }
-            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            m_Wrapper.m_SelectionActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @SelectEntity.started += instance.OnSelectEntity;
@@ -468,10 +493,13 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @EndSelectionRectangle.started += instance.OnEndSelectionRectangle;
                 @EndSelectionRectangle.performed += instance.OnEndSelectionRectangle;
                 @EndSelectionRectangle.canceled += instance.OnEndSelectionRectangle;
+                @EnableAdditiveSelection.started += instance.OnEnableAdditiveSelection;
+                @EnableAdditiveSelection.performed += instance.OnEnableAdditiveSelection;
+                @EnableAdditiveSelection.canceled += instance.OnEnableAdditiveSelection;
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public SelectionActions @Selection => new SelectionActions(this);
 
     // Camera
     private readonly InputActionMap m_Camera;
@@ -672,11 +700,12 @@ public class @GameInputs : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
-    public interface IPlayerActions
+    public interface ISelectionActions
     {
         void OnSelectEntity(InputAction.CallbackContext context);
         void OnStartSelectionRectangle(InputAction.CallbackContext context);
         void OnEndSelectionRectangle(InputAction.CallbackContext context);
+        void OnEnableAdditiveSelection(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

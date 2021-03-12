@@ -22,15 +22,15 @@
 
 		private void OnEnable()
 		{
-			_gameInputs.Player.Enable();
+			_gameInputs.Selection.Enable();
 
-			_gameInputs.Player.SelectEntity.performed -= OnSelectEntity;
-			_gameInputs.Player.SelectEntity.performed += OnSelectEntity;
+			_gameInputs.Selection.SelectEntity.performed -= OnSelectEntity;
+			_gameInputs.Selection.SelectEntity.performed += OnSelectEntity;
 		}
 
 		private void OnDisable()
 		{
-			_gameInputs.Player.SelectEntity.performed -= OnSelectEntity;
+			_gameInputs.Selection.SelectEntity.performed -= OnSelectEntity;
 		}
 
 		private void OnSelectEntity(InputAction.CallbackContext obj)

@@ -2,7 +2,7 @@
     "name": "GameInputs",
     "maps": [
         {
-            "name": "Player",
+            "name": "Selection",
             "id": "1db53977-1f0c-4322-9e90-3f2dff6269b7",
             "actions": [
                 {
@@ -25,6 +25,14 @@
                     "name": "EndSelectionRectangle",
                     "type": "Button",
                     "id": "9821828c-1ad5-4a5a-9467-16768e68bf04",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "EnableAdditiveSelection",
+                    "type": "Button",
+                    "id": "c1cce685-3c57-4d03-9117-3e402595bb40",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -61,6 +69,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "EndSelectionRectangle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30b5de86-63e6-4694-b84d-4463ac4f6ea0",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableAdditiveSelection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
