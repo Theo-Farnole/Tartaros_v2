@@ -56,8 +56,8 @@
 			var navMeshPath = new NavMeshPath();
 
 			_navMeshAgent.CalculatePath(point, navMeshPath);
-
-			return navMeshPath.status == NavMeshPathStatus.PathInvalid || navMeshPath.status == NavMeshPathStatus.PathPartial;
+			
+			return navMeshPath.status == NavMeshPathStatus.PathComplete;
 		}
 
 		public void MoveToPoint(Vector3 point)
