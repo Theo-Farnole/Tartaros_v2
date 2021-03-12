@@ -21,7 +21,16 @@
 		{
 			Material mat = CreateMaterial();
 
-			model.GetComponentInChildren<Renderer>().material = mat;
+			Renderer renderer = model.GetComponentInChildren<Renderer>();
+
+			if (renderer != null)
+			{
+				renderer.material = mat;
+			}
+			else
+			{
+				Debug.LogError("Missing renderer in object.");
+			}
 		}
 
 		private Material CreateMaterial()
