@@ -31,7 +31,7 @@
 
 		public void MarkCurrentStateAsFinish()
 		{
-			if (_statesQueue.Count != 0) return;
+			if (_statesQueue.Count == 0) return;
 
 			SetState(_statesQueue.Dequeue());
 		}
