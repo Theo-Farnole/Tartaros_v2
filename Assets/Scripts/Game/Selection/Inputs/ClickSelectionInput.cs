@@ -35,9 +35,15 @@
 
 		private void OnSelectEntity(InputAction.CallbackContext obj)
 		{
-			if (CanSelect() && TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
+			if (CanSelect() == false) return;
+
+			if (TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
 			{
 				_selection.AlternateSelection(selectableUnderCursor);
+			}
+			else
+			{
+				_selection.ClearSelection();
 			}
 		}
 
