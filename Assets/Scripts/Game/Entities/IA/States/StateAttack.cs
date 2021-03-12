@@ -29,6 +29,12 @@
 
 		public override void OnUpdate()
 		{
+			if (_target.IsAlive == false)
+			{
+				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
+				return;
+			}
+
 			if (_entityAttack.CanAttack(_target) == true)
 			{
 				_entityMovement.StopMovement();

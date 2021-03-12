@@ -14,8 +14,15 @@
 	{
 		#region Fields
 		[SerializeField]
+		private Team _controllableTeam = Team.Player;
+
+		[SerializeField]
 		private ISelection _selection = null;
 		#endregion Fields
+
+		#region Properties
+		public Team ControllableTeam => _controllableTeam;
+		#endregion Properties
 
 		#region Methods
 		private void Awake()
@@ -90,18 +97,25 @@
 		{
 			List<T> output = new List<T>(_selection.SelectedSelectables.Length);
 
-			foreach (var x in _selection.SelectedSelectables)
+			foreach (ISelectable selectable in _selection.SelectedSelectables)
 			{
-				if (x.GameObject.TryGetComponent(out Entity entity))
+				if (IsSelectableControllable(selectable) && GetSelectableAs(selectable, out T convertedEntity))
 				{
-					if (entity is T convertedEntity)
-					{
-						output.Add(convertedEntity);
-					}
+					output.Add(convertedEntity);
 				}
 			}
 
 			return output.ToArray();
+		}
+
+		private bool GetSelectableAs<T>(ISelectable selectable, out T convertedEntity)
+		{
+			return selectable.GameObject.TryGetComponent(out convertedEntity);
+		}
+
+		private bool IsSelectableControllable(ISelectable x)
+		{
+			return x.GameObject.TryGetComponent(out Entity entity) && entity.Team == _controllableTeam;
 		}
 		#endregion Methods
 	}

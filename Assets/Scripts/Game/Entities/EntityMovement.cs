@@ -1,17 +1,19 @@
 ﻿namespace Tartaros.Entities
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Entities;
-	using UnityEngine.AI;
 	using System;
+	using Tartaros.Entities.Movement;
+	using Tartaros.Entities.State;
+	using Tartaros.OrderGiver;
+	using UnityEngine;
+	using UnityEngine.AI;
 
-	public class EntityMovement : MonoBehaviour
+	public class EntityMovement : MonoBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver
 	{
 		#region Fields
 		private EntityMovementData _entityMovementData = null;
 		private NavMeshAgent _navMeshAgent = null;
+		private Entity _entity = null;
+		private EntityFSM _entityFSM = null;
 		#endregion
 
 		#region Properties
@@ -40,6 +42,8 @@
 		private void Awake()
 		{
 			_navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+			_entity = GetComponent<Entity>();
+			_entityFSM = GetComponent<EntityFSM>();
 		}
 
 		private void Update()
@@ -56,7 +60,7 @@
 			var navMeshPath = new NavMeshPath();
 
 			_navMeshAgent.CalculatePath(point, navMeshPath);
-			
+
 			return navMeshPath.status == NavMeshPathStatus.PathComplete;
 		}
 
@@ -77,6 +81,48 @@
 		{
 			_navMeshAgent.isStopped = true;
 		}
+
+		#region IOrder
+		void IOrderMoveAggresivellyReceiver.MoveAggressively(Vector3 position)
+		{
+			_entityFSM.SetState(new StateAggressiveMove(_entity, position));
+		}
+
+		void IOrderMoveAggresivellyReceiver.MoveAggressivelyAdditive(Vector3 position)
+		{
+			_entityFSM.EnqueueState(new StateAggressiveMove(_entity, position));
+		}
+
+		void IOrderMoveReceiver.Move(Vector3 position)
+		{
+			_entityFSM.SetState(new StateMove(_entity, position));
+		}
+
+		void IOrderMoveReceiver.Move(Transform toFollow)
+		{
+			_entityFSM.SetState(new StateFollow(_entity, toFollow));
+		}
+
+		void IOrderMoveReceiver.MoveAdditive(Vector3 position)
+		{
+			_entityFSM.EnqueueState(new StateMove(_entity, position));
+		}
+
+		void IOrderMoveReceiver.MoveAdditive(Transform target)
+		{
+			_entityFSM.EnqueueState(new StateFollow(_entity, target));
+		}
+
+		void IOrderPatrolReceiver.Patrol(PatrolPoints waypoints)
+		{
+			_entityFSM.SetState(new StatePatrol(_entity, waypoints));
+		}
+
+		void IOrderPatrolReceiver.PatrolAdditive(PatrolPoints waypoints)
+		{
+			_entityFSM.EnqueueState(new StatePatrol(_entity, waypoints));
+		}
+		#endregion
 		#endregion
 	}
 }

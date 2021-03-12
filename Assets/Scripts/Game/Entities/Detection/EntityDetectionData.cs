@@ -16,7 +16,7 @@
 
 		public void SpawnRequiredComponents(GameObject entityRoot)
 		{
-			throw new System.NotImplementedException();
+			entityRoot.AddComponent<EntityDetection>().EntityDetectionData = this;
 		}
 	}
 }

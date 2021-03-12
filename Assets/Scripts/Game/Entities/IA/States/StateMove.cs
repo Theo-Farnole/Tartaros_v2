@@ -35,7 +35,6 @@
 
 		private void DestinationReached(object sender, EntityMovement.DestinationReachedArgs e)
 		{
-			Debug.Log("Destination reached");
 			_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
 		}
 

@@ -1,14 +1,11 @@
 ﻿namespace Tartaros.Entities
 {
 	using System;
-	using Tartaros.Utilities;
-	using UnityEngine;
-	using Tartaros.OrderGiver;
-	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
-	using Sirenix.OdinInspector;
+	using Tartaros.OrderGiver;
+	using UnityEngine;
 
-	public class Entity : MonoBehaviour, IOrderAttackReceiver, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderStopReceiver
+	public class Entity : MonoBehaviour, IOrderStopReceiver
 	{
 		#region Fields
 		[SerializeField]
@@ -89,56 +86,6 @@
 		}
 
 		#region IOrders
-		void IOrderAttackReceiver.Attack(IAttackable target)
-		{
-			_entityFSM.SetState(new StateAttack(this, target));
-		}
-
-		void IOrderAttackReceiver.AttackAdditive(IAttackable target)
-		{
-			_entityFSM.EnqueueState(new StateAttack(this, target));
-		}
-
-		void IOrderMoveAggresivellyReceiver.MoveAggressively(Vector3 position)
-		{
-			_entityFSM.SetState(new StateAggressiveMove(this, position));
-		}
-
-		void IOrderMoveAggresivellyReceiver.MoveAggressivelyAdditive(Vector3 position)
-		{
-			_entityFSM.EnqueueState(new StateAggressiveMove(this, position));
-		}
-
-		void IOrderMoveReceiver.Move(Vector3 position)
-		{
-			_entityFSM.SetState(new StateMove(this, position));
-		}
-
-		void IOrderMoveReceiver.Move(Transform toFollow)
-		{
-			_entityFSM.SetState(new StateFollow(this, toFollow));
-		}
-
-		void IOrderMoveReceiver.MoveAdditive(Vector3 position)
-		{
-			_entityFSM.EnqueueState(new StateMove(this, position));
-		}
-
-		void IOrderMoveReceiver.MoveAdditive(Transform target)
-		{
-			_entityFSM.EnqueueState(new StateFollow(this, target));
-		}
-
-		void IOrderPatrolReceiver.Patrol(PatrolPoints waypoints)
-		{
-			_entityFSM.SetState(new StatePatrol(this, waypoints));
-		}
-
-		void IOrderPatrolReceiver.PatrolAdditive(PatrolPoints waypoints)
-		{
-			_entityFSM.EnqueueState(new StatePatrol(this, waypoints));
-		}
-
 		void IOrderStopReceiver.Stop()
 		{
 			_entityFSM.Stop();

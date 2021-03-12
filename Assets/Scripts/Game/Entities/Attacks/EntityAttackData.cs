@@ -36,7 +36,8 @@
 
         public void SpawnRequiredComponents(GameObject entityRoot)
         {
-            throw new System.NotImplementedException();
+			EntityAttack entityAttack = entityRoot.AddComponent<EntityAttack>();
+            entityAttack.EntityAttackData = this;
         }
     }
 

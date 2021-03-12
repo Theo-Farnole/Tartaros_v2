@@ -1,11 +1,10 @@
 ﻿namespace Tartaros.OrderGiver
 {
 	using Tartaros.Entities;
-	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
-	public class OrderGiverInput : MonoBehaviour
+	public class SelectionOrderGiverInput : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -45,24 +44,26 @@
 				return;
 			}
 
-			if (gameObject.TryGetComponent(out Entity entity) && entity.Team == Team.Enemy)
+			if (gameObject.TryGetComponentInParent(out Entity entity) && IsEntityOpponentOfSelection(entity))
 			{
 				if (entity.TryGetComponent(out IAttackable attackable))
 				{
-					Debug.Log("Attack");
 					_selectionOrderGiver.Attack(attackable);
 				}
 				else
 				{
-					Debug.Log("Not enemy clicked on Attack");
-
+					Debug.Log("Not attackable");
 				}
 			}
 			else if (CursorHelper.GetHitUnderCursor(out RaycastHit hit))
 			{
-				Debug.Log("Move");
 				_selectionOrderGiver.Move(hit.point);
 			}
+		}
+
+		private bool IsEntityOpponentOfSelection(Entity entity)
+		{
+			return entity.Team == _selectionOrderGiver.ControllableTeam.GetOpponent();
 		}
 		#endregion Methods
 	}
