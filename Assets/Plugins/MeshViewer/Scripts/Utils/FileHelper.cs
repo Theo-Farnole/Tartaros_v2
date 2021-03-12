@@ -114,7 +114,7 @@
 		{
 			if (string.IsNullOrEmpty(textureFilePath) == true)
 			{
-				Debug.LogError("Path is null or empty.");
+				Debug.LogError("Cannot load texture: provided path is empty.");
 				return null;
 			}
 

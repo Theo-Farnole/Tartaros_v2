@@ -6,6 +6,7 @@
 	using Tartaros.OrderGiver;
 	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
+	using Sirenix.OdinInspector;
 
 	public class Entity : MonoBehaviour, IOrderAttackReceiver, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderStopReceiver
 	{
@@ -21,7 +22,7 @@
 
 		#region Properties
 		public Team Team => _team;
-		public EntityType entityType => _entityType;
+		public EntityType EntityType => _entityType;
 		#endregion Properties
 
 		#region Events
