@@ -56,7 +56,10 @@
 
 		void ISelection.ClearSelection()
 		{
-			_selectedObjets.Clear();
+			for (int i = _selectedObjets.Count - 1; i >= 0; i--)
+			{
+				(this as ISelection).RemoveFromSelection(_selectedObjets[i]);
+			}
 		}
 
 		bool ISelection.IsSelected(ISelectable selectable)
