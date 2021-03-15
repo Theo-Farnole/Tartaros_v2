@@ -40,7 +40,6 @@
                 if (Services.Instance.TryGet<GamemodeManager>(out GamemodeManager gameModeManager))
                 {
                     _gamemodeManager = gameModeManager;
-                    Debug.Log(_gamemodeManager);
                 }
             }
         }

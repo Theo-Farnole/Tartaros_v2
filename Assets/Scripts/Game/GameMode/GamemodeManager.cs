@@ -9,6 +9,7 @@
     public class GamemodeManager : MonoBehaviour
     {
         private GamemodeFSM _gamemodeFSM;
+       
 
         private void Awake()
         {
@@ -21,7 +22,12 @@
         }
         public void SetState(AGameState _state)
         {
-            _gamemodeFSM.SetState(_state);
+            _gamemodeFSM.CurrentState = _state;
+        }
+
+        private void Update()
+        {
+            _gamemodeFSM.OnUpdate();
         }
     }
 }

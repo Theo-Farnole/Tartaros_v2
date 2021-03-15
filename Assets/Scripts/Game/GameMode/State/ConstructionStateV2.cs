@@ -20,6 +20,7 @@ namespace Tartaros.Construction
         {
             _price = price;
             _constructable = constructable;
+           
 
             _constructionInput = new ConstructionInputs();
 
@@ -31,6 +32,7 @@ namespace Tartaros.Construction
         {
             base.OnUpdate();
 
+            Debug.Log("OnUpdate");
             _buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetPreviewPosition());
 
             if (_constructionInput.IsValidatePerformed())

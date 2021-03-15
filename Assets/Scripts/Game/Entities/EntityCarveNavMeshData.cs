@@ -5,6 +5,7 @@
     using UnityEngine;
     using UnityEngine.AI;
 
+
     public class EntityCarveNavMeshData : IEntityBehaviourData
     {
         [SerializeField]
@@ -14,7 +15,7 @@
 
         void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
         {
-            NavMeshObstacle _navObstacle = entityRoot.AddComponent<NavMeshObstacle>();
+            NavMeshObstacle _navObstacle = entityRoot.GetOrAddComponent<NavMeshObstacle>();
             _navObstacle.size = _size;
             _navObstacle.carving = true;
         }

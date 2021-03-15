@@ -21,6 +21,8 @@
             _input = new GameInputs();
             _input.Construction.Enable();
 
+
+
             _constructable = _test.GetComponent<IConstructable>();
 
             _input.Construction.EnterConstruction.performed -= EnterConstruction_performed;
