@@ -8,12 +8,17 @@
     {
         private GameObject _buildingPreview = null;
 
-
-        public void InstanciateBuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
+        public BuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
         {
             GameObject buildingPreview = GameObject.Instantiate(toBuild.ModelPrefab, positionToInstancate, Quaternion.identity);
 
             _buildingPreview = buildingPreview;
+        }
+
+        [System.Obsolete]
+        public void InstanciateBuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
+        {
+            
         }
 
         public void SetBuildingPreviewPosition(Vector3 position)
