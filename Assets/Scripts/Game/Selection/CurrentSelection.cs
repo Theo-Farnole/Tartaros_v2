@@ -32,6 +32,8 @@
 				return;
 			}
 
+			if (DoSelectableBelongToSelectableTeam(selectable) == false) return;
+
 			_selectedObjets.Add(selectable);
 			selectable.OnSelected();
 		}
@@ -53,6 +55,8 @@
 				Debug.LogErrorFormat("Error while trying to remove from selection: selectable \"{0}\" is not in selection.", GetSelectableName(selectable));
 				return;
 			}
+
+			if (DoSelectableBelongToSelectableTeam(selectable) == false) return;
 
 			_selectedObjets.Remove(selectable);
 			selectable.OnUnselected();
@@ -88,6 +92,11 @@
 		private string GetSelectableName(ISelectable selectable)
 		{
 			return selectable is MonoBehaviour obj ? obj.name : selectable.ToString();
+		}
+
+		private bool DoSelectableBelongToSelectableTeam(ISelectable selectable)
+		{
+			return _selectableTeam == selectable.Team;
 		}
 		#endregion Methods
 	}
