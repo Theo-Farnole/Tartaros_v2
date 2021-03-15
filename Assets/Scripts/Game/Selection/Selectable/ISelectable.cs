@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Selection
 {
 	using System;
+	using Tartaros.Entities;
 	using UnityEngine;
 
 	public class SelectedArgs : EventArgs
@@ -16,6 +17,7 @@
 		bool CanBeSelected { get; }
 		Vector3 Position { get; }
 		GameObject GameObject { get; }
+		Team Team { get; }
 
 		void OnSelected();
 		void OnUnselected();

@@ -1,12 +1,16 @@
 ﻿namespace Tartaros.Selection
 {
 	using System.Collections.Generic;
+	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 	public class CurrentSelection : MonoBehaviour, ISelection
 	{
 		#region Fields
+		[SerializeField]
+		private Team _selectableTeam = Team.Player;
+
 		List<ISelectable> _selectedObjets = new List<ISelectable>();
 		#endregion Fields
 

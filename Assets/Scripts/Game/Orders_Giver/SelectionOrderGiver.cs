@@ -113,9 +113,9 @@
 			return selectable.GameObject.TryGetComponent(out convertedEntity);
 		}
 
-		private bool IsSelectableControllable(ISelectable x)
+		private bool IsSelectableControllable(ISelectable selectable)
 		{
-			return x.GameObject.TryGetComponent(out Entity entity) && entity.Team == _controllableTeam;
+			return selectable.Team == _controllableTeam;
 		}
 		#endregion Methods
 	}
