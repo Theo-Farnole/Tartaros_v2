@@ -38,12 +38,13 @@ Shader "SH_DepthFade"
 			float4 ase_screenPos = float4( i.screenPos.xyz , i.screenPos.w + 0.00000000001 );
 			float4 ase_screenPosNorm = ase_screenPos / ase_screenPos.w;
 			ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
-			float eyeDepth1 = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE( _CameraDepthTexture, ase_screenPosNorm.xy ));
+			float eyeDepth1 = (SAMPLE_DEPTH_TEXTURE( _CameraDepthTexture, ase_screenPosNorm.xy )*( _ProjectionParams.z - _ProjectionParams.y ));
 			float4 temp_cast_0 = (( ase_screenPos.w - _Offset )).xxxx;
-			float4 temp_output_9_0 = ( _Multiply * ( 1.0 - ( ( eyeDepth1 * unity_CameraWorldClipPlanes[5] ) - temp_cast_0 ) ) );
+			float4 temp_output_9_0 = ( _Multiply * ( ( eyeDepth1 * unity_CameraWorldClipPlanes[5] ) - temp_cast_0 ) );
 			o.Emission = ( _Color * temp_output_9_0 ).rgb;
 			float4 temp_cast_3 = (_SmoothStep.x).xxxx;
 			float4 temp_cast_4 = (_SmoothStep.y).xxxx;
+			float4 temp_cast_5 = (( ase_screenPos.w - _Offset )).xxxx;
 			float4 smoothstepResult12 = smoothstep( temp_cast_3 , temp_cast_4 , temp_output_9_0);
 			o.Alpha = smoothstepResult12.x;
 		}
@@ -125,19 +126,19 @@ Shader "SH_DepthFade"
 }
 /*ASEBEGIN
 Version=18500
-272;73;1265;655;1792.101;791.5883;2.5;True;False
-Node;AmplifyShaderEditor.CameraWorldClipPlanes;3;-1035.507,35.06288;Inherit;False;Far;0;1;FLOAT4;0
-Node;AmplifyShaderEditor.ScreenDepthNode;1;-1052.157,-73.6676;Inherit;False;0;True;1;0;FLOAT4;0,0,0,0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;10;-987.368,468.2063;Inherit;False;Property;_Offset;Offset;1;0;Create;True;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
+258;73;1214;646;1457.419;220.2473;1.150246;True;False
+Node;AmplifyShaderEditor.RangedFloatNode;10;-987.368,468.2063;Inherit;False;Property;_Offset;Offset;1;0;Create;True;0;0;False;0;False;0;41.58;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.ScreenPosInputsNode;6;-1031.321,274.9003;Float;False;1;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.CameraWorldClipPlanes;3;-1035.507,35.06288;Inherit;False;Far;0;1;FLOAT4;0
+Node;AmplifyShaderEditor.ScreenDepthNode;1;-1052.157,-73.6676;Inherit;False;0;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;4;-774.0148,-50.23723;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT4;0,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;11;-738.5681,358.6063;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;5;-448.5557,77.80688;Inherit;True;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.OneMinusNode;8;-200.8681,-24.89371;Inherit;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.RangedFloatNode;7;-201.4897,-154.964;Inherit;False;Property;_Multiply;Multiply;0;0;Create;True;0;0;False;0;False;0;0.16;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;7;-201.4897,-154.964;Inherit;False;Property;_Multiply;Multiply;0;0;Create;True;0;0;False;0;False;0;0.5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;9;8.731995,-84.09377;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT4;0,0,0,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.ColorNode;13;-5.960899,-346.7221;Inherit;False;Property;_Color;Color;2;1;[HDR];Create;True;0;0;False;0;False;1,0,0,1;1,0,0,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.Vector2Node;16;0.5666955,70.2326;Inherit;False;Property;_SmoothStep;SmoothStep;3;0;Create;True;0;0;False;0;False;0,1;5,10;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.ColorNode;13;-5.960899,-346.7221;Inherit;False;Property;_Color;Color;2;1;[HDR];Create;True;0;0;False;0;False;1,0,0,1;0,0.8934026,1,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.OneMinusNode;8;-200.8681,-24.89371;Inherit;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;12;291.9497,77.58067;Inherit;False;3;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT4;1,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;14;299.7661,-158.5673;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;598.5,-83.60001;Float;False;True;-1;2;ASEMaterialInspector;0;0;Standard;SH_DepthFade;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;False;False;False;False;False;False;Back;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Transparent;0.5;True;True;0;False;Transparent;;Transparent;All;14;all;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;True;2;5;False;-1;10;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;False;0.1;False;-1;0;False;-1;False;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
@@ -147,9 +148,8 @@ WireConnection;11;0;6;4
 WireConnection;11;1;10;0
 WireConnection;5;0;4;0
 WireConnection;5;1;11;0
-WireConnection;8;0;5;0
 WireConnection;9;0;7;0
-WireConnection;9;1;8;0
+WireConnection;9;1;5;0
 WireConnection;12;0;9;0
 WireConnection;12;1;16;1
 WireConnection;12;2;16;2
@@ -158,4 +158,4 @@ WireConnection;14;1;9;0
 WireConnection;0;2;14;0
 WireConnection;0;9;12;0
 ASEEND*/
-//CHKSM=A6D8022974B502BF16B1D7BD323E542B9AD47D86
+//CHKSM=D8F01A0ED4EEAC4F0FD00D40D2375FA261323ADD
