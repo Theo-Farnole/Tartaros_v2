@@ -51,7 +51,7 @@
 		{
 			if (RaycastUnderCursor(out RaycastHit hit))
 			{
-				if (hit.transform.TryGetComponent(out selectableUnderCursor))
+				if (hit.transform.gameObject.TryGetComponentInParent(out selectableUnderCursor))
 				{
 					return true;
 				}
