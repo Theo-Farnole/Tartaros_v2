@@ -14,6 +14,10 @@
 		private GameInputs _gameInputs = null;
 		#endregion Fields
 
+		#region Properties
+		private bool EnableAdditiveSelectionPerformed => _gameInputs.Selection.EnableAdditiveSelection.phase == InputActionPhase.Performed;
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{
@@ -37,13 +41,14 @@
 		{
 			if (CanSelect() == false) return;
 
+			if (EnableAdditiveSelectionPerformed == false)
+			{
+				_selection.ClearSelection();
+			}
+
 			if (TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
 			{
 				_selection.AlternateSelection(selectableUnderCursor);
-			}
-			else
-			{
-				_selection.ClearSelection();
 			}
 		}
 
