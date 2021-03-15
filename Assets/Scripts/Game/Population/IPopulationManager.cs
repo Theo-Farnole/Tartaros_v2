@@ -3,9 +3,9 @@
     public interface IPopulationManager
     {
         bool CanSpawn(int popAmount);
-        bool IncrementMaxPopulation(int popAmount);
-        bool ReduceMaxPopulation(int popAmount);
-        bool AddCurrentPopulation(int popAmount);
-        bool RemoveCurrentPopulation(int popAmount);
+        void IncrementMaxPopulation(int popAmount);
+        void ReduceMaxPopulation(int popAmount);
+        void AddCurrentPopulation(int popAmount);
+        void RemoveCurrentPopulation(int popAmount);
     }
 }
