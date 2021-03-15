@@ -5,7 +5,7 @@
 	using Tartaros.OrderGiver;
 	using UnityEngine;
 
-	public class Entity : MonoBehaviour, IOrderStopReceiver
+	public class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver
 	{
 		#region Fields
 		[SerializeField]
@@ -20,6 +20,7 @@
 		#region Properties
 		public Team Team => _team;
 		public EntityType EntityType => _entityType;
+		Team ITeamable.Team => _team;
 		#endregion Properties
 
 		#region Events
