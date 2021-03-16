@@ -1,12 +1,17 @@
 ﻿namespace Tartaros.Economy
 {
     using System.Collections;
+    using System.Collections.Generic;
     using UnityEngine;
 
+    [System.Serializable]
     public class SectorResourcesWallet : ISectorResourcesWallet
     {
+        private Dictionary<SectorRessourceType, int> _ressourceAmount = new Dictionary<SectorRessourceType, int>();
+
         bool ISectorResourcesWallet.CanBuy(Price price)
         {
+            Debug.Log(_ressourceAmount[SectorRessourceType.Food]);
             throw new System.NotImplementedException();
         }
 
