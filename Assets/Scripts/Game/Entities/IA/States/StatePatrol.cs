@@ -26,10 +26,12 @@
 			_entityMovement.DestinationReached += DestinationReached;
 		}
 
-		public override void OnUpdate()
+		public override void OnStateExit()
 		{
+			base.OnStateExit();
 
-			throw new System.NotImplementedException();
+			_entityMovement.DestinationReached -= DestinationReached;
+			_entityMovement.StopMovement();
 		}
 
 		private void MoveToTargetPoint(int index)
@@ -41,7 +43,7 @@
 			}
 		}
 
-		private void ChangeTargetPoint()
+		private void SetTargetPointToNext()
 		{
 			if (_currentIndex < _maxIndex)
 			{
@@ -55,12 +57,9 @@
 			MoveToTargetPoint(_currentIndex);
 		}
 
-
-
 		private void DestinationReached(object sender, EntityMovement.DestinationReachedArgs e)
 		{
-			ChangeTargetPoint();
+			SetTargetPointToNext();
 		}
-
 	}
 }
