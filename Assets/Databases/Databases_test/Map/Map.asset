@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c66167512d5e0a468775b8fbbab3a2d, type: 3}
+  m_Name: Map
+  m_EditorClassIdentifier: 
+  _mapSize: {x: 10, y: 10}
+  _sites:
+  - _vertices:
+    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
+    - _position: {x: 3.1169236, y: 1.3505859, z: 7.206687}
+  - _vertices:
+    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
+    - _position: {x: -7.704505, y: 3.336914, z: 2.1657681}
+    - _position: {x: -6.401081, y: -0.0078125, z: 6.017021}
+  - _vertices:
+    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
+    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
+    - _position: {x: -1.8364296, y: 2.995604, z: 3.8935547}
+    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
+  - _vertices:
+    - _position: {x: -6.401081, y: -0.0078125, z: 6.017021}
+    - _position: {x: -3.1756015, y: 1.3408203, z: 6.420121}
+    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
+    - _position: {x: -4.8919363, y: -2.8641772, z: 7.9814453}
+  - _vertices:
+    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
+    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
+  - _vertices:
+    - _position: {x: -3.199437, y: 0.22055995, z: 6.419922}
+    - _position: {x: -2.6914263, y: -0.22081697, z: 3.8935547}
+    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
+  - _vertices:
+    - _position: {x: 3.1169236, y: 1.3505859, z: 7.206687}
+    - _position: {x: 4.944829, y: 3.1539059, z: -14.510494}
+    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
+  - _vertices:
+    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
+    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
+    - _position: {x: -1.8364296, y: 2.995604, z: 3.8935547}
+    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
+  - _vertices:
+    - _position: {x: -1.8364296, y: 2.995604, z: 3.8935547}
+    - _position: {x: -3.1756015, y: 1.3408203, z: 6.420121}
+    - _position: {x: -6.401081, y: -0.0078125, z: 6.017021}
+    - _position: {x: -7.704505, y: 3.336914, z: 2.1657681}
+    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
+  - _vertices:
+    - _position: {x: 3.1169236, y: 1.3505859, z: 7.206687}
+    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
+    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
