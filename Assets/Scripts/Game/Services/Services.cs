@@ -2,7 +2,8 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using Tartaros.Utilities;
+    using Tartaros.Economy;
+    using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class Services : Singleton<Services>
@@ -26,7 +27,12 @@
 			return (T)_databases[typeof(T)];
 		}
 
-		public bool TryGet<T>(out T service)
+        internal T Get<T>(out IPlayerIncomeSectorResources playerIncomeSectorResources)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryGet<T>(out T service)
 		{
 			if (HasService<T>())
 			{

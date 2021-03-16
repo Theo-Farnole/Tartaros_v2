@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Economy.PlayerSectorRessources
+﻿namespace Tartaros.Economy
 {
 	using Tartaros.Economy;
 
@@ -7,5 +7,6 @@
 		int GetAmount(SectorRessourceType ressource);
 		void AddAmount(SectorRessourceType ressource, int amount);
 		void RemoveAmount(SectorRessourceType ressource, int amount);
-	}
+        void Buy(Price price);
+    }
 }

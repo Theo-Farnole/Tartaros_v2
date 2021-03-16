@@ -8,14 +8,14 @@
     public class PopulationManagerData : SerializedScriptableObject
     {
         [SerializeField]
-        private int _startingMaxPoupulation = 0;
+        private int _startingMaxPopulation = 0;
 
         public PopulationManagerData(int startingMaxPoupulation)
         {
-            _startingMaxPoupulation = startingMaxPoupulation;
+            _startingMaxPopulation = startingMaxPoupulation;
         }
 
-        public int StartingMaxPoupulation => _startingMaxPoupulation;
+        public int StartingMaxPopulation => _startingMaxPopulation;
     }
 
 }

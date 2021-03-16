@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Economy.PlayerIncomeSectorRessources
+﻿namespace Tartaros.Economy
 {
     using Tartaros.Economy;
 
