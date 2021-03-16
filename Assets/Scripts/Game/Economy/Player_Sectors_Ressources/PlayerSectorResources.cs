@@ -15,7 +15,7 @@
 
 		private void Awake()
 		{
-			if (_playerWallet != null)
+			if (_playerSectorRessourcesData != null)
 			{
 				_playerWallet = _playerSectorRessourcesData.Wallet.Clone() as ISectorResourcesWallet;
 			}
