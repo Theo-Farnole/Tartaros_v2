@@ -1,33 +1,27 @@
 ﻿namespace Tartaros.Gamemode
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using Tartaros.Gamemode;
-    using Tartaros.ServicesLocator;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
-    public class GamemodeManager : MonoBehaviour
-    {
-        private GamemodeFSM _gamemodeFSM;
-       
+	public class GamemodeManager : MonoBehaviour
+	{
+		private GamemodeFSM _gamemodeFSM = null;
 
-        private void Awake()
-        {
-            Services.Instance.RegisterService<GamemodeManager>(this);
-        }
 
-        private void OnEnable()
-        {
-            _gamemodeFSM = new GamemodeFSM();
-        }
-        public void SetState(AGameState _state)
-        {
-            _gamemodeFSM.CurrentState = _state;
-        }
+		private void Awake()
+		{
+			Services.Instance.RegisterService(this);
+			_gamemodeFSM = new GamemodeFSM();
+		}
 
-        private void Update()
-        {
-            _gamemodeFSM.OnUpdate();
-        }
-    }
+		public void SetState(AGameState _state)
+		{
+			_gamemodeFSM.CurrentState = _state;
+		}
+
+		private void Update()
+		{
+			_gamemodeFSM.OnUpdate();
+		}
+	}
 }

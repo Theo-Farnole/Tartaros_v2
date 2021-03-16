@@ -36,7 +36,7 @@
 
         private void EnterConstruction_performed(InputAction.CallbackContext obj)
         {
-            _constructionManger.EnterConstructionMode(_constructable, new Tartaros.Economy.Price());
+            _constructionManger.EnterConstructionMode(_constructable, null);
         }   
 
 

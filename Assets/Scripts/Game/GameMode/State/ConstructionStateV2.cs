@@ -32,7 +32,6 @@ namespace Tartaros.Construction
         {
             base.OnUpdate();
 
-            Debug.Log("OnUpdate");
             _buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetPreviewPosition());
 
             if (_constructionInput.IsValidatePerformed())
@@ -50,6 +49,8 @@ namespace Tartaros.Construction
             base.OnStateExit();
 
             _buildingPreview.DestroyMethod();
+
+             // TODO DJ: Refund if _shouldRefund
         }
 
         void Validate()

@@ -15,12 +15,6 @@
             _buildingPreview = buildingPreview;
         }
 
-        [System.Obsolete]
-        public void InstanciateBuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
-        {
-            
-        }
-
         public void SetBuildingPreviewPosition(Vector3 position)
         {
             _buildingPreview.transform.position = position;
