@@ -28,6 +28,7 @@
                     _gamemodeManager = gameModeManager;
                 }
             }
+            _playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
         }
 
         private void Update()
@@ -37,7 +38,9 @@
 
         public bool CanEnterConstruction(Price constructionPrice)
         {
-            return constructionPrice.Amount >= _playerSectorRessources.GetAmount(constructionPrice.RessourceType);
+            Debug.Log(_playerSectorRessources.GetAmount(constructionPrice.RessourceType));
+            
+            return constructionPrice.Amount <= _playerSectorRessources.GetAmount(constructionPrice.RessourceType);
         }
 
         public void EnterConstructionMode(IConstructable toBuild)

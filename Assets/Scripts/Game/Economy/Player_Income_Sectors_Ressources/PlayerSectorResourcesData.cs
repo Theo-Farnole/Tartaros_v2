@@ -5,16 +5,17 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    [System.Serializable]
     public class PlayerSectorResourcesData : SerializedScriptableObject
     {
         [SerializeField]
-        private SectorResourcesWallet _wallet = null;
+        private ISectorResourcesWallet _wallet = null;
 
-        public PlayerSectorResourcesData(SectorResourcesWallet wallet)
+        public PlayerSectorResourcesData(ISectorResourcesWallet wallet)
         {
             _wallet = wallet;
         }
 
-        public SectorResourcesWallet Wallet => _wallet;
+        public ISectorResourcesWallet Wallet => _wallet;
     }
 }

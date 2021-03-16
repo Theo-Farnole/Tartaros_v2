@@ -9,6 +9,7 @@
     public class PlayerIncomeSectorResources : MonoBehaviour, IPlayerIncomeSectorResources
     {
         private IPlayerSectorResources _playerSectorRessources = null;
+        [SerializeField]
         private PlayerSectorResourcesData _data = null;
 
         
