@@ -1,5 +1,7 @@
 ﻿namespace Tartaros.Map
 {
+	using System.Collections.Generic;
+	using System.Linq;
 	using UnityEditor;
 	using UnityEngine;
 	using UnityEngine.InputSystem;
@@ -9,6 +11,7 @@
 	{
 		#region Fields
 		private const float HANDLE_SITE = .1f;
+		private const float SITE_COLOR_OPACITY = 0.5f;
 		private static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
 		private Site _pendingCreationSite = null;
@@ -171,18 +174,35 @@
 			Handles.EndGUI();
 		}
 
-		private void DrawSite(Site site, Color color)
+		private void DrawSite(Site site, Color lineColor)
 		{
 			if (site == null) throw new System.NotSupportedException();
 
-			for (int i = 0; i < site.Vertices.Length - 1; i++)
-			{
-				Vertex p1 = site.Vertices[i];
-				Vertex p2 = site.Vertices[i + 1];
+			var sitePoints = site.GetWorldPointsWrapped();
 
-				Handles.color = color;
-				Handles.DrawLine(p1.Position, p2.Position);
+			DrawLine();
+			DrawPolygon();
+
+			void DrawLine()
+			{
+				Handles.color = lineColor;
+				Handles.DrawPolyLine(sitePoints);
 			}
+
+			void DrawPolygon()
+			{
+				SetHandleColorFromSite(site);
+				Handles.DrawAAConvexPolygon(sitePoints);
+			}
+		}
+
+		private static void SetHandleColorFromSite(Site site)
+		{
+			Random.InitState(site.GetHashCode());
+
+			Color handlesColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+			handlesColor.a = SITE_COLOR_OPACITY;
+			Handles.color = handlesColor;
 		}
 
 		private void DrawVertex(Vertex vertex)

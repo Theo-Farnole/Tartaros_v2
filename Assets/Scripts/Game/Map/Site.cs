@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using UnityEngine;
 
 	[Serializable]
@@ -23,6 +24,21 @@
 		public void AddVertex(Vertex vertex)
 		{
 			_vertices.Add(vertex);
+		}
+
+		/// <summary>
+		/// Returns an array that start and end with the first vertex's position.
+		/// </summary>
+		public Vector3[] GetWorldPointsWrapped()
+		{
+			List<Vector3> sitePoints = Vertices.Select(x => x.Position).ToList();
+
+			if (sitePoints.Count > 0)
+			{
+				sitePoints.Add(this[0].Position);
+			}
+
+			return sitePoints.ToArray();
 		}
 		#endregion Methods
 	}
