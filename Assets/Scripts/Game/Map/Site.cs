@@ -19,6 +19,7 @@
 
 		public Vertex this[int i] => _vertices[i];
 		public int VerticesCount => _vertices.Count;
+		public Vector3 Centroid => MathHelper.CalculateCentroid(_vertices.Select(x => x.Position).ToArray());
 		#endregion Properties
 
 		#region Methods

@@ -19,6 +19,15 @@
 			DrawPolygon(site);
 		}
 
+		public void DrawSite(Site site, string label)
+		{
+			if (site == null) throw new System.ArgumentNullException();
+
+			DrawSite(site);
+
+			Handles.Label(site.Centroid, label);
+		}
+
 		private void DrawLine(Site site)
 		{
 			Vector3[] sitePoints = site.GetWorldPointsWrapped();

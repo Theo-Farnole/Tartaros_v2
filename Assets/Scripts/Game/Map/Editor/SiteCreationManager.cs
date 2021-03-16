@@ -54,14 +54,14 @@
 		{
 			if (IsCreatingSite)
 			{
-				if (GUILayout.Button("Cancel sector editing", GUILayout.Width(100)))
+				if (GUILayout.Button("Cancel sector editing", GUILayout.Width(150)))
 				{
 					CancelCreation();
 				}
 			}
 			else
 			{
-				if (GUILayout.Button("Add new sector", GUILayout.Width(100)))
+				if (GUILayout.Button("Add new sector", GUILayout.Width(150)))
 				{
 					StartCreation();
 				}
@@ -108,6 +108,7 @@
 		{
 			foreach (Vertex vertex in _map.MapData.Vertices)
 			{
+				Handles.color = Color.white;
 				bool clickOnHandle = Handles.Button(vertex.Position, Quaternion.identity, HANDLE_SITE, HANDLE_SITE, Handles.RectangleHandleCap);
 
 				if (clickOnHandle == true)

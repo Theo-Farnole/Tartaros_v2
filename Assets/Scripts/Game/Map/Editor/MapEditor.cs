@@ -1,5 +1,7 @@
 ﻿namespace Tartaros.Map.Editor
 {
+	using System.Collections.Generic;
+	using Tartaros.Math;
 	using UnityEditor;
 	using UnityEngine;
 
@@ -25,7 +27,6 @@
 			_siteDrawer = new SiteDrawer();
 			_siteCreationManager = new SiteCreationManager(Map, _siteDrawer);
 		}
-
 
 		public void OnSceneGUI()
 		{
@@ -57,10 +58,11 @@
 
 		private void DrawSites(Color color)
 		{
-			foreach (var site in Map.MapData.Sites)
+			for (int i = 0; i < Map.MapData.Sites.Length; i++)
 			{
+				Site site = Map.MapData.Sites[i];
 				_siteDrawer.lineColor = color;
-				_siteDrawer.DrawSite(site);
+				_siteDrawer.DrawSite(site, i.ToString());
 			}
 		}
 
@@ -73,6 +75,11 @@
 					GUILayout.Label("Map Editor", EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
 
 					_siteCreationManager.DrawGUI();
+
+					if (GUILayout.Button("Check for errors", GUILayout.Width(150)))
+					{
+						MapErrorsChecker.HasErrors(Map);
+					}
 				}
 				GUILayout.EndVertical();
 			}
