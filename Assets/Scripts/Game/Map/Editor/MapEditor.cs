@@ -61,7 +61,7 @@
 
 				if (clickOnHandle == true)
 				{
-					if (IsVertexFirstOfNewSite(vertex) == true)
+					if (_pendingCreationSite.IsVertexFirstWaypoint(vertex) == true)
 					{
 						ValidatePendingSite();
 					}
@@ -98,10 +98,7 @@
 			_pendingCreationSite = null;
 		}
 
-		private bool IsVertexFirstOfNewSite(Vertex vertex)
-		{
-			return _pendingCreationSite.VerticesCount > 1 && vertex == _pendingCreationSite[0];
-		}
+
 
 		private void DrawSites(Color color)
 		{

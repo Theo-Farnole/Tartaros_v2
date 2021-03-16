@@ -40,6 +40,11 @@
 
 			return sitePoints.ToArray();
 		}
+
+		public bool IsVertexFirstWaypoint(Vertex vertex)
+		{
+			return VerticesCount > 1 && vertex == this[0];
+		}
 		#endregion Methods
 	}
 }
