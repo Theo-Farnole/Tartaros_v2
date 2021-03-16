@@ -7,8 +7,17 @@
 
     public class Price
     {
-        SectorRessourceType RessourceType;
-        int Amounth;
+        SectorRessourceType _ressourceType;
+        int _amounth;
+
+        public Price(SectorRessourceType ressourceType, int amounth)
+        {
+            _ressourceType = ressourceType;
+            _amounth = amounth;
+        }
+
+        public SectorRessourceType RessourceType => _ressourceType;
+        public int Amount => _amounth;
     }
 
 }

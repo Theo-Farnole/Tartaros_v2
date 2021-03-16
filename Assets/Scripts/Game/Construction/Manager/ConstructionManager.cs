@@ -5,10 +5,7 @@
     using UnityEngine;
     using Tartaros.Construction;
     using Tartaros.Economy;
-    using Tartaros.Gamemode.State;
     using Tartaros.Gamemode;
-    using Tartaros.Utilities;
-    using UnityEngine.InputSystem;
     using Tartaros.ServicesLocator;
 
     public class ConstructionManager : MonoBehaviour
@@ -16,9 +13,11 @@
         #region Fields
         private readonly ConstructionManagerData _contstructionManagerData = null;
         private GamemodeManager _gamemodeManager = null;
-
-       
+        private PlayerSectorResources _playerSectorRessources = null;
         private IConstructable _testConstructable = null;
+
+        private SectorRessourceType _currentRessource;
+        private int _currentAmount = 0;
         #endregion
 
         #region Methods
@@ -26,11 +25,6 @@
         private void Awake()
         {
             _testConstructable = GetComponent<IConstructable>();
-
-            //_input = GetComponent<IBuildingInputManager>();
-            //_IBuildingPreviewPosition = GetComponent<IBuildingPreviewPosition>();
-            //if (_IBuildingPreviewPosition == null)
-            //    Debug.LogError("Add compenent IbuildingPreviewPosition");
         }
 
         private void Start()
@@ -46,38 +40,14 @@
 
         private void Update()
         {
-            //if (_input.CheckEnterConstructionMode())
-            //{
-            //    if (_buildingPreview == null)
-            //    {
-            //        EnterConstructionMode(_testConstructable, new Price());
-            //    }
-            //}
-
-            //if (_buildingPreview != null)
-            //{
-            //    if(_input.CheckLeaveWithoutConstruct())
-            //    {
-            //        ExitConstructionModeWithoutConstruct();
-            //    }
-
-            //    _buildingPreview.SetBuildingPreviewPosition(_IBuildingPreviewPosition.GetPreviewPosition());
-            //    ConstructBuilding();
-            //}
+            
         }
-
-
-        //private void OnDrawGizmos()
-        //{
-        //    if (Application.isPlaying)
-        //    {
-        //        Gizmos.color = Color.red;
-        //        Gizmos.DrawSphere(_IBuildingPreviewPosition.GetBuildingPosition(), 0.5f);
-        //    }
-        //}
 
         private bool CanEnterConstruction(Price constructionPrice)
         {
+            SectorRessourceType ressourceType = constructionPrice.RessourceType;
+            int amount = constructionPrice.Amount;
+
             throw new System.NotImplementedException();
         }
 
