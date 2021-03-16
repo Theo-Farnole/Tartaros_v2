@@ -37,7 +37,7 @@
 
 			DrawVerticesButtons();
 
-			if (_pendingCreationSite.VerticesCount > 0)
+			if (_pendingCreationSite != null && _pendingCreationSite.VerticesCount > 0)
 			{
 				DrawLineFromLastVertexToCursor();
 
@@ -82,6 +82,8 @@
 
 		private void DrawSite()
 		{
+			if (_pendingCreationSite == null) return;
+
 			_siteDrawer.lineColor = Color.green;
 			_siteDrawer.DrawSite(_pendingCreationSite);
 		}
