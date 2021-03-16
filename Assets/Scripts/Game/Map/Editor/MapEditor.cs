@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Map
+﻿namespace Tartaros.Map.Editor
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -14,8 +14,9 @@
 		private const float SITE_COLOR_OPACITY = 0.5f;
 		private static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
+		private MapSiteDrawer _siteDrawer = new MapSiteDrawer();
+
 		private Site _pendingCreationSite = null;
-		Tool LastTool = Tool.None;
 		#endregion Fields
 
 		#region Properties
@@ -84,7 +85,8 @@
 				}
 			}
 
-			DrawSite(_pendingCreationSite, Color.green);
+			_siteDrawer.lineColor = Color.green;
+			_siteDrawer.DrawSite(_pendingCreationSite);
 		}
 
 		private Vector3 GetPositionUnderCursor()
@@ -132,7 +134,8 @@
 		{
 			foreach (var site in Map.MapData.Sites)
 			{
-				DrawSite(site, color);
+				_siteDrawer.lineColor = color;
+				_siteDrawer.DrawSite(site);
 			}
 		}
 
@@ -164,7 +167,6 @@
 						if (GUILayout.Button("Add new sector", GUILayout.Width(100)))
 						{
 							_pendingCreationSite = new Site();
-							LastTool = Tools.current;
 							Tools.current = Tool.None;
 						}
 					}
@@ -172,37 +174,6 @@
 				GUILayout.EndVertical();
 			}
 			Handles.EndGUI();
-		}
-
-		private void DrawSite(Site site, Color lineColor)
-		{
-			if (site == null) throw new System.NotSupportedException();
-
-			var sitePoints = site.GetWorldPointsWrapped();
-
-			DrawLine();
-			DrawPolygon();
-
-			void DrawLine()
-			{
-				Handles.color = lineColor;
-				Handles.DrawPolyLine(sitePoints);
-			}
-
-			void DrawPolygon()
-			{
-				SetHandleColorFromSite(site);
-				Handles.DrawAAConvexPolygon(sitePoints);
-			}
-		}
-
-		private static void SetHandleColorFromSite(Site site)
-		{
-			Random.InitState(site.GetHashCode());
-
-			Color handlesColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-			handlesColor.a = SITE_COLOR_OPACITY;
-			Handles.color = handlesColor;
 		}
 
 		private void DrawVertex(Vertex vertex)
