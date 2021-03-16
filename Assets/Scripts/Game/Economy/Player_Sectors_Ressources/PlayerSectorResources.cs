@@ -22,6 +22,7 @@
 			else
 			{
 				Debug.LogWarning("Missing _playerSectorResourcesData field in inspector. Default wallet is equals to zero.");
+				_playerSectorRessourcesData = new PlayerSectorResourcesData(SectorResourcesWallet.Zero);
 			}
 
 			Services.Instance.RegisterService<IPlayerSectorResources>(this);
