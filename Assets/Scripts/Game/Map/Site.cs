@@ -15,6 +15,7 @@
 
 		#region Properties
 		public Vertex[] Vertices => _vertices.ToArray();
+		public Vertex LastVertex => _vertices[_vertices.Count - 1];
 
 		public Vertex this[int i] => _vertices[i];
 		public int VerticesCount => _vertices.Count;

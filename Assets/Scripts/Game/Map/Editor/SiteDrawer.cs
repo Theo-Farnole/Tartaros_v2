@@ -3,7 +3,7 @@
 	using UnityEditor;
 	using UnityEngine;
 
-	public class MapSiteDrawer
+	public class SiteDrawer
 	{
 		#region Fields
 		public float polygonOpacity = 0.5f;

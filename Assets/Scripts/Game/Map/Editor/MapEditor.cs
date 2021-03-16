@@ -1,10 +1,7 @@
 ﻿namespace Tartaros.Map.Editor
 {
-	using System.Collections.Generic;
-	using System.Linq;
 	using UnityEditor;
 	using UnityEngine;
-	using UnityEngine.InputSystem;
 
 	[CustomEditor(typeof(Map))]
 	public class MapEditor : Editor
@@ -14,31 +11,36 @@
 		private const float SITE_COLOR_OPACITY = 0.5f;
 		private static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
-		private Site _pendingCreationSite = null;
-
-		private MapSiteDrawer _siteDrawer = new MapSiteDrawer();
-		private WaypointPositionInput _waypointPositionInput = new WaypointPositionInput();
+		private SiteCreationManager _siteCreationManager = null;
+		private SiteDrawer _siteDrawer = null;
 		#endregion Fields
 
 		#region Properties
 		public Map Map => target as Map;
-		public bool IsCreatingSite => _pendingCreationSite != null;
+
 		#endregion Properties
 
 		#region Methods
+		private void OnEnable()
+		{
+			_siteDrawer = new SiteDrawer();
+			_siteCreationManager = new SiteCreationManager(Map, _siteDrawer);
+		}
+
+
 		public void OnSceneGUI()
 		{
 			ForceRedraw();
 
-			if (IsCreatingSite == false)
+			if (DoVerticesMoveHandleShouldBeDraw())
 			{
-				DrawVertices();
+				DrawVerticesMoveHandle();
 			}
 
 			DrawSites(Color.white);
 			DrawGUI();
 
-			ManagePendingCreationSite();
+			_siteCreationManager.Update();
 		}
 
 		private static void ForceRedraw()
@@ -49,56 +51,10 @@
 			}
 		}
 
-		private void ManagePendingCreationSite()
+		private bool DoVerticesMoveHandleShouldBeDraw()
 		{
-			if (_pendingCreationSite == null) return;
-
-			HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
-
-			foreach (Vertex vertex in Map.MapData.Vertices)
-			{
-				bool clickOnHandle = Handles.Button(vertex.Position, Quaternion.identity, HANDLE_SITE, HANDLE_SITE, Handles.RectangleHandleCap);
-
-				if (clickOnHandle == true)
-				{
-					if (_pendingCreationSite.IsVertexFirstWaypoint(vertex) == true)
-					{
-						ValidatePendingSite();
-					}
-					else
-					{
-						_pendingCreationSite.AddVertex(vertex);
-					}
-				}
-			}
-
-			if (_pendingCreationSite.VerticesCount > 0)
-			{
-				Vertex lastVertex = _pendingCreationSite[_pendingCreationSite.VerticesCount - 1];
-				Handles.color = Color.blue;
-
-				Handles.DrawLine(lastVertex.Position, _waypointPositionInput.GetPositionUnderCursor());
-
-				if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
-				{
-					Selection.activeObject = Map;
-					_pendingCreationSite.AddVertex(new Vertex(_waypointPositionInput.GetPositionUnderCursor()));
-				}
-			}
-
-			_siteDrawer.lineColor = Color.green;
-			_siteDrawer.DrawSite(_pendingCreationSite);
+			return _siteCreationManager.IsCreatingSite == false;
 		}
-
-		private void ValidatePendingSite()
-		{
-			if (_pendingCreationSite == null) throw new System.NotSupportedException();
-
-			Map.MapData.AddSite(_pendingCreationSite);
-			_pendingCreationSite = null;
-		}
-
-
 
 		private void DrawSites(Color color)
 		{
@@ -106,14 +62,6 @@
 			{
 				_siteDrawer.lineColor = color;
 				_siteDrawer.DrawSite(site);
-			}
-		}
-
-		private void DrawVertices()
-		{
-			foreach (Vertex vertex in Map.MapData.Vertices)
-			{
-				DrawVertex(vertex);
 			}
 		}
 
@@ -125,28 +73,22 @@
 				{
 					GUILayout.Label("Map Editor", EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
 
-					if (IsCreatingSite)
-					{
-						if (GUILayout.Button("Cancel sector editing", GUILayout.Width(100)))
-						{
-							_pendingCreationSite = null;
-						}
-					}
-					else
-					{
-						if (GUILayout.Button("Add new sector", GUILayout.Width(100)))
-						{
-							_pendingCreationSite = new Site();
-							Tools.current = Tool.None;
-						}
-					}
+					_siteCreationManager.DrawGUI();
 				}
 				GUILayout.EndVertical();
 			}
 			Handles.EndGUI();
 		}
 
-		private void DrawVertex(Vertex vertex)
+		private void DrawVerticesMoveHandle()
+		{
+			foreach (Vertex vertex in Map.MapData.Vertices)
+			{
+				DrawVertexMoveHandle(vertex);
+			}
+		}
+
+		private void DrawVertexMoveHandle(Vertex vertex)
 		{
 			EditorGUI.BeginChangeCheck();
 
