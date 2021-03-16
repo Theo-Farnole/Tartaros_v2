@@ -94,7 +94,9 @@
 			Vector3 position = Handles.FreeMoveHandle(vertex.Position, HANDLE_ROTATION, HANDLE_SITE, vertex.Position, Handles.RectangleHandleCap);
 
 			if (EditorGUI.EndChangeCheck())
-			{				
+			{
+				Undo.RecordObject(Map.MapData, "Move position");
+
 				vertex.Position = position;
 				EditorUtility.SetDirty(Map.MapData);
 			}

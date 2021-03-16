@@ -127,6 +127,8 @@
 		{
 			if (_pendingCreationSite == null) throw new System.NotSupportedException();
 
+			Undo.RecordObject(_map.MapData, "Add site");
+
 			_map.MapData.AddSite(_pendingCreationSite);
 			_pendingCreationSite = null;
 
