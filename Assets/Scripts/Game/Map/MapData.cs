@@ -1,10 +1,11 @@
 ﻿namespace Tartaros.Map
 {
+	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
 
-	public class MapData : ScriptableObject
+	public class MapData : SerializedScriptableObject
 	{
 		#region Fields
 		[SerializeField]

@@ -129,6 +129,8 @@
 
 			_map.MapData.AddSite(_pendingCreationSite);
 			_pendingCreationSite = null;
+
+			EditorUtility.SetDirty(_map);
 		}
 		#endregion Methods
 	}

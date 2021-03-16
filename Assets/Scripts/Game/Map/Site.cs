@@ -9,7 +9,7 @@
 	public class Site
 	{
 		#region Fields
-		[SerializeField]
+		[SerializeReference]
 		private List<Vertex> _vertices = new List<Vertex>();
 		#endregion Fields
 

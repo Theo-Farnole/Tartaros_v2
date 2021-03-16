@@ -8,7 +8,6 @@
 	{
 		#region Fields
 		private const float HANDLE_SITE = .1f;
-		private const float SITE_COLOR_OPACITY = 0.5f;
 		private static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
 		private SiteCreationManager _siteCreationManager = null;
@@ -95,9 +94,9 @@
 			Vector3 position = Handles.FreeMoveHandle(vertex.Position, HANDLE_ROTATION, HANDLE_SITE, vertex.Position, Handles.RectangleHandleCap);
 
 			if (EditorGUI.EndChangeCheck())
-			{
-				Undo.RecordObject(target, "Free Move LookAt Point");
+			{				
 				vertex.Position = position;
+				EditorUtility.SetDirty(Map.MapData);
 			}
 		}
 		#endregion Methods
