@@ -14,9 +14,10 @@
 		private const float SITE_COLOR_OPACITY = 0.5f;
 		private static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
-		private MapSiteDrawer _siteDrawer = new MapSiteDrawer();
-
 		private Site _pendingCreationSite = null;
+
+		private MapSiteDrawer _siteDrawer = new MapSiteDrawer();
+		private WaypointPositionInput _waypointPositionInput = new WaypointPositionInput();
 		#endregion Fields
 
 		#region Properties
@@ -76,45 +77,17 @@
 				Vertex lastVertex = _pendingCreationSite[_pendingCreationSite.VerticesCount - 1];
 				Handles.color = Color.blue;
 
-				Handles.DrawLine(lastVertex.Position, GetPositionUnderCursor());
+				Handles.DrawLine(lastVertex.Position, _waypointPositionInput.GetPositionUnderCursor());
 
 				if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
 				{
 					Selection.activeObject = Map;
-					_pendingCreationSite.AddVertex(new Vertex(GetPositionUnderCursor()));
+					_pendingCreationSite.AddVertex(new Vertex(_waypointPositionInput.GetPositionUnderCursor()));
 				}
 			}
 
 			_siteDrawer.lineColor = Color.green;
 			_siteDrawer.DrawSite(_pendingCreationSite);
-		}
-
-		private Vector3 GetPositionUnderCursor()
-		{
-			Camera camera = Camera.current;
-
-			if (camera == null) throw new System.NotSupportedException();
-
-			// the Y position is flipped, so we have to account for that
-			// we also have to account for parts above the "Scene" window
-			Vector2 mousePosition = new Vector2(
-			   Event.current.mousePosition.x,
-			   Screen.height - (Event.current.mousePosition.y + 45)
-			);
-
-			Plane plane = new Plane(Vector3.back, 0 - camera.transform.position.z);
-			Ray ray = camera.ScreenPointToRay(mousePosition);
-
-			if (plane.Raycast(ray, out float distance))
-			{
-				Vector3 hitPoint = ray.GetPoint(distance);
-				return hitPoint;
-			}
-			else
-			{
-				Debug.LogError("NOT SUPPORTED");
-				return Vector3.zero;
-			}
 		}
 
 		private void ValidatePendingSite()
