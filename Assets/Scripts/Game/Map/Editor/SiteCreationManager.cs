@@ -56,17 +56,28 @@
 			{
 				if (GUILayout.Button("Cancel sector editing", GUILayout.Width(100)))
 				{
-					_pendingCreationSite = null;
+					CancelCreation();
 				}
 			}
 			else
 			{
 				if (GUILayout.Button("Add new sector", GUILayout.Width(100)))
 				{
-					_pendingCreationSite = new Site();
-					Tools.current = Tool.None;
+					StartCreation();
 				}
 			}
+		}
+
+		private void StartCreation()
+		{
+			_pendingCreationSite = new Site();
+			Tools.current = Tool.None;
+		}
+
+		private void CancelCreation()
+		{
+			_pendingCreationSite = null;
+			Tools.current = Tool.Move;
 		}
 
 		private static bool ShouldAddVertex()
@@ -131,6 +142,7 @@
 
 			_map.MapData.AddSite(_pendingCreationSite);
 			_pendingCreationSite = null;
+			Tools.current = Tool.Move;
 
 			EditorUtility.SetDirty(_map);
 		}
