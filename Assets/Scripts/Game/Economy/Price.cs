@@ -5,9 +5,12 @@
     using UnityEngine;
     using Tartaros.Economy;
 
+    [System.Serializable]
     public class Price
     {
+        [SerializeField]
         SectorRessourceType _ressourceType;
+        [SerializeField]
         int _amounth;
 
         public Price(SectorRessourceType ressourceType, int amounth)

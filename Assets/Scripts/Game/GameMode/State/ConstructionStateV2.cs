@@ -3,29 +3,23 @@ using UnityEngine;
 using Tartaros.Gamemode;
 using Tartaros.Economy;
 using Tartaros.Gamemode.State;
+using Tartaros.ServicesLocator;
 
 namespace Tartaros.Construction
 {
     public class ConstructionStateV2 : AGameState
     {
-
-
         private BuildingPreview _buildingPreview = null;
         private ConstructionInputs _constructionInput = null;
-        private bool _shouldRefund = true;
-        private Price _price = null;
         private IConstructable _constructable = null;
+        private IPlayerSectorResources _playerSectorRessources = null;
 
-        public ConstructionStateV2(GamemodeManager gamemodeManager, Price price, IConstructable constructable) : base(gamemodeManager)
+        public ConstructionStateV2(GamemodeManager gamemodeManager, IConstructable constructable) : base(gamemodeManager)
         {
-            _price = price;
             _constructable = constructable;
-           
-
             _constructionInput = new ConstructionInputs();
-
             _buildingPreview = new BuildingPreview(_constructable, _constructionInput.GetPreviewPosition());
-
+            _playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
         }
 
         public override void OnUpdate()
@@ -38,25 +32,18 @@ namespace Tartaros.Construction
             {
                 Validate();
             }
-
-            if (_constructionInput.IsLeaveAndRefundPerformed())
-            {
-                LeaveAndRefund();
-            }
         }
         public override void OnStateExit()
         {
             base.OnStateExit();
 
             _buildingPreview.DestroyMethod();
-
-             // TODO DJ: Refund if _shouldRefund
         }
 
         void Validate()
         {
-            _shouldRefund = false;
             InstanciateBuilding();
+            PayPriceRessources();
             LeaveState();
         }
 
@@ -65,10 +52,9 @@ namespace Tartaros.Construction
             GameObject buildingConstruct = GameObject.Instantiate(_constructable.ModelPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
         }
 
-        void LeaveAndRefund()
+        private void PayPriceRessources()
         {
-            _shouldRefund = true;
-            LeaveState();
+            _playerSectorRessources.RemoveAmount(_constructable.price.RessourceType, _constructable.price.Amount);
         }
 
         void LeaveState()

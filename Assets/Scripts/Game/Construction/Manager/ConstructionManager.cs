@@ -13,19 +13,11 @@
         #region Fields
         private readonly ConstructionManagerData _contstructionManagerData = null;
         private GamemodeManager _gamemodeManager = null;
-        private PlayerSectorResources _playerSectorRessources = null;
-        private IConstructable _testConstructable = null;
-
-        private SectorRessourceType _currentRessource;
-        private int _currentAmount = 0;
+        private IPlayerSectorResources _playerSectorRessources = null;
         #endregion
 
         #region Methods
 
-        private void Awake()
-        {
-            _testConstructable = GetComponent<IConstructable>();
-        }
 
         private void Start()
         {
@@ -43,17 +35,14 @@
             
         }
 
-        private bool CanEnterConstruction(Price constructionPrice)
+        public bool CanEnterConstruction(Price constructionPrice)
         {
-            SectorRessourceType ressourceType = constructionPrice.RessourceType;
-            int amount = constructionPrice.Amount;
-
-            throw new System.NotImplementedException();
+            return constructionPrice.Amount >= _playerSectorRessources.GetAmount(constructionPrice.RessourceType);
         }
 
-        public void EnterConstructionMode(IConstructable toBuild, Price constructionPrice)
+        public void EnterConstructionMode(IConstructable toBuild)
         {
-            _gamemodeManager.SetState(new ConstructionStateV2(_gamemodeManager, constructionPrice, toBuild));
+            _gamemodeManager.SetState(new ConstructionStateV2(_gamemodeManager, toBuild));
         }
         #endregion
     }

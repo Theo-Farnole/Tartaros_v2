@@ -36,7 +36,14 @@
 
         private void EnterConstruction_performed(InputAction.CallbackContext obj)
         {
-            _constructionManger.EnterConstructionMode(_constructable, null);
+            if (_constructionManger.CanEnterConstruction(_constructable.price))
+            {
+                _constructionManger.EnterConstructionMode(_constructable);
+            }
+            else
+            {
+                Debug.LogError("Don't have the Ressources to construct this Entity");
+            }
         }   
 
 

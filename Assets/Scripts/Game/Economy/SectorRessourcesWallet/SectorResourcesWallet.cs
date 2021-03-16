@@ -27,6 +27,7 @@
 
         int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource)
         {
+            return _ressourceAmount[ressource];
             throw new System.NotImplementedException();
         }
 
