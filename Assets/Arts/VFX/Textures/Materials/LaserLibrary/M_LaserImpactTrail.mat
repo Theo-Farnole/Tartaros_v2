@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_LaserImpactTrail
+  m_Shader: {fileID: 4800000, guid: 4510ad3f6f904fb4e9a7eb2d1c8906f0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Cutoff: 5
+    - _Depth: 0
+    - _FireRadius: 5
+    - _LaserPower: 5
+    - _LaserPrincipalPower: 10
+    - _LaserRimPatern: 4.25
+    - _LaserRimPatern1: 0.91
+    - _LaserRimPower: 10
+    - _LaserStrength: 5
+    - _LaserWidth: 1
+    - _LazerSize: 0.24
+    - _Lerp: 0.16
+    - _LinearSpace: 0.6
+    - _Opacity: 0.63
+    - _OpacityPatern: 10
+    - _OpacityTexture: 0
+    - _POWER: 2
+    - _PaternScale1: 50
+    - _PaternScale2: 50
+    - _PaternSpeed: 0.1
+    - _PaternSpeed2: 0.1
+    - _VoroScale: 2
+    - __dirty: 0
+    m_Colors:
+    - _Color0: {r: 0.7924528, g: 0.34765673, b: 0, a: 1}
+    - _Color1: {r: 0.7735849, g: 0.23287795, b: 0.15690638, a: 1}
+    - _Fresnel: {r: 1.85, g: 0.35, b: 0, a: 0}
+    - _LaserBalancePatern: {r: 2.48, g: 32.7, b: 0, a: 0}
+    - _LaserStrength: {r: 3.81, g: 3.79, b: 0, a: 0}
+    - _LaserWidth: {r: 1, g: 0.85, b: 1, a: 10}
+    - _LazerSize: {r: 0.21, g: 0.29, b: 0, a: 0}
+    - _POWER: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RadialShear: {r: 0, g: 0, b: 0, a: 0}
+    - _RimTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _STEP: {r: -1, g: 1, b: 0, a: 0}
+    - _SmoothStep: {r: 0, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 10, g: 1, b: 0, a: 0}
+    - _UV_direction: {r: 0, g: 0, b: 0, a: 0}
+    - _UV_tiling: {r: 1, g: 1, b: 0, a: 0}
