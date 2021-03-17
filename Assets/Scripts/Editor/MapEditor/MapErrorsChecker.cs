@@ -22,7 +22,7 @@
 		{
 			Dictionary<SectorData, Line[]> linesBySite = GetLinesBySites(map);
 
-			foreach (SectorData testedSite in map.MapData.SectorData)
+			foreach (SectorData testedSite in map.MapData.Sectors)
 			{
 				if (IsSiteIntersectWithAnotherSite(map, linesBySite, testedSite) == true)
 				{
@@ -39,7 +39,7 @@
 			{
 				if (IsLineIntersectWithAnotherSiteLines(linesBySite, testedSite, testedLines) == true)
 				{
-					Debug.LogErrorFormat("Error detected on map {0}: site n°{1} is inside other site.", map.name, Array.FindIndex(map.MapData.SectorData, x => x == testedSite));
+					Debug.LogErrorFormat("Error detected on map {0}: site n°{1} is inside other site.", map.name, Array.FindIndex(map.MapData.Sectors, x => x == testedSite));
 					return true;
 				}
 			}
@@ -71,7 +71,7 @@
 		{
 			var output = new Dictionary<SectorData, Line[]>();
 
-			foreach (SectorData site in map.MapData.SectorData)
+			foreach (SectorData site in map.MapData.Sectors)
 			{
 				List<Line> lines = new List<Line>();
 

@@ -6,7 +6,7 @@
 	public class SiteCreationManager
 	{
 		#region Fields
-		private const float HANDLE_SITE = .1f;
+		private const float HANDLE_SIZE = .1f;
 
 		private readonly Map _map = null;
 		private readonly SiteDrawer _siteDrawer = null;
@@ -109,7 +109,7 @@
 			foreach (Vertex vertex in _map.MapData.Vertices)
 			{
 				Handles.color = Color.white;
-				bool clickOnHandle = Handles.Button(vertex.Position, Quaternion.identity, HANDLE_SITE, HANDLE_SITE, Handles.RectangleHandleCap);
+				bool clickOnHandle = Handles.Button(vertex.Position, MapEditor.HANDLE_ROTATION, HANDLE_SIZE, HANDLE_SIZE, Handles.RectangleHandleCap);
 
 				if (clickOnHandle == true)
 				{

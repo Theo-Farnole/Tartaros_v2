@@ -17,7 +17,7 @@
 			   Screen.height - (Event.current.mousePosition.y + 45)
 			);
 
-			Plane plane = new Plane(Vector3.back, 0 - camera.transform.position.z);
+			Plane plane = new Plane(Vector3.up, 0 - camera.transform.position.z);
 			Ray ray = camera.ScreenPointToRay(mousePosition);
 
 			if (plane.Raycast(ray, out float distance))

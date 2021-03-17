@@ -9,51 +9,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c66167512d5e0a468775b8fbbab3a2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 63e6496cd470cf84591624fdb5dfa2d7, type: 3}
   m_Name: Map
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _mapSize: {x: 10, y: 10}
-  _sites:
+  _sectorData:
   - _vertices:
-    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
-    - _position: {x: 3.1169236, y: 1.3505859, z: 7.206687}
+    - id: 0
+    - id: 1
+    - id: 2
   - _vertices:
-    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
-    - _position: {x: -7.704505, y: 3.336914, z: 2.1657681}
-    - _position: {x: -6.401081, y: -0.0078125, z: 6.017021}
-  - _vertices:
-    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
-    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
-    - _position: {x: -1.8364296, y: 2.995604, z: 3.8935547}
-    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
-  - _vertices:
-    - _position: {x: -6.401081, y: -0.0078125, z: 6.017021}
-    - _position: {x: -3.1756015, y: 1.3408203, z: 6.420121}
-    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
-    - _position: {x: -4.8919363, y: -2.8641772, z: 7.9814453}
-  - _vertices:
-    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
-    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
-  - _vertices:
-    - _position: {x: -3.199437, y: 0.22055995, z: 6.419922}
-    - _position: {x: -2.6914263, y: -0.22081697, z: 3.8935547}
-    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
-  - _vertices:
-    - _position: {x: 3.1169236, y: 1.3505859, z: 7.206687}
-    - _position: {x: 4.944829, y: 3.1539059, z: -14.510494}
-    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
-  - _vertices:
-    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
-    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
-    - _position: {x: -1.8364296, y: 2.995604, z: 3.8935547}
-    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
-  - _vertices:
-    - _position: {x: -1.8364296, y: 2.995604, z: 3.8935547}
-    - _position: {x: -3.1756015, y: 1.3408203, z: 6.420121}
-    - _position: {x: -6.401081, y: -0.0078125, z: 6.017021}
-    - _position: {x: -7.704505, y: 3.336914, z: 2.1657681}
-    - _position: {x: -3.8675337, y: 5.4746094, z: 2.5870652}
-  - _vertices:
-    - _position: {x: 3.1169236, y: 1.3505859, z: 7.206687}
-    - _position: {x: 1.90113, y: 3.336914, z: 2.4994624}
-    - _position: {x: 0.70436645, y: -0.01171875, z: 5.567654}
+    - id: 0
+    - id: 3
+    - id: 4
+    - id: 5
+    - id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 1, y: 0, z: 1}
+    00000001:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 1, y: 0, z: 0}
+    00000002:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 0, y: 0, z: 1}
+    00000003:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 3.442243, y: -0.63918924, z: 1.8882053}
+    00000004:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 4.1986175, y: -0.640625, z: 0.33856323}
+    00000005:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 2.4644928, y: -0.640625, z: -0.7683231}

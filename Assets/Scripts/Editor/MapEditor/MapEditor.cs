@@ -9,8 +9,8 @@
 	public class MapEditor : Editor
 	{
 		#region Fields
-		private const float HANDLE_SITE = .1f;
-		private static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
+		public const float HANDLE_SITE = .1f;
+		public static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
 		private SiteCreationManager _siteCreationManager = null;
 		private SiteDrawer _siteDrawer = null;
@@ -58,9 +58,9 @@
 
 		private void DrawSites(Color color)
 		{
-			for (int i = 0; i < Map.MapData.SectorData.Length; i++)
+			for (int i = 0; i < Map.MapData.Sectors.Length; i++)
 			{
-				SectorData site = Map.MapData.SectorData[i];
+				SectorData site = Map.MapData.Sectors[i];
 				_siteDrawer.lineColor = color;
 				_siteDrawer.DrawSite(site, i.ToString());
 			}
