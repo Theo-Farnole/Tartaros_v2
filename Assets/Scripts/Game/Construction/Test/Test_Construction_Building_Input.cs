@@ -36,7 +36,6 @@
 
         private void EnterConstruction_performed(InputAction.CallbackContext obj)
         {
-            Debug.Log("yo");
             if (_constructionManger.CanEnterConstruction(_constructable.price))
             {
                 _constructionManger.EnterConstructionMode(_constructable);
