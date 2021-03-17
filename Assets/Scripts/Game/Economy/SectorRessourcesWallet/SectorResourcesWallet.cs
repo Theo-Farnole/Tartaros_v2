@@ -13,26 +13,34 @@
 		#region Fields
 		[SerializeField]
 		private Dictionary<SectorRessourceType, int> _ressourceAmount;
-
-		public static readonly SectorResourcesWallet Zero = new SectorResourcesWallet(
-			new Dictionary<SectorRessourceType, int>()
-			{
-				{ SectorRessourceType.Food, 0 },
-				{ SectorRessourceType.Iron, 0 },
-				{ SectorRessourceType.Stone, 0 }
-			}
-		);
 		#endregion Fields
 
-		#region Ctor
-		public SectorResourcesWallet(SectorResourcesWallet walletToCopy)
+		#region Properties
+		public static SectorResourcesWallet Zero
 		{
-			_ressourceAmount = walletToCopy._ressourceAmount.ToDictionary(entry => entry.Key, entry => entry.Value);
+			get
+			{
+				Dictionary<SectorRessourceType, int> EMPTY_DICTIONARY = new Dictionary<SectorRessourceType, int>()
+				{
+					{ SectorRessourceType.Food, 0 },
+					{ SectorRessourceType.Iron, 0 },
+					{ SectorRessourceType.Stone, 0 }
+				};
+
+
+				return new SectorResourcesWallet(EMPTY_DICTIONARY);
+			}
+		}
+		#endregion Properties
+
+		#region Ctor
+		public SectorResourcesWallet(SectorResourcesWallet walletToCopy) : this(walletToCopy._ressourceAmount)
+		{
 		}
 
 		public SectorResourcesWallet(Dictionary<SectorRessourceType, int> ressourceAmount)
 		{
-			_ressourceAmount = ressourceAmount;
+			_ressourceAmount = ressourceAmount.ToDictionary(entry => entry.Key, entry => entry.Value);
 		}
 		#endregion
 
