@@ -12,19 +12,19 @@
 		private Vector2 _mapSize = new Vector2(10, 10);
 
 		[SerializeField]
-		private List<Site> _sites = new List<Site>(0);
+		private List<SectorData> _sectorData = new List<SectorData>(0);
 		#endregion Fields
 
 		#region Properties
 		public Vector2 MapSize => _mapSize;
-		public Site[] Sites => _sites.ToArray();
-		public Vertex[] Vertices => _sites.SelectMany(x => x.Vertices).ToArray();
+		public SectorData[] SectorData => _sectorData.ToArray();
+		public Vertex[] Vertices => _sectorData.SelectMany(x => x.Vertices).ToArray();
 		#endregion Properties
 
 		#region Methods
-		public void AddSite(Site site)
+		public void AddSector(SectorData sectorData)
 		{
-			_sites.Add(site);
+			_sectorData.Add(sectorData);
 		}
 		#endregion Methods
 	}

@@ -6,7 +6,7 @@
 	using UnityEngine;
 
 	[Serializable]
-	public class Site
+	public class SectorData
 	{
 		#region Fields
 		[SerializeReference]

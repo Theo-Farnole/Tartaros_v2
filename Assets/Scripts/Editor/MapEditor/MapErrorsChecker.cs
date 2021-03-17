@@ -20,9 +20,9 @@
 
 		public static bool HasErrors(Map map)
 		{
-			Dictionary<Site, Line[]> linesBySite = GetLinesBySites(map);
+			Dictionary<SectorData, Line[]> linesBySite = GetLinesBySites(map);
 
-			foreach (Site testedSite in map.MapData.Sites)
+			foreach (SectorData testedSite in map.MapData.SectorData)
 			{
 				if (IsSiteIntersectWithAnotherSite(map, linesBySite, testedSite) == true)
 				{
@@ -33,13 +33,13 @@
 			return false;
 		}
 
-		private static bool IsSiteIntersectWithAnotherSite(Map map, Dictionary<Site, Line[]> linesBySite, Site testedSite)
+		private static bool IsSiteIntersectWithAnotherSite(Map map, Dictionary<SectorData, Line[]> linesBySite, SectorData testedSite)
 		{
 			foreach (Line testedLines in linesBySite[testedSite])
 			{
 				if (IsLineIntersectWithAnotherSiteLines(linesBySite, testedSite, testedLines) == true)
 				{
-					Debug.LogErrorFormat("Error detected on map {0}: site n°{1} is inside other site.", map.name, Array.FindIndex(map.MapData.Sites, x => x == testedSite));
+					Debug.LogErrorFormat("Error detected on map {0}: site n°{1} is inside other site.", map.name, Array.FindIndex(map.MapData.SectorData, x => x == testedSite));
 					return true;
 				}
 			}
@@ -47,7 +47,7 @@
 			return false;
 		}
 
-		private static bool IsLineIntersectWithAnotherSiteLines(Dictionary<Site, Line[]> linesBySite, Site site, Line testingLine)
+		private static bool IsLineIntersectWithAnotherSiteLines(Dictionary<SectorData, Line[]> linesBySite, SectorData site, Line testingLine)
 		{
 			foreach (var kvp in linesBySite)
 			{
@@ -67,11 +67,11 @@
 			return false;
 		}
 
-		private static Dictionary<Site, Line[]> GetLinesBySites(Map map)
+		private static Dictionary<SectorData, Line[]> GetLinesBySites(Map map)
 		{
-			var output = new Dictionary<Site, Line[]>();
+			var output = new Dictionary<SectorData, Line[]>();
 
-			foreach (Site site in map.MapData.Sites)
+			foreach (SectorData site in map.MapData.SectorData)
 			{
 				List<Line> lines = new List<Line>();
 

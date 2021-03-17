@@ -11,7 +11,7 @@
 		#endregion Fields
 
 		#region Methods
-		public void DrawSite(Site site)
+		public void DrawSite(SectorData site)
 		{
 			if (site == null) throw new System.ArgumentNullException();
 
@@ -19,7 +19,7 @@
 			DrawPolygon(site);
 		}
 
-		public void DrawSite(Site site, string label)
+		public void DrawSite(SectorData site, string label)
 		{
 			if (site == null) throw new System.ArgumentNullException();
 
@@ -28,7 +28,7 @@
 			Handles.Label(site.Centroid, label);
 		}
 
-		private void DrawLine(Site site)
+		private void DrawLine(SectorData site)
 		{
 			Vector3[] sitePoints = site.GetWorldPointsWrapped();
 
@@ -36,7 +36,7 @@
 			Handles.DrawPolyLine(sitePoints);
 		}
 
-		private void DrawPolygon(Site site)
+		private void DrawPolygon(SectorData site)
 		{
 			Vector3[] sitePoints = site.GetWorldPointsWrapped();
 
@@ -44,7 +44,7 @@
 			Handles.DrawAAConvexPolygon(sitePoints);
 		}
 
-		private void SetHandleColorFromSite(Site site)
+		private void SetHandleColorFromSite(SectorData site)
 		{
 			Random.InitState(site.GetHashCode());
 

@@ -12,7 +12,7 @@
 		private readonly SiteDrawer _siteDrawer = null;
 		private readonly WaypointPositionInput _waypointPositionInput = null;
 
-		private Site _pendingCreationSite = null;
+		private SectorData _pendingCreationSite = null;
 		#endregion Fields
 
 		#region Properties
@@ -70,7 +70,7 @@
 
 		private void StartCreation()
 		{
-			_pendingCreationSite = new Site();
+			_pendingCreationSite = new SectorData();
 			Tools.current = Tool.None;
 		}
 
@@ -141,7 +141,7 @@
 
 			Undo.RecordObject(_map.MapData, "Add site");
 
-			_map.MapData.AddSite(_pendingCreationSite);
+			_map.MapData.AddSector(_pendingCreationSite);
 			_pendingCreationSite = null;
 			Tools.current = Tool.Move;
 

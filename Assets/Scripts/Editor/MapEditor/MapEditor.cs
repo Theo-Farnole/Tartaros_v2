@@ -58,9 +58,9 @@
 
 		private void DrawSites(Color color)
 		{
-			for (int i = 0; i < Map.MapData.Sites.Length; i++)
+			for (int i = 0; i < Map.MapData.SectorData.Length; i++)
 			{
-				Site site = Map.MapData.Sites[i];
+				SectorData site = Map.MapData.SectorData[i];
 				_siteDrawer.lineColor = color;
 				_siteDrawer.DrawSite(site, i.ToString());
 			}
