@@ -32,6 +32,13 @@
 			_collider.sharedMesh = mesh;
 		}
 
+		public void Capture()
+		{
+			if (_isCaptured == true) return;
+
+			_isCaptured = true;
+		}
+
 		public Vector3[] GetPointsWrappedSnappedToGround()
 		{
 			List<Vector3> sectorPointsSnapToGround = new List<Vector3>();
