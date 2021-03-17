@@ -33,6 +33,23 @@ MonoBehaviour:
     - id: 4
     - id: 5
     - id: 1
+  - _vertices:
+    - id: 2
+    - id: 6
+    - id: 7
+    - id: 8
+    - id: 9
+    - id: 3
+    - id: 0
+  - _vertices:
+    - id: 6
+    - id: 10
+    - id: 11
+    - id: 12
+    - id: 13
+    - id: 14
+    - id: 1
+    - id: 2
   references:
     version: 1
     00000000:
@@ -59,3 +76,39 @@ MonoBehaviour:
       type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
       data:
         _position: {x: 2.4644928, y: -0.640625, z: -0.7683231}
+    00000006:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: -2.676557, y: -1.1656876, z: 3.3201442}
+    00000007:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: -1.0317545, y: -1.1656876, z: 4.6060815}
+    00000008:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 3.7232215, y: -1.1656876, z: 4.1574984}
+    00000009:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 4.321331, y: -1.1656876, z: 3.260333}
+    0000000A:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: -5.278337, y: -1.1656876, z: -0.9563446}
+    0000000B:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: -4.3811717, y: -1.1656876, z: -3.4983127}
+    0000000C:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: -1.5102425, y: -1.1656876, z: -4.3954782}
+    0000000D:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 0.822387, y: -1.1656876, z: -4.2459507}
+    0000000E:
+      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
+      data:
+        _position: {x: 1.330781, y: -1.1656876, z: -2.3918092}
