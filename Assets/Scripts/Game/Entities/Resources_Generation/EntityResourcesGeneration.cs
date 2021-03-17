@@ -38,6 +38,8 @@
 
 		private IEnumerator ResourcesGenerationCoroutine()
 		{
+			yield return new WaitUntil(() => _data != null);
+
 			while (true)
 			{
 				yield return new WaitForSeconds(_data.TickDelayInSeconds);
