@@ -17,6 +17,7 @@
         public CameraData _cameraData = null;
         private Camera _camera = null;
         private IMap _Imap = null;
+        private bool _enableScreenEdgeMovement = false;
 
 
         #endregion
@@ -26,6 +27,7 @@
         {
             _cameraData = data;
             _camera = camera;
+
         }
         #endregion
 
@@ -37,6 +39,7 @@
             _camera = GetComponent<Camera>();
             _input = new GameInputs();
             _input.Camera.Enable();
+            _enableScreenEdgeMovement = _cameraData.EnableScreenEdgeMovement;
         }
 
         private void Start()
@@ -60,7 +63,10 @@
             float deltaTime = Time.deltaTime;
             Vector3 deltaPosition = Vector3.zero;
 
-            ProccessTranslateScreenEdge(deltaTime, ref deltaPosition);
+            if (_enableScreenEdgeMovement)
+            {
+                ProccessTranslateScreenEdge(deltaTime, ref deltaPosition);
+            }
             ProccessTranslateKeyboardInput(deltaTime, ref deltaPosition);
             ProccessZoom(deltaTime, ref deltaPosition);
 
@@ -118,23 +124,33 @@
             Vector3 deltaRight = position.x * right;
             Vector3 deltaUp = position.y * up;
 
+            // if zoom reach bounds, the camera continue to moves on Z/X axis without zooming.        
+            if (transform.position.y + deltaUp.y > _cameraData.CameraZoomData.ZoomBounds.max || transform.position.y + deltaUp.y < _cameraData.CameraZoomData.ZoomBounds.min)
+                deltaUp = Vector3.zero;
+
             Vector3 finalDelta = deltaForward + deltaRight + deltaUp;
             Vector3 finalPosition = transform.position + finalDelta;
 
-            finalPosition = ClampMapBounds(finalPosition);
+       
+            finalPosition = ClampMapBoundsMovement(finalPosition);
 
             transform.position = finalPosition;
         }
 
-        private Vector3 ClampMapBounds(Vector3 finalPosition)
+        private Vector3 ClampMapBoundsMovement(Vector3 finalPosition)
         {
             if (_Imap != null)
             {
                 finalPosition.x = Mathf.Clamp(finalPosition.x, _Imap.MapBounds.boundsX.min, _Imap.MapBounds.boundsX.max);
-                finalPosition.y = Mathf.Clamp(finalPosition.y, _Imap.MapBounds.boundsY.min, _Imap.MapBounds.boundsY.max);
-                finalPosition.z = Mathf.Clamp(finalPosition.z, _cameraData.CameraZoomData.ZoomBounds.min, _cameraData.CameraZoomData.ZoomBounds.max);
+                finalPosition.z = Mathf.Clamp(finalPosition.z, _Imap.MapBounds.boundsY.min, _Imap.MapBounds.boundsY.max);
+                finalPosition.y = Mathf.Clamp(finalPosition.y, _cameraData.CameraZoomData.ZoomBounds.min, _cameraData.CameraZoomData.ZoomBounds.max);
             }
+            return finalPosition;
+        }
 
+        private Vector3 ClampZoomBounds(Vector3 finalPosition)
+        {
+            //finalPosition.z = Mathf.Clamp(finalPosition.z, _cameraData.CameraZoomData.ZoomBounds.min, _cameraData.CameraZoomData.ZoomBounds.max);
             return finalPosition;
         }
         #endregion

@@ -14,6 +14,7 @@
 	}
 	public interface ISelectable
 	{
+		bool CanBeMultiSelected { get; }
 		bool CanBeSelected { get; }
 		Vector3 Position { get; }
 		GameObject GameObject { get; }

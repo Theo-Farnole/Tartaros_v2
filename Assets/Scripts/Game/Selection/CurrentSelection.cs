@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Selection
 {
 	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -16,6 +17,7 @@
 
 		#region Properties
 		ISelectable[] ISelection.SelectedSelectables => _selectedObjets.ToArray();
+		private ISelection Selection => this as ISelection;
 		#endregion Properties
 
 		#region Methods
@@ -26,13 +28,20 @@
 
 		void ISelection.AddToSelection(ISelectable selectable)
 		{
-			if ((this as ISelection).IsSelected(selectable) == true)
+			if (Selection.IsSelected(selectable) == true)
 			{
 				Debug.LogErrorFormat("Error while trying to add to selection: selectable \"{0}\" is already in selection.", GetSelectableName(selectable));
 				return;
 			}
 
 			if (DoSelectableBelongToSelectableTeam(selectable) == false) return;
+
+			if (DoMustClearSelection(selectable))
+			{
+				Selection.ClearSelection();
+			}
+
+			UnselectNoMultiSelectables();
 
 			_selectedObjets.Add(selectable);
 			selectable.OnSelected();
@@ -44,13 +53,16 @@
 
 			foreach (ISelectable selectable in selectables)
 			{
-				(this as ISelection).AddToSelection(selectable);
+				if (selectable.CanBeMultiSelected == true)
+				{
+					Selection.AddToSelection(selectable);
+				}
 			}
 		}
 
 		void ISelection.RemoveFromSelection(ISelectable selectable)
 		{
-			if ((this as ISelection).IsSelected(selectable) == false)
+			if (Selection.IsSelected(selectable) == false)
 			{
 				Debug.LogErrorFormat("Error while trying to remove from selection: selectable \"{0}\" is not in selection.", GetSelectableName(selectable));
 				return;
@@ -66,7 +78,7 @@
 		{
 			for (int i = _selectedObjets.Count - 1; i >= 0; i--)
 			{
-				(this as ISelection).RemoveFromSelection(_selectedObjets[i]);
+				Selection.RemoveFromSelection(_selectedObjets[i]);
 			}
 		}
 
@@ -77,21 +89,36 @@
 
 		void ISelection.AlternateSelection(ISelectable selectable)
 		{
-			var selfSelection = this as ISelection;
-
-			if (selfSelection.IsSelected(selectable))
+			if (Selection.IsSelected(selectable))
 			{
-				selfSelection.RemoveFromSelection(selectable);
+				Selection.RemoveFromSelection(selectable);
 			}
 			else
 			{
-				selfSelection.AddToSelection(selectable);
+				Selection.AddToSelection(selectable);
 			}
+		}
+
+		private void UnselectNoMultiSelectables()
+		{
+			var elementsToRemove = _selectedObjets
+				.Where(x => x.CanBeMultiSelected == false)
+				.ToList();
+
+			foreach (var element in elementsToRemove)
+			{
+				Selection.RemoveFromSelection(element);
+			}
+		}
+
+		private bool DoMustClearSelection(ISelectable selectable)
+		{
+			return selectable.CanBeMultiSelected == false;
 		}
 
 		private string GetSelectableName(ISelectable selectable)
 		{
-			return selectable is MonoBehaviour obj ? obj.name : selectable.ToString();
+			return selectable.GameObject.name;
 		}
 
 		private bool DoSelectableBelongToSelectableTeam(ISelectable selectable)

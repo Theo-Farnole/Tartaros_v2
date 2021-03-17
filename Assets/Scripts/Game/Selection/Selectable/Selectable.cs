@@ -10,6 +10,9 @@
 		[SerializeField]
 		private Team _team = Team.Player;
 
+		[SerializeField]
+		private bool _canBeMultiSelected = true;
+
 		private ISelectionEffect _selectionEffect = null;
 		#endregion Fields
 
@@ -18,6 +21,7 @@
 		Vector3 ISelectable.Position => transform.position;
 		GameObject ISelectable.GameObject => gameObject;
 		Team ISelectable.Team => _team;
+		bool ISelectable.CanBeMultiSelected => _canBeMultiSelected;
 		#endregion Properties
 
 		#region Events

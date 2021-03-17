@@ -60,6 +60,10 @@
 				{
 					return true;
 				}
+				else
+				{
+					Debug.LogFormat("User click on {0} but it is not a selectable.", hit.transform.name);
+				}
 			}
 
 			selectableUnderCursor = null;
