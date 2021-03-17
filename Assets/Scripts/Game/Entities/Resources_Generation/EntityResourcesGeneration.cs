@@ -15,7 +15,16 @@
 		#endregion Fields
 
 		#region Properties
-		public EntityResourcesGenerationData Data { get => _data; set => _data = value; }
+		public EntityResourcesGenerationData Data
+		{
+			get => _data;
+
+			set
+			{
+				_data = value;
+				StartResourceGeneration();
+			}
+		}
 		#endregion Properties
 
 		#region Methods
@@ -28,17 +37,39 @@
 
 		private void OnEnable()
 		{
-			_resourceGeneration = StartCoroutine(ResourcesGenerationCoroutine());
+			if (CanStartResourceGeneration())
+			{
+				StartResourceGeneration();
+			}
 		}
 
 		private void OnDisable()
 		{
-			StopCoroutine(_resourceGeneration);
+			StopResourceGeneration();
+		}
+
+		private bool CanStartResourceGeneration()
+		{
+			return _data != null;
+		}
+
+		private void StartResourceGeneration()
+		{
+			StopResourceGeneration();
+			_resourceGeneration = StartCoroutine(ResourcesGenerationCoroutine());
+		}
+
+		private void StopResourceGeneration()
+		{
+			if (_resourceGeneration != null)
+			{
+				StopCoroutine(_resourceGeneration);
+			}
 		}
 
 		private IEnumerator ResourcesGenerationCoroutine()
 		{
-			yield return new WaitUntil(() => _data != null);
+			if (_data == null) throw new System.NotSupportedException("Can't start resources generation without generation data set.");
 
 			while (true)
 			{

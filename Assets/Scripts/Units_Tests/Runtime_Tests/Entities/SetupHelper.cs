@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Tests
 {
+	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Attack;
 	using Tartaros.Entities.Detection;
@@ -16,6 +17,11 @@
 		public static EntitiesKDTrees CreateEntitiesKDTree()
 		{
 			return new GameObject("Entities KD Tree").AddComponent<EntitiesKDTrees>();
+		}
+
+		public static PlayerSectorResources CreatePlayerSectorResources()
+		{
+			return new GameObject("Player Sector Resources").AddComponent<PlayerSectorResources>();
 		}
 
 		public static Entity CreateEntity(Vector3 position, Team team, EntityType entityType, string name)
