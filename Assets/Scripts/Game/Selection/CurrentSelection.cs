@@ -10,7 +10,7 @@
 	{
 		#region Fields
 		[SerializeField]
-		private Team _selectableTeam = Team.Player;
+		private List<Team> _selectableTeams = new List<Team>();
 
 		List<ISelectable> _selectedObjets = new List<ISelectable>();
 		#endregion Fields
@@ -123,7 +123,7 @@
 
 		private bool DoSelectableBelongToSelectableTeam(ISelectable selectable)
 		{
-			return _selectableTeam == selectable.Team;
+			return _selectableTeams.Contains(selectable.Team);
 		}
 		#endregion Methods
 	}

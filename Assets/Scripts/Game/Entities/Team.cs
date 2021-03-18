@@ -2,8 +2,9 @@
 {
 	public enum Team
 	{
+		Neutral = 0,
 		Player,
-		Enemy
+		Enemy,
 	}
 
 	public static class TeamExtensions
@@ -16,7 +17,7 @@
 					return Team.Enemy;
 
 				case Team.Enemy:
-					return Team.Enemy;
+					return Team.Player;
 
 				default:
 					throw new System.NotImplementedException();
