@@ -92,19 +92,19 @@
         private void ProccessTranslateKeyboardInput(float deltaTime, ref Vector3 deltaPosition)
         {
             if (_input.Camera.Forward.phase == InputActionPhase.Performed)
-                deltaPosition.z += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+                deltaPosition.z += _cameraData.KeyboardPan.Speed * deltaTime;
 
 
             if (_input.Camera.Backward.phase == InputActionPhase.Performed)
-                deltaPosition.z -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+                deltaPosition.z -= _cameraData.KeyboardPan.Speed * deltaTime;
 
 
             if (_input.Camera.Right.phase == InputActionPhase.Performed)
-                deltaPosition.x += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+                deltaPosition.x += _cameraData.KeyboardPan.Speed * deltaTime;
 
 
             if (_input.Camera.Left.phase == InputActionPhase.Performed)
-                deltaPosition.x -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+                deltaPosition.x -= _cameraData.KeyboardPan.Speed * deltaTime;
         }
 
 
