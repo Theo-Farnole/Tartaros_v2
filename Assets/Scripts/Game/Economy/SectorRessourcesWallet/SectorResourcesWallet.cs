@@ -15,6 +15,7 @@
 
 		[SerializeField]
 		private Dictionary<SectorRessourceType, int> _ressourceAmount = null;
+
 		#endregion Fields
 
 		#region Properties
@@ -36,6 +37,10 @@
 
 		private ISectorResourcesWallet Self => this;
 		#endregion Properties
+
+		#region Events
+		public event EventHandler<AmountChangedArgs> AmountChanged = null;
+		#endregion Events
 
 		#region Ctor
 		public SectorResourcesWallet() : this(Zero)

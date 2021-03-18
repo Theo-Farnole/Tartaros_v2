@@ -1,18 +1,23 @@
 ﻿namespace Tartaros.Economy
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
 	using ServicesLocator;
 	using System;
+	using UnityEngine;
 
 	public class PlayerSectorResources : MonoBehaviour, IPlayerSectorResources
 	{
+		#region Fields
 		[SerializeField]
 		private PlayerSectorResourcesData _playerSectorRessourcesData = null;
 
 		private ISectorResourcesWallet _playerWallet = null;
+		#endregion Fields
 
+		#region Properties
+		public event EventHandler<AmountChangedArgs> AmountChanged = null;
+		#endregion Properties
+
+		#region Methods
 		private void Awake()
 		{
 			if (_playerSectorRessourcesData != null)
@@ -33,5 +38,6 @@
 		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount) => _playerWallet.RemoveAmount(ressource, amount);
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price) => _playerWallet.CanBuy(price);
 		void ISectorResourcesWallet.Buy(ISectorResourcesWallet price) => _playerWallet.Buy(price);
+		#endregion Methods
 	}
 }
