@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_AOE_Plate 1
-  m_Shader: {fileID: 4800000, guid: c8f3a63e68d7bb34b94eefd317ab3b71, type: 3}
+  m_Shader: {fileID: 4800000, guid: a315738bdf5476f4686353415168de39, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -19,15 +19,32 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 8400000, guid: 0be5428491ac8a04483b5bc91fb068f6, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 8400000, guid: 4f79457e6662c064cbf77b6bca8e6023, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Depth1: -1
+    - _FarExplored: 0.2
     - _POWER: 1.01
+    - _RimPower: 1
+    - _RimPower2: 1
     - _Speed: 1
+    - _VoroPower: 1
+    - _VoroScale: 1
+    - _VoroScaleRim: 1
     - __dirty: 0
     m_Colors:
     - _Color0: {r: 0.39900085, g: 0, b: 0.5943396, a: 1}
     - _POWER1: {r: 0, g: -1.1, b: 1.21, a: 0}
+    - _RimColor: {r: 2, g: 0.5866007, b: 0, a: 1}
+    - _RimColor2: {r: 2, g: 0.5866007, b: 0, a: 1}
+    - _VoroColor: {r: 0.30228186, g: 0.16923663, b: 0.112642765, a: 1}
