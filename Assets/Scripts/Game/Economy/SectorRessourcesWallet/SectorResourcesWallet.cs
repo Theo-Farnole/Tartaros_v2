@@ -71,6 +71,11 @@
 
 		void ISectorResourcesWallet.AddAmount(SectorRessourceType ressource, int amount)
 		{
+			if (_ressourceAmount.ContainsKey(ressource) == false)
+			{
+				_ressourceAmount.Add(ressource, 0);
+			}
+
 			_ressourceAmount[ressource] += amount;
 		}
 
