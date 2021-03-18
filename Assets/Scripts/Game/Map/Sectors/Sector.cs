@@ -1,11 +1,12 @@
 ﻿namespace Tartaros.Map
 {
 	using System.Collections.Generic;
+	using Tartaros.Selection;
 	using UnityEngine;
 
 	public class Sector : MonoBehaviour
 	{
-		#region Fields
+		#region Fields		
 		[SerializeField]
 		private MeshFilter _meshFiltrer = null;
 
@@ -38,6 +39,11 @@
 
 			_isCaptured = true;
 			Debug.Log("A sector has been captured");
+
+			if (TryGetComponent(out ISelectable selectable))
+			{
+				selectable.Team = Entities.Team.Player;
+			}
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()
