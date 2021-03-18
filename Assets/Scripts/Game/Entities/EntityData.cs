@@ -2,7 +2,9 @@
 {
 	using Sirenix.OdinInspector;
 	using Sirenix.Serialization;
-	using System.Linq;
+	using Tartaros.Construction;
+	using Tartaros.Economy;
+	using UnityEngine;
 
 	public class EntityData : SerializedScriptableObject
 	{
@@ -16,7 +18,7 @@
 		#endregion Properties
 
 		#region Methods
-		public T GetBehaviour<T>() where T : class, IEntityBehaviourData
+		public T GetBehaviour<T>() where T : class
 		{
 			foreach (IEntityBehaviourData behaviour in _behaviours)
 			{
@@ -29,7 +31,7 @@
 			return null;
 		}
 
-		public bool HasBehaviour<T>() where T : class, IEntityBehaviourData
+		public bool HasBehaviour<T>() where T : class
 		{
 			foreach (IEntityBehaviourData behaviour in _behaviours)
 			{
@@ -42,7 +44,7 @@
 			return false;
 		}
 
-		public bool TryGetBehaviour<T>(out T behaviour) where T : class, IEntityBehaviourData
+		public bool TryGetBehaviour<T>(out T behaviour) where T : class
 		{
 			foreach (IEntityBehaviourData bhv in _behaviours)
 			{

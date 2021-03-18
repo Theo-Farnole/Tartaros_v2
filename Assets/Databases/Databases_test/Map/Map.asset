@@ -21,51 +21,43 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _mapSize: {x: 10, y: 10}
+  _mapSize: {x: 50, y: 50}
   _sectorData:
   - _vertices:
-    - id: 0
-    - id: 1
-    - id: 2
+    - _position: {x: 11.965366, y: 13.477809}
+    - _position: {x: 7.152276, y: 13.5767765}
+    - _position: {x: 9.255921, y: 18.141895}
   - _vertices:
-    - id: 2
-    - id: 3
-    - id: 4
-    - id: 5
-    - id: 6
-    - id: 7
-    - id: 1
-  references:
-    version: 1
-    00000000:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: 1.2521973, y: 0, z: 1.4985352}
-    00000001:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: 0.98657227, y: 0, z: -1.0678711}
-    00000002:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: -2.013916, y: 0, z: 1.3945312}
-    00000003:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: -8.514576, y: 0, z: 0.3981731}
-    00000004:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: -7.755087, y: 0, z: -2.8294904}
-    00000005:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: -2.7236915, y: 0, z: -6.816777}
-    00000006:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: 0.9312056, y: 0, z: -7.67111}
-    00000007:
-      type: {class: Vertex, ns: Tartaros.Map, asm: Tartaros}
-      data:
-        _position: {x: 3.399444, y: 0, z: -4.3959575}
+    - _position: {x: 9.255921, y: 18.141895}
+    - _position: {x: 8.722221, y: 25.962568}
+    - _position: {x: 13.995375, y: 23.222847}
+    - _position: {x: 12.939506, y: 19.591124}
+    - _position: {x: 14.273258, y: 12.741014}
+    - _position: {x: 11.965366, y: 13.477809}
+  - _vertices:
+    - _position: {x: 7.152276, y: 13.5767765}
+    - _position: {x: 2.3476882, y: 14.597332}
+    - _position: {x: 1.035183, y: 21.33485}
+    - _position: {x: 2.260188, y: 28.422375}
+    - _position: {x: 6.635203, y: 32.6224}
+    - _position: {x: 8.722221, y: 25.962568}
+    - _position: {x: 9.255921, y: 18.141895}
+  - _vertices:
+    - _position: {x: 6.635203, y: 32.6224}
+    - _position: {x: 13.897724, y: 33.23488}
+    - _position: {x: 20.372747, y: 32.622375}
+    - _position: {x: 25.710264, y: 31.222372}
+    - _position: {x: 26.760267, y: 24.572348}
+    - _position: {x: 25.845427, y: 19.17063}
+    - _position: {x: 17.44202, y: 22.987385}
+    - _position: {x: 13.995375, y: 23.222847}
+    - _position: {x: 8.722221, y: 25.962568}
+  - _vertices:
+    - _position: {x: 13.995375, y: 23.222847}
+    - _position: {x: 25.845427, y: 19.17063}
+    - _position: {x: 28.42276, y: 12.497288}
+    - _position: {x: 25.36025, y: 6.4597697}
+    - _position: {x: 17.222721, y: 6.4597697}
+    - _position: {x: 16.435217, y: 10.484781}
+    - _position: {x: 14.273258, y: 12.741014}
+    - _position: {x: 12.939506, y: 19.591124}

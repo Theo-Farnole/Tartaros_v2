@@ -20,7 +20,7 @@
 		bool ISelectable.CanBeSelected { get; }
 		Vector3 ISelectable.Position => transform.position;
 		GameObject ISelectable.GameObject => gameObject;
-		Team ISelectable.Team => _team;
+		Team ISelectable.Team { get => _team; set => _team = value; }
 		bool ISelectable.CanBeMultiSelected => _canBeMultiSelected;
 		#endregion Properties
 

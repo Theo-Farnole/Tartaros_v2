@@ -7,14 +7,14 @@
 	{
 		#region Fields
 		[SerializeField]
-		public int min;
+		public float min;
 
 		[SerializeField]
-		public int max;
+		public float max;
 		#endregion Fields
 
 		#region Properties
-		public Bounds1D(int min, int max)
+		public Bounds1D(float min, float max)
 		{
 			this.min = min;
 			this.max = max;

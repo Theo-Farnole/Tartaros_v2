@@ -1,21 +1,27 @@
 ﻿namespace Tartaros.Construction
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using Tartaros.Construction;
-    using Tartaros.Economy;
+	using Sirenix.OdinInspector;
+	using System.Linq;
+	using Tartaros.Entities;
+	using UnityEngine;
 
-    public class ConstructionManagerData : ScriptableObject
-    {
-        private Dictionary<IConstructable, Price> _buildingsPrice;
+	public partial class ConstructionManagerData : SerializedScriptableObject
+	{
+		[SerializeField]
+		[AssetsOnly]
+		[ValidateInput("ValidateConstructables")]
+		private EntityData[] _constructables = null;
 
-        public ConstructionManagerData(Dictionary<IConstructable, Price> buildingsPrice)
-        {
-            _buildingsPrice = buildingsPrice;
-        }
+		public IConstructable[] Constructables => _constructables.Where(x => x.HasBehaviour<IConstructable>()).Select(x => x.GetBehaviour<IConstructable>()).ToArray();
+	}
 
-        public Dictionary<IConstructable, Price> BuildingPrice => _buildingsPrice;
-    }
-
+#if UNITY_EDITOR
+	public partial class ConstructionManagerData
+	{
+		private bool ValidateConstructables(EntityData[] entityData)
+		{
+			return entityData.Where(x => x.HasBehaviour<IConstructable>()).Count() == entityData.Length;
+		}
+	}
+#endif
 }

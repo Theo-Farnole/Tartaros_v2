@@ -75,13 +75,13 @@
 			{
 				List<Line> lines = new List<Line>();
 
-				foreach (Vertex vertex1 in site.Vertices)
+				foreach (Vertex2D vertex1 in site.Vertices)
 				{
-					foreach (Vertex vertex2 in site.Vertices)
+					foreach (Vertex2D vertex2 in site.Vertices)
 					{
 						if (vertex1 == vertex2) continue;
 
-						var line = new Line(vertex1.Position, vertex2.Position);
+						var line = new Line(vertex1.WorldPosition, vertex2.WorldPosition);
 						lines.Add(line);
 					}
 				}

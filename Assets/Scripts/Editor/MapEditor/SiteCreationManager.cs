@@ -88,7 +88,7 @@
 		private void DrawLineFromLastVertexToCursor()
 		{
 			Handles.color = Color.blue;
-			Handles.DrawLine(_pendingCreationSite.LastVertex.Position, _waypointPositionInput.GetPositionUnderCursor());
+			Handles.DrawLine(_pendingCreationSite.LastVertex.WorldPosition, _waypointPositionInput.GetPositionUnderCursor());
 		}
 
 		private void DrawSite()
@@ -106,10 +106,10 @@
 
 		private void DrawVerticesButtons()
 		{
-			foreach (Vertex vertex in _map.MapData.Vertices)
+			foreach (Vertex2D vertex in _map.MapData.Vertices)
 			{
 				Handles.color = Color.white;
-				bool clickOnHandle = Handles.Button(vertex.Position, MapEditor.HANDLE_ROTATION, HANDLE_SIZE, HANDLE_SIZE, Handles.RectangleHandleCap);
+				bool clickOnHandle = Handles.Button(vertex.WorldPosition, MapEditor.HANDLE_ROTATION, HANDLE_SIZE, HANDLE_SIZE, Handles.RectangleHandleCap);
 
 				if (clickOnHandle == true)
 				{
@@ -118,7 +118,7 @@
 			}
 		}
 
-		private void AddAlreadyExistingVertex(Vertex vertex)
+		private void AddAlreadyExistingVertex(Vertex2D vertex)
 		{
 			if (_pendingCreationSite.IsVertexFirstWaypoint(vertex) == true)
 			{
@@ -132,7 +132,7 @@
 
 		private void AddVertexOnCursorPosition()
 		{
-			_pendingCreationSite.AddVertex(new Vertex(_waypointPositionInput.GetPositionUnderCursor()));
+			_pendingCreationSite.AddVertex(new Vertex2D(_waypointPositionInput.GetPositionUnderCursor()));
 		}
 
 		private void ValidatePendingSite()

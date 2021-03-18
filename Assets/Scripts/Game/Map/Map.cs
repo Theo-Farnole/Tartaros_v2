@@ -1,9 +1,12 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
+	using Tartaros.Sectors;
+	using Tartaros.ServicesLocator;
+	using Tartaros.Utilities;
 	using UnityEngine;
 
-	public class Map : MonoBehaviour
+	public class Map : MonoBehaviour, IMap
 	{
 		#region Fields 
 		[SerializeField]
@@ -16,9 +19,16 @@
 
 		#region Properties
 		public MapData MapData => _mapData;
+
+		Bounds2D IMap.MapBounds => new Bounds2D(0, _mapData.MapSize.x, 0, _mapData.MapSize.y);
 		#endregion Properties
 
 		#region Methods
+		private void Awake()
+		{
+			Services.Instance.RegisterService<IMap>(this);
+		}
+
 		private void Start()
 		{
 			SpawnSectors();
@@ -42,6 +52,12 @@
 					Debug.LogWarningFormat("Missing Sector component on prefab {0}.", _sectorPrefab.name);
 				}
 			}
+		}
+
+		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
+		{
+			Debug.LogError("Not implemented");
+			return true;
 		}
 		#endregion Methods
 	}

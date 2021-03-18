@@ -18,7 +18,7 @@
 		bool CanBeSelected { get; }
 		Vector3 Position { get; }
 		GameObject GameObject { get; }
-		Team Team { get; }
+		Team Team { get; set; }
 
 		void OnSelected();
 		void OnUnselected();

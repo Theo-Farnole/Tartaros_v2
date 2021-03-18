@@ -1,11 +1,12 @@
 ﻿namespace Tartaros.Map
 {
 	using System.Collections.Generic;
+	using Tartaros.Selection;
 	using UnityEngine;
 
 	public class Sector : MonoBehaviour
 	{
-		#region Fields
+		#region Fields		
 		[SerializeField]
 		private MeshFilter _meshFiltrer = null;
 
@@ -14,6 +15,7 @@
 
 		private SectorData _sectorData = null;
 		private bool _isCaptured = false;
+		private Mesh _sectorMesh = null;
 		#endregion Fields
 
 		#region Properties
@@ -26,18 +28,18 @@
 		{
 			_sectorData = sectorData;
 
-			Mesh mesh = SectorMeshGenerator.GenerateMesh(_sectorData);
+			_sectorMesh = SectorMeshGenerator.GenerateMesh(_sectorData);
 
-			//_meshFiltrer.mesh = mesh;
-			_collider.sharedMesh = mesh;
+			_collider.sharedMesh = _sectorMesh;
+			UpdateFogOfWarVisibility();
 		}
-
 		public void Capture()
 		{
 			if (_isCaptured == true) return;
 
 			_isCaptured = true;
-			Debug.Log("A sector has been captured");
+
+			OnCapture();
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()
@@ -61,6 +63,27 @@
 			Debug.LogFormat("{0} has generated an outline of {1} points.", name, sectorPointsSnapToGround.Count);
 
 			return sectorPointsSnapToGround.ToArray();
+		}
+
+
+		private void OnCapture()
+		{
+			Debug.Log("A sector has been captured");
+			UpdateSelectableTeam();
+			UpdateFogOfWarVisibility();
+		}
+
+		private void UpdateSelectableTeam()
+		{
+			if (TryGetComponent(out ISelectable selectable))
+			{
+				selectable.Team = Entities.Team.Player;
+			}
+		}
+
+		private void UpdateFogOfWarVisibility()
+		{
+			_meshFiltrer.mesh = _isCaptured ? _sectorMesh : null;
 		}
 		#endregion Methods
 	}

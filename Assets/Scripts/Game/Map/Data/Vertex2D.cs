@@ -1,0 +1,23 @@
+﻿namespace Tartaros.Map
+{
+	using System;
+	using UnityEngine;
+
+	[Serializable]
+	public class Vertex2D
+	{
+		[SerializeField]
+		private Vector2 _position;
+
+		public Vector3 WorldPosition
+		{
+			get => _position.ToXZ();
+			set => _position = new Vector2(value.x, value.z);
+		}
+
+		public Vertex2D(Vector3 worldPosition)
+		{
+			WorldPosition = worldPosition;
+		}
+	}
+}
