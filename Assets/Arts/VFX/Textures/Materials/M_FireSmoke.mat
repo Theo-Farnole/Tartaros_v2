@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_CosmicSmoke
+  m_Name: M_FireSmoke
   m_Shader: {fileID: 4800000, guid: 5626919a90431584a937476750223038, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -50,6 +50,10 @@ Material:
     - _NoiseScale: 10
     - _Offset: 1
     - _OpacityPatern: -1
+    - _PaternAngle: 1
+    - _PaternMultiply: -1
+    - _PaternScale: 2
+    - _PaternSpeed1: 0.1
     - _PaternStep: -1
     - _PaternStrength: 1
     - _RadialOpacity: -1
