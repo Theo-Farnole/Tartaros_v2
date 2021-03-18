@@ -37,6 +37,7 @@
 			if (_isCaptured == true) return;
 
 			_isCaptured = true;
+			Debug.Log("A sector has been captured");
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()
