@@ -17,7 +17,7 @@
 		{
 			if (_playerSectorRessourcesData != null)
 			{
-				_playerWallet = _playerSectorRessourcesData.Wallet.Clone() as ISectorResourcesWallet;
+				_playerWallet = (_playerSectorRessourcesData.Wallet as ICloneable).Clone() as ISectorResourcesWallet;
 			}
 			else
 			{
@@ -28,24 +28,10 @@
 			Services.Instance.RegisterService<IPlayerSectorResources>(this);
 		}
 
-		void IPlayerSectorResources.AddAmount(SectorRessourceType ressource, int amount)
-		{
-			_playerWallet.AddAmount(ressource, amount);
-		}
-
-		int IPlayerSectorResources.GetAmount(SectorRessourceType ressource)
-		{
-			return _playerWallet.GetAmount(ressource);
-		}
-
-		void IPlayerSectorResources.RemoveAmount(SectorRessourceType ressource, int amount)
-		{
-			_playerWallet.RemoveAmount(ressource, amount);
-		}
-
-		void IPlayerSectorResources.Buy(Price price)
-		{
-			_playerWallet.Buy(price);
-		}
+		int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource) => _playerWallet.GetAmount(ressource);
+		void ISectorResourcesWallet.AddAmount(SectorRessourceType ressource, int amount) => _playerWallet.AddAmount(ressource, amount);
+		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount) => _playerWallet.RemoveAmount(ressource, amount);
+		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price) => _playerWallet.CanBuy(price);
+		void ISectorResourcesWallet.Buy(ISectorResourcesWallet price) => _playerWallet.Buy(price);
 	}
 }

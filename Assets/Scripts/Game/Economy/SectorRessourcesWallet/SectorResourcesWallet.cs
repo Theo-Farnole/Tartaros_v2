@@ -8,11 +8,13 @@
 	using System;
 
 	[System.Serializable]
-	public class SectorResourcesWallet : ISectorResourcesWallet
+	public class SectorResourcesWallet : ISectorResourcesWallet, ICloneable
 	{
 		#region Fields
+		private static readonly SectorRessourceType[] SECTOR_RESOURCE_TYPE_VALUES = EnumHelper.GetValues<SectorRessourceType>();
+
 		[SerializeField]
-		private Dictionary<SectorRessourceType, int> _ressourceAmount;
+		private Dictionary<SectorRessourceType, int> _ressourceAmount = null;
 		#endregion Fields
 
 		#region Properties
@@ -31,6 +33,8 @@
 				return new SectorResourcesWallet(EMPTY_DICTIONARY);
 			}
 		}
+
+		private ISectorResourcesWallet Self => this;
 		#endregion Properties
 
 		#region Ctor
@@ -45,9 +49,19 @@
 		#endregion
 
 		#region Methods
-		bool ISectorResourcesWallet.CanBuy(Price price)
+		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price)
 		{
-			return price.Amount <= _ressourceAmount[price.RessourceType];
+			foreach (var sectorResourceType in SECTOR_RESOURCE_TYPE_VALUES)
+			{
+				bool hasEnoughtAmount = Self.GetAmount(sectorResourceType) >= price.GetAmount(sectorResourceType);
+
+				if (hasEnoughtAmount == false)
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		void ISectorResourcesWallet.AddAmount(SectorRessourceType ressource, int amount)
@@ -55,9 +69,12 @@
 			_ressourceAmount[ressource] += amount;
 		}
 
-		void ISectorResourcesWallet.Buy(Price price)
+		void ISectorResourcesWallet.Buy(ISectorResourcesWallet price)
 		{
-			(this as ISectorResourcesWallet).RemoveAmount(price.RessourceType, price.Amount);
+			foreach (var sectorResourceType in SECTOR_RESOURCE_TYPE_VALUES)
+			{
+				Self.RemoveAmount(sectorResourceType, price.GetAmount(sectorResourceType));
+			}
 		}
 
 		int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource)

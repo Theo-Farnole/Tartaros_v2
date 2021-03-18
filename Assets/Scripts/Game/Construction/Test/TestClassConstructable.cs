@@ -1,17 +1,15 @@
 ﻿namespace Tartaros.Construction
 {
-    using System.Collections;
-    using UnityEngine;
-    using Tartaros.Construction;
-    using Tartaros.Economy;
+	using Tartaros.Economy;
+	using UnityEngine;
 
-    public class TestClassConstructable : MonoBehaviour, IConstructable
+	public class TestClassConstructable : MonoBehaviour, IConstructable
     {
         public GameObject _testCube = null;
-        public Price _price = null;
+        public ISectorResourcesWallet _price = null;
 
         GameObject IConstructable.ModelPrefab => _testCube;
 
-        Price IConstructable.price => _price;
+        ISectorResourcesWallet IConstructable.Price => _price;
     }
 }

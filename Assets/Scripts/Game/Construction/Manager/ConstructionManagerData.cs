@@ -8,14 +8,14 @@
 
     public class ConstructionManagerData : ScriptableObject
     {
-        private Dictionary<IConstructable, Price> _buildingsPrice;
+        private Dictionary<IConstructable, ISectorResourcesWallet> _buildingsPrice = null;
 
-        public ConstructionManagerData(Dictionary<IConstructable, Price> buildingsPrice)
+        public ConstructionManagerData(Dictionary<IConstructable, ISectorResourcesWallet> buildingsPrice)
         {
             _buildingsPrice = buildingsPrice;
         }
 
-        public Dictionary<IConstructable, Price> BuildingPrice => _buildingsPrice;
+        public Dictionary<IConstructable, ISectorResourcesWallet> BuildingPrice => _buildingsPrice;
     }
 
 }

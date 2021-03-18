@@ -7,6 +7,6 @@ namespace Tartaros.Construction
     public interface IConstructable
     {
         GameObject ModelPrefab { get; }
-        Price price { get; }
+        ISectorResourcesWallet Price { get; }
     }
 }

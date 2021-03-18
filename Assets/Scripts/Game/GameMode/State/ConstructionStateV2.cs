@@ -73,7 +73,7 @@ namespace Tartaros.Construction
 
         private void PayPriceRessources()
         {
-            _playerSectorRessources.Buy(_constructable.price);
+            _playerSectorRessources.Buy(_constructable.Price);
         }
 
         void LeaveState()
