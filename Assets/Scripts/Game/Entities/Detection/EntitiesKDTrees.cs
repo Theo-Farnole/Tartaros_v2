@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities.Detection
 {
+	using System;
 	using System.Collections.Generic;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -15,11 +16,12 @@
 		{
 			Services.Instance.RegisterService(this);
 
-			_kdTrees = new Dictionary<Team, KdTree<Entity>>()
+			_kdTrees = new Dictionary<Team, KdTree<Entity>>();
+
+			foreach (Team team in (Team[])Enum.GetValues(typeof(Team)))
 			{
-				{ Team.Player, new KdTree<Entity>(true) },
-				{ Team.Enemy,  new KdTree<Entity>(true) }
-			};
+				_kdTrees.Add(team, new KdTree<Entity>(true));
+			}
 		}
 
 		private void OnEnable()
