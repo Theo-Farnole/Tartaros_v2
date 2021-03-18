@@ -88,23 +88,23 @@
 
 		private void DrawVerticesMoveHandle()
 		{
-			foreach (Vertex vertex in Map.MapData.Vertices)
+			foreach (Vertex2D vertex in Map.MapData.Vertices)
 			{
 				DrawVertexMoveHandle(vertex);
 			}
 		}
 
-		private void DrawVertexMoveHandle(Vertex vertex)
+		private void DrawVertexMoveHandle(Vertex2D vertex)
 		{
 			EditorGUI.BeginChangeCheck();
 
-			Vector3 position = Handles.FreeMoveHandle(vertex.Position, HANDLE_ROTATION, HANDLE_SITE, vertex.Position, Handles.RectangleHandleCap);
+			Vector3 position = Handles.FreeMoveHandle(vertex.WorldPosition, HANDLE_ROTATION, HANDLE_SITE, vertex.WorldPosition, Handles.RectangleHandleCap);
 
 			if (EditorGUI.EndChangeCheck())
 			{
 				Undo.RecordObject(Map.MapData, "Move position");
 
-				vertex.Position = position;
+				vertex.WorldPosition = position;
 				EditorUtility.SetDirty(Map.MapData);
 			}
 		}

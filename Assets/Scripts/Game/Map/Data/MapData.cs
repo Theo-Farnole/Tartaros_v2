@@ -18,7 +18,7 @@
 		#region Properties
 		public Vector2 MapSize => _mapSize;
 		public SectorData[] Sectors => _sectorData.ToArray();
-		public Vertex[] Vertices => _sectorData.SelectMany(x => x.Vertices).ToArray();
+		public Vertex2D[] Vertices => _sectorData.SelectMany(x => x.Vertices).ToArray();
 		#endregion Properties
 
 		#region Methods
@@ -32,9 +32,9 @@
 		{
 			SectorData sectorData = new SectorData();
 
-			sectorData.AddVertex(new Vertex(new Vector3(1, 0, 1)));
-			sectorData.AddVertex(new Vertex(new Vector3(1, 0, 0)));
-			sectorData.AddVertex(new Vertex(new Vector3(0, 0, 1)));
+			sectorData.AddVertex(new Vertex2D(new Vector3(1, 0, 1)));
+			sectorData.AddVertex(new Vertex2D(new Vector3(1, 0, 0)));
+			sectorData.AddVertex(new Vertex2D(new Vector3(0, 0, 1)));
 
 			_sectorData.Add(sectorData);
 		}
