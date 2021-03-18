@@ -38,6 +38,9 @@
 		#endregion Properties
 
 		#region Ctor
+		public SectorResourcesWallet() : this(Zero)
+		{ }
+
 		public SectorResourcesWallet(SectorResourcesWallet walletToCopy) : this(walletToCopy._ressourceAmount)
 		{
 		}
@@ -51,6 +54,8 @@
 		#region Methods
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price)
 		{
+			if (price is null) throw new ArgumentNullException(nameof(price));
+
 			foreach (var sectorResourceType in SECTOR_RESOURCE_TYPE_VALUES)
 			{
 				bool hasEnoughtAmount = Self.GetAmount(sectorResourceType) >= price.GetAmount(sectorResourceType);
@@ -79,7 +84,14 @@
 
 		int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource)
 		{
-			return _ressourceAmount[ressource];
+			if (_ressourceAmount.TryGetValue(ressource, out int amount))
+			{
+				return amount;
+			}
+			else
+			{
+				return 0;
+			}
 		}
 
 		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount)

@@ -1,12 +1,13 @@
 ﻿
 namespace Tartaros.Construction
 {
-    using Tartaros.Economy;
-    using UnityEngine;
+	using Tartaros.Economy;
+	using UnityEngine;
 
-    public interface IConstructable
-    {
-        GameObject ModelPrefab { get; }
-        ISectorResourcesWallet Price { get; }
-    }
+	public interface IConstructable
+	{
+		GameObject ModelPrefab { get; }
+		ISectorResourcesWallet Price { get; }
+		Vector2 Size { get; }
+	}
 }

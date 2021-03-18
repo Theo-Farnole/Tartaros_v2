@@ -11,34 +11,31 @@
 	public class ConstructionManager : MonoBehaviour
 	{
 		#region Fields
-		private readonly ConstructionManagerData _contstructionManagerData = null;
+		[SerializeField]
+		private ConstructionManagerData _constructionManagerData = null;
 		private GamemodeManager _gamemodeManager = null;
 		private IPlayerSectorResources _playerSectorRessources = null;
 		#endregion
 
-		#region Methods
+		#region Properties
+		public ConstructionManagerData ConstructionManagerData => _constructionManagerData;
+		#endregion Properties
 
+		#region Methods
+		private void Awake()
+		{
+			Services.Instance.RegisterService(this);
+		}
 
 		private void Start()
 		{
-			if (Services.HasInstance)
-			{
-				if (Services.Instance.TryGet<GamemodeManager>(out GamemodeManager gameModeManager))
-				{
-					_gamemodeManager = gameModeManager;
-				}
-			}
+			_gamemodeManager = Services.Instance.Get<GamemodeManager>();
 			_playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
 		}
 
-		private void Update()
+		public bool CanEnterConstruction(IConstructable constructable)
 		{
-
-		}
-
-		public bool CanEnterConstruction(ISectorResourcesWallet constructionPrice)
-		{
-			return _playerSectorRessources.CanBuy(constructionPrice);
+			return _playerSectorRessources.CanBuy(constructable.Price);
 		}
 
 		public void EnterConstructionMode(IConstructable toBuild)

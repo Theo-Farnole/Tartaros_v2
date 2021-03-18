@@ -10,7 +10,7 @@
 	public class SectorData
 	{
 		#region Fields
-		[SerializeReference]
+		[SerializeField]
 		private List<Vertex2D> _vertices = new List<Vertex2D>();
 		#endregion Fields
 
