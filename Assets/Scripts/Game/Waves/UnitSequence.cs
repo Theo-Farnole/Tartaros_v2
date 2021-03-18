@@ -6,16 +6,12 @@
     {
         private IWaveSpawnableData _entityToSpawn = null;
         private int _entitiesCount = 0;
-        private float _timeBetweenUnits = 0;
+        private float _secondsBetweenUnits = 0;
+        private float _secondsBeforeSpawn = 0;
 
-        public IEnumerator SpawnUnits(ISpawnPoint spawnPoint, IWaveSpawnable[] spawnedEntities)
-        {
-            for (int i = 0; i < spawnedEntities.Length; i++)
-            {
-                GameObject spawnedEntity = GameObject.Instantiate(_entityToSpawn.Prefab, spawnPoint.SpawnPoint, Quaternion.identity);
-                _entitiesCount++;
-                yield return new WaitForSeconds(_timeBetweenUnits);
-            }
-        }
+        public IWaveSpawnableData EntityToSpawn => _entityToSpawn;
+        public int EntitiesCount => _entitiesCount;
+        public float SecondsBetweenUnits => _secondsBetweenUnits;
+        public float SecondsBeforeSpawn => _secondsBeforeSpawn;
     }
 }

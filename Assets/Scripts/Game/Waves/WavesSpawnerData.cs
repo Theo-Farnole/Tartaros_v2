@@ -1,19 +1,17 @@
 ﻿namespace Tartaros.Wave
 {
+    using Sirenix.OdinInspector;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class WavesSpawnerData : MonoBehaviour
+    [System.Serializable]
+    public class WavesSpawnerData : SerializedScriptableObject
     {
         private WaveData[] _waves;
         private float _secondsBetweenWaves = 0;
 
-        void SpawnWave(int indexWave)
-        {
-            //TODO Dimi
-            throw new System.NotImplementedException();
-        }
+        public WaveData[] Wave => _waves;
+        public float SecondsBetweenWaves => _secondsBetweenWaves;
     }
-
 }
