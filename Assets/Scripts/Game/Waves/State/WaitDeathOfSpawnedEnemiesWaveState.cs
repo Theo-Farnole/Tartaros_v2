@@ -8,7 +8,7 @@
     {
 
         private WavesEnemiesStillAliveManager _stillAliveManager = null;
-        public WaitDeathOfSpawnedEnemiesWaveState(EnemiesWavesSpawner stateOwner, WavesEnemiesStillAliveManager stillAliveManager) : base(stateOwner)
+        public WaitDeathOfSpawnedEnemiesWaveState(EnemiesWavesManager stateOwner, WavesEnemiesStillAliveManager stillAliveManager) : base(stateOwner)
         {
             _stillAliveManager = stillAliveManager;
         }

@@ -3,7 +3,7 @@
     using System.Collections;
     using Tartaros.Utilities;
     using UnityEngine;
-    public class WaveSpawnerFSM : GenericFSM<EnemiesWavesSpawner>
+    public class WaveSpawnerFSM : GenericFSM<EnemiesWavesManager>
     {
         
     }

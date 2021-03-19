@@ -9,19 +9,19 @@
         private int _waveIndex = 0;
         private WavesSpawnerData _waveSpawnerData = null;
         private WaveData _waveData = null;
-        private ISpawnPoint[] _spawnPoint = null;
+        private ISpawnPoint[] _spawnPoints = null;
         private int _totalWaveEnemies = 0;
         private WavesEnemiesStillAliveManager _stillAliveManger = null; 
         private int _numberOfSpawnPoint = 0;
         private WaveSpawnerFSM _waveFSM = null;
 
-        public WaveSpawningState(EnemiesWavesSpawner stateOwner) : base(stateOwner)
+        public WaveSpawningState(EnemiesWavesManager stateOwner) : base(stateOwner)
         {
             _waveIndex = stateOwner.CurrentWaveIndex;
             _waveSpawnerData = stateOwner.WaveSpawnerData;
             _waveData = stateOwner.WaveSpawnerData.Wave[_waveIndex];
-            _spawnPoint = stateOwner.SpawnPoints;
-            _numberOfSpawnPoint = _spawnPoint.Length;
+            _spawnPoints = stateOwner.SpawnPoints;
+            _numberOfSpawnPoint = _spawnPoints.Length;
             _stillAliveManger = new WavesEnemiesStillAliveManager();
             _waveFSM = stateOwner.WaveFSM;
         }
@@ -29,8 +29,8 @@
         public override void OnStateEnter()
         {
             base.OnStateEnter();
-
-            SpawnWave(_stateOwner, _spawnPoint);
+            
+            SpawnWave(_stateOwner, _spawnPoints);
            
         }
 
@@ -54,12 +54,20 @@
 
         public void SpawnWave(MonoBehaviour mb, ISpawnPoint[] spawnPoints)
         {
+            SpawnPointIdentifier[] pointsUses = _waveData.GetSpawnPointActiveInTheWave();
             foreach (ISpawnPoint spawnPoint in spawnPoints)
             {
-                UnitSequence[] unitSequences = _waveData.GetUnitSequences(spawnPoint.Identifier);
-                mb.StartCoroutine(SpawnPointsSequences(unitSequences, spawnPoint));
+                for (int i = 0; i < pointsUses.Length; i++)
+                {
+                    if(pointsUses[i] == spawnPoint.Identifier)
+                    {
+                        UnitSequence[] unitSequences = _waveData.GetUnitSequences(spawnPoint.Identifier);
+                        mb.StartCoroutine(SpawnPointsSequences(unitSequences, spawnPoint));
+                    }
+                }
             }
         }
+
         public IEnumerator SpawnPointsSequences(UnitSequence[] unitSequences, ISpawnPoint spawnPoint)
         {
             foreach (UnitSequence sequence in unitSequences)

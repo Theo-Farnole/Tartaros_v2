@@ -6,7 +6,7 @@
     using UnityEngine;
 
 
-    public class EnemiesWavesSpawner : MonoBehaviour
+    public class EnemiesWavesManager : MonoBehaviour
     {
         public class WaveSpawningStartArgs : EventArgs
         {
@@ -26,7 +26,7 @@
         private WavesSpawnerData _waveSpawnerData = null;
         private ISpawnPoint[] _spawnPoints = null;
         private WaveSpawnerFSM _waveFSM = null;
-        private int _currentWaveIndex = 0;
+        private int _currentWaveIndex = 1;
         private IWaveSpawnable[] _spawnedEnemies = null;
 
         public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
@@ -38,7 +38,14 @@
         private void Awake()
         {
             _spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
+            _waveFSM = new WaveSpawnerFSM();
             //TODO: WaveFSM registerService & Call it
+        }
+
+        private void OnEnable()
+        {
+            //WaveFSM.CurrentState = new WaveCooldownState(this);
+            WaveFSM.CurrentState = new WaveSpawningState(this);
         }
 
 

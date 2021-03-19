@@ -15,8 +15,11 @@
         public void AddEnemyWave(IWaveSpawnable waveSpawnable)
         {
             _stillAliveEnemies.Add(waveSpawnable);
-            waveSpawnable.Killed -= WaveSpawnable_Killed;
-            waveSpawnable.Killed += WaveSpawnable_Killed;
+            if(waveSpawnable != null)
+            {
+                waveSpawnable.Killed -= WaveSpawnable_Killed;
+                waveSpawnable.Killed += WaveSpawnable_Killed;
+            }
         }
 
         private void WaveSpawnable_Killed(object sender, KilledArgs e)

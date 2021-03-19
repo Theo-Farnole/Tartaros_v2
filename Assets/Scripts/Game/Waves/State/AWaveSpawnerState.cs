@@ -3,10 +3,10 @@
     using System.Collections;
     using Tartaros.Utilities;
     using UnityEngine;
-    public class AWaveSpawnerState : AState<EnemiesWavesSpawner>
+    public class AWaveSpawnerState : AState<EnemiesWavesManager>
     {
 
-        public AWaveSpawnerState(EnemiesWavesSpawner stateOwner) : base(stateOwner)
+        public AWaveSpawnerState(EnemiesWavesManager stateOwner) : base(stateOwner)
         {
 
         }
