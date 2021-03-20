@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_AOE_Plate 1
-  m_Shader: {fileID: 4800000, guid: a315738bdf5476f4686353415168de39, type: 3}
+  m_Name: M_AOE_sphere
+  m_Shader: {fileID: 4800000, guid: c8f3a63e68d7bb34b94eefd317ab3b71, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3100
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -27,24 +27,39 @@ Material:
         m_Texture: {fileID: 8400000, guid: 4f79457e6662c064cbf77b6bca8e6023, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _tex3coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _BorderMult: 10
+    - _BorderOffset: -1.13
     - _Depth1: -1
     - _FarExplored: 0.2
+    - _Float0: 100
     - _POWER: 1.01
     - _RimPower: 1
     - _RimPower2: 1
+    - _SmoothStep: 0
     - _Speed: 1
-    - _VoroPower: 1
-    - _VoroScale: 1
+    - _Speed1: 100
+    - _VertexVMax: 0.5
+    - _VoroPower: 10
+    - _VoroScale: 20
     - _VoroScaleRim: 1
     - __dirty: 0
     m_Colors:
-    - _Color0: {r: 0.39900085, g: 0, b: 0.5943396, a: 1}
+    - _Color0: {r: 0, g: 27.482353, b: 32, a: 1}
+    - _Fresnel: {r: 0, g: 2, b: 2.98, a: 0}
     - _POWER1: {r: 0, g: -1.1, b: 1.21, a: 0}
     - _RimColor: {r: 2, g: 0.5866007, b: 0, a: 1}
     - _RimColor2: {r: 2, g: 0.5866007, b: 0, a: 1}
+    - _SmoothStep: {r: 0, g: 1, b: 0, a: 0}
+    - _UVSettings: {r: 2, g: -1, b: 0, a: 0}
+    - _UV_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _UV_Tiling: {r: 0, g: 0, b: 0, a: 0}
     - _VoroColor: {r: 0.30228186, g: 0.16923663, b: 0.112642765, a: 1}
