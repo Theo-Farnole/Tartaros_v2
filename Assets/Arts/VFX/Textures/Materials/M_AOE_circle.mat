@@ -32,6 +32,8 @@ Material:
     - _EdgePower: 1
     - _Float0: 1
     - _Float1: 2.52
+    - _Power: 10
+    - _Power1: 5
     - _PowerFlame: 100
     - _PowerVertical: 0.85
     - _ShadowPower: 1
@@ -39,13 +41,15 @@ Material:
     - _Step: -36.62
     - _Strength: 1
     - _VertexPos: 1
+    - _VoroAngleSpeed: 5
+    - _VoroScale: 5
     - __dirty: 0
     - _lerp: 0.5
     m_Colors:
-    - _Color: {r: 0, g: 0.20764184, b: 1, a: 1}
-    - _Color2: {r: 0, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 5.178137, b: 8.574187, a: 1}
+    - _Color2: {r: 0, g: 0, b: 2, a: 1}
     - _PowerRound: {r: 9.7, g: -3.91, b: 0, a: 0}
-    - _SmoothStep: {r: 0.1, g: -2, b: 0, a: 0}
+    - _SmoothStep: {r: 0.5, g: 2.5, b: 0, a: 0}
     - _TextureMovement: {r: 0.05, g: 0, b: 0, a: 0}
     - _VoroScale: {r: 5, g: 10, b: 1, a: 5}
     - _VoroSpeed: {r: 1, g: 1, b: 2, a: 1}
