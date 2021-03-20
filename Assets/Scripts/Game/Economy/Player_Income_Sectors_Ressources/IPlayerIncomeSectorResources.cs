@@ -2,9 +2,7 @@
 {
     using Tartaros.Economy;
 
-    public interface IPlayerIncomeSectorResources
+    public interface IPlayerIncomeSectorResources : ISectorResourcesWallet
     {
-        void AddIncome(SectorRessourceType ressource, int amount);
-        void RemoveIncome(SectorRessourceType ressource, int amount);
     }
 }

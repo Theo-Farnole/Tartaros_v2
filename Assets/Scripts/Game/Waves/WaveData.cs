@@ -6,11 +6,18 @@
     using UnityEngine;
     public class WaveData
     {
+        [SerializeField]
         private Dictionary<SpawnPointIdentifier, UnitSequence[]> _sequencesBySpawnPoint;
 
         public UnitSequence[] GetUnitSequences(SpawnPointIdentifier identifier)
         {
             return _sequencesBySpawnPoint[identifier];
+        }
+
+        public SpawnPointIdentifier[] GetSpawnPointActiveInTheWave()
+        {
+            List<SpawnPointIdentifier> pointsUses = _sequencesBySpawnPoint.Keys.ToList();
+            return pointsUses.ToArray();
         }
 
         public int GetSpawnedEntitiesCount()
