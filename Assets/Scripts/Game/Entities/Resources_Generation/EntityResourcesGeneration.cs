@@ -5,13 +5,11 @@
 	using UnityEngine;
 	using Tartaros.Economy;
 
-	public class EntityResourcesGeneration : MonoBehaviour
+	public class EntityResourcesGeneration : MonoBehaviour, IIncomeGenerator
 	{
 		#region Fields
 		private EntityResourcesGenerationData _data = null;
-		private Coroutine _resourceGeneration = null;
-
-		private IPlayerSectorResources _playerSector = null;
+		private IPlayerIncomeManager _incomeManager = null;
 		#endregion Fields
 
 		#region Properties
@@ -22,65 +20,34 @@
 			set
 			{
 				_data = value;
-				StartResourceGeneration();
+				_incomeManager.AddGeneratorIncome(this);
 			}
 		}
+
+		SectorRessourceType IIncomeGenerator.SectorRessourceType => _data.ResourcesType;
+
+		int IIncomeGenerator.ResourcesPerTick => _data.ResourcesPerTick;
 		#endregion Properties
 
 		#region Methods
 		private void Awake()
 		{
-			_playerSector = Services.Instance.Get<IPlayerSectorResources>();
+			_incomeManager = Services.Instance.Get<IPlayerIncomeManager>();
 
 			// TODO TF: Log warning if entity.Team is Enemy: The enemy will generate resource for the player
 		}
 
 		private void OnEnable()
 		{
-			if (CanStartResourceGeneration())
+			if (_data != null)
 			{
-				StartResourceGeneration();
+				_incomeManager.AddGeneratorIncome(this);
 			}
 		}
 
 		private void OnDisable()
 		{
-			StopResourceGeneration();
-		}
-
-		private bool CanStartResourceGeneration()
-		{
-			return _data != null;
-		}
-
-		private void StartResourceGeneration()
-		{
-			StopResourceGeneration();
-			_resourceGeneration = StartCoroutine(ResourcesGenerationCoroutine());
-		}
-
-		private void StopResourceGeneration()
-		{
-			if (_resourceGeneration != null)
-			{
-				StopCoroutine(_resourceGeneration);
-			}
-		}
-
-		private IEnumerator ResourcesGenerationCoroutine()
-		{
-			if (_data == null) throw new System.NotSupportedException("Can't start resources generation without generation data set.");
-
-			while (true)
-			{
-				yield return new WaitForSeconds(_data.TickDelayInSeconds);
-				GenerateResources();
-			}
-		}
-
-		private void GenerateResources()
-		{
-			_playerSector.AddAmount(_data.SectorRessourceType, _data.GeneratedResourcesPerTick);
+			_incomeManager.RemoveGeneratorIncome(this);
 		}
 		#endregion Methods
 	}

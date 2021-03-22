@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Map
 {
+	using Tartaros.Sectors;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;
@@ -14,7 +15,7 @@
 
 			foreach (var selected in (currentSelection as ISelection).SelectedSelectables)
 			{
-				if (selected is Sector sector)
+				if (selected is ISector sector)
 				{
 					sector.Capture();
 				}

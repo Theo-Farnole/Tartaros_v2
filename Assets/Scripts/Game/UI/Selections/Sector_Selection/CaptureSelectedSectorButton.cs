@@ -2,6 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.Map;
+	using Tartaros.Sectors;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -23,7 +24,7 @@
 			if (_captureButton == null)
 			{
 				_captureButton = GetComponent<Button>();
-			}			
+			}
 		}
 
 		private void Start()
@@ -46,7 +47,7 @@
 		{
 			foreach (ISelectable selected in _currentSelection.SelectedSelectables)
 			{
-				if (selected.GameObject.TryGetComponent(out Sector sector))
+				if (selected.GameObject.TryGetComponent(out ISector sector))
 				{
 					sector.Capture();
 				}

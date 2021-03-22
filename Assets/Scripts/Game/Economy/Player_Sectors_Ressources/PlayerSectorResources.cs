@@ -14,7 +14,18 @@
 		#endregion Fields
 
 		#region Properties
-		public event EventHandler<AmountChangedArgs> AmountChanged = null;
+		event EventHandler<AmountChangedArgs> ISectorResourcesWallet.AmountChanged
+		{
+			add
+			{
+				_playerWallet.AmountChanged += value;
+			}
+
+			remove
+			{
+				_playerWallet.AmountChanged -= value;
+			}
+		}
 		#endregion Properties
 
 		#region Methods
@@ -22,7 +33,7 @@
 		{
 			if (_playerSectorRessourcesData != null)
 			{
-				_playerWallet = (_playerSectorRessourcesData.Wallet as ICloneable).Clone() as ISectorResourcesWallet;
+				_playerWallet = (_playerSectorRessourcesData.StartingIncome as ICloneable).Clone() as ISectorResourcesWallet;
 			}
 			else
 			{

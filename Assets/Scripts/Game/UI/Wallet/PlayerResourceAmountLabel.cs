@@ -37,7 +37,10 @@
 
 		private void OnEnable()
 		{
-			SubscribeToEventAmountChanged();
+			if (_playerSectorResources != null)
+			{
+				SubscribeToEventAmountChanged();
+			}
 		}
 
 		private void OnDisable()
@@ -47,16 +50,12 @@
 
 		private void SubscribeToEventAmountChanged()
 		{
-			if (_playerSectorResources == null) return;
-
 			UnsubcribeToEventAmountChanged();
 			_playerSectorResources.AmountChanged += AmountChanged;
 		}
 
 		private void UnsubcribeToEventAmountChanged()
 		{
-			if (_playerSectorResources == null) return;
-
 			_playerSectorResources.AmountChanged -= AmountChanged;
 		}
 
