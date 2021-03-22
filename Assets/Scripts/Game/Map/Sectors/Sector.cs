@@ -7,6 +7,7 @@
 	using Tartaros.ServicesLocator;
 	using Tartaros.Sectors;
 	using Tartaros.Math;
+	using System.Linq;
 
 	public class Sector : MonoBehaviour, ISector
 	{
@@ -29,6 +30,16 @@
 		public bool IsCaptured => _isCaptured;
 
 		ConvexPolygon ISector.Polygon => _sectorData.ConvexPolygon;
+
+		GameObject[] ISector.ObjectsInSector
+		{
+			get
+			{
+				return FindObjectsOfType<GameObject>()
+					.Where(x => IsObjectInSector(x))
+					.ToArray();
+			}
+		}
 		#endregion Properties
 
 		#region Methods
@@ -97,6 +108,10 @@
 			return sectorPointsSnapToGround.ToArray();
 		}
 
+		public bool IsObjectInSector(GameObject gameObject)
+		{
+			return _sectorData.ConvexPolygon.ContainsPoint(gameObject.transform.position);
+		}
 
 		private void OnCapture()
 		{
