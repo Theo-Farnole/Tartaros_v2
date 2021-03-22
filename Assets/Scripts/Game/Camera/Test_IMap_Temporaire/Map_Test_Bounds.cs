@@ -20,6 +20,11 @@
         {
             Services.Instance.RegisterService<IMap>(this);
         }
-    }
+
+		ISector IMap.GetSectorOnPosition(Vector3 position)
+		{
+			throw new System.NotImplementedException();
+		}
+	}
 
 }
