@@ -24,6 +24,15 @@
 			return new GameObject("Player Sector Resources").AddComponent<PlayerSectorResources>();
 		}
 
+		public static PlayerIncomeManager CreateIncomeManager(ISectorResourcesWallet wallet, float tickInvervalInSeconds)
+		{
+			PlayerIncomeManager playerIncomeManager = new GameObject("Income Manager").AddComponent<PlayerIncomeManager>();
+
+			playerIncomeManager.Data = new PlayerIncomeManagerData(wallet, tickInvervalInSeconds);
+
+			return playerIncomeManager;
+		}
+
 		public static Entity CreateEntity(Vector3 position, Team team, EntityType entityType, string name)
 		{
 			GameObject entityObject = new GameObject(name);

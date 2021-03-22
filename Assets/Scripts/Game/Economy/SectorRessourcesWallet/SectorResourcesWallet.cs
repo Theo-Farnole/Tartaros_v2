@@ -6,6 +6,7 @@
 	using Tartaros.Economy;
 	using System.Linq;
 	using System;
+	using System.Text;
 
 	[System.Serializable]
 	public class SectorResourcesWallet : ISectorResourcesWallet, ICloneable
@@ -46,9 +47,8 @@
 		public SectorResourcesWallet() : this(Zero)
 		{ }
 
-		public SectorResourcesWallet(SectorResourcesWallet walletToCopy) : this(walletToCopy._ressourceAmount)
-		{
-		}
+		public SectorResourcesWallet(ISectorResourcesWallet walletToCopy) : this(GenerateResourcesAmount(walletToCopy))
+		{ }
 
 		public SectorResourcesWallet(Dictionary<SectorRessourceType, int> ressourceAmount)
 		{
@@ -57,6 +57,18 @@
 		#endregion
 
 		#region Methods
+		private static Dictionary<SectorRessourceType, int> GenerateResourcesAmount(ISectorResourcesWallet wallet)
+		{
+			Dictionary<SectorRessourceType, int> output = new Dictionary<SectorRessourceType, int>();
+
+			foreach (SectorRessourceType resourceType in EnumHelper.GetValues<SectorRessourceType>())
+			{
+				output.Add(resourceType, wallet.GetAmount(resourceType));
+			}
+
+			return output;
+		}
+
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price)
 		{
 			if (price is null) throw new ArgumentNullException(nameof(price));
@@ -106,21 +118,31 @@
 
 		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount)
 		{
-			if (_ressourceAmount[ressource] - amount > 0)
-			{
-				_ressourceAmount[ressource] -= amount;
-				Debug.Log(_ressourceAmount[ressource]);
-			}
-			else
+			if (_ressourceAmount[ressource] - amount < 0)
 			{
 				Debug.LogError("wallet can't be under 0");
 				_ressourceAmount[ressource] = 0;
+				return;
 			}
+
+			_ressourceAmount[ressource] -= amount;
 		}
 
 		object ICloneable.Clone()
 		{
 			return new SectorResourcesWallet(this);
+		}
+
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder();
+
+			foreach (var type in EnumHelper.GetValues<SectorRessourceType>())
+			{
+				sb.AppendFormat("{0}={1}", type, (this as ISectorResourcesWallet).GetAmount(type));
+			}
+
+			return sb.ToString();
 		}
 		#endregion Methods
 	}

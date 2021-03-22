@@ -27,7 +27,7 @@
 			return (T)_databases[typeof(T)];
 		}
 
-        internal T Get<T>(out IPlayerIncomeSectorResources playerIncomeSectorResources)
+        internal T Get<T>(out IPlayerIncomeManager playerIncomeSectorResources)
         {
             throw new NotImplementedException();
         }

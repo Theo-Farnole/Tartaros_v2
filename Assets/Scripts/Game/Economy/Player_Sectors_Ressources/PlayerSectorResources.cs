@@ -22,7 +22,7 @@
 		{
 			if (_playerSectorRessourcesData != null)
 			{
-				_playerWallet = (_playerSectorRessourcesData.Wallet as ICloneable).Clone() as ISectorResourcesWallet;
+				_playerWallet = (_playerSectorRessourcesData.StartingIncome as ICloneable).Clone() as ISectorResourcesWallet;
 			}
 			else
 			{
