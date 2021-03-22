@@ -38,7 +38,7 @@
 			if (_entityAttack.CanAttack(_target) == true)
 			{
 				_entityMovement.StopMovement();
-				_entityAttack.DoDamage(_target);
+				_entityAttack.CastAttack(_target);
 			}
 			else
 			{

@@ -13,6 +13,7 @@
 		private EntityDetection _entityDetection = null;
 		private EntityFSM _entityFSM = null;
 		private Entity _entity = null;
+		private float _lastTimeAttack = 0;
 		#endregion
 
 		#region Properties
@@ -41,20 +42,19 @@
 			}
 		}
 
-		public void DoDamage(IAttackable target)
+		public void CastAttack(IAttackable target)
 		{
-			if (CanAttack(target) == false)
-			{
-				Debug.LogErrorFormat("Entity {0} trying to attack an out of attack range entity.", name);
-				return;
-			}
+			if (CanAttack(target) == false) return;
+			
+			_entityAttackData.AttackMode.Attack(transform, target);
+			_lastTimeAttack = Time.time;
 
-			target.TakeDamage(_entityAttackData.Damage);
 		}
 
 		public bool CanAttack(IAttackable target)
 		{
-			return _entityDetection.IsInAttackRange(target.Transform.position);
+			// TODO TF: extract those conditions into differents methods
+			return Time.time > _lastTimeAttack + _entityAttackData.AttackSpeed && _entityDetection.IsInAttackRange(target.Transform.position);
 		}
 
 		void IOrderAttackReceiver.Attack(IAttackable target)

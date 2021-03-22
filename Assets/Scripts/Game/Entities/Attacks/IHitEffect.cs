@@ -1,7 +1,10 @@
-﻿namespace Tartaros.Entities.Attack
+﻿using System.Numerics;
+
+namespace Tartaros.Entities.Attack
 {
     public interface IHitEffect
     {
-        void ExecuteHitEffect();
+      
+        void ExecuteHitEffect(UnityEngine.Vector3 positionToInstanciate);
     }
 }
