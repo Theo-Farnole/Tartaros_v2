@@ -6,6 +6,7 @@
 	using Tartaros.Economy;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Sectors;
+	using Tartaros.Math;
 
 	public class Sector : MonoBehaviour, ISector
 	{
@@ -26,6 +27,8 @@
 		#region Properties
 		public SectorData SectorData => _sectorData;
 		public bool IsCaptured => _isCaptured;
+
+		ConvexPolygon ISector.Polygon => _sectorData.ConvexPolygon;
 		#endregion Properties
 
 		#region Methods
