@@ -8,7 +8,7 @@
 	{
 		#region Fields
 		[SerializeField]
-		private PlayerIncomeManagerData _playerSectorRessourcesData = null;
+		private PlayerSectorResourcesData _playerSectorRessourcesData = null;
 
 		private ISectorResourcesWallet _playerWallet = null;
 		#endregion Fields
