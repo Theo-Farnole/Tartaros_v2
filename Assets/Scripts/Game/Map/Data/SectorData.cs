@@ -1,8 +1,10 @@
 ﻿namespace Tartaros.Map
 {
+	using Sirenix.Serialization;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using Tartaros.Economy;
 	using Tartaros.Math;
 	using UnityEngine;
 
@@ -12,9 +14,13 @@
 		#region Fields
 		[SerializeField]
 		private List<Vertex2D> _vertices = new List<Vertex2D>();
+
+		[OdinSerialize]
+		private ISectorResourcesWallet _capturePrice = null;
 		#endregion Fields
 
 		#region Properties
+		public ISectorResourcesWallet CapturePrice => _capturePrice;
 		public Vertex2D[] Vertices => _vertices.ToArray();
 		public Vertex2D LastVertex => _vertices[_vertices.Count - 1];
 

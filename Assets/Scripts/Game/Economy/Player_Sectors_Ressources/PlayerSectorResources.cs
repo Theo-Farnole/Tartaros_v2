@@ -14,7 +14,18 @@
 		#endregion Fields
 
 		#region Properties
-		public event EventHandler<AmountChangedArgs> AmountChanged = null;
+		event EventHandler<AmountChangedArgs> ISectorResourcesWallet.AmountChanged
+		{
+			add
+			{
+				_playerWallet.AmountChanged += value;
+			}
+
+			remove
+			{
+				_playerWallet.AmountChanged -= value;
+			}
+		}
 		#endregion Properties
 
 		#region Methods

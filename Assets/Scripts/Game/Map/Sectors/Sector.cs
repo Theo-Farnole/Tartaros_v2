@@ -3,8 +3,11 @@
 	using System.Collections.Generic;
 	using Tartaros.Selection;
 	using UnityEngine;
+	using Tartaros.Economy;
+	using Tartaros.ServicesLocator;
+	using Tartaros.Sectors;
 
-	public class Sector : MonoBehaviour
+	public class Sector : MonoBehaviour, ISector
 	{
 		#region Fields		
 		[SerializeField]
@@ -16,6 +19,8 @@
 		private SectorData _sectorData = null;
 		private bool _isCaptured = false;
 		private Mesh _sectorMesh = null;
+
+		private IPlayerSectorResources _playerWallet = null;
 		#endregion Fields
 
 		#region Properties
@@ -24,6 +29,11 @@
 		#endregion Properties
 
 		#region Methods
+		private void Awake()
+		{
+			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
+		}
+
 		public void Initialize(SectorData sectorData)
 		{
 			_sectorData = sectorData;
@@ -33,11 +43,30 @@
 			_collider.sharedMesh = _sectorMesh;
 			UpdateFogOfWarVisibility();
 		}
-		public void Capture()
+
+		bool ISector.CanCapture()
 		{
+			if (SectorData.CapturePrice == null)
+			{
+				Debug.LogErrorFormat("Capture price is not set on sector {0}.", name);
+				return false;
+			}
+
+			return _playerWallet.CanBuy(SectorData.CapturePrice);
+		}
+
+		void ISector.Capture()
+		{
+			if ((this as ISector).CanCapture() == false)
+			{
+				Debug.LogErrorFormat("Not enought resources to capture resource.");
+				return;
+			}
+
 			if (_isCaptured == true) return;
 
 			_isCaptured = true;
+			_playerWallet.Buy(SectorData.CapturePrice);
 
 			OnCapture();
 		}

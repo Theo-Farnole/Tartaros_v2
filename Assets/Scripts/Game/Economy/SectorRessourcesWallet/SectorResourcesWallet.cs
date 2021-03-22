@@ -69,6 +69,43 @@
 			return output;
 		}
 
+		void ISectorResourcesWallet.AddAmount(SectorRessourceType ressource, int amount)
+		{
+			if (_ressourceAmount.ContainsKey(ressource) == false)
+			{
+				_ressourceAmount.Add(ressource, 0);
+			}
+
+			_ressourceAmount[ressource] += amount;
+
+			AmountChanged?.Invoke(this, new AmountChangedArgs());
+		}
+
+		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount)
+		{
+			if (_ressourceAmount[ressource] - amount < 0)
+			{
+				Debug.LogError("wallet can't be under 0");
+				_ressourceAmount[ressource] = 0;
+				return;
+			}
+
+			_ressourceAmount[ressource] -= amount;
+			AmountChanged?.Invoke(this, new AmountChangedArgs());
+		}
+
+		int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource)
+		{
+			if (_ressourceAmount.TryGetValue(ressource, out int amount))
+			{
+				return amount;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price)
 		{
 			if (price is null) throw new ArgumentNullException(nameof(price));
@@ -86,46 +123,12 @@
 			return true;
 		}
 
-		void ISectorResourcesWallet.AddAmount(SectorRessourceType ressource, int amount)
-		{
-			if (_ressourceAmount.ContainsKey(ressource) == false)
-			{
-				_ressourceAmount.Add(ressource, 0);
-			}
-
-			_ressourceAmount[ressource] += amount;
-		}
-
 		void ISectorResourcesWallet.Buy(ISectorResourcesWallet price)
 		{
 			foreach (var sectorResourceType in SECTOR_RESOURCE_TYPE_VALUES)
 			{
 				Self.RemoveAmount(sectorResourceType, price.GetAmount(sectorResourceType));
 			}
-		}
-
-		int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource)
-		{
-			if (_ressourceAmount.TryGetValue(ressource, out int amount))
-			{
-				return amount;
-			}
-			else
-			{
-				return 0;
-			}
-		}
-
-		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount)
-		{
-			if (_ressourceAmount[ressource] - amount < 0)
-			{
-				Debug.LogError("wallet can't be under 0");
-				_ressourceAmount[ressource] = 0;
-				return;
-			}
-
-			_ressourceAmount[ressource] -= amount;
 		}
 
 		object ICloneable.Clone()

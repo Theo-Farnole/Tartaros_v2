@@ -20,44 +20,529 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _sectorsData
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Tartaros.Map.SectorData, Tartaros]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 1|Tartaros.Map.SectorData, Tartaros
+    - Name: _vertices
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 3|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 17.9867153
+    - Name: 
+      Entry: 4
+      Data: 25.5110226
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 16.4747162
+    - Name: 
+      Entry: 4
+      Data: 15.6998
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 3.26375723
+    - Name: 
+      Entry: 4
+      Data: 20.8076363
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _capturePrice
+      Entry: 7
+      Data: 6|Tartaros.Economy.SectorResourcesWallet, Tartaros
+    - Name: _ressourceAmount
+      Entry: 7
+      Data: 7|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+        Tartaros],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 8|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+        Tartaros]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Tartaros.Map.SectorData, Tartaros
+    - Name: _vertices
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 11|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 3.26375723
+    - Name: 
+      Entry: 4
+      Data: 20.8076363
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 2.46505547
+    - Name: 
+      Entry: 4
+      Data: 13.712966
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 5.841357
+    - Name: 
+      Entry: 4
+      Data: 10.7868366
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 14|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 18.10859
+    - Name: 
+      Entry: 4
+      Data: 10.2803907
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 20.0218239
+    - Name: 
+      Entry: 4
+      Data: 13.2627926
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 16|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 16.4747162
+    - Name: 
+      Entry: 4
+      Data: 15.6998
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _capturePrice
+      Entry: 7
+      Data: 17|Tartaros.Economy.SectorResourcesWallet, Tartaros
+    - Name: _ressourceAmount
+      Entry: 7
+      Data: 18|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+        Tartaros],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 8
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 30
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 19|Tartaros.Map.SectorData, Tartaros
+    - Name: _vertices
+      Entry: 7
+      Data: 20|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 21|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 16.4747162
+    - Name: 
+      Entry: 4
+      Data: 15.6998
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 22|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 20.0218239
+    - Name: 
+      Entry: 4
+      Data: 13.2627926
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 23|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 25.0300026
+    - Name: 
+      Entry: 4
+      Data: 15.5136547
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 24|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 26.9432411
+    - Name: 
+      Entry: 4
+      Data: 21.0845528
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 25|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 24.4672852
+    - Name: 
+      Entry: 4
+      Data: 24.8547535
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 26|Tartaros.Map.Vertex2D, Tartaros
+    - Name: _position
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 17.9867153
+    - Name: 
+      Entry: 4
+      Data: 25.5110226
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _capturePrice
+      Entry: 7
+      Data: 27|Tartaros.Economy.SectorResourcesWallet, Tartaros
+    - Name: _ressourceAmount
+      Entry: 7
+      Data: 28|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+        Tartaros],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 8
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 20
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   _mapSize: {x: 50, y: 50}
-  _sectorData:
-  - _vertices:
-    - _position: {x: 11.965366, y: 13.477809}
-    - _position: {x: 7.152276, y: 13.5767765}
-    - _position: {x: 9.255921, y: 18.141895}
-  - _vertices:
-    - _position: {x: 9.255921, y: 18.141895}
-    - _position: {x: 8.722221, y: 25.962568}
-    - _position: {x: 13.995375, y: 23.222847}
-    - _position: {x: 12.939506, y: 19.591124}
-    - _position: {x: 14.273258, y: 12.741014}
-    - _position: {x: 11.965366, y: 13.477809}
-  - _vertices:
-    - _position: {x: 7.152276, y: 13.5767765}
-    - _position: {x: 2.3476882, y: 14.597332}
-    - _position: {x: 1.035183, y: 21.33485}
-    - _position: {x: 2.260188, y: 28.422375}
-    - _position: {x: 6.635203, y: 32.6224}
-    - _position: {x: 8.722221, y: 25.962568}
-    - _position: {x: 9.255921, y: 18.141895}
-  - _vertices:
-    - _position: {x: 6.635203, y: 32.6224}
-    - _position: {x: 13.897724, y: 33.23488}
-    - _position: {x: 20.372747, y: 32.622375}
-    - _position: {x: 25.710264, y: 31.222372}
-    - _position: {x: 26.760267, y: 24.572348}
-    - _position: {x: 25.845427, y: 19.17063}
-    - _position: {x: 17.44202, y: 22.987385}
-    - _position: {x: 13.995375, y: 23.222847}
-    - _position: {x: 8.722221, y: 25.962568}
-  - _vertices:
-    - _position: {x: 13.995375, y: 23.222847}
-    - _position: {x: 25.845427, y: 19.17063}
-    - _position: {x: 28.42276, y: 12.497288}
-    - _position: {x: 25.36025, y: 6.4597697}
-    - _position: {x: 17.222721, y: 6.4597697}
-    - _position: {x: 16.435217, y: 10.484781}
-    - _position: {x: 14.273258, y: 12.741014}
-    - _position: {x: 12.939506, y: 19.591124}
