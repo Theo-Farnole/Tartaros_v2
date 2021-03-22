@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab7f470cf3ff81478a18013a4fc49ea, type: 3}
-  m_Name: Test_player_sector_ressources_data
+  m_Script: {fileID: 11500000, guid: 68123061caf5d5e4a8e6ab3c112899b2, type: 3}
+  m_Name: Starting_Wallet
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _wallet
+    - Name: _startingWallet
       Entry: 7
       Data: 0|Tartaros.Economy.SectorResourcesWallet, Tartaros
     - Name: _ressourceAmount
