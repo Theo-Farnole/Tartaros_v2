@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
+	using System.Linq;
 	using Tartaros.Sectors;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
@@ -58,6 +59,13 @@
 		{
 			Debug.LogError("Not implemented");
 			return true;
+		}
+
+		ISector IMap.GetSectorOnPosition(Vector3 position)
+		{
+			return ObjectsFinder.FindObjectsOfInterface<ISector>()
+				.Where(x => x.Polygon.ContainsPoint(position))
+				.FirstOrDefault();
 		}
 		#endregion Methods
 	}
