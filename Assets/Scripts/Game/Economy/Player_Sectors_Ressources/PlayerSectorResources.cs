@@ -8,7 +8,7 @@
 	{
 		#region Fields
 		[SerializeField]
-		private PlayerSectorResourcesData _playerSectorRessourcesData = null;
+		private PlayerIncomeManagerData _playerSectorRessourcesData = null;
 
 		private ISectorResourcesWallet _playerWallet = null;
 		#endregion Fields
@@ -22,7 +22,7 @@
 		{
 			if (_playerSectorRessourcesData != null)
 			{
-				_playerWallet = (_playerSectorRessourcesData.Wallet as ICloneable).Clone() as ISectorResourcesWallet;
+				_playerWallet = (_playerSectorRessourcesData.StartingIncome as ICloneable).Clone() as ISectorResourcesWallet;
 			}
 			else
 			{

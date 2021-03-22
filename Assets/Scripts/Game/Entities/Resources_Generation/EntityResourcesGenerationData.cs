@@ -12,24 +12,19 @@
 		private SectorRessourceType _resourceToGenerate = SectorRessourceType.Food;
 
 		[SerializeField]
-		private int _amountResourcesToGeneratePerTick = 1;
-
-		[SerializeField]
-		private float _tickDelayInSeconds = 10;
+		private int _resourcesPerTick = 1;
 		#endregion Fields
 
 		#region Properties
-		public SectorRessourceType SectorRessourceType => _resourceToGenerate;
-		public int GeneratedResourcesPerTick => _amountResourcesToGeneratePerTick;
-		public float TickDelayInSeconds => _tickDelayInSeconds;
+		public SectorRessourceType ResourcesType => _resourceToGenerate;
+		public int ResourcesPerTick => _resourcesPerTick;
 		#endregion Properties
 
 		#region Ctor
-		public EntityResourcesGenerationData(SectorRessourceType resourceToGenerate, int amountResourcesToGeneratePerTick, float tickDelayInSeconds)
+		public EntityResourcesGenerationData(SectorRessourceType resourceToGenerate, int amountResourcesToGeneratePerTick)
 		{
 			_resourceToGenerate = resourceToGenerate;
-			_amountResourcesToGeneratePerTick = amountResourcesToGeneratePerTick;
-			_tickDelayInSeconds = tickDelayInSeconds;
+			_resourcesPerTick = amountResourcesToGeneratePerTick;
 		}
 		#endregion Ctor
 

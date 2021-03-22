@@ -26,6 +26,7 @@
 		public IEnumerator SetUp()
 		{
 			SetupHelper.CreateService();
+			SetupHelper.CreateIncomeManager(SectorResourcesWallet.Zero, TICK_DURATION);
 			_playerWallet = SetupHelper.CreatePlayerSectorResources();
 
 			Entity entityResources = SetupHelper.CreateEntity(Vector3.zero, Team.Player, EntityType.Unit, "Resources");
@@ -39,13 +40,13 @@
 		[UnityTest]
 		public IEnumerator ShouldGenerateFood()
 		{
-			EntityResourcesGenerationData entityData = new EntityResourcesGenerationData(SectorRessourceType.Food, 1, TICK_DURATION);
+			EntityResourcesGenerationData entityData = new EntityResourcesGenerationData(SectorRessourceType.Food, 1);
 			_entityResourcesGeneration.Data = entityData;
 
 			const int TICK_COUNT = 1;
 			yield return WaitForTick(TICK_COUNT);
 
-			Assert.AreEqual(entityData.GeneratedResourcesPerTick, _playerWallet.GetAmount(entityData.SectorRessourceType));
+			Assert.AreEqual(entityData.ResourcesPerTick, _playerWallet.GetAmount(entityData.ResourcesType));
 			Assert.AreEqual(0, _playerWallet.GetAmount(SectorRessourceType.Iron));
 			Assert.AreEqual(0, _playerWallet.GetAmount(SectorRessourceType.Stone));
 		}
@@ -53,13 +54,13 @@
 		[UnityTest]
 		public IEnumerator ShouldGenerateIronTwice()
 		{
-			EntityResourcesGenerationData data = new EntityResourcesGenerationData(SectorRessourceType.Iron, 1, TICK_DURATION);
+			EntityResourcesGenerationData data = new EntityResourcesGenerationData(SectorRessourceType.Iron, 1);
 			_entityResourcesGeneration.Data = data;
 
 			const int TICK_COUNT = 2;
 			yield return WaitForTick(TICK_COUNT);
 
-			Assert.AreEqual(data.GeneratedResourcesPerTick * TICK_COUNT, _playerWallet.GetAmount(data.SectorRessourceType));
+			Assert.AreEqual(data.ResourcesPerTick * TICK_COUNT, _playerWallet.GetAmount(data.ResourcesType));
 			Assert.AreEqual(0, _playerWallet.GetAmount(SectorRessourceType.Stone));
 			Assert.AreEqual(0, _playerWallet.GetAmount(SectorRessourceType.Food));
 		}
@@ -67,7 +68,7 @@
 		[Test]
 		public void ShouldNotHaveTimeToGenerateStone()
 		{
-			EntityResourcesGenerationData data = new EntityResourcesGenerationData(SectorRessourceType.Stone, 1, TICK_DURATION);
+			EntityResourcesGenerationData data = new EntityResourcesGenerationData(SectorRessourceType.Stone, 1);
 			_entityResourcesGeneration.Data = data;
 
 			Assert.AreEqual(0, _playerWallet.GetAmount(SectorRessourceType.Stone));

@@ -16,8 +16,12 @@
 		[SerializeField]
 		private SectorRessourceType _sectorRessourceType = SectorRessourceType.Food;
 
-		private IPlayerIncomeSectorResources _playerIncome = null;
+		private IPlayerIncomeManager _playerIncome = null;
 		#endregion Fields
+
+		#region Properties
+		private int PlayerIncome => _playerIncome.GetIncomeAmount(_sectorRessourceType);
+		#endregion Properties
 
 		#region Methods
 		private void Awake()
@@ -30,7 +34,7 @@
 
 		private void Start()
 		{
-			_playerIncome = Services.Instance.Get<IPlayerIncomeSectorResources>();
+			_playerIncome = Services.Instance.Get<IPlayerIncomeManager>();
 			SubscribeToEventAmountChanged();
 			UpdateAmountLabel();
 		}
@@ -50,28 +54,47 @@
 			if (_playerIncome == null) return;
 
 			UnsubcribeToEventAmountChanged();
-			_playerIncome.AmountChanged += AmountChanged;
+			_playerIncome.IncomeChanged += AmountChanged;
 		}
 
 		private void UnsubcribeToEventAmountChanged()
 		{
 			if (_playerIncome == null) return;
 
-			_playerIncome.AmountChanged -= AmountChanged;
+			_playerIncome.IncomeChanged -= AmountChanged;
 		}
 
-		private void AmountChanged(object sender, AmountChangedArgs e)
+		private void AmountChanged(object sender, IncomeChangedArgs e)
 		{
 			UpdateAmountLabel();
 		}
 
 		private void UpdateAmountLabel()
 		{
-			throw new System.NotImplementedException();
-			//if (_playerIncome > 0)
-			//{
-			//	_amountLabel.text = "+" + _playerIncome.GetAmount(_sectorRessourceType).ToString();
-			//}
+			if (PlayerIncome > 0)
+			{
+				string format = "{0}{1}";
+				string prefix = GetPrefix();
+				string amount = _playerIncome.GetIncomeAmount(_sectorRessourceType).ToString();
+
+				_amountLabel.text = string.Format(format, prefix, amount);
+			}
+		}
+
+		private string GetPrefix()
+		{
+			if (PlayerIncome > 0)
+			{
+				return "+";
+			}
+			else if (PlayerIncome < 0)
+			{
+				return "-";
+			}
+			else
+			{
+				return "~";
+			}
 		}
 		#endregion Methods
 	}
