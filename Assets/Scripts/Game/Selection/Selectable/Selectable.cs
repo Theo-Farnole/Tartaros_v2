@@ -49,12 +49,18 @@
 
 		void ISelectable.OnSelected()
 		{
-			_selectionEffect.OnSelected();
+			if (_selectionEffect != null)
+			{
+				_selectionEffect.OnSelected();
+			}
 		}
 
 		void ISelectable.OnUnselected()
 		{
-			_selectionEffect.OnUnselected();
+			if (_selectionEffect != null)
+			{
+				_selectionEffect.OnUnselected();
+			}
 		}
 		#endregion Methods
 	}
