@@ -35,10 +35,10 @@
 				return;
 			}
 
-			if (_entityAttack.CanAttack(_target) == true)
+			if (_entityAttack.IsInRange(_target) == true)
 			{
 				_entityMovement.StopMovement();
-				_entityAttack.DoDamage(_target);
+				_entityAttack.CastAttackIfPossible(_target);
 			}
 			else
 			{

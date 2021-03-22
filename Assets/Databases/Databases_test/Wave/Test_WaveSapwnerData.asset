@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 0}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -68,6 +69,9 @@ MonoBehaviour:
     - Name: _entityToSpawn
       Entry: 7
       Data: 6|Tartaros.Wave.Test_IspawnableData, Tartaros
+    - Name: _prefab
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -142,6 +146,9 @@ MonoBehaviour:
     - Name: _entityToSpawn
       Entry: 7
       Data: 12|Tartaros.Wave.Test_IspawnableData, Tartaros
+    - Name: _prefab
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -182,7 +189,13 @@ MonoBehaviour:
       Entry: 7
       Data: 14|Tartaros.Wave.UnitSequence, Tartaros
     - Name: _entityToSpawn
-      Entry: 6
+      Entry: 7
+      Data: 15|Tartaros.Wave.Test_IspawnableData, Tartaros
+    - Name: _prefab
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
     - Name: _entitiesCount
       Entry: 3
@@ -213,16 +226,19 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 7
-      Data: 15|Tartaros.Wave.UnitSequence[], Tartaros
+      Data: 16|Tartaros.Wave.UnitSequence[], Tartaros
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 16|Tartaros.Wave.UnitSequence, Tartaros
+      Data: 17|Tartaros.Wave.UnitSequence, Tartaros
     - Name: _entityToSpawn
       Entry: 7
-      Data: 17|Tartaros.Wave.Test_IspawnableData, Tartaros
+      Data: 18|Tartaros.Wave.Test_IspawnableData, Tartaros
+    - Name: _prefab
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

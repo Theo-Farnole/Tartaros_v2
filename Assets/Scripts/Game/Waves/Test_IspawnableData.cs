@@ -7,7 +7,10 @@
 
     public class Test_IspawnableData : IWaveSpawnableData
     {
-        GameObject IWaveSpawnableData.Prefab => GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        [SerializeField]
+        private GameObject _prefab = null;
+
+        GameObject IWaveSpawnableData.Prefab => _prefab;
     }
 
 }
