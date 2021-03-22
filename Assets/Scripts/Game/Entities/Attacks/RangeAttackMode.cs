@@ -1,12 +1,13 @@
 ﻿namespace Tartaros.Entities.Attack
 {
+    using Sirenix.Serialization;
     using UnityEngine;
 
     public class RangeAttackMode : IAttackMode
     {
-        [SerializeField]
+        [OdinSerialize]
         private GameObject _prefabProjectile = null;
-        [SerializeField]
+        [OdinSerialize]
         private IHitEffect _vfxPrefab = null;
         void IAttackMode.Attack(Transform attacker, IAttackable target)
         {

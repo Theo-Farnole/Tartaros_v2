@@ -42,19 +42,25 @@
 			}
 		}
 
-		public void CastAttack(IAttackable target)
+		public void CastAttackIfPossible(IAttackable target)
 		{
-			if (CanAttack(target) == false) return;
+			if (IsInRange(target) == false) return;
+
+			if (CanAttackCooldown() == false) return;
 			
 			_entityAttackData.AttackMode.Attack(transform, target);
 			_lastTimeAttack = Time.time;
 
 		}
 
-		public bool CanAttack(IAttackable target)
+		public bool IsInRange(IAttackable target)
 		{
-			// TODO TF: extract those conditions into differents methods
-			return Time.time > _lastTimeAttack + _entityAttackData.AttackSpeed && _entityDetection.IsInAttackRange(target.Transform.position);
+			return  _entityDetection.IsInAttackRange(target.Transform.position);
+		}
+
+		public bool CanAttackCooldown()
+        {
+			return Time.time > _lastTimeAttack + _entityAttackData.AttackSpeed;
 		}
 
 		void IOrderAttackReceiver.Attack(IAttackable target)
