@@ -71,7 +71,7 @@ namespace Tartaros.Construction
 
 			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
 
-			foreach (Map.IConstructionRule rule in _constructable.Rules)
+			foreach (IConstructionRule rule in _constructable.Rules)
 			{
 				if (rule == null)
 				{

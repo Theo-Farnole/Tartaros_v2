@@ -1,7 +1,6 @@
 ﻿namespace Tartaros.Construction
 {
 	using Tartaros.Economy;
-	using Tartaros.Map;
 	using Tartaros.UI;
 	using UnityEngine;
 

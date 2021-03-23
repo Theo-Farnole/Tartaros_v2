@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: b84f554f028390f409c8654d4563df65, type: 3}
     - {fileID: 5781224918604581195, guid: b9b2dee965749f8439375ab3438e7336, type: 3}
+    - {fileID: 11400000}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -166,16 +167,28 @@ MonoBehaviour:
       Data: 
     - Name: _rules
       Entry: 7
-      Data: 8|Tartaros.Map.IConstructionRule[], Tartaros
+      Data: 8|Tartaros.Construction.IConstructionRule[], Tartaros
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 9|Tartaros.Map.OnlyConstructOnSpecificResourceTypeSector, Tartaros
     - Name: _type
       Entry: 3
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Tartaros.Construction.SameBuildingsCountLimitOnSectorRule, Tartaros
+    - Name: _buildingToCheck
+      Entry: 10
+      Data: 2
+    - Name: _buildingMaxCount
+      Entry: 3
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

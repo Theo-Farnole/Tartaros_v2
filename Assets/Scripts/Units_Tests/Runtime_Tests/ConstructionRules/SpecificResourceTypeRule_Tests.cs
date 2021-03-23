@@ -9,6 +9,7 @@
 	using Tartaros.Sectors;
 	using UnityEngine.TestTools;
 	using Tartaros.ServicesLocator;
+	using Tartaros.Construction;
 
 	public partial class SpecificResourceTypeRule_Tests
 	{

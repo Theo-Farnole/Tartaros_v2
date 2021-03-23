@@ -4,7 +4,6 @@
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
-	using Tartaros.Map;
 	using UnityEngine;
 
 	public class EntityConstructableData : IEntityBehaviourData, IConstructable
