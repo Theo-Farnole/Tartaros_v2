@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 8650b8411ded8de418a4a18428f860ad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _tex3coord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -32,8 +36,11 @@ Material:
     - _BorderSpeed: 0.2
     - _OpacityFromPatern: 1
     - _PaternPower: 1.5
+    - _StarsSpeedRatio: 5
     - _StepInner: 1
     - _StepOutter: 5
+    - _TextureSat: 1
+    - _TextureStrength: 5
     - _VoroBorderScale: 0.25
     - _VoroPaternScale: 1
     - _VoroScale: 5
@@ -47,3 +54,4 @@ Material:
     - _OpacityFromPatern1: {r: 0, g: 20, b: 0, a: 0}
     - _PaternStep: {r: 0, g: 1, b: 0, a: 0}
     - _StepInner: {r: 2, g: 0.5, b: 0, a: 0}
+    - _TextureTiling: {r: -2, g: -2, b: 0, a: 0}
