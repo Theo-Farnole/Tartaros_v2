@@ -10,6 +10,8 @@ namespace Tartaros.Construction
 		GameObject ModelPrefab { get; }
 		ISectorResourcesWallet Price { get; }
 		Vector2 Size { get; }
+
+		bool IsChained { get; }
 		IConstructionRule[] Rules { get; }
 	}
 }

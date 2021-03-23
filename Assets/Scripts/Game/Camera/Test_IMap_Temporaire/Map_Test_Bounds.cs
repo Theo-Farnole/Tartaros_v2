@@ -13,7 +13,7 @@
 
         bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         private void Awake()

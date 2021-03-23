@@ -2,13 +2,16 @@
 {
 	using Tartaros.Economy;
 	using Tartaros.UI;
+    using Sirenix.OdinInspector;
+    using Tartaros.Economy;
 	using UnityEngine;
 
-	public class TestClassConstructable : MonoBehaviour, IConstructable
+	public class TestClassConstructable : SerializedMonoBehaviour, IConstructable
     {
         public GameObject _testCube = null;
         public ISectorResourcesWallet _price = null;
 		public Vector2 _size = Vector2.one;
+        public bool _IsChained = false;
 
         GameObject IConstructable.ModelPrefab => _testCube;
 
@@ -20,4 +23,7 @@
 
 		IConstructionRule[] IConstructable.Rules => throw new System.NotImplementedException();
 	}
+
+        bool IConstructable.IsChained => _IsChained;
+    }
 }
