@@ -16,6 +16,9 @@
 
 		[SerializeField]
 		private Vector2 _size = Vector2.one;
+
+		[SerializeField]
+		private Sprite _portrait = null;
 		#endregion Fields
 
 		#region Properties
@@ -24,6 +27,8 @@
 		ISectorResourcesWallet IConstructable.Price => _constructionPrice;
 
 		Vector2 IConstructable.Size => _size;
+
+		Sprite IPortraiteable.Portrait => _portrait;
 		#endregion Properties
 
 		#region Methods
