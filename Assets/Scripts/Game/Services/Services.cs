@@ -63,6 +63,18 @@
 			}
 		}
 
+		public void UnregisterService<T>()
+		{
+			if (HasService<T>() == true)
+			{
+				_databases.Remove(typeof(T));
+			}
+			else
+			{
+				Debug.LogErrorFormat("Cannot unregister service {0}: no corresponding service was registered.", typeof(T));
+			}
+		}
+
 		public void Initialize()
 		{
 			if (_isInitialized == true)

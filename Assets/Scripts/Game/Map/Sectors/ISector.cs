@@ -6,7 +6,7 @@
 	public interface ISector
 	{
 		GameObject[] ObjectsInSector { get; }
-		ConvexPolygon Polygon { get; }
+		bool ContainsPosition(Vector3 worldPosition);
 		bool CanCapture();
 		void Capture();
 	}

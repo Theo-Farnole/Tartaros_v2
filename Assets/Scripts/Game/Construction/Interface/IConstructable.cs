@@ -10,5 +10,6 @@ namespace Tartaros.Construction
 		GameObject ModelPrefab { get; }
 		ISectorResourcesWallet Price { get; }
 		Vector2 Size { get; }
+		IConstructionRule[] Rules { get; }
 	}
 }

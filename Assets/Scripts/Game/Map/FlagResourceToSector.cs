@@ -12,7 +12,7 @@
 		#endregion Fields
 
 		#region Properties
-		public SectorRessourceType Type => _type;
+		public SectorRessourceType Type { get => _type; set => _type = value; }
 		#endregion Properties
 
 		#region Methods

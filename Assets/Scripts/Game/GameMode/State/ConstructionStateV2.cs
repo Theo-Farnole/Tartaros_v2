@@ -56,7 +56,37 @@ namespace Tartaros.Construction
 
 		bool CanConstructHere()
 		{
-			return _map.CanBuild(_buildingPreview.GetBuildingPreviewPosition(), _constructable.Size);
+			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();			
+
+			return DoCanConstructRulesAreValid() && _map.CanBuild(buildingPosition, _constructable.Size);
+		}
+
+		private bool DoCanConstructRulesAreValid()
+		{
+			if (_constructable.Rules == null)
+			{
+				Debug.LogFormat("No rules found on constuctable {0}", _constructable.ToString());
+				return true;
+			}
+
+			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
+
+			foreach (IConstructionRule rule in _constructable.Rules)
+			{
+				if (rule == null)
+				{
+					Debug.LogErrorFormat("A rule is null in the constructable {0}.", _constructable.ToString());
+					continue;
+				}
+
+				if (rule.CanConstruct(buildingPosition) == false)
+				{
+					Debug.LogFormat("Rule {0} prevent construction.", rule.ToString());
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		private void InstanciateBuilding()

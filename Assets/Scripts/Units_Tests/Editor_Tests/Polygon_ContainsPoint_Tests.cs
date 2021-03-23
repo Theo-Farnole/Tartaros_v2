@@ -16,7 +16,7 @@
 				new Vector3(2, 2)
 			);
 
-			Assert.IsTrue(polygon.ContainsPoint(Vector3.one));
+			Assert.IsTrue(polygon.ContainsPoint2D(Vector3.one));
 		}
 
 		[Test]
@@ -29,7 +29,7 @@
 				new Vector3(2, 2)
 			);
 
-			Assert.IsFalse(polygon.ContainsPoint(Vector3.zero));
+			Assert.IsFalse(polygon.ContainsPoint2D(Vector3.zero));
 		}
 
 		[Test]
@@ -42,7 +42,7 @@
 				new Vector3(2, 2)
 			);
 
-			Assert.IsFalse(polygon.ContainsPoint(Vector3.one * 2));
+			Assert.IsFalse(polygon.ContainsPoint2D(Vector3.one * 2));
 		}
 
 		[Test]
@@ -55,7 +55,7 @@
 				new Vector3(2, 2)
 			);
 
-			Assert.IsFalse(polygon.ContainsPoint(Vector3.one * 3));
+			Assert.IsFalse(polygon.ContainsPoint2D(Vector3.one * 3));
 		}
 	}
 }

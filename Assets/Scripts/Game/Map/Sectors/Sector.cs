@@ -29,8 +29,6 @@
 		public SectorData SectorData => _sectorData;
 		public bool IsCaptured => _isCaptured;
 
-		ConvexPolygon ISector.Polygon => _sectorData.ConvexPolygon;
-
 		GameObject[] ISector.ObjectsInSector
 		{
 			get
@@ -85,6 +83,11 @@
 			OnCapture();
 		}
 
+		bool ISector.ContainsPosition(Vector3 point)
+		{
+			return _sectorData.ConvexPolygon.ContainsPoint2D(new Vector2(point.x, point.z));
+		}
+
 		public Vector3[] GetPointsWrappedSnappedToGround()
 		{
 			List<Vector3> sectorPointsSnapToGround = new List<Vector3>();
@@ -110,7 +113,7 @@
 
 		public bool IsObjectInSector(GameObject gameObject)
 		{
-			return _sectorData.ConvexPolygon.ContainsPoint(gameObject.transform.position);
+			return _sectorData.ConvexPolygon.ContainsWorldPosition(gameObject.transform.position);
 		}
 
 		private void OnCapture()

@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.UI
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -8,6 +9,11 @@
 	public class EntityConstructableData : IEntityBehaviourData, IConstructable
 	{
 		#region Fields
+
+		[SerializeField]
+		[PreviewField]
+		private Sprite _portrait = null;
+
 		[SerializeField]
 		private GameObject _modelPrefab = null;
 
@@ -18,7 +24,7 @@
 		private Vector2 _size = Vector2.one;
 
 		[SerializeField]
-		private Sprite _portrait = null;
+		private IConstructionRule[] _rules = new IConstructionRule[0];
 		#endregion Fields
 
 		#region Properties
@@ -29,12 +35,19 @@
 		Vector2 IConstructable.Size => _size;
 
 		Sprite IPortraiteable.Portrait => _portrait;
+
+		IConstructionRule[] IConstructable.Rules => _rules;
 		#endregion Properties
 
 		#region Methods
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
 			// TODO TF: use carve mesh here
+		}
+
+		public override string ToString()
+		{
+			return _portrait != null ? _portrait.name : base.ToString();
 		}
 		#endregion Methods
 	}

@@ -17,5 +17,7 @@
 		Vector2 IConstructable.Size => _size;
 
 		Sprite IPortraiteable.Portrait => null;
+
+		IConstructionRule[] IConstructable.Rules => throw new System.NotImplementedException();
 	}
 }

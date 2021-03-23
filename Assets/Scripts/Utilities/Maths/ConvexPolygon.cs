@@ -12,7 +12,12 @@
 			this.points = new List<Vector2>(points);
 		}	
 
-		public bool ContainsPoint(Vector2 point)
+		public bool ContainsWorldPosition(Vector3 position)
+		{
+			return ContainsPoint2D(new Vector2(position.x, position.z));
+		}
+
+		public bool ContainsPoint2D(Vector2 point)
 		{
 			return MathHelper.IsPointInPolygon(points, point);
 		}

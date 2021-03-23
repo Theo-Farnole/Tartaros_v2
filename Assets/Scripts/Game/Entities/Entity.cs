@@ -18,6 +18,7 @@
 		#endregion Fields
 
 		#region Properties
+		public EntityData EntityData => _entityData;
 		public Team Team => _team;
 		public EntityType EntityType => _entityType;
 		Team ITeamable.Team => _team;

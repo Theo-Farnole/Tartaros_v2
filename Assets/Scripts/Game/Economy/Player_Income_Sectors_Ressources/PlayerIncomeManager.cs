@@ -21,7 +21,6 @@
 
 		#region Properties
 		public PlayerIncomeManagerData Data { get => _data; set => _data = value; }
-		public event EventHandler<AmountChangedArgs> AmountChanged = null;
 		public event EventHandler<IncomeChangedArgs> IncomeChanged = null;
 		#endregion Properties
 
@@ -68,6 +67,8 @@
 			_incomesGiver.Add(income);
 			_incomePerTick.AddAmount(income.SectorRessourceType, income.ResourcesPerTick);
 
+			IncomeChanged?.Invoke(this, new IncomeChangedArgs());
+
 			Debug.LogFormat("Player Income changed: it is now {0}.", _incomePerTick.ToString());
 		}
 
@@ -83,6 +84,8 @@
 
 			_incomesGiver.Remove(income);
 			_incomePerTick.RemoveAmount(income.SectorRessourceType, income.ResourcesPerTick);
+
+			IncomeChanged?.Invoke(this, new IncomeChangedArgs());
 
 			Debug.LogFormat("Player Income changed: it is now {0}.", _incomePerTick.ToString());
 		}
