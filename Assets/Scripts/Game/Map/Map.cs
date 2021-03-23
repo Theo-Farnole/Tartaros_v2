@@ -69,7 +69,6 @@
 			{
 				if (sector.ContainsPosition(position))
 				{
-					Debug.LogFormat("GetSectorOnPosition returns sector {0} at position {1}.", sector.ToString(), position);
 					return sector;
 				}
 			}

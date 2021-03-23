@@ -57,9 +57,9 @@
 
 		private bool IsResourceFlag(GameObject gameObject, SectorRessourceType type)
 		{
-			if (gameObject.TryGetComponent(out FlagResourceToSector incomeGenerator))
+			if (gameObject.TryGetComponent(out FlagResourceToSector resourceFlag))
 			{
-				return incomeGenerator.Type == type;
+				return resourceFlag.Type == type;
 			}
 			else
 			{

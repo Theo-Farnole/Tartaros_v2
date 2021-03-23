@@ -85,7 +85,7 @@
 
 		bool ISector.ContainsPosition(Vector3 point)
 		{
-			return _sectorData.ConvexPolygon.ContainsPoint(new Vector2(point.x, point.z));
+			return _sectorData.ConvexPolygon.ContainsPoint2D(new Vector2(point.x, point.z));
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()
@@ -113,7 +113,7 @@
 
 		public bool IsObjectInSector(GameObject gameObject)
 		{
-			return _sectorData.ConvexPolygon.ContainsPoint(gameObject.transform.position);
+			return _sectorData.ConvexPolygon.ContainsWorldPosition(gameObject.transform.position);
 		}
 
 		private void OnCapture()

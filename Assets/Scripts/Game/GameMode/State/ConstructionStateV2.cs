@@ -73,10 +73,15 @@ namespace Tartaros.Construction
 
 			foreach (Map.IConstructionRule rule in _constructable.Rules)
 			{
-				Debug.LogFormat("Testing rule {0}", rule.ToString());
+				if (rule == null)
+				{
+					Debug.LogErrorFormat("A rule is null in the constructable {0}.", _constructable.ToString());
+					continue;
+				}
 
 				if (rule.CanConstruct(buildingPosition) == false)
 				{
+					Debug.LogFormat("Rule {0} prevent construction.", rule.ToString());
 					return false;
 				}
 			}
