@@ -9,6 +9,9 @@
 	public class ConstructButton : MonoBehaviour
 	{
 		#region Fields
+		[SerializeField]
+		private Image _buildingPortrait = null;
+
 		private IConstructable _toConstructOnClick = null;
 
 		private ConstructionManager _constructionManager = null;
@@ -33,10 +36,11 @@
 			_button.onClick.RemoveListener(OnButtonClick);
 		}
 
-
 		public void Initialize(IConstructable toConstructOnClick)
 		{
 			_toConstructOnClick = toConstructOnClick;
+
+			_buildingPortrait.sprite = _toConstructOnClick.Portrait;
 		}
 
 		private void OnButtonClick()

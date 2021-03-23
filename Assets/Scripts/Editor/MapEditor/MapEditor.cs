@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Map.Editor
 {
 	using System.Collections.Generic;
+	using Tartaros.Editor;
 	using Tartaros.Math;
 	using UnityEditor;
 	using UnityEngine;
@@ -9,7 +10,8 @@
 	public class MapEditor : Editor
 	{
 		#region Fields
-		public const float HANDLE_SITE = .1f;
+		public const float HANDLE_SIZE = 0.5f;
+		public static readonly Color HANDLE_COLOR = Color.red;
 		public static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
 		private SiteCreationManager _siteCreationManager = null;
@@ -98,7 +100,9 @@
 		{
 			EditorGUI.BeginChangeCheck();
 
-			Vector3 position = Handles.FreeMoveHandle(vertex.WorldPosition, HANDLE_ROTATION, HANDLE_SITE, vertex.WorldPosition, Handles.RectangleHandleCap);
+			HandlesHelper.PushColor(HANDLE_COLOR);
+			Vector3 position = Handles.FreeMoveHandle(vertex.WorldPosition, HANDLE_ROTATION, HANDLE_SIZE, vertex.WorldPosition, Handles.DotHandleCap);
+			HandlesHelper.PopColor();
 
 			if (EditorGUI.EndChangeCheck())
 			{

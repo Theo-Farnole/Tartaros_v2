@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 682235464088241539, guid: a737af567d7a55e47979de735b1b07aa, type: 3}
+    - {fileID: 21300000, guid: cd0f6aff2c935d646b81cb9906794ba8, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -35,12 +36,9 @@ MonoBehaviour:
     - Name: _resourceToGenerate
       Entry: 3
       Data: 2
-    - Name: _amountResourcesToGeneratePerTick
+    - Name: _resourcesPerTick
       Entry: 3
-      Data: 1
-    - Name: _tickDelayInSeconds
-      Entry: 4
-      Data: 1
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -163,6 +161,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: _portrait
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

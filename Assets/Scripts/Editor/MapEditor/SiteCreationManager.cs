@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Map.Editor
 {
+	using Tartaros.Editor;
 	using UnityEditor;
 	using UnityEngine;
 
@@ -109,7 +110,10 @@
 			foreach (Vertex2D vertex in _map.MapData.Vertices)
 			{
 				Handles.color = Color.white;
-				bool clickOnHandle = Handles.Button(vertex.WorldPosition, MapEditor.HANDLE_ROTATION, HANDLE_SIZE, HANDLE_SIZE, Handles.RectangleHandleCap);
+
+				HandlesHelper.PushColor(MapEditor.HANDLE_COLOR);
+				bool clickOnHandle = Handles.Button(vertex.WorldPosition, MapEditor.HANDLE_ROTATION, MapEditor.HANDLE_SIZE, MapEditor.HANDLE_SIZE, Handles.DotHandleCap);
+				HandlesHelper.PopColor();
 
 				if (clickOnHandle == true)
 				{
