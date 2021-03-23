@@ -3,7 +3,6 @@
 	using Tartaros.Economy;
 	using Tartaros.UI;
     using Sirenix.OdinInspector;
-    using Tartaros.Economy;
 	using UnityEngine;
 
 	public class TestClassConstructable : SerializedMonoBehaviour, IConstructable
@@ -22,8 +21,8 @@
 		Sprite IPortraiteable.Portrait => null;
 
 		IConstructionRule[] IConstructable.Rules => throw new System.NotImplementedException();
-	}
 
         bool IConstructable.IsChained => _IsChained;
+       
     }
 }

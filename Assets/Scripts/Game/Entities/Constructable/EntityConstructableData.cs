@@ -39,7 +39,6 @@
 		Sprite IPortraiteable.Portrait => _portrait;
 
 		IConstructionRule[] IConstructable.Rules => _rules;
-		#endregion Properties
 
         bool IConstructable.IsChained =>_IsChained;
         #endregion Properties

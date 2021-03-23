@@ -10,9 +10,13 @@
         private List<GameObject> _buildingsPreview = new List<GameObject>();
         private float _distanceBetweenInstanciate = 10f;
         private Vector3 _startPosition = Vector3.zero;
+        private IConstructable _toBuild = null;
+
+        public float DistanceBetweenInstanciate  => _toBuild.Size.y; 
 
         public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition)
         {
+            _toBuild = toBuild;
             _buildingPreview = toBuild.ModelPrefab;
             _startPosition = startPosition;
             InstanciatePreview(_startPosition);
@@ -26,7 +30,7 @@
 
             if (numberOfWallSection > _buildingsPreview.Count)
             {
-                Vector3 position = _startPosition + (-direction * ((_distanceBetweenInstanciate) * _buildingsPreview.Count));
+                Vector3 position = _startPosition + (-direction * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
                 InstanciatePreview(position);
             }
             else if (numberOfWallSection < _buildingsPreview.Count)
@@ -34,12 +38,13 @@
                 RemovePreviewWall();
             }
 
+            SetPositionRotationOfPreviews(end);
             //throw new System.NotImplementedException();
         }
 
         public void GetNumberOfWallSection(Vector3 end, out int numberOfWallSection, out Vector3 direction)
         {
-            numberOfWallSection = Mathf.RoundToInt(GetTheDitsanceBetweenTwoPoints(end) / _distanceBetweenInstanciate);
+            numberOfWallSection = Mathf.RoundToInt(GetTheDitsanceBetweenTwoPoints(end) / DistanceBetweenInstanciate);
             Debug.Log(GetTheDitsanceBetweenTwoPoints(end));
             direction = (_startPosition - end).normalized;
         }
@@ -50,9 +55,33 @@
             AddPreviewWall(wallInstance);
         }
 
-        private void SetPositionRotationOfPreviews()
+        private void SetPositionRotationOfPreviews(Vector3 end)
         {
-            throw new System.NotImplementedException();
+            SetPositionOfPreview(end);
+
+            foreach (GameObject wallSection in _buildingsPreview)
+            {
+
+
+
+
+                wallSection.transform.LookAt(end);
+            }
+        }
+
+        private void SetPositionOfPreview(Vector3 end)
+        {
+            float sectionLength = Vector3.Distance(_startPosition, end);
+            float sectionPercent = _buildingsPreview.Count / sectionLength;
+
+            for (int i = 0; i < _buildingsPreview.Count; i++)
+            {
+                GameObject wallSection = _buildingsPreview[i];
+                float interpolation = sectionPercent * i;
+                wallSection.transform.position = Vector3.Lerp(_startPosition, end, interpolation);
+
+                Debug.LogFormat("{0} {1}", i, interpolation);
+            }
         }
 
         public float GetTheDitsanceBetweenTwoPoints(Vector3 end)
