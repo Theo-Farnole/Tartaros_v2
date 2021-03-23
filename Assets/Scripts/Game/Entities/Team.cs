@@ -23,5 +23,19 @@
 					throw new System.NotImplementedException();
 			}
 		}
+
+		public static bool HasOpponent(this Team team)
+		{
+			switch (team)
+			{
+				case Team.Player:					
+				case Team.Enemy:
+					return true;
+
+				case Team.Neutral:
+				default:
+					return false;
+			}
+		}
 	}
 }

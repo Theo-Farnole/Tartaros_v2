@@ -63,7 +63,15 @@
 
 		private bool IsEntityOpponentOfSelection(Entity entity)
 		{
-			return entity.Team == _selectionOrderGiver.ControllableTeam.GetOpponent();
+			if (_selectionOrderGiver.ControllableTeam.HasOpponent() == true)
+			{
+				return entity.Team == _selectionOrderGiver.ControllableTeam.GetOpponent();
+			}
+			else
+			{
+				Debug.LogFormat("Entity {0} is not an opponent of team {1}. If it is an unwanted behaviour, check if the SelectionManager's controllable team is not set to Neutral.", entity.name, _selectionOrderGiver.ControllableTeam);
+				return false;
+			}
 		}
 		#endregion Methods
 	}
