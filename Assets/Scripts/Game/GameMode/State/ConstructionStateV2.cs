@@ -58,10 +58,10 @@ namespace Tartaros.Construction
 		{
 			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();			
 
-			return DoCanConstructAreValid() && _map.CanBuild(buildingPosition, _constructable.Size);
+			return DoCanConstructRulesAreValid() && _map.CanBuild(buildingPosition, _constructable.Size);
 		}
 
-		private bool DoCanConstructAreValid()
+		private bool DoCanConstructRulesAreValid()
 		{
 			if (_constructable.Rules == null)
 			{

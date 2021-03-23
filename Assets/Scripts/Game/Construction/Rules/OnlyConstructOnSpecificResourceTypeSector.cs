@@ -6,12 +6,20 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class OnlyConstructOnSpecificResourceTile : IConstructionRule
+	public class OnlyConstructOnSpecificResourceTypeSector : IConstructionRule
 	{
 		#region Fields
 		[SerializeField]
 		private SectorRessourceType _type = SectorRessourceType.Food;
 		#endregion Fields
+
+		#region Ctor
+		public OnlyConstructOnSpecificResourceTypeSector(SectorRessourceType type)
+		{
+			_type = type;
+		}
+
+		#endregion Ctor
 
 		#region Methods
 		bool IConstructionRule.CanConstruct(Vector3 position)

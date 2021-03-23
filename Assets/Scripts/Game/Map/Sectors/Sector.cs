@@ -85,7 +85,7 @@
 
 		bool ISector.ContainsPosition(Vector3 point)
 		{
-			return _sectorData.ConvexPolygon.ContainsPoint(new Vector3(point.x, 0, point.z));
+			return _sectorData.ConvexPolygon.ContainsPoint(new Vector2(point.x, point.z));
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()

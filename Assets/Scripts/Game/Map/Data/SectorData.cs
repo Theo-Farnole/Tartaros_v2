@@ -26,9 +26,9 @@
 
 		public Vertex2D this[int i] => _vertices[i];
 		public int VerticesCount => _vertices.Count;
-		public Vector3[] AllPoints => _vertices.Select(x => x.WorldPosition).ToArray();
-		public Vector3 Centroid => MathHelper.CalculateCentroid(AllPoints);
-		public ConvexPolygon ConvexPolygon => new ConvexPolygon(AllPoints.Select(vector => new Vector2(vector.x, vector.z)).ToArray());
+		public Vector3[] AllWorldsPoint => _vertices.Select(x => x.WorldPosition).ToArray();
+		public Vector3 Centroid => MathHelper.CalculateCentroid(AllWorldsPoint);
+		public ConvexPolygon ConvexPolygon => new ConvexPolygon(AllWorldsPoint.Select(vector => new Vector2(vector.x, vector.z)).ToArray());
 		#endregion Properties
 
 		#region Methods
