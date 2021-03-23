@@ -7,8 +7,9 @@
 	using Tartaros.Economy;
 	using Tartaros.Gamemode;
 	using Tartaros.ServicesLocator;
+    using Tartaros.Gamemode.State;
 
-	public class ConstructionManager : MonoBehaviour
+    public class ConstructionManager : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -40,7 +41,14 @@
 
 		public void EnterConstructionMode(IConstructable toBuild)
 		{
-			_gamemodeManager.SetState(new ConstructionStateV2(_gamemodeManager, toBuild));
+            if (toBuild.IsChained)
+            {
+				_gamemodeManager.SetState(new WallConstructionState(_gamemodeManager, toBuild));
+            }
+            else
+            {
+				_gamemodeManager.SetState(new ConstructionStateV2(_gamemodeManager, toBuild));
+            }
 		}
 		#endregion
 	}

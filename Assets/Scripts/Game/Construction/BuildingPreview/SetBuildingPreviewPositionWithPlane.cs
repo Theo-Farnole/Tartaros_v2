@@ -25,13 +25,15 @@
             Ray ray = Camera.main.ScreenPointToRay(_inputs.Camera.MousePosition.ReadValue<Vector2>());
 
             float enter = 0;
-
             if (_plane.Raycast(ray, out enter))
             {
                 Vector3 hitPoint = ray.GetPoint(enter);
                 return hitPoint;
             }
-            return Vector3.zero;
+            else
+            {
+                return Vector3.zero;
+            }
         }
 
         private void InstanciatePlane()
