@@ -28,13 +28,15 @@
 		{
 			switch (team)
 			{
-				case Team.Player:					
+				case Team.Player:
 				case Team.Enemy:
 					return true;
 
 				case Team.Neutral:
-				default:
 					return false;
+
+				default:
+					throw new System.NotImplementedException();
 			}
 		}
 	}
