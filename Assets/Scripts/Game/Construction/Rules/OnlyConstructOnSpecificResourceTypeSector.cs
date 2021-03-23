@@ -9,6 +9,8 @@
 	public class OnlyConstructOnSpecificResourceTypeSector : IConstructionRule
 	{
 		#region Fields
+		private const string DBG_ERR_NO_SECTOR_FOUND = "No sector found at position {0}. Return true by default.";
+
 		[SerializeField]
 		private SectorRessourceType _type = SectorRessourceType.Food;
 		#endregion Fields
@@ -27,7 +29,20 @@
 			IMap map = Services.Instance.Get<IMap>();
 			ISector sectorOnPosition = map.GetSectorOnPosition(position);
 
-			return ContainsResourceFlag(sectorOnPosition, _type);
+			if (sectorOnPosition != null)
+			{
+				return ContainsResourceFlag(sectorOnPosition, _type);
+			}
+			else
+			{
+				Debug.LogErrorFormat(BuildErrorMessage_NoSectorFoundAtPosition(position));
+				return true;
+			}
+		}
+
+		public static string BuildErrorMessage_NoSectorFoundAtPosition(Vector3 position)
+		{
+			return string.Format(DBG_ERR_NO_SECTOR_FOUND, position);
 		}
 
 		private bool ContainsResourceFlag(ISector sectorOnPosition, SectorRessourceType type)
@@ -37,14 +52,14 @@
 
 		private int GetResourceFlagCount(ISector sector, SectorRessourceType type)
 		{
-			return sector.ObjectsInSector.Count(x => IsResourceFlag(x, type));
+			return sector.ObjectsInSector.Count(objectInSector => IsResourceFlag(objectInSector, type));
 		}
 
 		private bool IsResourceFlag(GameObject gameObject, SectorRessourceType type)
 		{
 			if (gameObject.TryGetComponent(out FlagResourceToSector incomeGenerator))
 			{
-				return incomeGenerator.Type == _type;
+				return incomeGenerator.Type == type;
 			}
 			else
 			{

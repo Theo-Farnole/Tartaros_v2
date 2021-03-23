@@ -7,7 +7,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	internal static class SetupHelper
+	public static class SetupHelper
 	{
 		public static Services CreateService()
 		{
