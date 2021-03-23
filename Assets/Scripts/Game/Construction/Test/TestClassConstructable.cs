@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Construction
 {
 	using Tartaros.Economy;
+	using Tartaros.Map;
 	using Tartaros.UI;
 	using UnityEngine;
 
@@ -17,5 +18,7 @@
 		Vector2 IConstructable.Size => _size;
 
 		Sprite IPortraiteable.Portrait => null;
+
+		IConstructionRule[] IConstructable.Rules => throw new System.NotImplementedException();
 	}
 }

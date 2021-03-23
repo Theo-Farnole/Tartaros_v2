@@ -2,6 +2,7 @@
 namespace Tartaros.Construction
 {
 	using Tartaros.Economy;
+	using Tartaros.Map;
 	using Tartaros.UI;
 	using UnityEngine;
 
@@ -10,5 +11,6 @@ namespace Tartaros.Construction
 		GameObject ModelPrefab { get; }
 		ISectorResourcesWallet Price { get; }
 		Vector2 Size { get; }
+		IConstructionRule[] Rules { get; }
 	}
 }

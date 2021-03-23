@@ -29,8 +29,6 @@
 		public SectorData SectorData => _sectorData;
 		public bool IsCaptured => _isCaptured;
 
-		ConvexPolygon ISector.Polygon => _sectorData.ConvexPolygon;
-
 		GameObject[] ISector.ObjectsInSector
 		{
 			get
@@ -83,6 +81,11 @@
 			_playerWallet.Buy(SectorData.CapturePrice);
 
 			OnCapture();
+		}
+
+		bool ISector.ContainsPosition(Vector3 point)
+		{
+			return _sectorData.ConvexPolygon.ContainsPoint(new Vector3(point.x, 0, point.z));
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()

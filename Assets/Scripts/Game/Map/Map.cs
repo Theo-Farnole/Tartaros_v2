@@ -63,9 +63,19 @@
 
 		ISector IMap.GetSectorOnPosition(Vector3 position)
 		{
-			return ObjectsFinder.FindObjectsOfInterface<ISector>()
-				.Where(x => x.Polygon.ContainsPoint(position))
-				.FirstOrDefault();
+			ISector[] sectors = ObjectsFinder.FindObjectsOfInterface<ISector>();
+
+			foreach (var sector in sectors)
+			{
+				if (sector.ContainsPosition(position))
+				{
+					Debug.LogFormat("GetSectorOnPosition returns sector {0} at position {1}.", sector.ToString(), position);
+					return sector;
+				}
+			}
+
+			Debug.LogFormat("No sector found at position {0}", position);
+			return null;
 		}
 		#endregion Methods
 	}
