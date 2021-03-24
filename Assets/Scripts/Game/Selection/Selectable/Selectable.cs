@@ -17,11 +17,13 @@
 		#endregion Fields
 
 		#region Properties
+		public bool CanBeMultiSelected { get => _canBeMultiSelected; set => _canBeMultiSelected = value; }
+		public Team Team { get => _team; set => _team = value; }
 		bool ISelectable.CanBeSelected { get; }
 		Vector3 ISelectable.Position => transform.position;
 		GameObject ISelectable.GameObject => gameObject;
 		Team ISelectable.Team { get => _team; set => _team = value; }
-		bool ISelectable.CanBeMultiSelected => _canBeMultiSelected;
+		bool ISelectable.CanBeMultiSelected { get => _canBeMultiSelected; }
 		#endregion Properties
 
 		#region Events

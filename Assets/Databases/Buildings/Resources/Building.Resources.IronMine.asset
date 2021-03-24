@@ -29,7 +29,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.ResourcesGeneration.EntityResourcesGenerationData,
@@ -85,6 +85,9 @@ MonoBehaviour:
     - Name: _modelPrefab
       Entry: 10
       Data: 1
+    - Name: _IsChained
+      Entry: 5
+      Data: false
     - Name: _constructionPrice
       Entry: 7
       Data: 5|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -198,6 +201,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|Tartaros.Entities.EntitySelectable, Tartaros
+    - Name: _canBeMultiSelected
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 

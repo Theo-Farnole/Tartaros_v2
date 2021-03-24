@@ -16,8 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 4740395784054915281, guid: 99d2218f639cf4042baa4ec4b93e749d, type: 3}
     - {fileID: 21300000, guid: 8af83fcc1a2547d41a76dac2a50c13cc, type: 3}
+    - {fileID: 4740395784054915281, guid: 99d2218f639cf4042baa4ec4b93e749d, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -28,7 +28,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.EntityCarveNavMeshData, Tartaros
@@ -65,9 +65,15 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 3|Tartaros.UI.EntityConstructableData, Tartaros
-    - Name: _modelPrefab
+    - Name: _portrait
       Entry: 10
       Data: 0
+    - Name: _modelPrefab
+      Entry: 10
+      Data: 1
+    - Name: _IsChained
+      Entry: 5
+      Data: false
     - Name: _constructionPrice
       Entry: 7
       Data: 4|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -148,9 +154,18 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: _portrait
-      Entry: 10
-      Data: 1
+    - Name: _rules
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Tartaros.Entities.EntitySelectable, Tartaros
+    - Name: _canBeMultiSelected
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
