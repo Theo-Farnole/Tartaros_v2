@@ -305,6 +305,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "AddNewWallSections",
+                    "type": "Button",
+                    "id": "c0a3bd7a-fb93-4164-8c75-e207f4200cf2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -323,7 +331,7 @@
                     "name": "",
                     "id": "91cb0233-9f0d-4fc4-aa79-7bcf664a7d3f",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ValidateConstruction",
@@ -338,6 +346,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ExitConstruction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "612db67f-f688-4bf9-8c96-8f71e1cb9140",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddNewWallSections",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

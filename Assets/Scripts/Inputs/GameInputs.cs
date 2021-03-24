@@ -318,6 +318,14 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AddNewWallSections"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0a3bd7a-fb93-4164-8c75-e207f4200cf2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -336,7 +344,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""91cb0233-9f0d-4fc4-aa79-7bcf664a7d3f"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ValidateConstruction"",
@@ -351,6 +359,17 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ExitConstruction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""612db67f-f688-4bf9-8c96-8f71e1cb9140"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddNewWallSections"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -442,6 +461,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
         m_Construction_EnterConstruction = m_Construction.FindAction("EnterConstruction", throwIfNotFound: true);
         m_Construction_ValidateConstruction = m_Construction.FindAction("ValidateConstruction", throwIfNotFound: true);
         m_Construction_ExitConstruction = m_Construction.FindAction("ExitConstruction", throwIfNotFound: true);
+        m_Construction_AddNewWallSections = m_Construction.FindAction("AddNewWallSections", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -657,6 +677,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Construction_EnterConstruction;
     private readonly InputAction m_Construction_ValidateConstruction;
     private readonly InputAction m_Construction_ExitConstruction;
+    private readonly InputAction m_Construction_AddNewWallSections;
     public struct ConstructionActions
     {
         private @GameInputs m_Wrapper;
@@ -664,6 +685,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
         public InputAction @EnterConstruction => m_Wrapper.m_Construction_EnterConstruction;
         public InputAction @ValidateConstruction => m_Wrapper.m_Construction_ValidateConstruction;
         public InputAction @ExitConstruction => m_Wrapper.m_Construction_ExitConstruction;
+        public InputAction @AddNewWallSections => m_Wrapper.m_Construction_AddNewWallSections;
         public InputActionMap Get() { return m_Wrapper.m_Construction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -682,6 +704,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @ExitConstruction.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnExitConstruction;
                 @ExitConstruction.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnExitConstruction;
                 @ExitConstruction.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnExitConstruction;
+                @AddNewWallSections.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnAddNewWallSections;
+                @AddNewWallSections.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnAddNewWallSections;
+                @AddNewWallSections.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnAddNewWallSections;
             }
             m_Wrapper.m_ConstructionActionsCallbackInterface = instance;
             if (instance != null)
@@ -695,6 +720,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @ExitConstruction.started += instance.OnExitConstruction;
                 @ExitConstruction.performed += instance.OnExitConstruction;
                 @ExitConstruction.canceled += instance.OnExitConstruction;
+                @AddNewWallSections.started += instance.OnAddNewWallSections;
+                @AddNewWallSections.performed += instance.OnAddNewWallSections;
+                @AddNewWallSections.canceled += instance.OnAddNewWallSections;
             }
         }
     }
@@ -769,5 +797,6 @@ public class @GameInputs : IInputActionCollection, IDisposable
         void OnEnterConstruction(InputAction.CallbackContext context);
         void OnValidateConstruction(InputAction.CallbackContext context);
         void OnExitConstruction(InputAction.CallbackContext context);
+        void OnAddNewWallSections(InputAction.CallbackContext context);
     }
 }

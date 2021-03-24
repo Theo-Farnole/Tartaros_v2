@@ -1,15 +1,42 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-namespace Tartaros.Construction
+﻿namespace Tartaros.Construction
 {
-    public class ConstructionInputs 
+    using System;
+    using System.Collections;
+    using UnityEngine;
+    using UnityEngine.InputSystem;
+    using static UnityEngine.InputSystem.InputAction;
+
+    public class ConstructionInputs
     {
 
         private IBuildingPreviewPosition _buildingPreviewPosition = null;
         private GameInputs _input = null;
 
+        public event Action<CallbackContext> ValidatePerformed
+        {
+            add
+            {
+                _input.Construction.ValidateConstruction.performed += value;
+            }
+
+            remove
+            {
+                _input.Construction.ValidateConstruction.performed -= value;
+            }
+        }
+
+        public event Action<CallbackContext> CrtlPerformed
+        {
+            add
+            {
+                _input.Construction.AddNewWallSections.performed += value;
+            }
+
+            remove
+            {
+                _input.Construction.AddNewWallSections.performed -= value;
+            }
+        }
         public ConstructionInputs()
         {
             _input = new GameInputs();
@@ -20,6 +47,11 @@ namespace Tartaros.Construction
         public Vector3 GetPreviewPosition()
         {
             return _buildingPreviewPosition.GetPreviewPosition();
+        }
+
+        public bool IsCtrlPerformed()
+        {
+            return _input.Construction.AddNewWallSections.phase == InputActionPhase.Performed;
         }
 
         public bool IsValidatePerformed()

@@ -26,6 +26,7 @@
             return _buildingPreview.transform.position;
         }
 
+
         public void DestroyMethod()
         {
             GameObject.Destroy(_buildingPreview);
