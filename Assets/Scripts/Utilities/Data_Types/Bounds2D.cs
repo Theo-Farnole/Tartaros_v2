@@ -18,6 +18,8 @@
 
 		public float MinY { get => boundsY.min; set => boundsY.min = value; }
 		public float MaxY { get => boundsY.max; set => boundsY.max = value; }
+		public float Width => boundsX.max - boundsX.min;
+		public float Height => boundsY.max - boundsY.min;
 		#endregion Properties
 
 		#region Ctor

@@ -145,14 +145,14 @@
             {
                 Transform transform = wall.transform;
                 GameObject.Destroy(wall);
-                GameObject wallInstanciate = GameObject.Instantiate(_constructable.ModelPrefab, transform.position, transform.rotation);
+                GameObject wallInstanciate = GameObject.Instantiate(_constructable.PreviewPrefab, transform.position, transform.rotation);
             }
 
             foreach (GameObject corner in _wallCorners)
             {
                 Transform transform = corner.transform;
                 GameObject.Destroy(corner);
-                GameObject wallInstanciate = GameObject.Instantiate(_constructable.ModelPrefab, transform.position, transform.rotation);
+                GameObject wallInstanciate = GameObject.Instantiate(_constructable.PreviewPrefab, transform.position, transform.rotation);
             }
         }
 

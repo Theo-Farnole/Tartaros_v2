@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public class ConvexPolygon
+	public class ConvexPolygon : IContainable
 	{
 		public List<Vector2> points = new List<Vector2>();
 
@@ -21,5 +21,7 @@
 		{
 			return MathHelper.IsPointInPolygon(points, point);
 		}
+
+		bool IContainable.ContainsPosition(Vector3 worldPosition) => ContainsWorldPosition(worldPosition);
 	}
 }

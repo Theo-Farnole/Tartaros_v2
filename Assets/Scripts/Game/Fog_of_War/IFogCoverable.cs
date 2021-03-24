@@ -1,10 +1,8 @@
 ﻿namespace Tartaros.FogOfWar
 {
-    using UnityEngine;
-    public interface IFogCoverable
-    {
-        bool IsCovered { get; }
-
-        Rect GetWorldVolume();
-    }
+	public interface IFogCoverable
+	{
+		bool IsCovered { get; set; }
+		IContainable Volume { get; }
+	}
 }
