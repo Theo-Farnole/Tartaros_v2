@@ -4,6 +4,6 @@
 
 	public interface IContainable
 	{
-		public bool ContainsPosition(Vector3 worldPosition);
+		bool ContainsPosition(Vector3 worldPosition);
 	}
 }
