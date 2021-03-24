@@ -58,9 +58,13 @@
 			EntitySpawned?.Invoke(this, new EntitySpawnedArgs(this));
 		}
 
-		public void Kill()
+		private void OnDestroy()
 		{
 			EntityKilled?.Invoke(this, new EntityKilledArgs(this));
+		}
+
+		public void Kill()
+		{
 
 			Destroy(gameObject);
 		}
