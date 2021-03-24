@@ -10,7 +10,7 @@
 
         public BuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
         {
-            GameObject buildingPreview = GameObject.Instantiate(toBuild.ModelPrefab, positionToInstancate, Quaternion.identity);
+            GameObject buildingPreview = GameObject.Instantiate(toBuild.PreviewPrefab, positionToInstancate, Quaternion.identity);
 
             _buildingPreview = buildingPreview;
         }

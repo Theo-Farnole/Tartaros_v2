@@ -91,7 +91,7 @@ namespace Tartaros.Construction
 
 		private void InstanciateBuilding()
 		{
-			GameObject buildingConstruct = GameObject.Instantiate(_constructable.ModelPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
+			GameObject buildingConstruct = GameObject.Instantiate(_constructable.GameplayPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
 		}
 
 		private void PayPriceRessources()

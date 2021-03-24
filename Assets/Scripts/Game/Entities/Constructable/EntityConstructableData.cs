@@ -16,6 +16,10 @@
 
 		[SerializeField]
 		private GameObject _modelPrefab = null;
+
+		[SerializeField]
+		private GameObject _gameplayPrefab = null;
+
 		[SerializeField]
 		private bool _IsChained = false;
 
@@ -30,7 +34,7 @@
 		#endregion Fields
 
 		#region Properties
-		GameObject IConstructable.ModelPrefab => _modelPrefab;
+		GameObject IConstructable.PreviewPrefab => _modelPrefab;
 
 		ISectorResourcesWallet IConstructable.Price => _constructionPrice;
 
@@ -40,12 +44,15 @@
 
 		IConstructionRule[] IConstructable.Rules => _rules;
 
-        bool IConstructable.IsChained =>_IsChained;
-        #endregion Properties
+		bool IConstructable.IsChained => _IsChained;
 
-        #region Methods
-        void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
+		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
+		#endregion Properties
+
+		#region Methods
+		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
+			//GameObject.Instantiate(_modelPrefab, entityRoot.transform);
 			// TODO TF: use carve mesh here
 		}
 

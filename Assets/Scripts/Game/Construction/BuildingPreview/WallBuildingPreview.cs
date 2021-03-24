@@ -17,7 +17,7 @@
         public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition)
         {
             _toBuild = toBuild;
-            _buildingPreview = toBuild.ModelPrefab;
+            _buildingPreview = toBuild.PreviewPrefab;
             _startPosition = startPosition;
             InstanciatePreview(_startPosition);
         }

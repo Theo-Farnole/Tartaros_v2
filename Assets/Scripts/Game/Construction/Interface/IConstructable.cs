@@ -7,7 +7,8 @@ namespace Tartaros.Construction
 
 	public interface IConstructable : IPortraiteable
 	{
-		GameObject ModelPrefab { get; }
+		GameObject PreviewPrefab { get; }
+		GameObject GameplayPrefab { get; }
 		ISectorResourcesWallet Price { get; }
 		Vector2 Size { get; }
 

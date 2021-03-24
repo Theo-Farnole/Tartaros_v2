@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8354196551474623153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8354196551474623119}
+  - component: {fileID: 8354196551474623152}
+  - component: {fileID: 5241146246186131427}
+  m_Layer: 0
+  m_Name: Building.Resources.StoneQuary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8354196551474623119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354196551474623153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7820040559153794001}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8354196551474623152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354196551474623153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64de5000312a62b4a89a4c83a1890c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityData: {fileID: 11400000, guid: e091fb80bc9b71848a326d21fc00a624, type: 2}
+--- !u!114 &5241146246186131427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354196551474623153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07bf40f2cc7fac84ea080221bc5d1b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 7820040558449023240}
+  _selectedMaterial: {fileID: 2100000, guid: bf1ef890ac3a7094996e9f3b7aa1de5a, type: 2}
+--- !u!1001 &8529369688163972573
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8354196551474623119}
+    m_Modifications:
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934355408172695053, guid: e868847483ddbb94990beb0140dbc729,
+        type: 3}
+      propertyPath: m_Name
+      value: Building.Resources.StoneQuarry.Preview
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e868847483ddbb94990beb0140dbc729, type: 3}
+--- !u!4 &7820040559153794001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1934355408172695052, guid: e868847483ddbb94990beb0140dbc729,
+    type: 3}
+  m_PrefabInstance: {fileID: 8529369688163972573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7820040558449023240 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1934355408944573653, guid: e868847483ddbb94990beb0140dbc729,
+    type: 3}
+  m_PrefabInstance: {fileID: 8529369688163972573}
+  m_PrefabAsset: {fileID: 0}
