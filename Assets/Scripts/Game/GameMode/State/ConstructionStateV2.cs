@@ -71,6 +71,8 @@ namespace Tartaros.Construction
 			GameObject buildingConstruct = GameObject.Instantiate(_constructable.GameplayPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
 		}
 
+		
+
 		private void PayPriceRessources()
 		{
 			_playerSectorRessources.Buy(_constructable.Price);

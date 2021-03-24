@@ -18,6 +18,7 @@
         private IMap _map = null;
         private List<GameObject> _wallSections = new List<GameObject>();
         private List<GameObject> _wallCorners = new List<GameObject>();
+        private ISectorResourcesWallet _pricePreview = SectorResourcesWallet.Zero;
 
         public WallConstructionState(GamemodeManager gamemodeManager, IConstructable constructable) : base(gamemodeManager)
         {
@@ -90,6 +91,7 @@
         private void ContinueWallPreview()
         {
             AddWallPreviewOnList();
+            _pricePreview = GetTotalPriceOfConstruction();
             Vector3 lastPosition = _wallSectionPreview.GetAllCornerPreview()[1].transform.position;
             _wallSectionPreview = null;
             _wallSectionPreview = new WallBuildingPreview(_constructable, lastPosition);
@@ -108,6 +110,7 @@
             if (_wallSectionPreview != null)
             {
                 _wallSectionPreview.CheckLine(_inputs.GetPreviewPosition());
+                ShowPriceTotal();
             }
         }
 
@@ -121,6 +124,7 @@
         private void ValidateFinish()
         {
             AddWallPreviewOnList();
+            PayPriceRessources();
             InstanciateWallSection();
             LeaveState();
         }
@@ -130,7 +134,7 @@
             foreach (GameObject wallSection in _wallSectionPreview.GetAllSectionPreview())
             {
                 _wallSections.Add(wallSection);
-                
+
             }
 
             foreach (GameObject wallCorner in _wallSectionPreview.GetAllCornerPreview())
@@ -156,14 +160,59 @@
             }
         }
 
-        bool CanConstructHere()
+        private bool CanConstructHere()
         {
             return true;
+
+            return DoCanConstructOnMap() && DoCanConstructRulesAreValid();
+        }
+
+        private bool DoCanConstructOnMap()
+        {
+            foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+            {
+                if (_map.CanBuild(wallPreview.transform.position, _constructable.Size) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool DoCanConstructRulesAreValid()
+        {
+            foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+            {
+                if (_constructable.DoRulesPassAtPosition(wallPreview.transform.position) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private ISectorResourcesWallet GetTotalPriceOfConstruction()
+        {
+            ISectorResourcesWallet totalPrice = SectorResourcesWallet.Zero;
+
+            foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+            {
+                totalPrice.AddWallet(_constructable.Price);
+            }
+
+            totalPrice.AddWallet(_pricePreview);
+            return totalPrice;
+        }
+
+        private void ShowPriceTotal()
+        {
+            //TODO DJ: Ref l'UI Z
+            //Debug.LogFormat("{0}", GetTotalPriceOfConstruction().ToString());
         }
 
         private void PayPriceRessources()
         {
-            throw new System.NotImplementedException();
+            _playerSectorRessources.Buy(GetTotalPriceOfConstruction());
         }
 
         void LeaveState()

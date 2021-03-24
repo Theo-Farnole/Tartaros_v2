@@ -80,6 +80,11 @@
             return Vector3.Distance(_startPosition, end);
         }
 
+        public List<GameObject> GetWallBuildingPreview()
+        {
+            return _buildingsPreview;
+        }
+
         private void AddPreviewWall(GameObject previewToInstanciate)
         {
             _buildingsPreview.Add(previewToInstanciate);
