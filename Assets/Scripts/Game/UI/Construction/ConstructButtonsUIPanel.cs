@@ -1,10 +1,11 @@
 ﻿namespace Tartaros.UI
 {
+	using System.Collections.Generic;
 	using Tartaros.Construction;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class ConstructButtonsUIManager : MonoBehaviour
+	public class ConstructButtonsUIPanel : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -27,6 +28,8 @@
 
 		void BuildUI()
 		{
+			RemoveConstructButtonInRoot();
+
 			foreach (IConstructable constructable in _constructionManagerData.Constructables)
 			{
 				GameObject button = Instantiate(_constructButtonPrefab);
@@ -35,6 +38,31 @@
 
 				button.GetComponent<ConstructButton>().Initialize(constructable);
 			}
+		}
+
+		void RemoveConstructButtonInRoot()
+		{
+			foreach (var constructButton in GetConstructButtonsInRoot())
+			{
+				GameObject.Destroy(constructButton.gameObject);
+			}
+		}
+
+		ConstructButton[] GetConstructButtonsInRoot()
+		{
+			List<ConstructButton> output = new List<ConstructButton>();
+
+			for (int i = 0; i < _constructButtonRoot.transform.childCount; i++)
+			{
+				var child = _constructButtonRoot.transform.GetChild(i);
+
+				if (child.TryGetComponent(out ConstructButton constructButton))
+				{
+					output.Add(constructButton);
+				}
+			}
+
+			return output.ToArray();
 		}
 		#endregion Methods
 	}

@@ -22,6 +22,10 @@
 		private void Awake()
 		{
 			_button = GetComponent<Button>();
+		}
+
+		private void Start()
+		{
 			_constructionManager = Services.Instance.Get<ConstructionManager>();
 		}
 
