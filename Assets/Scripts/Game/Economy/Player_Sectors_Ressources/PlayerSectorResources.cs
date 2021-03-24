@@ -49,6 +49,11 @@
 		void ISectorResourcesWallet.RemoveAmount(SectorRessourceType ressource, int amount) => _playerWallet.RemoveAmount(ressource, amount);
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price) => _playerWallet.CanBuy(price);
 		void ISectorResourcesWallet.Buy(ISectorResourcesWallet price) => _playerWallet.Buy(price);
+
+		public override string ToString()
+		{
+			return _playerWallet.ToString();
+		}
 		#endregion Methods
 	}
 }
