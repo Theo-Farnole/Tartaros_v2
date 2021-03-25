@@ -19,6 +19,10 @@
 		public float MaxY => rect.yMax;
 		public float MinX => rect.xMin;
 		public float MaxX => rect.xMax;
+		public Vector2 Max => rect.max;
+		public Vector2 Min => rect.min;
+		public Vector2 TopLeft => new Vector2(MinX, MaxY);
+		public Vector2 BottomRight => new Vector2(MaxX, MinY);
 		#endregion Properties
 
 		#region Ctor

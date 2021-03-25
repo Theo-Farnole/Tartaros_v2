@@ -16,5 +16,14 @@
 			this.radius = radius;
 		}
 		#endregion Ctor
+
+		#region Fields
+		public bool ContainsPosition(Vector2 worldPosition)
+		{
+			// TODO TF: (perf) use sqrt
+			float dist = Vector2.Distance(position, worldPosition);
+			return dist <= radius;
+		}
+		#endregion Fields
 	}
 }

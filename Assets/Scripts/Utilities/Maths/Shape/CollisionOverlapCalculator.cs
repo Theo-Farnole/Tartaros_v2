@@ -16,5 +16,15 @@
 		{
 			return (rect1.X <= rect2.X + rect2.Width && rect1.X + rect1.Width >= rect2.X && rect1.Y <= rect2.Y + rect2.Height && rect1.Height + rect1.Y >= rect2.Y);
 		}
+
+		public static bool DoOverlap(Rectangle rect, Circle circle)
+		{
+			return DoOverlap(circle, rect);
+		}
+
+		public static bool DoOverlap(Circle circle, Rectangle rect)
+		{
+			return circle.ContainsPosition(rect.BottomRight) || circle.ContainsPosition(rect.TopLeft) || circle.ContainsPosition(rect.Min) || circle.ContainsPosition(rect.Max);
+		}
 	}
 }
