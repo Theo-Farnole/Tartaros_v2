@@ -23,7 +23,7 @@
 
         public float SpellRadius => _spellRadius;
         public GameObject PreCastVFXPrefab => _preCastVFXPrefab;
-        public GameObject CastVFXPrefab => _preCastVFXPrefab;
+        public GameObject CastVFXPrefab => _castVFXPrefab;
         public float LifeTime => _lifeTime;
         public float AttackFrequency => _attackFrequency; 
     }

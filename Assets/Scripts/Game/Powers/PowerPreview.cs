@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using Tartaros.Editor;
     using UnityEngine;
 
     public class PowerPreview
@@ -20,16 +21,12 @@
         public void SetPreviewPosition(Vector3 position)
         {
             _preview.transform.position = position;
+            //HandlesHelper.DrawSolidCircle(position, Vector3.up, _rangeRadius, Color.red);
         }
 
         public void DestroyMethods()
         {
             GameObject.Destroy(_preview);
-        }
-
-        public void Debug()
-        {
-
         }
     }
 }

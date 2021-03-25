@@ -17,6 +17,10 @@
         private void Awake()
         {
             Services.Instance.RegisterService(this);
+        }
+
+        private void Start()
+        {
             _gameModeManager = Services.Instance.Get<GamemodeManager>();
         }
 

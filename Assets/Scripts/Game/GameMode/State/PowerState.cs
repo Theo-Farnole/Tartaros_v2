@@ -33,7 +33,7 @@
         {
             if (CanCastHere())
             {
-                Validate();
+                CastSpell();
             }
         }
 
@@ -51,11 +51,6 @@
             _inputs.ValidatePerformed -= _inputs_ValidatePerformed;
         }
 
-        private void Validate()
-        {
-            CastSpell();
-        }
-
         private bool CanCastHere()
         {
             return true;
@@ -69,9 +64,10 @@
 
         private void CastSpell()
         {
-
             GameObject powerInstanciate = GameObject.Instantiate(_power.prefabPower, _inputs.GetMousePosition(), Quaternion.identity);
-
+           // _power.Cast();
+            _preview.DestroyMethods();
+            _stateOwner.SetState(new PlayState(_stateOwner));
             //throw new System.NotImplementedException();
         }
     }
