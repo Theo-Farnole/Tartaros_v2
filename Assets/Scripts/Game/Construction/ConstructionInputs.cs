@@ -9,7 +9,7 @@
     public class ConstructionInputs
     {
 
-        private IBuildingPreviewPosition _buildingPreviewPosition = null;
+        private IMousePosition _mousePosition = null;
         private GameInputs _input = null;
 
         public event Action<CallbackContext> ValidatePerformed
@@ -41,12 +41,12 @@
         {
             _input = new GameInputs();
             _input.Construction.Enable();
-            _buildingPreviewPosition = new SetBuildingPreviewPositionWithPlane();
+            _mousePosition = new SetMousePositionWithPlane();
         }
 
-        public Vector3 GetPreviewPosition()
+        public Vector3 GetMousePosition()
         {
-            return _buildingPreviewPosition.GetPreviewPosition();
+            return _mousePosition.GetPreviewPosition();
         }
 
         public bool IsCtrlPerformed()

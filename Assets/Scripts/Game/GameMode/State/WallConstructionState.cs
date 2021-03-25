@@ -26,7 +26,7 @@
             _inputs = new ConstructionInputs();
             _playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
             _map = Services.Instance.Get<IMap>();
-            _buildingPreview = new BuildingPreview(_constructable, _inputs.GetPreviewPosition());
+            _buildingPreview = new BuildingPreview(_constructable, _inputs.GetMousePosition());
         }
 
         public override void OnStateEnter()
@@ -101,7 +101,7 @@
         {
             if (_buildingPreview != null)
             {
-                _buildingPreview.SetBuildingPreviewPosition(_inputs.GetPreviewPosition());
+                _buildingPreview.SetBuildingPreviewPosition(_inputs.GetMousePosition());
             }
         }
 
@@ -109,7 +109,7 @@
         {
             if (_wallSectionPreview != null)
             {
-                _wallSectionPreview.CheckLine(_inputs.GetPreviewPosition());
+                _wallSectionPreview.CheckLine(_inputs.GetMousePosition());
                 ShowPriceTotal();
             }
         }

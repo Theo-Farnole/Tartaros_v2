@@ -21,7 +21,7 @@ namespace Tartaros.Construction
 		{
 			_constructable = constructable;
 			_constructionInput = new ConstructionInputs();
-			_buildingPreview = new BuildingPreview(_constructable, _constructionInput.GetPreviewPosition());
+			_buildingPreview = new BuildingPreview(_constructable, _constructionInput.GetMousePosition());
 			_playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
 			_map = Services.Instance.Get<IMap>();
 		}
@@ -30,7 +30,7 @@ namespace Tartaros.Construction
 		{
 			base.OnUpdate();
 
-			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetPreviewPosition());
+			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetMousePosition());
 
 			if (_constructionInput.IsValidatePerformed())
 			{

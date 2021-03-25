@@ -2,7 +2,7 @@
 
 namespace Tartaros.Construction
 {
-    public interface IBuildingPreviewPosition
+    public interface IMousePosition
     {
         Vector3 GetPreviewPosition();
     }

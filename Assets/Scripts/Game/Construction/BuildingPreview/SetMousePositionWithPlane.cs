@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using UnityEngine;
-    public class SetBuildingPreviewPositionWithPlane : IBuildingPreviewPosition
+    public class SetMousePositionWithPlane : IMousePosition
     {
 
         private Vector3 _planeDistanceFromCamera;
@@ -11,7 +11,7 @@
         private GameInputs _inputs = null;
         private float _offsetHeightMap = 0;
 
-        public SetBuildingPreviewPositionWithPlane()
+        public SetMousePositionWithPlane()
         {
             _inputs = new GameInputs();
             _inputs.Camera.Enable();
@@ -42,7 +42,7 @@
             _plane = new Plane(Vector3.up, _planeDistanceFromCamera);
         }
 
-        Vector3 IBuildingPreviewPosition.GetPreviewPosition()
+        Vector3 IMousePosition.GetPreviewPosition()
         {
             return MousePositionOnGround();
         }
