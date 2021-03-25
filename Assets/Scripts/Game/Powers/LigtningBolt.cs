@@ -67,13 +67,11 @@
 
         private void InstanciatePrecastVFX()
         {
-            
            _preCastVFX = GameObject.Instantiate(_data.PreCastVFXPrefab, transform.position, Quaternion.identity);
         }
 
         private void InstanciateCastVFX()
         {
-            Debug.Log(_data.CastVFXPrefab);
             _castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity);
         }
 

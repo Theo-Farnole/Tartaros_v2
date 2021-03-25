@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1157637322191692058}
   - component: {fileID: 271343699824096116}
+  - component: {fileID: 6296951557632705190}
   m_Layer: 0
   m_Name: ControlledAoE_test
   m_TagString: Untagged
@@ -43,3 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800946b4e180a76499554f0baa381217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6296951557632705190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232756025107487623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _canBeMultiSelected: 1
