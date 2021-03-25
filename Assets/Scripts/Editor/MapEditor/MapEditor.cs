@@ -1,8 +1,6 @@
 ﻿namespace Tartaros.Map.Editor
 {
-	using System.Collections.Generic;
 	using Tartaros.Editor;
-	using Tartaros.Math;
 	using UnityEditor;
 	using UnityEngine;
 

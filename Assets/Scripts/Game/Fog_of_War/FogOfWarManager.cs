@@ -98,7 +98,7 @@
 		{
 			foreach (IFogVision vision in _visions)
 			{
-				if (vision.IsEnable() && vision.IsPointVisible(worldPosition) == true)
+				if (vision.IsPointVisible(worldPosition) == true)
 				{
 					return true;
 				}
@@ -124,10 +124,10 @@
 
 		private bool IsCoverableVisible(IFogCoverable coverable)
 		{
-			return IsVolumeVisibile(coverable.Volume);
+			return IsContainableVisible(coverable);
 		}
 
-		private bool IsVolumeVisibile(IContainable containable)
+		private bool IsContainableVisible(IContainable containable)
 		{
 			for (int i = 0; i < _visibleCells.GetLength(0); i++)
 			{

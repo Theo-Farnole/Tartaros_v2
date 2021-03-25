@@ -3,6 +3,7 @@
 	using System.Collections.Generic;
 	using UnityEditor;
 	using UnityEngine;
+	using UnityEngine.Rendering;
 
 	public static class HandlesHelper
 	{
@@ -31,6 +32,27 @@
 					return DEFAULT_COLOR;
 				}
 			}
+		}
+
+		public static void DrawSolidCircle(Vector3 position, Vector3 up, float radius, Color color)
+		{
+			Color wireColor = color;
+			Color fillColor = color;
+			fillColor.a = 0.1f;
+
+			Handles.zTest = CompareFunction.LessEqual;
+
+			PushColor(wireColor);
+			{
+				Handles.DrawWireDisc(position, up, radius);
+			}
+			PopColor();
+
+			PushColor(fillColor);
+			{
+				Handles.DrawSolidDisc(position, up, radius);
+			}
+			PopColor();
 		}
 	}
 }

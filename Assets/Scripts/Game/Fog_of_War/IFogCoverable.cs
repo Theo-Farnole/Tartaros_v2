@@ -1,8 +1,7 @@
 ﻿namespace Tartaros.FogOfWar
 {
-	public interface IFogCoverable
+	public interface IFogCoverable : IContainable
 	{
-		bool IsCovered { get; set; }
-		IContainable Volume { get; }
+		bool IsCovered { get; set; }		
 	}
 }

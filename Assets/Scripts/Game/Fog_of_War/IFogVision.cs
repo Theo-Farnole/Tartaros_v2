@@ -5,7 +5,6 @@ namespace Tartaros.FogOfWar
 
     public interface IFogVision
     {
-        bool IsPointVisible(Vector2 worldPoint);
-        bool IsEnable();
+        bool IsPointVisible(Vector3 worldPoint);
     }
 }
