@@ -2,6 +2,7 @@
 {
 	using UnityEngine;
 
+	[System.Serializable]
 	public class Bounds2D
 	{
 		#region Fields
@@ -18,8 +19,10 @@
 
 		public float MinY { get => boundsY.min; set => boundsY.min = value; }
 		public float MaxY { get => boundsY.max; set => boundsY.max = value; }
-		public float Width => boundsX.max - boundsX.min;
-		public float Height => boundsY.max - boundsY.min;
+		public float Width => boundsX.Size;
+		public float Height => boundsY.Size;
+		public float CenterX => boundsX.Center;
+		public float CenterY => boundsY.Center;
 		#endregion Properties
 
 		#region Ctor
@@ -44,6 +47,14 @@
 				&& cursorX <= bounds.boundsX.max
 				&& cursorY >= bounds.boundsY.min
 				&& cursorY <= bounds.boundsY.max);
+		}
+
+		public void DrawGizmos()
+		{
+			Vector3 center = new Vector3(CenterX, 0, CenterY);
+			Vector3 size = new Vector3(Width, 0, Height);
+
+			Gizmos.DrawWireCube(center, size);
 		}
 		#endregion Ctor
 	}
