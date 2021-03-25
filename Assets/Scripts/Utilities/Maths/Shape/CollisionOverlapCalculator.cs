@@ -26,5 +26,23 @@
 		{
 			return circle.ContainsPosition(rect.BottomRight) || circle.ContainsPosition(rect.TopLeft) || circle.ContainsPosition(rect.Min) || circle.ContainsPosition(rect.Max);
 		}
+
+		public static bool DoOverlap(ConvexPolygon polygon, Circle circle)
+		{
+			return DoOverlap(circle, polygon);
+		}
+
+		public static bool DoOverlap(Circle circle, ConvexPolygon polygon)
+		{
+			foreach (Vector2 point in polygon.vertices)
+			{
+				if (circle.ContainsPosition(point) == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
 	}
 }
