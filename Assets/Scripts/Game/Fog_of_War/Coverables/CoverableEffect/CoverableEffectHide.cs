@@ -1,11 +1,14 @@
 ﻿namespace Tartaros.FogOfWar
 {
+	using Sirenix.OdinInspector;
 	using UnityEngine;
 
 	public class CoverableEffectHide : MonoBehaviour, ICoverableEffect
 	{
 		#region Fields
 		[SerializeField]
+		[Required]
+		[ChildGameObjectsOnly]
 		private MeshRenderer _meshRenderer = null;
 		#endregion Fields
 

@@ -1,6 +1,8 @@
 ﻿namespace Tartaros.FogOfWar
 {
 	using Tartaros;
+	using Tartaros.ServicesLocator;
+	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class FogCoverablePosition : MonoBehaviour, IFogCoverable
@@ -8,6 +10,7 @@
 		#region Fields
 		private bool _isCovered = false;
 		private ICoverableEffect _coverableEffect = null;
+		private FogOfWarManager _fogOfWarManager = null;
 		#endregion Fields
 
 		#region Properties
@@ -35,6 +38,8 @@
 				}
 			}
 		}
+
+		BoundsXZ IFogCoverable.ModelBounds => throw new System.NotImplementedException();
 		#endregion Properties
 
 		#region Methods
@@ -48,9 +53,23 @@
 			}
 		}
 
-		bool IContainable.ContainsPosition(Vector3 worldPosition)
+		void Start()
 		{
-			return worldPosition == transform.position;
+			_fogOfWarManager = Services.Instance.Get<FogOfWarManager>();
+			_fogOfWarManager.AddCoverable(this);
+		}
+
+		void OnEnable()
+		{
+			if (_fogOfWarManager != null)
+			{
+				_fogOfWarManager.AddCoverable(this);
+			}
+		}
+
+		void OnDisable()
+		{
+			_fogOfWarManager.RemoveCoverable(this);
 		}
 		#endregion Methods
 	}

@@ -15,9 +15,7 @@
 		private List<IFogVision> _visions = new List<IFogVision>();
 		private List<IFogCoverable> _coverables = new List<IFogCoverable>();
 
-		private bool[,] _visibleCells = null;
 		private Bounds2D bounds = null;
-		private IMap _map = null;
 		#endregion Fields
 
 		#region Properties
@@ -30,22 +28,6 @@
 		private void Awake()
 		{
 			Services.Instance.RegisterService(this);
-		}
-
-		private void Start()
-		{
-			_map = Services.Instance.Get<IMap>();
-			bounds = _map.MapBounds;
-
-			_visibleCells = new bool[CellsWidth, CellsHeight];
-
-			SetAllCellsToFalse();
-		}
-
-		private void Update()
-		{
-			UpdateCellsVisibility();
-			UpdateCoverablesVisibility();
 		}
 		#endregion MonoBehaviour Callbacks
 
@@ -124,56 +106,7 @@
 
 		private bool IsCoverableVisible(IFogCoverable coverable)
 		{
-			return IsContainableVisible(coverable);
-		}
-
-		private bool IsContainableVisible(IContainable containable)
-		{
-			for (int i = 0; i < _visibleCells.GetLength(0); i++)
-			{
-				for (int j = 0; j < _visibleCells.GetLength(1); j++)
-				{
-					Vector3 worldPosition = CellPositionToWorldPosition(i, j);
-
-					if (containable.ContainsPosition(worldPosition))
-					{
-						return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
-		private void UpdateCellsVisibility()
-		{
-			SetAllCellsToFalse();
-
-			for (int i = 0; i < _visibleCells.GetLength(0); i++)
-			{
-				for (int j = 0; j < _visibleCells.GetLength(1); j++)
-				{
-					Vector3 worldPosition = CellPositionToWorldPosition(i, j);
-					_visibleCells[i, j] = IsPositionVisible(worldPosition);
-				}
-			}
-		}
-
-		private void SetAllCellsToFalse()
-		{
-			for (int i = 0; i < _visibleCells.GetLength(0); i++)
-			{
-				for (int j = 0; j < _visibleCells.GetLength(1); j++)
-				{
-
-					_visibleCells[i, j] = false;
-				}
-			}
-		}
-
-		private Vector3 CellPositionToWorldPosition(int x, int y)
-		{
-			return new Vector3(x * _data.SizePerCell, y * _data.SizePerCell);
+			throw new System.NotImplementedException();
 		}
 		#endregion Private Methods
 		#endregion Methods
