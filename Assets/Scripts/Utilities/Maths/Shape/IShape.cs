@@ -1,7 +1,7 @@
 ﻿namespace Tartaros.Math
 {
-	public class IShape
+	public interface IShape
 	{
-		
+
 	}
 }

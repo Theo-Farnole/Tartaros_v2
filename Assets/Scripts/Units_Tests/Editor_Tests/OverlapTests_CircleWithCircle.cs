@@ -32,5 +32,14 @@
 
 			Assert.IsFalse(CollisionOverlapCalculator.DoOverlap(c1, c2));
 		}
+
+		[Test]
+		public void When_CircleIsInsideOtherCircle_Should_ReturnTrue()
+		{
+			Circle c1 = new Circle(Vector2.zero, 1);
+			Circle c2 = new Circle(Vector2.zero, 0.5f);
+
+			Assert.IsTrue(CollisionOverlapCalculator.DoOverlap(c1, c2));
+		}
 	}
 }

@@ -5,6 +5,71 @@
 
 	public static class CollisionOverlapCalculator
 	{
+		public static bool DoOverlap(IShape shapeToTest, IShape[] shapes)
+		{
+			foreach (var shape in shapes)
+			{
+				if (DoOverlap(shapeToTest, shape) == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public static bool DoOverlap(IShape shape1, IShape shape2)
+		{
+			// TODO TF: refactor this ugly snippet
+			if (shape1 is Circle circle1)
+			{
+				if (shape2 is Circle circle2)
+				{
+					return DoOverlap(circle1, circle2);
+				}
+				else if (shape2 is Rectangle rect2)
+				{
+					return DoOverlap(circle1, rect2);
+				}
+				else if (shape2 is ConvexPolygon polygon2)
+				{
+					return DoOverlap(circle1, polygon2);
+				}
+			}
+			else if (shape1 is Rectangle rect1)
+			{
+				if (shape2 is Circle circle2)
+				{
+					return DoOverlap(rect1, circle2);
+				}
+				else if (shape2 is Rectangle rect2)
+				{
+					return DoOverlap(rect1, rect2);
+				}
+				else if (shape2 is ConvexPolygon polygon2)
+				{
+					return DoOverlap(rect1, polygon2);
+				}
+			}
+			else if (shape1 is ConvexPolygon polygon1)
+			{
+				if (shape2 is Circle circle2)
+				{
+					return DoOverlap(polygon1, circle2);
+				}
+				else if (shape2 is Rectangle rect2)
+				{
+					return DoOverlap(polygon1, rect2);
+				}
+				else if (shape2 is ConvexPolygon polygon2)
+				{
+					return DoOverlap(polygon1, polygon2);
+				}
+			}
+
+			throw new System.NotImplementedException(string.Format("Cannot check if shapes {0} and {1} can overlap.", shape1.GetType(), shape2.GetType()));
+		}
+
 		public static bool DoOverlap(Circle c1, Circle c2)
 		{
 			float distance = Vector2.Distance(c1.position, c2.position);
