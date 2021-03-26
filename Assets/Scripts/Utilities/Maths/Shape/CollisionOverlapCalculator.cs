@@ -61,13 +61,13 @@
 				Vector2 vn = vertices[next];       // n for "next"
 
 				// check against all four sides of the rectangle
-				bool collision = lineRect(vc.x, vc.y, vn.x, vn.y, rect);
+				bool collision = DoLineOverlapRect(vc.x, vc.y, vn.x, vn.y, rect);
 				if (collision) return true;
 
 				// optional: test if the rectangle is INSIDE the polygon
 				// note that this iterates all sides of the polygon
 				// again, so only use this if you need to
-				bool inside = polygonPoint(vertices, rx, ry);
+				bool inside = DoPolygonOverlapPoint(vertices, rx, ry);
 				if (inside) return true;
 			}
 
@@ -97,7 +97,7 @@
 
 				// check for collision between the circle and
 				// a line formed between the two vertices
-				bool collision = lineCircle(vc.x, vc.y, vn.x, vn.y, circle);
+				bool collision = DoLineOverlapCircle(vc.x, vc.y, vn.x, vn.y, circle);
 				if (collision) return true;
 			}
 
@@ -134,11 +134,11 @@
 
 				// now we can use these two points (a line) to compare
 				// to the other polygon's vertices using polyLine()
-				bool collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
+				bool collision = DoPolygonOverlapLine(p2, vc.x, vc.y, vn.x, vn.y);
 				if (collision) return true;
 
 				// optional: check if the 2nd polygon is INSIDE the first
-				collision = polygonPoint(p1.vertices.ToArray(), p2.vertices[0].x, p2.vertices[0].y);
+				collision = DoPolygonOverlapPoint(p1.vertices.ToArray(), p2.vertices[0].x, p2.vertices[0].y);
 				if (collision) return true;
 			}
 
@@ -146,7 +146,7 @@
 		}
 
 		// POLYGON/LINE
-		static bool polyLine(ConvexPolygon polygon, float x1, float y1, float x2, float y2)
+		static bool DoPolygonOverlapLine(ConvexPolygon polygon, float x1, float y1, float x2, float y2)
 		{
 
 			// go through each of the vertices, plus the next
@@ -170,7 +170,7 @@
 				// do a Line/Line comparison
 				// if true, return 'true' immediately and
 				// stop testing (faster)
-				bool hit = lineLine(x1, y1, x2, y2, x3, y3, x4, y4);
+				bool hit = DoTwoLineOverlap(x1, y1, x2, y2, x3, y3, x4, y4);
 				if (hit)
 				{
 					return true;
@@ -181,7 +181,7 @@
 			return false;
 		}
 
-		public static bool lineCircle(float x1, float y1, float x2, float y2, Circle circle)
+		public static bool DoLineOverlapCircle(float x1, float y1, float x2, float y2, Circle circle)
 		{
 			float cx = circle.X;
 			float cy = circle.Y;
@@ -189,8 +189,8 @@
 
 			// is either end INSIDE the circle?
 			// if so, return true immediately
-			bool inside1 = pointCircle(x1, y1, cx, cy, r);
-			bool inside2 = pointCircle(x2, y2, cx, cy, r);
+			bool inside1 = DoPointOverlapCircle(x1, y1, cx, cy, r);
+			bool inside2 = DoPointOverlapCircle(x2, y2, cx, cy, r);
 			if (inside1 || inside2) return true;
 
 			// get length of the line
@@ -207,7 +207,7 @@
 
 			// is this point actually on the line segment?
 			// if so keep going, but if not, return false
-			bool onSegment = LinePoint(new Vector2(x1, y1), new Vector2(x2, y2), closestX, closestY);
+			bool onSegment = DoLineOverlapPoint(new Vector2(x1, y1), new Vector2(x2, y2), closestX, closestY);
 			if (!onSegment) return false;
 
 			// get distance to closest point
@@ -223,7 +223,7 @@
 			return false;
 		}
 
-		public static bool LinePoint(Vector2 p1, Vector2 p2, float px, float py)
+		public static bool DoLineOverlapPoint(Vector2 p1, Vector2 p2, float px, float py)
 		{
 
 			// get distance from the point to the two ends of the line
@@ -248,7 +248,7 @@
 			return false;
 		}
 
-		public static bool pointCircle(float px, float py, float cx, float cy, float r)
+		public static bool DoPointOverlapCircle(float px, float py, float cx, float cy, float r)
 		{
 
 			// get distance between the point and circle's center
@@ -266,7 +266,7 @@
 			return false;
 		}
 
-		public static bool polygonPoint(Vector2[] vertices, float px, float py)
+		public static bool DoPolygonOverlapPoint(Vector2[] vertices, float px, float py)
 		{
 			bool collision = false;
 
@@ -298,7 +298,7 @@
 		}
 
 		// LINE/RECTANGLE
-		static bool lineRect(float x1, float y1, float x2, float y2, Rectangle rect)
+		static bool DoLineOverlapRect(float x1, float y1, float x2, float y2, Rectangle rect)
 		{
 
 			float rx = rect.X;
@@ -308,10 +308,10 @@
 
 			// check if the line has hit any of the rectangle's sides
 			// uses the Line/Line function below
-			bool left = lineLine(x1, y1, x2, y2, rx, ry, rx, ry + rh);
-			bool right = lineLine(x1, y1, x2, y2, rx + rw, ry, rx + rw, ry + rh);
-			bool top = lineLine(x1, y1, x2, y2, rx, ry, rx + rw, ry);
-			bool bottom = lineLine(x1, y1, x2, y2, rx, ry + rh, rx + rw, ry + rh);
+			bool left = DoTwoLineOverlap(x1, y1, x2, y2, rx, ry, rx, ry + rh);
+			bool right = DoTwoLineOverlap(x1, y1, x2, y2, rx + rw, ry, rx + rw, ry + rh);
+			bool top = DoTwoLineOverlap(x1, y1, x2, y2, rx, ry, rx + rw, ry);
+			bool bottom = DoTwoLineOverlap(x1, y1, x2, y2, rx, ry + rh, rx + rw, ry + rh);
 
 			// if ANY of the above are true,
 			// the line has hit the rectangle
@@ -323,7 +323,7 @@
 		}
 
 		// LINE/LINE
-		static bool lineLine(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+		public static bool DoTwoLineOverlap(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
 		{
 
 			// calculate the direction of the lines
