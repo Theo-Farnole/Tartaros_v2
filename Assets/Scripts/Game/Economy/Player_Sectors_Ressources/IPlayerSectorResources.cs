@@ -4,5 +4,6 @@
 
 	public interface IPlayerSectorResources : ISectorResourcesWallet
 	{
+
     }
 }

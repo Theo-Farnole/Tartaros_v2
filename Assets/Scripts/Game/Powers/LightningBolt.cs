@@ -6,19 +6,22 @@
     using Tartaros.Entities;
     using Tartaros.Entities.Detection;
     using Tartaros.ServicesLocator;
+    using Tartaros.Economy;
     using UnityEngine;
 
-    public class LigtningBolt : SerializedMonoBehaviour, IPower
+    public class LightningBolt : SerializedMonoBehaviour, IPower
     {
         [SerializeField]
         private LightningBoltData _data = null;
         private GameObject _preCastVFX = null;
         private GameObject _castVFX = null;
+        private IPlayerGloryWallet _playerGloryWallet = null;
 
         float IPower.range => _data.SpellRadius;
 
         GameObject IPower.prefabPower => gameObject;
 
+        int IPower.price => _data.GloryPrice;
 
         void IPower.Cast()
         {

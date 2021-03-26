@@ -19,7 +19,9 @@
         private float _attackFrequency = 1;
         [SerializeField]
         private float _timeBeforeAppliedDamage = 1;
-        //TODO DJ: Price 
+        [SerializeField]
+        private int _gloryPrice = 0;
+        
 
 
         public float SpellRadius => _spellRadius;
@@ -28,5 +30,6 @@
         public float LifeTime => _lifeTime;
         public float AttackFrequency => _attackFrequency;
         public float TimeBeforeAppliedDamage => _timeBeforeAppliedDamage;
+        public int GloryPrice => _gloryPrice;
     }
 }
