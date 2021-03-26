@@ -23,7 +23,9 @@
         #region Properties
         float IPower.range => _data.SpellRadius;
 
-        GameObject IPower.prefabPower => gameObject; 
+        GameObject IPower.prefabPower => gameObject;
+
+        int IPower.price => _data.GloryPrice;
         #endregion
 
         private void OnEnable()
