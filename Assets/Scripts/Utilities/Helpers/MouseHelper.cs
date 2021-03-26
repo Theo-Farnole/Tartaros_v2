@@ -9,6 +9,12 @@
 
 		public static bool IsCursorOverWindow()
 		{
+			if (Camera.main == null)
+			{
+				Debug.LogErrorFormat("Cannot get if cursor is over window. Missing camera with tag MainCamera.");
+				return true;
+			}
+
 			var view = Camera.main.ScreenToViewportPoint(CursorPosition);
 			return view.x >= 0 && view.x <= 1 && view.y >= 0 && view.y <= 1;
 		}
