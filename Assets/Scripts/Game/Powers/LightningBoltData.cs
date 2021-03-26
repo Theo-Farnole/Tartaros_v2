@@ -17,7 +17,8 @@
         private float _lifeTime = 1;
         [SerializeField]
         private float _attackFrequency = 1;
-        
+        [SerializeField]
+        private float _timeBeforeAppliedDamage = 1;
         //TODO DJ: Price 
 
 
@@ -25,6 +26,7 @@
         public GameObject PreCastVFXPrefab => _preCastVFXPrefab;
         public GameObject CastVFXPrefab => _castVFXPrefab;
         public float LifeTime => _lifeTime;
-        public float AttackFrequency => _attackFrequency; 
+        public float AttackFrequency => _attackFrequency;
+        public float TimeBeforeAppliedDamage => _timeBeforeAppliedDamage;
     }
 }

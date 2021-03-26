@@ -12,13 +12,13 @@
     {
         [SerializeField]
         private LightningBoltData _data = null;
+        private GameObject _preCastVFX = null;
+        private GameObject _castVFX = null;
 
         float IPower.range => _data.SpellRadius;
 
         GameObject IPower.prefabPower => gameObject;
 
-        private GameObject _preCastVFX = null;
-        private GameObject _castVFX = null;
 
         void IPower.Cast()
         {
@@ -55,7 +55,7 @@
 
         private void Finish()
         {
-            InstanciateCastVFX();
+            //InstanciateCastVFX();
             AppliedDamage();
             StartCoroutine(FinishVFX());
         }
@@ -67,12 +67,12 @@
 
         private void InstanciatePrecastVFX()
         {
-           _preCastVFX = GameObject.Instantiate(_data.PreCastVFXPrefab, transform.position, Quaternion.identity);
+           _preCastVFX = GameObject.Instantiate(_data.PreCastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
         }
 
         private void InstanciateCastVFX()
         {
-            _castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity);
+            _castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
         }
 
         private void AppliedDamage()
@@ -88,21 +88,21 @@
 
         private void DestoryMehods()
         {
-            Destroy(_preCastVFX);
+            //Destroy(_preCastVFX);
             Destroy(_castVFX);
             Destroy(gameObject);
         }
 
         IEnumerator CastSpellMethods()
         {
-            InstanciatePrecastVFX();
+            InstanciateCastVFX();
             yield return new WaitForSeconds(1);
             Finish();
         }
 
         IEnumerator FinishVFX()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_data.LifeTime);
             DestoryMehods();
         }
     }
