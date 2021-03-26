@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 63374057}
   - component: {fileID: 63374056}
   - component: {fileID: 63374055}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 66031215}
   - component: {fileID: 66031216}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 175975889}
   - component: {fileID: 175975891}
   - component: {fileID: 175975890}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 187652451}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RadialSlider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 187754909}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SideButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 246643817}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UpButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1189,7 +1189,7 @@ GameObject:
   - component: {fileID: 330177162}
   - component: {fileID: 330177161}
   - component: {fileID: 330177160}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pause Button UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1288,7 +1288,7 @@ GameObject:
   - component: {fileID: 381961594}
   - component: {fileID: 381961593}
   - component: {fileID: 381961592}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,7 +1494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426988473}
   - component: {fileID: 426988472}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Alpha Selection UI Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,7 +1642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 459086944}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 461046210}
   - component: {fileID: 461046212}
   - component: {fileID: 461046211}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1985,7 +1985,7 @@ GameObject:
   - component: {fileID: 627586630}
   - component: {fileID: 627586629}
   - component: {fileID: 627586628}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 629360308}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: INTERFACES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2231,7 +2231,7 @@ GameObject:
   - component: {fileID: 719447598}
   - component: {fileID: 719447597}
   - component: {fileID: 719447596}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Selection Units+Building UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2435,6 +2435,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LabelWithIcon (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8319305460334564875, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305460968635846, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8319305460968635847, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2490,6 +2500,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8319305461004267267, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798e997f224d3bb4c91f012eaa4ec9f6, type: 3}
 --- !u!224 &744193956 stripped
@@ -2510,7 +2525,7 @@ GameObject:
   - component: {fileID: 813013142}
   - component: {fileID: 813013141}
   - component: {fileID: 813013140}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2932,7 +2947,7 @@ GameObject:
   - component: {fileID: 905264576}
   - component: {fileID: 905264575}
   - component: {fileID: 905264574}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3087,7 +3102,7 @@ GameObject:
   - component: {fileID: 984072364}
   - component: {fileID: 984072363}
   - component: {fileID: 984072362}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3397,7 +3412,7 @@ GameObject:
   - component: {fileID: 1074581029}
   - component: {fileID: 1074581031}
   - component: {fileID: 1074581030}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3699,7 +3714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1107332732}
   - component: {fileID: 1107332733}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4005,7 +4020,7 @@ GameObject:
   - component: {fileID: 1236216333}
   - component: {fileID: 1236216335}
   - component: {fileID: 1236216334}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4372,7 +4387,7 @@ GameObject:
   - component: {fileID: 1417527146}
   - component: {fileID: 1417527148}
   - component: {fileID: 1417527147}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4506,7 +4521,7 @@ GameObject:
   - component: {fileID: 1437394104}
   - component: {fileID: 1437394103}
   - component: {fileID: 1437394102}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5416,7 +5431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568770528}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5456,7 +5471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1585567874}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5552,7 +5567,7 @@ GameObject:
   - component: {fileID: 1601685544}
   - component: {fileID: 1601685543}
   - component: {fileID: 1601685542}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5904,7 +5919,7 @@ GameObject:
   - component: {fileID: 1682533536}
   - component: {fileID: 1682533535}
   - component: {fileID: 1682533534}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6021,7 +6036,7 @@ GameObject:
   - component: {fileID: 1690620587}
   - component: {fileID: 1690620589}
   - component: {fileID: 1690620588}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6214,7 +6229,7 @@ GameObject:
   - component: {fileID: 1749379434}
   - component: {fileID: 1749379433}
   - component: {fileID: 1749379432}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6331,7 +6346,7 @@ GameObject:
   - component: {fileID: 1770103987}
   - component: {fileID: 1770103989}
   - component: {fileID: 1770103988}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6407,7 +6422,7 @@ GameObject:
   - component: {fileID: 1800481274}
   - component: {fileID: 1800481276}
   - component: {fileID: 1800481277}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6631,7 +6646,7 @@ GameObject:
   - component: {fileID: 1864298196}
   - component: {fileID: 1864298195}
   - component: {fileID: 1864298194}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Minimap UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6969,7 +6984,7 @@ GameObject:
   - component: {fileID: 1903193322}
   - component: {fileID: 1903193324}
   - component: {fileID: 1903193323}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7122,7 +7137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1971705408}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7331,6 +7346,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LabelWithIcon (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8319305460334564875, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305460968635846, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8319305460968635847, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7385,6 +7410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305461004267267, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798e997f224d3bb4c91f012eaa4ec9f6, type: 3}
@@ -7511,6 +7541,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LabelWithIcon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8319305460334564875, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305460968635846, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8319305460968635847, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7565,6 +7605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305461004267267, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798e997f224d3bb4c91f012eaa4ec9f6, type: 3}
@@ -8541,6 +8586,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LabelWithIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 8319305460334564875, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305460968635846, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8319305460968635847, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -8595,6 +8650,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319305461004267267, guid: 798e997f224d3bb4c91f012eaa4ec9f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798e997f224d3bb4c91f012eaa4ec9f6, type: 3}

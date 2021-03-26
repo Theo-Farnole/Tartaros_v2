@@ -1,6 +1,8 @@
 ﻿namespace Tartaros.FogOfWar
 {
 	using System.Collections.Generic;
+	using System.Linq;
+	using Tartaros.Math;
 	using Tartaros.Sectors;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
@@ -12,26 +14,24 @@
 		[SerializeField]
 		private FogOfWarData _data = null;
 
+		[ShowInRuntime]
 		private List<IFogVision> _visions = new List<IFogVision>();
-		private List<IFogCoverable> _coverables = new List<IFogCoverable>();
 
-		private Bounds2D bounds = null;
+		[ShowInRuntime]
+		private List<IFogCoverable> _coverables = new List<IFogCoverable>();
 		#endregion Fields
 
-		#region Properties
-		public int CellsWidth => Mathf.RoundToInt(bounds.Width / _data.SizePerCell);
-		public int CellsHeight => Mathf.RoundToInt(bounds.Height / _data.SizePerCell);
-		#endregion Properties
-
 		#region Methods
-		#region MonoBehaviour Callbacks
 		private void Awake()
 		{
 			Services.Instance.RegisterService(this);
 		}
-		#endregion MonoBehaviour Callbacks
 
-		#region Public Methods
+		private void Update()
+		{
+			UpdateCoverablesVisibility();
+		}
+
 		public void AddVision(IFogVision vision)
 		{
 			if (_visions.Contains(vision) == true)
@@ -76,39 +76,20 @@
 			_coverables.Remove(coverable);
 		}
 
-		public bool IsPositionVisible(Vector3 worldPosition)
-		{
-			foreach (IFogVision vision in _visions)
-			{
-				if (vision.IsPointVisible(worldPosition) == true)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-		#endregion Public Methods
-
-		#region Private Methods
 		private void UpdateCoverablesVisibility()
 		{
+			IShape[] visions = _visions.Select(x => x.VisionShape).ToArray();
+
 			foreach (IFogCoverable coverable in _coverables)
 			{
-				UpdateCoverableVisibility(coverable);
+				IShape coverableShape = coverable.ModelBounds;
+
+				bool isVisible = CollisionOverlapCalculator.DoOverlap(coverableShape, visions);
+				coverable.IsCovered = !isVisible;
+
+				Debug.LogFormat("Coverable {0} is {1}.", coverable.ToString(), isVisible ? "visible" : "not visible");
 			}
 		}
-
-		private void UpdateCoverableVisibility(IFogCoverable coverable)
-		{
-			coverable.IsCovered = IsCoverableVisible(coverable);
-		}
-
-		private bool IsCoverableVisible(IFogCoverable coverable)
-		{
-			throw new System.NotImplementedException();
-		}
-		#endregion Private Methods
 		#endregion Methods
 	}
 }
