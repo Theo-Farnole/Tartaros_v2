@@ -20,6 +20,7 @@
 
 			foreach (Team team in (Team[])Enum.GetValues(typeof(Team)))
 			{
+				// TODO TF: (perf) use 2D kd tree if possible
 				_kdTrees.Add(team, new KdTree<Entity>(false));
 			}
 		}

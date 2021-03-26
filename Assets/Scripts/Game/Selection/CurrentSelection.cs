@@ -16,7 +16,7 @@
 		#endregion Fields
 
 		#region Properties
-		ISelectable[] ISelection.SelectedSelectables => _selectedObjets.ToArray();
+		ISelectable[] ISelection.SelectedSelectables =>_selectedObjets.ToArray();
 		private ISelection Selection => this as ISelection;
 		#endregion Properties
 
