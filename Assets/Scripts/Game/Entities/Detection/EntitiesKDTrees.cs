@@ -20,7 +20,7 @@
 
 			foreach (Team team in (Team[])Enum.GetValues(typeof(Team)))
 			{
-				_kdTrees.Add(team, new KdTree<Entity>(true));
+				_kdTrees.Add(team, new KdTree<Entity>(false));
 			}
 		}
 
