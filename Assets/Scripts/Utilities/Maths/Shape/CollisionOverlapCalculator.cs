@@ -33,9 +33,45 @@
 			return DoOverlap(circle, polygon);
 		}
 
-		public static bool DoOverlap(ConvexPolygon p1, ConvexPolygon p2)
+		public static bool DoOverlap(ConvexPolygon polygon, Rectangle rect) => DoOverlap(rect, polygon);
+
+		public static bool DoOverlap(Rectangle rect, ConvexPolygon polygon)
 		{
-			throw new System.NotImplementedException();
+			float rx = rect.X;
+			float ry = rect.Y;
+			float rw = rect.Width;
+			float rh = rect.Height;
+
+			Vector2[] vertices = polygon.vertices.ToArray();
+
+			// go through each of the vertices, plus the next
+			// vertex in the list
+			int next = 0;
+			for (int current = 0; current < vertices.Length; current++)
+			{
+
+				// get next vertex in list
+				// if we've hit the end, wrap around to 0
+				next = current + 1;
+				if (next == vertices.Length) next = 0;
+
+				// get the PVectors at our current position
+				// this makes our if statement a little cleaner
+				Vector2 vc = vertices[current];    // c for "current"
+				Vector2 vn = vertices[next];       // n for "next"
+
+				// check against all four sides of the rectangle
+				bool collision = lineRect(vc.x, vc.y, vn.x, vn.y, rect);
+				if (collision) return true;
+
+				// optional: test if the rectangle is INSIDE the polygon
+				// note that this iterates all sides of the polygon
+				// again, so only use this if you need to
+				bool inside = polygonPoint(vertices, rx, ry);
+				if (inside) return true;
+			}
+
+			return false;
 		}
 
 		// http://www.jeffreythompson.org/collision-detection/poly-circle.php
@@ -75,6 +111,73 @@
 			// if (centerInside) return true;
 
 			// otherwise, after all that, return false
+			return false;
+		}
+
+		public static bool DoOverlap(ConvexPolygon p1, ConvexPolygon p2)
+		{
+			// go through each of the vertices, plus the next
+			// vertex in the list
+			int next = 0;
+			for (int current = 0; current < p1.vertices.Count; current++)
+			{
+
+				// get next vertex in list
+				// if we've hit the end, wrap around to 0
+				next = current + 1;
+				if (next == p1.vertices.Count) next = 0;
+
+				// get the PVectors at our current position
+				// this makes our if statement a little cleaner
+				Vector2 vc = p1.vertices[current];    // c for "current"
+				Vector2 vn = p1.vertices[next];       // n for "next"
+
+				// now we can use these two points (a line) to compare
+				// to the other polygon's vertices using polyLine()
+				bool collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
+				if (collision) return true;
+
+				// optional: check if the 2nd polygon is INSIDE the first
+				collision = polygonPoint(p1.vertices.ToArray(), p2.vertices[0].x, p2.vertices[0].y);
+				if (collision) return true;
+			}
+
+			return false;
+		}
+
+		// POLYGON/LINE
+		static bool polyLine(ConvexPolygon polygon, float x1, float y1, float x2, float y2)
+		{
+
+			// go through each of the vertices, plus the next
+			// vertex in the list
+			int next = 0;
+			for (int current = 0; current < polygon.vertices.Count; current++)
+			{
+
+				// get next vertex in list
+				// if we've hit the end, wrap around to 0
+				next = current + 1;
+				if (next == polygon.vertices.Count) next = 0;
+
+				// get the PVectors at our current position
+				// extract X/Y coordinates from each
+				float x3 = polygon.vertices[current].x;
+				float y3 = polygon.vertices[current].y;
+				float x4 = polygon.vertices[next].x;
+				float y4 = polygon.vertices[next].y;
+
+				// do a Line/Line comparison
+				// if true, return 'true' immediately and
+				// stop testing (faster)
+				bool hit = lineLine(x1, y1, x2, y2, x3, y3, x4, y4);
+				if (hit)
+				{
+					return true;
+				}
+			}
+
+			// never got a hit
 			return false;
 		}
 
@@ -192,6 +295,47 @@
 				}
 			}
 			return collision;
+		}
+
+		// LINE/RECTANGLE
+		static bool lineRect(float x1, float y1, float x2, float y2, Rectangle rect)
+		{
+
+			float rx = rect.X;
+			float ry = rect.Y;
+			float rw = rect.Width;
+			float rh = rect.Height;
+
+			// check if the line has hit any of the rectangle's sides
+			// uses the Line/Line function below
+			bool left = lineLine(x1, y1, x2, y2, rx, ry, rx, ry + rh);
+			bool right = lineLine(x1, y1, x2, y2, rx + rw, ry, rx + rw, ry + rh);
+			bool top = lineLine(x1, y1, x2, y2, rx, ry, rx + rw, ry);
+			bool bottom = lineLine(x1, y1, x2, y2, rx, ry + rh, rx + rw, ry + rh);
+
+			// if ANY of the above are true,
+			// the line has hit the rectangle
+			if (left || right || top || bottom)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		// LINE/LINE
+		static bool lineLine(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+		{
+
+			// calculate the direction of the lines
+			float uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+			float uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+
+			// if uA and uB are between 0-1, lines are colliding
+			if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1)
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 }
