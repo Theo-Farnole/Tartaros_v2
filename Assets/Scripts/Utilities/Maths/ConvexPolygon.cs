@@ -39,9 +39,14 @@
 		{
 			this.vertices = new List<Vector2>(points);
 		}
+
+		public ConvexPolygon(Rectangle rect) : this(rect.TopLeft, rect.Max, rect.BottomRight, rect.Min)
+		{
+
+		}
 		#endregion Ctor
 
-		#region Methods
+		#region Methods		
 		public bool ContainsWorldPosition(Vector3 position)
 		{
 			return ContainsPoint2D(new Vector2(position.x, position.z));
