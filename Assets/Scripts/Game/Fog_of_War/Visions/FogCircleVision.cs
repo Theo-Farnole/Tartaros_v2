@@ -43,6 +43,7 @@
 
 			_meshVision.layer = LayerMask.NameToLayer("FogOfWar");
 			_meshVision.transform.localScale = _radius * Vector3.one;
+			_meshVision.transform.localPosition = Vector3.zero;
 		}
 
 		void OnEnable()

@@ -1,11 +1,12 @@
 ﻿namespace Tartaros.Map.Editor
 {
+	using Sirenix.OdinInspector.Editor;
 	using Tartaros.Editor;
 	using UnityEditor;
 	using UnityEngine;
 
 	[CustomEditor(typeof(Map))]
-	public class MapEditor : Editor
+	public class MapEditor : OdinEditor
 	{
 		#region Fields
 		public const float HANDLE_SIZE = 0.5f;
@@ -22,14 +23,18 @@
 		#endregion Properties
 
 		#region Methods
-		private void OnEnable()
+		protected override void OnEnable()
 		{
+			base.OnEnable();
+
 			_siteDrawer = new SiteDrawer();
 			_siteCreationManager = new SiteCreationManager(Map, _siteDrawer);
 		}
 
 		public void OnSceneGUI()
 		{
+			if (Map.MapData == null) return;
+
 			ForceRedraw();
 
 			if (DoVerticesMoveHandleShouldBeDraw())

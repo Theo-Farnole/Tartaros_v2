@@ -1,16 +1,18 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
-	using System.Linq;
+	using System;
+	using System.IO;
 	using Tartaros.Sectors;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
-	public class Map : MonoBehaviour, IMap
+	public partial class Map : MonoBehaviour, IMap
 	{
 		#region Fields 
 		[SerializeField]
+		[InlineEditor]
 		private MapData _mapData = null;
 
 		[SerializeField]
@@ -33,6 +35,16 @@
 		private void Start()
 		{
 			SpawnSectors();
+		}
+
+		private void OnDrawGizmos()
+		{
+			if (_mapData != null)
+			{
+				Gizmos.color = Color.green;
+				Vector3 size = new Vector3(_mapData.MapSize.x, 0, _mapData.MapSize.y);
+				Gizmos.DrawWireCube(size / 2, size);
+			}
 		}
 
 		private void SpawnSectors()
@@ -78,4 +90,36 @@
 		}
 		#endregion Methods
 	}
+
+#if UNITY_EDITOR
+	public partial class Map
+	{
+		private const string path = "Assets/Databases/Maps/";
+
+		[ShowIf("@_mapData == null")]
+		[Button]
+		public void CreateMapData()
+		{
+			MapData mapData = ScriptableObject.CreateInstance<MapData>();
+
+			string filename = string.Format("Map-{0}.asset", gameObject.scene.name);
+			string filePath = path + filename;
+
+
+			string dataPath = Application.dataPath;
+			string dataPathWithoutAsset = dataPath.Remove(dataPath.Length - "Assets".Length);
+			Debug.Log(dataPathWithoutAsset + path);
+
+			Directory.CreateDirectory(dataPathWithoutAsset + path);
+
+			UnityEditor.AssetDatabase.CreateAsset(mapData, filePath);
+
+			UnityEditor.AssetDatabase.SaveAssets();
+
+			_mapData = mapData;
+
+			Debug.LogFormat("Creating map data at path {0}.", filePath);
+		}
+	}
+#endif
 }
