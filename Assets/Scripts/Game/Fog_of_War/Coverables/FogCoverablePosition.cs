@@ -1,8 +1,7 @@
 ﻿namespace Tartaros.FogOfWar
 {
-	using Tartaros;
+	using Tartaros.Math;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class FogCoverablePosition : MonoBehaviour, IFogCoverable
@@ -39,7 +38,7 @@
 			}
 		}
 
-		BoundsXZ IFogCoverable.ModelBounds => throw new System.NotImplementedException();
+		IShape IFogCoverable.ModelBounds => new Circle(transform.position, 0);
 		#endregion Properties
 
 		#region Methods
@@ -70,6 +69,12 @@
 		void OnDisable()
 		{
 			_fogOfWarManager.RemoveCoverable(this);
+		}
+
+		void OnDrawGizmos()
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(transform.position, Vector3.up * 3);
 		}
 		#endregion Methods
 	}

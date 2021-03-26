@@ -1,10 +1,10 @@
 ﻿
 namespace Tartaros.FogOfWar
 {
-    using UnityEngine;
+	using Tartaros.Math;
 
-    public interface IFogVision
+	public interface IFogVision
     {
-        bool IsPointVisible(Vector3 worldPoint);
+        IShape VisionShape { get; }
     }
 }

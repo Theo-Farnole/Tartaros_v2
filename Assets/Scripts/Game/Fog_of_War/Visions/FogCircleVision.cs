@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.FogOfWar
 {
+	using Tartaros.Math;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
@@ -11,6 +12,10 @@
 
 		private FogOfWarManager _fogOfWarManager = null;
 		#endregion Fields
+
+		#region Properties
+		IShape IFogVision.VisionShape => new Circle(new Vector3(transform.position.x, 0, transform.position.z), _radius);
+		#endregion Properties
 
 		#region Methods
 		void Start()
@@ -37,12 +42,6 @@
 #if UNITY_EDITOR
 			Editor.HandlesHelper.DrawSolidCircle(transform.position, Vector3.up, _radius, Color.grey);
 #endif
-		}
-
-		bool IFogVision.IsPointVisible(Vector3 worldPoint)
-		{
-			// TODO TF: (perf) use SqrtDistance
-			return Vector3.Distance(transform.position, worldPoint) <= _radius;
 		}
 		#endregion Methods
 	}

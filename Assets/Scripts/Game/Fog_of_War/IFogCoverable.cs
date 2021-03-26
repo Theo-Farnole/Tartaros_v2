@@ -1,10 +1,10 @@
 ﻿namespace Tartaros.FogOfWar
 {
-	using Tartaros.Utilities;
+	using Tartaros.Math;
 
 	public interface IFogCoverable
 	{
 		bool IsCovered { get; set; }
-		BoundsXZ ModelBounds { get; }
+		IShape ModelBounds { get; }
 	}
 }
