@@ -3,9 +3,15 @@
 	using UnityEngine;
 	using UnityEngine.InputSystem;
 
-	public static class CursorHelper
+	public static class MouseHelper
 	{
 		public static Vector2 CursorPosition => Mouse.current.position.ReadValue();
+
+		public static bool IsCursorOverWindow()
+		{
+			var view = Camera.main.ScreenToViewportPoint(CursorPosition);
+			return view.x >= 0 && view.x <= 1 && view.y >= 0 && view.y <= 1;
+		}
 
 		public static GameObject GetGameObjectUnderCursor()
 		{

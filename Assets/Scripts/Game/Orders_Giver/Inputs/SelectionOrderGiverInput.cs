@@ -36,7 +36,7 @@
 
 		private void MoveToOrAttack(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 		{
-			GameObject gameObject = CursorHelper.GetGameObjectUnderCursor();
+			GameObject gameObject = MouseHelper.GetGameObjectUnderCursor();
 
 			if (gameObject == null)
 			{
@@ -55,7 +55,7 @@
 					Debug.Log("Not attackable");
 				}
 			}
-			else if (CursorHelper.GetHitUnderCursor(out RaycastHit hit))
+			else if (MouseHelper.GetHitUnderCursor(out RaycastHit hit))
 			{
 				_selectionOrderGiver.Move(hit.point);
 			}
