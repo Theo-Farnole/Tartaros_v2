@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6812927556283947173}
   - component: {fileID: 1452253395}
   - component: {fileID: 7427948960150135923}
+  - component: {fileID: 2698862322642800849}
+  - component: {fileID: 5993632778829013082}
   m_Layer: 0
   m_Name: Entity.Archer
   m_TagString: Untagged
@@ -75,6 +77,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+--- !u!114 &2698862322642800849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812927556283947172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7074fb2a5f4c4134ca2136b04fa6f826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 4.7
+--- !u!114 &5993632778829013082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812927556283947172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20ca0ec693f18d42af0195d8ccc9ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6812927557317958458
 GameObject:
   m_ObjectHideFlags: 0

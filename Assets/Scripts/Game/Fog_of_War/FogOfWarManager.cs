@@ -86,8 +86,6 @@
 
 				bool isVisible = CollisionOverlapCalculator.DoOverlap(coverableShape, visions);
 				coverable.IsCovered = !isVisible;
-
-				Debug.LogFormat("Coverable {0} is {1}.", coverable.ToString(), isVisible ? "visible" : "not visible");
 			}
 		}
 		#endregion Methods

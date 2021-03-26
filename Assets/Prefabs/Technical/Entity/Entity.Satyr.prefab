@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8729383663548792514}
   - component: {fileID: 8729383663548792515}
   - component: {fileID: 2100040218}
+  - component: {fileID: 6259777308904078152}
   m_Layer: 0
   m_Name: Entity.Satyr
   m_TagString: Untagged
@@ -60,6 +61,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entity: {fileID: 0}
   _teamSetOnStart: 2
+--- !u!114 &6259777308904078152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729383663548792512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437a6e41acd02ca4185d0176626de8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8729383665189449600
 GameObject:
   m_ObjectHideFlags: 0
