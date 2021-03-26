@@ -55,6 +55,33 @@
 
 		private void AddEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].Add(entity);
 		private void RemoveEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].RemoveAll(x => x == entity);
+
+		public Entity[] GetEveryEntityInRadius(Team team, float radius)
+		{
+			EntitiesKDTrees kdTree = Services.Instance.Get<EntitiesKDTrees>();
+			var output = new List<Entity>();
+
+			IEnumerable<Entity> enemiesSortByDistance = kdTree.FindClose(team, transform.position);
+
+			foreach (Entity entity in enemiesSortByDistance)
+			{
+				if (IsEntityInRadius(entity, radius))
+				{
+					output.Add(entity);
+				}
+				else
+				{
+					return output.ToArray();
+				}
+			}
+
+			return output.ToArray();
+		}
+
+		private bool IsEntityInRadius(Entity entity, float radius)
+		{
+			return Vector3.Distance(entity.transform.position, transform.position) <= radius;
+		}
 		#endregion Methods
 	}
 }
