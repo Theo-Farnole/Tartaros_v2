@@ -4,6 +4,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using Tartaros.Power;
+    using Tartaros.Economy;
     using UnityEngine;
     using UnityEngine.InputSystem;
 
@@ -12,13 +13,14 @@
         private IPower _power = null;
         private PowerInputs _inputs = null;
         private PowerPreview _preview = null;
+        private IPlayerGloryWallet _playerGloryWallet = null;
 
         public PowerState(GamemodeManager gamemodeManager, IPower power) : base(gamemodeManager)
         {
             _power = power;
 
             _inputs = new PowerInputs();
-            _preview = new PowerPreview(power.range, _inputs.GetMousePosition());
+            _preview = new PowerPreview(power.Range, _inputs.GetMousePosition());
         }
 
         public override void OnStateEnter()
@@ -53,8 +55,7 @@
 
         private bool CanCastHere()
         {
-            return true;
-            //throw new System.NotImplementedException();
+            return _playerGloryWallet.CanSpend(_power.Price);
         }
 
         private void SetPreviewRange()
@@ -64,11 +65,10 @@
 
         private void CastSpell()
         {
-            GameObject powerInstanciate = GameObject.Instantiate(_power.prefabPower, _inputs.GetMousePosition(), Quaternion.identity);
-           // _power.Cast();
+            GameObject powerInstanciate = GameObject.Instantiate(_power.PrefabPower, _inputs.GetMousePosition(), Quaternion.identity);
+            _playerGloryWallet.Spend(_power.Price);
             _preview.DestroyMethods();
             _stateOwner.SetState(new PlayState(_stateOwner));
-            //throw new System.NotImplementedException();
         }
     }
 }

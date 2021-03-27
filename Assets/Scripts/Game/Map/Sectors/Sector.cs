@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Map
+namespace Tartaros.Map
 {
 	using System.Collections.Generic;
 	using Tartaros.Selection;
@@ -60,8 +60,8 @@
 		{
 			if (SectorData.CapturePrice == null)
 			{
-				Debug.LogErrorFormat("Capture price is not set on sector {0}.", name);
-				return false;
+				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);
+				return true;
 			}
 
 			return _playerWallet.CanBuy(SectorData.CapturePrice);
@@ -133,6 +133,11 @@
 
 		private void UpdateFogOfWarVisibility()
 		{
+			if (_sectorMesh == null)
+			{
+				Debug.LogErrorFormat("Vision don't work on sector. Sector {0} has not be initialized.", name);
+			}
+
 			_meshFiltrer.mesh = _isCaptured ? _sectorMesh : null;
 		}
 		#endregion Methods
