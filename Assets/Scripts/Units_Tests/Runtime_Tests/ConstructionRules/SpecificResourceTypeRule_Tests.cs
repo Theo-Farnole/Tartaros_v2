@@ -36,6 +36,7 @@
 			_debugMap = new DebugMap(services, GenerateSectors());
 
 			_rule = new OnlyConstructOnSpecificResourceTypeSector(WANTED_RESOURCE);
+
 			yield return null;
 		}
 

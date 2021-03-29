@@ -38,6 +38,26 @@ namespace Tartaros.Map
 					.ToArray();
 			}
 		}
+
+		bool ISector.IsCaptured
+		{
+			get => _isCaptured;
+			set
+			{
+				if (_isCaptured == value) return;
+
+				_isCaptured = value;
+
+				if (_isCaptured == true)
+				{
+					OnCapture();
+				}
+
+				UpdateFogOfWarVisibility();
+			}
+		}
+
+		ISectorResourcesWallet ISector.CapturePrice => throw new System.NotImplementedException();
 		#endregion Properties
 
 		#region Methods
@@ -54,43 +74,6 @@ namespace Tartaros.Map
 
 			_collider.sharedMesh = _sectorMesh;
 			UpdateFogOfWarVisibility();
-		}
-
-		bool ISector.CanCapture()
-		{
-			if (SectorData.CapturePrice == null)
-			{
-				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);
-				return true;
-			}
-
-			return _playerWallet.CanBuy(SectorData.CapturePrice);
-		}
-
-		void ISector.Capture()
-		{
-			if ((this as ISector).CanCapture() == false)
-			{
-				Debug.LogErrorFormat("Not enought resources to capture resource.");
-				return;
-			}
-
-			if (_isCaptured == true) return;
-
-			_isCaptured = true;
-
-			if (SectorData.CapturePrice != null)
-			{
-				_playerWallet.Buy(SectorData.CapturePrice);
-			}
-
-			OnCapture();
-			UpdateFogOfWarVisibility();
-		}
-
-		bool ISector.ContainsPosition(Vector3 point)
-		{
-			return _sectorData.ConvexPolygon.ContainsPoint2D(new Vector2(point.x, point.z));
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()
@@ -119,6 +102,11 @@ namespace Tartaros.Map
 		public bool IsObjectInSector(GameObject gameObject)
 		{
 			return _sectorData.ConvexPolygon.ContainsWorldPosition(gameObject.transform.position);
+		}
+
+		bool ISector.ContainsPosition(Vector3 point)
+		{
+			return _sectorData.ConvexPolygon.ContainsPoint2D(new Vector2(point.x, point.z));
 		}
 
 		private void OnCapture()

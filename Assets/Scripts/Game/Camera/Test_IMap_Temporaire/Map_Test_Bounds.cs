@@ -37,6 +37,11 @@
 		{
 			return true;
 		}
+
+		bool IMap.IsSectorNeightborOfCapturedSectors(ISector sector)
+		{
+			throw new System.NotImplementedException();
+		}
 		#endregion Methods
 	}
 
