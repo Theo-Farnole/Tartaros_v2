@@ -133,8 +133,8 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4103014584774180702}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -217,7 +217,7 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec55312842c2d3643ad88e1a46e4eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outlineHeightOffset: 0
   _lineRenderer: {fileID: 8778109537714895836}
   _sector: {fileID: 7736608417416095626}
   _selectedOutlineColor: {r: 0, g: 0.039997578, b: 1, a: 1}

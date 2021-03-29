@@ -12,6 +12,9 @@
 		private const string EDITOR_GROUP_COLORS = "Colors";
 
 		[SerializeField]
+		private float _outlineHeightOffset = 0.1f;
+
+		[SerializeField]
 		private LineRenderer _lineRenderer = null;
 
 		[SerializeField]
@@ -67,7 +70,7 @@
 		private void SetupLinePoints()
 		{
 			Vector3[] positions = _sector.GetPointsWrappedSnappedToGround()
-				.Select(x => x + Vector3.up * 0.1f)
+				.Select(x => x + Vector3.up * _outlineHeightOffset)
 				.ToArray();
 
 			_lineRenderer.positionCount = positions.Length;

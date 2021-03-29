@@ -78,9 +78,14 @@ namespace Tartaros.Map
 			if (_isCaptured == true) return;
 
 			_isCaptured = true;
-			_playerWallet.Buy(SectorData.CapturePrice);
+
+			if (SectorData.CapturePrice != null)
+			{
+				_playerWallet.Buy(SectorData.CapturePrice);
+			}
 
 			OnCapture();
+			UpdateFogOfWarVisibility();
 		}
 
 		bool ISector.ContainsPosition(Vector3 point)
