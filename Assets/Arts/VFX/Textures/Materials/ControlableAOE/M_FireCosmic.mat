@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Fire
+  m_Name: M_FireCosmic
   m_Shader: {fileID: 4800000, guid: d774c94268caf4e41834adc17dcb911f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -36,7 +36,7 @@ Material:
     - _VoroScale: 2
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 4.237095, g: 2.3736603, b: 0.90953344, a: 1}
+    - _Color: {r: 0, g: 1.6326756, b: 24.537634, a: 1}
     - _NoiseSpeed: {r: 5, g: 5, b: 0, a: 0}
     - _SmoothStepParticleShape: {r: 0.9, g: 0.95, b: 0, a: 0}
     - _SmoothStepVoronoi: {r: 0, g: 0.5, b: 0, a: 0}

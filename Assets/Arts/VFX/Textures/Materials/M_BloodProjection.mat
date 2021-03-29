@@ -81,7 +81,8 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PaternPower: 2.53
-    - _ScalePatern: 1
+    - _PaternsDif: -0.71
+    - _ScalePatern: 0.77
     - _ScalePatern1: 3
     - _ScalePatern2: 3
     - _SmoothnessTextureChannel: 0
@@ -94,22 +95,24 @@ Material:
     - _UVSec: 0
     - _VoroBorderScale: 1
     - _VoroPaternScale: 0.35
-    - _WorldOffsetDiv: 2
+    - _VoroSpeed1: 0
+    - _VoroSpeed2: 1
+    - _WorldOffsetDiv: 4.21
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _BorderColor: {r: 0.33333334, g: 0, b: 0, a: 1}
-    - _BorderStep: {r: 0.6, g: 1, b: 0, a: 0}
+    - _BorderColor: {r: 0.4811321, g: 0, b: 0, a: 0}
+    - _BorderStep: {r: 0.53, g: 0.64, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color0: {r: 0.2735849, g: 0.019357419, b: 0.019357419, a: 1}
-    - _Color1: {r: 0.14150941, g: 0, b: 0, a: 0.09803922}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 1, b: 1, a: 0}
     - _Color2: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-    - _ColorSteps: {r: 1.83, g: 0.44, b: 0, a: 0}
+    - _ColorSteps: {r: -0.49, g: 0.44, b: 0, a: 0}
     - _ColorSteps1: {r: 3, g: 0.1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OpacityFromPatern: {r: 0, g: 1, b: 0, a: 0}
     - _OpacityFromPatern1: {r: 0, g: 20, b: 0, a: 0}
-    - _OpacityStep: {r: 0.5, g: 1, b: 0, a: 0}
-    - _PaternStep: {r: 0.5, g: 0.8, b: 0, a: 0}
+    - _OpacityStep: {r: 0.44, g: 0.81, b: 0, a: 0}
+    - _PaternStep: {r: -0.91, g: 3.53, b: 0, a: 0}
     - _StepInner: {r: 0, g: 1, b: 0, a: 0}
     - _TextureTiling: {r: 1, g: 1, b: 0, a: 0}
