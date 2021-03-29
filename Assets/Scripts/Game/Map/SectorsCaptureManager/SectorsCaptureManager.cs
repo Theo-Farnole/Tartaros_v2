@@ -25,15 +25,17 @@
 
 		void ISectorsCaptureManager.Capture(ISector sectorToCapture)
 		{
-			if ((this as ISectorsCaptureManager).CanCapture(sectorToCapture)) return;
 			if (sectorToCapture.IsCaptured == true) return;
 
-			if (sectorToCapture.CapturePrice != null)
+			if ((this as ISectorsCaptureManager).CanCapture(sectorToCapture) == true)
 			{
-				_playerWallet.Buy(sectorToCapture.CapturePrice);
-			}
+				if (sectorToCapture.CapturePrice != null)
+				{
+					_playerWallet.Buy(sectorToCapture.CapturePrice);
+				}
 
-			sectorToCapture.IsCaptured = true;
+				sectorToCapture.IsCaptured = true;
+			}
 		}
 
 		bool ISectorsCaptureManager.CanCapture(ISector sector)
@@ -51,6 +53,11 @@
 			}
 
 			return _playerWallet.CanBuy(sector.CapturePrice);
+		}
+
+		void ISectorsCaptureManager.ForceCapture(ISector sectorToCapture)
+		{
+			sectorToCapture.IsCaptured = true;
 		}
 		#endregion Methods
 	}

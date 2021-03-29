@@ -19,6 +19,8 @@ namespace Tartaros.Map
 		private MeshCollider _collider = null;
 
 		private SectorData _sectorData = null;
+
+		[ShowInRuntime]
 		private bool _isCaptured = false;
 		private Mesh _sectorMesh = null;
 		#endregion Fields
@@ -103,7 +105,6 @@ namespace Tartaros.Map
 
 		private void OnCapture()
 		{
-			Debug.Log("A sector has been captured");
 			UpdateSelectableTeam();
 			UpdateFogOfWarVisibility();
 		}
