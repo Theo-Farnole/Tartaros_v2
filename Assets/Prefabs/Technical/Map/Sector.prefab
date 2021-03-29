@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 7736608417416095626}
   - component: {fileID: 5511430529155595148}
   - component: {fileID: 3064883107347522493}
+  - component: {fileID: 449023178508813542}
   m_Layer: 0
   m_Name: Sector
   m_TagString: Untagged
@@ -270,7 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23f0066107d9484ebbe092634458f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshFiltrer: {fileID: 1974011339308884732}
   _collider: {fileID: 881496141060671147}
 --- !u!114 &5511430529155595148
 MonoBehaviour:
@@ -304,3 +304,16 @@ MonoBehaviour:
   _selectedOutlineColor: {r: 0, g: 0.039997578, b: 1, a: 1}
   _capturedOutlineColor: {r: 1, g: 0, b: 0, a: 1}
   _uncapturedOutlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!114 &449023178508813542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5511430529155595154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41bc15ea0b0560a4099b186ba5e93890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshFiltrer: {fileID: 1974011339308884732}

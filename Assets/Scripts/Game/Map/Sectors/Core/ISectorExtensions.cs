@@ -8,6 +8,16 @@
 
 	public static class ISectorExtensions
 	{
+		public static T[] FindObjectsOfType<T>(this ISector sector)
+		{
+			T[] entitiesInSector = sector.ObjectsInSector
+				.Select(x => x.GetComponent<T>())
+				.Where(x => x != null)
+				.ToArray();
+
+			return entitiesInSector;
+		}
+
 		public static Entity[] GetEntitiesInSector(this ISector sector)
 		{
 			Entity[] entitiesInSector = sector.ObjectsInSector
