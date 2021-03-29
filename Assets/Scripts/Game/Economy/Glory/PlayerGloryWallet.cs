@@ -17,10 +17,6 @@
             Services.Instance.RegisterService(this);
         }
 
-        private void Update()
-        {
-            Debug.Log(_gloryWallet.GetAmount());
-        }
 
         int IGloryWallet.GetAmount() => _gloryWallet.GetAmount();
 
