@@ -155,7 +155,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 271343699824096116, guid: 1842a862c8694c64e95bfa0e01701190, type: 3}
+    - {fileID: 4751374637518981737, guid: 1842a862c8694c64e95bfa0e01701190, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 17471988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9580b6b46f581d24d9447de98a3756c8, type: 3}
+  m_Script: {fileID: 11500000, guid: bd4e7dc539920aa4b96b9d7a14e7ded1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &17471991
@@ -339,6 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56235898}
   - component: {fileID: 56235897}
+  - component: {fileID: 56235899}
   m_Layer: 0
   m_Name: GloryManager
   m_TagString: Untagged
@@ -372,6 +373,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &56235899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56235896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caba3a19fd4727438fded24bc04695f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &302873596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358335497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.53, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1053048378}

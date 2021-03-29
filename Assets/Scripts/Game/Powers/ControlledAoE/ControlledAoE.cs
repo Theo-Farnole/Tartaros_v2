@@ -1,119 +1,119 @@
 ﻿namespace Tartaros.Power
 {
-	using Sirenix.OdinInspector;
-	using System.Collections;
-	using System.Collections.Generic;
-	using Tartaros.Entities;
-	using Tartaros.Entities.Detection;
-	using Tartaros.OrderGiver;
-	using Tartaros.ServicesLocator;
-	using UnityEngine;
-	using UnityEngine.AI;
+    using Sirenix.OdinInspector;
+    using System.Collections;
+    using System.Collections.Generic;
+    using Tartaros.Entities;
+    using Tartaros.Entities.Detection;
+    using Tartaros.OrderGiver;
+    using Tartaros.ServicesLocator;
+    using UnityEngine;
+    using UnityEngine.AI;
 
-	public class ControlledAoE : SerializedMonoBehaviour, IPower, IOrderMoveReceiver
-	{
-		#region Fields
-		[SerializeField]
-		private ControlledAoEData _data = null;
+    public class ControlledAoE : SerializedMonoBehaviour, IPower, IOrderMoveReceiver
+    {
+        #region Fields
+        [SerializeField]
+        private ControlledAoEData _data = null;
 
-		private GameObject _preCastVFX = null;
-		private GameObject _castVFX = null;
-		private ControlledAoEMovement _movement = null;
-		private EntitiesKDTrees _kdTree = null;
-		#endregion
+        private GameObject _preCastVFX = null;
+        private GameObject _castVFX = null;
+        private ControlledAoEMovement _movement = null;
+        private EntitiesKDTrees _kdTree = null;
+        #endregion
 
-		#region Properties
-		float IPower.Range => _data.SpellRadius;
+        #region Properties
+        float IPower.Range => _data.SpellRadius;
 
-		GameObject IPower.PrefabPower => gameObject;
+        GameObject IPower.PrefabPower => gameObject;
 
-		int IPower.Price => _data.GloryPrice;
-		#endregion
+        int IPower.Price => _data.GloryPrice;
+        #endregion
 
-		#region Methods
-		void Awake()
-		{
-			_movement = gameObject.GetOrAddComponent<ControlledAoEMovement>();
-		}
+        #region Methods
+        void Awake()
+        {
+            _movement = gameObject.GetOrAddComponent<ControlledAoEMovement>();
+        }
 
-		void Start()
-		{
-			_kdTree = Services.Instance.Get<EntitiesKDTrees>();
+        void Start()
+        {
+            _kdTree = Services.Instance.Get<EntitiesKDTrees>();
 
-			StartCoroutine(OnInstanciate());
-		}
+            StartCoroutine(OnInstanciate());
+        }
 
-		private void OnDestroy()
-		{
-			Destroy(_preCastVFX);
-			Destroy(_castVFX);
-		}
+        private void OnDestroy()
+        {
+            Destroy(_preCastVFX);
+            Destroy(_castVFX);
+        }
 
-		void OnDrawGizmos()
-		{
+        void OnDrawGizmos()
+        {
 #if UNITY_EDITOR
-			Editor.HandlesHelper.DrawSolidCircle(transform.position, Vector3.up, _data.SpellRadius, Color.red);
+            Editor.HandlesHelper.DrawSolidCircle(transform.position, Vector3.up, _data.SpellRadius, Color.red);
 #endif
-		}
+        }
 
-		#region IOrderMoveReceiver
-		void IOrderMoveReceiver.Move(Vector3 position)
-		{
-			_movement.Move(position);
-		}
+        #region IOrderMoveReceiver
+        void IOrderMoveReceiver.Move(Vector3 position)
+        {
+            _movement.Move(position);
+        }
 
-		void IOrderMoveReceiver.Move(Transform toFollow)
-		{
-			_movement.Move(toFollow);
-		}
+        void IOrderMoveReceiver.Move(Transform toFollow)
+        {
+            _movement.Move(toFollow);
+        }
 
-		void IOrderMoveReceiver.MoveAdditive(Vector3 position)
-		{
-			_movement.Move(position);
-		}
+        void IOrderMoveReceiver.MoveAdditive(Vector3 position)
+        {
+            _movement.Move(position);
+        }
 
-		void IOrderMoveReceiver.MoveAdditive(Transform toFollow)
-		{
-			_movement.Move(toFollow);
-		}
-		#endregion IOrderMoveReceiver
+        void IOrderMoveReceiver.MoveAdditive(Transform toFollow)
+        {
+            _movement.Move(toFollow);
+        }
+        #endregion IOrderMoveReceiver
 
-		private void InstanciateCastVFX()
-		{
-			_castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
-		}
+        private void InstanciateCastVFX()
+        {
+            _castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
+        }
 
-		private void AppliedDamage()
-		{
-			Entity[] entities = _kdTree.GetEveryEntityInRadius(Team.Enemy, _data.SpellRadius);
+        private void AppliedDamage()
+        {
+            Entity[] entities = _kdTree.GetEveryEntityInRadius(Team.Enemy, _data.SpellRadius);
 
-			for (int i = 0; i < entities.Length; i++)
-			{
-				//IAttackable attackable = entity[i].GetComponent<IAttackable>();
-				entities[i].Kill();
-			}
-		}
-		#endregion
+            for (int i = 0; i < entities.Length; i++)
+            {
+                //IAttackable attackable = entity[i].GetComponent<IAttackable>();
+                entities[i].Kill();
+            }
+        }
+        #endregion
 
-		#region Enumerator
-		IEnumerator OnInstanciate()
-		{
-			InstanciateCastVFX();
-			yield return new WaitForSeconds(_data.TimeBeforeAppliedDamage);
-			StartCoroutine(ApplyDamageFrequently());
-		}
+        #region Enumerator
+        IEnumerator OnInstanciate()
+        {
+            InstanciateCastVFX();
+            yield return new WaitForSeconds(_data.TimeBeforeAppliedDamage);
+            StartCoroutine(ApplyDamageFrequently());
+        }
 
-		IEnumerator ApplyDamageFrequently()
-		{
-			for (int i = 0; i < _data.LifeTime; i++)
-			{
-				AppliedDamage();
-				yield return new WaitForSeconds(_data.AttackFrequency);
-			}
+        IEnumerator ApplyDamageFrequently()
+        {
+            for (int i = 0; i < _data.LifeTime; i++)
+            {
+                AppliedDamage();
+                yield return new WaitForSeconds(_data.AttackFrequency);
+            }
 
-			Destroy(gameObject);
-		}
-		#endregion
+            Destroy(gameObject);
+        }
+        #endregion
 
-	}
+    }
 }
