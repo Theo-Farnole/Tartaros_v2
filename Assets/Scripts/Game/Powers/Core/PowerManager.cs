@@ -34,7 +34,6 @@
         public void EnterPowerState(IPower power)
         {
             _gameModeManager.SetState(new PowerState(_gameModeManager, power));
-            Debug.Log(power);
         }
     }
 }

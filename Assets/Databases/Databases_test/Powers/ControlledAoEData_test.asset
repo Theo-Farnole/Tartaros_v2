@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 275634b61f8b2474fad85fd3853ff869, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b981ccb564f86b408b2e3c597be61d3, type: 3}
   m_Name: ControlledAoEData_test
   m_EditorClassIdentifier: 
   serializationData:
@@ -26,6 +26,7 @@ MonoBehaviour:
     type: 3}
   _castVFXPrefab: {fileID: 2715093854450190327, guid: 16549f5dca0c18f4bb6df7aba46b58c0,
     type: 3}
-  _lifeTime: 10
-  _attackFrequency: 0.5
+  _lifeTime: 5
+  _attackFrequency: 1
   _timeBeforeAppliedDamage: 1
+  _gloryPrice: 50

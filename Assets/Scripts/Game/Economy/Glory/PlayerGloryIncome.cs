@@ -17,26 +17,48 @@
 
         private void Start()
         {
-            _playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
+            _playerGloryWallet = Services.Instance.Get<PlayerGloryWallet>();
         }
 
         private void OnEnable()
         {
             Entity.EntitySpawned -= Entity_EntitySpawned;
             Entity.EntitySpawned += Entity_EntitySpawned;
-        }
 
+            Entity.EntityKilled -= Entity_EntityKilled; 
+            Entity.EntityKilled += Entity_EntityKilled; 
+        }
         private void OnDisable()
         {
             Entity.EntitySpawned -= Entity_EntitySpawned;
+            Entity.EntityKilled -= Entity_EntityKilled; 
+        }
+
+        private void Entity_EntityKilled(object sender, Entity.EntityKilledArgs e)
+        {
+            if (e.entity.Team == Team.Enemy)
+            {
+                int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
+                FillWallet(gloryIncome);
+            }
         }
 
         private void Entity_EntitySpawned(object sender, Entity.EntitySpawnedArgs e)
         {
-            throw new System.NotImplementedException();
+            if(e.entity.Team == Team.Player)
+            {
+                int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
+                FillWallet(gloryIncome);
+            }
         }
 
+
         void IPlayerGloryIncome.AddAmount(int amount)
+        {
+            FillWallet(amount);
+        }
+
+        private void FillWallet(int amount)
         {
             _playerGloryWallet.AddAmount(amount);
         }
