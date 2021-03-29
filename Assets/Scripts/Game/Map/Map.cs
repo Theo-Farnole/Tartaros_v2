@@ -18,6 +18,8 @@
 		[SerializeField]
 		[AssetsOnly]
 		private GameObject _sectorPrefab = null;
+
+		private ISector[] _sectors = null;
 		#endregion Fields
 
 		#region Properties
@@ -47,29 +49,9 @@
 			}
 		}
 
-		private void SpawnSectors()
-		{
-			for (int i = 0; i < _mapData.Sectors.Length; i++)
-			{
-				// because polygon normal are forward, we must rotate to make them look up
-				GameObject sectorGameObject = Instantiate(_sectorPrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
-				sectorGameObject.name = string.Format("Sector {0}", i);
-
-				if (sectorGameObject.TryGetComponent(out Sector sector))
-				{
-					SectorData sectorData = _mapData.Sectors[i];
-					sector.Initialize(sectorData);
-				}
-				else
-				{
-					Debug.LogWarningFormat("Missing Sector component on prefab {0}.", _sectorPrefab.name);
-				}
-			}
-		}
-
 		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
 		{
-			Debug.LogError("Not implemented");
+			Debug.Log("Not implemented");
 			return true;
 		}
 
@@ -87,6 +69,43 @@
 
 			Debug.LogFormat("No sector found at position {0}", position);
 			return null;
+		}
+
+		bool IMap.IsSectorNeightborOfCapturedSectors(ISector sectorToCheck)
+		{
+			foreach (ISector sector in _sectors)
+			{
+				if (sectorToCheck.IsSectorNeightborOf(sector) == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private void SpawnSectors()
+		{
+			_sectors = new ISector[_mapData.Sectors.Length];
+
+			for (int i = 0; i < _mapData.Sectors.Length; i++)
+			{
+				// because polygon normal are forward, we must rotate to make them look up
+				GameObject sectorGameObject = Instantiate(_sectorPrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
+				sectorGameObject.name = string.Format("Sector {0}", i);
+
+				if (sectorGameObject.TryGetComponent(out Sector sector))
+				{
+					_sectors[i] = sector;
+
+					SectorData sectorData = _mapData.Sectors[i];
+					sector.Initialize(sectorData);
+				}
+				else
+				{
+					Debug.LogWarningFormat("Missing Sector component on prefab {0}.", _sectorPrefab.name);
+				}
+			}
 		}
 		#endregion Methods
 	}
