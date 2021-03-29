@@ -42,6 +42,7 @@ namespace Tartaros.Map
 		bool ISector.IsCaptured
 		{
 			get => _isCaptured;
+
 			set
 			{
 				if (_isCaptured == value) return;
@@ -57,7 +58,7 @@ namespace Tartaros.Map
 			}
 		}
 
-		ISectorResourcesWallet ISector.CapturePrice => throw new System.NotImplementedException();
+		ISectorResourcesWallet ISector.CapturePrice => SectorData.CapturePrice;
 		#endregion Properties
 
 		#region Methods
@@ -93,8 +94,6 @@ namespace Tartaros.Map
 					sectorPointsSnapToGround.Add(sectorPoint);
 				}
 			}
-
-			Debug.LogFormat("{0} has generated an outline of {1} points.", name, sectorPointsSnapToGround.Count);
 
 			return sectorPointsSnapToGround.ToArray();
 		}
