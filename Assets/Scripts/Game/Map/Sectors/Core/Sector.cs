@@ -8,27 +8,26 @@ namespace Tartaros.Map
 	using Tartaros.Sectors;
 	using Tartaros.Math;
 	using System.Linq;
+	using System;
 
 	public class Sector : MonoBehaviour, ISector
 	{
 		#region Fields		
-		[SerializeField]
-		private MeshFilter _meshFiltrer = null;
 
 		[SerializeField]
 		private MeshCollider _collider = null;
 
 		private SectorData _sectorData = null;
+
+		[ShowInRuntime]
 		private bool _isCaptured = false;
 		private Mesh _sectorMesh = null;
-
-		private IPlayerSectorResources _playerWallet = null;
 		#endregion Fields
 
 		#region Properties
-		public SectorData SectorData => _sectorData;
+		public SectorData SectorData { get => _sectorData; set => _sectorData = value; }
 		public bool IsCaptured => _isCaptured;
-
+		public Mesh SectorMesh => _sectorMesh;
 		GameObject[] ISector.ObjectsInSector
 		{
 			get
@@ -53,20 +52,25 @@ namespace Tartaros.Map
 				{
 					OnCapture();
 				}
-
-				UpdateFogOfWarVisibility();
 			}
 		}
 
 		ISectorResourcesWallet ISector.CapturePrice => SectorData.CapturePrice;
 		#endregion Properties
 
-		#region Methods
-		private void Awake()
-		{
-			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
-		}
+		#region Events
+		public class CapturedArgs : EventArgs
+		{ }
 
+		public event EventHandler<CapturedArgs> Captured = null;
+
+		public class InitializedArgs : EventArgs
+		{ }
+
+		public event EventHandler<InitializedArgs> Initialized = null;
+		#endregion Events
+
+		#region Methods
 		public void Initialize(SectorData sectorData)
 		{
 			_sectorData = sectorData;
@@ -74,7 +78,7 @@ namespace Tartaros.Map
 			_sectorMesh = SectorMeshGenerator.GenerateMesh(_sectorData);
 
 			_collider.sharedMesh = _sectorMesh;
-			UpdateFogOfWarVisibility();
+			Initialized?.Invoke(this, new InitializedArgs());
 		}
 
 		public Vector3[] GetPointsWrappedSnappedToGround()
@@ -110,9 +114,9 @@ namespace Tartaros.Map
 
 		private void OnCapture()
 		{
-			Debug.Log("A sector has been captured");
 			UpdateSelectableTeam();
-			UpdateFogOfWarVisibility();
+
+			Captured?.Invoke(this, new CapturedArgs());
 		}
 
 		private void UpdateSelectableTeam()
@@ -121,16 +125,6 @@ namespace Tartaros.Map
 			{
 				selectable.Team = Entities.Team.Player;
 			}
-		}
-
-		private void UpdateFogOfWarVisibility()
-		{
-			if (_sectorMesh == null)
-			{
-				Debug.LogErrorFormat("Vision don't work on sector. Sector {0} has not be initialized.", name);
-			}
-
-			_meshFiltrer.mesh = _isCaptured ? _sectorMesh : null;
 		}
 		#endregion Methods
 	}

@@ -32,10 +32,6 @@
 		private void Awake()
 		{
 			Services.Instance.RegisterService<IMap>(this);
-		}
-
-		private void Start()
-		{
 			SpawnSectors();
 		}
 
@@ -57,9 +53,7 @@
 
 		ISector IMap.GetSectorOnPosition(Vector3 position)
 		{
-			ISector[] sectors = ObjectsFinder.FindObjectsOfInterface<ISector>();
-
-			foreach (var sector in sectors)
+			foreach (var sector in _sectors)
 			{
 				if (sector.ContainsPosition(position))
 				{
@@ -75,7 +69,7 @@
 		{
 			foreach (ISector sector in _sectors)
 			{
-				if (sectorToCheck.IsSectorNeightborOf(sector) == true)
+				if (sector.IsCaptured && sectorToCheck.IsSectorNeightborOf(sector) == true)
 				{
 					return true;
 				}
