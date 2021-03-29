@@ -21,12 +21,10 @@ namespace Tartaros.Map
 		private SectorData _sectorData = null;
 		private bool _isCaptured = false;
 		private Mesh _sectorMesh = null;
-
-		private IPlayerSectorResources _playerWallet = null;
 		#endregion Fields
 
 		#region Properties
-		public SectorData SectorData => _sectorData;
+		public SectorData SectorData { get => _sectorData; set => _sectorData = value; }
 		public bool IsCaptured => _isCaptured;
 
 		GameObject[] ISector.ObjectsInSector
@@ -62,11 +60,6 @@ namespace Tartaros.Map
 		#endregion Properties
 
 		#region Methods
-		private void Awake()
-		{
-			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
-		}
-
 		public void Initialize(SectorData sectorData)
 		{
 			_sectorData = sectorData;

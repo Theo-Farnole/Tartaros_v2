@@ -19,5 +19,8 @@
 		{
 			WorldPosition = worldPosition;
 		}
+
+		public Vertex2D(float x, float y, float z) : this(new Vector3(x, y, z))
+		{ }
 	}
 }

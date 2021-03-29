@@ -31,6 +31,19 @@
 		public ConvexPolygon ConvexPolygon => new ConvexPolygon(AllWorldsPoint.Select(vector => new Vector2(vector.x, vector.z)).ToArray());
 		#endregion Properties
 
+		#region Ctor
+		public SectorData(params Vertex2D[] vertices) : this(vertices, null)
+		{
+
+		}
+
+		public SectorData(Vertex2D[] vertices, ISectorResourcesWallet capturePrice)
+		{
+			_vertices = new List<Vertex2D>(vertices);
+			_capturePrice = capturePrice;
+		}
+		#endregion Ctor
+
 		#region Methods
 		public void AddVertex(Vertex2D vertex)
 		{

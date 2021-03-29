@@ -1,5 +1,6 @@
 ﻿namespace Tartaros
 {
+	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Entities;
 	using Tartaros.Map;
@@ -22,22 +23,21 @@
 			return sector.GetEntitiesInSector().Count(x => x.EntityData == correspondingData);
 		}
 
-		public static bool IsSectorNeightborOf(this ISector sector, ISector toTest)
+		public static bool IsSectorNeightborOf(this ISector sector1, ISector sector2)
 		{
-			if (sector is Sector convertSector && toTest is Sector convertToTest)
+			if (sector1 is Sector convertedSector1 && sector2 is Sector convertedSector2)
 			{
-				foreach (Vertex2D vertex in convertSector.SectorData.Vertices)
-				{
-					foreach (Vertex2D vertexToTest in convertToTest.SectorData.Vertices)
-					{
-						if (vertex == vertexToTest)
-						{
-							return true;
-						}
-					}
-				}
+				Vertex2D[] verticesSector1 = convertedSector1.SectorData.Vertices;
+				Vertex2D[] verticesSector2 = convertedSector2.SectorData.Vertices;
 
-				return false;
+				Vertex2D[] mergedVertices = verticesSector1.Concat(verticesSector2).ToArray();
+
+				int sharedVerticesCount = mergedVertices.GroupBy(x => x)
+					.Where(g => g.Count() > 1)
+					.Select(y => y.Key)
+					.Count();
+
+				return sharedVerticesCount >= 2;
 			}
 			else
 			{
