@@ -60,8 +60,8 @@ namespace Tartaros.Map
 		{
 			if (SectorData.CapturePrice == null)
 			{
-				Debug.LogErrorFormat("Capture price is not set on sector {0}.", name);
-				return false;
+				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);
+				return true;
 			}
 
 			return _playerWallet.CanBuy(SectorData.CapturePrice);

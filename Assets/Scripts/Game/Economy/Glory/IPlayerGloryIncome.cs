@@ -7,7 +7,5 @@
     public interface IPlayerGloryIncome 
     {
         void AddAmount(int amount);
-
-        void RemoveAmount(int amount);
     }
 }
