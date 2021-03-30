@@ -5,12 +5,10 @@
     using Tartaros.Entities;
     using UnityEngine;
 
-    public class Test_IspawnableData : IWaveSpawnableData
+    public class Test_IspawnableData
     {
         [SerializeField]
         private GameObject _prefab = null;
-
-        GameObject IWaveSpawnableData.Prefab => _prefab;
     }
 
 }
