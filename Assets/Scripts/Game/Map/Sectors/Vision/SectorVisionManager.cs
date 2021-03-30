@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Sectors
 {
 	using Sirenix.OdinInspector;
+	using Tartaros.FogOfWar;
 	using Tartaros.Map;
 	using UnityEngine;
 
@@ -13,12 +14,14 @@
 
 		private MeshRenderer _meshRenderer = null;
 		private Sector _sector = null;
+		private FogConvexPolygonVision _fogVision = null;
 		#endregion Fields
 
 		#region Methods
 		private void Awake()
 		{
 			_sector = GetComponent<Sector>();
+			_fogVision = this.GetOrAddComponent<FogConvexPolygonVision>();
 			_meshRenderer = _meshFiltrer.GetComponent<MeshRenderer>();
 		}
 
@@ -45,6 +48,7 @@
 		private void Initialized(object sender, Sector.InitializedArgs e)
 		{
 			SetVisionMesh();
+			_fogVision.ConvexPolygon = _sector.SectorData.ConvexPolygon;
 		}
 
 		private void SectorCaptured(object sender, Sector.CapturedArgs e)
@@ -59,14 +63,22 @@
 				Debug.LogErrorFormat("Vision don't work on sector. Sector {0} has not be initialized.", name);
 			}
 
+			bool shouldEnableFog = ShouldEnableFog();
+
+			_meshRenderer.enabled = shouldEnableFog;
+			_fogVision.enabled = shouldEnableFog;
+		}
+
+		private bool ShouldEnableFog()
+		{
 			if (_sector.IsCaptured == true)
 			{
-				_meshRenderer.enabled = true;
+				return true;
 			}
 			else
 			{
-				ISectorVisionEnabler[] enablers = _sector.FindObjectsOfType<ISectorVisionEnabler>();
-				_meshRenderer.enabled = enablers.Length > 0;
+				ISectorVisionEnabler[] enablers = _sector.FindObjectsInSectorOfType<ISectorVisionEnabler>();
+				return enablers.Length > 0;
 			}
 		}
 

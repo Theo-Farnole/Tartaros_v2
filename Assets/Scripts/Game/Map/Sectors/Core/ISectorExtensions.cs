@@ -8,7 +8,7 @@
 
 	public static class ISectorExtensions
 	{
-		public static T[] FindObjectsOfType<T>(this ISector sector)
+		public static T[] FindObjectsInSectorOfType<T>(this ISector sector)
 		{
 			T[] entitiesInSector = sector.ObjectsInSector
 				.Select(x => x.GetComponent<T>())
