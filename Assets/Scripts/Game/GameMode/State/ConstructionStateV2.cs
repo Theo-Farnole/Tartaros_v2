@@ -17,6 +17,7 @@ namespace Tartaros.Construction
 		private IConstructable _constructable = null;
 		private IPlayerSectorResources _playerSectorRessources = null;
 		private IMap _map = null;
+		private UserErrorsLogger _errorsLogger = null;
 		#endregion Fields
 
 		#region Ctor
@@ -26,6 +27,7 @@ namespace Tartaros.Construction
 			_constructionInput = new ConstructionInputs();
 			_buildingPreview = new BuildingPreview(_constructable, _constructionInput.GetMousePosition());
 			_playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
+			_errorsLogger = Services.Instance.Get<UserErrorsLogger>();
 			_map = Services.Instance.Get<IMap>();
 		}
 		#endregion Ctor
@@ -66,21 +68,7 @@ namespace Tartaros.Construction
 		{
 			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
 
-			Debug.Log("buildingPosition = " + buildingPosition);
-
-
-			if (_map.CanBuild(buildingPosition, _constructable.Size) == false)
-			{
-				Debug.LogFormat("Cannot build: map prevents build on {0}.", buildingPosition);
-				return false;
-			}
-			else if (DoCanConstructRulesAreValid() == false)
-			{
-				Debug.LogFormat("Cannot build: construction rules prevent build on {0}.", buildingPosition);
-				return false;
-			}
-
-			return true;
+			return _map.CanBuild(buildingPosition, _constructable.Size) && DoCanConstructRulesAreValid();
 		}
 
 		private bool DoCanConstructRulesAreValid()

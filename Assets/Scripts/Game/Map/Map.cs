@@ -20,6 +20,7 @@
 		private GameObject _sectorPrefab = null;
 
 		private ISector[] _sectors = null;
+		private UserErrorsLogger _logger = null;
 		#endregion Fields
 
 		#region Properties
@@ -33,6 +34,11 @@
 		{
 			Services.Instance.RegisterService<IMap>(this);
 			SpawnSectors();
+		}
+
+		private void Start()
+		{
+			_logger = Services.Instance.Get<UserErrorsLogger>();
 		}
 
 		private void OnDrawGizmos()
@@ -53,7 +59,7 @@
 
 			if (sector.IsCaptured == false)
 			{
-				Debug.LogFormat("Cannot build at position {0} : {1} is not a captured sector.", buildingPosition, sector.ToString());
+				_logger.Log("Cannot build on a uncaptured sector.", buildingPosition, sector.ToString());
 				return false;
 			}
 
