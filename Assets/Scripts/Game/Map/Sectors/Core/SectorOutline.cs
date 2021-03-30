@@ -31,6 +31,8 @@
 		[FoldoutGroup(EDITOR_GROUP_COLORS)]
 		[SerializeField]
 		private Color _uncapturedOutlineColor = Color.grey;
+		
+		private bool _selected = false;
 		#endregion Fields
 
 		#region Methods		
@@ -40,14 +42,27 @@
 			SetUnselectedColor();
 		}
 
-		void ISelectionEffect.OnSelected()
+		private void OnEnable()
 		{
-			SetSelectedColor();
+			_sector.Captured -= OnSectorCaptured;
+			_sector.Captured += OnSectorCaptured;
 		}
 
-		void ISelectionEffect.OnUnselected()
+		private void OnSectorCaptured(object sender, Sector.CapturedArgs e)
 		{
-			SetUnselectedColor();
+			UpdateColor();
+		}
+
+		private void UpdateColor()
+		{
+			if (_selected == true)
+			{
+				SetSelectedColor();
+			}
+			else
+			{
+				SetUnselectedColor();
+			}
 		}
 
 		private void SetSelectedColor()
@@ -75,6 +90,20 @@
 
 			_lineRenderer.positionCount = positions.Length;
 			_lineRenderer.SetPositions(positions);
+		}
+
+		void ISelectionEffect.OnSelected()
+		{
+			SetSelectedColor();
+
+			// TODO TF: (refactor) it's strange to have boolean; we should get the selectable of ISelectionEffect
+			_selected = true;
+		}
+
+		void ISelectionEffect.OnUnselected()
+		{
+			SetUnselectedColor();
+			_selected = false;
 		}
 		#endregion Methods
 	}

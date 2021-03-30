@@ -7,6 +7,8 @@
 	public class SectorsCaptureManager : MonoBehaviour, ISectorsCaptureManager
 	{
 		#region Fields
+		private const string DBG_CANNOT_CAPTURE = "Cannot capture sector {0} : {1}";
+
 		private IPlayerSectorResources _playerWallet = null;
 		private IMap _map = null;
 		#endregion Fields
@@ -40,9 +42,22 @@
 
 		bool ISectorsCaptureManager.CanCapture(ISector sector)
 		{
+			// TODO TF: (refactor) check if there is another way
+			if (sector.IsThereEnemiesOnSector() == true)
+			{
+				Debug.LogFormat(DBG_CANNOT_CAPTURE, name, "there is ennemies on the sector.");
+				return false;
+			}
+
+			if (sector.IsTherePlayersEntitiesOnSector() == false)
+			{
+				Debug.LogFormat(DBG_CANNOT_CAPTURE, name, "must contains players entities on the sector.");
+				return false;
+			}
+
 			if (_map.IsSectorNeightborOfCapturedSectors(sector) == false)
 			{
-				Debug.Log("Sector to capture has not neightbor that is captured.");
+				Debug.LogFormat(DBG_CANNOT_CAPTURE, name, "must be neightbor of a captured sector.");
 				return false;
 			}
 

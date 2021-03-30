@@ -28,6 +28,23 @@
 			return entitiesInSector;
 		}
 
+		public static bool IsThereEnemiesOnSector(this ISector sector)
+		{
+			return sector.GetEntitiesOfTypeOnSector(Team.Enemy) > 0;
+		}
+
+		public static bool IsTherePlayersEntitiesOnSector(this ISector sector)
+		{
+			return sector.GetEntitiesOfTypeOnSector(Team.Player) > 0;
+		}
+
+		private static int GetEntitiesOfTypeOnSector(this ISector sector, Team team)
+		{
+			return sector.GetEntitiesInSector()
+							.Where(x => x.Team == team)
+							.Count();
+		}
+
 		public static int GetEntityCount(this ISector sector, EntityData correspondingData)
 		{
 			return sector.GetEntitiesInSector().Count(x => x.EntityData == correspondingData);
