@@ -83,7 +83,7 @@
         {
             for (int i = 0; i < unitSequence.EntitiesCount; i++)
             {
-                GameObject spawnedEntity = GameObject.Instantiate(unitSequence.EntityToSpawn.Prefab, spawnPoint.SpawnPoint, Quaternion.identity);
+                GameObject spawnedEntity = GameObject.Instantiate(unitSequence.PrefabToSpawn, spawnPoint.SpawnPoint, Quaternion.identity);
                 _stillAliveManger.AddEnemyWave(spawnedEntity.GetComponent<IWaveSpawnable>());
                 yield return new WaitForSeconds(unitSequence.SecondsBetweenUnits);
             }
