@@ -25,6 +25,7 @@
 		// public event EventHandler<KilledArgs> Killed;
 
 		[SerializeField]
+		[InlineEditor]
 		private WavesSpawnerData _waveSpawnerData = null;
 		private ISpawnPoint[] _spawnPoints = null;
 		private WaveSpawnerFSM _waveFSM = null;
