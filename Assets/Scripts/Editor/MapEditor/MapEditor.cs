@@ -30,8 +30,6 @@
 
 		private void OnSceneGUI()
 		{
-			Debug.Log("Scene gui");
-
 			if (Map.MapData == null) return;
 
 			if (DoVerticesMoveHandleShouldBeDraw())

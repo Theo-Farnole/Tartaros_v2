@@ -107,6 +107,16 @@
 #if UNITY_EDITOR
 	public partial class Map
 	{
+		public const string FILL_SITE_ID = "MapEditor_FillSite";
+
+		[FoldoutGroup("Display Preferences")]
+		[ShowInInspector]
+		public bool DisplaySitesWithColor
+		{
+			get => UnityEditor.EditorPrefs.GetBool(FILL_SITE_ID, false);
+			set => UnityEditor.EditorPrefs.SetBool(FILL_SITE_ID, value);
+		}
+
 		private const string path = "Assets/Databases/Maps/";
 
 		[ShowIf("@_mapData == null")]

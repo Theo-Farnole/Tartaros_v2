@@ -11,32 +11,37 @@
 		#endregion Fields
 
 		#region Methods
-		public void DrawSite(SectorData site)
+		/// <summary>
+		/// Draw site with borders, label and color inside borders.
+		/// </summary>
+		/// <param name="site"></param>
+		/// <param name="label"></param>
+		public void DrawCompleteSite(SectorData site, string label)
 		{
 			if (site == null) throw new System.ArgumentNullException();
 
-			DrawLine(site);
-			DrawPolygon(site);
+			DrawBorders(site);
+			DrawSiteLabel(site, label);
+			DrawColorInsideBorders(site);
 		}
 
-		public void DrawSite(SectorData site, string label)
+		public void DrawSiteLabel(SectorData site, string label)
 		{
 			if (site == null) throw new System.ArgumentNullException();
-
-			DrawSite(site);
-
 			Handles.Label(site.Centroid, label);
 		}
 
-		private void DrawLine(SectorData site)
+		public void DrawBorders(SectorData site)
 		{
+			if (site == null) throw new System.ArgumentNullException();
+
 			Vector3[] sitePoints = site.GetWorldPointsWrapped();
 
 			Handles.color = lineColor;
 			Handles.DrawPolyLine(sitePoints);
 		}
 
-		private void DrawPolygon(SectorData site)
+		public void DrawColorInsideBorders(SectorData site)
 		{
 			Vector3[] sitePoints = site.GetWorldPointsWrapped();
 
