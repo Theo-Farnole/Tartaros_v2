@@ -1,12 +1,12 @@
 ﻿namespace Tartaros.Gamemode
 {
 	using Tartaros.ServicesLocator;
+	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class GamemodeManager : MonoBehaviour
-	{
+	{		
 		private GamemodeFSM _gamemodeFSM = null;
-
 
 		private void Awake()
 		{

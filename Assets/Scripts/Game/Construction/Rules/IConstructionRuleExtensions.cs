@@ -14,7 +14,6 @@ namespace Tartaros
 		{
 			if (constructable.Rules == null)
 			{
-				Debug.LogFormat("No rules found on constuctable {0}", constructable.ToString());
 				return true;
 			}
 

@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 8af83fcc1a2547d41a76dac2a50c13cc, type: 3}
     - {fileID: 4740395784054915281, guid: 99d2218f639cf4042baa4ec4b93e749d, type: 3}
+    - {fileID: 4740395784054915281, guid: cac3677ec5163d74882eb8dff95a91e6, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -71,6 +72,9 @@ MonoBehaviour:
     - Name: _modelPrefab
       Entry: 10
       Data: 1
+    - Name: _gameplayPrefab
+      Entry: 10
+      Data: 2
     - Name: _IsChained
       Entry: 5
       Data: false

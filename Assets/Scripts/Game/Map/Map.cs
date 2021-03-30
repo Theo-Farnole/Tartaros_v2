@@ -45,9 +45,18 @@
 			}
 		}
 
-		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
+		bool IMap.CanBuild(Vector3 buildingPosition, Vector2 buildingSize)
 		{
-			Debug.Log("Not implemented");
+			// TODO TF: check if build is not on multiple sector at once
+
+			ISector sector = (this as IMap).GetSectorOnPosition(buildingPosition);
+
+			if (sector.IsCaptured == false)
+			{
+				Debug.LogFormat("Cannot build at position {0} : {1} is not a captured sector.", buildingPosition, sector.ToString());
+				return false;
+			}
+
 			return true;
 		}
 

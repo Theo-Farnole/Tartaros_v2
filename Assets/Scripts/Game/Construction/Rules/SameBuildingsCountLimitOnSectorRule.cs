@@ -26,9 +26,8 @@
 
 			if (sectorOnPosition != null)
 			{
-				int v = GetBuildingsCount(sectorOnPosition);
-				Debug.Log(v);
-				return v < _buildingMaxCount;
+				int buildingsCount = GetBuildingsCount(sectorOnPosition);
+				return buildingsCount < _buildingMaxCount;
 			}
 			else
 			{
