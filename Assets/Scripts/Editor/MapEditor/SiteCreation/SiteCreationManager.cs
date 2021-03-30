@@ -8,10 +8,12 @@
 	{
 		#region Fields
 		private const float HANDLE_SIZE = .1f;
+		private readonly Color HANDLE_COLOR = Color.green;
+		private readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 
 		private readonly Map _map = null;
-		private readonly SiteDrawer _siteDrawer = null;
 		private readonly WaypointPositionInput _waypointPositionInput = null;
+		private SiteDrawer _siteDrawer = null;
 
 		private SectorData _pendingCreationSite = null;
 		#endregion Fields
@@ -21,10 +23,10 @@
 		#endregion Properties
 
 		#region Ctor
-		public SiteCreationManager(Map map, SiteDrawer siteDrawer)
+		public SiteCreationManager(Map map)
 		{
 			_map = map;
-			_siteDrawer = siteDrawer;
+			_siteDrawer = new SiteDrawer();
 			_waypointPositionInput = new WaypointPositionInput();
 		}
 		#endregion Ctor
@@ -111,8 +113,8 @@
 			{
 				Handles.color = Color.white;
 
-				HandlesHelper.PushColor(MapEditor.HANDLE_COLOR);
-				bool clickOnHandle = Handles.Button(vertex.WorldPosition, MapEditor.HANDLE_ROTATION, MapEditor.HANDLE_SIZE, MapEditor.HANDLE_SIZE, Handles.DotHandleCap);
+				HandlesHelper.PushColor(HANDLE_COLOR);
+				bool clickOnHandle = Handles.Button(vertex.WorldPosition, HANDLE_ROTATION, HANDLE_SIZE, HANDLE_SIZE, Handles.DotHandleCap);
 				HandlesHelper.PopColor();
 
 				if (clickOnHandle == true)
