@@ -25,6 +25,16 @@
 		}
 
 		[Test]
+		public void When_CirclesAreOneDiameterFar_Should_ReturnFalse()
+		{
+			Circle c1 = new Circle(new Vector2(0, 0), 1);
+			Circle c2 = new Circle(new Vector2(3, 0), 1);
+
+			Assert.IsFalse(CollisionOverlapCalculator.DoOverlap(c1, c2));
+
+		}
+
+		[Test]
 		public void When_CircleAreFarOver_Should_ReturnTrue()
 		{
 			Circle c1 = new Circle(new Vector2(5, 5), 1);

@@ -20,6 +20,11 @@
 			this.position = position;
 			this.radius = radius;
 		}
+
+		public Circle(Vector3 position, float radius) : this(new Vector2(position.x, position.z), radius)
+		{
+			
+		}
 		#endregion Ctor
 
 		#region Methods
