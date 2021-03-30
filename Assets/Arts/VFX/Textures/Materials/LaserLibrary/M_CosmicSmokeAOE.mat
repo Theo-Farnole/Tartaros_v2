@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_CosmicSmoke
+  m_Name: M_CosmicSmokeAOE
   m_Shader: {fileID: 4800000, guid: 8666f20837fa801458159b2d2f8c8458, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -46,8 +46,8 @@ Material:
     - _VoroScale: 5
     - __dirty: 0
     m_Colors:
-    - _Color0: {r: 0.05913247, g: 0.7169812, b: 0, a: 1}
-    - _Color1: {r: 0, g: 0.34302652, b: 0.7169812, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 0.46021718, b: 0, a: 1}
     - _ColorSteps: {r: 3, g: 0.1, b: 0, a: 0}
     - _MovingUV: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _OpacityFromPatern: {r: 0, g: 0.5, b: 0, a: 0}
