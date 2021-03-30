@@ -8,6 +8,7 @@
     using UnityEngine.UI;
     using Tartaros.ServicesLocator;
     using Sirenix.OdinInspector;
+    using UnityEngine.AI;
 
     public class MiniMap : MonoBehaviour
     {
@@ -29,6 +30,9 @@
         private IMiniMapPolygon _miniMapPolygon = null;
         private IMap _map = null;
         private Bounds2D _MiniMapLimites = null;
+        private NavigationPathMiniMap _navigationPathCalcule = null;
+
+        public RectTransform RootTransform => _rootTransform;
 
         private void Awake()
         {
@@ -43,9 +47,17 @@
         private void Start()
         {
             _map = Services.Instance.Get<IMap>();
+            _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
+
+            //_navigationPathCalcule.DrawPathNavigation();
         }
 
         private void Update()
+        {
+            SetPositionIcons();
+        }
+
+        private void SetPositionIcons()
         {
             foreach (var icon in _icons)
             {
@@ -57,7 +69,7 @@
             }
         }
 
-        private Vector2 WordToUiPosition(Vector3 worldPosition)
+        public Vector2 WordToUiPosition(Vector3 worldPosition)
         {
             var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
             var y = _rootTransform.rect.height * worldPosition.z / _map.MapBounds.boundsY.max;
@@ -65,6 +77,7 @@
             return new Vector2(x, y);
         }
 
+  
         public void AddIcon(IMiniMapIcon icon)
         {
             RectTransform rectTransform = InstantiateIcon(icon);
