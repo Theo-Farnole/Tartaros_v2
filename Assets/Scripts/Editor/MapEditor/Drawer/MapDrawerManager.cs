@@ -16,8 +16,6 @@
 		{
 			if (ShouldCreateDrawer(map) == true)
 			{
-				Debug.LogFormat("Create drawer of {0}.", map);
-
 				MapSitesDrawer drawer = new MapSitesDrawer(map);
 				_drawers.Add(map, drawer);
 			}

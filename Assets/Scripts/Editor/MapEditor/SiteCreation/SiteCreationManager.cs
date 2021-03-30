@@ -99,7 +99,8 @@
 			if (_pendingCreationSite == null) return;
 
 			_siteDrawer.lineColor = Color.green;
-			_siteDrawer.DrawSite(_pendingCreationSite);
+			_siteDrawer.DrawBorders(_pendingCreationSite);
+			_siteDrawer.DrawColorInsideBorders(_pendingCreationSite);
 		}
 
 		private static void HideGizmosTool()

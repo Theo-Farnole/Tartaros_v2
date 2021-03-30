@@ -18,6 +18,10 @@
 		private int _buildingMaxCount = 1;
 		#endregion Fields
 
+		#region Properties
+		string IConstructionRule.ErrorMessage => "You reach the limit of this building on this sector.";
+		#endregion Properties
+
 		#region Methods
 		bool IConstructionRule.CanConstruct(Vector3 position)
 		{
@@ -26,9 +30,8 @@
 
 			if (sectorOnPosition != null)
 			{
-				int v = GetBuildingsCount(sectorOnPosition);
-				Debug.Log(v);
-				return v < _buildingMaxCount;
+				int buildingsCount = GetBuildingsCount(sectorOnPosition);
+				return buildingsCount < _buildingMaxCount;
 			}
 			else
 			{

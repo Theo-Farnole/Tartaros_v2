@@ -20,6 +20,7 @@
 		private GameObject _sectorPrefab = null;
 
 		private ISector[] _sectors = null;
+		private UserErrorsLogger _logger = null;
 		#endregion Fields
 
 		#region Properties
@@ -35,6 +36,11 @@
 			SpawnSectors();
 		}
 
+		private void Start()
+		{
+			_logger = Services.Instance.Get<UserErrorsLogger>();
+		}
+
 		private void OnDrawGizmos()
 		{
 			if (_mapData != null)
@@ -45,9 +51,18 @@
 			}
 		}
 
-		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
+		bool IMap.CanBuild(Vector3 buildingPosition, Vector2 buildingSize)
 		{
-			Debug.Log("Not implemented");
+			// TODO TF: check if build is not on multiple sector at once
+
+			ISector sector = (this as IMap).GetSectorOnPosition(buildingPosition);
+
+			if (sector.IsCaptured == false)
+			{
+				_logger.Log("Cannot build on a uncaptured sector.", buildingPosition, sector.ToString());
+				return false;
+			}
+
 			return true;
 		}
 
@@ -107,6 +122,16 @@
 #if UNITY_EDITOR
 	public partial class Map
 	{
+		public const string FILL_SITE_ID = "MapEditor_FillSite";
+
+		[FoldoutGroup("Display Preferences")]
+		[ShowInInspector]
+		public bool DisplaySitesWithColor
+		{
+			get => UnityEditor.EditorPrefs.GetBool(FILL_SITE_ID, false);
+			set => UnityEditor.EditorPrefs.SetBool(FILL_SITE_ID, value);
+		}
+
 		private const string path = "Assets/Databases/Maps/";
 
 		[ShowIf("@_mapData == null")]

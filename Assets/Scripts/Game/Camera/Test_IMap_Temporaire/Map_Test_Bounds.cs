@@ -33,7 +33,7 @@
 			throw new System.NotImplementedException();
 		}
 
-		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
+		bool IMap.CanBuild(Vector3 buildingPosition, Vector2 buildingSize)
 		{
 			return true;
 		}

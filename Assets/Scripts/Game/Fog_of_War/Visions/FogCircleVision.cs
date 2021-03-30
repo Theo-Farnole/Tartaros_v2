@@ -4,7 +4,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class FogCircleVision : MonoBehaviour, IFogVision
+	public partial class FogCircleVision : MonoBehaviour, IFogVision
 	{
 		#region Fields
 		[SerializeField]
@@ -58,13 +58,24 @@
 		{
 			_fogOfWarManager.RemoveVision(this);
 		}
-
-		void OnDrawGizmos()
-		{
-#if UNITY_EDITOR
-			Editor.HandlesHelper.DrawSolidCircle(transform.position, Vector3.up, _radius, Color.grey);
-#endif
-		}
 		#endregion Methods
 	}
+
+#if UNITY_EDITOR
+	public partial class FogCircleVision
+	{
+		void OnDrawGizmos()
+		{
+			if (Application.isPlaying == true)
+			{
+				DrawVisionCircle();
+			}
+		}
+
+		private void DrawVisionCircle()
+		{
+			Editor.HandlesHelper.DrawSolidCircle(transform.position, Vector3.up, _radius, Color.grey);
+		}
+	}
+#endif
 }
