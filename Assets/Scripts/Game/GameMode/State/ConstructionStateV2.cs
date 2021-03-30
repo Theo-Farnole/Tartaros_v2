@@ -73,7 +73,24 @@ namespace Tartaros.Construction
 
 		private bool DoCanConstructRulesAreValid()
 		{
-			return _constructable.DoRulesPassAtPosition(_buildingPreview.GetBuildingPreviewPosition());
+			bool rulePass = _constructable.DoRulesPassAtPosition(_buildingPreview.GetBuildingPreviewPosition());
+
+			if (rulePass == false)
+			{
+				LogFailedConstructRules();
+			}
+
+			return rulePass;
+		}
+
+		private void LogFailedConstructRules()
+		{
+			var failedRules = _constructable.GetFailedRules(_buildingPreview.GetBuildingPreviewPosition());
+
+			foreach (var failedRule in failedRules)
+			{
+				_errorsLogger.Log(failedRule.ErrorMessage);
+			}
 		}
 
 		private void Validate()
