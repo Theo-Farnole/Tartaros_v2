@@ -6,10 +6,10 @@
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class MiniMapDrawNavigationPath : Graphic
+    public class DrawLineUI : Graphic
     {
-        public Vector2Int _gridSize;
-        private List<Vector2> _points;
+        private Vector2Int _gridSize;
+        private List<Vector2> _points = null;
         private List<Vector2>[] _pathPoints = null;
 
         float _width;
@@ -18,11 +18,6 @@
         float _unitHeight;
 
         public float _thickness = 10f;
-
-        public MiniMapDrawNavigationPath()
-        {
-            color = Color.red;
-        }
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {
@@ -34,7 +29,7 @@
             _unitWidth = _width / (float)_gridSize.x;
             _unitHeight = _height / (float)_gridSize.y;
 
-            Debug.Log(_points.Count);
+            //Debug.Log(_points.Count);
             if (_points.Count < 2)
             {
                 return;
@@ -80,6 +75,16 @@
             vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(_thickness / 2, 0);
             vertex.position += new Vector3(_unitWidth * point.x, _unitHeight * point.y);
             vh.AddVert(vertex);
+        }
+
+        public void SetColor(Color newColor)
+        {
+            color = newColor;
+        }
+
+        public void SetMaterial(Material mat)
+        {
+            material = mat;
         }
 
         public void SetNavigationPoints(List<Vector2> pointsToSet)

@@ -4196,6 +4196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1307895274}
   - component: {fileID: 1307895275}
+  - component: {fileID: 1307895276}
   m_Layer: 0
   m_Name: MiniMapManager
   m_TagString: Untagged
@@ -4230,10 +4231,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniMap: {fileID: 1864298197}
-  _miniMapDrawNavigationPath: {fileID: 0}
   _mapBackground: {fileID: 1903193321}
   _navigationLine: {fileID: 6791326595167842489, guid: 5e283fc160917b043893e9fe71ff73f2,
     type: 3}
+--- !u!114 &1307895276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307895273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9c0a7694d61c047902b7c8d6b600f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _miniMapBackground: {fileID: 1903193321}
+  _drawLinePrefab: {fileID: 6791326595167842489, guid: 5e283fc160917b043893e9fe71ff73f2,
+    type: 3}
+  _miniMap: {fileID: 1864298197}
 --- !u!1 &1308085827
 GameObject:
   m_ObjectHideFlags: 0
@@ -6897,6 +6913,7 @@ MonoBehaviour:
   _iconsParent: {fileID: 1903193322}
   _prefabIcon: {fileID: 4655882646585069190, guid: 7f7971f0bd1d4de44bfd4a8a3a5d5b9d,
     type: 3}
+  _sectorDisplayer: {fileID: 1307895276}
 --- !u!1 &1875967885
 GameObject:
   m_ObjectHideFlags: 0
