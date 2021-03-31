@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -35,10 +35,10 @@ Material:
     - _BorderPower: 5
     - _BorderSpeed: 0.2
     - _OpacityFromPatern: 1
-    - _PaternPower: 1.5
+    - _PaternPower: 0.08
     - _StarsSpeedRatio: 5
     - _StepInner: 1
-    - _StepOutter: 5
+    - _StepOutter: 10
     - _TextureSat: 1
     - _TextureStrength: 5
     - _VoroBorderScale: 0.25
@@ -46,11 +46,11 @@ Material:
     - _VoroScale: 5
     - __dirty: 0
     m_Colors:
-    - _Color0: {r: 0.05913247, g: 0.7169812, b: 0, a: 1}
-    - _Color1: {r: 0, g: 0.34302652, b: 0.7169812, a: 1}
+    - _Color0: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
+    - _Color1: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     - _ColorSteps: {r: 3, g: 0.1, b: 0, a: 0}
     - _MovingUV: {r: 0.2, g: 0.2, b: 0, a: 0}
-    - _OpacityFromPatern: {r: 0, g: 0.5, b: 0, a: 0}
+    - _OpacityFromPatern: {r: 0, g: 0.32, b: 0, a: 0}
     - _OpacityFromPatern1: {r: 0, g: 20, b: 0, a: 0}
     - _PaternStep: {r: 0, g: 1, b: 0, a: 0}
     - _StepInner: {r: 2, g: 0.5, b: 0, a: 0}
