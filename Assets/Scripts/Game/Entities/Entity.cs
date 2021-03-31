@@ -1,8 +1,10 @@
 ﻿namespace Tartaros.Entities
 {
 	using System;
+	using System.Linq;
 	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
+	using Tartaros.Orders;
 	using Tartaros.Wave;
 	using UnityEngine;
 
@@ -79,6 +81,13 @@
 			_entityType = entityType;
 		}
 
+		public Order[] GenerateAvailablesOrders()
+		{
+			return GetComponents<IEntityOrderable>()
+				.SelectMany(x => x.GenerateOrders(this))
+				.ToArray();
+		}
+
 		void GenerateRequiredComponents()
 		{
 			_entityFSM = gameObject.AddComponent<EntityFSM>();
@@ -99,6 +108,11 @@
 		void IOrderStopReceiver.Stop()
 		{
 			_entityFSM.Stop();
+		}
+
+		void IWaveSpawnable.Attack(IAttackable attackable)
+		{
+			GetComponent<IOrderAttackReceiver>().Attack(attackable);
 		}
 		#endregion IOrders
 		#endregion Methods

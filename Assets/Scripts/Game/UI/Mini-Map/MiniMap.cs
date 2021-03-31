@@ -9,6 +9,8 @@
     using Tartaros.ServicesLocator;
     using Sirenix.OdinInspector;
     using UnityEngine.AI;
+    using System.Linq;
+    using Tartaros.Map;
 
     public class MiniMap : MonoBehaviour
     {
@@ -21,6 +23,8 @@
         [BoxGroup("Prefabs")]
         [SerializeField]
         private GameObject _prefabIcon = null;
+        [SerializeField]
+        private SectorsMiniMapDisplay _sectorDisplayer = null;
 
         [ShowInRuntime]
         private Dictionary<IMiniMapIcon, RectTransform> _icons = new Dictionary<IMiniMapIcon, RectTransform>();
@@ -47,7 +51,11 @@
         private void Start()
         {
             _map = Services.Instance.Get<IMap>();
+
+            var array = _map.Sectors.OfType<Sector>().ToArray();
+
             _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
+            _sectorDisplayer.DisplaySectors();
         }
 
         private void Update()
@@ -71,6 +79,14 @@
         {
             var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
             var y = _rootTransform.rect.height * worldPosition.z / _map.MapBounds.boundsY.max;
+
+            return new Vector2(x, y);
+        }
+
+        public Vector2 WordToUiPosition(Vector2 worldPosition)
+        {
+            var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
+            var y = _rootTransform.rect.height * worldPosition.y / _map.MapBounds.boundsY.max;
 
             return new Vector2(x, y);
         }

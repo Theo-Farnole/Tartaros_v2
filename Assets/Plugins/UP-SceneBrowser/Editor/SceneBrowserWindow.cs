@@ -8,7 +8,8 @@
 
 	internal class SceneBrowserWindow : EditorWindow
 	{
-		private const int WIDTH_PX_BUTTONS = 100;
+		private const int MEDIUM_BUTTON_WIDTH = 100;
+		private const int SMALL_BUTTON_WIDTH = 80;
 		private const int SPACING_PX_BUTTONS = 3;
 
 		[SerializeField]
@@ -95,9 +96,18 @@
 			{
 				DrawFavoriteButton(sceneAsset);
 				GUILayout.Label(sceneAsset.Name);
+				DrawSelectButton(sceneAsset);
 				DrawOpenButtons(sceneAsset);
 			}
 			GUILayout.EndHorizontal();
+		}
+
+		private static void DrawSelectButton(SceneData sceneAsset)
+		{
+			if (GUIHelper.DrawColoredButton("Select", Color.grey, GUILayout.Width(SMALL_BUTTON_WIDTH), GUILayout.ExpandWidth(false)))
+			{
+				Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(sceneAsset.Path);
+			}
 		}
 
 		private void DrawFavoriteButton(SceneData sceneAsset)
@@ -117,7 +127,7 @@
 		{
 			if (sceneAsset.IsLoaded == true)
 			{
-				bool shouldClose = GUIHelper.DrawColoredButton("Close", Color.red, GUILayout.Width(WIDTH_PX_BUTTONS * 2 + SPACING_PX_BUTTONS), GUILayout.ExpandWidth(false));
+				bool shouldClose = GUIHelper.DrawColoredButton("Close", Color.red, GUILayout.Width(MEDIUM_BUTTON_WIDTH * 2 + SPACING_PX_BUTTONS), GUILayout.ExpandWidth(false));
 
 				if (shouldClose)
 				{
@@ -126,7 +136,7 @@
 			}
 			else
 			{
-				bool shouldOpenScene = GUILayout.Button("Open", GUILayout.Width(WIDTH_PX_BUTTONS), GUILayout.ExpandWidth(false));
+				bool shouldOpenScene = GUILayout.Button("Open", GUILayout.Width(MEDIUM_BUTTON_WIDTH), GUILayout.ExpandWidth(false));
 
 				if (shouldOpenScene)
 				{
@@ -136,7 +146,7 @@
 				{
 
 
-					bool additiveOpen = GUILayout.Button("Additive Open", GUILayout.Width(WIDTH_PX_BUTTONS), GUILayout.ExpandWidth(false));
+					bool additiveOpen = GUILayout.Button("Additive Open", GUILayout.Width(MEDIUM_BUTTON_WIDTH), GUILayout.ExpandWidth(false));
 
 					if (additiveOpen)
 					{

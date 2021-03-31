@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2983191766981580122}
   - component: {fileID: 4322440327783989077}
+  - component: {fileID: 5494600410522137868}
   m_Layer: 5
   m_Name: ResourceIcon.Root
   m_TagString: Untagged
@@ -141,6 +142,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022669993934798061}
   m_CullTransparentMesh: 0
+--- !u!114 &5494600410522137868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022669993934798061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 72
+  m_MinHeight: -1
+  m_PreferredWidth: 72
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 114
 --- !u!1 &2545316671899048569
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: deeea3e7abfdd494eb35e2c7b389aea3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 256fdf323f110f644b59182198aa47a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -390,7 +411,7 @@ RectTransform:
   m_GameObject: {fileID: 4217784909361263454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 3590848660792318926}
   m_RootOrder: 1
@@ -454,12 +475,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.3
-  m_fontSizeBase: 9.3
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
-  m_fontSizeMax: 9.3
+  m_fontSizeMax: 206.7
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -490,7 +511,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2, y: 2, z: 2, w: 2}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -542,7 +563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7736665989222359473}
-  - component: {fileID: 5494600410522137868}
+  - component: {fileID: 4928554199677332419}
   m_Layer: 5
   m_Name: Income.Root
   m_TagString: Untagged
@@ -570,7 +591,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5494600410522137868
+--- !u!114 &4928554199677332419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -583,13 +604,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: -1
+  m_MinWidth: 80
   m_MinHeight: -1
-  m_PreferredWidth: 5.34
+  m_PreferredWidth: 80
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
-  m_LayoutPriority: 1
+  m_LayoutPriority: 305
 --- !u!1 &5494600410416544725
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +622,7 @@ GameObject:
   - component: {fileID: 5494600410416544746}
   - component: {fileID: 5494600410416544744}
   - component: {fileID: 5494600410416544747}
+  - component: {fileID: 5494600410522137870}
   m_Layer: 5
   m_Name: Amount
   m_TagString: Untagged
@@ -681,11 +703,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.3
-  m_fontSizeBase: 9.3
+  m_fontSize: 41
+  m_fontSizeBase: 41
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_fontSizeMin: 1.37
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -723,6 +745,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5494600410522137870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494600410416544725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 100
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 0
 --- !u!1 &5494600410755793441
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,8 +774,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5494600410755793446}
-  - component: {fileID: 1915991853}
-  - component: {fileID: 1352678336437635185}
   - component: {fileID: 5494600410755793447}
   m_Layer: 5
   m_Name: UI.Resource
@@ -765,34 +805,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 313.6, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1915991853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5494600410755793441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22b574c8466a46408f5edb85bf450fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _amountLabel: {fileID: 5494600410416544747}
-  _sectorRessourceType: 2
---- !u!114 &1352678336437635185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5494600410755793441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189e0a78fa2d4ff448367534ccfdab86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _amountLabel: {fileID: 2427673151910344905}
-  _sectorRessourceType: 2
 --- !u!114 &5494600410755793447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,7 +823,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1

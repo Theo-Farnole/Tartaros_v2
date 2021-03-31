@@ -20,11 +20,7 @@
             _miniMap.AddIcon(this);
         }
 
-        void OnEnable()
-        {
-
-        }
-
+  
         void OnDisable()
         {
             _miniMap.RemoveIcon(this);

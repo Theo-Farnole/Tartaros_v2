@@ -45,7 +45,7 @@
                     List<Vector2> vertexs = GetVectors2(corners);
 
                     GameObject navLine = GameObject.Instantiate(_navigationLine, _mapBackground.transform);
-                    MiniMapDrawNavigationPath navPath = navLine.GetComponent<MiniMapDrawNavigationPath>();
+                    DrawLineUI navPath = navLine.GetComponent<DrawLineUI>();
 
                     navPath.Setup(
                     Mathf.RoundToInt(_rootTransform.rect.width),

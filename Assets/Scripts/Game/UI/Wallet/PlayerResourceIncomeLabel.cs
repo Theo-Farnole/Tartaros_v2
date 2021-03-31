@@ -11,7 +11,7 @@
 		#region Fields
 		[SerializeField]
 		[SuffixLabel("self is null")]
-		private TextMeshProUGUI _amountLabel = null;
+		private TextMeshProUGUI _incomeLabel = null;
 
 		[SerializeField]
 		private SectorRessourceType _sectorRessourceType = SectorRessourceType.Food;
@@ -26,9 +26,9 @@
 		#region Methods
 		private void Awake()
 		{
-			if (_amountLabel == null)
+			if (_incomeLabel == null)
 			{
-				_amountLabel = GetComponent<TextMeshProUGUI>();
+				_incomeLabel = GetComponent<TextMeshProUGUI>();
 			}
 		}
 
@@ -77,7 +77,7 @@
 				string prefix = GetPrefix();
 				string amount = _playerIncome.GetIncomeAmount(_sectorRessourceType).ToString();
 
-				_amountLabel.text = string.Format(format, prefix, amount);
+				_incomeLabel.text = string.Format(format, prefix, amount);
 			}
 		}
 
