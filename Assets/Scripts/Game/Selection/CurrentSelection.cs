@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Selection
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Entities;
@@ -16,8 +17,11 @@
 		#endregion Fields
 
 		#region Properties
-		ISelectable[] ISelection.SelectedSelectables =>_selectedObjets.ToArray();
+		ISelectable[] ISelection.SelectedSelectables => _selectedObjets.ToArray();
 		private ISelection Selection => this as ISelection;
+
+		private event EventHandler<SelectionChangedArgs> SelectionChanged = null;
+		event EventHandler<SelectionChangedArgs> ISelection.SelectionChanged { add => SelectionChanged += value; remove => SelectionChanged -= value; }
 		#endregion Properties
 
 		#region Methods
@@ -45,6 +49,8 @@
 
 			_selectedObjets.Add(selectable);
 			selectable.OnSelected();
+
+			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
 		}
 
 		void ISelection.AddToSelection(ISelectable[] selectables)
@@ -72,6 +78,8 @@
 
 			_selectedObjets.Remove(selectable);
 			selectable.OnUnselected();
+
+			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
 		}
 
 		void ISelection.ClearSelection()
