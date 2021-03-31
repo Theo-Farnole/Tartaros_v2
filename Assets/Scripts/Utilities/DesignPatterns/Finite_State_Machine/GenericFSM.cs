@@ -6,7 +6,8 @@
 		private AState<T> _currentState = null;
 		#endregion Fields
 
-		#region Properties
+		#region Properties	
+		[ShowInRuntime]
 		public AState<T> CurrentState
 		{
 			get => _currentState;
@@ -26,6 +27,11 @@
 				}
 			}
 		}
+
+		[ShowInRuntime]
+#pragma warning disable IDE0051 // Remove unused private members
+		private string CurrentStateType => CurrentState?.GetType().Name ?? "No state";
+#pragma warning restore IDE0051 // Remove unused private members
 		#endregion Properties
 
 		#region Methods

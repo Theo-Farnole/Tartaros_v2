@@ -27,6 +27,7 @@ namespace Tartaros.Map
 		#region Properties
 		public SectorData SectorData { get => _sectorData; set => _sectorData = value; }
 		public bool IsCaptured => _isCaptured;
+		public ConvexPolygon ConvexPolygon => _sectorData.ConvexPolygon;
 		public Mesh SectorMesh => _sectorMesh;
 		GameObject[] ISector.ObjectsInSector
 		{

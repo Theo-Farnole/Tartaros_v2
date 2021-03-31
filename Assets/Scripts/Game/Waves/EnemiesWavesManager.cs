@@ -4,12 +4,36 @@
 	using System;
 	using System.Collections;
 	using System.IO;
+	using Tartaros.Entities;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
 
 	public partial class EnemiesWavesManager : MonoBehaviour
 	{
+		#region Fields
+		[SerializeField]
+		[InlineEditor]
+		private WavesSpawnerData _waveSpawnerData = null;
+
+		[ShowInRuntime]
+		private WaveSpawnerFSM _waveFSM = null;
+		private int _currentWaveIndex = 0;
+		private ISpawnPoint[] _spawnPoints = null;
+		private IWaveSpawnable[] _spawnedEnemies = null;
+		private IAttackable _enemiesTarget = null;
+		#endregion Fields
+
+		#region Properties
+		public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
+		public ISpawnPoint[] SpawnPoints => _spawnPoints;
+		public int CurrentWaveIndex => _currentWaveIndex;
+		public IWaveSpawnable[] SpawnedEnemies => _spawnedEnemies;
+		public WaveSpawnerFSM WaveFSM => _waveFSM;
+		public IAttackable EnemiesTarget => _enemiesTarget;
+		#endregion Properties
+
+		#region Events
 		public class WaveSpawningStartArgs : EventArgs
 		{
 
@@ -23,21 +47,9 @@
 		public event EventHandler<WaveSpawningStartArgs> WaveSpawnStart;
 		public event EventHandler<WaveSpawningFinishedArgs> WaveSpawnFinished;
 		// public event EventHandler<KilledArgs> Killed;
+		#endregion Events
 
-		[SerializeField]
-		[InlineEditor]
-		private WavesSpawnerData _waveSpawnerData = null;
-		private ISpawnPoint[] _spawnPoints = null;
-		private WaveSpawnerFSM _waveFSM = null;
-		private int _currentWaveIndex = 1;
-		private IWaveSpawnable[] _spawnedEnemies = null;
-
-		public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
-		public ISpawnPoint[] SpawnPoints => _spawnPoints;
-		public int CurrentWaveIndex => _currentWaveIndex;
-		public IWaveSpawnable[] SpawnedEnemies => _spawnedEnemies;
-		public WaveSpawnerFSM WaveFSM => _waveFSM;
-
+		#region Methods
 		private void Awake()
 		{
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
@@ -45,22 +57,67 @@
 			//TODO: WaveFSM registerService & Call it
 		}
 
-		private void OnEnable()
+		private void Start()
 		{
-			//WaveFSM.CurrentState = new WaveCooldownState(this);
+			FindEnemiesTarget();
 			WaveFSM.CurrentState = new WaveSpawningState(this);
 		}
 
+		private void Update()
+		{
+			_waveFSM.OnUpdate();
+		}
+
+		public bool IsThereWavesToSpawn()
+		{
+			return _currentWaveIndex < _waveSpawnerData.FinalWaveIndex;
+		}
+
+		public void StartNewWave()
+		{
+			if (IsThereWavesToSpawn() == true)
+			{
+				_currentWaveIndex++;
+				_waveFSM.CurrentState = new WaveSpawningState(this);
+			}
+			else
+			{
+				Debug.Log("Trying to start a new wave while there is no waves to spawn.");
+			}
+		}
 
 		public void InvokeWaveSpawn()
 		{
 			WaveSpawnStart?.Invoke(this, new WaveSpawningStartArgs());
 		}
 
-		public void InvokeWaveFinish()
+		public void InvokeWaveFinished()
 		{
 			WaveSpawnFinished?.Invoke(this, new WaveSpawningFinishedArgs());
 		}
+
+		private void FindEnemiesTarget()
+		{
+			WavesEnemiesTarget target = GameObject.FindObjectOfType<WavesEnemiesTarget>();
+
+			if (target == null)
+			{
+				Debug.LogErrorFormat("A WavesEnemiesTarget is missing in the scene. Please add one in the scene.");
+			}
+			else
+			{
+
+				if (target.TryGetComponent(out IAttackable attackable))
+				{
+					_enemiesTarget = attackable;
+				}
+				else
+				{
+					Debug.LogErrorFormat("Missing a component IAttackable on {0}, the enemies target.", target);
+				}
+			}
+		}
+		#endregion Methods
 	}
 
 #if UNITY_EDITOR

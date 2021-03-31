@@ -1,44 +1,42 @@
 ﻿namespace Tartaros.Wave
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using System.Collections;
+	using System.Collections.Generic;
+	using UnityEngine;
 
-    public class WaitDeathOfSpawnedEnemiesWaveState : AWaveSpawnerState
-    {
+	public class WaitDeathOfSpawnedEnemiesWaveState : AWaveSpawnerState
+	{
+		#region Fields
+		private readonly WavesEnemiesStillAliveManager _stillAliveManager = null;
+		#endregion Fields
 
-        private WavesEnemiesStillAliveManager _stillAliveManager = null;
-        public WaitDeathOfSpawnedEnemiesWaveState(EnemiesWavesManager stateOwner, WavesEnemiesStillAliveManager stillAliveManager) : base(stateOwner)
-        {
-            _stillAliveManager = stillAliveManager;
-        }
+		#region Ctor
+		public WaitDeathOfSpawnedEnemiesWaveState(EnemiesWavesManager stateOwner, WavesEnemiesStillAliveManager stillAliveManager) : base(stateOwner)
+		{
+			_stillAliveManager = stillAliveManager;
+		}
+		#endregion Ctor
 
-        public override void OnStateEnter()
-        {
-            base.OnStateEnter();
+		#region Methods
+		public override void OnStateEnter()
+		{
+			base.OnStateEnter();
+		}
 
-        }
+		public override void OnUpdate()
+		{
+			base.OnUpdate();
 
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
+			if (IsEverySpawnedEnemiesWaveDead())
+			{
+				_stateOwner.WaveFSM.CurrentState = new WaveCooldownState(_stateOwner);
+			}
+		}
 
-            if (IsEverySpawnedEnemiesWaveDead())
-            {
-                
-            }
-        }
-
-        public override void OnStateExit()
-        {
-            base.OnStateExit();
-
-            _stateOwner.WaveFSM.CurrentState = new WaveCooldownState(_stateOwner);
-        }
-
-        private bool IsEverySpawnedEnemiesWaveDead()
-        {
-            return (_stillAliveManager.GetStillAliveEnemiesCount() == 0);
-        }
-    }
+		private bool IsEverySpawnedEnemiesWaveDead()
+		{
+			return (_stillAliveManager.GetStillAliveEnemiesCount() == 0);
+		}
+		#endregion Methods
+	}
 }

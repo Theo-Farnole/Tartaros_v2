@@ -10,13 +10,18 @@
 
     public class NavigationPathMiniMap : MonoBehaviour
     {
-        private Vector3 _targetPosition = new Vector3(6, 0, 8);
-        private ISpawnPoint[] _spawnPoints = null;
         [SerializeField]
         private MiniMap _miniMap = null;
         [SerializeField]
-        private MiniMapDrawNavigationPath _miniMapDrawNavigationPath = null;
+        private GameObject _mapBackground = null;
+        [SerializeField]
+        private GameObject _navigationLine = null;
+
         private RectTransform _rootTransform = null;
+        private ISpawnPoint[] _spawnPoints = null;
+        private Vector3 _targetPosition = new Vector3(6, 0, 8);
+        private List<GameObject> _navigationLineInstanciate = new List<GameObject>();
+        //TODO DJ: Give the position of the Temple automaticaly 
 
 
         private void Awake()
@@ -34,29 +39,27 @@
         {
             if (_spawnPoints.Length > 1)
             {
-                var listOfList = new List<List<Vector2>>();
-
-                _miniMapDrawNavigationPath.Setup(
-                    Mathf.RoundToInt(_rootTransform.rect.width),
-                    Mathf.RoundToInt(_rootTransform.rect.height));
-
                 foreach (NavMeshPath path in GetNavigationsPaths())
                 {
                     Vector3[] corners = GetCornersNavigationPath(path);
                     List<Vector2> vertexs = GetVectors2(corners);
 
-                    listOfList.Add(vertexs);
-                }
+                    GameObject navLine = GameObject.Instantiate(_navigationLine, _mapBackground.transform);
+                    DrawLineUI navPath = navLine.GetComponent<DrawLineUI>();
 
-                _miniMapDrawNavigationPath.SetPathNavigationPoints(listOfList.ToArray());
+                    navPath.Setup(
+                    Mathf.RoundToInt(_rootTransform.rect.width),
+                    Mathf.RoundToInt(_rootTransform.rect.height));
+
+                    navPath.SetNavigationPoints(vertexs);
+                    _navigationLineInstanciate.Add(navLine);
+                }
             }
             else
             {
                 return;
             }
         }
-
-
 
         private List<Vector2> GetVectors2(Vector3[] corners)
         {
@@ -65,7 +68,6 @@
             {
                 list.Add(_miniMap.WordToUiPosition(corner));
             }
-
             return list;
         }
 
@@ -83,7 +85,7 @@
             return vertex.ToArray();
         }
 
-        public NavMeshPath[] GetNavigationsPaths()
+        private NavMeshPath[] GetNavigationsPaths()
         {
             List<NavMeshPath> navPath = new List<NavMeshPath>();
 
@@ -95,6 +97,15 @@
             }
 
             return navPath.ToArray();
+        }
+
+        public void DisablePathLine()
+        {
+            foreach (var line in _navigationLineInstanciate)
+            {
+                Destroy(line);
+            }
+            _navigationLineInstanciate.Clear();
         }
     }
 }

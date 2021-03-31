@@ -1,97 +1,127 @@
 ﻿namespace Tartaros.Wave
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using System.Collections;
+	using UnityEngine;
 
-    public class WaveSpawningState : AWaveSpawnerState
-    {
-        private int _waveIndex = 0;
-        private WavesSpawnerData _waveSpawnerData = null;
-        private WaveData _waveData = null;
-        private ISpawnPoint[] _spawnPoints = null;
-        private int _totalWaveEnemies = 0;
-        private WavesEnemiesStillAliveManager _stillAliveManger = null; 
-        private int _numberOfSpawnPoint = 0;
-        private WaveSpawnerFSM _waveFSM = null;
+	public class WaveSpawningState : AWaveSpawnerState
+	{
+		#region Fields
+		[ShowInRuntime]
+		private int _pendingSpawnPointsCount = 0;
 
-        public WaveSpawningState(EnemiesWavesManager stateOwner) : base(stateOwner)
-        {
-            _waveIndex = stateOwner.CurrentWaveIndex;
-            _waveSpawnerData = stateOwner.WaveSpawnerData;
-            _waveData = stateOwner.WaveSpawnerData.Wave[_waveIndex];
-            _spawnPoints = stateOwner.SpawnPoints;
-            _numberOfSpawnPoint = _spawnPoints.Length;
-            _stillAliveManger = new WavesEnemiesStillAliveManager();
-            _waveFSM = stateOwner.WaveFSM;
-        }
+		private readonly int _waveIndex = 0;
+		private readonly WaveData _waveData = null;
+		private readonly ISpawnPoint[] _spawnPoints = null;
+		private readonly WavesEnemiesStillAliveManager _stillAliveManger = null;
+		private readonly WaveSpawnerFSM _waveFSM = null;
+		#endregion Fields
 
-        public override void OnStateEnter()
-        {
-            base.OnStateEnter();
-            
-            SpawnWave(_stateOwner, _spawnPoints);
-           
-        }
+		#region Ctor
+		public WaveSpawningState(EnemiesWavesManager stateOwner) : base(stateOwner)
+		{
+			_waveIndex = stateOwner.CurrentWaveIndex;
 
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
+			try
+			{
+				_waveData = stateOwner.WaveSpawnerData.Waves[_waveIndex];
+			}
+			catch (System.IndexOutOfRangeException)
+			{
+				Debug.LogErrorFormat("Cannot spawn wave {0}. It doesn't exist.", _waveIndex);
+			}
 
-            if (CheckIfSpawnIsFinish())
-            {
-                OnStateExit();
-            }
-        }
+			_spawnPoints = stateOwner.SpawnPoints;
+			_pendingSpawnPointsCount = _spawnPoints.Length;
+			_stillAliveManger = new WavesEnemiesStillAliveManager();
+			_waveFSM = stateOwner.WaveFSM;
+		}
+		#endregion Ctor
 
-        public override void OnStateExit()
-        {
-            base.OnStateExit();
+		#region Methods
+		public override void OnStateEnter()
+		{
+			base.OnStateEnter();
 
-            _waveFSM.CurrentState = new WaitDeathOfSpawnedEnemiesWaveState(_stateOwner, _stillAliveManger);
-        }
+			_stateOwner.InvokeWaveSpawn();
+			SpawnWave(_stateOwner);
+		}
+
+		public override void OnUpdate()
+		{
+			base.OnUpdate();
+
+			if (CheckIfSpawnIsFinish())
+			{
+				_stateOwner.InvokeWaveFinished();
+				_waveFSM.CurrentState = new WaitDeathOfSpawnedEnemiesWaveState(_stateOwner, _stillAliveManger);
+			}
+		}
+
+		public override void OnStateExit()
+		{
+			base.OnStateExit();
+
+			if (CheckIfSpawnIsFinish() == false)
+			{
+				Debug.LogErrorFormat("Wave spawning state leaved while spawning is not finished.");
+			}
+		}
+
+		private void SpawnWave(MonoBehaviour coroutineOwner)
+		{
+			SpawnPointIdentifier[] pointsUses = _waveData.GetSpawnPointActiveInTheWave();
+
+			foreach (ISpawnPoint spawnPoint in _spawnPoints)
+			{
+				foreach (SpawnPointIdentifier identifier in pointsUses)
+				{
+					if (identifier == spawnPoint.Identifier)
+					{
+						UnitSequence[] unitSequences = _waveData.GetUnitSequences(spawnPoint.Identifier);
+						coroutineOwner.StartCoroutine(SpawnPointsSequences(unitSequences, spawnPoint));
+					}
+				}
+			}
+		}
+
+		private IEnumerator SpawnPointsSequences(UnitSequence[] unitSequences, ISpawnPoint spawnPoint)
+		{
+			foreach (UnitSequence sequence in unitSequences)
+			{
+				yield return new WaitForSeconds(sequence.SecondsBeforeSpawn);
+				yield return SpawnUnits(spawnPoint, sequence);
+			}
+
+			_pendingSpawnPointsCount--;
+		}
 
 
-        public void SpawnWave(MonoBehaviour mb, ISpawnPoint[] spawnPoints)
-        {
-            SpawnPointIdentifier[] pointsUses = _waveData.GetSpawnPointActiveInTheWave();
-            foreach (ISpawnPoint spawnPoint in spawnPoints)
-            {
-                for (int i = 0; i < pointsUses.Length; i++)
-                {
-                    if(pointsUses[i] == spawnPoint.Identifier)
-                    {
-                        UnitSequence[] unitSequences = _waveData.GetUnitSequences(spawnPoint.Identifier);
-                        mb.StartCoroutine(SpawnPointsSequences(unitSequences, spawnPoint));
-                    }
-                }
-            }
-        }
+		private IEnumerator SpawnUnits(ISpawnPoint spawnPoint, UnitSequence unitSequence)
+		{
+			if (unitSequence.PrefabToSpawn == null)
+			{
+				Debug.LogErrorFormat("Missing prefab on a unit sequence of wave {0}.", _waveIndex);
+				yield return null;
+			}
 
-        public IEnumerator SpawnPointsSequences(UnitSequence[] unitSequences, ISpawnPoint spawnPoint)
-        {
-            foreach (UnitSequence sequence in unitSequences)
-            {
-                yield return new WaitForSeconds(sequence.SecondsBeforeSpawn);
-                yield return SpawnUnits(spawnPoint, sequence);
-                _numberOfSpawnPoint--;
-            }
-        }
+			for (int i = 0; i < unitSequence.EntitiesCount; i++)
+			{
+				GameObject spawnedEntity = GameObject.Instantiate(unitSequence.PrefabToSpawn, spawnPoint.SpawnPoint, Quaternion.identity);
+				yield return null; // wait for the entity to configure itself (see Entity.SpawnRequiredComponents)
+
+				IWaveSpawnable waveSpawnable = spawnedEntity.GetComponent<IWaveSpawnable>();
+				waveSpawnable.Attack(_stateOwner.EnemiesTarget);
+				_stillAliveManger.AddEnemyWave(waveSpawnable);
 
 
-        public IEnumerator SpawnUnits(ISpawnPoint spawnPoint, UnitSequence unitSequence)
-        {
-            for (int i = 0; i < unitSequence.EntitiesCount; i++)
-            {
-                GameObject spawnedEntity = GameObject.Instantiate(unitSequence.PrefabToSpawn, spawnPoint.SpawnPoint, Quaternion.identity);
-                _stillAliveManger.AddEnemyWave(spawnedEntity.GetComponent<IWaveSpawnable>());
-                yield return new WaitForSeconds(unitSequence.SecondsBetweenUnits);
-            }
-        }
+				yield return new WaitForSeconds(unitSequence.SecondsBetweenUnits);
+			}
+		}
 
-        private bool CheckIfSpawnIsFinish()
-        {
-            return (_numberOfSpawnPoint == 0);
-        }
-    }
+		private bool CheckIfSpawnIsFinish()
+		{
+			return (_pendingSpawnPointsCount == 0);
+		}
+		#endregion Methods
+	}
 }

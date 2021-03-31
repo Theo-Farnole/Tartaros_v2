@@ -1,35 +1,35 @@
 ﻿namespace Tartaros.Wave
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using System.Collections;
+	using System.Collections.Generic;
+	using UnityEngine;
 
-    public class WaveCooldownState : AWaveSpawnerState
-    {
-        public WaveCooldownState(EnemiesWavesManager stateOwner) : base(stateOwner)
-        {
-        }
+	public class WaveCooldownState : AWaveSpawnerState
+	{
+		#region Properties
+		public float SecondsBetweenWaves => _stateOwner.WaveSpawnerData.SecondsBetweenWaves;
+		#endregion Properties
 
-        public override void OnStateEnter()
-        {
-            base.OnStateEnter();
-            Debug.Log("enter_CooldownState");
-            _stateOwner.StartCoroutine(DelayBeforeNextWave(_stateOwner.WaveSpawnerData.SecondsBetweenWaves));
-        }
+		#region Ctor
+		public WaveCooldownState(EnemiesWavesManager stateOwner) : base(stateOwner)
+		{
+		}
+		#endregion Ctor
 
-        public override void OnStateExit()
-        {
-            base.OnStateExit();
+		#region Fields
+		public override void OnStateEnter()
+		{
+			base.OnStateEnter();
 
-            Debug.Log("exit_CooldownState");
-            //_stateOwner.WaveFSM.CurrentState = new WaveSpawningState(_stateOwner);
-        }
+			_stateOwner.StartCoroutine(DelayBeforeNextWave(SecondsBetweenWaves));
+		}
 
-        public IEnumerator DelayBeforeNextWave(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            OnStateExit();
-        }
-    }
+		private IEnumerator DelayBeforeNextWave(float delay)
+		{
+			yield return new WaitForSeconds(delay);
+			_stateOwner.StartNewWave();
+		}
+		#endregion Fields
+	}
 
 }

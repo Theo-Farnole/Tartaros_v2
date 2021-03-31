@@ -15,6 +15,8 @@
 
 		#region Properties
 		Bounds2D IMap.MapBounds => throw new System.NotImplementedException();
+
+		ISector[] IMap.Sectors => throw new System.NotImplementedException();
 		#endregion Properties
 
 		#region Ctor

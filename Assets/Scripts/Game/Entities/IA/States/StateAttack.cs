@@ -17,6 +17,11 @@
 		{
 			_target = target;
 
+			if (_target == null)
+			{
+				Debug.LogErrorFormat("The attack target of {0} is null. It is not a expected behaviour.", stateOwner);
+			}
+
 			_entityMovement = stateOwner.GetComponent<EntityMovement>();
 			_entityAttack = stateOwner.GetComponent<EntityAttack>();
 		}
@@ -29,7 +34,7 @@
 
 		public override void OnUpdate()
 		{
-			if (_target.IsAlive == false)
+			if (_target == null || _target.IsAlive == false)
 			{
 				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
 				return;

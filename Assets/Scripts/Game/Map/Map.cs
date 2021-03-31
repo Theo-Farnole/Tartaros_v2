@@ -1,7 +1,6 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
-	using System;
 	using System.IO;
 	using Tartaros.Sectors;
 	using Tartaros.ServicesLocator;
@@ -25,8 +24,8 @@
 
 		#region Properties
 		public MapData MapData => _mapData;
-
 		Bounds2D IMap.MapBounds => new Bounds2D(0, _mapData.MapSize.x, 0, _mapData.MapSize.y);
+		ISector[] IMap.Sectors => _sectors;
 		#endregion Properties
 
 		#region Methods
