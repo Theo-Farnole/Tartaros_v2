@@ -10,6 +10,27 @@
 
 	public partial class EnemiesWavesManager : MonoBehaviour
 	{
+		#region Fields
+		[SerializeField]
+		[InlineEditor]
+		private WavesSpawnerData _waveSpawnerData = null;
+
+		[ShowInRuntime]
+		private WaveSpawnerFSM _waveFSM = null;
+		private int _currentWaveIndex = 0;
+		private ISpawnPoint[] _spawnPoints = null;
+		private IWaveSpawnable[] _spawnedEnemies = null;
+		#endregion Fields
+
+		#region Properties
+		public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
+		public ISpawnPoint[] SpawnPoints => _spawnPoints;
+		public int CurrentWaveIndex => _currentWaveIndex;
+		public IWaveSpawnable[] SpawnedEnemies => _spawnedEnemies;
+		public WaveSpawnerFSM WaveFSM => _waveFSM;
+		#endregion Properties
+
+		#region Events
 		public class WaveSpawningStartArgs : EventArgs
 		{
 
@@ -23,26 +44,20 @@
 		public event EventHandler<WaveSpawningStartArgs> WaveSpawnStart;
 		public event EventHandler<WaveSpawningFinishedArgs> WaveSpawnFinished;
 		// public event EventHandler<KilledArgs> Killed;
+		#endregion Events
 
-		[SerializeField]
-		[InlineEditor]
-		private WavesSpawnerData _waveSpawnerData = null;
-		private ISpawnPoint[] _spawnPoints = null;
-		private WaveSpawnerFSM _waveFSM = null;
-		private int _currentWaveIndex = 1;
-		private IWaveSpawnable[] _spawnedEnemies = null;
 
-		public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
-		public ISpawnPoint[] SpawnPoints => _spawnPoints;
-		public int CurrentWaveIndex => _currentWaveIndex;
-		public IWaveSpawnable[] SpawnedEnemies => _spawnedEnemies;
-		public WaveSpawnerFSM WaveFSM => _waveFSM;
-
+		#region Methods
 		private void Awake()
 		{
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
 			_waveFSM = new WaveSpawnerFSM();
 			//TODO: WaveFSM registerService & Call it
+		}
+
+		private void Update()
+		{
+			_waveFSM.OnUpdate();
 		}
 
 		private void OnEnable()
@@ -51,16 +66,34 @@
 			WaveFSM.CurrentState = new WaveSpawningState(this);
 		}
 
+		public bool IsThereWavesToSpawn()
+		{
+			return _currentWaveIndex < _waveSpawnerData.FinalWaveIndex;
+		}
+
+		public void StartNewWave()
+		{
+			if (IsThereWavesToSpawn() == true)
+			{
+				_currentWaveIndex++;
+				_waveFSM.CurrentState = new WaveSpawningState(this);
+			}
+			else
+			{
+				Debug.Log("Trying to start a new wave while there is no waves to spawn.");
+			}
+		}
 
 		public void InvokeWaveSpawn()
 		{
 			WaveSpawnStart?.Invoke(this, new WaveSpawningStartArgs());
 		}
 
-		public void InvokeWaveFinish()
+		public void InvokeWaveFinished()
 		{
 			WaveSpawnFinished?.Invoke(this, new WaveSpawningFinishedArgs());
 		}
+		#endregion Methods
 	}
 
 #if UNITY_EDITOR
