@@ -8,47 +8,51 @@
 
     public class MiniMapDrawNavigationPath : Graphic
     {
-        public Vector2Int gridSize;
-        private List<Vector2> points;
+        public Vector2Int _gridSize;
+        private List<Vector2> _points;
         private List<Vector2>[] _pathPoints = null;
 
-        float width;
-        float height;
-        float unitWidth;
-        float unitHeight;
+        float _width;
+        float _height;
+        float _unitWidth;
+        float _unitHeight;
 
-        public float thickness = 10f;
+        public float _thickness = 10f;
 
+        public MiniMapDrawNavigationPath()
+        {
+            color = Color.red;
+        }
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();
 
-            width = rectTransform.rect.width;
-            height = rectTransform.rect.height;
+            _width = rectTransform.rect.width;
+            _height = rectTransform.rect.height;
 
-            unitWidth = width / (float)gridSize.x;
-            unitHeight = height / (float)gridSize.y;
+            _unitWidth = _width / (float)_gridSize.x;
+            _unitHeight = _height / (float)_gridSize.y;
 
-            Debug.Log(points.Count);
-            if (points.Count < 2)
+            Debug.Log(_points.Count);
+            if (_points.Count < 2)
             {
                 return;
             }
 
-            for (int i = 0; i < points.Count - 1; i++)
+            for (int i = 0; i < _points.Count - 1; i++)
             {
-                Vector2 point = points[i];
+                Vector2 point = _points[i];
                 float angle = 0f;
 
-                angle = GetAngle(points[i], points[i + 1]) + 90f;
+                angle = GetAngle(_points[i], _points[i + 1]) + 90f;
                 DrawVerticesForPoint(point, vh, angle);
 
-                Vector2 nextPoint = points[i + 1];
+                Vector2 nextPoint = _points[i + 1];
                 DrawVerticesForPoint(nextPoint, vh, angle);
             }
 
-            for (int i = 0; i < points.Count * 2 - 3; i++)
+            for (int i = 0; i < _points.Count * 2 - 3; i++)
             {
                 int index = i * 2;
 
@@ -60,7 +64,7 @@
 
         public float GetAngle(Vector2 from, Vector2 to)
         {
-            return (float)(Mathf.Atan2(unitHeight * (to.y - from.y), unitWidth * (to.x - from.x)) * Mathf.Rad2Deg);
+            return (float)(Mathf.Atan2(_unitHeight * (to.y - from.y), _unitWidth * (to.x - from.x)) * Mathf.Rad2Deg);
         }
 
         void DrawVerticesForPoint(Vector2 point, VertexHelper vh, float angle)
@@ -68,35 +72,29 @@
             UIVertex vertex = UIVertex.simpleVert;
             vertex.color = color;
 
-            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(-thickness / 2, 0);
-            vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
+            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(-_thickness / 2, 0);
+            vertex.position += new Vector3(_unitWidth * point.x, _unitHeight * point.y);
             vh.AddVert(vertex);
 
 
-            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(thickness / 2, 0);
-            vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
+            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(_thickness / 2, 0);
+            vertex.position += new Vector3(_unitWidth * point.x, _unitHeight * point.y);
             vh.AddVert(vertex);
         }
 
-        private void SetNavigationPoints(List<Vector2> pointsToSet)
+        public void SetNavigationPoints(List<Vector2> pointsToSet)
         {
-            points = pointsToSet;
-        }
-
-        public void SetPathNavigationPoints(List<Vector2>[] pathNav)
-        {
-            _pathPoints = pathNav;
-            SetNavigationPoints(pathNav[0]);
+            _points = pointsToSet;
         }
 
         public void Setup(int width, int height)
         {
-            gridSize.x = width;
-            gridSize.y = height;
+            _gridSize.x = width;
+            _gridSize.y = height;
         }
         public void ClearPoints()
         {
-            points.Clear();
+            _points.Clear();
             _pathPoints = null;
         }
     }

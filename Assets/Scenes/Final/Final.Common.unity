@@ -3251,68 +3251,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984072360}
   m_CullTransparentMesh: 0
---- !u!1 &985652555
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 985652556}
-  - component: {fileID: 985652558}
-  - component: {fileID: 985652557}
-  m_Layer: 5
-  m_Name: NavigationLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &985652556
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985652555}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1903193322}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &985652557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985652555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f297b381ab1eb5a42b2d83c6caac4959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  gridSize: {x: 10, y: 10}
-  thickness: 5
---- !u!222 &985652558
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985652555}
-  m_CullTransparentMesh: 0
 --- !u!1 &1031124390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,7 +4230,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniMap: {fileID: 1864298197}
-  _miniMapDrawNavigationPath: {fileID: 985652557}
+  _miniMapDrawNavigationPath: {fileID: 0}
+  _mapBackground: {fileID: 1903193321}
+  _navigationLine: {fileID: 6791326595167842489, guid: 5e283fc160917b043893e9fe71ff73f2,
+    type: 3}
 --- !u!1 &1308085827
 GameObject:
   m_ObjectHideFlags: 0
@@ -7226,7 +7167,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1437394101}
-  - {fileID: 985652556}
   m_Father: {fileID: 1585567874}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
