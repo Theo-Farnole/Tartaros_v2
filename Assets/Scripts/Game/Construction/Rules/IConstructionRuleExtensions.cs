@@ -14,7 +14,6 @@ namespace Tartaros
 		{
 			if (constructable.Rules == null)
 			{
-				Debug.LogFormat("No rules found on constuctable {0}", constructable.ToString());
 				return true;
 			}
 
@@ -34,6 +33,32 @@ namespace Tartaros
 			}
 
 			return true;
+		}
+
+		public static IConstructionRule[] GetFailedRules(this IConstructable constructable, Vector3 buildingPosition)
+		{
+			if (constructable.Rules == null)
+			{
+				return null;
+			}
+
+			List<IConstructionRule> output = new List<IConstructionRule>();
+
+			foreach (IConstructionRule rule in constructable.Rules)
+			{
+				if (rule == null)
+				{
+					Debug.LogErrorFormat("A rule is null in the constructable {0}.", constructable.ToString());
+					continue;
+				}
+
+				if (rule.CanConstruct(buildingPosition) == false)
+				{
+					output.Add(rule);
+				}
+			}
+
+			return output.ToArray(); ;
 		}
 	}
 }

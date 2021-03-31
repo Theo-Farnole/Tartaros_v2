@@ -6,7 +6,7 @@
 
     public class GloryWallet : IGloryWallet
     {
-        private int _gloryAmount = 0;
+        private int _gloryAmount = 100;
 
         void IGloryWallet.AddAmount(int amount)
         {
@@ -15,7 +15,7 @@
 
         void IGloryWallet.Spend(int price)
         {
-            if (_gloryAmount - price < 0)
+            if (_gloryAmount - price > 0)
             {
                 _gloryAmount -= price;
             }

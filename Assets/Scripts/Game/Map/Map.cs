@@ -18,6 +18,9 @@
 		[SerializeField]
 		[AssetsOnly]
 		private GameObject _sectorPrefab = null;
+
+		private ISector[] _sectors = null;
+		private UserErrorsLogger _logger = null;
 		#endregion Fields
 
 		#region Properties
@@ -30,11 +33,12 @@
 		private void Awake()
 		{
 			Services.Instance.RegisterService<IMap>(this);
+			SpawnSectors();
 		}
 
 		private void Start()
 		{
-			SpawnSectors();
+			_logger = Services.Instance.Get<UserErrorsLogger>();
 		}
 
 		private void OnDrawGizmos()
@@ -47,37 +51,24 @@
 			}
 		}
 
-		private void SpawnSectors()
+		bool IMap.CanBuild(Vector3 buildingPosition, Vector2 buildingSize)
 		{
-			for (int i = 0; i < _mapData.Sectors.Length; i++)
+			// TODO TF: check if build is not on multiple sector at once
+
+			ISector sector = (this as IMap).GetSectorOnPosition(buildingPosition);
+
+			if (sector.IsCaptured == false)
 			{
-				// because polygon normal are forward, we must rotate to make them look up
-				GameObject sectorGameObject = Instantiate(_sectorPrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
-				sectorGameObject.name = string.Format("Sector {0}", i);
-
-				if (sectorGameObject.TryGetComponent(out Sector sector))
-				{
-					SectorData sectorData = _mapData.Sectors[i];
-					sector.Initialize(sectorData);
-				}
-				else
-				{
-					Debug.LogWarningFormat("Missing Sector component on prefab {0}.", _sectorPrefab.name);
-				}
+				_logger.Log("Cannot build on a uncaptured sector.", buildingPosition, sector.ToString());
+				return false;
 			}
-		}
 
-		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
-		{
-			Debug.LogError("Not implemented");
 			return true;
 		}
 
 		ISector IMap.GetSectorOnPosition(Vector3 position)
 		{
-			ISector[] sectors = ObjectsFinder.FindObjectsOfInterface<ISector>();
-
-			foreach (var sector in sectors)
+			foreach (var sector in _sectors)
 			{
 				if (sector.ContainsPosition(position))
 				{
@@ -88,12 +79,59 @@
 			Debug.LogFormat("No sector found at position {0}", position);
 			return null;
 		}
+
+		bool IMap.IsSectorNeightborOfCapturedSectors(ISector sectorToCheck)
+		{
+			foreach (ISector sector in _sectors)
+			{
+				if (sector.IsCaptured && sectorToCheck.IsSectorNeightborOf(sector) == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private void SpawnSectors()
+		{
+			_sectors = new ISector[_mapData.Sectors.Length];
+
+			for (int i = 0; i < _mapData.Sectors.Length; i++)
+			{
+				// because polygon normal are forward, we must rotate to make them look up
+				GameObject sectorGameObject = Instantiate(_sectorPrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
+				sectorGameObject.name = string.Format("Sector {0}", i);
+
+				if (sectorGameObject.TryGetComponent(out Sector sector))
+				{
+					_sectors[i] = sector;
+
+					SectorData sectorData = _mapData.Sectors[i];
+					sector.Initialize(sectorData);
+				}
+				else
+				{
+					Debug.LogWarningFormat("Missing Sector component on prefab {0}.", _sectorPrefab.name);
+				}
+			}
+		}
 		#endregion Methods
 	}
 
 #if UNITY_EDITOR
 	public partial class Map
 	{
+		public const string FILL_SITE_ID = "MapEditor_FillSite";
+
+		[FoldoutGroup("Display Preferences")]
+		[ShowInInspector]
+		public bool DisplaySitesWithColor
+		{
+			get => UnityEditor.EditorPrefs.GetBool(FILL_SITE_ID, false);
+			set => UnityEditor.EditorPrefs.SetBool(FILL_SITE_ID, value);
+		}
+
 		private const string path = "Assets/Databases/Maps/";
 
 		[ShowIf("@_mapData == null")]

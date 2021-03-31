@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: 5
+    - _Cutoff: 0.5
     - _FireRadius: 5
     - _LaserPower: 1
     - _LaserPrincipalPower: 10
@@ -44,26 +44,27 @@ Material:
     - _LazerSize: 0.24
     - _Lerp: 0.16
     - _LinearSpace: 0.6
+    - _MaskOpacity: 2.8
     - _Opacity: 0.63
     - _OpacityPatern: 5
     - _OpacityTexture: 0
-    - _PaternScale1: 1
-    - _PaternScale2: 2
-    - _PaternSpeed: 2
-    - _PaternSpeed2: 3
+    - _PaternScale1: 3.84
+    - _PaternScale2: 1
+    - _PaternSpeed: 0
+    - _PaternSpeed2: 2
     - _VoroScale: 2
     - __dirty: 0
     m_Colors:
     - _Color0: {r: 0.6792453, g: 0, b: 0.045282975, a: 1}
-    - _Color1: {r: 0.7830189, g: 0.18954477, b: 0, a: 1}
+    - _Color1: {r: 1, g: 0.49668637, b: 0.3254717, a: 1}
     - _Fresnel: {r: 1.85, g: 0.35, b: 0, a: 0}
     - _LaserBalancePatern: {r: 2.48, g: 32.7, b: 0, a: 0}
     - _LaserStrength: {r: 3.81, g: 3.79, b: 0, a: 0}
     - _LaserWidth: {r: 1, g: 0.85, b: 1, a: 10}
     - _LazerSize: {r: 0.21, g: 0.29, b: 0, a: 0}
-    - _RadialShear: {r: 0, g: 0, b: 0, a: 0}
+    - _RadialShear: {r: 1, g: 1, b: 0, a: 0}
     - _RimTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _SmoothStep: {r: 0, g: 1, b: 0, a: 0}
+    - _SmoothStep: {r: -0.05, g: 0.39, b: 0, a: 0}
     - _Tiling: {r: 2, g: 1, b: 0, a: 0}
-    - _UV_direction: {r: -10, g: 0, b: 0, a: 0}
-    - _UV_tiling: {r: -0.5, g: 1, b: 0, a: 0}
+    - _UV_direction: {r: -1, g: 0, b: 0, a: 0}
+    - _UV_tiling: {r: -1.04, g: 1, b: 0, a: 0}

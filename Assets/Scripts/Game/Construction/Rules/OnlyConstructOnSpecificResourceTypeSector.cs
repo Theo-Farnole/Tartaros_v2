@@ -24,6 +24,10 @@
 
 		#endregion Ctor
 
+		#region Properties
+		string IConstructionRule.ErrorMessage => "You can only construct on sector with {0} resource".Format(_type.ToString().ToLower());
+		#endregion Properties
+
 		#region Methods
 		bool IConstructionRule.CanConstruct(Vector3 position)
 		{

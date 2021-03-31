@@ -27,17 +27,17 @@
 
 		private void OnEnable()
 		{
-			Entity.EntityKilled -= Entity_EntityKilled;
-			Entity.EntityKilled += Entity_EntityKilled;
+			Entity.AnyEntityKilled -= Entity_EntityKilled;
+			Entity.AnyEntityKilled += Entity_EntityKilled;
 
-			Entity.EntitySpawned -= Entity_EntitySpawned;
-			Entity.EntitySpawned += Entity_EntitySpawned;
+			Entity.AnyEntitySpawned -= Entity_EntitySpawned;
+			Entity.AnyEntitySpawned += Entity_EntitySpawned;
 		}
 
 		private void OnDisable()
 		{
-			Entity.EntityKilled -= Entity_EntityKilled;
-			Entity.EntitySpawned -= Entity_EntitySpawned;
+			Entity.AnyEntityKilled -= Entity_EntityKilled;
+			Entity.AnyEntitySpawned -= Entity_EntitySpawned;
 		}
 
 		private void Entity_EntitySpawned(object sender, Entity.EntitySpawnedArgs e)

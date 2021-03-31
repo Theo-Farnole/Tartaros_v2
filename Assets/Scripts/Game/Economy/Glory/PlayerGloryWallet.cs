@@ -17,6 +17,7 @@
             Services.Instance.RegisterService(this);
         }
 
+
         int IGloryWallet.GetAmount() => _gloryWallet.GetAmount();
 
         void IGloryWallet.Spend(int price) => _gloryWallet.Spend(price);

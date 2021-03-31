@@ -3,9 +3,10 @@
 	using System;
 	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
+	using Tartaros.Wave;
 	using UnityEngine;
 
-	public class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver
+	public class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable
 	{
 		#region Fields
 		[SerializeField]
@@ -35,7 +36,7 @@
 			}
 		}
 
-		public static event EventHandler<EntitySpawnedArgs> EntitySpawned = null;
+		public static event EventHandler<EntitySpawnedArgs> AnyEntitySpawned = null;
 
 		public class EntityKilledArgs : EventArgs
 		{
@@ -47,7 +48,10 @@
 			}
 		}
 
-		public static event EventHandler<EntityKilledArgs> EntityKilled = null;
+		public static event EventHandler<EntityKilledArgs> AnyEntityKilled = null;
+
+		event EventHandler<KilledArgs> EntityKilled = null;
+		event EventHandler<KilledArgs> IWaveSpawnable.Killed { add => EntityKilled += value; remove => EntityKilled -= value; }
 		#endregion Events
 
 		#region Methods
@@ -55,17 +59,17 @@
 		{
 			GenerateRequiredComponents();
 
-			EntitySpawned?.Invoke(this, new EntitySpawnedArgs(this));
+			AnyEntitySpawned?.Invoke(this, new EntitySpawnedArgs(this));
 		}
 
 		private void OnDestroy()
 		{
-			EntityKilled?.Invoke(this, new EntityKilledArgs(this));
+			EntityKilled?.Invoke(this, new KilledArgs());
+			AnyEntityKilled?.Invoke(this, new EntityKilledArgs(this));
 		}
 
 		public void Kill()
 		{
-
 			Destroy(gameObject);
 		}
 

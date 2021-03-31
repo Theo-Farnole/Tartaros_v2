@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_LaserBeamGround
+  m_Shader: {fileID: 4800000, guid: 5f738eff9aef27a4ca5a5bd6fe2c87bc, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 3001
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Cutoff: 0.5
+    - _FireRadius: 5
+    - _LaserPower: 1
+    - _LaserPrincipalPower: 10
+    - _LaserRimPatern: 4.25
+    - _LaserRimPatern1: 0.91
+    - _LaserRimPower: 10
+    - _LaserStrength: 1.5
+    - _LaserWidth: 1
+    - _LazerSize: 0.24
+    - _Lerp: 0.16
+    - _LerpPatern: 0.95
+    - _LinearSpace: 0.6
+    - _MaskOpacity: 2.8
+    - _Opacity: 0.63
+    - _OpacityPatern: 1
+    - _OpacityTexture: 0
+    - _PaternScale1: 3.84
+    - _PaternScale2: 1
+    - _PaternSpeed: 2
+    - _PaternSpeed2: 2
+    - _VoroScale: 2
+    - __dirty: 0
+    m_Colors:
+    - _Color0: {r: 0.6792453, g: 0, b: 0.045282975, a: 1}
+    - _Color1: {r: 3.5648696, g: 2.3837864, b: 1.4629419, a: 1}
+    - _Fresnel: {r: 1.85, g: 0.35, b: 0, a: 0}
+    - _LaserBalancePatern: {r: 2.48, g: 32.7, b: 0, a: 0}
+    - _LaserSmoothStep: {r: 0.9, g: 1, b: 0, a: 0}
+    - _LaserStrength: {r: 3.81, g: 3.79, b: 0, a: 0}
+    - _LaserWidth: {r: 1, g: 0.85, b: 1, a: 10}
+    - _LazerSize: {r: 0.21, g: 0.29, b: 0, a: 0}
+    - _LerpPatern: {r: 0.5, g: 1, b: 0, a: 0}
+    - _PaternLerpSmooth: {r: 1, g: 0, b: 0, a: 0}
+    - _RadialShear: {r: 1, g: 1, b: 0, a: 0}
+    - _RimTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _SmoothStep: {r: 0, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _UV_direction: {r: 1, g: 1, b: 0, a: 0}
+    - _UV_tiling: {r: 1, g: 1, b: 0, a: 0}

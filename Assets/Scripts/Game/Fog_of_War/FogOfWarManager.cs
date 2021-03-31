@@ -11,9 +11,6 @@
 	public class FogOfWarManager : MonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		private FogOfWarData _data = null;
-
 		[ShowInRuntime]
 		private List<IFogVision> _visions = new List<IFogVision>();
 

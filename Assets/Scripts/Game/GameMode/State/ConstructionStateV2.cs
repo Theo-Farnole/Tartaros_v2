@@ -11,19 +11,42 @@ namespace Tartaros.Construction
 
 	public class ConstructionStateV2 : AGameState
 	{
+		#region Fields
 		private BuildingPreview _buildingPreview = null;
 		private ConstructionInputs _constructionInput = null;
 		private IConstructable _constructable = null;
 		private IPlayerSectorResources _playerSectorRessources = null;
 		private IMap _map = null;
+		private UserErrorsLogger _errorsLogger = null;
+		#endregion Fields
 
+		#region Ctor
 		public ConstructionStateV2(GamemodeManager gamemodeManager, IConstructable constructable) : base(gamemodeManager)
 		{
 			_constructable = constructable;
 			_constructionInput = new ConstructionInputs();
 			_buildingPreview = new BuildingPreview(_constructable, _constructionInput.GetMousePosition());
 			_playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();
+			_errorsLogger = Services.Instance.Get<UserErrorsLogger>();
 			_map = Services.Instance.Get<IMap>();
+		}
+		#endregion Ctor
+
+		#region Methods
+		public override void OnStateEnter()
+		{
+			base.OnStateEnter();
+
+			_constructionInput.ValidatePerformed -= InputValidatePerformed;
+			_constructionInput.ValidatePerformed += InputValidatePerformed;
+		}
+
+		public override void OnStateExit()
+		{
+			base.OnStateExit();
+
+			_buildingPreview.DestroyMethod();
+			_constructionInput.ValidatePerformed -= InputValidatePerformed;
 		}
 
 		public override void OnUpdate()
@@ -31,47 +54,57 @@ namespace Tartaros.Construction
 			base.OnUpdate();
 
 			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetMousePosition());
+		}
 
-			if (_constructionInput.IsValidatePerformed())
+		private void InputValidatePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+		{
+			if (CanConstructHere())
 			{
-				if (CanConstructHere())
-				{
-					Validate();
-				}
+				Validate();
 			}
 		}
-		public override void OnStateExit()
-		{
-			base.OnStateExit();
 
-			_buildingPreview.DestroyMethod();
+		bool CanConstructHere()
+		{
+			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
+
+			return _map.CanBuild(buildingPosition, _constructable.Size) && DoCanConstructRulesAreValid();
 		}
 
-		void Validate()
+		private bool DoCanConstructRulesAreValid()
+		{
+			bool rulePass = _constructable.DoRulesPassAtPosition(_buildingPreview.GetBuildingPreviewPosition());
+
+			if (rulePass == false)
+			{
+				LogFailedConstructRules();
+			}
+
+			return rulePass;
+		}
+
+		private void LogFailedConstructRules()
+		{
+			var failedRules = _constructable.GetFailedRules(_buildingPreview.GetBuildingPreviewPosition());
+
+			foreach (var failedRule in failedRules)
+			{
+				_errorsLogger.Log(failedRule.ErrorMessage);
+			}
+		}
+
+		private void Validate()
 		{
 			InstanciateBuilding();
 			PayPriceRessources();
 			LeaveState();
 		}
 
-		bool CanConstructHere()
-		{
-			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();			
-
-			return DoCanConstructRulesAreValid() && _map.CanBuild(buildingPosition, _constructable.Size);
-		}
-
-		private bool DoCanConstructRulesAreValid()
-		{
-			return _constructable.DoRulesPassAtPosition(_buildingPreview.GetBuildingPreviewPosition());
-		}
 
 		private void InstanciateBuilding()
 		{
-			GameObject buildingConstruct = GameObject.Instantiate(_constructable.GameplayPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
+			GameObject.Instantiate(_constructable.GameplayPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
 		}
-
-		
 
 		private void PayPriceRessources()
 		{
@@ -82,5 +115,6 @@ namespace Tartaros.Construction
 		{
 			_stateOwner.SetState(new PlayState(_stateOwner));
 		}
+		#endregion Methods
 	}
 }

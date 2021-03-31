@@ -35,8 +35,6 @@
 
             _inputs.ValidatePerformed -= _inputs_ValidatePerformed;
             _inputs.ValidatePerformed += _inputs_ValidatePerformed;
-
-
         }
         public override void OnUpdate()
         {
@@ -214,7 +212,6 @@
         {
             _playerSectorRessources.Buy(GetTotalPriceOfConstruction());
         }
-
         void LeaveState()
         {
             _stateOwner.SetState(new PlayState(_stateOwner));

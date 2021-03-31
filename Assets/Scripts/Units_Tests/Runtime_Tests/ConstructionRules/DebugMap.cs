@@ -33,7 +33,7 @@
 		#endregion Ctor
 
 		#region Methods
-		bool IMap.CanBuild(Vector2 buildingPosition, Vector2 buildingSize)
+		bool IMap.CanBuild(Vector3 buildingPosition, Vector2 buildingSize)
 		{
 			throw new System.NotImplementedException();
 		}
@@ -49,6 +49,11 @@
 				Debug.LogFormat("No sector found at position {0}.", position);
 				return null;
 			}
+		}
+
+		bool IMap.IsSectorNeightborOfCapturedSectors(ISector sector)
+		{
+			throw new System.NotImplementedException();
 		}
 		#endregion Methods
 	}

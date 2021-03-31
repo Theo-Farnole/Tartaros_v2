@@ -1,9 +1,9 @@
-﻿namespace Tartaros.Math
+namespace Tartaros.Math
 {
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public class ConvexPolygon : IContainable
+	public class ConvexPolygon : IContainable, IShape
 	{
 		#region Fields
 		public static ConvexPolygon OneSquare => new ConvexPolygon(new Vector2(1, 1), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-1, 1));

@@ -7,6 +7,7 @@
     using Tartaros.Economy;
     using UnityEngine;
     using UnityEngine.InputSystem;
+    using Tartaros.ServicesLocator;
 
     public class PowerState : AGameState
     {
@@ -29,6 +30,8 @@
 
             _inputs.ValidatePerformed -= _inputs_ValidatePerformed;
             _inputs.ValidatePerformed += _inputs_ValidatePerformed;
+
+            _playerGloryWallet = Services.Instance.Get<PlayerGloryWallet>();
         }
 
         private void _inputs_ValidatePerformed(InputAction.CallbackContext obj)
@@ -55,6 +58,7 @@
 
         private bool CanCastHere()
         {
+            //return true;
             return _playerGloryWallet.CanSpend(_power.Price);
         }
 
@@ -66,6 +70,7 @@
         private void CastSpell()
         {
             GameObject powerInstanciate = GameObject.Instantiate(_power.PrefabPower, _inputs.GetMousePosition(), Quaternion.identity);
+            Debug.Log(_power.Price);
             _playerGloryWallet.Spend(_power.Price);
             _preview.DestroyMethods();
             _stateOwner.SetState(new PlayState(_stateOwner));
