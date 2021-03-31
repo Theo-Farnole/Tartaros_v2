@@ -48,8 +48,6 @@
         {
             _map = Services.Instance.Get<IMap>();
             _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
-
-            _navigationPathCalcule.DrawPathNavigation();
         }
 
         private void Update()
@@ -77,6 +75,11 @@
             return new Vector2(x, y);
         }
 
+        public void DrawWavePathNavigation()
+        {
+            _navigationPathCalcule.DrawPathNavigation();
+            //TODO DJ: draw the nav line each start of wave 
+        }
   
         public void AddIcon(IMiniMapIcon icon)
         {
