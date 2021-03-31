@@ -100,6 +100,11 @@
 		{
 			_entityFSM.Stop();
 		}
+
+		void IWaveSpawnable.Attack(IAttackable attackable)
+		{
+			GetComponent<IOrderAttackReceiver>().Attack(attackable);
+		}
 		#endregion IOrders
 		#endregion Methods
 	}

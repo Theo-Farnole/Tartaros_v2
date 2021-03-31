@@ -4,6 +4,7 @@
 	using System;
 	using System.Collections;
 	using System.IO;
+	using Tartaros.Entities;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
@@ -20,6 +21,7 @@
 		private int _currentWaveIndex = 0;
 		private ISpawnPoint[] _spawnPoints = null;
 		private IWaveSpawnable[] _spawnedEnemies = null;
+		private IAttackable _enemiesTarget = null;
 		#endregion Fields
 
 		#region Properties
@@ -28,6 +30,7 @@
 		public int CurrentWaveIndex => _currentWaveIndex;
 		public IWaveSpawnable[] SpawnedEnemies => _spawnedEnemies;
 		public WaveSpawnerFSM WaveFSM => _waveFSM;
+		public IAttackable EnemiesTarget => _enemiesTarget;
 		#endregion Properties
 
 		#region Events
@@ -46,7 +49,6 @@
 		// public event EventHandler<KilledArgs> Killed;
 		#endregion Events
 
-
 		#region Methods
 		private void Awake()
 		{
@@ -55,15 +57,15 @@
 			//TODO: WaveFSM registerService & Call it
 		}
 
+		private void Start()
+		{
+			FindEnemiesTarget();
+			WaveFSM.CurrentState = new WaveSpawningState(this);
+		}
+
 		private void Update()
 		{
 			_waveFSM.OnUpdate();
-		}
-
-		private void OnEnable()
-		{
-			//WaveFSM.CurrentState = new WaveCooldownState(this);
-			WaveFSM.CurrentState = new WaveSpawningState(this);
 		}
 
 		public bool IsThereWavesToSpawn()
@@ -92,6 +94,28 @@
 		public void InvokeWaveFinished()
 		{
 			WaveSpawnFinished?.Invoke(this, new WaveSpawningFinishedArgs());
+		}
+
+		private void FindEnemiesTarget()
+		{
+			WavesEnemiesTarget target = GameObject.FindObjectOfType<WavesEnemiesTarget>();
+
+			if (target == null)
+			{
+				Debug.LogErrorFormat("A WavesEnemiesTarget is missing in the scene. Please add one in the scene.");
+			}
+			else
+			{
+
+				if (target.TryGetComponent(out IAttackable attackable))
+				{
+					_enemiesTarget = attackable;
+				}
+				else
+				{
+					Debug.LogErrorFormat("Missing a component IAttackable on {0}, the enemies target.", target);
+				}
+			}
 		}
 		#endregion Methods
 	}
