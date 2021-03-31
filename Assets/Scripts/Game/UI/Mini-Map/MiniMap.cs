@@ -49,7 +49,7 @@
             _map = Services.Instance.Get<IMap>();
             _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
 
-            //_navigationPathCalcule.DrawPathNavigation();
+            _navigationPathCalcule.DrawPathNavigation();
         }
 
         private void Update()
@@ -102,8 +102,8 @@
         {
             if (_icons.ContainsKey(icon) == true)
             {
-                Destroy(_icons[icon].gameObject);
-                _icons.Remove(icon);
+                //Destroy(_icons[icon].gameObject);
+                //_icons.Remove(icon);
             }
             else
             {

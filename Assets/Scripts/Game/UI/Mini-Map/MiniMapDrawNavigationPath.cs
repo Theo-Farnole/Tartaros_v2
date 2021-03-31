@@ -30,7 +30,8 @@
             unitWidth = width / (float)gridSize.x;
             unitHeight = height / (float)gridSize.y;
 
-            if (points.Count < 2 || _pathPoints.Length < 1)
+            Debug.Log(points.Count);
+            if (points.Count < 2)
             {
                 return;
             }

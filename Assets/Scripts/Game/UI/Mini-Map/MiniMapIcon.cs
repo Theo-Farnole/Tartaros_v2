@@ -14,14 +14,15 @@
 
         Sprite IMiniMapIcon.Icon => _icon;
 
-        private void Awake()
+        private void Start()
         {
             _miniMap = Services.Instance.Get<MiniMap>();
+            _miniMap.AddIcon(this);
         }
 
         void OnEnable()
         {
-            _miniMap.AddIcon(this);
+
         }
 
         void OnDisable()
