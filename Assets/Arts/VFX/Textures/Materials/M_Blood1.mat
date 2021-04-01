@@ -7,14 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BloodProjection
-  m_Shader: {fileID: 4800000, guid: 84494431751b7c446a97cf31e72ed94d, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 0
+  m_Name: M_Blood1
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -40,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5918cbe9260a2744991da0d1ab995c05, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,64 +56,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _TextureSample0:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _tex3coord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BorderSpeed: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Mode: 0
+    - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PaternPower: 2.53
-    - _PaternsDif: -0.71
-    - _ScalePatern: 0.55
-    - _ScalePatern1: 3
-    - _ScalePatern2: 3
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StarsSpeedRatio: 0.1
-    - _StepOutter: 2.5
-    - _TextureSat: 0.1
-    - _TextureStrength: 0
     - _UVSec: 0
-    - _VoroBorderScale: 1
-    - _VoroPaternScale: 0.35
-    - _VoroSpeed1: 0.5
-    - _VoroSpeed2: 0.5
-    - _WorldOffsetDiv: 5
-    - _ZWrite: 1
-    - __dirty: 0
+    - _ZWrite: 0
     m_Colors:
-    - _BorderColor: {r: 0.4811321, g: 0, b: 0, a: 0}
-    - _BorderStep: {r: 0.53, g: 0.75, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color0: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
-    - _Color1: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0.0627451}
-    - _Color2: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-    - _ColorSteps: {r: -0.49, g: 0.44, b: 0, a: 0}
-    - _ColorSteps1: {r: 3, g: 0.1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OpacityFromPatern: {r: 0, g: 1, b: 0, a: 0}
-    - _OpacityFromPatern1: {r: 0, g: 20, b: 0, a: 0}
-    - _OpacityStep: {r: 0.44, g: 0.81, b: 0, a: 0}
-    - _PaternStep: {r: -0.91, g: 3.53, b: 0, a: 0}
-    - _StepInner: {r: 0, g: 1, b: 0, a: 0}
-    - _TextureTiling: {r: 1, g: 1, b: 0, a: 0}

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_SpawnerGate
-  m_Shader: {fileID: 4800000, guid: 6fcfc6bbab66fc045bd3e444327795ca, type: 3}
+  m_Name: M_SpawnerGateAlly
+  m_Shader: {fileID: 4800000, guid: 82f18ca202e1b544b9f6bb08ca5c0f9b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -60,14 +60,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AngleSpeed: 2
+    - _AngleSpeed: 0
     - _BorderFade: 0.09
     - _BumpScale: 1
     - _CameraFade: 0
     - _Cutoff: 0.5
     - _DepthFadeOffset: 48.02
-    - _DepthFadeOffset1: 0.1
-    - _DepthFadeOffset2: 5
+    - _DepthFadeOffset1: 0.001
+    - _DepthFadeOffset2: 32.14
     - _DetailNormalMapScale: 1
     - _Distance1: 2
     - _DstBlend: 0
@@ -90,9 +90,9 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 1, a: 1}
-    - _ColorBorder: {r: 0, g: 0.5960784, b: 1, a: 1}
-    - _DepthOffset: {r: 30, g: -500, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorBorder: {r: 1, g: 0.92941177, b: 0.6745098, a: 1}
+    - _DepthOffset: {r: 1000, g: 50, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OpacityPaternStep: {r: 0, g: 1, b: 0, a: 0}
+    - _OpacityPaternStep: {r: -0.01, g: 1, b: 0, a: 0}
     - _UVpos: {r: 0.5, g: 3, b: 0, a: 0}
