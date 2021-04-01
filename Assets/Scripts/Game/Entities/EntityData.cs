@@ -4,17 +4,27 @@
 	using Sirenix.Serialization;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
+	using Tartaros.UI;
 	using UnityEngine;
 
-	public class EntityData : SerializedScriptableObject
+	public class EntityData : SerializedScriptableObject, ISpawnable
 	{
 		#region Fields
+		[SerializeField]
+		private GameObject _prefab = null;
+
+		[SerializeField]
+		private Sprite _portrait = null;
+
 		[OdinSerialize]
 		private IEntityBehaviourData[] _behaviours = new IEntityBehaviourData[0];
 		#endregion Fields
 
 		#region Properties
 		public IEntityBehaviourData[] Behaviours => _behaviours;
+
+		GameObject ISpawnable.Prefab => _prefab;
+		Sprite IPortraiteable.Portrait => _portrait;
 		#endregion Properties
 
 		#region Methods

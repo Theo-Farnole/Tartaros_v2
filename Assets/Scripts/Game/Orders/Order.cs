@@ -15,7 +15,7 @@
 		#endregion Properties
 
 		#region Ctor
-		public Order(Action executeAction, Sprite portrait)
+		public Order(Sprite portrait, Action executeAction)
 		{
 			_executeAction = executeAction;
 			_portrait = portrait;

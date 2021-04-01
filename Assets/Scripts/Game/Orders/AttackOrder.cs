@@ -16,7 +16,7 @@
 		#endregion Properties
 
 		#region Ctor
-		public AttackOrder(Entity entity) : base(Create(entity), Icon)
+		public AttackOrder(Entity entity) : base(Icon, Create(entity))
 		{ }
 		#endregion Ctor
 
