@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4807487723612796997}
   - component: {fileID: 1354776695470027127}
   - component: {fileID: 8987789355194051278}
+  - component: {fileID: 5054874063280888878}
   m_Layer: 0
   m_Name: TestConstructableWall
   m_TagString: Untagged
@@ -201,3 +202,17 @@ MonoBehaviour:
   _gameplayPrefab: {fileID: 0}
   _size: {x: 2, y: 1}
   _IsChained: 1
+--- !u!114 &5054874063280888878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5844679653255406007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
+    type: 3}

@@ -38,6 +38,10 @@
 
 				sectorToCapture.IsCaptured = true;
 			}
+			else
+            {
+				Debug.LogFormat("Cannot capture sector {0}.", sectorToCapture.ToString());
+            }
 		}
 
 		bool ISectorsCaptureManager.CanCapture(ISector sector)
