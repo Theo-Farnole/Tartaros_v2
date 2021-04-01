@@ -19,18 +19,11 @@
 		#endregion Properties
 
 		#region Methods
-		public bool CanSpawn(ISpawnable gameObject)
+		public ISectorResourcesWallet GetSpawnPrice(ISpawnable gameObject)
 		{
-			IPlayerSectorResources playerSectorResources = Services.Instance.Get<IPlayerSectorResources>();
-
-			return _unitsSpawnable.ContainsKey(gameObject) && playerSectorResources.CanBuyWallet(_unitsSpawnable[gameObject].SpawnPrice);
-		}
-
-		public ISectorResourcesWallet GetPriceToSpawn(ISpawnable gameObject)
-		{
-			if (CanSpawn(gameObject) == true)
+			if (_unitsSpawnable.TryGetValue(gameObject, out SpawnSettings value))
 			{
-				return _unitsSpawnable[gameObject].SpawnPrice;
+				return value.SpawnPrice;
 			}
 			else
 			{

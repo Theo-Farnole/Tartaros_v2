@@ -6,5 +6,6 @@
 	public interface ISpawnable : IPortraiteable
 	{
 		GameObject Prefab { get; }
+		int PopulationAmount { get; }
 	}
 }

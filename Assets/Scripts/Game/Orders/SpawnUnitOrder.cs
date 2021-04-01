@@ -15,13 +15,9 @@
 		{
 			return () =>
 			{
-				if (spawner.CanSpawn(spawnable))
+				if (spawner.CanSpawn(spawnable, true))
 				{
 					spawner.Spawn(spawnable);
-				}
-				else
-				{
-					Services.Instance.Get<UserErrorsLogger>().Log("Not enough money to format {0}.", spawnable.ToString());
 				}
 			};
 		}

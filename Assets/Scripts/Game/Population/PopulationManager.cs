@@ -28,7 +28,6 @@
 		event EventHandler<MaxPopulationChangedArgs> IPopulationManager.MaxPopulationChanged { add => MaxPopulationChanged += value; remove => MaxPopulationChanged -= value; }
 		#endregion Events
 
-
 		#region Methods
 		void Awake()
 		{
