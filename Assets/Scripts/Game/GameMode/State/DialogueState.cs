@@ -4,11 +4,14 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class CinematicState : AGameState
+    public class DialogueState : AGameState
     {
-        public CinematicState(GamemodeManager stateOwner) : base(stateOwner)
+        
+        public DialogueState(GamemodeManager stateOwner) : base(stateOwner)
         {
-        }
-    }
 
+        }
+
+        
+    }
 }

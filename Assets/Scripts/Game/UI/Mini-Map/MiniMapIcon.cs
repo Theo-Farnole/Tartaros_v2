@@ -17,7 +17,10 @@
         private void Start()
         {
             _miniMap = Services.Instance.Get<MiniMap>();
-            _miniMap.AddIcon(this);
+            if(_miniMap != null)
+            {
+                _miniMap.AddIcon(this);
+            }
         }
 
   
