@@ -11,7 +11,8 @@
 		public GameObject _gameplayPrefab = null;
 		public ISectorResourcesWallet _price = null;
 		public Vector2 _size = Vector2.one;
-		public bool _IsChained = false;
+		public bool _isWall = false;
+
 
 		GameObject IConstructable.PreviewPrefab => _testCube;
 
@@ -23,7 +24,7 @@
 
 		IConstructionRule[] IConstructable.Rules => throw new System.NotImplementedException();
 
-		bool IConstructable.IsChained => _IsChained;
+		bool IConstructable.IsWall => _isWall;
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
 	}

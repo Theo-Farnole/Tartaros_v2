@@ -52,10 +52,18 @@
         {
             _map = Services.Instance.Get<IMap>();
 
-            var array = _map.Sectors.OfType<Sector>().ToArray();
+            if(_map.Sectors == null)
+            {
+                Debug.LogError("there is no sector reference on the map");
+                return;
+            }
+            else
+            {
+                //var array = _map.Sectors.OfType<Sector>().ToArray();
 
-            _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
-            _sectorDisplayer.DisplaySectors();
+                //_navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
+                //_sectorDisplayer.DisplaySectors();
+            }
         }
 
         private void Update()

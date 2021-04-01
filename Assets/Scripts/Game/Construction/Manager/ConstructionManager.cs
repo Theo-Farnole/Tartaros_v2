@@ -41,7 +41,7 @@
 
 		public void EnterConstructionMode(IConstructable toBuild)
 		{
-            if (toBuild.IsChained)
+            if (toBuild.IsWall)
             {
 				_gamemodeManager.SetState(new WallConstructionState(_gamemodeManager, toBuild));
             }

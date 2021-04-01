@@ -4,8 +4,9 @@
 	using Tartaros.Economy;
 	using Tartaros.Sectors;
 	using Tartaros.Map;
+    using System;
 
-	internal class DebugResourceSector : ISector
+    internal class DebugResourceSector : ISector
 	{
 		#region Fields
 		[SerializeField]
@@ -40,7 +41,20 @@
 
 		ISectorResourcesWallet ISector.CapturePrice => throw new System.NotImplementedException();
 
-		bool ISector.ContainsPosition(Vector3 worldPosition)
+        event EventHandler<CapturedArgs> ISector.Captured
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        bool ISector.ContainsPosition(Vector3 worldPosition)
 		{
 			throw new System.NotImplementedException();
 		}
