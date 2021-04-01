@@ -36,11 +36,6 @@
 			_maxPopulation = _populationManagerData.StartingMaxPopulation;
 		}
 
-		bool IPopulationManager.CanSpawn(int popAmount)
-		{
-			return _currentPopulation + popAmount < _maxPopulation;
-		}
-
 		void IPopulationManager.IncrementMaxPopulation(int popAmount)
 		{
 			_maxPopulation += popAmount;
