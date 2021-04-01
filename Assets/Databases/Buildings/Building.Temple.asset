@@ -30,7 +30,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 6
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.EntityCarveNavMeshData, Tartaros
@@ -66,25 +66,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Tartaros.Entities.EntityAttackData, Tartaros
-    - Name: _damage
-      Entry: 3
-      Data: 1
-    - Name: _attackSpeed
-      Entry: 4
-      Data: 1
-    - Name: _attackRange
-      Entry: 4
-      Data: 5
-    - Name: _attackMode
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
+      Data: 3|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
     - Name: _detectionRange
       Entry: 4
       Data: 10
@@ -93,7 +75,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Tartaros.UI.EntityConstructableData, Tartaros
+      Data: 4|Tartaros.UI.EntityConstructableData, Tartaros
     - Name: _portrait
       Entry: 10
       Data: 0
@@ -108,14 +90,14 @@ MonoBehaviour:
       Data: false
     - Name: _constructionPrice
       Entry: 7
-      Data: 6|Tartaros.Economy.SectorResourcesWallet, Tartaros
+      Data: 5|Tartaros.Economy.SectorResourcesWallet, Tartaros
     - Name: _ressourceAmount
       Entry: 7
-      Data: 7|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+      Data: 6|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
         Tartaros],[System.Int32, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 8|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+      Data: 7|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
         Tartaros]], mscorlib
     - Name: 
       Entry: 12
@@ -170,7 +152,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Tartaros.Entities.EntitySelectable, Tartaros
+      Data: 8|Tartaros.Entities.EntitySelectable, Tartaros
     - Name: _canBeMultiSelected
       Entry: 5
       Data: false
@@ -179,14 +161,14 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|Tartaros.Entities.EntityUnitsSpawnerData, Tartaros
+      Data: 9|Tartaros.Entities.EntityUnitsSpawnerData, Tartaros
     - Name: _unitsSpawnable
       Entry: 7
-      Data: 11|System.Collections.Generic.Dictionary`2[[Tartaros.Entities.ISpawnable,
+      Data: 10|System.Collections.Generic.Dictionary`2[[Tartaros.Entities.ISpawnable,
         Tartaros],[Tartaros.Entities.SpawnSettings, Tartaros]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 12|System.Collections.Generic.ObjectEqualityComparer`1[[Tartaros.Entities.ISpawnable,
+      Data: 11|System.Collections.Generic.ObjectEqualityComparer`1[[Tartaros.Entities.ISpawnable,
         Tartaros]], mscorlib
     - Name: 
       Entry: 8
@@ -202,17 +184,17 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 13|Tartaros.Entities.SpawnSettings, Tartaros
+      Data: 12|Tartaros.Entities.SpawnSettings, Tartaros
     - Name: _spawnPrice
       Entry: 7
-      Data: 14|Tartaros.Economy.SectorResourcesWallet, Tartaros
+      Data: 13|Tartaros.Economy.SectorResourcesWallet, Tartaros
     - Name: _ressourceAmount
       Entry: 7
-      Data: 15|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+      Data: 14|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
         Tartaros],[System.Int32, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 16|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+      Data: 15|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
         Tartaros]], mscorlib
     - Name: 
       Entry: 12
