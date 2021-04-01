@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.OrderGiver
 {
 	using Tartaros.Entities;
+	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
@@ -21,6 +22,8 @@
 			_gameInputs.Orders.Enable();
 
 			_camera = Camera.main;
+
+			Services.Instance.RegisterService(this);
 		}
 
 		private void OnEnable()

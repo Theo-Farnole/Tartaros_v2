@@ -34,7 +34,7 @@
 
 		private void OnButtonClick()
 		{
-			if (_order == null)
+			if (_order != null)
 			{
 				_order.Execute();
 			}

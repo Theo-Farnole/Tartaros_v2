@@ -6,8 +6,8 @@
 	public class Order
 	{
 		#region Fields
-		private readonly Action _executeAction = null;
-		private readonly Sprite _portrait = null;
+		protected readonly Action _executeAction = null;
+		protected readonly Sprite _portrait = null;
 		#endregion Fields
 
 		#region Properties

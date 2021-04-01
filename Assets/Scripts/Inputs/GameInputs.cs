@@ -275,6 +275,14 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""3068a7cc-b1ba-4ef4-8bfb-959a0a06163c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -286,6 +294,17 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveToOrAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af856233-7b49-40bc-b3f6-7cdcfce7c5ca"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -456,6 +475,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
         // Orders
         m_Orders = asset.FindActionMap("Orders", throwIfNotFound: true);
         m_Orders_MoveToOrAttack = m_Orders.FindAction("MoveToOrAttack", throwIfNotFound: true);
+        m_Orders_RightClick = m_Orders.FindAction("RightClick", throwIfNotFound: true);
         // Construction
         m_Construction = asset.FindActionMap("Construction", throwIfNotFound: true);
         m_Construction_EnterConstruction = m_Construction.FindAction("EnterConstruction", throwIfNotFound: true);
@@ -642,11 +662,13 @@ public class @GameInputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Orders;
     private IOrdersActions m_OrdersActionsCallbackInterface;
     private readonly InputAction m_Orders_MoveToOrAttack;
+    private readonly InputAction m_Orders_RightClick;
     public struct OrdersActions
     {
         private @GameInputs m_Wrapper;
         public OrdersActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveToOrAttack => m_Wrapper.m_Orders_MoveToOrAttack;
+        public InputAction @RightClick => m_Wrapper.m_Orders_RightClick;
         public InputActionMap Get() { return m_Wrapper.m_Orders; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -659,6 +681,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @MoveToOrAttack.started -= m_Wrapper.m_OrdersActionsCallbackInterface.OnMoveToOrAttack;
                 @MoveToOrAttack.performed -= m_Wrapper.m_OrdersActionsCallbackInterface.OnMoveToOrAttack;
                 @MoveToOrAttack.canceled -= m_Wrapper.m_OrdersActionsCallbackInterface.OnMoveToOrAttack;
+                @RightClick.started -= m_Wrapper.m_OrdersActionsCallbackInterface.OnRightClick;
+                @RightClick.performed -= m_Wrapper.m_OrdersActionsCallbackInterface.OnRightClick;
+                @RightClick.canceled -= m_Wrapper.m_OrdersActionsCallbackInterface.OnRightClick;
             }
             m_Wrapper.m_OrdersActionsCallbackInterface = instance;
             if (instance != null)
@@ -666,6 +691,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @MoveToOrAttack.started += instance.OnMoveToOrAttack;
                 @MoveToOrAttack.performed += instance.OnMoveToOrAttack;
                 @MoveToOrAttack.canceled += instance.OnMoveToOrAttack;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
             }
         }
     }
@@ -791,6 +819,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
     public interface IOrdersActions
     {
         void OnMoveToOrAttack(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
     }
     public interface IConstructionActions
     {

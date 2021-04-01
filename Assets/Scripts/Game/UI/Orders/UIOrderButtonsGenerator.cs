@@ -50,7 +50,7 @@
 			GameObject button = GameObject.Instantiate(_prefabButton, _buttonsRoot);
 			_buttons.Add(button);
 
-			button.GetComponent<OrderButton>().Order = order;
+			button.GetOrAddComponent<OrderButton>().Order = order;
 		}
 		#endregion Methods
 	}

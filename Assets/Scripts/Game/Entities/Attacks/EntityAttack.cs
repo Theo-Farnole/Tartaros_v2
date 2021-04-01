@@ -4,9 +4,10 @@
 	using Tartaros.Entities.Detection;
 	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
+	using Tartaros.Orders;
 	using UnityEngine;
 
-	public class EntityAttack : MonoBehaviour, IOrderAttackReceiver
+	public class EntityAttack : MonoBehaviour, IOrderAttackReceiver, IEntityOrderable
 	{
 		#region Fields
 		private EntityAttackData _entityAttackData = null;
@@ -47,7 +48,7 @@
 			if (IsInRange(target) == false) return;
 
 			if (CanAttackCooldown() == false) return;
-			
+
 			_entityAttackData.AttackMode.Attack(transform, target);
 			_lastTimeAttack = Time.time;
 
@@ -55,11 +56,11 @@
 
 		public bool IsInRange(IAttackable target)
 		{
-			return  _entityDetection.IsInAttackRange(target.Transform.position);
+			return _entityDetection.IsInAttackRange(target.Transform.position);
 		}
 
 		public bool CanAttackCooldown()
-        {
+		{
 			return Time.time > _lastTimeAttack + _entityAttackData.AttackSpeed;
 		}
 
@@ -71,6 +72,16 @@
 		void IOrderAttackReceiver.AttackAdditive(IAttackable target)
 		{
 			_entityFSM.EnqueueState(new StateAttack(_entity, target));
+		}
+
+		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		{
+			Order[] orders = new Order[]
+			{
+				new AttackOrder(entity)
+			};
+
+			return orders;
 		}
 		#endregion
 	}
