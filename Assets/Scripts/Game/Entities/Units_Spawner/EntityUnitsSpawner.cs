@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities
 {
+	using Assets.Scripts.Game.Orders;
 	using Boo.Lang;
 	using Tartaros.Economy;
 	using Tartaros.Orders;
@@ -30,7 +31,7 @@
 		{
 			if (CanSpawn(prefabToSpawn) == true)
 			{
-				Instantiate(prefabToSpawn.Prefab);
+				Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
 				_playerResources.RemoveWallet(Data.GetPriceToSpawn(prefabToSpawn));
 			}
 			else
@@ -51,10 +52,15 @@
 
 			foreach (ISpawnable spawnable in SpawnablePrefabs)
 			{
-				throw new System.NotImplementedException();
+				orders.Add(new SpawnUnitOrder(spawnable, this));
 			}
 
 			return orders.ToArray();
+		}
+
+		private Vector3 GetSpawnPoint()
+		{
+			return transform.position + Vector3.right;
 		}
 		#endregion Methods
 	}
