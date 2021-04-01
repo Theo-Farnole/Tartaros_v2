@@ -36,14 +36,10 @@
 		{
 			return () =>
 			{
-				Debug.Log("Click");
-
 				GameObject gameObjectUnderCursor = MouseHelper.GetGameObjectUnderCursor();
 
-				Debug.Log(gameObjectUnderCursor);
 				if (gameObjectUnderCursor.TryGetComponentInParent(out IAttackable attackableUnderCursor))
 				{
-					Debug.Log(attackableUnderCursor);
 					entity.GetComponent<IOrderAttackReceiver>().Attack(attackableUnderCursor);
 				}
 			};
