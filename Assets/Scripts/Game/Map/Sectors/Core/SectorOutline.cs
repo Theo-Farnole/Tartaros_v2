@@ -3,7 +3,8 @@
 	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Tartaros.Selection;
+    using Tartaros.Sectors;
+    using Tartaros.Selection;
 	using UnityEngine;
 
 	public class SectorOutline : MonoBehaviour, ISelectionEffect
@@ -48,7 +49,7 @@
 			_sector.Captured += OnSectorCaptured;
 		}
 
-		private void OnSectorCaptured(object sender, Sector.CapturedArgs e)
+		private void OnSectorCaptured(object sender, CapturedArgs e)
 		{
 			UpdateColor();
 		}

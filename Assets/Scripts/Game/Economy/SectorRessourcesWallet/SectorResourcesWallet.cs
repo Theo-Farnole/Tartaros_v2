@@ -47,6 +47,15 @@
 		public SectorResourcesWallet() : this(Zero)
 		{ }
 
+		public SectorResourcesWallet(int food, int stone, int iron)
+		{
+			_ressourceAmount = new Dictionary<SectorRessourceType, int>();
+
+			_ressourceAmount[SectorRessourceType.Food] = food;
+			_ressourceAmount[SectorRessourceType.Stone] = stone;
+			_ressourceAmount[SectorRessourceType.Iron] = iron;
+		}
+
 		public SectorResourcesWallet(ISectorResourcesWallet walletToCopy) : this(GenerateResourcesAmount(walletToCopy))
 		{ }
 

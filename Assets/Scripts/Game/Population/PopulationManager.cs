@@ -28,17 +28,11 @@
 		event EventHandler<MaxPopulationChangedArgs> IPopulationManager.MaxPopulationChanged { add => MaxPopulationChanged += value; remove => MaxPopulationChanged -= value; }
 		#endregion Events
 
-
 		#region Methods
 		void Awake()
 		{
 			Services.Instance.RegisterService<IPopulationManager>(this);
 			_maxPopulation = _populationManagerData.StartingMaxPopulation;
-		}
-
-		bool IPopulationManager.CanSpawn(int popAmount)
-		{
-			return _currentPopulation + popAmount < _maxPopulation;
 		}
 
 		void IPopulationManager.IncrementMaxPopulation(int popAmount)

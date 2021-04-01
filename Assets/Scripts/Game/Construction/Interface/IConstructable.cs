@@ -12,7 +12,7 @@ namespace Tartaros.Construction
 		ISectorResourcesWallet Price { get; }
 		Vector2 Size { get; }
 
-		bool IsChained { get; }
+		bool IsWall { get; }
 		IConstructionRule[] Rules { get; }
 	}
 }

@@ -44,7 +44,7 @@
 
 		IConstructionRule[] IConstructable.Rules => _rules;
 
-		bool IConstructable.IsChained => _IsChained;
+		bool IConstructable.IsWall => _IsChained;
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
 		#endregion Properties

@@ -27,14 +27,14 @@
 			}
 		}
 
-		public static bool CanBuyWallet(this ISectorResourcesWallet wallet, ISectorResourcesWallet walletToBuy)
+		public static bool CanBuyWallet(this ISectorResourcesWallet w1, ISectorResourcesWallet w2)
 		{
-			if (wallet is null) throw new System.ArgumentNullException(nameof(wallet));
-			if (walletToBuy is null) throw new System.ArgumentNullException(nameof(walletToBuy));
+			if (w1 is null) throw new System.ArgumentNullException(nameof(w1));
+			if (w2 is null) throw new System.ArgumentNullException(nameof(w2));
 
 			foreach (SectorRessourceType resourceType in EnumHelper.GetValues<SectorRessourceType>())
 			{
-				bool hasEnoughtMoney = wallet.GetAmount(resourceType) >= walletToBuy.GetAmount(resourceType);
+				bool hasEnoughtMoney = w1.GetAmount(resourceType) >= w2.GetAmount(resourceType);
 
 				if (hasEnoughtMoney == false)
 				{

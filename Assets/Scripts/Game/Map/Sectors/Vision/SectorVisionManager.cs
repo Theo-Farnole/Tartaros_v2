@@ -51,7 +51,7 @@
 			_fogVision.ConvexPolygon = _sector.SectorData.ConvexPolygon;
 		}
 
-		private void SectorCaptured(object sender, Sector.CapturedArgs e)
+		private void SectorCaptured(object sender, CapturedArgs e)
 		{
 			UpdateFogOfWarVisibility();
 		}

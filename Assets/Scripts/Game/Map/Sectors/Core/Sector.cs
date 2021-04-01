@@ -1,132 +1,148 @@
 namespace Tartaros.Map
 {
-	using System.Collections.Generic;
-	using Tartaros.Selection;
-	using UnityEngine;
-	using Tartaros.Economy;
-	using Tartaros.ServicesLocator;
-	using Tartaros.Sectors;
-	using Tartaros.Math;
-	using System.Linq;
-	using System;
+    using System.Collections.Generic;
+    using Tartaros.Selection;
+    using UnityEngine;
+    using Tartaros.Economy;
+    using Tartaros.ServicesLocator;
+    using Tartaros.Sectors;
+    using Tartaros.Math;
+    using System.Linq;
+    using System;
 
-	public class Sector : MonoBehaviour, ISector
-	{
-		#region Fields		
+    public class Sector : MonoBehaviour, ISector
+    {
+        #region Fields		
 
-		[SerializeField]
-		private MeshCollider _collider = null;
+        [SerializeField]
+        private MeshCollider _collider = null;
 
-		private SectorData _sectorData = null;
+        private SectorData _sectorData = null;
 
-		[ShowInRuntime]
-		private bool _isCaptured = false;
-		private Mesh _sectorMesh = null;
-		#endregion Fields
+        [ShowInRuntime]
+        private bool _isCaptured = false;
+        private Mesh _sectorMesh = null;
+        #endregion Fields
 
-		#region Properties
-		public SectorData SectorData { get => _sectorData; set => _sectorData = value; }
-		public bool IsCaptured => _isCaptured;
-		public ConvexPolygon ConvexPolygon => _sectorData.ConvexPolygon;
-		public Mesh SectorMesh => _sectorMesh;
-		GameObject[] ISector.ObjectsInSector
-		{
-			get
-			{
-				return FindObjectsOfType<GameObject>()
-					.Where(x => IsObjectInSector(x))
-					.ToArray();
-			}
-		}
+        #region Properties
+        public SectorData SectorData { get => _sectorData; set => _sectorData = value; }
+        public bool IsCaptured => _isCaptured;
+        public ConvexPolygon ConvexPolygon => _sectorData.ConvexPolygon;
+        public Mesh SectorMesh => _sectorMesh;
 
-		bool ISector.IsCaptured
-		{
-			get => _isCaptured;
+        GameObject[] ISector.ObjectsInSector
+        {
+            get
+            {
+                return FindObjectsOfType<GameObject>()
+                    .Where(x => IsObjectInSector(x))
+                    .ToArray();
+            }
+        }
 
-			set
-			{
-				if (_isCaptured == value) return;
+        bool ISector.IsCaptured
+        {
+            get => _isCaptured;
 
-				_isCaptured = value;
+            set
+            {
+                if (_isCaptured == value) return;
 
-				if (_isCaptured == true)
-				{
-					OnCapture();
-				}
-			}
-		}
+                _isCaptured = value;
 
-		ISectorResourcesWallet ISector.CapturePrice => SectorData.CapturePrice;
-		#endregion Properties
+                if (_isCaptured == true)
+                {
+                    OnCaptureSector();
+                }
+            }
+        }
 
-		#region Events
-		public class CapturedArgs : EventArgs
-		{ }
+        ISectorResourcesWallet ISector.CapturePrice => SectorData.CapturePrice;
+        #endregion Properties
 
-		public event EventHandler<CapturedArgs> Captured = null;
+        #region Events
+        public class InitializedArgs : EventArgs
+        { }
 
-		public class InitializedArgs : EventArgs
-		{ }
+        public event EventHandler<InitializedArgs> Initialized = null;
 
-		public event EventHandler<InitializedArgs> Initialized = null;
-		#endregion Events
+        public event EventHandler<CapturedArgs> Captured = null;
 
-		#region Methods
-		public void Initialize(SectorData sectorData)
-		{
-			_sectorData = sectorData;
 
-			_sectorMesh = SectorMeshGenerator.GenerateMesh(_sectorData);
 
-			_collider.sharedMesh = _sectorMesh;
-			Initialized?.Invoke(this, new InitializedArgs());
-		}
+        event EventHandler<CapturedArgs> ISector.Captured
+        {
+            add
+            {
+                Captured += value;
+            }
 
-		public Vector3[] GetPointsWrappedSnappedToGround()
-		{
-			List<Vector3> sectorPointsSnapToGround = new List<Vector3>();
+            remove
+            {
+                Captured -= value;
+            }
+        }
 
-			foreach (Vector3 sectorPoint in _sectorData.GetWorldPointsWrapped())
-			{
-				Ray ray = new Ray(sectorPoint + Vector3.up * 5, Vector3.down);
 
-				if (Physics.Raycast(ray, out RaycastHit hit))
-				{
-					sectorPointsSnapToGround.Add(hit.point);
-				}
-				else
-				{
-					sectorPointsSnapToGround.Add(sectorPoint);
-				}
-			}
+        #endregion Events
 
-			return sectorPointsSnapToGround.ToArray();
-		}
+        #region Methods
+        public void Initialize(SectorData sectorData)
+        {
+            _sectorData = sectorData;
 
-		public bool IsObjectInSector(GameObject gameObject)
-		{
-			return _sectorData.ConvexPolygon.ContainsWorldPosition(gameObject.transform.position);
-		}
+            _sectorMesh = SectorMeshGenerator.GenerateMesh(_sectorData);
 
-		bool ISector.ContainsPosition(Vector3 point)
-		{
-			return _sectorData.ConvexPolygon.ContainsPoint2D(new Vector2(point.x, point.z));
-		}
+            _collider.sharedMesh = _sectorMesh;
+            Initialized?.Invoke(this, new InitializedArgs());
+        }
 
-		private void OnCapture()
-		{
-			UpdateSelectableTeam();
+        public Vector3[] GetPointsWrappedSnappedToGround()
+        {
+            List<Vector3> sectorPointsSnapToGround = new List<Vector3>();
 
-			Captured?.Invoke(this, new CapturedArgs());
-		}
+            foreach (Vector3 sectorPoint in _sectorData.GetWorldPointsWrapped())
+            {
+                Ray ray = new Ray(sectorPoint + Vector3.up * 5, Vector3.down);
 
-		private void UpdateSelectableTeam()
-		{
-			if (TryGetComponent(out ISelectable selectable))
-			{
-				selectable.Team = Entities.Team.Player;
-			}
-		}
-		#endregion Methods
-	}
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    sectorPointsSnapToGround.Add(hit.point);
+                }
+                else
+                {
+                    sectorPointsSnapToGround.Add(sectorPoint);
+                }
+            }
+
+            return sectorPointsSnapToGround.ToArray();
+        }
+
+        public bool IsObjectInSector(GameObject gameObject)
+        {
+            return _sectorData.ConvexPolygon.ContainsWorldPosition(gameObject.transform.position);
+        }
+
+        bool ISector.ContainsPosition(Vector3 point)
+        {
+            return _sectorData.ConvexPolygon.ContainsPoint2D(new Vector2(point.x, point.z));
+        }
+
+        private void OnCaptureSector()
+        {
+            UpdateSelectableTeam();
+
+            Captured?.Invoke(this, new CapturedArgs());
+
+        }
+
+        private void UpdateSelectableTeam()
+        {
+            if (TryGetComponent(out ISelectable selectable))
+            {
+                selectable.Team = Entities.Team.Player;
+            }
+        }
+        #endregion Methods
+    }
 }

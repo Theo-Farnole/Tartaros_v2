@@ -16,6 +16,9 @@
 		[SerializeField]
 		private Sprite _portrait = null;
 
+		[SerializeField]
+		private int _population = 1;
+
 		[OdinSerialize]
 		private IEntityBehaviourData[] _behaviours = new IEntityBehaviourData[0];
 		#endregion Fields
@@ -25,6 +28,7 @@
 
 		GameObject ISpawnable.Prefab => _prefab;
 		Sprite IPortraiteable.Portrait => _portrait;
+		int ISpawnable.PopulationAmount => _population;
 		#endregion Properties
 
 		#region Methods
