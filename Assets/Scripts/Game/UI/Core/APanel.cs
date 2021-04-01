@@ -1,12 +1,17 @@
 ﻿namespace Tartaros.UI
 {
+	using Sirenix.OdinInspector;
 	using UnityEngine;
 
-	[RequireComponent(typeof(Canvas))]
 	public class APanel : MonoBehaviour
 	{
 		#region Fields
+		[SerializeField]
+		[SuffixLabel("self if null")]
 		private Canvas _canvas = null;
+
+		[SerializeField]
+		private bool _showAtStart = true;
 		#endregion Fields
 
 		#region Properties
@@ -15,9 +20,18 @@
 
 		#region Methods
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_canvas = GetComponent<Canvas>();
+
+			if (_showAtStart == true)
+			{
+				Show();
+			}
+			else
+			{
+				Hide();
+			}
 		}
 
 		public void Show()
