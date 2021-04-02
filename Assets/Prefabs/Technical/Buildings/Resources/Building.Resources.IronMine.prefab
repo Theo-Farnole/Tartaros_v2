@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7859859454919395630}
   - component: {fileID: 7859859454919395601}
-  - component: {fileID: 8367569124810393953}
+  - component: {fileID: 4675484710445595902}
   m_Layer: 0
   m_Name: Building.Resources.IronMine
   m_TagString: Untagged
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: f782db0389b33be45b8bf92963d59dc6, type: 2}
---- !u!114 &8367569124810393953
+  _team: 1
+--- !u!114 &4675484710445595902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,11 +56,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7859859454919395600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bf40f2cc7fac84ea080221bc5d1b3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 418464527b50aee42ac8b64598d460fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 7382564273838079081}
-  _selectedMaterial: {fileID: 2100000, guid: bf1ef890ac3a7094996e9f3b7aa1de5a, type: 2}
 --- !u!1001 &3913393301472652673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,12 +131,6 @@ PrefabInstance:
 --- !u!4 &7382564273689175243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5781224918604581194, guid: b9b2dee965749f8439375ab3438e7336,
-    type: 3}
-  m_PrefabInstance: {fileID: 3913393301472652673}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &7382564273838079081 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5781224918757675496, guid: b9b2dee965749f8439375ab3438e7336,
     type: 3}
   m_PrefabInstance: {fileID: 3913393301472652673}
   m_PrefabAsset: {fileID: 0}

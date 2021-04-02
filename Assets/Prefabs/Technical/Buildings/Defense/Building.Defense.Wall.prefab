@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5810600384853675110}
   - component: {fileID: 3625532610530107028}
   - component: {fileID: 3616846463437891640}
+  - component: {fileID: 4413853332208303120}
   m_Layer: 0
   m_Name: Building.Defense.Wall
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 93f56da6c07b91e45a5cffdf5c761f1a, type: 2}
+  _team: 1
 --- !u!114 &3616846463437891640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +62,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+--- !u!114 &4413853332208303120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810600384853675113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418464527b50aee42ac8b64598d460fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1035043831809296912
 PrefabInstance:
   m_ObjectHideFlags: 0
