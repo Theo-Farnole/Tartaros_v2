@@ -103,6 +103,7 @@ namespace Tartaros.Construction
 
 		private void InstanciateBuilding()
 		{
+			Debug.Log(_constructable.GameplayPrefab);
 			GameObject.Instantiate(_constructable.GameplayPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
 		}
 

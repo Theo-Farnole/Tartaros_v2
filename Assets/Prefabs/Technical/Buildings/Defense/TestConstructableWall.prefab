@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64de5000312a62b4a89a4c83a1890c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityData: {fileID: 11400000, guid: 5b59b787a4cdc764eb2c3c625fa46bd8, type: 2}
+  _entityData: {fileID: 11400000, guid: 93f56da6c07b91e45a5cffdf5c761f1a, type: 2}
 --- !u!114 &8987789355194051278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,9 +199,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _testCube: {fileID: 5844679653255406007}
-  _gameplayPrefab: {fileID: 0}
+  _gameplayPrefab: {fileID: 5844679653255406007}
   _size: {x: 2, y: 1}
-  _IsChained: 1
+  _isWall: 1
 --- !u!114 &5054874063280888878
 MonoBehaviour:
   m_ObjectHideFlags: 0
