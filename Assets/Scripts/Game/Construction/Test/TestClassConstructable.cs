@@ -22,7 +22,7 @@
 
 		Sprite IPortraiteable.Portrait => null;
 
-		IConstructionRule[] IConstructable.Rules => throw new System.NotImplementedException();
+		IConstructionRule[] IConstructable.Rules => null;
 
 		bool IConstructable.IsWall => _isWall;
 

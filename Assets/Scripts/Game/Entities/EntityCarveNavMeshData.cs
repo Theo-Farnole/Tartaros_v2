@@ -14,7 +14,10 @@
         void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
         {
             NavMeshObstacle _navObstacle = entityRoot.GetOrAddComponent<NavMeshObstacle>();
-            _navObstacle.size = _size;
+
+            Vector3 newSize = new Vector3(_size.x, 1, _size.y);
+
+            _navObstacle.size = newSize;
             _navObstacle.carving = true;
         }
     }

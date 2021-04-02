@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5657609668978460671}
   - component: {fileID: 6555778418471866085}
+  - component: {fileID: 2674278735904378252}
+  - component: {fileID: 9067237037945139639}
   m_Layer: 0
   m_Name: Building.Defense.Balista
   m_TagString: Untagged
@@ -46,6 +48,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+--- !u!114 &2674278735904378252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418464527b50aee42ac8b64598d460fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9067237037945139639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64de5000312a62b4a89a4c83a1890c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityData: {fileID: 11400000, guid: 2b97efc399d71d046aaa480fe09828bf, type: 2}
+  _team: 1
 --- !u!114 &834045431216267731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 2b97efc399d71d046aaa480fe09828bf, type: 2}
+  _team: 1
 --- !u!1001 &1917619717638062243
 PrefabInstance:
   m_ObjectHideFlags: 0

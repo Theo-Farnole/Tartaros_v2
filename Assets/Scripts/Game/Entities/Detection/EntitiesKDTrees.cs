@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
@@ -14,7 +15,14 @@
 		#region Methods
 		private void Awake()
 		{
-			Services.Instance.RegisterService(this);
+			if (Services.HasInstance == true)
+			{
+				Services.Instance.RegisterService(this);
+			}
+			else
+			{
+				Debug.LogError("Missing services GameObject in the Scene.");
+			}
 
 			_kdTrees = new Dictionary<Team, KdTree<Entity>>();
 
@@ -56,31 +64,26 @@
 		private void AddEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].Add(entity);
 		private void RemoveEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].RemoveAll(x => x == entity);
 
-		public Entity[] GetEveryEntityInRadius(Team team, float radius)
+		// TODO TF: (perf)
+		public Entity[] GetEveryEntityInRadius(Team team, Vector3 position, float radius)
 		{
-			EntitiesKDTrees kdTree = Services.Instance.Get<EntitiesKDTrees>();
-			var output = new List<Entity>();
+			var entitiesOfTeam = FindAllEntitiesOfTeam(team);
+			List<Entity> output = new List<Entity>();
 
-			IEnumerable<Entity> enemiesSortByDistance = kdTree.FindClose(team, transform.position);
-
-			foreach (Entity entity in enemiesSortByDistance)
+			foreach (Entity entity in entitiesOfTeam)
 			{
-				if (IsEntityInRadius(entity, radius))
+				if (Vector3.Distance(position, entity.transform.position) <= radius)
 				{
 					output.Add(entity);
-				}
-				else
-				{
-					return output.ToArray();
 				}
 			}
 
 			return output.ToArray();
 		}
 
-		private bool IsEntityInRadius(Entity entity, float radius)
+		public Entity[] FindAllEntitiesOfTeam(Team team)
 		{
-			return Vector3.Distance(entity.transform.position, transform.position) <= radius;
+			return GameObject.FindObjectsOfType<Entity>().Where(x => x.Team == team).ToArray();
 		}
 		#endregion Methods
 	}

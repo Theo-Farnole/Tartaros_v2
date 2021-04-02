@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7141674708461386793}
   - component: {fileID: 7141674708461386774}
-  - component: {fileID: 2488679310530382106}
+  - component: {fileID: 6474260231024514300}
   m_Layer: 0
   m_Name: Building.Resources.Mill
   m_TagString: Untagged
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 266102ea2d9e0e549adf693dd2d41a5f, type: 2}
---- !u!114 &2488679310530382106
+  _team: 1
+--- !u!114 &6474260231024514300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,11 +56,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7141674708461386775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bf40f2cc7fac84ea080221bc5d1b3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 418464527b50aee42ac8b64598d460fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 4443972135823830099}
-  _selectedMaterial: {fileID: 2100000, guid: bf1ef890ac3a7094996e9f3b7aa1de5a, type: 2}
 --- !u!1001 &3808884847478128314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,12 +131,6 @@ PrefabInstance:
 --- !u!4 &4443972135201438522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 682235464088241536, guid: a737af567d7a55e47979de735b1b07aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 3808884847478128314}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &4443972135823830099 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 682235464854164201, guid: a737af567d7a55e47979de735b1b07aa,
     type: 3}
   m_PrefabInstance: {fileID: 3808884847478128314}
   m_PrefabAsset: {fileID: 0}

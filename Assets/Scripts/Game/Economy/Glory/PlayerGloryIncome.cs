@@ -48,7 +48,7 @@
 			if (e.entity.Team == Team.Player)
 			{
 				int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
-				FillWallet(gloryIncome);
+				//FillWallet(gloryIncome);
 			}
 		}
 

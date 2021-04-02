@@ -1,9 +1,9 @@
 ﻿namespace Tartaros.Population
 {
-	using UnityEngine;
-	using System.Collections;
-	using Tartaros.ServicesLocator;
+	using Sirenix.OdinInspector;
 	using System;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
 	public class PopulationManager : MonoBehaviour, IPopulationManager
 	{
@@ -12,6 +12,7 @@
 		private int _maxPopulation = 0;
 
 		[SerializeField]
+		[InlineEditor]
 		private PopulationManagerData _populationManagerData = null;
 		#endregion Fields
 
@@ -38,6 +39,7 @@
 		void IPopulationManager.IncrementMaxPopulation(int popAmount)
 		{
 			_maxPopulation += popAmount;
+			MaxPopulationChanged?.Invoke(this, new MaxPopulationChangedArgs());
 		}
 
 		void IPopulationManager.ReduceMaxPopulation(int popAmount)
@@ -45,6 +47,7 @@
 			if (_maxPopulation - popAmount > 0)
 			{
 				_maxPopulation -= popAmount;
+				MaxPopulationChanged?.Invoke(this, new MaxPopulationChangedArgs());
 			}
 			else
 			{
@@ -60,10 +63,11 @@
 			if ((this as IPopulationManager).CanSpawn(popAmount) == true)
 			{
 				_currentPopulation += popAmount;
+				CurrentPopulationChanged?.Invoke(this, new CurrentPopulationChangedArgs());
 			}
 			else
 			{
-				Debug.LogError("_currentPop can't be supperior than _maxPop");
+				Debug.LogError("Current population can't be supperior than max population.");
 			}
 		}
 
@@ -74,6 +78,7 @@
 			if (_currentPopulation - popAmount > 0)
 			{
 				_currentPopulation -= popAmount;
+				CurrentPopulationChanged?.Invoke(this, new CurrentPopulationChangedArgs());
 			}
 			else
 			{

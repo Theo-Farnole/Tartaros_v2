@@ -8,7 +8,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class EntityDetection : MonoBehaviour
+	public partial class EntityDetection : MonoBehaviour
 	{
 		#region Fields
 		private float _attackRange = -1;
@@ -21,8 +21,25 @@
 		#endregion
 
 		#region Properties
-		public EntityDetectionData EntityDetectionData { get => _entityDetectionData; set => _entityDetectionData = value; }
+		public EntityDetectionData EntityDetectionData
+		{
+			get => _entityDetectionData;
+
+			set
+			{
+				_entityDetectionData = value;
+
+				if (_entityDetectionData != null)
+				{
+					if (DetectionRange <= 0)
+					{
+						Debug.LogWarningFormat("Detection range of {0} is less or equals to zero.", DetectionRange);
+					}
+				}
+			}
+		}
 		public Team OpponentTeam => _entity.Team.GetOpponent();
+		public float DetectionRange => _entityDetectionData.DetectionRange;
 		#endregion Properties
 
 		#region Methods
@@ -54,6 +71,22 @@
 
 			return null;
 		}
+
+		public IAttackable GetNearestAttackableOpponentInDetectionRange()
+		{
+			IEnumerable<Entity> opponents = GetOpponentsOrderByDistance();
+
+			foreach (Entity entity in opponents)
+			{
+				if (entity.TryGetComponent(out IAttackable attackable) && IsInDetectionRange(entity))
+				{
+					return attackable;
+				}
+			}
+
+			return null;
+		}
+
 
 		public Entity GetNearestOpponent()
 		{
@@ -165,5 +198,15 @@
 			return enumerable;
 		}
 		#endregion
+	}
+
+#if UNITY_EDITOR
+	public partial class EntityDetection
+	{
+		private void OnDrawGizmos()
+		{
+			Tartaros.Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, DetectionRange, Color.grey);
+		}
+#endif // UNITY_EDITOR
 	}
 }

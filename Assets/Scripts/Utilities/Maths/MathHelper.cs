@@ -5,6 +5,11 @@
 
 	public static class MathHelper
 	{
+		public static bool IsInRadius(Vector3 p1, Vector3 p2, float radius)
+		{
+			return Vector3.Distance(p1, p2) <= radius;
+		}
+
 		public static Vector3 CalculateCentroid(Vector3[] points)
 		{
 			Vector3 centroid = Vector3.zero;

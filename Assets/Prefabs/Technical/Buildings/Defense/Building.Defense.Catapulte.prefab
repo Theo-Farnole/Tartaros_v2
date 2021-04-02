@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3622053809958350416}
   - component: {fileID: 421165933000891260}
   - component: {fileID: 6474790578246595102}
+  - component: {fileID: 4441524218981506817}
   m_Layer: 0
   m_Name: Building.Defense.Catapulte
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: b39b75c5f7de033428e9633636aee9dd, type: 2}
+  _team: 1
 --- !u!114 &6474790578246595102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +62,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+--- !u!114 &4441524218981506817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622053809958350417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418464527b50aee42ac8b64598d460fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4897343814929541699
 PrefabInstance:
   m_ObjectHideFlags: 0

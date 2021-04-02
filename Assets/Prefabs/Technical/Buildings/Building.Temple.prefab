@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6555778418471866085}
   - component: {fileID: 1883052399}
   - component: {fileID: 1883052400}
+  - component: {fileID: 509519298507246717}
   m_Layer: 0
   m_Name: Building.Temple
   m_TagString: Untagged
@@ -73,6 +74,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: de4a2e0a3a7b978418da5170bb48242c, type: 2}
+  _team: 1
+--- !u!114 &509519298507246717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418464527b50aee42ac8b64598d460fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5588348853997773697
 PrefabInstance:
   m_ObjectHideFlags: 0
