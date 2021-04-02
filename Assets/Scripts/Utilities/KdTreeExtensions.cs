@@ -21,10 +21,6 @@
 				{
 					output.Add(item);
 				}
-				else
-				{
-					//return output.ToArray();
-				}
 			}
 
 			return output.ToArray();

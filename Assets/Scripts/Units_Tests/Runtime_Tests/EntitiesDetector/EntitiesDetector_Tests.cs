@@ -19,12 +19,26 @@
 		[UnitySetUp]
 		public IEnumerator SetUp()
 		{
+			var objects = GameObject.FindObjectsOfType<GameObject>();
+
+
+			foreach (var obj in objects)
+			{
+				Debug.Log(obj.name);
+			}
+
 			LogAssert.ignoreFailingMessages = true;
 
 			//SetupHelper.CreateService();
 			_entitiesDetector = SetupHelper.CreateEntitiesKDTree();
 
 			yield return null;
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			GameObject.Destroy(_entitiesDetector);
 		}
 
 		[Test]

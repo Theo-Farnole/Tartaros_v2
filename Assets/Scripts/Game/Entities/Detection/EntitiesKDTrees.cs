@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
@@ -63,7 +64,27 @@
 		private void AddEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].Add(entity);
 		private void RemoveEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].RemoveAll(x => x == entity);
 
-		public Entity[] GetEveryEntityInRadius(Team team, Vector3 position, float radius) => _kdTrees[team].FindItemsInRadius(position, radius);
+		// TODO TF: (perf)
+		public Entity[] GetEveryEntityInRadius(Team team, Vector3 position, float radius)
+		{
+			var entitiesOfTeam = FindAllEntitiesOfTeam(team);
+			List<Entity> output = new List<Entity>();
+
+			foreach (Entity entity in entitiesOfTeam)
+			{
+				if (Vector3.Distance(position, entity.transform.position) <= radius)
+				{
+					output.Add(entity);
+				}
+			}
+
+			return output.ToArray();
+		}
+
+		public Entity[] FindAllEntitiesOfTeam(Team team)
+		{
+			return GameObject.FindObjectsOfType<Entity>().Where(x => x.Team == team).ToArray();
+		}
 		#endregion Methods
 	}
 }
