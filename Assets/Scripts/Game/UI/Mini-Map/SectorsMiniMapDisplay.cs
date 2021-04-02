@@ -18,17 +18,32 @@
         private MiniMap _miniMap = null;
 
         private IMap _map = null;
-        private RectTransform _rootTransform = null;
+
+        //TODO DJ: Avoid this 
+        private IMap Map
+        {
+            get
+            {
+                if (_map == null)
+                {
+                    _map = Services.Instance.Get<IMap>();
+                }
+
+                return _map;
+            }
+        }
+
+        public RectTransform RootTransform => _miniMap.RootTransform;
 
         private void Start()
         {
-            _map = Services.Instance.Get<IMap>();
-            _rootTransform = _miniMap.RootTransform;
+            _map = Services.Instance.Get<IMap>();            
         }
 
         public void DisplaySectors()
         {
-            Sector[] sectors = _map.Sectors.OfType<Sector>().ToArray();
+            Debug.Log(_map);
+            Sector[] sectors = Map.Sectors.OfType<Sector>().ToArray();
 
             if (sectors == null)
             {
@@ -45,8 +60,8 @@
                 listOfVertice.Add(listOfVertice.ToArray()[0]);
 
                 drawLineUI.Setup(
-                    Mathf.RoundToInt(_rootTransform.rect.width),
-                    Mathf.RoundToInt(_rootTransform.rect.height));
+                    Mathf.RoundToInt(RootTransform.rect.width),
+                    Mathf.RoundToInt(RootTransform.rect.height));
                 drawLineUI.SetColor(Color.blue);
                 drawLineUI.SetNavigationPoints(listOfVertice);
             }
