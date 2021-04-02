@@ -2,6 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
+	using Tartaros.Entities.State;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
@@ -12,9 +13,21 @@
 		private GenericFSM<Entity> _finiteStateMachine = new GenericFSM<Entity>();
 
 		private Queue<AEntityState> _statesQueue = new Queue<AEntityState>();
+
+		private Entity _entity = null;
 		#endregion Fields
 
 		#region Methods		
+		private void Awake()
+		{
+			_entity = GetComponent<Entity>();
+		}
+
+		private void Start()
+		{
+			SetStateToDefaultState();
+		}
+
 		private void Update()
 		{
 			if (_finiteStateMachine != null)
@@ -26,14 +39,20 @@
 		public void Stop()
 		{
 			_statesQueue.Clear();
-			SetState(null);
+			SetStateToDefaultState();
 		}
 
 		public void MarkCurrentStateAsFinish()
 		{
-			if (_statesQueue.Count == 0) return;
+			if (_statesQueue.Count > 0)
+			{
+				SetState(_statesQueue.Dequeue());
+			}
+			else
+			{
+				SetStateToDefaultState();
+			}
 
-			SetState(_statesQueue.Dequeue());
 		}
 
 		public void SetState(AEntityState newState)
@@ -44,6 +63,16 @@
 		public void EnqueueState(AEntityState state)
 		{
 			_statesQueue.Enqueue(state);
+		}
+
+		public void SetStateToDefaultState()
+		{
+			SetState(GenerateDefaultState());
+		}
+
+		private AEntityState GenerateDefaultState()
+		{
+			return new StateIdle(_entity);
 		}
 		#endregion Methods
 	}

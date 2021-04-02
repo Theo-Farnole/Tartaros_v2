@@ -7,7 +7,7 @@
 	using Tartaros.Orders;
 	using UnityEngine;
 
-	public class EntityAttack : MonoBehaviour, IOrderAttackReceiver, IEntityOrderable
+	public partial class EntityAttack : MonoBehaviour, IOrderAttackReceiver, IEntityOrderable
 	{
 		#region Fields
 		private EntityAttackData _entityAttackData = null;
@@ -19,6 +19,7 @@
 
 		#region Properties
 		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
+		public float AttackRange => _entityAttackData.AttackRange;
 		#endregion Properties
 
 		#region Methods
@@ -54,6 +55,16 @@
 
 		}
 
+		public void TryAttackNearestOpponent()
+		{
+			IAttackable attackable = _entityDetection.GetNearestAttackableOpponentInDetectionRange();
+
+			if (attackable != null)
+			{
+				(this as IOrderAttackReceiver).Attack(attackable);
+			}
+		}
+
 		public bool IsInRange(IAttackable target)
 		{
 			return _entityDetection.IsInAttackRange(target.Transform.position);
@@ -86,4 +97,13 @@
 		#endregion
 	}
 
+#if UNITY_EDITOR
+	public partial class EntityAttack
+	{
+		private void OnDrawGizmos()
+		{
+			Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, AttackRange, Color.red);
+		}
+	}
+#endif
 }
