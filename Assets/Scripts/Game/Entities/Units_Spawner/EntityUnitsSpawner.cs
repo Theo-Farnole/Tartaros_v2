@@ -32,16 +32,14 @@
 
 		public void Spawn(ISpawnable prefabToSpawn)
 		{
-			if (CanSpawn(prefabToSpawn) == true)
+			if (CanSpawn(prefabToSpawn) == false)
 			{
 				Debug.LogErrorFormat("Entity {0} cannot spawn a {1}.", name, prefabToSpawn.Prefab.name);
 				return;
 			}
-			else
-			{
-				Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
-				_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
-			}
+
+			Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
+			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
 		}
 
 		public bool CanSpawn(ISpawnable gameObject, bool logToUser = false)

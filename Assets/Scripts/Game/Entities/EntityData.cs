@@ -72,6 +72,25 @@
 			behaviour = null;
 			return false;
 		}
+
+		public void SpawnComponents(GameObject entity)
+		{
+			foreach (IEntityBehaviourData behaviour in _behaviours)
+			{
+				behaviour.SpawnRequiredComponents(entity);
+			}
+
+			SpawnRequiredComponents(entity);
+		}
+
+		private void SpawnRequiredComponents(GameObject entity)
+		{
+			if (_population > 0)
+			{
+				var entityPopulationTaker = entity.AddComponent<EntityPlayerPopulationTaker>();
+				entityPopulationTaker.EntityPopulatioNtakerData = new EntityPopulationTakerData(_population);
+			}
+		}
 		#endregion Methods
 	}
 }
