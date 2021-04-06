@@ -19,6 +19,12 @@ namespace TF.CheatsGUI
 		[Header("GUI SETTINGS")]
 		[SerializeField] private RectOffset _margin = new RectOffset();
 
+		[SerializeField]
+		private bool _restrictToSomeAssemblies = false;
+
+		[SerializeField]
+		private string[] _restrictedAssemblies = new string[0];
+
 		private bool _isCheatsMenuOpen = false;
 		private GUI_CheatButton[] _cheatsButton = null;
 		private Vector2 _scrollPosition = Vector2.zero;
@@ -99,7 +105,16 @@ namespace TF.CheatsGUI
 		#region Private Methods
 		private void SetCheatsButton()
 		{
-			IEnumerable<Type> typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatMethodAttribute>();
+			IEnumerable<Type> typesWithAttributes;
+
+			if (_restrictToSomeAssemblies == true)
+			{
+				typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatMethodAttribute>(_restrictedAssemblies);
+			}
+			else
+			{
+				typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatMethodAttribute>();
+			}
 
 			List<GUI_CheatButton> cheatsButton = new List<GUI_CheatButton>();
 
