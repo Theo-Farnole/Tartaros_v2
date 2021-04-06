@@ -2,13 +2,11 @@
 {
 	using Sirenix.OdinInspector;
 	using System.Collections;
-	using System.Collections.Generic;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
 	using Tartaros.OrderGiver;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
-	using UnityEngine.AI;
 
 	public class ControlledAoE : SerializedMonoBehaviour, IPower, IOrderMoveReceiver
 	{

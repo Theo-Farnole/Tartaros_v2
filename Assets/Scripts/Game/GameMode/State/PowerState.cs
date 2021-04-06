@@ -31,7 +31,7 @@
             _inputs.ValidatePerformed -= _inputs_ValidatePerformed;
             _inputs.ValidatePerformed += _inputs_ValidatePerformed;
 
-            _playerGloryWallet = Services.Instance.Get<PlayerGloryWallet>();
+            _playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
         }
 
         private void _inputs_ValidatePerformed(InputAction.CallbackContext obj)

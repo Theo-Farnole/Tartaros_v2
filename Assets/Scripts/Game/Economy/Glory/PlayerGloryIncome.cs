@@ -44,7 +44,7 @@
 					int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
 					FillWallet(gloryIncome);
 
-					Debug.LogFormat("Add {0} glory because {1} is killed.", gloryIncome, e.entity.name);
+					//Debug.LogFormat("Add {0} glory because {1} is killed.", gloryIncome, e.entity.name);
 				}
 				else
 				{
@@ -66,7 +66,7 @@
 					int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
 					FillWallet(gloryIncome);
 
-					Debug.LogFormat("Add {0} glory because {1} is spawned.", gloryIncome, e.entity.name);
+					//Debug.LogFormat("Add {0} glory because {1} is spawned.", gloryIncome, e.entity.name);
 				}
 				else
 				{

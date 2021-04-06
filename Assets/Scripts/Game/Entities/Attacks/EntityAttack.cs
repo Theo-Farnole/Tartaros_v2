@@ -50,6 +50,12 @@
 
 			if (CanAttackCooldown() == false) return;
 
+			if (_entityAttackData.AttackMode == null)
+			{
+				Debug.LogErrorFormat("Please set an attack mode in data of {0}.", name);
+				return;
+			}
+
 			_entityAttackData.AttackMode.Attack(transform, target);
 			_lastTimeAttack = Time.time;
 

@@ -28,7 +28,7 @@
         {
             if (_powerManager.CanCastSpell(_power))
             {
-                _powerManager.EnterPowerState(_power);
+                _powerManager.Cast(_power);
             }
             else
             {
