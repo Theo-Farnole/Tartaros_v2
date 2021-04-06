@@ -35,7 +35,7 @@
 		#region Methods
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			var entityHealth = entityRoot.AddComponent<EntityHealth>();
+			var entityHealth = entityRoot.GetOrAddComponent<EntityHealth>();
 			entityHealth.EntityHealthData = this;
 		}
 

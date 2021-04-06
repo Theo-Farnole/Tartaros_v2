@@ -3,17 +3,15 @@
 	using System;
 	using UnityEngine;
 
-	public class EntityHealth : MonoBehaviour, IAttackable
+	public class EntityHealth : MonoBehaviour, IAttackable, IHealthable
 	{
 		#region Fields
+		[ShowInRuntime]
 		private float _currentHealth = -1;
 
 		private Coroutine _healthRegenerationCoroutine = null;
 		private EntityHealthData _entityHealthData = null;
 		#endregion
-
-
-
 
 		#region Properties
 		Transform IAttackable.Transform => transform;
@@ -28,6 +26,7 @@
 		}
 		public bool IsAlive => _currentHealth > 0;
 		public bool IsDead => IsAlive == false;
+		[ShowInRuntime]
 		public int MaxHealth => EntityHealthData.Health;
 		public bool IsFullHealth => CurrentHealth == MaxHealth;
 
@@ -37,9 +36,28 @@
 
 			set
 			{
+				bool doGetDamage = value < _currentHealth;
+
 				_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+
+				HealthChanged?.Invoke(this, new HealthChangedArgs());
+
+				if (doGetDamage == true)
+				{
+					DamageTaken?.Invoke(this, new DamageTakenArgs());
+				}
+
+				if (IsDead)
+				{
+					Death?.Invoke(this, new DeathArgs());
+					GetComponent<Entity>().Kill();
+				}
 			}
 		}
+
+		int IHealthable.CurrentHealth => Mathf.RoundToInt(_currentHealth);
+
+		int IHealthable.MaxHealth => MaxHealth;
 		#endregion Properties
 
 
@@ -55,6 +73,9 @@
 
 		public class DeathArgs : EventArgs { }
 		public EventHandler<DeathArgs> Death = null;
+
+		event EventHandler<HealthChangedArgs> HealthChanged = null;
+		event EventHandler<HealthChangedArgs> IHealthable.HealthChanged { add => HealthChanged += value; remove => HealthChanged -= value; }
 		#endregion
 
 		#region Methods
@@ -62,16 +83,7 @@
 		void IAttackable.TakeDamage(int damage)
 		{
 			CurrentHealth -= damage;
-
-			DamageTaken?.Invoke(this, new DamageTakenArgs());
-
-			if (IsDead)
-			{
-				Death?.Invoke(this, new DeathArgs());
-				GetComponent<Entity>().Kill();
-			}
 		}
-
 		#endregion
 	}
 
