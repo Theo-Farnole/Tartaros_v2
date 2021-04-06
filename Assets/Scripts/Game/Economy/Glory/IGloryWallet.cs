@@ -1,14 +1,16 @@
 ﻿namespace Tartaros.Economy
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using System;
 
-    public interface IGloryWallet
-    {
-        int GetAmount();
-        void AddAmount(int amount);
-        bool CanSpend(int price);
-        void Spend(int price);
-    }
+	public class GloryAmountChangedArgs : EventArgs
+	{ }
+
+	public interface IGloryWallet
+	{
+		int GetAmount();
+		void AddAmount(int amount);
+		bool CanSpend(int price);
+		void Spend(int price);
+		event EventHandler<GloryAmountChangedArgs> AmountChanged;
+	}
 }

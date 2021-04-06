@@ -17,7 +17,7 @@
 
 		private void Start()
 		{
-			_playerGloryWallet = Services.Instance.Get<PlayerGloryWallet>();
+			_playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
 		}
 
 		private void OnEnable()
@@ -38,17 +38,40 @@
 		{
 			if (e.entity.Team == Team.Enemy)
 			{
-				int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
-				FillWallet(gloryIncome);
+				// TODO (perf): use TryGetBehaviour
+				if (e.entity.EntityData.HasBehaviour<EntityGloryIncomeData>() == true)
+				{
+					int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
+					FillWallet(gloryIncome);
+
+					Debug.LogFormat("Add {0} glory because {1} is killed.", gloryIncome, e.entity.name);
+				}
+				else
+				{
+					Debug.LogWarningFormat("No entity glory income data beahviour on entity data {0}.", e.entity.EntityData);
+				}
 			}
 		}
 
 		private void Entity_EntitySpawned(object sender, Entity.EntitySpawnedArgs e)
 		{
+			if (Time.timeSinceLevelLoad == 0) return; // skip already in scene entities
+
 			if (e.entity.Team == Team.Player)
 			{
-				int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
-				//FillWallet(gloryIncome);
+
+				// TODO (perf): use TryGetBehaviour
+				if (e.entity.EntityData.HasBehaviour<EntityGloryIncomeData>() == true)
+				{
+					int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
+					FillWallet(gloryIncome);
+
+					Debug.LogFormat("Add {0} glory because {1} is spawned.", gloryIncome, e.entity.name);
+				}
+				else
+				{
+					Debug.LogWarningFormat("No entity glory income data beahviour on entity data {0}.", e.entity.EntityData);
+				}
 			}
 		}
 

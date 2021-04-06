@@ -72,7 +72,7 @@
 
 		public bool CanAttackCooldown()
 		{
-			return Time.time > _lastTimeAttack + _entityAttackData.AttackSpeed;
+			return Time.time > _lastTimeAttack + _entityAttackData.SecondsBetweenAttacks;
 		}
 
 		void IOrderAttackReceiver.Attack(IAttackable target)
