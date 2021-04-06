@@ -37,6 +37,19 @@
                 _input.Construction.AddNewWallSections.performed -= value;
             }
         }
+
+        public event Action<CallbackContext> LeavePerformed
+        {
+            add
+            {
+                _input.Construction.ExitConstruction.performed += value;
+            }
+
+            remove
+            {
+                _input.Construction.ExitConstruction.performed -= value;
+            }
+        }
         public ConstructionInputs()
         {
             _input = new GameInputs();
@@ -59,7 +72,7 @@
             return _input.Construction.ValidateConstruction.phase == InputActionPhase.Performed;
         }
 
-        public bool IsLeaveAndRefundPerformed()
+        public bool IsLeavePerformed()
         {
             return _input.Construction.ExitConstruction.phase == InputActionPhase.Performed;
         }

@@ -7,7 +7,7 @@
 	public class SiteCreationManager
 	{
 		#region Fields
-		private const float HANDLE_SIZE = .1f;
+		private const float HANDLE_SIZE = MapEditor.HANDLE_SIZE;
 		private readonly Color HANDLE_COLOR = Color.green;
 		private readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
 

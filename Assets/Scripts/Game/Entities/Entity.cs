@@ -14,7 +14,9 @@
 		[SerializeField]
 		private EntityData _entityData = null;
 
+		[SerializeField]
 		private Team _team = Team.Player;
+
 		private EntityType _entityType = EntityType.Unit;
 
 		private EntityFSM _entityFSM = null;
@@ -98,10 +100,7 @@
 				return;
 			}
 
-			foreach (IEntityBehaviourData behaviour in _entityData.Behaviours)
-			{
-				behaviour.SpawnRequiredComponents(gameObject);
-			}
+			_entityData.SpawnComponents(gameObject);
 		}
 
 		#region IOrders

@@ -54,5 +54,18 @@
 			}
 			PopColor();
 		}
+
+		public static void DrawWireCircle(Vector3 position, Vector3 up, float radius, Color color)
+		{
+			Color wireColor = color;
+
+			Handles.zTest = CompareFunction.LessEqual;
+
+			PushColor(wireColor);
+			{
+				Handles.DrawWireDisc(position, up, radius);
+			}
+			PopColor();
+		}
 	}
 }

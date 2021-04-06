@@ -61,7 +61,7 @@
 
 		private void ApplyDamage()
 		{
-			Entity[] entities = _kdTree.GetEveryEntityInRadius(Team.Enemy, _data.SpellRadius);
+			Entity[] entities = _kdTree.GetEveryEntityInRadius(Team.Enemy, transform.position, _data.SpellRadius);
 
 			for (int i = 0; i < entities.Length; i++)
 			{

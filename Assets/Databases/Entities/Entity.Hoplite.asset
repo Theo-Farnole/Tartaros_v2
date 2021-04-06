@@ -26,19 +26,19 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.EntityAttackData, Tartaros
     - Name: _damage
       Entry: 3
-      Data: 5
-    - Name: _attackSpeed
+      Data: 1
+    - Name: _secondsBetweenAttacks
       Entry: 4
       Data: 1
     - Name: _attackRange
       Entry: 4
-      Data: 10
+      Data: 3
     - Name: _attackMode
       Entry: 6
       Data: 
@@ -91,8 +91,20 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 6|Tartaros.Entities.EntityGloryIncomeData, Tartaros
+    - Name: _gloryIncome
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
+  _prefab: {fileID: 0}
+  _portrait: {fileID: 0}
+  _population: 1

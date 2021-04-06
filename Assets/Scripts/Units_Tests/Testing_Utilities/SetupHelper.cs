@@ -33,7 +33,7 @@
 			return playerIncomeManager;
 		}
 
-		public static Entity CreateEntity(Vector3 position, Team team, EntityType entityType, string name)
+		public static Entity CreateEntity(Vector3 position, Team team, EntityType entityType, string name = "Entity")
 		{
 			GameObject entityObject = new GameObject(name);
 			entityObject.transform.position = position;

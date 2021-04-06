@@ -16,6 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 6298112130364849783, guid: 992dfbd2dcd34d5439d763dfa0125e74, type: 3}
     - {fileID: 21300000, guid: b1ffca23ee75f2f43833e96b01ff2213, type: 3}
     - {fileID: 5657609668978460668, guid: 40135a875b18b894893b8965e1eb5987, type: 3}
     - {fileID: 5657609668978460668, guid: 6c854dce3fc8b564bb55753400db7878, type: 3}
@@ -29,7 +30,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.EntityCarveNavMeshData, Tartaros
@@ -69,21 +70,36 @@ MonoBehaviour:
     - Name: _damage
       Entry: 3
       Data: 1
-    - Name: _attackSpeed
+    - Name: _secondsBetweenAttacks
       Entry: 4
-      Data: 1
+      Data: 0
     - Name: _attackRange
       Entry: 4
       Data: 5
     - Name: _attackMode
+      Entry: 7
+      Data: 4|Tartaros.Entities.Attack.RangeAttackMode, Tartaros
+    - Name: _prefabProjectile
+      Entry: 10
+      Data: 0
+    - Name: _vfxPrefab
+      Entry: 7
+      Data: 5|Tartaros.Entities.Attack.SingleEffect, Tartaros
+    - Name: _vfxPrefab
       Entry: 6
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 7
-      Data: 4|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
+      Data: 6|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
     - Name: _detectionRange
       Entry: 4
       Data: 10
@@ -92,29 +108,29 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Tartaros.UI.EntityConstructableData, Tartaros
+      Data: 7|Tartaros.UI.EntityConstructableData, Tartaros
     - Name: _portrait
       Entry: 10
-      Data: 0
+      Data: 1
     - Name: _modelPrefab
       Entry: 10
-      Data: 1
+      Data: 2
     - Name: _gameplayPrefab
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: _IsChained
       Entry: 5
       Data: false
     - Name: _constructionPrice
       Entry: 7
-      Data: 6|Tartaros.Economy.SectorResourcesWallet, Tartaros
+      Data: 8|Tartaros.Economy.SectorResourcesWallet, Tartaros
     - Name: _ressourceAmount
       Entry: 7
-      Data: 7|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+      Data: 9|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
         Tartaros],[System.Int32, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 8|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+      Data: 10|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
         Tartaros]], mscorlib
     - Name: 
       Entry: 12
@@ -169,10 +185,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Tartaros.Entities.EntitySelectable, Tartaros
+      Data: 11|Tartaros.Entities.EntitySelectable, Tartaros
     - Name: _canBeMultiSelected
       Entry: 5
       Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|Tartaros.Entities.EntityGloryIncomeData, Tartaros
+    - Name: _gloryIncome
+      Entry: 3
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -182,3 +207,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _prefab: {fileID: 0}
+  _portrait: {fileID: 0}
+  _population: 1

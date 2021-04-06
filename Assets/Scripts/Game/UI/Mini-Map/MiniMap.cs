@@ -59,10 +59,10 @@
             }
             else
             {
-                //var array = _map.Sectors.OfType<Sector>().ToArray();
+                var array = _map.Sectors.OfType<Sector>().ToArray();
 
-                //_navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
-                //_sectorDisplayer.DisplaySectors();
+                _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
+                _sectorDisplayer.DisplaySectors();
             }
         }
 
@@ -72,22 +72,31 @@
         }
 
         private void SetPositionIcons()
-        {
-            foreach (var icon in _icons)
-            {
-                RectTransform iconTransform = icon.Value;
-                Vector3 iconWorldPosition = icon.Key.WorldPosition;
-                Vector2 iconUIPosition = WordToUiPosition(iconWorldPosition);
+		{
+			RemoveDestroyedMinimapIcons();
 
-                iconTransform.anchoredPosition = iconUIPosition;
-            }
-        }
+			foreach (var icon in _icons)
+			{
+				RectTransform iconTransform = icon.Value;
+				Vector3 iconWorldPosition = icon.Key.WorldPosition;
+				Vector2 iconUIPosition = WordToUiPosition(iconWorldPosition);
 
-        public Vector2 WordToUiPosition(Vector3 worldPosition)
+				iconTransform.anchoredPosition = iconUIPosition;
+			}
+		}
+
+		private void RemoveDestroyedMinimapIcons()
+		{
+            // source: https://stackoverflow.com/questions/16340818/remove-item-from-dictionary-where-value-is-empty-list
+            _icons = _icons
+                .Where(x => x.Key.IsInterfaceDestroyed() == false)
+                .ToDictionary(x => x.Key, x => x.Value);
+		}
+
+		public Vector2 WordToUiPosition(Vector3 worldPosition)
         {
             var Diago = (_rootTransform.rect.width + _rootTransform.rect.height) / 2;
             var Radius2 = Diago / 2;
-            var edge = Radius2 / 2;
 
             var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
             var y = _rootTransform.rect.height * worldPosition.z / _map.MapBounds.boundsY.max;

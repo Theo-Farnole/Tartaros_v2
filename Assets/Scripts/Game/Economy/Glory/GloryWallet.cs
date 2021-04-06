@@ -1,34 +1,43 @@
 ﻿namespace Tartaros.Economy
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using System;
 
-    public class GloryWallet : IGloryWallet
-    {
-        private int _gloryAmount = 100;
+	public class GloryWallet : IGloryWallet
+	{
+		#region Fields
+		private int _gloryAmount = 0;
+		#endregion Fields
 
-        void IGloryWallet.AddAmount(int amount)
-        {
-            _gloryAmount += amount;
-        }
+		#region Properties
+		event EventHandler<GloryAmountChangedArgs> AmountChanged = null;
+		event EventHandler<GloryAmountChangedArgs> IGloryWallet.AmountChanged { add => AmountChanged += value; remove => AmountChanged -= value; }
+		#endregion Properties
 
-        void IGloryWallet.Spend(int price)
-        {
-            if (_gloryAmount - price > 0)
-            {
-                _gloryAmount -= price;
-            }
-        }
+		#region Methods
+		void IGloryWallet.AddAmount(int amount)
+		{
+			_gloryAmount += amount;
+			AmountChanged?.Invoke(this, new GloryAmountChangedArgs());
+		}
 
-        bool IGloryWallet.CanSpend(int price)
-        {
-            return _gloryAmount - price >= 0;
-        }
+		void IGloryWallet.Spend(int price)
+		{
+			if (_gloryAmount - price > 0)
+			{
+				_gloryAmount -= price;
+				AmountChanged?.Invoke(this, new GloryAmountChangedArgs());
+			}
+		}
 
-        int IGloryWallet.GetAmount()
-        {
-            return _gloryAmount;
-        }
-    }
+		bool IGloryWallet.CanSpend(int price)
+		{
+			return _gloryAmount - price >= 0;
+		}
+
+		int IGloryWallet.GetAmount()
+		{
+			return _gloryAmount;
+		}
+		#endregion Methods
+	}
 }

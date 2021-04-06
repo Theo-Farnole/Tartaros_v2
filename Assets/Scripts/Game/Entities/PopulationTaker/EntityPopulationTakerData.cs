@@ -1,25 +1,24 @@
 ﻿namespace Tartaros.Entities
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using UnityEngine;
 
 
-    public class EntityPopulationTakerData : IEntityBehaviourData
-    {
-        [SerializeField]
-        private int _populationTakingCount = 1;
+	public class EntityPopulationTakerData
+	{
+		#region Fields
+		[SerializeField]
+		private int _populationTakingCount = 1;
+		#endregion Fields
 
-        public EntityPopulationTakerData(int populationTakingCount)
-        {
-            _populationTakingCount = populationTakingCount;
-        }
+		#region Properties
+		public int PopulationTakingCount => _populationTakingCount;
+		#endregion Properties
 
-        public int PopulationTakingCount => _populationTakingCount;
-
-        void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+		#region Ctor
+		public EntityPopulationTakerData(int populationTakingCount)
+		{
+			_populationTakingCount = populationTakingCount;
+		}
+		#endregion Ctor
+	}
 }

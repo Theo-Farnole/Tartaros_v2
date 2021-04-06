@@ -27,6 +27,8 @@
 
 		private void OnEnable()
 		{
+			this.titleContent = new GUIContent("Tartaros Scene Browser");
+
 			if (_projectScenes == null || _projectScenes.Length == 0)
 			{
 				SetScenesAssets();

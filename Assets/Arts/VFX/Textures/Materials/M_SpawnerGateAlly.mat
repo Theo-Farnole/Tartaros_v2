@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_SpawnerGateAlly
+  m_Shader: {fileID: 4800000, guid: 82f18ca202e1b544b9f6bb08ca5c0f9b, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AngleSpeed: 0
+    - _BorderFade: 0.09
+    - _BorderSpeed: 0.5
+    - _BorderSpeed1: 0.1
+    - _BumpScale: 1
+    - _CameraFade: 0
+    - _Cutoff: 0.5
+    - _DepthDist: 0.01
+    - _DepthFadeOffset: 48.02
+    - _DepthFadeOffset1: -1
+    - _DepthFadeOffset2: 1
+    - _DetailNormalMapScale: 1
+    - _Distance1: 1.5
+    - _DstBlend: 0
+    - _Float0: 2.46
+    - _FoamCutoff1: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _MovementSpeed1: -0.1
+    - _OcclusionStrength: 1
+    - _Opacity: 0.5
+    - _OpacityPaternMult: 1
+    - _Parallax: 0.02
+    - _PaternPower: 1.5
+    - _PaternPower1: 1.5
+    - _PaternScale: 0.5
+    - _RefractionStrength1: 1
+    - _RotaSpeed: 0.1
+    - _Scale1: 1
+    - _ScaleFoam1: 50
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StepOutter: 5
+    - _StepOutter1: 5
+    - _UVSec: 0
+    - _VoroBorderScale: 0.5
+    - _VoroBorderScale1: 1
+    - _VoroPaternScale: 10
+    - _VoroPaternScale1: 1
+    - _WaterDepth: 1.5
+    - _WaterDepth1: 2.01
+    - _WaveScale1: 1
+    - _WaveSpeed1: 1
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _CausticsColor1: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0.1490196}
+    - _Color: {r: 0, g: 0.43595493, b: 1, a: 1}
+    - _Color0: {r: 0, g: 1, b: 0.8869138, a: 1}
+    - _Color1: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
+    - _Color2: {r: 1, g: 0.4981088, b: 0, a: 1}
+    - _ColorBorder: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorSteps: {r: 3, g: -0.5, b: 0, a: 0}
+    - _ColorSteps1: {r: 3, g: -0.5, b: 0, a: 0}
+    - _DepthOffset: {r: 0, g: 1, b: 0, a: 0}
+    - _Depths: {r: 0, g: 1, b: 0.6520562, a: 1}
+    - _Depths1: {r: 0, g: 0.1056603, b: 0.3962264, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor1: {r: 0.1249555, g: 0.5333043, b: 0.6792453, a: 1}
+    - _OpacityFromPatern: {r: 0, g: 2.5, b: 0, a: 0}
+    - _OpacityFromPatern1: {r: 0, g: 2, b: 0, a: 0}
+    - _OpacityPaternStep: {r: -0.43, g: 1, b: 0, a: 0}
+    - _SmoothDepth: {r: 0, g: 100, b: 0, a: 0}
+    - _SmoothStepWaves1: {r: 0.04, g: 0.06, b: 0, a: 0}
+    - _StepInner: {r: 1, g: 0.5, b: 0, a: 0}
+    - _StepInner1: {r: 1, g: 0.5, b: 0, a: 0}
+    - _Surface: {r: 0, g: 0.11639009, b: 0.1509434, a: 1}
+    - _Surface1: {r: 0, g: 0.5003328, b: 0.6509434, a: 1}
+    - _UV_tiling: {r: -1, g: 1, b: 1, a: 0}
+    - _UVpos: {r: 0.5, g: 3, b: 0, a: 0}
+    - _WavesScale1: {r: 0.5, g: 1.5, b: 0, a: 0}
+    - _WavesSpeed1: {r: 0, g: -0.3, b: 0, a: 0}

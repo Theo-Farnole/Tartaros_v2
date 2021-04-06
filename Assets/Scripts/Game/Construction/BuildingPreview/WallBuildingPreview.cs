@@ -126,8 +126,14 @@
         {
             foreach (GameObject wallSection in _buildingsPreview)
             {
-                GameObject.Destroy(_buildingsPreview[_buildingsPreview.Count - 1]);
+                Debug.Log("delete");
+                GameObject.Destroy(wallSection);
             }
+
+			//for (int i = 0; i < _buildingsPreview.Count; i++)
+			//{
+   //             GameObject.Destroy(_buildingsPreview[_buildingsPreview.Count - 1]);
+			//}
         }
     }
 }
