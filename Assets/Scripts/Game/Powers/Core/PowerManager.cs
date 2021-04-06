@@ -7,6 +7,7 @@
 	using Tartaros.ServicesLocator;
 	using Tartaros.Gamemode.State;
 	using Sirenix.OdinInspector;
+	using Tartaros.Economy;
 
 	public class PowerManager : MonoBehaviour
 	{
@@ -21,6 +22,7 @@
 
 		private GamemodeManager _gameModeManager = null;
 		private UserErrorsLogger _userErrorsLogger = null;
+		private IPlayerGloryWallet _gloryWallet = null;
 		#endregion Fields
 
 
@@ -34,11 +36,12 @@
 		{
 			_gameModeManager = Services.Instance.Get<GamemodeManager>();
 			_userErrorsLogger = Services.Instance.Get<UserErrorsLogger>();
+			_gloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
 		}
 
 		public bool CanCastSpell(IPower power)
 		{
-			return true;
+			return _gloryWallet.CanSpend(power.Price);
 		}
 
 		public void CastLightningBolt()
@@ -71,7 +74,7 @@
 			}
 			else
 			{
-				_userErrorsLogger.Log("Cannot cast spell {0}.", power.ToString());
+				_userErrorsLogger.Log("Not enought glory to cast spell {0}.", power.ToString());
 			}
 		}
 		#endregion Methods
