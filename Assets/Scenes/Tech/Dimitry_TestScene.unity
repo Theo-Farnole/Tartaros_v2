@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &30015930
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -395,7 +396,6 @@ GameObject:
   m_Component:
   - component: {fileID: 302873597}
   - component: {fileID: 302873598}
-  - component: {fileID: 302873599}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -429,25 +429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ac2d7ef560ff146ba85e55393b726a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &302873599
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302873596}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &367578140
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 5b59b787a4cdc764eb2c3c625fa46bd8, type: 2}
+  _team: 1
 --- !u!114 &367578146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,6 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &456523403
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1055,6 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &667604335
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1269,6 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &677785540
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1501,6 +1486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &743103284
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1940,6 +1926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &1053048375
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2151,6 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &1203711933
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2420,6 +2408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &1728094169
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2558,6 +2547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &1754157106
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2788,6 +2778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &1951311434
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3023,6 +3014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &1997550965
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3161,6 +3153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 48b1dff20f6c3da49bdf2ecb8fed6fd5, type: 2}
+  _team: 1
 --- !u!136 &2043187119
 CapsuleCollider:
   m_ObjectHideFlags: 0

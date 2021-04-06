@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Tartaros.Construction;
     using Tartaros.Economy;
+    using Tartaros.Entities;
     using Tartaros.Sectors;
     using Tartaros.ServicesLocator;
     using UnityEngine;
