@@ -57,7 +57,7 @@
 		public override void OnStateExit()
 		{
 			base.OnStateExit();
-			
+
 			_inputs.ValidatePerformed -= InputsValidatePerformed;
 			_inputs.LeavePerformed -= InputsLeavePerformed;
 
@@ -141,7 +141,7 @@
 
 		private void AddWallPreviewOnList()
 		{
-			if(_wallSectionPreview.GetAllSectionPreview() != null)
+			if (_wallSectionPreview.GetAllSectionPreview() != null)
 			{
 				foreach (GameObject wallSection in _wallSectionPreview.GetAllSectionPreview())
 				{
@@ -175,33 +175,51 @@
 
 		private bool CanConstructHere()
 		{
-			return true;
+			//return true;
 
 			return DoCanConstructOnMap() && DoCanConstructRulesAreValid();
 		}
 
 		private bool DoCanConstructOnMap()
 		{
-			foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+			bool isNotInPreviewMode = _wallSectionPreview == null;
+
+			if (isNotInPreviewMode)
 			{
-				if (_map.CanBuild(wallPreview.transform.position, _constructable.Size) == false)
-				{
-					return false;
-				}
+				return _map.CanBuild(_buildingPreview.GetBuildingPreviewPosition(), _constructable.Size);
 			}
-			return true;
+			else
+			{
+				foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+				{
+					if (_map.CanBuild(wallPreview.transform.position, _constructable.Size) == false)
+					{
+						return false;
+					}
+				}
+				return true;
+			}
 		}
 
 		private bool DoCanConstructRulesAreValid()
 		{
-			foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+			bool isNotInPreviewMode = _wallSectionPreview == null;
+
+			if (isNotInPreviewMode)
 			{
-				if (_constructable.DoRulesPassAtPosition(wallPreview.transform.position) == false)
-				{
-					return false;
-				}
+				return _constructable.DoRulesPassAtPosition(_buildingPreview.GetBuildingPreviewPosition());
 			}
-			return true;
+			else
+			{
+				foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
+				{
+					if (_constructable.DoRulesPassAtPosition(wallPreview.transform.position) == false)
+					{
+						return false;
+					}
+				}
+				return true;
+			}
 		}
 
 		private ISectorResourcesWallet GetTotalPriceOfConstruction()
