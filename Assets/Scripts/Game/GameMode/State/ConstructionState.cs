@@ -9,7 +9,7 @@ namespace Tartaros.Construction
 	using Tartaros.ServicesLocator;
 	using Tartaros.Sectors;
 
-	public class ConstructionStateV2 : AGameState
+	public class ConstructionState : AGameState
 	{
 		#region Fields
 		private BuildingPreview _buildingPreview = null;
@@ -21,7 +21,7 @@ namespace Tartaros.Construction
 		#endregion Fields
 
 		#region Ctor
-		public ConstructionStateV2(GamemodeManager gamemodeManager, IConstructable constructable) : base(gamemodeManager)
+		public ConstructionState(GamemodeManager gamemodeManager, IConstructable constructable) : base(gamemodeManager)
 		{
 			_constructable = constructable;
 			_constructionInput = new ConstructionInputs();
@@ -39,9 +39,18 @@ namespace Tartaros.Construction
 
 			_constructionInput.ValidatePerformed -= InputValidatePerformed;
 			_constructionInput.ValidatePerformed += InputValidatePerformed;
+
+            _constructionInput.LeavePerformed -= InputLeavePerformed;
+            _constructionInput.LeavePerformed += InputLeavePerformed;
 		}
 
-		public override void OnStateExit()
+        private void InputLeavePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+			LeaveState();
+
+		}
+
+        public override void OnStateExit()
 		{
 			base.OnStateExit();
 
@@ -112,7 +121,7 @@ namespace Tartaros.Construction
 			_playerSectorRessources.Buy(_constructable.Price);
 		}
 
-		void LeaveState()
+		private void LeaveState()
 		{
 			_stateOwner.SetState(new PlayState(_stateOwner));
 		}

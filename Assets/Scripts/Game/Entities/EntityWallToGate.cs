@@ -77,7 +77,6 @@
                     _previousAdjacentWall = entity;
 
                     entity.gameObject.GetComponent<EntityWallToGate>().NextAdjacentWall = gameObject.GetComponent<Entity>();
-                    Debug.Log(_nextAdjacentWall);
                 }
                 else
                 {

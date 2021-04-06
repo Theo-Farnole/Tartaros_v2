@@ -47,7 +47,7 @@
             }
             else
             {
-				_gamemodeManager.SetState(new ConstructionStateV2(_gamemodeManager, toBuild));
+				_gamemodeManager.SetState(new ConstructionState(_gamemodeManager, toBuild));
             }
 		}
 		#endregion
