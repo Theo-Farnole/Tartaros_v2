@@ -1,52 +1,80 @@
 ﻿namespace Tartaros.Sectors.Village
 {
-    using System.Collections;
-    using UnityEngine;
-    using Tartaros.Sectors;
-    using Tartaros.ServicesLocator;
-    using Tartaros.Population;
-    using Tartaros.Entities;
+	using Tartaros.Entities;
+	using Tartaros.Population;
+	using Tartaros.Sectors;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
-    public class Village : Entity
-    {
-        [SerializeField]
-        private VillageData _data = null;
+	//TODO DJ: Add spawn option when captured 
+	public class Village : MonoBehaviour
+	{
+		#region Fields
+		[SerializeField]
+		private VillageData _data = null;
 
-        private int _populationToAugmant = 10;
-        private IMap _map = null;
-        private ISector _sector = null;
-        private IPopulationManager _popManager = null;
-        //TODO DJ: Add spawn option when captured
+		private IMap _map = null;
+		private ISector _sector = null;
+		private IPopulationManager _populationManager = null;
 
-        private void Start()
-        {
-            _map = Services.Instance.Get<IMap>();
-            _popManager = Services.Instance.Get<IPopulationManager>();
+		private Entity _entity = null;
+		#endregion Fields
 
-            _populationToAugmant = _data.PopulationAmount;
-            _sector = _map.GetSectorOnPosition(transform.position);
+		#region Properties
+		private int PopulationToIncrease => _data.PopulationAmount;
+		public VillageData Data { get => _data; set => _data = value; }
+		#endregion Properties
 
-            _sector.Captured -= OnCaptureSector;
-            _sector.Captured += OnCaptureSector;
-        }
+		#region Methods
+		private void Awake()
+		{
+			_entity = GetComponent<Entity>();
+		}
 
-        private void OnEnable()
-        {
-            if (_sector != null)
-            {
-                _sector.Captured -= OnCaptureSector;
-                _sector.Captured += OnCaptureSector;
-            }
-        }
+		private void Start()
+		{
+			_map = Services.Instance.Get<IMap>();
+			_populationManager = Services.Instance.Get<IPopulationManager>();
 
-        private void OnDisable()
-        {
-            _sector.Captured -= OnCaptureSector;
-        }
+			_sector = _map.GetSectorOnPosition(transform.position);
 
-        private void OnCaptureSector(object sender, CapturedArgs e)
-        {
-            _popManager.IncrementMaxPopulation(_populationToAugmant);
-        }
-    }
+			_sector.Captured -= OnCaptureSector;
+			_sector.Captured += OnCaptureSector;
+
+			UpdateAbilityToSpawnUnits();
+		}
+
+		private void OnEnable()
+		{
+			if (_sector != null)
+			{
+				_sector.Captured -= OnCaptureSector;
+				_sector.Captured += OnCaptureSector;
+			}
+		}
+
+		private void OnDisable()
+		{
+			_sector.Captured -= OnCaptureSector;
+		}
+
+		private void OnCaptureSector(object sender, CapturedArgs e)
+		{
+			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
+			UpdateAbilityToSpawnUnits();
+		}
+
+		private void UpdateAbilityToSpawnUnits()
+		{
+			if (TryGetComponent(out EntityUnitsSpawner entityUnitsSpawner))
+			{
+				entityUnitsSpawner.enabled = _sector.IsCaptured;
+			}
+			else
+			{
+				Debug.LogErrorFormat("Missing entity spawner on village {0}. The village will not be able to spawn units.");
+			}
+		}
+		#endregion Methods
+	}
 }

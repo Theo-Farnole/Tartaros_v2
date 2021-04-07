@@ -56,6 +56,11 @@
 
 		event EventHandler<KilledArgs> EntityKilled = null;
 		event EventHandler<KilledArgs> IWaveSpawnable.Killed { add => EntityKilled += value; remove => EntityKilled -= value; }
+
+		public class RequiredComponentsSpawnedArgs : EventArgs
+		{ }
+
+		public event EventHandler<RequiredComponentsSpawnedArgs> RequiredComponentsSpawned = null;
 		#endregion Events
 
 		#region Methods
@@ -86,6 +91,7 @@
 		public Order[] GenerateAvailablesOrders()
 		{
 			return GetComponents<IEntityOrderable>()
+				.Where(x => (x as MonoBehaviour).enabled == true)
 				.SelectMany(x => x.GenerateOrders(this))
 				.ToArray();
 		}
@@ -101,6 +107,8 @@
 			}
 
 			_entityData.SpawnComponents(gameObject);
+
+			RequiredComponentsSpawned?.Invoke(this, new RequiredComponentsSpawnedArgs());
 		}
 
 		#region IOrders

@@ -1,11 +1,9 @@
 ﻿namespace Tartaros.Sectors.Village
 {
-    using System.Collections;
-    using UnityEngine;
-    using Tartaros.Sectors;
-    using Sirenix.OdinInspector;
+	using Tartaros.Entities;
+	using UnityEngine;
 
-    public class VillageData : SerializedScriptableObject
+	public class VillageData : IEntityBehaviourData
     {
         [SerializeField]
         private int _populationAugmantationAmount = 0;
@@ -17,5 +15,10 @@
         public int PopulationAmount => _populationAugmantationAmount;
         public GameObject OutpostPrefab => _outpostPrefab;
         public GameObject VillagerPrefab => _villagerPrefab;
-    }
+
+		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
+		{
+            entityRoot.GetOrAddComponent<Village>().Data = this;
+		}
+	}
 }
