@@ -77,8 +77,11 @@
 
 		private void SetSliderValues()
 		{
-			_radialHealth.fillAmount = FillAmount;
-			SetCursorRotation();
+			if (_healthable != null && _healthable.IsInterfaceDestroyed() == false)
+			{
+				_radialHealth.fillAmount = FillAmount;
+				SetCursorRotation();
+			}
 		}
 
 		private void SetCursorRotation()
