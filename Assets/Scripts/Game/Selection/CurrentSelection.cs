@@ -32,6 +32,8 @@
 
 		void ISelection.AddToSelection(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
 			if (Selection.IsSelected(selectable) == true)
 			{
 				Debug.LogErrorFormat("Error while trying to add to selection: selectable \"{0}\" is already in selection.", GetSelectableName(selectable));
@@ -55,7 +57,7 @@
 
 		void ISelection.AddToSelection(ISelectable[] selectables)
 		{
-			if (selectables == null) return;
+			if (selectables is null) throw new ArgumentNullException(nameof(selectables));
 
 			foreach (ISelectable selectable in selectables)
 			{
@@ -68,6 +70,9 @@
 
 		void ISelection.RemoveFromSelection(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
+
 			if (Selection.IsSelected(selectable) == false)
 			{
 				Debug.LogErrorFormat("Error while trying to remove from selection: selectable \"{0}\" is not in selection.", GetSelectableName(selectable));
@@ -92,11 +97,15 @@
 
 		bool ISelection.IsSelected(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
 			return _selectedObjets.Contains(selectable);
 		}
 
 		void ISelection.AlternateSelection(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
 			if (Selection.IsSelected(selectable))
 			{
 				Selection.RemoveFromSelection(selectable);
@@ -121,16 +130,22 @@
 
 		private bool DoMustClearSelection(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
 			return selectable.CanBeMultiSelected == false;
 		}
 
 		private string GetSelectableName(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
 			return selectable.GameObject.name;
 		}
 
 		private bool DoSelectableBelongToSelectableTeam(ISelectable selectable)
 		{
+			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
+
 			return _selectableTeams.Contains(selectable.Team);
 		}
 		#endregion Methods
