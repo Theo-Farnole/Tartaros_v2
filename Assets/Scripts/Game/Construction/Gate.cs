@@ -59,8 +59,8 @@
         {
             List<Order> orders = new List<Order>();
 
-            orders.Add(new OpenDoorsOrder(this, _iconsDataBase.Data.AttackIcon));
-            orders.Add(new CloseDoorsOrder(this, _iconsDataBase.Data.AttackIcon));
+            orders.Add(new OpenDoorsOrder(this));
+            orders.Add(new CloseDoorsOrder(this));
             return orders.ToArray();
         }
 

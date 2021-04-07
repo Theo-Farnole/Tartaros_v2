@@ -3,11 +3,13 @@
     using System;
     using System.Collections;
     using Tartaros.Construction;
-    using UnityEngine;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
     public class CloseDoorsOrder : Order
     {
-        public CloseDoorsOrder(Gate gate, Sprite icon) : base(icon, CloseDoorsAction(gate))
+        private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.CloseDoorIcon;
+        public CloseDoorsOrder(Gate gate) : base(Icon, CloseDoorsAction(gate))
         {
         }
 
