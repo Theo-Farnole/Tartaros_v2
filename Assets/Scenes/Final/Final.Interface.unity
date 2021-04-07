@@ -1941,6 +1941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 459086944}
+  - component: {fileID: 459086945}
   m_Layer: 5
   m_Name: HealthSlider
   m_TagString: Untagged
@@ -1969,6 +1970,31 @@ RectTransform:
   m_AnchoredPosition: {x: 108.899994, y: -1.8999939}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &459086945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459086943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caa22e6466f6aa43869f0d1c429e9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _healthable
+      Entry: 6
+      Data: 
+  _radialHealth: {fileID: 1690620588}
 --- !u!1 &461046209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,6 +3212,7 @@ MonoBehaviour:
   _canvas: {fileID: 719447598}
   _showAtStart: 0
   _topButtons: {fileID: 0}
+  _radialHealthSlider: {fileID: 459086945}
 --- !u!114 &719447600
 MonoBehaviour:
   m_ObjectHideFlags: 0

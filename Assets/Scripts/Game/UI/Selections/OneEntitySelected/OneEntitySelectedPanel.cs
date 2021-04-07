@@ -1,12 +1,12 @@
-﻿namespace Assets.Scripts.Game.UI.Selections.OneEntitySelected
+﻿namespace Tartaros.UI
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.Entities;
 	using Tartaros.Orders;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
-	using Tartaros.UI;
 	using UnityEngine;
+	using UnityEngine.UI;
 
 	public class OneEntitySelectedPanel : APanel
 	{
@@ -14,6 +14,9 @@
 		[SerializeField]
 		[SuffixLabel("self if null")]
 		private UIOrderButtonsGenerator _topButtons = null;
+
+		[SerializeField]
+		private RadialHealthSlider _radialHealthSlider = null;
 
 		private ISelection _currentSelection = null;
 		#endregion Fields
@@ -56,7 +59,7 @@
 
 				if (firtSelectable.GameObject.TryGetComponent(out Entity entity))
 				{
-					_topButtons.GenerateButtons(entity);
+					UpdatePanelInformations(entity);
 					Show();
 				}
 			}
@@ -64,6 +67,18 @@
 			{
 				Hide();
 			}
+		}
+
+		private void UpdatePanelInformations(Entity entity)
+		{
+			_topButtons.GenerateButtons(entity);
+			// HP
+			_radialHealthSlider.Healthable = entity.GetComponent<IHealthable>();
+
+			// NAME
+			// DESCRIPTION
+			// PORTRAIT
+			// STATS
 		}
 		#endregion Methods
 	}
