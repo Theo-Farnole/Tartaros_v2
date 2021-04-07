@@ -1,11 +1,8 @@
 ﻿namespace Tartaros.Power
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using Tartaros.Editor;
-    using UnityEngine;
+	using UnityEngine;
 
-    public class PowerPreview
+	public class PowerPreview
     {
         private float _rangeRadius = 1;
         private Vector3 _position = Vector3.zero;

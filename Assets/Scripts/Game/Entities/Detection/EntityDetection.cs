@@ -207,6 +207,6 @@
 		{
 			Tartaros.Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, DetectionRange, Color.grey);
 		}
-#endif // UNITY_EDITOR
 	}
+#endif // UNITY_EDITOR
 }

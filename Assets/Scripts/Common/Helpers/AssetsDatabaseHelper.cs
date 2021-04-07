@@ -1,4 +1,5 @@
-﻿namespace Tartaros.Editor
+﻿#if UNITY_EDITOR
+namespace Tartaros.Editor
 {
 	using System;
 	using System.Linq;
@@ -25,3 +26,5 @@
 		}
 	}
 }
+
+#endif
