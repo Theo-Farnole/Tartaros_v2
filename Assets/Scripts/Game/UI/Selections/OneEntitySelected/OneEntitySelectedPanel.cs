@@ -6,7 +6,6 @@
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
-	using UnityEngine.UI;
 
 	public class OneEntitySelectedPanel : APanel
 	{
@@ -17,6 +16,9 @@
 
 		[SerializeField]
 		private RadialHealthSlider _radialHealthSlider = null;
+
+		[SerializeField]
+		private EntityInformationsUI _entityInformations = null;
 
 		private ISelection _currentSelection = null;
 		#endregion Fields
@@ -71,13 +73,10 @@
 
 		private void UpdatePanelInformations(Entity entity)
 		{
-			_topButtons.GenerateButtons(entity);
-			// HP
+			_topButtons.GenerateButtons(entity);			
 			_radialHealthSlider.Healthable = entity.GetComponent<IHealthable>();
+			_entityInformations.Entity = entity;
 
-			// NAME
-			// DESCRIPTION
-			// PORTRAIT
 			// STATS
 		}
 		#endregion Methods

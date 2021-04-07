@@ -25,6 +25,7 @@
 
 		#region Properties
 		public IEntityBehaviourData[] Behaviours => _behaviours;
+		public Sprite Portrait => _portrait;
 
 		GameObject ISpawnable.Prefab => _prefab;
 		Sprite IPortraiteable.Portrait => _portrait;
