@@ -19,7 +19,17 @@
 		bool IAttackable.IsAlive => IsAlive;
 		public EntityHealthData EntityHealthData
 		{
-			get => _entityHealthData; set
+			get
+			{
+				if (_entityHealthData == null)
+				{
+					throw new MissingDatabaseReference<EntityHealthData>(this);
+				}
+
+				return _entityHealthData;
+			}
+
+			set
 			{
 				_entityHealthData = value;
 				_currentHealth = EntityHealthData.Health;
@@ -29,6 +39,7 @@
 		public bool IsDead => IsAlive == false;
 
 		public int MaxHealth => EntityHealthData.Health;
+
 		public bool IsFullHealth => CurrentHealth == MaxHealth;
 
 		public float CurrentHealth
