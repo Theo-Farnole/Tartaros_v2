@@ -44,6 +44,8 @@
 			_navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
 			_entity = GetComponent<Entity>();
 			_entityFSM = GetComponent<EntityFSM>();
+
+			//NavMesh.avoidancePredictionTime = Mathf.Infinity; // overclock the nav mesh calculator
 		}
 
 		private void Update()
@@ -59,9 +61,18 @@
 		{
 			var navMeshPath = new NavMeshPath();
 
-			_navMeshAgent.CalculatePath(point, navMeshPath);
+			_navMeshAgent.CalculatePath(point, navMeshPath);			
+		
+			if (navMeshPath.status == NavMeshPathStatus.PathComplete)
+			{
+				return true;
+			}
+			else
+			{
+				Debug.LogErrorFormat("Cannot move to point {0}.", navMeshPath.status);
 
-			return navMeshPath.status == NavMeshPathStatus.PathComplete;
+				return false;
+			}
 		}
 
 		public void MoveToPoint(Vector3 point)
