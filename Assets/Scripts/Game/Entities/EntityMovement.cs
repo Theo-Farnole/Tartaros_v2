@@ -1,13 +1,15 @@
 ﻿namespace Tartaros.Entities
 {
 	using System;
+	using System.Collections.Generic;
 	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
+	using Tartaros.Orders;
 	using UnityEngine;
 	using UnityEngine.AI;
 
-	public class EntityMovement : MonoBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver
+	public class EntityMovement : MonoBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IEntityOrderable
 	{
 		#region Fields
 		private EntityMovementData _entityMovementData = null;
@@ -135,6 +137,16 @@
 		void IOrderPatrolReceiver.PatrolAdditive(PatrolPoints waypoints)
 		{
 			_entityFSM.EnqueueState(new StatePatrol(_entity, waypoints));
+		}
+
+		public Order[] GenerateOrders(Entity entity)
+		{
+			List<Order> orders = new List<Order>();
+
+			orders.Add(new MoveOrder(this));
+			orders.Add(new MoveAgressivelyOrder(this));
+			orders.Add(new PatrolOrder(this));
+			return orders.ToArray();
 		}
 		#endregion
 		#endregion

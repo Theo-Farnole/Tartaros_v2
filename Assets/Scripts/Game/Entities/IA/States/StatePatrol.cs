@@ -2,6 +2,7 @@
 {
 	using Tartaros.Entities;
 	using Tartaros.Entities.Movement;
+	using UnityEngine;
 
 	public partial class StatePatrol : AEntityState
 	{
@@ -45,7 +46,7 @@
 
 		private void SetTargetPointToNext()
 		{
-			if (_currentIndex < _maxIndex)
+			if (_currentIndex < _maxIndex - 1)
 			{
 				_currentIndex++;
 			}
@@ -53,6 +54,7 @@
 			{
 				_currentIndex = 0;
 			}
+			Debug.Log(_maxIndex);
 
 			MoveToTargetPoint(_currentIndex);
 		}
