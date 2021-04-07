@@ -3,10 +3,12 @@
     using System;
     using System.Collections;
     using Tartaros.Construction;
-    using UnityEngine;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
     public class OpenDoorsOrder : Order
     {
-        public OpenDoorsOrder(Gate gate, Sprite icon) : base(icon, OpenDoorsAction(gate))
+        private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.OpenDoorIcon;
+        public OpenDoorsOrder(Gate gate) : base(Icon, OpenDoorsAction(gate))
         {
         }
 

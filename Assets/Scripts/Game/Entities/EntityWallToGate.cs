@@ -40,7 +40,7 @@
         {
             List<Order> orders = new List<Order>();
 
-            orders.Add(new InstanciateGateOrder(this, _iconsDataBase.Data.AttackIcon));
+            orders.Add(new InstanciateGateOrder(this));
             return orders.ToArray();
         }
 

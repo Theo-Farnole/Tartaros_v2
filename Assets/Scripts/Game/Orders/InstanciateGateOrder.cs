@@ -9,7 +9,8 @@
 
     public class InstanciateGateOrder : Order
     {
-        public InstanciateGateOrder(EntityWallToGate wallToGate, Sprite portrait) : base(portrait, InstancaiteGate(wallToGate))
+        private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.InstanciateGateIcon;
+        public InstanciateGateOrder(EntityWallToGate wallToGate) : base(Icon, InstancaiteGate(wallToGate))
         {  
         }
 
