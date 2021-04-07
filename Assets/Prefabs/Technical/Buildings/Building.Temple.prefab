@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5657609668978460671}
+  - component: {fileID: 5026770722809627915}
   - component: {fileID: 6555778418471866085}
   - component: {fileID: 1883052399}
   - component: {fileID: 1883052400}
@@ -37,6 +38,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5026770722809627915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64de5000312a62b4a89a4c83a1890c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityData: {fileID: 0}
+  _team: 1
 --- !u!114 &6555778418471866085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +166,7 @@ PrefabInstance:
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
@@ -201,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.27
+      value: 9.12
       objectReference: {fileID: 0}
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
