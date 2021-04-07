@@ -35,15 +35,6 @@
 			}
 		}
 
-		private void OnDrawGizmosSelected()
-		{
-			if (Application.isPlaying == true)
-			{
-				Gizmos.color = Color.blue;
-				Gizmos.DrawWireSphere(transform.position, _entityAttackData.AttackRange);
-			}
-		}
-
 		public void CastAttackIfPossible(IAttackable target)
 		{
 			if (IsInRange(target) == false) return;
