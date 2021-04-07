@@ -48,7 +48,12 @@
 		private void RightClick(InputAction.CallbackContext obj)
 		{
 			_rightClickAction.Invoke();
-			LeaveState();
+
+			// right click action can modify the current state, so we only want to leave the state if current state has changed
+			if (_stateOwner.CurrentState == this)
+			{
+				LeaveState();
+			}
 		}
 	}
 }
