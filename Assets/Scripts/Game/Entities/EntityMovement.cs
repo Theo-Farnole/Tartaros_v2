@@ -59,10 +59,12 @@
 
 		public bool CanMoveToPoint(Vector3 point)
 		{
+			point = NavMeshHelper.AdjustPositionToFitNavMesh(point);
+
 			var navMeshPath = new NavMeshPath();
 
-			_navMeshAgent.CalculatePath(point, navMeshPath);			
-		
+			_navMeshAgent.CalculatePath(point, navMeshPath);
+
 			if (navMeshPath.status == NavMeshPathStatus.PathComplete)
 			{
 				return true;
@@ -87,6 +89,7 @@
 				Debug.LogErrorFormat("Entity {0} can't move to {1}.", name, point);
 			}
 		}
+
 
 		public void StopMovement()
 		{
