@@ -29,10 +29,10 @@
             _miniMap.RemoveIcon(this);
         }
 
-        void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, 0.3f);
-        }
+        //void OnDrawGizmos()
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawWireSphere(transform.position, 0.3f);
+        //}
     }
 }
