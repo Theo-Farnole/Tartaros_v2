@@ -74,9 +74,9 @@
 
 		public IAttackable GetNearestAttackableOpponentInDetectionRange()
 		{
-			IEnumerable<Entity> opponents = GetOpponentsOrderByDistance();
+			Entity[] entitiesInAttackRange = _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, _attackRange);
 
-			foreach (Entity entity in opponents)
+			foreach (Entity entity in entitiesInAttackRange)
 			{
 				if (entity.TryGetComponent(out IAttackable attackable) && IsInDetectionRange(entity))
 				{
@@ -182,7 +182,7 @@
 			return distance <= _attackRange;
 		}
 
-
+		[Obsolete("This function doesn't not work.")]
 		private IEnumerable<Entity> GetOpponentsOrderByDistance()
 		{
 			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);

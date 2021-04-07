@@ -29,7 +29,8 @@
 		public override void OnStateExit()
 		{
 			base.OnStateExit();
-			_entityMovement.StopMovement();
+
+			StopMovement();
 		}
 
 		public override void OnUpdate()
@@ -42,10 +43,26 @@
 
 			if (_entityAttack.IsInRange(_target) == true)
 			{
-				_entityMovement.StopMovement();
+				StopMovement();
 				_entityAttack.CastAttackIfPossible(_target);
 			}
 			else
+			{
+				MoveToTarget();
+			}
+		}
+
+		private void StopMovement()
+		{
+			if (_entityMovement != null)
+			{
+				_entityMovement.StopMovement();
+			}
+		}
+
+		private void MoveToTarget()
+		{
+			if (_entityMovement != null)
 			{
 				_entityMovement.MoveToPoint(_target.Transform.position);
 			}

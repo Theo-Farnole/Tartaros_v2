@@ -1,17 +1,22 @@
 ﻿namespace Tartaros.Entities.Attack
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+	using UnityEngine;
 
-    public class SingleEffect : IHitEffect
-    {
-        [SerializeField]
-        GameObject _vfxPrefab = null;
+	public class SingleEffect : IHitEffect
+	{
+		#region Fields
+		[SerializeField]
+		private GameObject _vfxPrefab = null;
+		#endregion Fields
 
-        void IHitEffect.ExecuteHitEffect(Vector3 positionToInstanciate)
-        {
-            GameObject vfxInstanciate = GameObject.Instantiate(_vfxPrefab, positionToInstanciate, Quaternion.identity);
-        }
-    }
+		#region Methods
+		void IHitEffect.ExecuteHitEffect(Vector3 positionToInstanciate)
+		{
+			if (_vfxPrefab != null)
+			{
+				GameObject.Instantiate(_vfxPrefab, positionToInstanciate, Quaternion.identity);
+			}
+		} 
+		#endregion Methods
+	}
 }
