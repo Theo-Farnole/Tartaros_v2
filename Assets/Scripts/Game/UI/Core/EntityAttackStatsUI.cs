@@ -28,8 +28,8 @@
 		#region Properties
 		public Entity Entity
 		{
-			get => _entity; 
-			
+			get => _entity;
+
 			set
 			{
 				_entity = value;
@@ -53,7 +53,7 @@
 				_damage.text = attackData.Damage.ToString();
 				_range.text = attackData.AttackRange.ToString();
 				_attackSpeed.text = attackData.SecondsBetweenAttacks.ToString();
-				_type.text = attackData.AttackMode?.GetType().Name ?? "NONE";
+				_type.text = attackData.AttackMode?.DisplayTypeUI ?? "NONE";
 			}
 		}
 		#endregion Methods

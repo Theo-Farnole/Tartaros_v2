@@ -8,6 +8,9 @@
 	{
 		[OdinSerialize]
 		private IHitEffect _vfxPrefab = null;
+
+		string IAttackMode.DisplayTypeUI => "Melee";
+
 		void IAttackMode.Attack(Transform attacker, IAttackable target)
 		{
 			if(_vfxPrefab != null)
