@@ -3,7 +3,7 @@
 	using System.Collections;
 	using UnityEngine;
 	using Tartaros;
-	public class SpawnPoint : MonoBehaviour, ISpawnPoint
+	public partial class SpawnPoint : MonoBehaviour, ISpawnPoint
 	{
 		#region Fields
 		[SerializeField]
@@ -18,13 +18,18 @@
 
 		Vector3 ISpawnPoint.SpawnPoint => Random.insideUnitCircle.ToXZ() * _randomRadius + transform.position;
 		#endregion Properties
+	}
 
+#if UNITY_EDITOR
+	public partial class SpawnPoint
+	{
 		#region Methods
 		private void OnDrawGizmos()
 		{
 			Gizmos.DrawIcon(transform.position, "skull-crossed-bones.png");
-			Gizmos.DrawWireSphere(transform.position, _randomRadius);
+			Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, _randomRadius, Color.white);
 		}
 		#endregion Methods
 	}
+#endif
 }
