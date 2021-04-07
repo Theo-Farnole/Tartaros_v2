@@ -8,7 +8,7 @@
 
 	public static class SectorCheats
 	{
-		[CheatMethod]
+		[Cheat]
 		public static void CaptureSelectedSector()
 		{
 			throw new System.NotImplementedException();

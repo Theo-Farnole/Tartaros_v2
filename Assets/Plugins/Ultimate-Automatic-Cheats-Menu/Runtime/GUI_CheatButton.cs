@@ -11,7 +11,7 @@
 		#region Fields
 		private static readonly Type[] SUPPORTED_PARAMETER_TYPE = new Type[] { typeof(int), typeof(float), typeof(string), typeof(bool) };
 		private readonly MethodInfo _methodInfo = null;
-		private readonly CheatMethodAttribute _cheatMethodAttribute = null;
+		private readonly CheatAttribute _cheatMethodAttribute = null;
 
 		private bool _enabled = true;
 		private string _overridedButtonLabel = null;
@@ -53,7 +53,7 @@
 		#endregion
 
 		#region ctor
-		public GUI_CheatButton(MethodInfo methodInfo, CheatMethodAttribute cheatMethodAttribute)
+		public GUI_CheatButton(MethodInfo methodInfo, CheatAttribute cheatMethodAttribute)
 		{
 			_methodInfo = methodInfo ?? throw new ArgumentNullException();
 			_cheatMethodAttribute = cheatMethodAttribute ?? throw new ArgumentNullException();

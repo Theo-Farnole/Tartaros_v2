@@ -109,20 +109,20 @@ namespace TF.CheatsGUI
 
 			if (_restrictToSomeAssemblies == true)
 			{
-				typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatMethodAttribute>(_restrictedAssemblies);
+				typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatAttribute>(_restrictedAssemblies);
 			}
 			else
 			{
-				typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatMethodAttribute>();
+				typesWithAttributes = ReflectionHelper.GetTypesWithAttribute<CheatAttribute>();
 			}
 
 			List<GUI_CheatButton> cheatsButton = new List<GUI_CheatButton>();
 
 			foreach (Type type in typesWithAttributes)
 			{
-				foreach (MethodInfo method in ReflectionHelper.GetMethodsWithAttribute(type, typeof(CheatMethodAttribute)))
+				foreach (MethodInfo method in ReflectionHelper.GetMethodsWithAttribute(type, typeof(CheatAttribute)))
 				{
-					cheatsButton.Add(new GUI_CheatButton(method, method.GetCustomAttribute<CheatMethodAttribute>()));
+					cheatsButton.Add(new GUI_CheatButton(method, method.GetCustomAttribute<CheatAttribute>()));
 				}
 			}
 
