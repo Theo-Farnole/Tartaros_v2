@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 4004279344480064026, guid: 6a623a0eee17c9a44a0d4e1d8281d326, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -40,14 +41,26 @@ MonoBehaviour:
       Entry: 4
       Data: 3
     - Name: _attackMode
-      Entry: 6
+      Entry: 7
+      Data: 2|Tartaros.Entities.Attack.MeleeAttackMode, Tartaros
+    - Name: _vfxPrefab
+      Entry: 7
+      Data: 3|Tartaros.Entities.Attack.SingleEffect, Tartaros
+    - Name: _vfxPrefab
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|Tartaros.Entities.EntityHealthData, Tartaros
+      Data: 4|Tartaros.Entities.EntityHealthData, Tartaros
     - Name: _health
       Entry: 3
       Data: 10
@@ -62,7 +75,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Tartaros.Entities.EntityMovementData, Tartaros
+      Data: 5|Tartaros.Entities.EntityMovementData, Tartaros
     - Name: _speed
       Entry: 4
       Data: 10
@@ -74,7 +87,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Tartaros.Entities.EntitySelectable, Tartaros
+      Data: 6|Tartaros.Entities.EntitySelectable, Tartaros
     - Name: _canBeMultiSelected
       Entry: 5
       Data: true
@@ -83,7 +96,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
+      Data: 7|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
     - Name: _detectionRange
       Entry: 4
       Data: 3
@@ -92,7 +105,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Tartaros.Entities.EntityGloryIncomeData, Tartaros
+      Data: 8|Tartaros.Entities.EntityGloryIncomeData, Tartaros
     - Name: _gloryIncome
       Entry: 3
       Data: 5
@@ -101,7 +114,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|Tartaros.Entities.Informations.EntityInformationsData, Tartaros
+      Data: 9|Tartaros.Entities.Informations.EntityInformationsData, Tartaros
     - Name: _name
       Entry: 1
       Data: Hoplite

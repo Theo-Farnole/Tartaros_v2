@@ -72,9 +72,6 @@
 		int IHealthable.MaxHealth => MaxHealth;
 		#endregion Properties
 
-
-
-
 		#region Events
 		public class DamageTakenArgs : EventArgs
 		{
