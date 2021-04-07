@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities.Health
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using UnityEngine;
 
@@ -26,7 +27,7 @@
 		}
 		public bool IsAlive => _currentHealth > 0;
 		public bool IsDead => IsAlive == false;
-		[ShowInRuntime]
+
 		public int MaxHealth => EntityHealthData.Health;
 		public bool IsFullHealth => CurrentHealth == MaxHealth;
 
