@@ -20,6 +20,9 @@
 		[SerializeField]
 		private EntityInformationsUI _entityInformations = null;
 
+		[SerializeField]
+		private EntityAttackStatsUI _attacksStatsUI = null;
+
 		private ISelection _currentSelection = null;
 		#endregion Fields
 
@@ -73,11 +76,10 @@
 
 		private void UpdatePanelInformations(Entity entity)
 		{
-			_topButtons.GenerateButtons(entity);			
+			_topButtons.GenerateButtons(entity);
 			_radialHealthSlider.Healthable = entity.GetComponent<IHealthable>();
 			_entityInformations.Entity = entity;
-
-			// STATS
+			_attacksStatsUI.Entity = entity;
 		}
 		#endregion Methods
 	}
