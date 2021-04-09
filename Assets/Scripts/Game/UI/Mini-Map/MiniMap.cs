@@ -11,8 +11,9 @@
     using UnityEngine.AI;
     using System.Linq;
     using Tartaros.Map;
+	using Tartaros.Wave;
 
-    public class MiniMap : MonoBehaviour
+	public class MiniMap : MonoBehaviour
     {
         [SerializeField]
         private RectTransform _rootTransform = null;
@@ -35,6 +36,7 @@
         private IMap _map = null;
         private Bounds2D _MiniMapLimites = null;
         private NavigationPathMiniMap _navigationPathCalcule = null;
+        private EnemiesWavesManager _enemiesWaveManger = null;
 
         public RectTransform RootTransform => _rootTransform;
 
@@ -51,8 +53,10 @@
         private void Start()
         {
             _map = Services.Instance.Get<IMap>();
+            _enemiesWaveManger = Services.Instance.Get<EnemiesWavesManager>();
+            
 
-            if(_map.Sectors == null)
+            if (_map.Sectors == null)
             {
                 Debug.LogError("there is no sector reference on the map");
                 return;
@@ -63,10 +67,41 @@
 
                 _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
                 _sectorDisplayer.DisplaySectors();
+               //DrawWavePathNavigation();
+            }
+
+            if(_enemiesWaveManger == null)
+			{
+                Debug.LogError("No reference of waveManager on MiniMap");
+			}
+			else
+			{
+				_enemiesWaveManger.WaveStartCooldown -= WaveCooldownStart;
+				_enemiesWaveManger.WaveStartCooldown += WaveCooldownStart;
             }
         }
 
-        private void Update()
+        private void OnEnable()
+        {
+            if (_enemiesWaveManger != null)
+            {
+                _enemiesWaveManger.WaveStartCooldown -= WaveCooldownStart;
+                _enemiesWaveManger.WaveStartCooldown += WaveCooldownStart;
+            }
+        }
+
+        private void OnDisable()
+		{
+				_enemiesWaveManger.WaveStartCooldown -= WaveCooldownStart;
+		}
+
+		private void WaveCooldownStart(object sender, EnemiesWavesManager.WaveStartCooldownArgs e)
+		{
+            Debug.Log("minimap ready");
+            DrawWavePathNavigation();
+        }
+
+		private void Update()
         {
             SetPositionIcons();
         }
@@ -114,6 +149,7 @@
 
         public void DrawWavePathNavigation()
         {
+            _navigationPathCalcule.DisablePathLine();
             _navigationPathCalcule.DrawPathNavigation();
             //TODO DJ: draw the nav line each start of wave 
         }

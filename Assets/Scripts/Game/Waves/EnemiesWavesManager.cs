@@ -5,6 +5,7 @@
 	using System.Collections;
 	using System.IO;
 	using Tartaros.Entities;
+	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
@@ -18,7 +19,7 @@
 
 		[ShowInRuntime]
 		private WaveSpawnerFSM _waveFSM = null;
-		private int _currentWaveIndex = 0;
+		private int _currentWaveIndex = -1;
 		private ISpawnPoint[] _spawnPoints = null;
 		private IWaveSpawnable[] _spawnedEnemies = null;
 		private IAttackable _enemiesTarget = null;
@@ -44,8 +45,14 @@
 
 		}
 
+		public class WaveStartCooldownArgs : EventArgs
+		{
+
+		}
+
 		public event EventHandler<WaveSpawningStartArgs> WaveSpawnStart;
 		public event EventHandler<WaveSpawningFinishedArgs> WaveSpawnFinished;
+		public event EventHandler<WaveStartCooldownArgs> WaveStartCooldown;
 		// public event EventHandler<KilledArgs> Killed;
 		#endregion Events
 
@@ -54,13 +61,14 @@
 		{
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
 			_waveFSM = new WaveSpawnerFSM();
+			Services.Instance.RegisterService(this);
 			//TODO: WaveFSM registerService & Call it
 		}
 
 		private void Start()
 		{
 			FindEnemiesTarget();
-			WaveFSM.CurrentState = new WaveSpawningState(this);
+			WaveFSM.CurrentState = new WaveCooldownState(this);
 		}
 
 		private void Update()
@@ -82,13 +90,18 @@
 			}
 			else
 			{
-				Debug.Log("Trying to start a new wave while there is no waves to spawn.");
+				Debug.LogError("Trying to start a new wave while there is no waves to spawn.");
 			}
 		}
 
 		public void InvokeWaveSpawn()
 		{
 			WaveSpawnStart?.Invoke(this, new WaveSpawningStartArgs());
+		}
+
+		public void InvokeWaveCooldown()
+		{
+			WaveStartCooldown?.Invoke(this, new WaveStartCooldownArgs());
 		}
 
 		public void InvokeWaveFinished()

@@ -101,11 +101,14 @@
 
         public void DisablePathLine()
         {
-            foreach (var line in _navigationLineInstanciate)
-            {
-                Destroy(line);
-            }
-            _navigationLineInstanciate.Clear();
+            if(_navigationLineInstanciate.Count != 0)
+			{
+                foreach (var line in _navigationLineInstanciate)
+                {
+                    Destroy(line);
+                }
+                _navigationLineInstanciate.Clear();
+			}
         }
     }
 }
