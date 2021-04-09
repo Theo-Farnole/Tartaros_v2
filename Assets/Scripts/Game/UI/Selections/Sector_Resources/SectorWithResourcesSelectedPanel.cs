@@ -1,8 +1,6 @@
 ﻿namespace Tartaros.UI
 {
-	using System.Windows.Forms;
 	using Tartaros.Economy;
-	using Tartaros.Map;
 	using Tartaros.Map;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;

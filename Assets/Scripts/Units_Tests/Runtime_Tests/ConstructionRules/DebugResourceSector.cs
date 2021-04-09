@@ -1,12 +1,11 @@
 ﻿namespace Tartaros.Tests
 {
-	using UnityEngine;
+	using System;
 	using Tartaros.Economy;
 	using Tartaros.Map;
-	using Tartaros.Map;
-    using System;
+	using UnityEngine;
 
-    internal class DebugResourceSector : ISector
+	internal class DebugResourceSector : ISector
 	{
 		#region Fields
 		[SerializeField]

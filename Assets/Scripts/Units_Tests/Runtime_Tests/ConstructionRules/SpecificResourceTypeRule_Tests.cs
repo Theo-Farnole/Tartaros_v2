@@ -1,15 +1,14 @@
 ﻿namespace Tartaros.Tests
 {
-	using System.Collections;
-	using UnityEngine;
 	using NUnit.Framework;
+	using System.Collections;
+	using System.Collections.Generic;
+	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Map;
-	using System.Collections.Generic;
-	using Tartaros.Map;
-	using UnityEngine.TestTools;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Construction;
+	using UnityEngine;
+	using UnityEngine.TestTools;
 
 	public partial class SpecificResourceTypeRule_Tests
 	{

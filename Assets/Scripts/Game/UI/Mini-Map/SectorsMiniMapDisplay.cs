@@ -1,9 +1,7 @@
 ﻿namespace Tartaros.UI.MiniMap
 {
-	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Tartaros.Map;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;

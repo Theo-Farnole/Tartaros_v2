@@ -14,7 +14,6 @@
 		private float _attackRange = -1;
 
 		private EntityDetectionData _entityDetectionData = null;
-		private EntityAttackData _entityAttackData = null;
 
 		private Entity _entity = null;
 		private EntitiesKDTrees _entitiesKDTrees = null;

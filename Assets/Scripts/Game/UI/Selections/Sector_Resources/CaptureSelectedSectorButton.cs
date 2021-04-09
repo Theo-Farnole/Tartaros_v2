@@ -2,7 +2,6 @@
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.Map;
-	using Tartaros.Map;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;

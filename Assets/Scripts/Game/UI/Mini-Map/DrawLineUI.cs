@@ -1,17 +1,14 @@
 ﻿namespace Tartaros.UI.MiniMap
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using Tartaros.ServicesLocator;
-    using UnityEngine;
-    using UnityEngine.UI;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using UnityEngine.UI;
 
-    public class DrawLineUI : Graphic
+	public class DrawLineUI : Graphic
     {
         private Vector2Int _gridSize;
         [SerializeField]
         private List<Vector2> _points = null;
-        private List<Vector2>[] _pathPoints = null;
 
         float _width;
         float _height;
@@ -102,7 +99,6 @@
         public void ClearPoints()
         {
             _points.Clear();
-            _pathPoints = null;
         }
     }
 }

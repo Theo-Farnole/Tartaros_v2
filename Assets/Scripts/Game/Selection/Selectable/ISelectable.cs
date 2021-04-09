@@ -22,10 +22,5 @@
 
 		void OnSelected();
 		void OnUnselected();
-
-		event EventHandler<SelectedArgs> Selected;
-
-		event EventHandler<UnSelectedArgs> UnSelected;
-
 	}
 }

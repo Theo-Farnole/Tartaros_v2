@@ -10,7 +10,6 @@
 		[ShowInRuntime]
 		private float _currentHealth = -1;
 
-		private Coroutine _healthRegenerationCoroutine = null;
 		private EntityHealthData _entityHealthData = null;
 		#endregion
 

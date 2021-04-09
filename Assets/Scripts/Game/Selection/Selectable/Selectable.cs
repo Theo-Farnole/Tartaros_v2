@@ -26,23 +26,6 @@
 		bool ISelectable.CanBeMultiSelected { get => _canBeMultiSelected; }
 		#endregion Properties
 
-		#region Events
-		public event EventHandler<SelectedArgs> Selected = null;
-		public event EventHandler<UnSelectedArgs> Unselected = null;
-
-		event EventHandler<SelectedArgs> ISelectable.Selected
-		{
-			add => Selected += value;
-			remove => Selected -= value;
-		}
-
-		event EventHandler<UnSelectedArgs> ISelectable.UnSelected
-		{
-			add => Unselected += value;
-			remove => Unselected -= value;
-		}
-		#endregion Events
-
 		#region Methods
 		void Awake()
 		{
