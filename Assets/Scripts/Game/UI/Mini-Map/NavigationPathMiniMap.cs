@@ -16,10 +16,11 @@
         private GameObject _mapBackground = null;
         [SerializeField]
         private GameObject _navigationLine = null;
+        [SerializeField]
+        private Transform _targetPosition = null;
 
         private RectTransform _rootTransform = null;
         private ISpawnPoint[] _spawnPoints = null;
-        private Vector3 _targetPosition = new Vector3(6, 0, 8);
         private List<GameObject> _navigationLineInstanciate = new List<GameObject>();
         //TODO DJ: Give the position of the Temple automaticaly 
 
@@ -37,8 +38,13 @@
 
         public void DrawPathNavigation()
         {
-            if (_spawnPoints.Length > 1)
+            if (_spawnPoints.Length >= 1)
             {
+                if (_rootTransform == null)
+                {
+                    _rootTransform = _miniMap.RootTransform;
+                }
+
                 foreach (NavMeshPath path in GetNavigationsPaths())
                 {
                     Vector3[] corners = GetCornersNavigationPath(path);
@@ -92,7 +98,7 @@
             foreach (ISpawnPoint point in _spawnPoints)
             {
                 var path = new NavMeshPath();
-                NavMesh.CalculatePath(point.SpawnPoint, _targetPosition, NavMesh.AllAreas, path);
+                NavMesh.CalculatePath(point.SpawnPoint, _targetPosition.position, NavMesh.AllAreas, path);
                 navPath.Add(path);
             }
 

@@ -9,6 +9,7 @@
     public class DrawLineUI : Graphic
     {
         private Vector2Int _gridSize;
+        [SerializeField]
         private List<Vector2> _points = null;
         private List<Vector2>[] _pathPoints = null;
 
@@ -90,6 +91,7 @@
         public void SetNavigationPoints(List<Vector2> pointsToSet)
         {
             _points = pointsToSet;
+            SetVerticesDirty();
         }
 
         public void Setup(int width, int height)
