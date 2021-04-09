@@ -70,7 +70,7 @@
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 2))
             {
-                var entity = hit.transform.gameObject.GetComponent<Entity>();
+                var entity = hit.transform.gameObject.GetComponentInParent<Entity>();
 
                 if (entity != null)
                 {
