@@ -29,6 +29,13 @@
 			}
 		}
 
+		public static string GetRichTextSprite(this SectorRessourceType type)
+		{
+			const string FORMAT = "<sprite name={0}>";
+
+			return string.Format(FORMAT, type.ToString().ToLower());
+		}
+
 		public static void DrawIcon(this SectorRessourceType type, Vector3 center)
 		{
 			Gizmos.DrawIcon(center, type.GetGizmosIconName());
@@ -43,7 +50,7 @@
 
 				case SectorRessourceType.Stone:
 					return "stone.png";
-					
+
 				case SectorRessourceType.Food:
 					return "food.png";
 

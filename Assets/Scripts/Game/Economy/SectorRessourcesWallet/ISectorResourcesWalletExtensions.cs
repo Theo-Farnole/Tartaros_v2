@@ -1,5 +1,6 @@
 ﻿namespace Tartaros
 {
+	using System.Text;
 	using Tartaros.Economy;
 
 	public static class ISectorResourcesWalletExtensions
@@ -43,6 +44,25 @@
 			}
 
 			return true;
+		}
+
+		public static string ToRichTextString(this ISectorResourcesWallet w1)
+		{
+			if (w1 is null) throw new System.ArgumentNullException(nameof(w1));			
+
+			StringBuilder sb = new StringBuilder();
+
+			foreach (SectorRessourceType resourceType in EnumHelper.GetValues<SectorRessourceType>())
+			{
+				int amount = w1.GetAmount(resourceType);
+				string richTextSprite = resourceType.GetRichTextSprite();
+
+				sb.AppendFormat("{0}{1}", amount, richTextSprite);
+				sb.AppendFormat(" ");
+
+			}
+
+			return sb.ToString().Trim();
 		}
 
 	}

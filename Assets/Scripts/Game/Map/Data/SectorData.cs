@@ -20,7 +20,7 @@
 		#endregion Fields
 
 		#region Properties
-		public ISectorResourcesWallet CapturePrice => _capturePrice;
+		public ISectorResourcesWallet CapturePrice => _capturePrice ?? SectorResourcesWallet.Zero;
 		public Vertex2D[] Vertices => _vertices.ToArray();
 		public Vertex2D LastVertex => _vertices[_vertices.Count - 1];
 
