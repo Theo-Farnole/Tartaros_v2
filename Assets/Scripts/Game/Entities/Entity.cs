@@ -102,8 +102,7 @@
 
 			if (_entityData == null)
 			{
-				Debug.LogErrorFormat("Missing entity data in \"{0}\". Aborting components generation.", name);
-				return;
+				throw new MissingDataReference<EntityData>(this);				
 			}
 
 			_entityData.SpawnComponents(gameObject);

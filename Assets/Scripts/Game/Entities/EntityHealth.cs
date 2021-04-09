@@ -17,13 +17,14 @@
 		#region Properties
 		Transform IAttackable.Transform => transform;
 		bool IAttackable.IsAlive => IsAlive;
+		[ShowInRuntime]
 		public EntityHealthData EntityHealthData
 		{
 			get
 			{
 				if (_entityHealthData == null)
 				{
-					throw new MissingDatabaseReference<EntityHealthData>(this);
+					throw new MissingDataReference<EntityHealthData>(this);
 				}
 
 				return _entityHealthData;
