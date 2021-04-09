@@ -48,19 +48,20 @@
 		{
 			if (_entity == null) return;
 
-			if (_name != null && EntityInformation != null)
+			if (_name != null)
 			{
-				_name.text = EntityInformation.Name;
+				_name.text = EntityInformation != null ? EntityInformation.Name : "NONE";
+
 			}
 
-			if (_description != null && EntityInformation != null)
+			if (_description != null)
 			{
-				_description.text = EntityInformation.Description;
+				_description.text = EntityInformation != null ? EntityInformation.Description : "NONE";
 			}
 
-			if (_portrait != null && EntityInformation != null)
+			if (_portrait != null)
 			{
-				_portrait.sprite = _entity.EntityData.Portrait;
+				_portrait.sprite = EntityInformation != null ? _entity.EntityData.Portrait : null;
 			}
 		}
 		#endregion Methods
