@@ -2,9 +2,11 @@
 {
 	using System.Collections.Generic;
 	using System.Linq;
+	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Map;
 	using Tartaros.Sectors;
+	using UnityEngine;
 
 	public static class ISectorExtensions
 	{
@@ -69,6 +71,45 @@
 			else
 			{
 				throw new System.NotSupportedException();
+			}
+		}
+
+		public static bool ContainsResource(this ISector sector)
+		{
+			return sector.FindObjectsInSectorOfType<FlagResourceToSector>().Length > 0;
+		}
+
+		public static SectorRessourceType GetResourceType(this ISector sector)
+		{
+			FlagResourceToSector[] flags = sector.FindObjectsInSectorOfType<FlagResourceToSector>();
+
+			if (flags.Length == 1)
+			{
+				return flags[0].Type;
+			}
+			else
+			{
+				throw new System.NotSupportedException(string.Format("There is {0} resources flags on sector {1}. This is not supported.", flags.Length, sector.ToString()));
+			}
+		}
+
+		public static bool TryGetResourceTypeOfSector(this ISector sector, out SectorRessourceType type)
+		{
+			FlagResourceToSector[] flags = sector.FindObjectsInSectorOfType<FlagResourceToSector>();
+
+			if (flags.Length > 1)
+			{
+				throw new System.NotSupportedException(string.Format("There is {0} resources flags on sector {1}. This is not supported.", flags.Length, sector.ToString()));
+			}
+			else if (flags.Length == 1)
+			{
+				type = flags[0].Type;
+				return true;
+			}
+			else
+			{
+				type = SectorRessourceType.Food;
+				return false;
 			}
 		}
 	}

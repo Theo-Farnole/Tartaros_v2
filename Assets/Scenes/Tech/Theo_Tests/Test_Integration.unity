@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 8d0f4e2cdfdcd9e46b33b331c7213e10, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 847575395a37f544ebc3b675ef367bbe, type: 2}
 --- !u!1 &94646143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,6 +3557,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4791618484923487473, guid: 3b6b3b394f1e31240baee6116d67c61f,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4791618484923487475, guid: 3b6b3b394f1e31240baee6116d67c61f,
         type: 3}
       propertyPath: m_Name
