@@ -3,7 +3,7 @@
 	using System.Windows.Forms;
 	using Tartaros.Economy;
 	using Tartaros.Map;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using TMPro;

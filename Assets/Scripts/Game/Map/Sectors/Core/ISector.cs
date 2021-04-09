@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Sectors
+﻿namespace Tartaros.Map
 {
 	using System;
 	using Tartaros.Economy;

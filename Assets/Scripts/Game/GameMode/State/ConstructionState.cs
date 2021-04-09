@@ -7,7 +7,7 @@ namespace Tartaros.Construction
 	using Tartaros.Economy;
 	using Tartaros.Gamemode.State;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 
 	public class ConstructionState : AGameState
 	{

@@ -1,7 +1,7 @@
 ﻿namespace Tartaros.Tests
 {
 	using System.Collections.Generic;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;

@@ -1,7 +1,7 @@
 ﻿namespace Tartaros.Tests
 {
 	using UnityEngine;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.Economy;
     using System;
 

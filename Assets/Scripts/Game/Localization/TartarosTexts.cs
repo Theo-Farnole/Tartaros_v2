@@ -1,6 +1,6 @@
 ﻿namespace Tartaros
 {
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 
 	public static class TartarosTexts
 	{

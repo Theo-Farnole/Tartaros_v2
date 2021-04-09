@@ -2,7 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.Economy;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using TMPro;
 	using UnityEngine;

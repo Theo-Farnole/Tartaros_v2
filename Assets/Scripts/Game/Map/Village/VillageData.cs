@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Sectors.Village
+﻿namespace Tartaros.Map.Village
 {
 	using Tartaros.Entities;
 	using UnityEngine;

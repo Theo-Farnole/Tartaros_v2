@@ -4,7 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Map;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 

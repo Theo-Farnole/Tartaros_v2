@@ -5,7 +5,7 @@ namespace Tartaros.Map
     using UnityEngine;
     using Tartaros.Economy;
     using Tartaros.ServicesLocator;
-    using Tartaros.Sectors;
+    using Tartaros.Map;
     using Tartaros.Math;
     using System.Linq;
     using System;

@@ -3,7 +3,7 @@
 	using System.Linq;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 

@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Sectors
+﻿namespace Tartaros.Map
 {
 	using Tartaros.ServicesLocator;
 	using UnityEngine;

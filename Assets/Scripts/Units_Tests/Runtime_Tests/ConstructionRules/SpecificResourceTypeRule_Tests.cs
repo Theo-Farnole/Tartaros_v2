@@ -6,7 +6,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Map;
 	using System.Collections.Generic;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using UnityEngine.TestTools;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Construction;

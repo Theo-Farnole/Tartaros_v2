@@ -1,9 +1,7 @@
-﻿namespace Tartaros.Sectors
+﻿namespace Tartaros.Map
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using Tartaros.Utilities;
 	using Tartaros.ServicesLocator;
+	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class Map_Test_Bounds : MonoBehaviour, IMap

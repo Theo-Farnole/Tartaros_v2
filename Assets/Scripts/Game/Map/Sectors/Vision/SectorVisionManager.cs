@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Sectors
+﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.FogOfWar;

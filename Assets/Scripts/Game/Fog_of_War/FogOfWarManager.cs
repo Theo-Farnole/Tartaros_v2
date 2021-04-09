@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Math;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;

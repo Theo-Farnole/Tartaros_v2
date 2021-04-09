@@ -2,7 +2,7 @@
 {
 	using UnityEngine;
 	using Tartaros.Economy;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.Map;
     using System;
 

@@ -7,7 +7,7 @@
     using Tartaros.Utilities;
     using Tartaros.Construction;
     using UnityEngine;
-    using Tartaros.Sectors;
+    using Tartaros.Map;
 
     public class CheckCanConstruct : MonoBehaviour, ICheckCanConstruct
     {

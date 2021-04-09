@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Sectors
+﻿namespace Tartaros.Map
 {
     using System.Collections;
     using System.Collections.Generic;

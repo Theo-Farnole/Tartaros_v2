@@ -2,7 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using System.IO;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using Tartaros.Utilities;
 	using UnityEngine;

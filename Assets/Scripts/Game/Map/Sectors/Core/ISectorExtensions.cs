@@ -5,7 +5,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Map;
-	using Tartaros.Sectors;
+	using Tartaros.Map;
 	using UnityEngine;
 
 	public static class ISectorExtensions
