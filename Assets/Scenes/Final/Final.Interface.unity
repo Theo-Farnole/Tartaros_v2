@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11256,6 +11256,7 @@ GameObject:
   - component: {fileID: 1864298197}
   - component: {fileID: 1864298199}
   - component: {fileID: 1864298198}
+  - component: {fileID: 1864298200}
   - component: {fileID: 1864298196}
   - component: {fileID: 1864298195}
   - component: {fileID: 1864298194}
@@ -11376,9 +11377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniMap: {fileID: 1864298197}
-  _mapBackground: {fileID: 0}
+  _mapBackground: {fileID: 1903193321}
   _navigationLine: {fileID: 6791326595167842489, guid: 5e283fc160917b043893e9fe71ff73f2,
     type: 3}
+  _targetPosition: {fileID: 0}
 --- !u!114 &1864298199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11395,6 +11397,22 @@ MonoBehaviour:
   _drawLinePrefab: {fileID: 6791326595167842489, guid: 5e283fc160917b043893e9fe71ff73f2,
     type: 3}
   _miniMap: {fileID: 1864298197}
+--- !u!114 &1864298200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864298192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3489773d45452854f9855d63bda0b493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _miniMap: {fileID: 1864298197}
+  _mapBackground: {fileID: 1903193321}
+  _navigationLine: {fileID: 6791326595167842489, guid: 5e283fc160917b043893e9fe71ff73f2,
+    type: 3}
 --- !u!1 &1864612387
 GameObject:
   m_ObjectHideFlags: 0

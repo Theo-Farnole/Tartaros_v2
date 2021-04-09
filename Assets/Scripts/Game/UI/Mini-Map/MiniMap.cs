@@ -37,6 +37,7 @@
         private Bounds2D _MiniMapLimites = null;
         private NavigationPathMiniMap _navigationPathCalcule = null;
         private EnemiesWavesManager _enemiesWaveManger = null;
+        private FrustumCameraMiniMap _frustrumCamera = null;
 
         public RectTransform RootTransform => _rootTransform;
 
@@ -66,6 +67,8 @@
                 var array = _map.Sectors.OfType<Sector>().ToArray();
 
                 _navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
+                _frustrumCamera = GetComponent<FrustumCameraMiniMap>();
+                _frustrumCamera.InstanciateLineUI();
                 _sectorDisplayer.DisplaySectors();
                //DrawWavePathNavigation();
             }
@@ -97,7 +100,6 @@
 
 		private void WaveCooldownStart(object sender, EnemiesWavesManager.WaveStartCooldownArgs e)
 		{
-            Debug.Log("minimap ready");
             DrawWavePathNavigation();
         }
 
