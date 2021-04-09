@@ -11,6 +11,7 @@
 
 		private IPlayerSectorResources _playerWallet = null;
 		private IMap _map = null;
+		private UserErrorsLogger _userErrorsLogger = null;
 		#endregion Fields
 
 		#region Methods
@@ -23,6 +24,7 @@
 		{
 			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
 			_map = Services.Instance.Get<IMap>();
+			_userErrorsLogger = Services.Instance.Get<UserErrorsLogger>();
 		}
 
 		void ISectorsCaptureManager.Capture(ISector sectorToCapture)
@@ -50,24 +52,27 @@
 			if (sector.IsThereEnemiesOnSector() == true)
 			{
 				Debug.LogFormat(DBG_CANNOT_CAPTURE, name, "there is ennemies on the sector.");
+				_userErrorsLogger.Log("Cannot capture this sector: there is ennemies on the sector.");
 				return false;
 			}
 
 			if (sector.IsTherePlayersEntitiesOnSector() == false)
 			{
 				Debug.LogFormat(DBG_CANNOT_CAPTURE, name, "must contains players entities on the sector.");
+				_userErrorsLogger.Log("Cannot capture this sector: one of your unit must be on it.");
 				return false;
 			}
 
 			if (_map.IsSectorNeightborOfCapturedSectors(sector) == false)
 			{
 				Debug.LogFormat(DBG_CANNOT_CAPTURE, name, "must be neightbor of a captured sector.");
+				_userErrorsLogger.Log("Cannot capture this sector: it must be a neightbor of an already captured sector.");
 				return false;
 			}
 
 			if (sector.CapturePrice == null)
 			{
-				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);
+				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);				
 				return true;
 			}
 
