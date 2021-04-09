@@ -79,7 +79,7 @@
 			List<Vector2> list = new List<Vector2>();
 			foreach (Vector3 corner in corners)
 			{
-				Debug.Log(corner);
+
 				list.Add(_miniMap.WordToUiPosition(corner));
 			}
 			return list;
