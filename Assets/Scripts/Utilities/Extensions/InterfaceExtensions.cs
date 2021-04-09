@@ -6,6 +6,8 @@
 	{
 		public static bool IsInterfaceDestroyed<T>(this T @interface) where T : class
 		{
+			if (@interface == null) return true;
+
 			if (@interface is MonoBehaviour monoBehaviour)
 			{
 				return monoBehaviour == null;

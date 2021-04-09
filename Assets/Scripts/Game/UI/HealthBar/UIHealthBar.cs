@@ -12,6 +12,7 @@
 		// Because Odin struggle to serialize an interface in a nested prefab,
 		// we get rid of odin serialization by getting IHeathable		
 		[SerializeField]
+		[SuffixLabel("(optional) will get IHeatable component this")]
 		[ValidateInput("DoContainsIHealthable", "Must be not null and contains a IHeathable")]
 		private GameObject _healthableContainer = null;
 
@@ -62,7 +63,10 @@
 		#region Methods
 		private void Awake()
 		{
-			_healthable = _healthableContainer.GetComponent<IHealthable>();
+			if (_healthableContainer != null)
+			{
+				_healthable = _healthableContainer.GetComponent<IHealthable>();
+			}
 		}
 
 		private void Start()
@@ -105,8 +109,11 @@
 
 		private void SetSliderValue()
 		{
-			_slider.value = _healthable.CurrentHealth;
-			_slider.gameObject.SetActive(ShouldShowSlider);
+			if (_healthable.IsInterfaceDestroyed() == false)
+			{
+				_slider.value = _healthable.CurrentHealth;
+				_slider.gameObject.SetActive(ShouldShowSlider);
+			}
 		}
 
 		private void SetSliderBounds()
@@ -127,7 +134,7 @@
 		bool DoContainsIHealthable(GameObject gameObject)
 #pragma warning restore IDE0051 // Remove unused private members
 		{
-			return gameObject != null && gameObject.GetComponent<IHealthable>() != null;
+			return gameObject == null || gameObject.GetComponent<IHealthable>() != null;
 		}
 	}
 #endif // UNITY_EDITOR

@@ -3626,7 +3626,7 @@ GameObject:
   - component: {fileID: 657935165}
   - component: {fileID: 657935166}
   m_Layer: 5
-  m_Name: Grid
+  m_Name: Portrait Roots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8100,6 +8100,7 @@ GameObject:
   - component: {fileID: 1310557064}
   - component: {fileID: 1310557063}
   - component: {fileID: 1310557062}
+  - component: {fileID: 1310557066}
   m_Layer: 5
   m_Name: Selection Multiple Entities
   m_TagString: Untagged
@@ -8187,6 +8188,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1310557066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310557061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8bdf9155413c4045a9f6ac81e1c7775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 1310557064}
+  _showAtStart: 0
+  _portraitsRoot: {fileID: 657935165}
+  _prefabPortrait: {fileID: 4933814373491593418, guid: d69388ad4a5911c4b967fca814783817,
+    type: 3}
 --- !u!1001 &1316516702
 PrefabInstance:
   m_ObjectHideFlags: 0

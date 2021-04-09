@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthableContainer: {fileID: 0}
   _slider: {fileID: 1367816898580242565}
-  _hideIfFull: 1
+  _hideIfFull: 0
 --- !u!114 &1367816898580242565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4933814373491593419}
+  - component: {fileID: 7981871544174351749}
   - component: {fileID: 1502760422}
   m_Layer: 5
   m_Name: UI.Unit.Root
@@ -347,6 +348,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7981871544174351749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933814373491593418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b93a2019928b094ea5b6f3636b1e64c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _portrait: {fileID: 4933814374238073505}
+  _healthBar: {fileID: 1367816898580242680}
 --- !u!114 &1502760422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +457,7 @@ GameObject:
   - component: {fileID: 4933814374238073534}
   - component: {fileID: 4933814374238073505}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
