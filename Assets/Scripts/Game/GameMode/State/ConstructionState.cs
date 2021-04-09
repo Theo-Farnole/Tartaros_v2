@@ -40,17 +40,17 @@ namespace Tartaros.Construction
 			_constructionInput.ValidatePerformed -= InputValidatePerformed;
 			_constructionInput.ValidatePerformed += InputValidatePerformed;
 
-            _constructionInput.LeavePerformed -= InputLeavePerformed;
-            _constructionInput.LeavePerformed += InputLeavePerformed;
+			_constructionInput.LeavePerformed -= InputLeavePerformed;
+			_constructionInput.LeavePerformed += InputLeavePerformed;
 		}
 
-        private void InputLeavePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-        {
+		private void InputLeavePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+		{
 			LeaveState();
 
 		}
 
-        public override void OnStateExit()
+		public override void OnStateExit()
 		{
 			base.OnStateExit();
 
@@ -119,11 +119,6 @@ namespace Tartaros.Construction
 		private void PayPriceRessources()
 		{
 			_playerSectorRessources.Buy(_constructable.Price);
-		}
-
-		private void LeaveState()
-		{
-			_stateOwner.SetState(new PlayState(_stateOwner));
 		}
 		#endregion Methods
 	}

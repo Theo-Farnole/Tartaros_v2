@@ -2,10 +2,12 @@
 {
 	using System.Collections;
 	using System.Collections.Generic;
+	using System.Windows.Forms;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Sectors;
+	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
@@ -39,6 +41,8 @@
 
 			_inputs.LeavePerformed -= InputsLeavePerformed;
 			_inputs.LeavePerformed += InputsLeavePerformed;
+
+			SetActiveRectangleSelectionInput(false);
 		}
 
 		private void InputsLeavePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -72,6 +76,8 @@
 			{
 				_wallSectionPreview.DestroyMehods();
 			}
+
+			SetActiveRectangleSelectionInput(true);
 		}
 
 		private void InputsValidatePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -245,10 +251,6 @@
 		{
 			_playerSectorRessources.Buy(GetTotalPriceOfConstruction());
 		}
-		private void LeaveState()
-		{
-			_stateOwner.SetState(new PlayState(_stateOwner));
-		}
 
 		private void DestroyPreviews()
 		{
@@ -260,6 +262,17 @@
 			foreach (var wallCorner in _wallCorners)
 			{
 				GameObject.Destroy(wallCorner);
+			}
+		}
+
+
+		private static void SetActiveRectangleSelectionInput(bool enable)
+		{
+			var rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
+
+			if (rectangleSelectionInput != null)
+			{
+				rectangleSelectionInput.enabled = enable;
 			}
 		}
 	}

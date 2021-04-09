@@ -1,8 +1,6 @@
 ﻿namespace Tartaros.Gamemode
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
+	using Tartaros.Gamemode.State;
 	using Tartaros.Utilities;
 
 	public abstract class AGameState : AState<GamemodeManager>
@@ -29,7 +27,7 @@
 
 		protected void LeaveState()
 		{
-			_stateOwner.SetState(null);
+			_stateOwner.SetState(new PlayState(_stateOwner));
 		}
 	}
 
