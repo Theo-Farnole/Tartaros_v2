@@ -127,7 +127,7 @@
 
 		[ShowIf("@_waveSpawnerData == null")]
 		[Button]
-		public void CreateMapData()
+		public void CreateWaveSpawnerData()
 		{
 			var waveData = ScriptableObject.CreateInstance<WavesSpawnerData>();
 
