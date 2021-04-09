@@ -22,6 +22,7 @@
 			base.OnStateEnter();
 
 			_stateOwner.StartCoroutine(DelayBeforeNextWave(SecondsBetweenWaves));
+			_stateOwner.InvokeWaveCooldown();
 		}
 
 		private IEnumerator DelayBeforeNextWave(float delay)
