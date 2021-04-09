@@ -16,8 +16,7 @@
 
 		#region Properties
 		Transform IAttackable.Transform => transform;
-		bool IAttackable.IsAlive => IsAlive;
-		[ShowInRuntime]
+		bool IAttackable.IsAlive => IsAlive;		
 		public EntityHealthData EntityHealthData
 		{
 			get

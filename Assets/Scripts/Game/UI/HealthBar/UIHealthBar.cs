@@ -5,10 +5,16 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public class UIHealthBar : SerializedMonoBehaviour
+	public partial class UIHealthBar : MonoBehaviour
 	{
 		#region Fields
+		// Contexte: this composant is often in a nested prefab
+		// Because Odin struggle to serialize an interface in a nested prefab,
+		// we get rid of odin serialization by getting IHeathable		
 		[SerializeField]
+		[ValidateInput("DoContainsIHealthable", "Must be not null and contains a IHeathable")]
+		private GameObject _healthableContainer = null;
+
 		private IHealthable _healthable = null;
 
 		[SerializeField]
@@ -35,7 +41,6 @@
 			}
 		}
 
-		[ShowInRuntime]
 		private bool ShouldHideSlider
 		{
 			get
@@ -55,6 +60,11 @@
 		#endregion Properties
 
 		#region Methods
+		private void Awake()
+		{
+			_healthable = _healthableContainer.GetComponent<IHealthable>();
+		}
+
 		private void Start()
 		{
 			SetSliderBounds();
@@ -109,4 +119,16 @@
 		}
 		#endregion Methods
 	}
+
+#if UNITY_EDITOR
+	public partial class UIHealthBar
+	{
+#pragma warning disable IDE0051 // Remove unused private members
+		bool DoContainsIHealthable(GameObject gameObject)
+#pragma warning restore IDE0051 // Remove unused private members
+		{
+			return gameObject != null && gameObject.GetComponent<IHealthable>() != null;
+		}
+	}
+#endif // UNITY_EDITOR
 }
