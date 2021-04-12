@@ -127,9 +127,6 @@
 
 		public Vector2 WordToUiPosition(Vector3 worldPosition)
 		{
-			var Diago = (_rootTransform.rect.width + _rootTransform.rect.height) / 2;
-			var Radius2 = Diago / 2;
-
 			var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
 			var y = _rootTransform.rect.height * worldPosition.z / _map.MapBounds.boundsY.max;
 

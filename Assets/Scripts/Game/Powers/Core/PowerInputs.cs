@@ -10,14 +10,14 @@
 
     public class PowerInputs
     {
-        private IMousePosition _mousePosition = null;
-        private GameInputs _input = null;
+        private readonly IMousePosition _mousePosition = null;
+        private readonly GameInputs _input = null;
 
         public PowerInputs()
         {
             _input = new GameInputs();
             _input.Construction.Enable();
-            _mousePosition = new SetMousePositionWithPlane();
+            _mousePosition = new SetMousePositionWithPlane();            
         }
 
         public event Action<CallbackContext> ValidatePerformed

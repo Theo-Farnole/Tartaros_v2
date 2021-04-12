@@ -135,7 +135,9 @@
 
 		[ShowIf("@_mapData == null")]
 		[Button]
-		public void CreateMapData()
+#pragma warning disable IDE0051 // Remove unused private members
+		private void CreateMapData()
+#pragma warning restore IDE0051 // Remove unused private members
 		{
 			MapData mapData = ScriptableObject.CreateInstance<MapData>();
 

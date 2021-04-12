@@ -6,7 +6,6 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	//TODO DJ: Add spawn option when captured 
 	public class Village : MonoBehaviour
 	{
 		#region Fields
@@ -16,8 +15,6 @@
 		private IMap _map = null;
 		private ISector _sector = null;
 		private IPopulationManager _populationManager = null;
-
-		private Entity _entity = null;
 		#endregion Fields
 
 		#region Properties
@@ -25,12 +22,7 @@
 		public VillageData Data { get => _data; set => _data = value; }
 		#endregion Properties
 
-		#region Methods
-		private void Awake()
-		{
-			_entity = GetComponent<Entity>();
-		}
-
+		#region Methods		
 		private void Start()
 		{
 			_map = Services.Instance.Get<IMap>();
