@@ -62,7 +62,7 @@
             return _mousePosition.GetPreviewPosition();
         }
 
-        public bool IsCtrlPerformed()
+        public bool IsAddNewWallSectionsPerformed()
         {
             return _input.Construction.AddNewWallSections.phase == InputActionPhase.Performed;
         }

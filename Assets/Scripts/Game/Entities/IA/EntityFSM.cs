@@ -9,7 +9,7 @@
 	public partial class EntityFSM : MonoBehaviour
 	{
 		#region Fields
-		[OnInspectorGUI("OnInspectorGUI")]
+		[OnInspectorGUI("DisplayCurrentState")]
 		private GenericFSM<Entity> _finiteStateMachine = new GenericFSM<Entity>();
 
 		private Queue<AEntityState> _statesQueue = new Queue<AEntityState>();
@@ -81,7 +81,7 @@
 	public partial class EntityFSM
 	{
 #pragma warning disable IDE0051 // Remove unused private members
-		void OnInspectorGUI()
+		void DisplayCurrentState()
 #pragma warning restore IDE0051 // Remove unused private members
 		{
 			if (Application.isPlaying)

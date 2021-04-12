@@ -6,15 +6,10 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class PlayerGloryIncome : MonoBehaviour, IPlayerGloryIncome
+	public class PlayerGloryIncomeManager : MonoBehaviour
 	{
 		private IPlayerGloryWallet _playerGloryWallet = null;
-
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
+		
 		private void Start()
 		{
 			_playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
@@ -73,12 +68,6 @@
 					Debug.LogWarningFormat("No entity glory income data beahviour on entity data {0}.", e.entity.EntityData);
 				}
 			}
-		}
-
-
-		void IPlayerGloryIncome.AddAmount(int amount)
-		{
-			FillWallet(amount);
 		}
 
 		private void FillWallet(int amount)

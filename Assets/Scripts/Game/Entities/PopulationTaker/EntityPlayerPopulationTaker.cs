@@ -23,7 +23,7 @@
 			{
 				DecrementCurrentPopulation();
 				_entityPopulationTakerData = value;
-				IncrementCurrentPoplation();
+				IncrementCurrentPopulation();
 			}
 		}
 		public int PopulationToIncrease => _entityPopulationTakerData.PopulationTakingCount;
@@ -35,14 +35,14 @@
 			_entity = GetComponent<Entity>();
 		}
 
+		private void Start()
+		{
+			_populationManger = Services.Instance.Get<IPopulationManager>();
+		}
+
 		private void OnEnable()
 		{
-			if (Services.Instance.TryGet(out IPopulationManager populationManger))
-			{
-				_populationManger = populationManger;
-			}
-
-			IncrementCurrentPoplation();
+			IncrementCurrentPopulation();
 		}
 
 		private void OnDisable()
@@ -50,7 +50,7 @@
 			DecrementCurrentPopulation();
 		}
 
-		public void IncrementCurrentPoplation()
+		public void IncrementCurrentPopulation()
 		{
 			if (_entityPopulationTakerData != null && _entity.Team == Team.Player)
 			{

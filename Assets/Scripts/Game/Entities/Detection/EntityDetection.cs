@@ -181,7 +181,7 @@
 			return distance <= _attackRange;
 		}
 
-		[Obsolete("This function doesn't not work.")]
+		[Obsolete("This function doesn't work.")]
 		private IEnumerable<Entity> GetOpponentsOrderByDistance()
 		{
 			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);

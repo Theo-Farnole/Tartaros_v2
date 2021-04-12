@@ -15,11 +15,9 @@
         private bool _useAnimatorONEDITOR = false;
 
         private Animator _animator = null;
-        private IconsDatabase _iconsDataBase = null;
         private bool _isOpen = false;
         private NavMeshObstacle _navObstacle = null;
 
-        public IconsDatabase IconData => _iconsDataBase;
         public Animator Animator => _animator;
 
         private void Awake()
@@ -31,11 +29,6 @@
         private void Update()
         {
             NavMeshObstacleUpdate();
-        }
-
-        private void Start()
-        {
-            _iconsDataBase = Services.Instance.Get<IconsDatabase>();
         }
 
         private void NavMeshObstacleUpdate()

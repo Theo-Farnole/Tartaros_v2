@@ -10,15 +10,16 @@
 
 	public class WallConstructionState : AGameState
 	{
-		private IConstructable _constructable = null;
-		private ConstructionInputs _inputs = null;
-		private WallBuildingPreview _wallSectionPreview = null;
 		private BuildingPreview _buildingPreview = null;
-		private IPlayerSectorResources _playerSectorRessources = null;
-		private IMap _map = null;
-		private List<GameObject> _wallSections = new List<GameObject>();
-		private List<GameObject> _wallCorners = new List<GameObject>();
 		private ISectorResourcesWallet _pricePreview = SectorResourcesWallet.Zero;
+		private List<GameObject> _wallSections = new List<GameObject>();
+		private WallBuildingPreview _wallSectionPreview = null;
+
+		private readonly IConstructable _constructable = null;
+		private readonly ConstructionInputs _inputs = null;
+		private readonly IPlayerSectorResources _playerSectorRessources = null;
+		private readonly IMap _map = null;
+		private readonly List<GameObject> _wallCorners = new List<GameObject>();
 
 		public WallConstructionState(GamemodeManager gamemodeManager, IConstructable constructable) : base(gamemodeManager)
 		{
@@ -39,7 +40,7 @@
 			_inputs.LeavePerformed -= InputsLeavePerformed;
 			_inputs.LeavePerformed += InputsLeavePerformed;
 
-			SetActiveRectangleSelectionInput(false);
+			SetActiveSelectionInputRect(false);
 		}
 
 		private void InputsLeavePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -71,10 +72,10 @@
 
 			if (_wallSectionPreview != null)
 			{
-				_wallSectionPreview.DestroyMehods();
+				_wallSectionPreview.DestroyMethod();
 			}
 
-			SetActiveRectangleSelectionInput(true);
+			SetActiveSelectionInputRect(true);
 		}
 
 		private void InputsValidatePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -85,7 +86,7 @@
 
 				if (isInPreviewMode)
 				{
-					if (_inputs.IsCtrlPerformed() == true)
+					if (_inputs.IsAddNewWallSectionsPerformed() == true)
 					{
 						ContinueWallPreview();
 					}
@@ -122,7 +123,7 @@
 		{
 			if (_wallSectionPreview != null)
 			{
-				_wallSectionPreview.CheckLine(_inputs.GetMousePosition());
+				_wallSectionPreview.Update(_inputs.GetMousePosition());
 				ShowPriceTotal();
 			}
 		}
@@ -229,6 +230,7 @@
 		{
 			ISectorResourcesWallet totalPrice = SectorResourcesWallet.Zero;
 
+			// TODO: totalPrice.AddWallet(_constructable.Price * _wallSectionPreview.GetWallBuildingPreview().Count);
 			foreach (GameObject wallPreview in _wallSectionPreview.GetWallBuildingPreview())
 			{
 				totalPrice.AddWallet(_constructable.Price);
@@ -263,7 +265,7 @@
 		}
 
 
-		private static void SetActiveRectangleSelectionInput(bool enable)
+		private static void SetActiveSelectionInputRect(bool enable)
 		{
 			var rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
 

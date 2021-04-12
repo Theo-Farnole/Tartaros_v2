@@ -13,11 +13,12 @@ namespace Tartaros.Construction
 	{
 		#region Fields
 		private BuildingPreview _buildingPreview = null;
-		private ConstructionInputs _constructionInput = null;
-		private IConstructable _constructable = null;
-		private IPlayerSectorResources _playerSectorRessources = null;
-		private IMap _map = null;
-		private UserErrorsLogger _errorsLogger = null;
+
+		private readonly ConstructionInputs _constructionInput = null;
+		private readonly UserErrorsLogger _errorsLogger = null;
+		private readonly IConstructable _constructable = null;
+		private readonly IPlayerSectorResources _playerSectorRessources = null;
+		private readonly IMap _map = null;
 		#endregion Fields
 
 		#region Ctor
@@ -69,7 +70,7 @@ namespace Tartaros.Construction
 		{
 			if (CanConstructHere())
 			{
-				Validate();
+				ValidateConstruction();
 			}
 		}
 
@@ -102,7 +103,7 @@ namespace Tartaros.Construction
 			}
 		}
 
-		private void Validate()
+		private void ValidateConstruction()
 		{
 			InstanciateBuilding();
 			PayPriceRessources();

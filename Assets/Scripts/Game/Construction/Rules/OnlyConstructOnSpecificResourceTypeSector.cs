@@ -55,6 +55,7 @@
 			return GetResourceFlagCount(sectorOnPosition, type) > 0;
 		}
 
+		// TODO TF: move to extensions
 		private int GetResourceFlagCount(ISector sector, SectorRessourceType type)
 		{
 			return sector.ObjectsInSector.Count(objectInSector => IsResourceFlag(objectInSector, type));

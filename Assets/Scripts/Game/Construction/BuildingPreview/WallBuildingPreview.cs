@@ -21,30 +21,28 @@
             InstanciatePreview(_startPosition);
         }
 
-        public void CheckLine(Vector3 end)
-        {
-            int numberOfWallSection;
-            Vector3 direction;
-            GetNumberOfWallSection(end, out numberOfWallSection, out direction);
+        public void Update(Vector3 end)
+		{
+			int numberOfWallSection = CalculateNumberOfWallSections(end);
+			Vector3 direction = (_startPosition - end).normalized;
 
-            if (numberOfWallSection > _buildingsPreview.Count)
-            {
-                Vector3 position = _startPosition + (-direction * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
-                InstanciatePreview(position);
-            }
-            else if (numberOfWallSection < _buildingsPreview.Count)
-            {
-                RemovePreviewWall();
-            }
+			if (numberOfWallSection > _buildingsPreview.Count)
+			{
+				Vector3 position = _startPosition + (-direction * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
+				InstanciatePreview(position);
+			}
+			else if (numberOfWallSection < _buildingsPreview.Count)
+			{
+				RemovePreviewWall();
+			}
 
-            SetPositionRotationOfPreviews(end);
-        }
+			SetPositionRotationOfPreviews(end);
+		}
 
-        public void GetNumberOfWallSection(Vector3 end, out int numberOfWallSection, out Vector3 direction)
-        {
-            numberOfWallSection = Mathf.RoundToInt(GetTheDitsanceBetweenTwoPoints(end) / _toBuild.Size.x);
-            direction = (_startPosition - end).normalized;
-        }
+		private int CalculateNumberOfWallSections(Vector3 end)
+		{
+			return Mathf.RoundToInt(CalculateDistanceFromStartToPosition(end) / _toBuild.Size.x);
+		}
 
         private void InstanciatePreview(Vector3 position)
         {
@@ -75,9 +73,9 @@
             }
         }
 
-        public float GetTheDitsanceBetweenTwoPoints(Vector3 end)
+        private float CalculateDistanceFromStartToPosition(Vector3 position)
         {
-            return Vector3.Distance(_startPosition, end);
+            return Vector3.Distance(_startPosition, position);
         }
 
         public List<GameObject> GetWallBuildingPreview()
@@ -122,7 +120,7 @@
 
             return wallCorner;
         }
-        public void DestroyMehods()
+        public void DestroyMethod()
         {
             foreach (GameObject wallSection in _buildingsPreview)
             {

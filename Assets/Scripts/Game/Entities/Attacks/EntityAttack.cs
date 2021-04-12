@@ -52,7 +52,7 @@
 
 		}
 
-		public void TryAttackNearestOpponent()
+		public void TryOrderAttackNearestOpponent()
 		{
 			IAttackable attackable = _entityDetection.GetNearestAttackableOpponentInDetectionRange();
 

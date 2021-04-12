@@ -35,21 +35,27 @@
 
 		public override void OnUpdate()
 		{
-			if (_target == null || _target.IsAlive == false)
+			if (IsTargetDead() == true)
 			{
 				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
-				return;
-			}
-
-			if (_entityAttack.IsInRange(_target) == true)
-			{
-				StopMovement();
-				_entityAttack.CastAttackIfPossible(_target);
 			}
 			else
 			{
-				MoveToTarget();
+				if (_entityAttack.IsInRange(_target) == true)
+				{
+					StopMovement();
+					_entityAttack.CastAttackIfPossible(_target);
+				}
+				else
+				{
+					MoveToTarget();
+				}
 			}
+		}
+
+		private bool IsTargetDead()
+		{
+			return _target == null || _target.IsAlive == false;
 		}
 
 		private void StopMovement()

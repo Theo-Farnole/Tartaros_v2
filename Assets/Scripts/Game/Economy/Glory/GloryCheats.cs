@@ -1,10 +1,5 @@
 ﻿namespace Tartaros.Glory
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using Tartaros.Economy;
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;

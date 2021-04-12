@@ -46,7 +46,7 @@
 		{
 			if (ShouldTryAttackNearest == true)
 			{
-				_entityAttack.TryAttackNearestOpponent();
+				_entityAttack.TryOrderAttackNearestOpponent();
 			}
 		}
 		#endregion Methods

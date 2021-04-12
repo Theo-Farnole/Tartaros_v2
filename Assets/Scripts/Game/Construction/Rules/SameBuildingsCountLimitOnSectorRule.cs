@@ -42,7 +42,7 @@
 
 		int GetBuildingsCount(ISector sector)
 		{
-			return sector.GetEntityCount(_buildingToCheck);
+			return sector.GetEntitiesCountInSector(_buildingToCheck);
 		}
 		#endregion Methods
 	}

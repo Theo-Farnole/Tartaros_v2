@@ -27,8 +27,10 @@
 		[ShowInRuntime]
 		private Dictionary<IMiniMapIcon, RectTransform> _icons = new Dictionary<IMiniMapIcon, RectTransform>();
 
-		private IMap _map = null;
+		[SerializeField]
 		private NavigationPathMiniMap _navigationPathCalcule = null;
+
+		private IMap _map = null;
 		private EnemiesWavesManager _enemiesWaveManger = null;
 		private FrustumCameraMiniMap _frustrumCamera = null;
 

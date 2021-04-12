@@ -44,7 +44,7 @@
 							.Count();
 		}
 
-		public static int GetEntityCount(this ISector sector, EntityData correspondingData)
+		public static int GetEntitiesCountInSector(this ISector sector, EntityData correspondingData)
 		{
 			return sector.GetEntitiesInSector().Count(x => x.EntityData == correspondingData);
 		}

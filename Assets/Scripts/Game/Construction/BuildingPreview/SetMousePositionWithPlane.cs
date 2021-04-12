@@ -34,14 +34,6 @@
 			}
 		}
 
-		private Vector3 GetCameraFrustumPosition(Vector3 position)
-		{
-			float cameraDistance = Camera.main.transform.position.y;
-			Ray positionRay = Camera.main.ScreenPointToRay(position);
-
-			return _plane.Raycast(positionRay, out float enter) ? positionRay.GetPoint(enter) : new Vector3();
-		}
-
 		private void InstanciatePlane()
 		{
 			_planeDistanceFromCamera = Vector3.zero;

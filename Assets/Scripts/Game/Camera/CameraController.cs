@@ -13,8 +13,10 @@
 	public class CameraController : MonoBehaviour
 	{
 		#region Fields
+		[SerializeField]
+		private CameraData _cameraData = null;
+
 		private GameInputs _input = null;
-		public CameraData _cameraData = null;
 		private Camera _camera = null;
 		private IMap _Imap = null;
 		private bool _enableScreenEdgeMovement = false;
@@ -44,12 +46,9 @@
 
 		private void Start()
 		{
-			if (Services.HasInstance)
+			if (Services.Instance.TryGet<IMap>(out IMap map))
 			{
-				if (Services.Instance.TryGet<IMap>(out IMap map))
-				{
-					_Imap = map;
-				}
+				_Imap = map;
 			}
 		}
 

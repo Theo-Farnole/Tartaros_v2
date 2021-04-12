@@ -6,12 +6,12 @@
 	{
 		[SerializeField]
 		private float _detectionRange = 1;
+		public float DetectionRange => _detectionRange;
 
 		public EntityDetectionData(float detectionRange)
 		{
 			_detectionRange = detectionRange;
 		}
-		public float DetectionRange => _detectionRange;
 
 
 		public void SpawnRequiredComponents(GameObject entityRoot)
