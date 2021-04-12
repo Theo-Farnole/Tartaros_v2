@@ -27,7 +27,7 @@
 
 		private void Update()
 		{
-			UpdateFogOfWarVisibility();
+			//UpdateFogOfWarVisibility();
 		}
 
 		private void OnEnable()
