@@ -11,6 +11,9 @@
         private Vector3 _startPosition = Vector3.zero;
         private IConstructable _toBuild = null;
 
+        private float _angleLimitation = 90;
+        private float _actualAngle = 0;
+
         public float DistanceBetweenInstanciate => _toBuild.Size.y;
 
         public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition)
@@ -35,9 +38,14 @@
 			{
 				RemovePreviewWall();
 			}
-
+            //Debug.Log(CaluclateAngleFromStartPointToDirection(direction));
 			SetPositionRotationOfPreviews(end);
 		}
+
+        private float CaluclateAngleFromStartPointToDirection(Vector3 direction)
+		{
+            return Vector3.Angle(direction, _startPosition);
+        }
 
 		private int CalculateNumberOfWallSections(Vector3 end)
 		{
@@ -51,16 +59,27 @@
         }
 
         private void SetPositionRotationOfPreviews(Vector3 end)
-        {
+		{
+            Vector3 direction = (_startPosition - end).normalized;
+
+            //float runTimeAngle = CaluclateAngleFromStartPointToDirection(direction) - 
+
+            //if (CaluclateAngleFromStartPointToDirection(direction) ==)
+
             SetPositionOfPreview(end);
 
-            foreach (GameObject wallSection in _buildingsPreview)
-            {
-                wallSection.transform.LookAt(end);
-            }
-        }
+			SetRotationOfPreview(end);
+		}
 
-        private void SetPositionOfPreview(Vector3 end)
+		private void SetRotationOfPreview(Vector3 end)
+		{
+			foreach (GameObject wallSection in _buildingsPreview)
+			{
+				wallSection.transform.LookAt(end);
+			}
+		}
+
+		private void SetPositionOfPreview(Vector3 end)
         {
             float sectionLength = Vector3.Distance(_startPosition, end);
             float sectionPercent = _toBuild.Size.x / sectionLength;
