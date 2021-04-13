@@ -6,6 +6,7 @@
 	using Tartaros.Entities;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class EntityConstructableData : IEntityBehaviourData, IConstructable
 	{
 		#region Fields
@@ -19,6 +20,12 @@
 
 		[SerializeField]
 		private GameObject _gameplayPrefab = null;
+
+		[SerializeField]
+		private GameObject _wallCornerModel = null;
+
+		[SerializeField]
+		private GameObject _wallCornerGameplay = null;
 
 		[SerializeField]
 		private bool _IsChained = false;
@@ -47,6 +54,10 @@
 		bool IConstructable.IsWall => _IsChained;
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
+
+		GameObject IConstructable.WallCornerModel => _wallCornerModel;
+
+		GameObject IConstructable.WallCornerGameplay => _wallCornerGameplay;
 		#endregion Properties
 
 		#region Methods

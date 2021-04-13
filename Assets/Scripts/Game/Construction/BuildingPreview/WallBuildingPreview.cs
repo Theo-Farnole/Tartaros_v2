@@ -11,7 +11,7 @@
 		private Vector3 _startPosition = Vector3.zero;
 		private IConstructable _toBuild = null;
 
-		private float _angleLimitation = 8;
+		private float _angleLimitation = 4;
 		private float _actualAngle = 0;
 
 		public float DistanceBetweenInstanciate => _toBuild.Size.y;

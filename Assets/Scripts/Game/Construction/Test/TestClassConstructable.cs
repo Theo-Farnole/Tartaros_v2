@@ -27,5 +27,9 @@
 		bool IConstructable.IsWall => _isWall;
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
+
+		GameObject IConstructable.WallCornerModel => throw new System.NotImplementedException();
+
+		GameObject IConstructable.WallCornerGameplay => throw new System.NotImplementedException();
 	}
 }
