@@ -24,7 +24,26 @@
 
 			return centroid;
 		}
-		
+
+		public static Vector3 SnapXZToAxis(Vector3 direction, float axisCount)
+		{
+			// Calculate the decrees in between the options
+			float degrees = 360f / axisCount;
+
+			// calculate the angle
+			float angle = Mathf.Atan2((0 - -direction.z), (0 - direction.x)) * Mathf.Rad2Deg + 90f;
+
+			// Snap the rotation to our degrees
+			angle = Mathf.Round(angle / degrees) * degrees;
+
+			return AngleToXZ(angle);
+		}
+
+		public static Vector3 AngleToXZ(float angleInDegrees)
+		{
+			return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+		}
+
 		// source: https://www.habrador.com/tutorials/math/9-useful-algorithms/
 		public static bool AreLinesIntersecting(Vector2 l1_p1, Vector2 l1_p2, Vector2 l2_p1, Vector2 l2_p2, bool shouldIncludeEndPoints)
 		{
@@ -60,6 +79,8 @@
 
 			return isIntersecting;
 		}
+
+
 
 		//The list describing the polygon has to be sorted either clockwise or counter-clockwise because we have to identify its edges
 		public static bool IsPointInPolygon(List<Vector2> polygonPoints, Vector2 point)
