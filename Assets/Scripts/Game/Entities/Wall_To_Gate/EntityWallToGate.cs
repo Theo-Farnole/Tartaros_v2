@@ -68,7 +68,7 @@
         private void GetNeighbourWall()
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 2))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 5))
             {
                 var entity = hit.transform.gameObject.GetComponentInParent<Entity>();
 
