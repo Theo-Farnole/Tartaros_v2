@@ -33,11 +33,11 @@
 		private void Awake()
 		{
 			_entity = GetComponent<Entity>();
+			_populationManger = Services.Instance.Get<IPopulationManager>();
 		}
 
 		private void Start()
 		{
-			_populationManger = Services.Instance.Get<IPopulationManager>();
 		}
 
 		private void OnEnable()
