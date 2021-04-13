@@ -11,7 +11,7 @@
 		private Vector3 _startPosition = Vector3.zero;
 		private IConstructable _toBuild = null;
 
-		private float _angleLimitation = 85;
+		private float _angleLimitation = 8;
 		private float _actualAngle = 0;
 
 		public float DistanceBetweenInstanciate => _toBuild.Size.y;
@@ -26,12 +26,15 @@
 
 		public void Update(Vector3 end)
 		{
+			Vector3 rawDirection = (_startPosition - end);
+			Vector3 realDirection = MathHelper.SnapXZToAxis(rawDirection, _angleLimitation);
+			end = _startPosition + rawDirection.magnitude * realDirection.normalized;
+
 			int numberOfWallSection = CalculateNumberOfWallSections(end);
-			Vector3 direction = (_startPosition - end).normalized;
 
 			if (numberOfWallSection > _buildingsPreview.Count)
 			{
-				Vector3 position = _startPosition + (-direction * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
+				Vector3 position = _startPosition + (realDirection * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
 				InstanciatePreview(position);
 			}
 			else if (numberOfWallSection < _buildingsPreview.Count)
@@ -60,36 +63,28 @@
 
 		private void SetPositionRotationOfPreviews(Vector3 end)
 		{
-			SnapPreview(end);
-
-			SetPositionOfPreview(end);
-
 			SetRotationOfPreview(end);
+			SetPositionOfPreview(end);
 		}
 
 
-		private void SnapPreview(Vector3 end)
+		private bool IsSnapPreviewRightAngle(Vector3 end)
 		{
-			Vector3 direction = (_startPosition - end).normalized;
+			Vector3 startDirection = (_startPosition - end).normalized;
 
-			//         float runTimeAngle = CaluclateAngleFromStartPointToDirection(direction) - _actualAngle;
+			Vector3 direction = MathHelper.SnapXZToAxis(startDirection, _angleLimitation);
 
-			//         float limite = _actualAngle + _angleLimitation;
-			//         //Debug.Log(limite);
-
-			//         if (runTimeAngle >= limite || runTimeAngle <= limite)
-			//{
-			//             Debug.Log(CaluclateAngleFromStartPointToDirection(direction));
-			//             _actualAngle = CaluclateAngleFromStartPointToDirection(direction);
-			//}
-
-			
 			float runTimeAngle = CaluclateAngleFromStartPointToDirection(direction);
 
-			if(runTimeAngle >= _actualAngle + _angleLimitation || runTimeAngle <= _actualAngle - _angleLimitation)
+			if (runTimeAngle >= _actualAngle + _angleLimitation || runTimeAngle <= _actualAngle - _angleLimitation)
 			{
 				Debug.Log(runTimeAngle);
 				_actualAngle = runTimeAngle;
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 
