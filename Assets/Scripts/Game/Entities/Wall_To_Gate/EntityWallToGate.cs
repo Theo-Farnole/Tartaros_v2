@@ -8,7 +8,7 @@
     using Tartaros.ServicesLocator;
     using UnityEngine;
 
-    public class EntityWallToGate : MonoBehaviour, IEntityOrderable
+    public class EntityWallToGate : AEntityBehaviour, IEntityOrderable
     {
         private EntityWallToGateData _data = null;
         private IconsDatabase _iconsDataBase = null;
@@ -29,7 +29,9 @@
 		private void Awake()
 		{
             _iconsDataBase = Services.Instance.Get<IconsDatabase>();
-            _playerResources = Services.Instance.Get<IPlayerSectorResources>();			
+            _playerResources = Services.Instance.Get<IPlayerSectorResources>();
+
+            _data = Entity.GetBehaviourData<EntityWallToGateData>();
 		}
 
 		private void Start()

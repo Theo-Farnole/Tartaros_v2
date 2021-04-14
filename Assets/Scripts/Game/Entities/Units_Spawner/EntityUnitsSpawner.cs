@@ -8,10 +8,9 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class EntityUnitsSpawner : MonoBehaviour, IEntityOrderable
+	public class EntityUnitsSpawner : AEntityBehaviour, IEntityOrderable
 	{
 		#region Fields
-		[SerializeField]
 		private EntityUnitsSpawnerData _data = null;
 
 		private IPlayerSectorResources _playerResources = null;
@@ -28,6 +27,8 @@
 		{
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
+
+			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
 		}
 
 		public void Spawn(ISpawnable prefabToSpawn)

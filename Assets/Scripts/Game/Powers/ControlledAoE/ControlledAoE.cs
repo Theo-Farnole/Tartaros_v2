@@ -59,17 +59,17 @@
 			_movement.Move(position);
 		}
 
-		void IOrderMoveReceiver.Move(Transform toFollow)
+		void IOrderMoveReceiver.Follow(Transform toFollow)
 		{
 			_movement.Move(toFollow);
 		}
 
-		void IOrderMoveReceiver.MoveAdditive(Vector3 position)
+		void IOrderMoveReceiver.EnqueueMove(Vector3 position)
 		{
 			_movement.Move(position);
 		}
 
-		void IOrderMoveReceiver.MoveAdditive(Transform toFollow)
+		void IOrderMoveReceiver.EnqueueFollow(Transform toFollow)
 		{
 			_movement.Move(toFollow);
 		}

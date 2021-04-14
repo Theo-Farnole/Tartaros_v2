@@ -5,6 +5,7 @@
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.UI;
+	using UnityEditorInternal;
 	using UnityEngine;
 
 	public class EntityData : SerializedScriptableObject, ISpawnable
@@ -30,6 +31,7 @@
 		GameObject ISpawnable.Prefab => _prefab;
 		Sprite IPortraiteable.Portrait => _portrait;
 		int ISpawnable.PopulationAmount => _population;
+		public int Population => _population;
 		#endregion Properties
 
 		#region Methods
@@ -43,7 +45,7 @@
 				}
 			}
 
-			return null;
+			throw new System.Exception(string.Format("Missing behaviour data of {0} in {1}.", typeof(T), name));
 		}
 
 		public bool HasBehaviour<T>() where T : class
@@ -81,17 +83,6 @@
 				if (behaviour is null) throw new System.NullReferenceException(string.Format("Behaviour of {0} is null", this.name));
 
 				behaviour.SpawnRequiredComponents(entity);
-			}
-
-			SpawnRequiredComponents(entity);
-		}
-
-		private void SpawnRequiredComponents(GameObject entity)
-		{
-			if (_population > 0)
-			{
-				var entityPopulationTaker = entity.AddComponent<EntityPlayerPopulationTaker>();
-				entityPopulationTaker.EntityPopulatioNtakerData = new EntityPopulationTakerData(_population);
 			}
 		}
 		#endregion Methods

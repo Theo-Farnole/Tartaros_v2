@@ -13,11 +13,13 @@
             _gloryIncome = gloryIncome;
         }
 
-        public int GloryIncome => _gloryIncome; 
+        public int GloryIncome => _gloryIncome;
 
-        void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
-        {
+#if UNITY_EDITOR
+		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
+		{
 
-        }
-    }
+		} 
+#endif
+	}
 }

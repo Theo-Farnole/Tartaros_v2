@@ -29,10 +29,12 @@
 		#endregion Ctor
 
 		#region Methods
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			entityRoot.AddComponent<EntityResourcesGeneration>().Data = this;
-		}
+			entityRoot.GetOrAddComponent<EntityResourcesGeneration>();
+		} 
+#endif
 		#endregion Methods
 	}
 }

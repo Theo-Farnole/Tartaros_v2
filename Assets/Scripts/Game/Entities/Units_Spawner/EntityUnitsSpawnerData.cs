@@ -31,11 +31,12 @@
 			}
 		}
 
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			var unitsSpawner = entityRoot.GetOrAddComponent<EntityUnitsSpawner>();
-			unitsSpawner.Data = this;
-		}
+			entityRoot.GetOrAddComponent<EntityUnitsSpawner>();
+		} 
+#endif
 		#endregion Methods
 	}
 }

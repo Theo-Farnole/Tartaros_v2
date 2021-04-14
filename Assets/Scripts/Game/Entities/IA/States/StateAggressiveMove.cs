@@ -6,7 +6,7 @@
 
 	public class StateAggressiveMove : AEntityState
 	{
-		private readonly Vector3 _targetPoint = Vector3.zero;		
+		private readonly Vector3 _targetPoint = Vector3.zero;
 		private readonly EntityDetection _entityDetection = null;
 		private readonly EntityMovement _entityMovement = null;
 
@@ -36,7 +36,7 @@
 			if (_entityDetection.IsNearestOpponentInDetectionRange())
 			{
 				IAttackable target = _entityDetection.GetNearestAttackableOpponent();
-				_stateOwner.GetComponent<EntityFSM>().SetState(new StateAttack(_stateOwner, target));
+				_stateOwner.GetComponent<EntityFSM>().OrderAttack(target);
 			}
 		}
 	}

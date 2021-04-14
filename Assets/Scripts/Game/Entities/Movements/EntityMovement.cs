@@ -9,12 +9,12 @@
 	using UnityEngine;
 	using UnityEngine.AI;
 
-	public class EntityMovement : MonoBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IEntityOrderable
+	[RequireComponent(typeof(NavMeshAgent), typeof(EntityFSM))]
+	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IEntityOrderable
 	{
 		#region Fields
 		private EntityMovementData _entityMovementData = null;
 		private NavMeshAgent _navMeshAgent = null;
-		private Entity _entity = null;
 		private EntityFSM _entityFSM = null;
 		#endregion
 
@@ -43,9 +43,10 @@
 		#region Methods
 		private void Awake()
 		{
-			_navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-			_entity = GetComponent<Entity>();
+			_navMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
 			_entityFSM = GetComponent<EntityFSM>();
+
+			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
 
 			//NavMesh.avoidancePredictionTime = Mathf.Infinity; // overclock the nav mesh calculator
 		}
@@ -101,42 +102,42 @@
 		#region IOrder
 		void IOrderMoveAggresivellyReceiver.MoveAggressively(Vector3 position)
 		{
-			_entityFSM.SetState(new StateAggressiveMove(_entity, position));
+			_entityFSM.OrderMoveAggressively(position);
 		}
 
 		void IOrderMoveAggresivellyReceiver.MoveAggressivelyAdditive(Vector3 position)
 		{
-			_entityFSM.EnqueueState(new StateAggressiveMove(_entity, position));
+			_entityFSM.EnqueueOrderMoveAggressively(position);
 		}
 
 		void IOrderMoveReceiver.Move(Vector3 position)
 		{
-			_entityFSM.SetState(new StateMove(_entity, position));
+			_entityFSM.OrderMove(position);
 		}
 
-		void IOrderMoveReceiver.Move(Transform toFollow)
+		void IOrderMoveReceiver.Follow(Transform toFollow)
 		{
-			_entityFSM.SetState(new StateFollow(_entity, toFollow));
+			_entityFSM.OrderFollow(toFollow);
 		}
 
-		void IOrderMoveReceiver.MoveAdditive(Vector3 position)
+		void IOrderMoveReceiver.EnqueueMove(Vector3 position)
 		{
-			_entityFSM.EnqueueState(new StateMove(_entity, position));
+			_entityFSM.EnqueueOrderMove(position);
 		}
 
-		void IOrderMoveReceiver.MoveAdditive(Transform target)
+		void IOrderMoveReceiver.EnqueueFollow(Transform target)
 		{
-			_entityFSM.EnqueueState(new StateFollow(_entity, target));
+			_entityFSM.EnqueueOrderFollow(target);
 		}
 
 		void IOrderPatrolReceiver.Patrol(PatrolPoints waypoints)
 		{
-			_entityFSM.SetState(new StatePatrol(_entity, waypoints));
+			_entityFSM.OrderPatrol(waypoints);
 		}
 
-		void IOrderPatrolReceiver.PatrolAdditive(PatrolPoints waypoints)
+		void IOrderPatrolReceiver.EnqueuePatrol(PatrolPoints waypoints)
 		{
-			_entityFSM.EnqueueState(new StatePatrol(_entity, waypoints));
+			_entityFSM.OrderPatrol(waypoints);
 		}
 
 		public Order[] GenerateOrders(Entity entity)

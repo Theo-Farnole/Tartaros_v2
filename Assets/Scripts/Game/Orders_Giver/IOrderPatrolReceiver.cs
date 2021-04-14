@@ -5,6 +5,6 @@
 	public interface IOrderPatrolReceiver
 	{
 		void Patrol(PatrolPoints waypoints);
-		void PatrolAdditive(PatrolPoints waypoints);
+		void EnqueuePatrol(PatrolPoints waypoints);
 	}
 }

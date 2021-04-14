@@ -18,8 +18,10 @@
 		#endregion Properties
 
 		#region Methods
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
-		{ }
+		{ } 
+#endif
 		#endregion Methods
 	}
 }

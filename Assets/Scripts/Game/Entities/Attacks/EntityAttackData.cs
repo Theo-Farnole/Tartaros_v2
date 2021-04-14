@@ -5,6 +5,7 @@
 	using UnityEngine;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Attack;
+	using Tartaros.Entities.Detection;
 
 	public class EntityAttackData : IEntityBehaviourData
 	{
@@ -32,11 +33,14 @@
 		public IAttackMode AttackMode => _attackMode;
 
 
-		public void SpawnRequiredComponents(GameObject entityRoot)
+#if UNITY_EDITOR
+		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			EntityAttack entityAttack = entityRoot.AddComponent<EntityAttack>();
-			entityAttack.EntityAttackData = this;
+			entityRoot.GetOrAddComponent<EntityAttack>();
+			entityRoot.GetOrAddComponent<EntityDetection>();
+			entityRoot.GetOrAddComponent<EntityFSM>();
 		}
+#endif
 	}
 
 }

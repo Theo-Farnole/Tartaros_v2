@@ -36,17 +36,17 @@
 
 		public void Move(Transform target)
 		{
-			CallAction<IOrderMoveReceiver>(ctx => ctx.Move(target));
+			CallAction<IOrderMoveReceiver>(ctx => ctx.Follow(target));
 		}
 
 		public void MoveAdditive(Vector3 position)
 		{
-			CallAction<IOrderMoveReceiver>(ctx => ctx.MoveAdditive(position));
+			CallAction<IOrderMoveReceiver>(ctx => ctx.EnqueueMove(position));
 		}
 
 		public void MoveAdditive(Transform target)
 		{
-			CallAction<IOrderMoveReceiver>(ctx => ctx.MoveAdditive(target));
+			CallAction<IOrderMoveReceiver>(ctx => ctx.EnqueueFollow(target));
 		}
 
 		public void Attack(IAttackable attackable)
@@ -76,7 +76,7 @@
 
 		public void PatrolAdditive(PatrolPoints patrolPoints)
 		{
-			CallAction<IOrderPatrolReceiver>(ctx => ctx.PatrolAdditive(patrolPoints));
+			CallAction<IOrderPatrolReceiver>(ctx => ctx.EnqueuePatrol(patrolPoints));
 		}
 
 		private void CallAction<T>(Action<T> action)
