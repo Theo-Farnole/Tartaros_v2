@@ -40,7 +40,7 @@
 			RegisterFromChildren<IPlayerGloryWallet>();
 			RegisterFromChildren<IPlayerIncomeManager>();
 			RegisterFromChildren<IPlayerSectorResources>();
-			RegisterFromChildren<EntitiesDetector>();
+			RegisterFromChildren<EntitiesDetectorManager>();
 			RegisterFromChildren<FogOfWarManager>();
 			RegisterFromChildren<GamemodeManager>();
 			RegisterFromChildren<ISectorsCaptureManager>();

@@ -12,7 +12,7 @@
 	{
 		#region Fields
 		private const int DETECTOR_RADIUS = 5;
-		private EntitiesDetector _entitiesDetector = null;
+		private EntitiesDetectorManager _entitiesDetector = null;
 		#endregion Fields
 
 		#region Methods

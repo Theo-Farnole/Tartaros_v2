@@ -5,7 +5,7 @@
 	using System.Linq;
 	using UnityEngine;
 
-	public class EntitiesDetector : MonoBehaviour
+	public class EntitiesDetectorManager : MonoBehaviour
 	{
 		#region Fields
 		private Dictionary<Team, KdTree<Entity>> _kdTrees = null;

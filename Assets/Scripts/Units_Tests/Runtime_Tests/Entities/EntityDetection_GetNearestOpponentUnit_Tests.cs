@@ -10,7 +10,7 @@
 	public class EntityDetection_GetNearestOpponentUnit_Tests
 	{
 		#region Fields
-		private EntitiesDetector _entitiesKDTrees = null;
+		private EntitiesDetectorManager _entitiesKDTrees = null;
 		private EntityDetection _playerEntDetection = null;
 		private Entity _enemyEntity = null;
 		#endregion Fields
