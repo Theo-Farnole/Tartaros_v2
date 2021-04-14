@@ -17,8 +17,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: b1ffca23ee75f2f43833e96b01ff2213, type: 3}
-    - {fileID: 5657609668978460668, guid: 40135a875b18b894893b8965e1eb5987, type: 3}
-    - {fileID: 5657609668978460668, guid: 6c854dce3fc8b564bb55753400db7878, type: 3}
+    - {fileID: 5657609668978460668, guid: 792750a5111312a4da38e3eae8838e9d, type: 3}
+    - {fileID: 0}
     - {fileID: 11400000, guid: 69c05a069b696be49b0616a67f00bff7, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -67,10 +67,22 @@ MonoBehaviour:
     - Name: _gameplayPrefab
       Entry: 10
       Data: 2
-    - Name: _wallCornerModel
+    - Name: _wallLModel
       Entry: 6
       Data: 
-    - Name: _wallCornerGameplay
+    - Name: _wallLGameplay
+      Entry: 6
+      Data: 
+    - Name: _wallTModel
+      Entry: 6
+      Data: 
+    - Name: _wallTGameplay
+      Entry: 6
+      Data: 
+    - Name: _wallXModel
+      Entry: 6
+      Data: 
+    - Name: _wallXGameplay
       Entry: 6
       Data: 
     - Name: _IsChained
