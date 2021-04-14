@@ -34,23 +34,11 @@
 
 		private void Awake()
 		{
-            _iconsDataBase = Services.Instance.Get<IconsDatabase>();
-            _playerResources = Services.Instance.Get<IPlayerSectorResources>();
-
-            _data = Entity.GetBehaviourData<EntityWallToGateData>();
-		}
-
-		private void Start()
-        {
-            GetNeighbourWall();
-        }
-
-		private void Start()
-		{
 			_iconsDataBase = Services.Instance.Get<IconsDatabase>();
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
-		}
 
+			_data = Entity.GetBehaviourData<EntityWallToGateData>();
+		}
 
 		Order[] IEntityOrderable.GenerateOrders(Entity entity)
 		{
@@ -80,7 +68,7 @@
 		{
 			return _neigboorManager.NextAdjacentWall != null && _neigboorManager.PreviousAdjacentWall != null;
 		}
-		
+
 
 		public bool CanSpawn()
 		{
