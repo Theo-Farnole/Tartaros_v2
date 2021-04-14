@@ -17,7 +17,7 @@
 		private GameObject _preCastVFX = null;
 		private GameObject _castVFX = null;
 		private ControlledAoEMovement _movement = null;
-		private EntitiesKDTrees _kdTree = null;
+		private EntitiesDetector _kdTree = null;
 		#endregion
 
 		#region Properties
@@ -32,7 +32,7 @@
 		void Awake()
 		{
 			_movement = gameObject.GetOrAddComponent<ControlledAoEMovement>();
-			_kdTree = Services.Instance.Get<EntitiesKDTrees>();
+			_kdTree = Services.Instance.Get<EntitiesDetector>();
 		}
 
 		void Start()

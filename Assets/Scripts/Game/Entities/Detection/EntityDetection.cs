@@ -16,7 +16,7 @@
 
 		private EntityDetectionData _entityDetectionData = null;
 
-		private EntitiesKDTrees _entitiesKDTrees = null;
+		private EntitiesDetector _entitiesKDTrees = null;
 		private EntityAttack _entityAttack = null;
 		#endregion
 
@@ -58,7 +58,7 @@
 		#region Methods
 		private void Awake()
 		{
-			_entitiesKDTrees = Services.Instance.Get<EntitiesKDTrees>();
+			_entitiesKDTrees = Services.Instance.Get<EntitiesDetector>();
 			_entityAttack = GetComponent<EntityAttack>();
 
 			EntityDetectionData = Entity.GetBehaviourData<EntityDetectionData>();

@@ -14,9 +14,9 @@
 			return new GameObject("Services").AddComponent<Services>();
 		}
 
-		public static EntitiesKDTrees CreateEntitiesKDTree()
+		public static EntitiesDetector CreateEntitiesKDTree()
 		{
-			return new GameObject("Entities KD Tree").AddComponent<EntitiesKDTrees>();
+			return new GameObject("Entities KD Tree").AddComponent<EntitiesDetector>();
 		}
 
 		public static PlayerSectorResources CreatePlayerSectorResources()

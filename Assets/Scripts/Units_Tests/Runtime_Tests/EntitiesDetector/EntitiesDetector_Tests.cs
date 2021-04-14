@@ -12,7 +12,7 @@
 	{
 		#region Fields
 		private const int DETECTOR_RADIUS = 5;
-		private EntitiesKDTrees _entitiesDetector = null;
+		private EntitiesDetector _entitiesDetector = null;
 		#endregion Fields
 
 		#region Methods

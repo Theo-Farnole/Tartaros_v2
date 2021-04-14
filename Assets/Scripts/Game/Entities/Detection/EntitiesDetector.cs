@@ -3,10 +3,9 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class EntitiesKDTrees : MonoBehaviour
+	public class EntitiesDetector : MonoBehaviour
 	{
 		#region Fields
 		private Dictionary<Team, KdTree<Entity>> _kdTrees = null;

@@ -16,7 +16,7 @@
 		private LightningBoltData _data = null;
 
 		private GameObject _castVFX = null;
-		private EntitiesKDTrees _kdTree = null;
+		private EntitiesDetector _kdTree = null;
 		#endregion
 
 		#region Properties
@@ -30,7 +30,7 @@
 		#region Methods
 		void Awake()
 		{
-			_kdTree = Services.Instance.Get<EntitiesKDTrees>();
+			_kdTree = Services.Instance.Get<EntitiesDetector>();
 		}
 
 		private void OnEnable()
