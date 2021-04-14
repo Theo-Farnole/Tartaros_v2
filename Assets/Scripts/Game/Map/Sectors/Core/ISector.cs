@@ -16,5 +16,8 @@
 		GameObject[] ObjectsInSector { get; }
 		ISectorResourcesWallet CapturePrice { get; }
 		bool ContainsPosition(Vector3 worldPosition);
+
+		void AddObjectInSector(GameObject gameObject);
+		void RemoveObjectInSector(GameObject gameObject);
 	}
 }

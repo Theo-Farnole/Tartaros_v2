@@ -1,9 +1,9 @@
 ﻿namespace Tartaros.Map
 {
-	using Sirenix.OdinInspector;
 	using Tartaros.Economy;
 	using UnityEngine;
 
+	[RequireComponent(typeof(SectorObject))]
 	public class FlagResourceToSector : MonoBehaviour
 	{
 		#region Fields
@@ -16,6 +16,11 @@
 		#endregion Properties
 
 		#region Methods
+		private void Awake()
+		{
+			gameObject.GetOrAddComponent<SectorObject>();
+		}
+
 		private void OnDrawGizmos()
 		{
 			_type.DrawIcon(transform.position);

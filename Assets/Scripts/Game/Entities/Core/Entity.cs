@@ -3,12 +3,14 @@
 	using Sirenix.OdinInspector;
 	using System;
 	using System.Linq;
+	using Tartaros.Map;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
 	using Tartaros.Wave;
 	using UnityEngine;
 	using UnityEngine.UI;
 
+	[RequireComponent(typeof(SectorObject))]
 	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable
 	{
 		#region Fields
@@ -60,6 +62,11 @@
 		#endregion Events
 
 		#region Methods
+		private void Awake()
+		{
+			gameObject.GetOrAddComponent<SectorObject>();
+		}
+
 		private void Start()
 		{
 			AnyEntitySpawned?.Invoke(this, new EntitySpawnedArgs(this));

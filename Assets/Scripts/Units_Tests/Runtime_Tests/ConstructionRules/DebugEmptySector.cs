@@ -26,11 +26,19 @@
             }
         }
 
-     
+		void ISector.AddObjectInSector(GameObject gameObject)
+		{
+			throw new NotImplementedException();
+		}
 
-        bool ISector.ContainsPosition(Vector3 worldPosition)
+		bool ISector.ContainsPosition(Vector3 worldPosition)
 		{
 			throw new System.NotImplementedException();
+		}
+
+		void ISector.RemoveObjectInSector(GameObject gameObject)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

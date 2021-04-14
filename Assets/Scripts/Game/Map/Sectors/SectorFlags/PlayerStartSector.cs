@@ -3,6 +3,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
+	[RequireComponent(typeof(SectorObject))]
 	public class PlayerStartSector : MonoBehaviour
 	{
 		private IMap _map = null;
@@ -10,9 +11,10 @@
 
 		private void Awake()
 		{
+			gameObject.GetOrAddComponent<SectorObject>();
+
 			_map = Services.Instance.Get<IMap>();
 			_captureManager = Services.Instance.Get<ISectorsCaptureManager>();
-
 		}
 
 		private void Start()

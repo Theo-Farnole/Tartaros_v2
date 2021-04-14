@@ -53,9 +53,19 @@
             }
         }
 
-        bool ISector.ContainsPosition(Vector3 worldPosition)
+		void ISector.AddObjectInSector(GameObject gameObject)
+		{
+			throw new NotImplementedException();
+		}
+
+		bool ISector.ContainsPosition(Vector3 worldPosition)
 		{
 			throw new System.NotImplementedException();
+		}
+
+		void ISector.RemoveObjectInSector(GameObject gameObject)
+		{
+			throw new NotImplementedException();
 		}
 		#endregion Methods
 	}
