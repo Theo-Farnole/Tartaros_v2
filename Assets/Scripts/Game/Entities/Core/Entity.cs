@@ -120,9 +120,23 @@
 			gameObject.GetOrAddComponent<EntityFSM>();
 			gameObject.GetOrAddComponent<Selection.Selectable>();
 
+			if (_team == Team.Player)
+			{
+				Selection.InstantiateGameObjectOnSelection instantiateGameObjectOnSelection = gameObject.GetOrAddComponent<Selection.InstantiateGameObjectOnSelection>();
+				TryConfigurePrefabOnSelection(instantiateGameObjectOnSelection);
+			}
+
 			if (_entityData != null)
 			{
 				_entityData.SpawnComponents(gameObject);
+			}
+		}
+
+		private static void TryConfigurePrefabOnSelection(Selection.InstantiateGameObjectOnSelection instantiateGameObjectOnSelection)
+		{
+			if (instantiateGameObjectOnSelection.PrefabToInstantiateOnSelection == null)
+			{
+				instantiateGameObjectOnSelection.PrefabToInstantiateOnSelection = Tartaros.Editor.AssetsDatabaseHelper.FindAsset<GameObject>("SelectionCircle");
 			}
 		}
 	}

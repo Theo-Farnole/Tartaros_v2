@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6812927556283947170}
   - component: {fileID: 6812927556283947173}
-  - component: {fileID: 1452253395}
   - component: {fileID: 7427948960150135923}
   - component: {fileID: 2698862322642800849}
   - component: {fileID: 5993632778829013082}
@@ -61,20 +60,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 69c05a069b696be49b0616a67f00bff7, type: 2}
   _team: 1
---- !u!114 &1452253395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6812927556283947172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77df7935e2160914fa85c66780dde569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _entity: {fileID: 0}
-  _teamSetOnStart: 1
 --- !u!114 &7427948960150135923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,9 +183,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 15
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

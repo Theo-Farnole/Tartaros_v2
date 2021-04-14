@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9216734862956900627}
   - component: {fileID: 815088699222477536}
   - component: {fileID: 1210303624595609094}
+  - component: {fileID: 3084403576448455371}
+  - component: {fileID: 1623667010330385622}
   m_Layer: 0
   m_Name: Building.Resources.StoneQuary
   m_TagString: Untagged
@@ -99,6 +101,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ac80f35b6b60d46bfb0d62c84e1cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3084403576448455371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354196551474623153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _canBeMultiSelected: 1
+--- !u!114 &1623667010330385622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354196551474623153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
+    type: 3}
 --- !u!1001 &3288096233272832078
 PrefabInstance:
   m_ObjectHideFlags: 0

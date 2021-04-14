@@ -104,7 +104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6321277518661800558}
   - component: {fileID: 6321277518661800557}
-  - component: {fileID: 1485619149}
   - component: {fileID: 2900519924700786984}
   - component: {fileID: 4815396241145748713}
   - component: {fileID: 6834013272998221486}
@@ -155,20 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: ef88a5278bc6e0d469c259828f48c5ad, type: 2}
   _team: 1
---- !u!114 &1485619149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6321277518661800559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77df7935e2160914fa85c66780dde569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _entity: {fileID: 0}
-  _teamSetOnStart: 1
 --- !u!114 &2900519924700786984
 MonoBehaviour:
   m_ObjectHideFlags: 0
