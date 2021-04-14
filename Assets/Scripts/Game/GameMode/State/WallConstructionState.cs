@@ -130,6 +130,10 @@
 
 		private void ValidateFirstPreview()
 		{
+			if(_buildingPreview.GetNeigboorManager() != null)
+			{
+
+			}
 			_wallSectionPreview = new WallBuildingPreview(_constructable, _buildingPreview.GetBuildingPreviewPosition());
 			_buildingPreview.DestroyMethod();
 			_buildingPreview = null;
@@ -173,7 +177,7 @@
 			{
 				Transform transform = corner.transform;
 				GameObject.Destroy(corner);
-				GameObject wallInstanciate = GameObject.Instantiate(_constructable.WallCornerGameplay, transform.position, transform.rotation);
+				GameObject wallInstanciate = GameObject.Instantiate(_constructable.WallLGameplay, transform.position, transform.rotation);
 			}
 		}
 

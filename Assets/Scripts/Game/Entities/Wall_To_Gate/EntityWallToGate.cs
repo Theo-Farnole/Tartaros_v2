@@ -1,30 +1,36 @@
 ﻿namespace Tartaros.Entities
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using Tartaros.Economy;
-    using Tartaros.Orders;
-    using Tartaros.Selection;
-    using Tartaros.ServicesLocator;
-    using UnityEngine;
+	using System.Collections;
+	using System.Collections.Generic;
+	using Tartaros.Economy;
+	using Tartaros.Orders;
+	using Tartaros.Selection;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
-    public class EntityWallToGate : MonoBehaviour, IEntityOrderable
-    {
-        private EntityWallToGateData _data = null;
-        private IconsDatabase _iconsDataBase = null;
-        private IPlayerSectorResources _playerResources = null;
+	public class EntityWallToGate : MonoBehaviour, IEntityOrderable
+	{
+		private EntityWallToGateData _data = null;
+		private IconsDatabase _iconsDataBase = null;
+		private IPlayerSectorResources _playerResources = null;
+		private NeigboorWallManager _neigboorManager = null;
 
-        [SerializeField]
-        private Entity _previousAdjacentWall = null;
-        [SerializeField]
-        private Entity _nextAdjacentWall = null;
+		[SerializeField]
+		private Entity _previousAdjacentWall = null;
+		[SerializeField]
+		private Entity _nextAdjacentWall = null;
+		[SerializeField]
+		private Entity _rightAdjacecntWall = null;
+		[SerializeField]
+		private Entity _leftAdjacentWall = null;
 
-        public Entity PreviousAdjacentWall => _previousAdjacentWall;
-        public Entity NextAdjacentWall { get => _nextAdjacentWall; set => _nextAdjacentWall = value; }
+		public Entity PreviousAdjacentWall => _previousAdjacentWall;
+		public Entity NextAdjacentWall { get => _nextAdjacentWall; set => _nextAdjacentWall = value; }
 
-        public IconsDatabase IconData => _iconsDataBase;
+		public IconsDatabase IconData => _iconsDataBase;
 
-        public EntityWallToGateData EntityWallToGateData { get => _data; set => _data = value; }
+		public EntityWallToGateData EntityWallToGateData { get => _data; set => _data = value; }
+		public NeigboorWallManager NeigboorManager { get => _neigboorManager; set => _neigboorManager = value; }
 
 		private void Awake()
 		{
@@ -37,60 +43,46 @@
             GetNeighbourWall();
         }
 
+		private void Start()
+		{
+			_iconsDataBase = Services.Instance.Get<IconsDatabase>();
+			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
+		}
 
-        Order[] IEntityOrderable.GenerateOrders(Entity entity)
-        {
-            List<Order> orders = new List<Order>();
 
-            orders.Add(new InstanciateGateOrder(this));
-            return orders.ToArray();
-        }
+		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		{
+			List<Order> orders = new List<Order>();
 
-        public void InstanciateGate()
-        {
-            if (CanSpawn())
-            {
-                Vector3 position = (transform.position + _previousAdjacentWall.gameObject.transform.position) / 2;
+			orders.Add(new InstanciateGateOrder(this));
+			return orders.ToArray();
+		}
 
-                GameObject gate = GameObject.Instantiate(_data.GatePrefab, position, transform.rotation);
-                Destroy(_previousAdjacentWall.gameObject);
-                Destroy(this.gameObject);
+		public void InstanciateGate()
+		{
+			if (CanSpawn())
+			{
+				Vector3 position = (transform.position + _neigboorManager.PreviousAdjacentWall.gameObject.transform.position) / 2;
 
-                ISelection selction = Services.Instance.Get<CurrentSelection>();
-                selction.ClearSelection();
-                selction.AddToSelection(gate.GetComponent<ISelectable>());
-            }
-        }
+				GameObject gate = GameObject.Instantiate(_data.GatePrefab, position, transform.rotation);
+				Destroy(_neigboorManager.PreviousAdjacentWall.gameObject);
+				Destroy(this.gameObject);
 
-        public bool HaveEnoughSpace()
-        {
-            return _nextAdjacentWall != null && _previousAdjacentWall != null;
-        }
+				ISelection selction = Services.Instance.Get<CurrentSelection>();
+				selction.ClearSelection();
+				selction.AddToSelection(gate.GetComponent<ISelectable>());
+			}
+		}
 
-        private void GetNeighbourWall()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 5))
-            {
-                var entity = hit.transform.gameObject.GetComponentInParent<Entity>();
+		public bool HaveEnoughSpace()
+		{
+			return _neigboorManager.NextAdjacentWall != null && _neigboorManager.PreviousAdjacentWall != null;
+		}
+		
 
-                if (entity != null)
-                {
-                    _previousAdjacentWall = entity;
-
-                    entity.gameObject.GetComponent<EntityWallToGate>().NextAdjacentWall = gameObject.GetComponent<Entity>();
-                }
-                else
-                {
-                    Debug.LogError("there is no adjacentWall detected");
-                    return;
-                }
-            }
-        }
-
-        public bool CanSpawn()
-        {
-            return _playerResources.CanBuyWallet(_data.GatePrice);
-        }
-    }
+		public bool CanSpawn()
+		{
+			return _playerResources.CanBuyWallet(_data.GatePrice);
+		}
+	}
 }
