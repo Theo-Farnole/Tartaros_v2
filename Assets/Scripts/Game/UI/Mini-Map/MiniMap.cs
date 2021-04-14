@@ -158,7 +158,7 @@
 
 			RectTransform rectTransform = iconGameObject.GetComponent<RectTransform>();
 
-			rectTransform.parent = _iconsParent;
+			rectTransform.SetParent(_iconsParent, false);
 			rectTransform.localScale = Vector3.one;
 			iconGameObject.GetComponent<Image>().sprite = icon.Icon;
 
