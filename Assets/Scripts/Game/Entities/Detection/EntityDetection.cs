@@ -81,17 +81,7 @@
 
 		public IAttackable GetNearestAttackableOpponentInDetectionRange()
 		{
-			Entity[] entitiesInAttackRange = _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange);
-
-			foreach (Entity entity in entitiesInAttackRange)
-			{
-				if (entity.TryGetComponent(out IAttackable attackable) && IsInDetectionRange(entity))
-				{
-					return attackable;
-				}
-			}
-
-			return null;
+			return _entitiesKDTrees.GetNearestAttackable(transform.position, OpponentTeam, DetectionRange);
 		}
 
 

@@ -19,7 +19,7 @@
 		#endregion Fields
 
 		#region Properties
-		private bool ShouldTryAttackNearest => _entityAttack != null;
+		private bool CanTryAttackNearest => _entityAttack != null;
 		#endregion Properties
 
 		#region Ctor
@@ -44,7 +44,7 @@
 
 		public override void OnUpdate()
 		{
-			if (ShouldTryAttackNearest == true)
+			if (CanTryAttackNearest == true)
 			{
 				_entityAttack.TryOrderAttackNearestOpponent();
 			}

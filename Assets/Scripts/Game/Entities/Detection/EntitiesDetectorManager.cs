@@ -75,6 +75,44 @@
 		{
 			return GameObject.FindObjectsOfType<Entity>().Where(x => x.Team == team).ToArray();
 		}
+
+		public IAttackable GetNearestAttackable(Vector3 position, Team team, float radius)
+		{
+			Entity nearestOpponent = FindClosest(team, position);
+
+			// let's find the nearest using the KD-Tree
+			if (nearestOpponent != null && nearestOpponent is IAttackable nearestAttackable)
+			{
+				if (IsInRadius(position, radius, nearestOpponent) == true)
+				{
+					return nearestAttackable;
+				}
+				else
+				{
+					return null;
+				}
+			}
+			// if the nearest entity has not a IAttackable component, let's use the hard way
+			else
+			{
+				Entity[] entitiesInRange = this.GetEveryEntityInRadius(team, transform.position, radius);
+
+				foreach (Entity entity in entitiesInRange)
+				{
+					if (entity.TryGetComponent(out IAttackable entityAttackable) && IsInRadius(position, radius, entity))
+					{
+						return entityAttackable;
+					}
+				}
+
+				return null;
+			}
+		}
+
+		private static bool IsInRadius(Vector3 position, float radius, Entity entity)
+		{
+			return Vector3.Distance(entity.transform.position, position) <= radius;
+		}
 		#endregion Methods
 	}
 }
