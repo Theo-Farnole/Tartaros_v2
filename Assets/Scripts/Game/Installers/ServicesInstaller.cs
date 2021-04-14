@@ -43,7 +43,6 @@
 			RegisterFromChildren<EntitiesKDTrees>();
 			RegisterFromChildren<FogOfWarManager>();
 			RegisterFromChildren<GamemodeManager>();
-			RegisterFromChildren<ICheckCanConstruct>();
 			RegisterFromChildren<ISectorsCaptureManager>();
 			RegisterFromChildren<SelectionOrderGiverInput>(); // TODO: check if I can remove it
 			RegisterFromChildren<SelectionOrderGiver>();

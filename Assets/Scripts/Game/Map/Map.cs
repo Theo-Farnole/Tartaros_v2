@@ -32,10 +32,6 @@
 		private void Awake()
 		{
 			_logger = Services.Instance.Get<UserErrorsLogger>();
-		}
-
-		private void Start()
-		{
 			SpawnSectors();
 		}
 
