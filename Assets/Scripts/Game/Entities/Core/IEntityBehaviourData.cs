@@ -4,6 +4,8 @@
 
 	public interface IEntityBehaviourData
 	{
-		void SpawnRequiredComponents(GameObject entityRoot);
+#if UNITY_EDITOR
+		void SpawnRequiredComponents(GameObject entityRoot); 
+#endif // UNITY_EDITOR
 	}
 }

@@ -15,10 +15,14 @@
 		private GameObject _currentPrefab = null;
 		#endregion Fields
 
+		#region Properties
+		public GameObject PrefabToInstantiateOnSelection { get => _prefabToInstantiateOnSelection; set => _prefabToInstantiateOnSelection = value; } 
+		#endregion Properties
+
 		#region Methods
 		void Start()
 		{
-			if (_prefabToInstantiateOnSelection == null)
+			if (PrefabToInstantiateOnSelection == null)
 			{
 				Debug.LogWarningFormat("Missing projector prefab on {0}.", name);
 			}
@@ -42,7 +46,7 @@
 				DestroyCurrentPrefab();
 			}
 
-			_currentPrefab = Instantiate(_prefabToInstantiateOnSelection, transform);
+			_currentPrefab = Instantiate(PrefabToInstantiateOnSelection, transform);
 		}
 
 		private void DestroyCurrentPrefab()

@@ -1,14 +1,15 @@
 ﻿namespace Tartaros.Entities
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using System.Linq;
-	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
 	using Tartaros.Wave;
 	using UnityEngine;
+	using UnityEngine.UI;
 
-	public class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable
+	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable
 	{
 		#region Fields
 		[SerializeField]
@@ -56,18 +57,11 @@
 
 		event EventHandler<KilledArgs> EntityKilled = null;
 		event EventHandler<KilledArgs> IWaveSpawnable.Killed { add => EntityKilled += value; remove => EntityKilled -= value; }
-
-		public class RequiredComponentsSpawnedArgs : EventArgs
-		{ }
-
-		public event EventHandler<RequiredComponentsSpawnedArgs> RequiredComponentsSpawned = null;
 		#endregion Events
 
 		#region Methods
 		private void Start()
 		{
-			GenerateRequiredComponents();
-
 			AnyEntitySpawned?.Invoke(this, new EntitySpawnedArgs(this));
 		}
 
@@ -96,18 +90,9 @@
 				.ToArray();
 		}
 
-		void GenerateRequiredComponents()
+		public T GetBehaviourData<T>() where T : class
 		{
-			_entityFSM = gameObject.AddComponent<EntityFSM>();
-
-			if (_entityData == null)
-			{
-				throw new MissingDataReference<EntityData>(this);				
-			}
-
-			_entityData.SpawnComponents(gameObject);
-
-			RequiredComponentsSpawned?.Invoke(this, new RequiredComponentsSpawnedArgs());
+			return _entityData.GetBehaviour<T>();
 		}
 
 		#region IOrders
@@ -123,4 +108,37 @@
 		#endregion IOrders
 		#endregion Methods
 	}
+
+#if UNITY_EDITOR
+	public partial class Entity
+	{
+		[Button]
+#pragma warning disable IDE0051 // Remove unused private members
+		void GenerateRequiredComponents()
+#pragma warning restore IDE0051 // Remove unused private members
+		{
+			gameObject.GetOrAddComponent<EntityFSM>();
+			gameObject.GetOrAddComponent<Selection.Selectable>();
+
+			if (_team == Team.Player)
+			{
+				Selection.InstantiateGameObjectOnSelection instantiateGameObjectOnSelection = gameObject.GetOrAddComponent<Selection.InstantiateGameObjectOnSelection>();
+				TryConfigurePrefabOnSelection(instantiateGameObjectOnSelection);
+			}
+
+			if (_entityData != null)
+			{
+				_entityData.SpawnComponents(gameObject);
+			}
+		}
+
+		private static void TryConfigurePrefabOnSelection(Selection.InstantiateGameObjectOnSelection instantiateGameObjectOnSelection)
+		{
+			if (instantiateGameObjectOnSelection.PrefabToInstantiateOnSelection == null)
+			{
+				instantiateGameObjectOnSelection.PrefabToInstantiateOnSelection = Tartaros.Editor.AssetsDatabaseHelper.FindAsset<GameObject>("SelectionCircle");
+			}
+		}
+	}
+#endif
 }

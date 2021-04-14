@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: -8408549596680975159}
   - component: {fileID: 264629295783845372}
   - component: {fileID: 6537621115621274118}
+  - component: {fileID: 629918595505551156}
+  - component: {fileID: 4909234102194517533}
   m_Layer: 0
   m_Name: Building.Defense.Gate
   m_TagString: Untagged
@@ -102,6 +104,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31da8d9a0020b4146919208799b4faf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &629918595505551156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740395784054915281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9916b8fbc6dc04e4a82598a30673594b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4909234102194517533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740395784054915281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _canBeMultiSelected: 1
 --- !u!1001 &5427320161552061013
 PrefabInstance:
   m_ObjectHideFlags: 0

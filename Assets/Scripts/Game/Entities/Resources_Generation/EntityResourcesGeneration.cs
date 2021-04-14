@@ -5,7 +5,7 @@
 	using UnityEngine;
 	using Tartaros.Economy;
 
-	public class EntityResourcesGeneration : MonoBehaviour, IIncomeGenerator
+	public class EntityResourcesGeneration : AEntityBehaviour, IIncomeGenerator
 	{
 		#region Fields
 		private EntityResourcesGenerationData _data = null;
@@ -34,6 +34,7 @@
 		{
 			_incomeManager = Services.Instance.Get<IPlayerIncomeManager>();
 
+			_data = Entity.GetBehaviourData<EntityResourcesGenerationData>();
 			// TODO TF: Log warning if entity.Team is Enemy: The enemy will generate resource for the player
 		}
 

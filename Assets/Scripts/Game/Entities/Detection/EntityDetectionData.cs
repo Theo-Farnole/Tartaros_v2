@@ -14,9 +14,11 @@
 		}
 
 
-		public void SpawnRequiredComponents(GameObject entityRoot)
+#if UNITY_EDITOR
+		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			entityRoot.AddComponent<EntityDetection>().EntityDetectionData = this;
-		}
+			entityRoot.GetOrAddComponent<EntityDetection>();
+		} 
+#endif
 	}
 }

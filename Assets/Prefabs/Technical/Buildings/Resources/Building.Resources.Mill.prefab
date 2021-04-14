@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: 7141674708461386774}
   - component: {fileID: 6474260231024514300}
   - component: {fileID: 4602035083701467463}
+  - component: {fileID: 850160829079408488}
+  - component: {fileID: 8572922819082457272}
+  - component: {fileID: 3379786364793707916}
+  - component: {fileID: 3002595405880767657}
   m_Layer: 0
   m_Name: Building.Resources.Mill
   m_TagString: Untagged
@@ -73,6 +77,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31da8d9a0020b4146919208799b4faf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &850160829079408488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141674708461386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9916b8fbc6dc04e4a82598a30673594b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8572922819082457272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141674708461386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ac80f35b6b60d46bfb0d62c84e1cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3379786364793707916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141674708461386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _canBeMultiSelected: 1
+--- !u!114 &3002595405880767657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141674708461386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
+    type: 3}
 --- !u!1001 &3808884847478128314
 PrefabInstance:
   m_ObjectHideFlags: 0

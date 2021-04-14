@@ -1,11 +1,7 @@
 ﻿namespace Tartaros.Entities
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Entities;
-	using System;
 	using Tartaros.Entities.Health;
+	using UnityEngine;
 
 	public class EntityHealthData : IEntityBehaviourData
 	{
@@ -30,16 +26,13 @@
 		public float RegenerationDelayWithoutTakingDamage => _regenerationDelayWithoutTakingDamage;
 		#endregion
 
-
-
 		#region Methods
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			var entityHealth = entityRoot.GetOrAddComponent<EntityHealth>();
-			entityHealth.EntityHealthData = this;
-		}
-
-
+			entityRoot.GetOrAddComponent<EntityHealth>();			
+		} 
+#endif
 		#endregion
 	}
 

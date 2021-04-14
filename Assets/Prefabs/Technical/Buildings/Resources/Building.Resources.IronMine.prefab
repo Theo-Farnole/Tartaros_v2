@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: 7859859454919395601}
   - component: {fileID: 4675484710445595902}
   - component: {fileID: 1198309916872359552}
+  - component: {fileID: 6808270645925116430}
+  - component: {fileID: 2535345861080177723}
+  - component: {fileID: 1887435035698048007}
+  - component: {fileID: 7705120993291523984}
   m_Layer: 0
   m_Name: Building.Resources.IronMine
   m_TagString: Untagged
@@ -73,6 +77,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31da8d9a0020b4146919208799b4faf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6808270645925116430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859859454919395600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9916b8fbc6dc04e4a82598a30673594b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2535345861080177723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859859454919395600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ac80f35b6b60d46bfb0d62c84e1cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1887435035698048007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859859454919395600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _canBeMultiSelected: 1
+--- !u!114 &7705120993291523984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859859454919395600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
+    type: 3}
 --- !u!1001 &3913393301472652673
 PrefabInstance:
   m_ObjectHideFlags: 0

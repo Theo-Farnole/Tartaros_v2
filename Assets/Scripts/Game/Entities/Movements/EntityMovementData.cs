@@ -22,10 +22,11 @@
 		public float Speed => _speed;
 		public float SeparationRange => _separationRange;
 
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			var movement = entityRoot.AddComponent<EntityMovement>();
-			movement.EntityMovementData = this;
-		}
+			entityRoot.GetOrAddComponent<EntityMovement>();
+		} 
+#endif
 	}
 }

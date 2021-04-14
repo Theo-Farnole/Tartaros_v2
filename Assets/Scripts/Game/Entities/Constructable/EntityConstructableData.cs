@@ -87,11 +87,13 @@
 		#endregion Properties
 
 		#region Methods
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
 			//GameObject.Instantiate(_modelPrefab, entityRoot.transform);
 			// TODO TF: use carve mesh here
-		}
+		} 
+#endif
 
 		public override string ToString()
 		{

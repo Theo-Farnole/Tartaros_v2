@@ -16,9 +16,11 @@
         public GameObject OutpostPrefab => _outpostPrefab;
         public GameObject VillagerPrefab => _villagerPrefab;
 
+#if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-            entityRoot.GetOrAddComponent<Village>().Data = this;
-		}
+            entityRoot.GetOrAddComponent<Village>();
+		} 
+#endif
 	}
 }

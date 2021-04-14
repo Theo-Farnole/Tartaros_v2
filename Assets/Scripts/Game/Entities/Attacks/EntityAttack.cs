@@ -7,13 +7,13 @@
 	using Tartaros.Orders;
 	using UnityEngine;
 
-	public partial class EntityAttack : MonoBehaviour, IOrderAttackReceiver, IEntityOrderable
+	[RequireComponent(typeof(EntityDetection), typeof(EntityFSM), typeof(Entity))]
+	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IEntityOrderable
 	{
 		#region Fields
 		private EntityAttackData _entityAttackData = null;
 		private EntityDetection _entityDetection = null;
 		private EntityFSM _entityFSM = null;
-		private Entity _entity = null;
 		private float _lastTimeAttack = 0;
 		#endregion
 
@@ -25,9 +25,10 @@
 		#region Methods
 		private void Start()
 		{
-			_entity = GetComponent<Entity>();
 			_entityFSM = GetComponent<EntityFSM>();
 			_entityDetection = GetComponent<EntityDetection>();
+
+			_entityAttackData = Entity.GetBehaviourData<EntityAttackData>();
 
 			if (_entityDetection == null)
 			{
@@ -74,12 +75,12 @@
 
 		void IOrderAttackReceiver.Attack(IAttackable target)
 		{
-			_entityFSM.SetState(new StateAttack(_entity, target));
+			_entityFSM.OrderAttack(target);
 		}
 
 		void IOrderAttackReceiver.AttackAdditive(IAttackable target)
 		{
-			_entityFSM.EnqueueState(new StateAttack(_entity, target));
+			_entityFSM.EnqueueOrderAttack(target);
 		}
 
 		Order[] IEntityOrderable.GenerateOrders(Entity entity)
@@ -99,7 +100,10 @@
 	{
 		private void OnDrawGizmos()
 		{
-			Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, AttackRange, Color.red);
+			if (_entityAttackData != null)
+			{
+				Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, AttackRange, Color.red);
+			}
 		}
 	}
 #endif

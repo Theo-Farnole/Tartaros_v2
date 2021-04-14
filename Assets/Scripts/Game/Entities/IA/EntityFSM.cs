@@ -2,27 +2,21 @@
 {
 	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
+	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
 	using Tartaros.Utilities;
 	using UnityEngine;
 
-	public partial class EntityFSM : MonoBehaviour
+	public partial class EntityFSM : AEntityBehaviour
 	{
 		#region Fields
 		[OnInspectorGUI("DisplayCurrentState")]
 		private GenericFSM<Entity> _finiteStateMachine = new GenericFSM<Entity>();
 
 		private Queue<AEntityState> _statesQueue = new Queue<AEntityState>();
-
-		private Entity _entity = null;
 		#endregion Fields
 
 		#region Methods		
-		private void Awake()
-		{
-			_entity = GetComponent<Entity>();
-		}
-
 		private void Start()
 		{
 			SetStateToDefaultState();
@@ -55,25 +49,81 @@
 
 		}
 
-		public void SetState(AEntityState newState)
+		private void SetState(AEntityState newState)
 		{
 			_finiteStateMachine.CurrentState = newState;
 		}
 
-		public void EnqueueState(AEntityState state)
+		private void EnqueueState(AEntityState state)
 		{
 			_statesQueue.Enqueue(state);
 		}
 
-		public void SetStateToDefaultState()
+		public void OrderAttack(IAttackable target)
 		{
-			SetState(GenerateDefaultState());
+			SetState(InstantiateAttackState(target));
 		}
 
-		private AEntityState GenerateDefaultState()
+		public void EnqueueOrderAttack(IAttackable target)
 		{
-			return new StateIdle(_entity);
+			EnqueueState(InstantiateAttackState(target));
 		}
+
+		public void OrderMoveAggressively(Vector3 position)
+		{
+			SetState(new StateAggressiveMove(Entity, position));
+		}
+
+		public void EnqueueOrderMoveAggressively(Vector3 position)
+		{
+			EnqueueState(new StateAggressiveMove(Entity, position));
+		}
+
+		public void OrderMove(Vector3 position)
+		{
+			SetState(new StateMove(Entity, position));
+		}
+
+		public void OrderFollow(Transform toFollow)
+		{
+			SetState(new StateFollow(Entity, toFollow));
+		}
+
+		public void EnqueueOrderMove(Vector3 position)
+		{
+			EnqueueState(new StateMove(Entity, position));
+		}
+
+		public void EnqueueOrderFollow(Transform toFollow)
+		{
+			EnqueueState(new StateFollow(Entity, toFollow));
+		}
+
+		public void OrderPatrol(PatrolPoints waypoints)
+		{
+			SetState(new StatePatrol(Entity, waypoints));
+		}
+
+		public void EnqueueOrderPatrol(PatrolPoints waypoints)
+		{
+			EnqueueState(new StatePatrol(Entity, waypoints));
+		}
+
+		public void SetStateToDefaultState()
+		{
+			SetState(InstantiateDefaultState());
+		}
+
+		private AEntityState InstantiateDefaultState()
+		{
+			return new StateIdle(Entity);
+		}
+
+		private StateAttack InstantiateAttackState(IAttackable target)
+		{
+			return new StateAttack(Entity, target);
+		}
+
 		#endregion Methods
 	}
 

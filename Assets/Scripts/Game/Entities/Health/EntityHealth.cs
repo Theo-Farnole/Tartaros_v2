@@ -1,10 +1,9 @@
 ﻿namespace Tartaros.Entities.Health
 {
-	using Sirenix.OdinInspector;
 	using System;
 	using UnityEngine;
 
-	public class EntityHealth : MonoBehaviour, IAttackable, IHealthable
+	public class EntityHealth : AEntityBehaviour, IAttackable, IHealthable
 	{
 		#region Fields
 		[ShowInRuntime]
@@ -87,6 +86,10 @@
 		#endregion
 
 		#region Methods
+		void Awake()
+		{
+			EntityHealthData = Entity.GetBehaviourData<EntityHealthData>();
+		}
 
 		void IAttackable.TakeDamage(int damage)
 		{

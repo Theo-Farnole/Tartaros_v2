@@ -8,15 +8,16 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public partial class EntityDetection : MonoBehaviour
+	[RequireComponent(typeof(Entity))]
+	public partial class EntityDetection : AEntityBehaviour
 	{
 		#region Fields
 		private float _attackRange = -1;
 
 		private EntityDetectionData _entityDetectionData = null;
 
-		private Entity _entity = null;
 		private EntitiesKDTrees _entitiesKDTrees = null;
+		private EntityAttack _entityAttack = null;
 		#endregion
 
 		#region Properties
@@ -37,23 +38,30 @@
 				}
 			}
 		}
-		public Team OpponentTeam => _entity.Team.GetOpponent();
+		public Team OpponentTeam => Entity.Team.GetOpponent();
 		public float DetectionRange => _entityDetectionData.DetectionRange;
+
+		public float AttackRange
+		{
+			get
+			{
+				if (_entityAttack == null)
+				{
+					throw new System.NotSupportedException(string.Format("Cannot detect entities inside the attack range because the entity {0} doesn't have an {1} component.", name, nameof(EntityAttack)));
+				}
+
+				return _entityAttack.EntityAttackData.AttackRange;
+			}
+		}
 		#endregion Properties
 
 		#region Methods
 		private void Awake()
 		{
-			_entity = GetComponent<Entity>();
 			_entitiesKDTrees = Services.Instance.Get<EntitiesKDTrees>();
-		}
+			_entityAttack = GetComponent<EntityAttack>();
 
-		private void Start()
-		{
-			if (TryGetComponent(out EntityAttack entityAttack))
-			{
-				_attackRange = entityAttack.EntityAttackData.AttackRange;
-			}
+			EntityDetectionData = Entity.GetBehaviourData<EntityDetectionData>();
 		}
 
 		public IAttackable GetNearestAttackableOpponent()
@@ -73,7 +81,7 @@
 
 		public IAttackable GetNearestAttackableOpponentInDetectionRange()
 		{
-			Entity[] entitiesInAttackRange = _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, _attackRange);
+			Entity[] entitiesInAttackRange = _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange);
 
 			foreach (Entity entity in entitiesInAttackRange)
 			{
@@ -173,12 +181,12 @@
 
 		public bool IsInAttackRange(Vector3 point)
 		{
-			if (_attackRange == -1) Debug.LogWarningFormat("EntityDetection has not attack range. Calling IsInAttackRange requires a EntityAttack component.");
+			if (AttackRange == -1) Debug.LogWarningFormat("EntityDetection has not attack range. Calling IsInAttackRange requires a EntityAttack component.");
 
 
 			float distance = Vector3.Distance(transform.position, point);
 
-			return distance <= _attackRange;
+			return distance <= AttackRange;
 		}
 
 		[Obsolete("This function doesn't work.")]
@@ -191,8 +199,8 @@
 
 		private IEnumerable<Entity> GetAlliesOrderByDistance()
 		{
-			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(_entity.Team, transform.position)
-				.Where(ally => ally != _entity);
+			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(Entity.Team, transform.position)
+				.Where(ally => ally != Entity);
 
 			return enumerable;
 		}
@@ -204,7 +212,10 @@
 	{
 		private void OnDrawGizmos()
 		{
-			Tartaros.Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, DetectionRange, Color.grey);
+			if (_entityDetectionData != null)
+			{
+				Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, DetectionRange, Color.grey);
+			}
 		}
 	}
 #endif // UNITY_EDITOR
