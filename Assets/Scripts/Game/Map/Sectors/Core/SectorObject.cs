@@ -6,6 +6,8 @@
 	public class SectorObject : MonoBehaviour
 	{
 		#region Fields
+		private const float MOVE_DETECTION_THRESHOLD = 0.01f;
+
 		private ISector _currentSector = null;
 		private IMap _map = null;
 		private Vector3 _lastPosition = Vector3.zero;
@@ -20,17 +22,22 @@
 		private void Start()
 		{
 			SetCurrentSector(GetSectorOnPosition());
+			_lastPosition = transform.position;
 		}
 
 		private void Update()
 		{
-			if (transform.position != _lastPosition)
+			if (HasMoved() && IsOnNewSector())
 			{
-				if (IsOnNewSector())
-				{
-					SetCurrentSector(GetSectorOnPosition());
-				}
+				SetCurrentSector(GetSectorOnPosition());
 			}
+
+			_lastPosition = transform.position;
+		}
+
+		private bool HasMoved()
+		{
+			return Vector3.Distance(transform.position, _lastPosition) >= MOVE_DETECTION_THRESHOLD;
 		}
 
 		private ISector GetSectorOnPosition()
