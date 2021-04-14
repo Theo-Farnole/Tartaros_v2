@@ -22,10 +22,28 @@
 		private GameObject _gameplayPrefab = null;
 
 		[SerializeField]
-		private GameObject _wallCornerModel = null;
+		[ShowIf(nameof(_IsChained))]
+		private GameObject _wallLModel = null;
 
 		[SerializeField]
-		private GameObject _wallCornerGameplay = null;
+		[ShowIf(nameof(_IsChained))]
+		private GameObject _wallLGameplay = null;
+
+		[SerializeField]
+		[ShowIf(nameof(_IsChained))]
+		private GameObject _wallTModel = null;
+
+		[SerializeField]
+		[ShowIf(nameof(_IsChained))]
+		private GameObject _wallTGameplay = null;
+
+		[SerializeField]
+		[ShowIf(nameof(_IsChained))]
+		private GameObject _wallXModel = null;
+
+		[SerializeField]
+		[ShowIf(nameof(_IsChained))]
+		private GameObject _wallXGameplay = null;
 
 		[SerializeField]
 		private bool _IsChained = false;
@@ -55,9 +73,17 @@
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
 
-		GameObject IConstructable.WallCornerModel => _wallCornerModel;
+		GameObject IConstructable.WallLModel => _wallLModel;
 
-		GameObject IConstructable.WallCornerGameplay => _wallCornerGameplay;
+		GameObject IConstructable.WallLGameplay => _wallLGameplay;
+
+		GameObject IConstructable.WallTModel => _wallTModel;
+
+		GameObject IConstructable.WallTGameplay => _wallTGameplay;
+
+		GameObject IConstructable.WallXModel => _wallXModel;
+
+		GameObject IConstructable.WallXGameplay => _wallXGameplay;
 		#endregion Properties
 
 		#region Methods

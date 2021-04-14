@@ -7,6 +7,7 @@
 	public class WallBuildingPreview
 	{
 		private GameObject _buildingPreview = null;
+		private GameObject _startBuildingPreview = null;
 		private List<GameObject> _buildingsPreview = new List<GameObject>();
 		private Vector3 _startPosition = Vector3.zero;
 		private IConstructable _toBuild = null;
@@ -21,7 +22,7 @@
 			_toBuild = toBuild;
 			_buildingPreview = toBuild.PreviewPrefab;
 			_startPosition = startPosition;
-			InstanciatePreview(_startPosition);
+			InstanciatePreviewWallSection(_startPosition);
 		}
 
 		public void Update(Vector3 end)
@@ -35,13 +36,13 @@
 			if (numberOfWallSection > _buildingsPreview.Count)
 			{
 				Vector3 position = _startPosition + (realDirection * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
-				InstanciatePreview(position);
+				InstanciatePreviewWallSection(position);
 			}
 			else if (numberOfWallSection < _buildingsPreview.Count)
 			{
 				RemovePreviewWall();
 			}
-			//Debug.Log(CaluclateAngleFromStartPointToDirection(direction));
+
 			SetPositionRotationOfPreviews(end);
 		}
 
@@ -55,7 +56,13 @@
 			return Mathf.RoundToInt(CalculateDistanceFromStartToPosition(end) / _toBuild.Size.x);
 		}
 
-		private void InstanciatePreview(Vector3 position)
+		private void InstanciatePreviewWallSection(Vector3 position)
+		{
+			GameObject wallInstance = GameObject.Instantiate(_buildingPreview, position, Quaternion.identity);
+			AddPreviewWall(wallInstance);
+		}
+
+		private void InstanciatePreviewStart(Vector3 position)
 		{
 			GameObject wallInstance = GameObject.Instantiate(_buildingPreview, position, Quaternion.identity);
 			AddPreviewWall(wallInstance);
@@ -142,8 +149,6 @@
 
 			return wallSection;
 		}
-
-
 
 		public List<GameObject> GetAllCornerPreview()
 		{
