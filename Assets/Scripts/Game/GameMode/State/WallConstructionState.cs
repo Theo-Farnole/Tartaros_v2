@@ -14,6 +14,7 @@
 		private ISectorResourcesWallet _pricePreview = SectorResourcesWallet.Zero;
 		private List<GameObject> _wallSections = new List<GameObject>();
 		private WallBuildingPreview _wallSectionPreview = null;
+		private GameObject _wallToHideAndShow = null;
 
 		private readonly IConstructable _constructable = null;
 		private readonly ConstructionInputs _inputs = null;
@@ -75,6 +76,11 @@
 				_wallSectionPreview.DestroyMethod();
 			}
 
+			if(_wallToHideAndShow != null)
+			{
+				_wallToHideAndShow.SetActive(true);
+			}
+
 			SetActiveSelectionInputRect(true);
 		}
 
@@ -108,7 +114,7 @@
 			_pricePreview = GetTotalPriceOfConstruction();
 			Vector3 lastPosition = _wallSectionPreview.GetAllCornerPreview()[1].transform.position;
 			_wallSectionPreview = null;
-			_wallSectionPreview = new WallBuildingPreview(_constructable, lastPosition);
+			_wallSectionPreview = new WallBuildingPreview(_constructable, lastPosition, _constructable.PreviewPrefab);
 		}
 
 		private void SetFirstBuildingPreview()
@@ -130,15 +136,63 @@
 
 		private void ValidateFirstPreview()
 		{
+			GameObject previewStart = _constructable.PreviewPrefab;
+
 			if(_buildingPreview.GetNeigboorManager() != null)
 			{
+				_wallToHideAndShow = _buildingPreview.GetObjectUnderCursor();
+				_wallToHideAndShow.SetActive(false);
 
+				previewStart = SelectPreviewStartPrefab();				
 			}
-			_wallSectionPreview = new WallBuildingPreview(_constructable, _buildingPreview.GetBuildingPreviewPosition());
+			_wallSectionPreview = new WallBuildingPreview(_constructable, _buildingPreview.GetBuildingPreviewPosition(), previewStart);
 			_buildingPreview.DestroyMethod();
 			_buildingPreview = null;
 		}
 
+		
+
+		private GameObject SelectPreviewStartPrefab()
+		{
+			var neigboorManager = _buildingPreview.GetNeigboorManager();
+			GameObject previewStart = null;
+
+			if (neigboorManager.GetNumberOfNeigboor() == 1)
+			{
+				previewStart = _constructable.WallLModel;
+			}
+			else if (neigboorManager.GetNumberOfNeigboor() == 2)
+			{
+				previewStart = _constructable.WallTModel;
+			}
+			else if (neigboorManager.GetNumberOfNeigboor() == 3)
+			{
+				previewStart = _constructable.WallXModel;
+			}
+
+			return previewStart;
+		}
+
+		private GameObject SelectGameplayStartPrefab()
+		{
+			var neigboorManager = _buildingPreview.GetNeigboorManager();
+			GameObject gameplayPrefab = null;
+
+			if (neigboorManager.GetNumberOfNeigboor() == 1)
+			{
+				gameplayPrefab = _constructable.WallLGameplay;
+			}
+			else if (neigboorManager.GetNumberOfNeigboor() == 2)
+			{
+				gameplayPrefab = _constructable.WallTGameplay;
+			}
+			else if (neigboorManager.GetNumberOfNeigboor() == 3)
+			{
+				gameplayPrefab = _constructable.WallXGameplay;
+			}
+
+			return gameplayPrefab;
+		}
 		private void ValidateFinish()
 		{
 			AddWallPreviewOnList();
@@ -177,8 +231,26 @@
 			{
 				Transform transform = corner.transform;
 				GameObject.Destroy(corner);
-				GameObject wallInstanciate = GameObject.Instantiate(_constructable.WallLGameplay, transform.position, transform.rotation);
+				GameObject wallInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transform.position, transform.rotation);
 			}
+
+			//GameObject gameplayStartPrefab = _constructable.GameplayPrefab;
+
+			
+
+			//if (_wallToHideAndShow != null)
+			//{
+			//	gameplayStartPrefab = SelectGameplayStartPrefab();
+			//	GameObject.Destroy(_wallToHideAndShow);
+			//}
+
+			//Transform transformStart = _wallCorners[1].transform;
+			//GameObject.Destroy(_wallCorners[1]);
+			//GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
+
+			//Transform transformEnd = _wallCorners[2].transform;
+			//GameObject.Destroy(_wallCorners[2]);
+			//GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformStart.position, transformStart.rotation);
 		}
 
 		private bool CanConstructHere()

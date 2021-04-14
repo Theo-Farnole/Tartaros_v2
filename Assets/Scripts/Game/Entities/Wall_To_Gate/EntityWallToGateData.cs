@@ -18,6 +18,7 @@
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
 			entityRoot.GetOrAddComponent<EntityWallToGate>();
+			entityRoot.GetOrAddComponent<NeigboorWallManager>();
 		} 
 #endif
 	}

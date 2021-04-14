@@ -15,18 +15,6 @@
 		private IPlayerSectorResources _playerResources = null;
 		private NeigboorWallManager _neigboorManager = null;
 
-		[SerializeField]
-		private Entity _previousAdjacentWall = null;
-		[SerializeField]
-		private Entity _nextAdjacentWall = null;
-		[SerializeField]
-		private Entity _rightAdjacecntWall = null;
-		[SerializeField]
-		private Entity _leftAdjacentWall = null;
-
-		public Entity PreviousAdjacentWall => _previousAdjacentWall;
-		public Entity NextAdjacentWall { get => _nextAdjacentWall; set => _nextAdjacentWall = value; }
-
 		public IconsDatabase IconData => _iconsDataBase;
 
 		public EntityWallToGateData EntityWallToGateData { get => _data; set => _data = value; }
@@ -36,6 +24,7 @@
 		{
 			_iconsDataBase = Services.Instance.Get<IconsDatabase>();
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
+			_neigboorManager = GetComponent<NeigboorWallManager>();
 
 			_data = Entity.GetBehaviourData<EntityWallToGateData>();
 		}
@@ -52,10 +41,10 @@
 		{
 			if (CanSpawn())
 			{
-				Vector3 position = (transform.position + _neigboorManager.PreviousAdjacentWall.gameObject.transform.position) / 2;
+				Vector3 position = (transform.position + _neigboorManager.BackAdjacentWall.gameObject.transform.position) / 2;
 
 				GameObject gate = GameObject.Instantiate(_data.GatePrefab, position, transform.rotation);
-				Destroy(_neigboorManager.PreviousAdjacentWall.gameObject);
+				Destroy(_neigboorManager.BackAdjacentWall.gameObject);
 				Destroy(this.gameObject);
 
 				ISelection selction = Services.Instance.Get<CurrentSelection>();
@@ -66,7 +55,7 @@
 
 		public bool HaveEnoughSpace()
 		{
-			return _neigboorManager.NextAdjacentWall != null && _neigboorManager.PreviousAdjacentWall != null;
+			return _neigboorManager.FrontAdjacentWall != null && _neigboorManager.BackAdjacentWall != null;
 		}
 
 

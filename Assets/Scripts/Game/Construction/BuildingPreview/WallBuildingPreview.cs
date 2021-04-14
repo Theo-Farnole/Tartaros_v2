@@ -8,6 +8,8 @@
 	{
 		private GameObject _buildingPreview = null;
 		private GameObject _startBuildingPreview = null;
+
+
 		private List<GameObject> _buildingsPreview = new List<GameObject>();
 		private Vector3 _startPosition = Vector3.zero;
 		private IConstructable _toBuild = null;
@@ -17,12 +19,13 @@
 
 		public float DistanceBetweenInstanciate => _toBuild.Size.y;
 
-		public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition)
+		public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition, GameObject startPreview)
 		{
 			_toBuild = toBuild;
 			_buildingPreview = toBuild.PreviewPrefab;
+			_startBuildingPreview = startPreview;
 			_startPosition = startPosition;
-			InstanciatePreviewWallSection(_startPosition);
+			InstanciatePreviewStart(_startPosition);
 		}
 
 		public void Update(Vector3 end)
@@ -64,7 +67,7 @@
 
 		private void InstanciatePreviewStart(Vector3 position)
 		{
-			GameObject wallInstance = GameObject.Instantiate(_buildingPreview, position, Quaternion.identity);
+			GameObject wallInstance = GameObject.Instantiate(_startBuildingPreview, position, Quaternion.identity);
 			AddPreviewWall(wallInstance);
 		}
 

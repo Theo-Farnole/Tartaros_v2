@@ -1,21 +1,22 @@
 ﻿namespace Tartaros.Entities
 {
+	using Boo.Lang;
 	using System.Collections;
 	using UnityEngine;
 
 	public class NeigboorWallManager : MonoBehaviour
 	{
 		[SerializeField]
-		private Entity _previousAdjacentWall = null;
+		private Entity _backAdjacentWall = null;
 		[SerializeField]
-		private Entity _nextAdjacentWall = null;
+		private Entity _frontAdjacentWall = null;
 		[SerializeField]
 		private Entity _rightAdjacecntWall = null;
 		[SerializeField]
 		private Entity _leftAdjacentWall = null;
 
-		public Entity PreviousAdjacentWall => _previousAdjacentWall;
-		public Entity NextAdjacentWall { get => _nextAdjacentWall; set => _nextAdjacentWall = value; }
+		public Entity BackAdjacentWall => _backAdjacentWall;
+		public Entity FrontAdjacentWall { get => _frontAdjacentWall; set => _frontAdjacentWall = value; }
 		public Entity RightAdjacentWall => _rightAdjacecntWall;
 		public Entity LeftAdjacentWall => _leftAdjacentWall;
 
@@ -34,9 +35,9 @@
 
 			if (entity != null)
 			{
-				_previousAdjacentWall = entity;
+				_backAdjacentWall = entity;
 
-				entity.gameObject.GetComponent<NeigboorWallManager>().NextAdjacentWall = gameObject.GetComponent<Entity>();
+				entity.gameObject.GetComponent<NeigboorWallManager>().FrontAdjacentWall = gameObject.GetComponent<Entity>();
 			}
 			else
 			{
@@ -83,6 +84,29 @@
 				return hit.transform.gameObject.GetComponentInParent<Entity>();
 			}
 			return null;
+		}
+
+
+		public int GetNumberOfNeigboor()
+		{
+			int number = 0;
+
+			List<Entity> list = new List<Entity>();
+
+			list.Add(FrontAdjacentWall);
+			list.Add(BackAdjacentWall);
+			list.Add(RightAdjacentWall);
+			list.Add(LeftAdjacentWall);
+
+			foreach (var entity in list)
+			{
+				if(entity != null)
+				{
+					number++;
+				}
+			}
+
+			return number;
 		}
 	}
 }
