@@ -3,7 +3,7 @@
     using System.Collections;
     using UnityEngine;
     using Tartaros.Wave;
-    using Tartaros.Utilities;
+    
     using UnityEngine.AI;
     using System.Collections.Generic;
     using Tartaros.ServicesLocator;

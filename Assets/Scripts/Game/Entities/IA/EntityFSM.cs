@@ -4,7 +4,7 @@
 	using System.Collections.Generic;
 	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 
 	public partial class EntityFSM : AEntityBehaviour

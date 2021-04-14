@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Utilities
+﻿namespace Tartaros
 {
 	/// <summary>
 	/// Implement this interface to receive pool objects callbacks.

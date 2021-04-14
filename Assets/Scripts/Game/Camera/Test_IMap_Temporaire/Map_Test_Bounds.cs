@@ -1,7 +1,7 @@
 ﻿namespace Tartaros.Map
 {
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 
 	public class Map_Test_Bounds : MonoBehaviour, IMap

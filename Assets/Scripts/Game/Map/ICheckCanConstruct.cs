@@ -3,7 +3,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using Tartaros.Entities;
-    using Tartaros.Utilities;
+    
     using UnityEngine;
 
     public interface ICheckCanConstruct 

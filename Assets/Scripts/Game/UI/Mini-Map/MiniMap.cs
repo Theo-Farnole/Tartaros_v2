@@ -5,7 +5,7 @@
 	using System.Linq;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	
 	using Tartaros.Wave;
 	using UnityEngine;
 	using UnityEngine.UI;

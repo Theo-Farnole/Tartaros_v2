@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 
 	internal class DebugMap : IMap

@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Utilities
+﻿namespace Tartaros
 {
 	using Sirenix.OdinInspector;
 	using UnityEngine;

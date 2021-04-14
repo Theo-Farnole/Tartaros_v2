@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Utilities
+﻿namespace Tartaros
 {
     public abstract class AState<T>
     {

@@ -4,7 +4,7 @@
 	using System.IO;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 
 	public partial class Map : MonoBehaviour, IMap

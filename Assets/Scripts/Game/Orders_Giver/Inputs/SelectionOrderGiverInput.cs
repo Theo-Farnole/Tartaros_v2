@@ -2,7 +2,7 @@
 {
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 
 	public class SelectionOrderGiverInput : MonoBehaviour

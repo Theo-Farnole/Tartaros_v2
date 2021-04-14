@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Utilities
+﻿namespace Tartaros
 {
 	using System.Collections.Generic;
 	using System.Linq;

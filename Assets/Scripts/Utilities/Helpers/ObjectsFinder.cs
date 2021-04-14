@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 
-namespace Tartaros.Utilities
+namespace Tartaros
 {
 	public static class ObjectsFinder
 	{

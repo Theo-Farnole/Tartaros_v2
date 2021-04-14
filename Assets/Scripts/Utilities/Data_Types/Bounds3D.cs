@@ -1,6 +1,5 @@
 ﻿namespace Tartaros.Math
 {
-	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class Bounds3D

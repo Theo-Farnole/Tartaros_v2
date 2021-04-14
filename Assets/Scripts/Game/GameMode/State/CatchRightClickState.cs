@@ -7,7 +7,7 @@
 	using System.Threading.Tasks;
 	using Tartaros.OrderGiver;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	
 	using UnityEngine.InputSystem;
 
 	public class CatchRightClickState : AGameState

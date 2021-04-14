@@ -1,7 +1,7 @@
 ﻿namespace Tartaros.Selection
 {
 	using System.Linq;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 	using UnityEngine.InputSystem;
 

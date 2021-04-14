@@ -1,7 +1,7 @@
 ﻿namespace Tartaros.Map
 {
 	using Tartaros.Entities;
-	using Tartaros.Utilities;
+	
 	using UnityEngine;
 
 	public class CheckCanConstruct : MonoBehaviour, ICheckCanConstruct

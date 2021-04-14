@@ -1,12 +1,8 @@
 ﻿namespace Tartaros.CameraSystem
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.CameraSystem;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
+	using UnityEngine;
 	using UnityEngine.InputSystem;
 
 	[RequireComponent(typeof(Camera))]
