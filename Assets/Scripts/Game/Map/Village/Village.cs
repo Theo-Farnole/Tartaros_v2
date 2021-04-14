@@ -23,26 +23,24 @@
 		#endregion Properties
 
 		#region Methods		
-		private void Start()
+
+		private void Awake()
 		{
 			_map = Services.Instance.Get<IMap>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
+		}
 
+		private void Start()
+		{
 			_sector = _map.GetSectorOnPosition(transform.position);
-
-			_sector.Captured -= OnCaptureSector;
-			_sector.Captured += OnCaptureSector;
 
 			UpdateAbilityToSpawnUnits();
 		}
 
 		private void OnEnable()
 		{
-			if (_sector != null)
-			{
-				_sector.Captured -= OnCaptureSector;
-				_sector.Captured += OnCaptureSector;
-			}
+			_sector.Captured -= OnCaptureSector;
+			_sector.Captured += OnCaptureSector;
 		}
 
 		private void OnDisable()

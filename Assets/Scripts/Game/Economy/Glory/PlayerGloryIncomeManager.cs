@@ -1,7 +1,5 @@
 ﻿namespace Tartaros.Economy
 {
-	using System.Collections;
-	using System.Collections.Generic;
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -10,7 +8,7 @@
 	{
 		private IPlayerGloryWallet _playerGloryWallet = null;
 		
-		private void Start()
+		private void Awake()
 		{
 			_playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
 		}

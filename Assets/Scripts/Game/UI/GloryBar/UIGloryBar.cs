@@ -24,37 +24,23 @@
 			{
 				Debug.LogErrorFormat("Missing slider reference in {0}.", this.name);
 			}
+
+			_gloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
 		}
 
 		private void Start()
 		{
-			_gloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
-
-			SubcribeToAmountChangedEvent();
 			SetSliderBounds();
 			SetSliderValue();
 		}
 
 		private void OnEnable()
 		{
-			SubcribeToAmountChangedEvent();
+			_gloryWallet.AmountChanged -= AmountChanged;
+			_gloryWallet.AmountChanged += AmountChanged;
 		}
 
 		private void OnDisable()
-		{
-			UnsubcribeToAmountChangedEvent();
-		}
-
-		private void SubcribeToAmountChangedEvent()
-		{
-			if (_gloryWallet != null)
-			{
-				_gloryWallet.AmountChanged -= AmountChanged;
-				_gloryWallet.AmountChanged += AmountChanged;
-			}
-		}
-
-		private void UnsubcribeToAmountChangedEvent()
 		{
 			_gloryWallet.AmountChanged -= AmountChanged;
 		}

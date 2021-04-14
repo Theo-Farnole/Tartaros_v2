@@ -28,7 +28,7 @@
 		#endregion
 
 		#region Methods
-		void Start()
+		void Awake()
 		{
 			_kdTree = Services.Instance.Get<EntitiesKDTrees>();
 		}

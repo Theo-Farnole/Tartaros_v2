@@ -18,18 +18,14 @@
 		#endregion Properties
 
 		#region Methods
-		void Start()
+		void Awake()
 		{
 			_fogOfWarManager = Services.Instance.Get<FogOfWarManager>();
-			_fogOfWarManager.AddVision(this);
 		}
 
 		void OnEnable()
 		{
-			if (_fogOfWarManager != null)
-			{
-				_fogOfWarManager.AddVision(this);
-			}
+			_fogOfWarManager.AddVision(this);
 		}
 
 		void OnDisable()

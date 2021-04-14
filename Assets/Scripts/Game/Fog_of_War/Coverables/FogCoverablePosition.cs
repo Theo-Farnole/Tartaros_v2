@@ -44,6 +44,7 @@
 		#region Methods
 		void Awake()
 		{
+			_fogOfWarManager = Services.Instance.Get<FogOfWarManager>();
 			_coverableEffect = GetComponent<ICoverableEffect>();
 
 			if (_coverableEffect == null)
@@ -52,18 +53,9 @@
 			}
 		}
 
-		void Start()
-		{
-			_fogOfWarManager = Services.Instance.Get<FogOfWarManager>();
-			_fogOfWarManager.AddCoverable(this);
-		}
-
 		void OnEnable()
 		{
-			if (_fogOfWarManager != null)
-			{
-				_fogOfWarManager.AddCoverable(this);
-			}
+			_fogOfWarManager.AddCoverable(this);
 		}
 
 		void OnDisable()

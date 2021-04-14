@@ -31,25 +31,24 @@
 		private NavigationPathMiniMap _navigationPathCalcule = null;
 
 		private IMap _map = null;
-		private EnemiesWavesManager _enemiesWaveManger = null;
+		private EnemiesWavesManager _enemiesWaveManager = null;
 		private FrustumCameraMiniMap _frustrumCamera = null;
 
 		public RectTransform RootTransform => _rootTransform;
 
 		private void Awake()
-		{			
+		{
 			if (_rootTransform == null)
 			{
 				Debug.LogErrorFormat("Missing root transform in minimap {0}.", name);
 			}
+
+			_map = Services.Instance.Get<IMap>();
+			_enemiesWaveManager = Services.Instance.Get<EnemiesWavesManager>();
 		}
 
 		private void Start()
 		{
-			_map = Services.Instance.Get<IMap>();
-			_enemiesWaveManger = Services.Instance.Get<EnemiesWavesManager>();
-
-
 			if (_map.Sectors == null)
 			{
 				Debug.LogError("there is no sector reference on the map");
@@ -66,29 +65,29 @@
 				//DrawWavePathNavigation();
 			}
 
-			if (_enemiesWaveManger == null)
+			if (_enemiesWaveManager == null)
 			{
 				Debug.LogError("No reference of waveManager on MiniMap");
 			}
 			else
 			{
-				_enemiesWaveManger.WaveStartCooldown -= WaveCooldownStart;
-				_enemiesWaveManger.WaveStartCooldown += WaveCooldownStart;
+				_enemiesWaveManager.WaveStartCooldown -= WaveCooldownStart;
+				_enemiesWaveManager.WaveStartCooldown += WaveCooldownStart;
 			}
 		}
 
 		private void OnEnable()
 		{
-			if (_enemiesWaveManger != null)
+			if (_enemiesWaveManager != null)
 			{
-				_enemiesWaveManger.WaveStartCooldown -= WaveCooldownStart;
-				_enemiesWaveManger.WaveStartCooldown += WaveCooldownStart;
+				_enemiesWaveManager.WaveStartCooldown -= WaveCooldownStart;
+				_enemiesWaveManager.WaveStartCooldown += WaveCooldownStart;
 			}
 		}
 
 		private void OnDisable()
 		{
-			_enemiesWaveManger.WaveStartCooldown -= WaveCooldownStart;
+			_enemiesWaveManager.WaveStartCooldown -= WaveCooldownStart;
 		}
 
 		private void WaveCooldownStart(object sender, EnemiesWavesManager.WaveStartCooldownArgs e)

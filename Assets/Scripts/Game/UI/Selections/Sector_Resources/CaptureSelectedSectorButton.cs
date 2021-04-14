@@ -25,10 +25,7 @@
 			{
 				_captureButton = GetComponent<Button>();
 			}
-		}
 
-		private void Start()
-		{
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
 			_sectorsCaptureManager = Services.Instance.Get<ISectorsCaptureManager>();
 		}

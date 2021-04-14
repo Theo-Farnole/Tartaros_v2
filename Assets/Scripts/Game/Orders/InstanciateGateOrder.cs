@@ -10,11 +10,11 @@
     public class InstanciateGateOrder : Order
     {
         private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.InstanciateGateIcon;
-        public InstanciateGateOrder(EntityWallToGate wallToGate) : base(Icon, InstancaiteGate(wallToGate))
+        public InstanciateGateOrder(EntityWallToGate wallToGate) : base(Icon, InstanciateGate(wallToGate))
         {  
         }
 
-        private static Action InstancaiteGate(EntityWallToGate wallToGate)
+        private static Action InstanciateGate(EntityWallToGate wallToGate)
         {
             return () =>
             {

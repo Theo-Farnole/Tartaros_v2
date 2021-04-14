@@ -15,13 +15,18 @@
 		private RectTransform _constructButtonRoot = null;
 
 		private ConstructionManagerData _constructionManagerData = null;
+		private ConstructionManager _constructionManager = null;
 		#endregion Fields
 
 		#region Methods
+		private void Awake()
+		{
+			_constructionManager = Services.Instance.Get<ConstructionManager>();
+		}
+
 		private void Start()
 		{
-			var constructionManager = Services.Instance.Get<ConstructionManager>();
-			_constructionManagerData = constructionManager.ConstructionManagerData;
+			_constructionManagerData = _constructionManager.ConstructionManagerData;
 
 			BuildUI();
 		}

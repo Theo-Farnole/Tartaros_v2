@@ -30,37 +30,23 @@
 			{
 				_incomeLabel = GetComponent<TextMeshProUGUI>();
 			}
+
+			_playerIncome = Services.Instance.Get<IPlayerIncomeManager>();
 		}
 
 		private void Start()
 		{
-			_playerIncome = Services.Instance.Get<IPlayerIncomeManager>();
-			SubscribeToEventAmountChanged();
 			UpdateAmountLabel();
 		}
 
 		private void OnEnable()
 		{
-			SubscribeToEventAmountChanged();
+			_playerIncome.IncomeChanged -= AmountChanged;
+			_playerIncome.IncomeChanged += AmountChanged;
 		}
 
 		private void OnDisable()
 		{
-			UnsubcribeToEventAmountChanged();
-		}
-
-		private void SubscribeToEventAmountChanged()
-		{
-			if (_playerIncome == null) return;
-
-			UnsubcribeToEventAmountChanged();
-			_playerIncome.IncomeChanged += AmountChanged;
-		}
-
-		private void UnsubcribeToEventAmountChanged()
-		{
-			if (_playerIncome == null) return;
-
 			_playerIncome.IncomeChanged -= AmountChanged;
 		}
 

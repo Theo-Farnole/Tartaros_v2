@@ -21,11 +21,13 @@
 		#endregion Properties
 
 		#region Methods
-		void Start()
+		private void Awake()
 		{
 			_fogOfWarManager = Services.Instance.Get<FogOfWarManager>();
-			_fogOfWarManager.AddVision(this);
+		}
 
+		void Start()
+		{
 			CreateMeshVision();
 		}
 
@@ -48,10 +50,7 @@
 
 		void OnEnable()
 		{
-			if (_fogOfWarManager != null)
-			{
-				_fogOfWarManager.AddVision(this);
-			}
+			_fogOfWarManager.AddVision(this);
 		}
 
 		void OnDisable()

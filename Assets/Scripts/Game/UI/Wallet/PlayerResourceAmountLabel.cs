@@ -26,35 +26,22 @@
 			{
 				_amountLabel = GetComponent<TextMeshProUGUI>();
 			}
+
+			_playerSectorResources = Services.Instance.Get<IPlayerSectorResources>();
 		}
 
 		private void Start()
 		{
-			_playerSectorResources = Services.Instance.Get<IPlayerSectorResources>();
-			SubscribeToEventAmountChanged();
 			UpdateAmountLabel();
 		}
 
 		private void OnEnable()
 		{
-			if (_playerSectorResources != null)
-			{
-				SubscribeToEventAmountChanged();
-			}
-		}
-
-		private void OnDisable()
-		{
-			UnsubcribeToEventAmountChanged();
-		}
-
-		private void SubscribeToEventAmountChanged()
-		{
-			UnsubcribeToEventAmountChanged();
+			_playerSectorResources.AmountChanged -= AmountChanged;
 			_playerSectorResources.AmountChanged += AmountChanged;
 		}
 
-		private void UnsubcribeToEventAmountChanged()
+		private void OnDisable()
 		{
 			_playerSectorResources.AmountChanged -= AmountChanged;
 		}

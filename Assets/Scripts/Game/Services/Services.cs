@@ -2,8 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
-    using Tartaros.Economy;
-    using Tartaros.Utilities;
+	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class Services : Singleton<Services>
@@ -26,11 +25,6 @@
 
 			return (T)_databases[typeof(T)];
 		}
-
-        internal T Get<T>(out IPlayerIncomeManager playerIncomeSectorResources)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool TryGet<T>(out T service)
 		{

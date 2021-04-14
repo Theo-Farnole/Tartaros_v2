@@ -10,7 +10,7 @@
 		#region Fields
 		private EntityPopulationTakerData _entityPopulationTakerData = null;
 
-		private IPopulationManager _populationManger = null;
+		private IPopulationManager _populationManager = null;
 		private Entity _entity = null;
 		#endregion Fields
 
@@ -33,11 +33,7 @@
 		private void Awake()
 		{
 			_entity = GetComponent<Entity>();
-			_populationManger = Services.Instance.Get<IPopulationManager>();
-		}
-
-		private void Start()
-		{
+			_populationManager = Services.Instance.Get<IPopulationManager>();
 		}
 
 		private void OnEnable()
@@ -54,7 +50,7 @@
 		{
 			if (_entityPopulationTakerData != null && _entity.Team == Team.Player)
 			{
-				_populationManger.AddCurrentPopulation(PopulationToIncrease);
+				_populationManager.AddCurrentPopulation(PopulationToIncrease);
 			}
 		}
 
@@ -62,7 +58,7 @@
 		{
 			if (_entityPopulationTakerData != null && _entity.Team == Team.Player)
 			{
-				_populationManger.RemoveCurrentPopulation(PopulationToIncrease);
+				_populationManager.RemoveCurrentPopulation(PopulationToIncrease);
 			}
 		}
 		#endregion Methods

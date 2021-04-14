@@ -26,12 +26,14 @@
 
         public EntityWallToGateData EntityWallToGateData { get => _data; set => _data = value; }
 
-
-        private void Start()
-        {
+		private void Awake()
+		{
             _iconsDataBase = Services.Instance.Get<IconsDatabase>();
-            _playerResources = Services.Instance.Get<IPlayerSectorResources>();
+            _playerResources = Services.Instance.Get<IPlayerSectorResources>();			
+		}
 
+		private void Start()
+        {
             GetNeighbourWall();
         }
 

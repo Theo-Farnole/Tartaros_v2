@@ -28,35 +28,23 @@
 		#endregion Fields
 
 		#region Methods
-		private void Start()
+		protected override void Awake()
 		{
+			base.Awake();
+
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
 			_iconsDatabase = Services.Instance.Get<IconsDatabase>();
-			SubscribeToSelectionChangedEvent();
 		}
 
 		private void OnEnable()
 		{
-			if (_currentSelection != null)
-			{
-				SubscribeToSelectionChangedEvent();
-			}
+			_currentSelection.SelectionChanged -= SelectionChanged;
+			_currentSelection.SelectionChanged += SelectionChanged;
 		}
 
 		private void OnDisable()
 		{
-			UnsubscribeToSelectionChangedEvents();
-		}
-
-		private void UnsubscribeToSelectionChangedEvents()
-		{
 			_currentSelection.SelectionChanged -= SelectionChanged;
-		}
-
-		private void SubscribeToSelectionChangedEvent()
-		{
-			_currentSelection.SelectionChanged -= SelectionChanged;
-			_currentSelection.SelectionChanged += SelectionChanged;
 		}
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)

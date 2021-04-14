@@ -31,10 +31,6 @@
 		private void Awake()
 		{
 			_button = GetComponent<Button>();
-		}
-
-		private void Start()
-		{
 			_powerManager = Services.Instance.Get<PowerManager>();
 		}
 

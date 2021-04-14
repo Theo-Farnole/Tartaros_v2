@@ -33,7 +33,7 @@
 
 		public RectTransform RootTransform => _miniMap.RootTransform;
 
-		private void Start()
+		private void Awake()
 		{
 			_map = Services.Instance.Get<IMap>();
 		}

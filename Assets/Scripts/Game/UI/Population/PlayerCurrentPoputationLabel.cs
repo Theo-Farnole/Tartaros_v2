@@ -23,25 +23,19 @@
 			{
 				_currentPopulationLabel = GetComponent<TextMeshProUGUI>();
 			}
+
+			_populationManager = Services.Instance.Get<IPopulationManager>();
 		}
 
 		private void Start()
 		{
-			_populationManager = Services.Instance.Get<IPopulationManager>();
-
-			_populationManager.CurrentPopulationChanged -= CurrentPopulationChanged;
-			_populationManager.CurrentPopulationChanged += CurrentPopulationChanged;
-
 			UpdateLabel();
 		}
 
 		private void OnEnable()
 		{
-			if (_populationManager != null)
-			{
-				_populationManager.CurrentPopulationChanged -= CurrentPopulationChanged;
-				_populationManager.CurrentPopulationChanged += CurrentPopulationChanged;
-			}
+			_populationManager.CurrentPopulationChanged -= CurrentPopulationChanged;
+			_populationManager.CurrentPopulationChanged += CurrentPopulationChanged;
 		}
 
 		private void OnDisable()

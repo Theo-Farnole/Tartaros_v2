@@ -32,23 +32,13 @@
 			base.Awake();
 
 			_topButtons = GetComponent<UIOrderButtonsGenerator>();
-		}
-
-		private void Start()
-		{
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
-
-			_currentSelection.SelectionChanged -= SelectionChanged;
-			_currentSelection.SelectionChanged += SelectionChanged;
 		}
 
 		private void OnEnable()
 		{
-			if (_currentSelection != null)
-			{
-				_currentSelection.SelectionChanged -= SelectionChanged;
-				_currentSelection.SelectionChanged += SelectionChanged;
-			}
+			_currentSelection.SelectionChanged -= SelectionChanged;
+			_currentSelection.SelectionChanged += SelectionChanged;
 		}
 
 		private void OnDisable()

@@ -15,7 +15,7 @@
 		#endregion Fields
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
 			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
 			_map = Services.Instance.Get<IMap>();

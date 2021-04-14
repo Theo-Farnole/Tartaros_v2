@@ -24,7 +24,7 @@
 		#endregion Properties
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();

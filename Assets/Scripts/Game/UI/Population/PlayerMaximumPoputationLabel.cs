@@ -23,25 +23,19 @@
 			{
 				_maximumPopulationLabel = GetComponent<TextMeshProUGUI>();
 			}
+
+			_populationManager = Services.Instance.Get<IPopulationManager>();
 		}
 
 		private void Start()
 		{
-			_populationManager = Services.Instance.Get<IPopulationManager>();
-
-			_populationManager.MaxPopulationChanged -= MaxPopulationChanged;
-			_populationManager.MaxPopulationChanged += MaxPopulationChanged;
-
 			UpdateLabel();
 		}
 
 		private void OnEnable()
 		{
-			if (_populationManager != null)
-			{
-				_populationManager.MaxPopulationChanged -= MaxPopulationChanged;
-				_populationManager.MaxPopulationChanged += MaxPopulationChanged;
-			}
+			_populationManager.MaxPopulationChanged -= MaxPopulationChanged;
+			_populationManager.MaxPopulationChanged += MaxPopulationChanged;
 		}
 
 		private void OnDisable()

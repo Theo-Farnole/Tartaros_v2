@@ -1,15 +1,12 @@
 ﻿namespace Tartaros.Construction
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Gamemode;
+	using Tartaros.Gamemode.State;
 	using Tartaros.ServicesLocator;
-    using Tartaros.Gamemode.State;
+	using UnityEngine;
 
-    public class ConstructionManager : MonoBehaviour
+	public class ConstructionManager : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -23,7 +20,7 @@
 		#endregion Properties
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
 			_gamemodeManager = Services.Instance.Get<GamemodeManager>();
 			_playerSectorRessources = Services.Instance.Get<IPlayerSectorResources>();

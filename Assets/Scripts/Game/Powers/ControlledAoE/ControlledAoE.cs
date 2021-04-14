@@ -32,12 +32,11 @@
 		void Awake()
 		{
 			_movement = gameObject.GetOrAddComponent<ControlledAoEMovement>();
+			_kdTree = Services.Instance.Get<EntitiesKDTrees>();
 		}
 
 		void Start()
 		{
-			_kdTree = Services.Instance.Get<EntitiesKDTrees>();
-
 			StartCoroutine(OnInstanciate());
 		}
 

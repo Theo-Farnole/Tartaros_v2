@@ -4,7 +4,6 @@
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using Tartaros.Entities.ResourcesGeneration;
 	using UnityEngine;
 
 	public class PlayerIncomeManager : MonoBehaviour, IPlayerIncomeManager
@@ -27,7 +26,7 @@
 		#region Methods
 		private void Awake()
 		{
-			Services.Instance.RegisterService<IPlayerIncomeManager>(this);
+			_incomeReceiver = Services.Instance.Get<IPlayerSectorResources>();
 
 			if (_data != null)
 			{
@@ -42,7 +41,6 @@
 
 		private void Start()
 		{
-			_incomeReceiver = Services.Instance.Get<IPlayerSectorResources>();
 			StartCoroutine(GenerationCoroutine());
 		}
 

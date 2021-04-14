@@ -31,12 +31,12 @@
 		#region Methods
 		private void Awake()
 		{
-			SpawnSectors();
+			_logger = Services.Instance.Get<UserErrorsLogger>();
 		}
 
 		private void Start()
 		{
-			_logger = Services.Instance.Get<UserErrorsLogger>();
+			SpawnSectors();
 		}
 
 		private void OnDrawGizmos()

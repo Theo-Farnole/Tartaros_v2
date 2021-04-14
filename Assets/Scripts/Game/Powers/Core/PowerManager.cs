@@ -24,7 +24,7 @@
 		#endregion Fields
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
 			_gameModeManager = Services.Instance.Get<GamemodeManager>();
 			_userErrorsLogger = Services.Instance.Get<UserErrorsLogger>();

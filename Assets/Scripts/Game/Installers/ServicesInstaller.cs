@@ -52,7 +52,6 @@
 			RegisterFromChildren<CurrentSelection>();
 			RegisterFromChildren<IconsDatabase>();
 			RegisterFromChildren<UserErrorsLogger>();
-
 		}
 
 		private void RegisterFromHierarchy<T>()

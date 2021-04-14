@@ -18,21 +18,17 @@
 		#endregion Fields
 
 		#region Methods
-		private void Start()
+		protected override void Awake()
 		{
-			_currentSelection = Services.Instance.Get<CurrentSelection>();
+			base.Awake();
 
-			_currentSelection.SelectionChanged -= SelectionChanged;
-			_currentSelection.SelectionChanged += SelectionChanged;
+			_currentSelection = Services.Instance.Get<CurrentSelection>();
 		}
 
 		private void OnEnable()
 		{
-			if (_currentSelection != null)
-			{
-				_currentSelection.SelectionChanged -= SelectionChanged;
-				_currentSelection.SelectionChanged += SelectionChanged;
-			}
+			_currentSelection.SelectionChanged -= SelectionChanged;
+			_currentSelection.SelectionChanged += SelectionChanged;
 		}
 
 		private void OnDisable()

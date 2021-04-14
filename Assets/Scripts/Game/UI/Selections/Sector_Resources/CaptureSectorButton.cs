@@ -50,7 +50,7 @@
 		#endregion Properties
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
 			_sectorsCaptureManager = Services.Instance.Get<ISectorsCaptureManager>();
 		}
