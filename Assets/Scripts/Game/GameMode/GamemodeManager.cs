@@ -11,8 +11,7 @@
 		public AState<GamemodeManager> CurrentState => _gamemodeFSM.CurrentState;
 
 		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
+		{			
 			_gamemodeFSM = new GamemodeFSM();
 		}
 

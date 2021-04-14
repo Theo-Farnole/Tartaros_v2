@@ -1,13 +1,11 @@
 ﻿namespace Tartaros.Power
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Gamemode;
-	using Tartaros.ServicesLocator;
-	using Tartaros.Gamemode.State;
 	using Sirenix.OdinInspector;
 	using Tartaros.Economy;
+	using Tartaros.Gamemode;
+	using Tartaros.Gamemode.State;
+	using Tartaros.ServicesLocator;
+	using UnityEngine;
 
 	public class PowerManager : MonoBehaviour
 	{
@@ -25,13 +23,7 @@
 		private IPlayerGloryWallet _gloryWallet = null;
 		#endregion Fields
 
-
 		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
 		private void Start()
 		{
 			_gameModeManager = Services.Instance.Get<GamemodeManager>();

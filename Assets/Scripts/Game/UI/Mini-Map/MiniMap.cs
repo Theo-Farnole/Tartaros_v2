@@ -37,9 +37,7 @@
 		public RectTransform RootTransform => _rootTransform;
 
 		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-
+		{			
 			if (_rootTransform == null)
 			{
 				Debug.LogErrorFormat("Missing root transform in minimap {0}.", name);

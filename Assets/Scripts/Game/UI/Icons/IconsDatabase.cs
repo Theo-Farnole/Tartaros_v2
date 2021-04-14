@@ -11,10 +11,5 @@
 		private IconsDatabaseData _data = null;
 
 		public IconsDatabaseData Data => _data;
-
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
 	}
 }

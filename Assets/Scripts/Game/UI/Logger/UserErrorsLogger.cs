@@ -42,11 +42,6 @@
 		#endregion Properties
 
 		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
 		private void Update()
 		{
 			RemoveOldErrors();

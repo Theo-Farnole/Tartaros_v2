@@ -32,7 +32,6 @@
 		#region Methods
 		void Awake()
 		{
-			Services.Instance.RegisterService<IPopulationManager>(this);
 			_maxPopulation = _populationManagerData.StartingMaxPopulation;
 		}
 

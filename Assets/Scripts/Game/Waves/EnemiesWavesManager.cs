@@ -60,8 +60,7 @@
 		private void Awake()
 		{
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
-			_waveFSM = new WaveSpawnerFSM();
-			Services.Instance.RegisterService(this);
+			_waveFSM = new WaveSpawnerFSM();			
 			//TODO: WaveFSM registerService & Call it
 		}
 

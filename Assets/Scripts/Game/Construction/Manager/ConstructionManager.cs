@@ -23,11 +23,6 @@
 		#endregion Properties
 
 		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
 		private void Start()
 		{
 			_gamemodeManager = Services.Instance.Get<GamemodeManager>();

@@ -20,8 +20,6 @@
 		private void Awake()
 		{
 			_gloryWallet = new GloryWallet();
-
-			Services.Instance.RegisterService<IPlayerGloryWallet>(this);
 		}
 
 

@@ -3,7 +3,6 @@
 	using Sirenix.OdinInspector;
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Movement;
 	using Tartaros.Selection;
@@ -24,12 +23,7 @@
 		public Team ControllableTeam => _controllableTeam;
 		#endregion Properties
 
-		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
+		#region Methods		
 		public void Stop()
 		{
 			CallAction<IOrderStopReceiver>(ctx => ctx.Stop());

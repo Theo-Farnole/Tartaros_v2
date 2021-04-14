@@ -15,11 +15,6 @@
 		#endregion Fields
 
 		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService<ISectorsCaptureManager>(this);
-		}
-
 		private void Start()
 		{
 			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();

@@ -27,7 +27,6 @@
 
         private void Awake()
         {
-            Services.Instance.RegisterService(this);
             _spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
         }
 

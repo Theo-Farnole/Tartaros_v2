@@ -22,8 +22,6 @@
 			_gameInputs.Orders.Enable();
 
 			_camera = Camera.main;
-
-			Services.Instance.RegisterService(this);
 		}
 
 		private void OnEnable()

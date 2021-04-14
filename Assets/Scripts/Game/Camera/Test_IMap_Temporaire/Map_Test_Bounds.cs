@@ -18,11 +18,6 @@
 		#endregion Properties
 
 		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService<IMap>(this);
-		}
-
 		private void OnDrawGizmos()
 		{
 			_bounds2D.DrawGizmos();

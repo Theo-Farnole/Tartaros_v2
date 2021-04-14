@@ -15,15 +15,6 @@
 		#region Methods
 		private void Awake()
 		{
-			if (Services.HasInstance == true)
-			{
-				Services.Instance.RegisterService(this);
-			}
-			else
-			{
-				Debug.LogError("Missing services GameObject in the Scene.");
-			}
-
 			_kdTrees = new Dictionary<Team, KdTree<Entity>>();
 
 			foreach (Team team in (Team[])Enum.GetValues(typeof(Team)))

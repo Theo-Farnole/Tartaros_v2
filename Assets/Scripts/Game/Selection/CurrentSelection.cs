@@ -25,11 +25,6 @@
 		#endregion Properties
 
 		#region Methods
-		void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
 		void ISelection.AddToSelection(ISelectable selectable)
 		{
 			if (selectable is null) throw new ArgumentNullException(nameof(selectable));

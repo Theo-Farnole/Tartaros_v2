@@ -1,21 +1,11 @@
 ﻿namespace Tartaros.Map
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using Tartaros.Entities;
-    using Tartaros.ServicesLocator;
-    using Tartaros.Utilities;
-    using Tartaros.Construction;
-    using UnityEngine;
-    using Tartaros.Map;
+	using Tartaros.Entities;
+	using Tartaros.Utilities;
+	using UnityEngine;
 
-    public class CheckCanConstruct : MonoBehaviour, ICheckCanConstruct
+	public class CheckCanConstruct : MonoBehaviour, ICheckCanConstruct
     {
-
-        private void Awake()
-        {
-            Services.Instance.RegisterService<ICheckCanConstruct>(this);
-        }
         bool ICheckCanConstruct.IsInBoundsMap(Bounds2D bounds, Vector3 position)
         {
             return bounds.CountainsPoint(position, bounds);

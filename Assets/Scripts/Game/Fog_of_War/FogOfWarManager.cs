@@ -3,9 +3,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Math;
-	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Utilities;
 	using UnityEngine;
 
 	public class FogOfWarManager : MonoBehaviour
@@ -19,11 +17,6 @@
 		#endregion Fields
 
 		#region Methods
-		private void Awake()
-		{
-			Services.Instance.RegisterService(this);
-		}
-
 		private void Update()
 		{
 			UpdateCoverablesVisibility();

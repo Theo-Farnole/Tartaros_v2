@@ -31,7 +31,6 @@
 		#region Methods
 		private void Awake()
 		{
-			Services.Instance.RegisterService<IMap>(this);
 			SpawnSectors();
 		}
 
