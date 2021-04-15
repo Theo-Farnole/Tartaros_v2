@@ -140,7 +140,7 @@
 			_entityFSM.OrderPatrol(waypoints);
 		}
 
-		public Order[] GenerateOrders(Entity entity)
+		public Order[] GenerateOrders()
 		{
 			List<Order> orders = new List<Order>();
 

@@ -49,7 +49,7 @@
 			_playerSectorResources.Buy(healCost);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		Order[] IEntityOrderable.GenerateOrders()
 		{
 			if (_healthable.IsFullLife())
 			{

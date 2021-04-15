@@ -12,7 +12,7 @@
 
 	[SelectionBase]
 	[RequireComponent(typeof(SectorObject))]
-	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable
+	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable, IEntityOrderable
 	{
 		#region Fields
 		[SerializeField]
@@ -99,7 +99,7 @@
 			{
 				if ((orderable as MonoBehaviour).enabled == true)
 				{
-					Order[] orderableOrders = orderable.GenerateOrders(this);
+					Order[] orderableOrders = orderable.GenerateOrders();
 
 					if (orderableOrders != null)
 					{
@@ -116,7 +116,7 @@
 			return _entityData.GetBehaviour<T>();
 		}
 
-		#region IOrders
+		#region Interfaces
 		void IOrderStopReceiver.Stop()
 		{
 			_entityFSM.Stop();
@@ -125,6 +125,14 @@
 		void IWaveSpawnable.Attack(IAttackable attackable)
 		{
 			GetComponent<IOrderAttackReceiver>().Attack(attackable);
+		}
+
+		Order[] IEntityOrderable.GenerateOrders()
+		{
+			return new Order[]
+			{
+				new SelfKillOrder(this)
+			};
 		}
 		#endregion IOrders
 		#endregion Methods

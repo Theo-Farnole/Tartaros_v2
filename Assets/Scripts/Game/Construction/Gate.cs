@@ -48,8 +48,8 @@
             }    
         }
 
-        Order[] IEntityOrderable.GenerateOrders(Entity entity)
-        {
+        Order[] IEntityOrderable.GenerateOrders()
+		{
             List<Order> orders = new List<Order>();
 
             orders.Add(new OpenDoorsOrder(this));

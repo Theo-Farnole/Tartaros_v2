@@ -29,7 +29,7 @@
 			_data = Entity.GetBehaviourData<EntityWallToGateData>();
 		}
 
-		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		Order[] IEntityOrderable.GenerateOrders()
 		{
 			List<Order> orders = new List<Order>();
 

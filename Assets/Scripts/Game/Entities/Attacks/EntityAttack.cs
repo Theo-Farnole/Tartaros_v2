@@ -83,11 +83,11 @@
 			_entityFSM.EnqueueOrderAttack(target);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		Order[] IEntityOrderable.GenerateOrders()
 		{
 			Order[] orders = new Order[]
 			{
-				new AttackOrder(entity)
+				new AttackOrder(Entity)
 			};
 
 			return orders;

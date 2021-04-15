@@ -26,6 +26,8 @@
 		private Dictionary<SectorRessourceType, Sprite> _icons = new Dictionary<SectorRessourceType, Sprite>();
 		[SerializeField]
 		private Sprite _healIcon = null;
+		[SerializeField]
+		private Sprite _selfKillIcon = null;
 		#endregion Fields
 
 		#region Properties
@@ -37,6 +39,7 @@
 		public Sprite CloseDoorIcon => _closeDoorIcon;
 		public Sprite PatrolIcon => _patrolIcon;
 		public Sprite HealIcon => _healIcon;
+		public Sprite SelfKillIcon => _selfKillIcon;
 		#endregion properties
 
 		#region Methods
