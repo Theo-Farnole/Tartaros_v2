@@ -3,6 +3,7 @@
 	using System;
 	using System.Linq;
 	using Tartaros.Entities;
+	using Tartaros.Map;
 	using Tartaros.Orders;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
@@ -71,10 +72,15 @@
 		{
 			if (_currentSelection.SelectedSelectables.Length == 1)
 			{
-				_showSelectable = _currentSelection.SelectedSelectables[0];
+				ISelectable firstSelectable = _currentSelection.SelectedSelectables[0];
 
-				UpdatePanelInformations();
-				Show();
+				if ((firstSelectable as MonoBehaviour).GetComponent<ISector>() == null)
+				{
+					_showSelectable = firstSelectable;
+
+					UpdatePanelInformations();
+					Show();
+				}
 			}
 			else
 			{
