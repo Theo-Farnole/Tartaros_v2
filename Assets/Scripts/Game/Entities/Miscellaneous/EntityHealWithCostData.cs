@@ -32,7 +32,7 @@
 #if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			throw new NotImplementedException();
+			entityRoot.GetOrAddComponent<EntityHealWithCost>();
 		}
 #endif
 		#endregion Methods
