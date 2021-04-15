@@ -77,7 +77,19 @@
 
 			return output;
 		}
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder();
 
+			foreach (var type in EnumHelper.GetValues<SectorRessourceType>())
+			{
+				sb.AppendFormat("{0}={1}", type, (this as ISectorResourcesWallet).GetAmount(type));
+			}
+
+			return sb.ToString();
+		}
+
+		#region ISectorResourcesWallet
 		void ISectorResourcesWallet.AddAmount(SectorRessourceType ressource, int amount)
 		{
 			if (_ressourceAmount.ContainsKey(ressource) == false)
@@ -115,9 +127,9 @@
 			}
 		}
 
-		public void SetAmount(SectorRessourceType ressource, int amount)
+		void ISectorResourcesWallet.SetAmount(SectorRessourceType ressource, int amount)
 		{
-			Self.SetAmount(ressource, amount);
+			_ressourceAmount[ressource] = amount;
 		}
 
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price)
@@ -149,18 +161,9 @@
 		{
 			return new SectorResourcesWallet(this);
 		}
+		#endregion
 
-		public override string ToString()
-		{
-			StringBuilder sb = new StringBuilder();
 
-			foreach (var type in EnumHelper.GetValues<SectorRessourceType>())
-			{
-				sb.AppendFormat("{0}={1}", type, (this as ISectorResourcesWallet).GetAmount(type));
-			}
-
-			return sb.ToString();
-		}
 		#endregion Methods
 	}
 }
