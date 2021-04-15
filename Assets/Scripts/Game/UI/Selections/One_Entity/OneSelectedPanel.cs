@@ -1,6 +1,5 @@
 ﻿namespace Tartaros.UI
 {
-	using Sirenix.OdinInspector;
 	using System;
 	using System.Linq;
 	using Tartaros.Entities;
@@ -9,7 +8,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class OneEntitySelectedPanel : APanel
+	public class OneSelectedPanel : APanel
 	{
 		#region Fields
 		private static readonly Type[] SIDE_BUTTONS_ORDER_TYPE = new Type[]
@@ -34,7 +33,7 @@
 		private EntityAttackStatsUI _attacksStatsUI = null;
 
 		private ISelection _currentSelection = null;
-		private Entity _showEntity = null;
+		private ISelectable _showSelectable = null;
 		#endregion Fields
 
 		#region Methods
@@ -62,7 +61,7 @@
 
 		private void Entity_AnyEntityKilled(object sender, Entity.EntityKilledArgs e)
 		{
-			if (IsShow && sender as Entity == _showEntity)
+			if (IsShow && (sender as MonoBehaviour).GetComponent<ISelectable>() == _showSelectable)
 			{
 				Hide();
 			}
@@ -72,14 +71,10 @@
 		{
 			if (_currentSelection.SelectedSelectables.Length == 1)
 			{
-				ISelectable firtSelectable = _currentSelection.SelectedSelectables[0];
+				_showSelectable = _currentSelection.SelectedSelectables[0];
 
-				if (firtSelectable.GameObject.TryGetComponent(out Entity entity))
-				{
-					_showEntity = entity;
-					UpdatePanelInformations();
-					Show();
-				}
+				UpdatePanelInformations();
+				Show();
 			}
 			else
 			{
@@ -89,18 +84,18 @@
 
 		private void UpdatePanelInformations()
 		{
-			var orders = _showEntity.GenerateAvailablesOrders();
-
-			foreach (var order in orders)
-				Debug.Log(order.GetType());
-
-			Debug.LogFormat("Side buttons length is {0}.", GetSideButtons(orders).Length);
+			var showSelectableMonoBehaviour = _showSelectable as MonoBehaviour;
+			var orders = showSelectableMonoBehaviour.gameObject.GenerateAvailablesOrders();
 
 			_topButtons.SetOrders(GetTopButtons(orders));
 			_sideButtons.SetOrders(GetSideButtons(orders));
-			_radialHealthSlider.Healthable = _showEntity.GetComponent<IHealthable>();
-			_entityInformations.Entity = _showEntity;
-			_attacksStatsUI.Entity = _showEntity;
+			_radialHealthSlider.Healthable = showSelectableMonoBehaviour.GetComponent<IHealthable>();
+
+			if (showSelectableMonoBehaviour.TryGetComponent(out Entity entity))
+			{
+				_entityInformations.Entity = entity;
+				_attacksStatsUI.Entity = entity;
+			}
 		}
 
 		private Order[] GetTopButtons(Order[] orders)

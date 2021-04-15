@@ -90,26 +90,7 @@
 			_entityType = entityType;
 		}
 
-		public Order[] GenerateAvailablesOrders()
-		{
-			List<Order> outputOrders = new List<Order>();
-			IEntityOrderable[] orderables = GetComponents<IEntityOrderable>();
-
-			foreach (var orderable in orderables)
-			{
-				if ((orderable as MonoBehaviour).enabled == true)
-				{
-					Order[] orderableOrders = orderable.GenerateOrders();
-
-					if (orderableOrders != null)
-					{
-						outputOrders.AddRange(orderableOrders);
-					}
-				}
-			}
-
-			return outputOrders.ToArray();
-		}
+		
 
 		public T GetBehaviourData<T>() where T : class
 		{
