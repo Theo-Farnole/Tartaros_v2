@@ -12,7 +12,7 @@
 		private bool _isWallPreview = false;
 		private IConstructable _toBuild = null;
 		private bool _isSnaped = false;
-		private NeigboorWallManager _neigboorManager = null;
+		private EntityNeigboorWallManager _neigboorManager = null;
 
 		public BuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
 		{
@@ -37,7 +37,7 @@
 					if (constructable == _toBuild)
 					{
 						_buildingPreview.transform.position = MouseHelper.GetGameObjectUnderCursor().transform.position;
-						_neigboorManager = entity.gameObject.GetComponentInParent<NeigboorWallManager>();
+						_neigboorManager = entity.gameObject.GetComponentInParent<EntityNeigboorWallManager>();
 						return;
 					}
 				}
@@ -52,7 +52,7 @@
 			return _buildingPreview.transform.position;
 		}
 
-		public NeigboorWallManager GetNeigboorManager()
+		public EntityNeigboorWallManager GetNeigboorManager()
 		{
 			return _neigboorManager;
 		}
