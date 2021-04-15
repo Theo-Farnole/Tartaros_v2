@@ -2,7 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using System;
-	using System.Linq;
+	using System.Collections.Generic;
 	using Tartaros.Map;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
@@ -10,6 +10,7 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
+	[SelectionBase]
 	[RequireComponent(typeof(SectorObject))]
 	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable
 	{
@@ -91,10 +92,23 @@
 
 		public Order[] GenerateAvailablesOrders()
 		{
-			return GetComponents<IEntityOrderable>()
-				.Where(x => (x as MonoBehaviour).enabled == true)
-				.SelectMany(x => x.GenerateOrders(this))
-				.ToArray();
+			List<Order> outputOrders = new List<Order>();
+			IEntityOrderable[] orderables = GetComponents<IEntityOrderable>();
+
+			foreach (var orderable in orderables)
+			{
+				if ((orderable as MonoBehaviour).enabled == true)
+				{
+					Order[] orderableOrders = orderable.GenerateOrders(this);
+
+					if (orderableOrders != null)
+					{
+						outputOrders.AddRange(orderableOrders);
+					}
+				}
+			}
+
+			return outputOrders.ToArray();
 		}
 
 		public T GetBehaviourData<T>() where T : class
