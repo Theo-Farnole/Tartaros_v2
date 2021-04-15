@@ -57,14 +57,11 @@
 
 		private void UpdateAmountLabel()
 		{
-			if (PlayerIncome > 0)
-			{
-				string format = "{0}{1}";
-				string prefix = GetPrefix();
-				string amount = _playerIncome.GetIncomeAmount(_sectorRessourceType).ToString();
+			string format = "{0}{1}";
+			string prefix = GetPrefix();
+			string amount = _playerIncome.GetIncomeAmount(_sectorRessourceType).ToString();
 
-				_incomeLabel.text = string.Format(format, prefix, amount);
-			}
+			_incomeLabel.text = string.Format(format, prefix, amount);
 		}
 
 		private string GetPrefix()
