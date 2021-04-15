@@ -5,6 +5,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using UnityEngine;
+	using UnityEngine.AI;
 
 	[System.Serializable]
 	public class EntityConstructableData : IEntityBehaviourData, IConstructable
@@ -90,9 +91,10 @@
 #if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			//GameObject.Instantiate(_modelPrefab, entityRoot.transform);
-			// TODO TF: use carve mesh here
-		} 
+			var navMeshObstacle = entityRoot.GetOrAddComponent<NavMeshObstacle>();
+			navMeshObstacle.carving = true;
+			navMeshObstacle.size = new Vector3(_size.x, 1, _size.y);
+		}
 #endif
 
 		public override string ToString()

@@ -49,9 +49,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 2|Tartaros.Entities.EntityAttackData, Tartaros
-    - Name: _damage
-      Entry: 3
-      Data: 1
     - Name: _secondsBetweenAttacks
       Entry: 4
       Data: 0.5
@@ -73,6 +70,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: _damage
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -194,10 +194,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

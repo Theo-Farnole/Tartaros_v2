@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4550432140546763596}
   - component: {fileID: 396220872236625786}
   - component: {fileID: 8774480851626937428}
+  - component: {fileID: 8980753426503742301}
   m_Layer: 0
   m_Name: Building.Temple
   m_TagString: Untagged
@@ -71,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+  _prefabScale: 1
 --- !u!114 &1883052399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +183,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &8980753426503742301
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 7.5, y: 0.5, z: 6.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &2387191279002509662
 PrefabInstance:
   m_ObjectHideFlags: 0
