@@ -12,10 +12,17 @@
 		private ISectorResourcesWallet _fulllifeCost = null;
 		#endregion Fields
 
+		#region Ctor
 		public EntityHealWithCostData()
 		{
 			_fulllifeCost = new SectorResourcesWallet(0, 10, 5);
 		}
+
+		public EntityHealWithCostData(ISectorResourcesWallet fulllifeCost)
+		{
+			_fulllifeCost = fulllifeCost ?? throw new ArgumentNullException(nameof(fulllifeCost));
+		}
+		#endregion Ctor
 
 		#region Methods	
 		public ISectorResourcesWallet GetCostToHeal(IHealthable healthable)
@@ -26,7 +33,9 @@
 		public ISectorResourcesWallet GetCostToHeal(int hpToHeal, int maxHealth)
 		{
 			// equivalent of _fulllifeCost * health / maxHealth
-			return ISectorResourcesWalletMath.Multiply(_fulllifeCost, (hpToHeal / maxHealth));
+			float multiplicator = ((float)hpToHeal / (float)maxHealth);
+
+			return ISectorResourcesWalletMath.Multiply(_fulllifeCost, multiplicator);
 		}
 
 #if UNITY_EDITOR

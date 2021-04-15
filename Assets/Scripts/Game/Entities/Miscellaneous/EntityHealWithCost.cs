@@ -11,6 +11,7 @@
 		#region Fields
 		private EntityHealWithCostData _data = null;
 
+		private UserErrorsLogger _userErrorsLogger = null;
 		private IPlayerSectorResources _playerSectorResources = null;
 		private IHealthable _healthable = null;
 		#endregion Fields
@@ -27,7 +28,12 @@
 		{
 			if (CanBuyHeal() == true)
 			{
+				BuyHeal();
 				_healthable.HealMaxLife();
+			}
+			else
+			{
+				_userErrorsLogger.Log("Not enough resources to repair the building(s).");
 			}
 		}
 
@@ -37,12 +43,25 @@
 			return _playerSectorResources.CanBuy(healCost);
 		}
 
+		private void BuyHeal()
+		{
+			ISectorResourcesWallet healCost = _data.GetCostToHeal(_healthable);
+			_playerSectorResources.Buy(healCost);
+		}
+
 		Order[] IEntityOrderable.GenerateOrders(Entity entity)
 		{
-			return new Order[]
+			if (_healthable.IsFullLife())
 			{
-				new HealOrder(this)
-			};
+				return null;
+			}
+			else
+			{
+				return new Order[]
+				{
+					new HealOrder(this)
+				};
+			}
 		}
 		#endregion Methods
 	}

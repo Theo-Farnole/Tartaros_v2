@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6488230847132883514}
   - component: {fileID: 435715542111525154}
   - component: {fileID: 9051523499025112307}
+  - component: {fileID: 777838268106696224}
   m_Layer: 0
   m_Name: Building.Defense.Balista
   m_TagString: Untagged
@@ -154,6 +155,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &777838268106696224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851a463b7d46cae44870c6814bf01543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1917619717638062243

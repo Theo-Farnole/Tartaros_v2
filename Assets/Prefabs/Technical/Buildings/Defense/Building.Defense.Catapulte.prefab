@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 1377521498474758015}
   - component: {fileID: 3490829677239746903}
   - component: {fileID: 7033158893081403326}
+  - component: {fileID: -4128873540385485047}
+  - component: {fileID: -6293229806712192634}
   m_Layer: 0
   m_Name: Building.Defense.Catapulte
   m_TagString: Untagged
@@ -68,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+  _prefabScale: 1
 --- !u!114 &4441524218981506817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +145,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _canBeMultiSelected: 1
+--- !u!114 &-4128873540385485047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622053809958350417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6293229806712192634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622053809958350417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851a463b7d46cae44870c6814bf01543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4897343814929541699
 PrefabInstance:
   m_ObjectHideFlags: 0

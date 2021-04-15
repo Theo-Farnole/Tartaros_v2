@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3379786364793707916}
   - component: {fileID: 3002595405880767657}
   - component: {fileID: 1326604236127479612}
+  - component: {fileID: -1364515673476779802}
   m_Layer: 0
   m_Name: Building.Resources.Mill
   m_TagString: Untagged
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+  _prefabScale: 1
 --- !u!114 &1326604236127479612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +142,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1364515673476779802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141674708461386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851a463b7d46cae44870c6814bf01543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1795284652005403292
