@@ -11,8 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 93db62e444b26aa4db37d00739d42191, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -25,14 +25,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _OpacityPaternPower: 1.56
-    - _VerticalAlphaStrength: 2.15
-    - _Voro1Scale: 1.5
-    - _Voro1Strength: 1
-    - _Voro2Scale: 10
-    - _Voro2Strength: 0.75
-    - _VoroSpeed1: -0.5
-    - _VoroSpeed2: -0.3
+    - _Smoothness: 0
+    - _Tiling: 1
+    - _VerticalAlphaStrength: 1.2
+    - _Voro1Scale: 3
+    - _Voro1Strength: 0.5
+    - _Voro2Scale: 1.5
+    - _Voro2Strength: 2
+    - _VoroSpeed1: -0.8
+    - _VoroSpeed2: -0.1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.8351569, b: 1, a: 1}
-    - _Color2: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.5518868, g: 0.91740656, b: 1, a: 1}
+    - _Color2: {r: 0, g: 0.81621456, b: 1, a: 1}
+    - _SmoothStepSmoke: {r: 0, g: 2, b: 0, a: 0}
+    - _Vector0: {r: 0.14, g: 0.04, b: 0, a: 0}
