@@ -10,7 +10,7 @@
 	using UnityEngine.AI;
 
 	[RequireComponent(typeof(NavMeshAgent), typeof(EntityFSM))]
-	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IEntityOrderable
+	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderable
 	{
 		#region Fields
 		private EntityMovementData _entityMovementData = null;
@@ -140,7 +140,7 @@
 			_entityFSM.OrderPatrol(waypoints);
 		}
 
-		public Order[] GenerateOrders(Entity entity)
+		public Order[] GenerateOrders()
 		{
 			List<Order> orders = new List<Order>();
 

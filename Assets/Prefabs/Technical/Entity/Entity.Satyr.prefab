@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 7346568056699488540}
   - component: {fileID: 4077966187037685672}
   - component: {fileID: 7446995093344909706}
+  - component: {fileID: 4914162101903876982}
+  - component: {fileID: 3737431887952081801}
   m_Layer: 0
   m_Name: Entity.Satyr
   m_TagString: Untagged
@@ -114,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7093ddca2a2524c438a7bb6ddd4d575e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 8729383665189449602}
+  _model: {fileID: 5334325722198455337}
 --- !u!114 &1740465896924796274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +209,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b997af4d82253040817d76bd5c8219f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4914162101903876982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729383663548792512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _canBeMultiSelected: 1
+--- !u!114 &3737431887952081801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729383663548792512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8729383665189449600

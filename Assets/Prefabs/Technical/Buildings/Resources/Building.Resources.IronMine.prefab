@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7705120993291523984}
   - component: {fileID: 5780505988638116571}
   - component: {fileID: -2244458501669202722}
+  - component: {fileID: -4029700754040652274}
   m_Layer: 0
   m_Name: Building.Resources.IronMine
   m_TagString: Untagged
@@ -129,9 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
+  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: adf5804c5dd5aa7409e21bafdc4518a6,
     type: 3}
-  _prefabScale: 1
+  _prefabScale: 2
 --- !u!114 &5780505988638116571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +157,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851a463b7d46cae44870c6814bf01543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &-4029700754040652274
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859859454919395600}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.5, y: 0.5, z: 3.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3913393301472652673
 PrefabInstance:
   m_ObjectHideFlags: 0

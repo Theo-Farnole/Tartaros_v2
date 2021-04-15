@@ -1,20 +1,21 @@
 ﻿namespace Tartaros.UI
 {
-	using Sirenix.OdinInspector;
 	using System;
 	using System.Linq;
 	using Tartaros.Entities;
+	using Tartaros.Map;
 	using Tartaros.Orders;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class OneEntitySelectedPanel : APanel
+	public class OneSelectedPanel : APanel
 	{
 		#region Fields
 		private static readonly Type[] SIDE_BUTTONS_ORDER_TYPE = new Type[]
 		{
-			typeof(HealOrder)
+			typeof(HealOrder),
+			typeof(SelfKillOrder)
 		};
 
 		[SerializeField]
@@ -33,6 +34,7 @@
 		private EntityAttackStatsUI _attacksStatsUI = null;
 
 		private ISelection _currentSelection = null;
+		private ISelectable _showSelectable = null;
 		#endregion Fields
 
 		#region Methods
@@ -47,22 +49,36 @@
 		{
 			_currentSelection.SelectionChanged -= SelectionChanged;
 			_currentSelection.SelectionChanged += SelectionChanged;
+
+			Entity.AnyEntityKilled -= Entity_AnyEntityKilled;
+			Entity.AnyEntityKilled += Entity_AnyEntityKilled;
 		}
 
 		private void OnDisable()
 		{
+			Entity.AnyEntityKilled -= Entity_AnyEntityKilled;
 			_currentSelection.SelectionChanged -= SelectionChanged;
+		}
+
+		private void Entity_AnyEntityKilled(object sender, Entity.EntityKilledArgs e)
+		{
+			if (IsShow && (sender as MonoBehaviour).GetComponent<ISelectable>() == _showSelectable)
+			{
+				Hide();
+			}
 		}
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
 			if (_currentSelection.SelectedSelectables.Length == 1)
 			{
-				ISelectable firtSelectable = _currentSelection.SelectedSelectables[0];
+				ISelectable firstSelectable = _currentSelection.SelectedSelectables[0];
 
-				if (firtSelectable.GameObject.TryGetComponent(out Entity entity))
+				if ((firstSelectable as MonoBehaviour).GetComponent<ISector>() == null)
 				{
-					UpdatePanelInformations(entity);
+					_showSelectable = firstSelectable;
+
+					UpdatePanelInformations();
 					Show();
 				}
 			}
@@ -72,18 +88,20 @@
 			}
 		}
 
-		private void UpdatePanelInformations(Entity entity)
+		private void UpdatePanelInformations()
 		{
-			var orders = entity.GenerateAvailablesOrders();
-
-			foreach (var order in orders)
-				Debug.Log(order.GetType());
+			var showSelectableMonoBehaviour = _showSelectable as MonoBehaviour;
+			var orders = showSelectableMonoBehaviour.gameObject.GenerateAvailablesOrders();
 
 			_topButtons.SetOrders(GetTopButtons(orders));
 			_sideButtons.SetOrders(GetSideButtons(orders));
-			_radialHealthSlider.Healthable = entity.GetComponent<IHealthable>();
-			_entityInformations.Entity = entity;
-			_attacksStatsUI.Entity = entity;
+			_radialHealthSlider.Healthable = showSelectableMonoBehaviour.GetComponent<IHealthable>();
+
+			if (showSelectableMonoBehaviour.TryGetComponent(out Entity entity))
+			{
+				_entityInformations.Entity = entity;
+				_attacksStatsUI.Entity = entity;
+			}
 		}
 
 		private Order[] GetTopButtons(Order[] orders)
@@ -102,7 +120,7 @@
 
 		private bool IsSideButtonOrder(Order order)
 		{
-			return Array.IndexOf(SIDE_BUTTONS_ORDER_TYPE, order.GetType()) != -1;
+			return SIDE_BUTTONS_ORDER_TYPE.Contains(order.GetType());
 		}
 		#endregion Methods
 	}

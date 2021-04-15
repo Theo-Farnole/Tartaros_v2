@@ -1,16 +1,21 @@
 ﻿namespace Tartaros.Entities.Attack
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
 	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
+	using TMPro;
 	using UnityEngine;
 
 	[RequireComponent(typeof(EntityDetection), typeof(EntityFSM), typeof(Entity))]
-	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IEntityOrderable
+	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IOrderable
 	{
 		#region Fields
+		[SerializeField]
+		private Vector3 _projectileSpawnPoint = Vector3.up;
+
 		private EntityAttackData _entityAttackData = null;
 		private EntityDetection _entityDetection = null;
 		private EntityFSM _entityFSM = null;
@@ -20,6 +25,11 @@
 		#region Properties
 		public EntityAttackData EntityAttackData { get => _entityAttackData; set => _entityAttackData = value; }
 		public float AttackRange => _entityAttackData.AttackRange;
+		public Vector3 ProjectileSpawnWorldPoint
+		{
+			get => transform.InverseTransformPoint(_projectileSpawnPoint);
+			set => _projectileSpawnPoint = transform.TransformPoint(value);
+		}
 		#endregion Properties
 
 		#region Methods
@@ -83,11 +93,11 @@
 			_entityFSM.EnqueueOrderAttack(target);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		Order[] IOrderable.GenerateOrders()
 		{
 			Order[] orders = new Order[]
 			{
-				new AttackOrder(entity)
+				new AttackOrder(Entity)
 			};
 
 			return orders;

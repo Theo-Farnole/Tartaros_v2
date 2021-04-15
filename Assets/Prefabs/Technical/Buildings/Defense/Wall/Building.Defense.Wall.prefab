@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 8614130090644889785}
   - component: {fileID: 7562795870038913340}
   - component: {fileID: 6073263459150086886}
-  - component: {fileID: -1055367257994511564}
+  - component: {fileID: 3556129785545932030}
+  - component: {fileID: 1114249956890718782}
   m_Layer: 0
   m_Name: Building.Defense.Wall
   m_TagString: Untagged
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _canBeMultiSelected: 1
---- !u!114 &-1055367257994511564
+--- !u!114 &3556129785545932030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,13 +140,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5810600384853675113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a80a96be91a1d40ba0dbf088fe0370, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8412799fbbdc44094be91881567ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _backAdjacentWall: {fileID: 0}
   _frontAdjacentWall: {fileID: 0}
   _rightAdjacecntWall: {fileID: 0}
   _leftAdjacentWall: {fileID: 0}
+--- !u!114 &1114249956890718782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810600384853675113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1035043831809296912
 PrefabInstance:
   m_ObjectHideFlags: 0

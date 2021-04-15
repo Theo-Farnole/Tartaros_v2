@@ -1,14 +1,14 @@
 ﻿namespace Tartaros.Entities
 {
 	using Assets.Scripts.Game.Orders;
-	using Boo.Lang;
+	using System.Collections.Generic;
 	using Tartaros.Economy;
 	using Tartaros.Orders;
 	using Tartaros.Population;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class EntityUnitsSpawner : AEntityBehaviour, IEntityOrderable
+	public class EntityUnitsSpawner : AEntityBehaviour, IOrderable
 	{
 		#region Fields
 		private EntityUnitsSpawnerData _data = null;
@@ -75,7 +75,7 @@
 			return _populationManager.CanSpawn(gameObject.PopulationAmount);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders(Entity entity)
+		Order[] IOrderable.GenerateOrders()
 		{
 			List<Order> orders = new List<Order>();
 

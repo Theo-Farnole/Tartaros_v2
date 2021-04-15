@@ -7,15 +7,13 @@
 	{
 		#region Fields
 		[SerializeField]
-		[Required]
-		[ChildGameObjectsOnly]
-		private MeshRenderer _meshRenderer = null;
+		private GameObject _model = null;
 		#endregion Fields
 
 		#region Methods
 		void Start()
 		{
-			if (_meshRenderer == null)
+			if (_model == null)
 			{
 				Debug.LogErrorFormat("Missing Meshrenderer on {0}. Cover will not be hide.", name);
 			}
@@ -23,17 +21,17 @@
 
 		void ICoverableEffect.OnBecomeCover()
 		{
-			if (_meshRenderer != null)
+			if (_model != null)
 			{
-				_meshRenderer.enabled = false;
+				_model.SetActive(false);
 			}
 		}
 
 		void ICoverableEffect.OnBecomeVisible()
 		{
-			if (_meshRenderer != null)
+			if (_model != null)
 			{
-				_meshRenderer.enabled = true;
+				_model.SetActive(true);
 			}
 		}
 		#endregion Methods
