@@ -36,7 +36,7 @@
 
 			if (sectorOnPosition != null)
 			{
-				return ContainsResourceFlag(sectorOnPosition, _type);
+				return sectorOnPosition.ContainsResourceFlag(_type);
 			}
 			else
 			{
@@ -48,29 +48,6 @@
 		public static string BuildErrorMessage_NoSectorFoundAtPosition(Vector3 position)
 		{
 			return string.Format(DBG_ERR_NO_SECTOR_FOUND, position);
-		}
-
-		private bool ContainsResourceFlag(ISector sectorOnPosition, SectorRessourceType type)
-		{
-			return GetResourceFlagCount(sectorOnPosition, type) > 0;
-		}
-
-		// TODO TF: move to extensions
-		private int GetResourceFlagCount(ISector sector, SectorRessourceType type)
-		{
-			return sector.ObjectsInSector.Count(objectInSector => IsResourceFlag(objectInSector, type));
-		}
-
-		private bool IsResourceFlag(GameObject gameObject, SectorRessourceType type)
-		{
-			if (gameObject.TryGetComponent(out FlagResourceToSector resourceFlag))
-			{
-				return resourceFlag.Type == type;
-			}
-			else
-			{
-				return false;
-			}
 		}
 		#endregion Methods
 	}

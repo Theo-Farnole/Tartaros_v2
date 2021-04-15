@@ -28,6 +28,16 @@
 			return entitiesInSector;
 		}
 
+		public static bool ContainsResourceFlag(this ISector sector, SectorRessourceType type)
+		{
+			return GetResourceFlagCount(sector, type) > 0;
+		}
+
+		public static int GetResourceFlagCount(this ISector sector, SectorRessourceType type)
+		{
+			return sector.ObjectsInSector.Count(objectInSector => IsResourceFlag(objectInSector, type));
+		}
+
 		public static bool IsThereEnemiesOnSector(this ISector sector)
 		{
 			return sector.GetEntitiesOfTypeOnSector(Team.Enemy) > 0;
@@ -107,6 +117,18 @@
 			else
 			{
 				type = SectorRessourceType.Food;
+				return false;
+			}
+		}
+
+		private static bool IsResourceFlag(GameObject gameObject, SectorRessourceType type)
+		{
+			if (gameObject.TryGetComponent(out FlagResourceToSector resourceFlag))
+			{
+				return resourceFlag.Type == type;
+			}
+			else
+			{
 				return false;
 			}
 		}
