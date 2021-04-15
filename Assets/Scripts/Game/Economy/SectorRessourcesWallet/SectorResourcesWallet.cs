@@ -7,6 +7,7 @@
 	using System.Linq;
 	using System;
 	using System.Text;
+	using TMPro;
 
 	[System.Serializable]
 	public class SectorResourcesWallet : ISectorResourcesWallet
@@ -87,6 +88,33 @@
 			}
 
 			return sb.ToString();
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is ISectorResourcesWallet wallet)
+			{
+				foreach (SectorRessourceType type in EnumHelper.GetValues<SectorRessourceType>())
+				{
+					bool amountEquals = wallet.GetAmount(type) == Self.GetAmount(type);
+
+					if (amountEquals == false)
+					{
+						return false;
+					}
+				}
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public override int GetHashCode()
+		{
+			return -1482668319 + EqualityComparer<Dictionary<SectorRessourceType, int>>.Default.GetHashCode(_ressourceAmount);
 		}
 
 		#region ISectorResourcesWallet

@@ -16,11 +16,11 @@
 		[SerializeField]
 		private bool _destroyRootChildrenBeforeGeneration = true;
 
-		private List<GameObject> _buttons = new List<GameObject>();
+		private List<GameObject> _buttons = new List<GameObject>();		
 		#endregion Fields
 
 		#region Methods		
-		public void GenerateButtons(Entity entity)
+		public void SetOrders(Order[] orders)
 		{
 			if (_destroyRootChildrenBeforeGeneration == true)
 			{
@@ -28,8 +28,6 @@
 			}
 
 			DestroyCurrentButtons();
-
-			Order[] orders = entity.GenerateAvailablesOrders();
 
 			foreach (Order order in orders)
 			{
