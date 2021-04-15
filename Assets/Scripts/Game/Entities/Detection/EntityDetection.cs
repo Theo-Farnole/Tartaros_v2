@@ -12,10 +12,7 @@
 	public partial class EntityDetection : AEntityBehaviour
 	{
 		#region Fields
-		private float _attackRange = -1;
-
 		private EntityDetectionData _entityDetectionData = null;
-
 		private EntitiesDetectorManager _entitiesKDTrees = null;
 		private EntityAttack _entityAttack = null;
 		#endregion
