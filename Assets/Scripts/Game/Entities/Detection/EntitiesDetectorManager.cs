@@ -81,7 +81,7 @@
 			Entity nearestOpponent = FindClosest(team, position);
 
 			// let's find the nearest using the KD-Tree
-			if (nearestOpponent != null && nearestOpponent is IAttackable nearestAttackable)
+			if (nearestOpponent != null && nearestOpponent.TryGetComponent(out IAttackable nearestAttackable) == true)
 			{
 				if (IsInRadius(position, radius, nearestOpponent) == true)
 				{
@@ -95,6 +95,8 @@
 			// if the nearest entity has not a IAttackable component, let's use the hard way
 			else
 			{
+				Debug.Log(string.Format("Nearest entity using KD-Tree is {0} of team {1}. It is not a attackable.", nearestOpponent, team), nearestOpponent);
+
 				Entity[] entitiesInRange = this.GetEveryEntityInRadius(team, transform.position, radius);
 
 				foreach (Entity entity in entitiesInRange)
