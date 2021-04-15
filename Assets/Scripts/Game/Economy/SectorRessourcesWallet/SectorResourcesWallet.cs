@@ -9,7 +9,7 @@
 	using System.Text;
 
 	[System.Serializable]
-	public class SectorResourcesWallet : ISectorResourcesWallet, ICloneable
+	public class SectorResourcesWallet : ISectorResourcesWallet
 	{
 		#region Fields
 		private static readonly SectorRessourceType[] SECTOR_RESOURCE_TYPE_VALUES = EnumHelper.GetValues<SectorRessourceType>();
@@ -113,6 +113,11 @@
 			{
 				return 0;
 			}
+		}
+
+		public void SetAmount(SectorRessourceType ressource, int amount)
+		{
+			Self.SetAmount(ressource, amount);
 		}
 
 		bool ISectorResourcesWallet.CanBuy(ISectorResourcesWallet price)

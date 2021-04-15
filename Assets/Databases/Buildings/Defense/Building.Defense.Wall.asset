@@ -18,13 +18,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 6e5890a165b99324f9f08ad0c6269110, type: 3}
     - {fileID: 5810600384853675113, guid: f63531dd88f368e48a1de23a7d34113e, type: 3}
-    - {fileID: 5810600384853675113, guid: 096b7ee2b2c442c4db9b1e2286049ca8, type: 3}
-    - {fileID: 5810600384853675113, guid: 5c07f5e081bede44bbf768082bbeef64, type: 3}
-    - {fileID: 5810600384853675113, guid: 52242568469a53d469ef67e4a3f8074a, type: 3}
-    - {fileID: 5810600384853675113, guid: 956ffdbd604b72941872f3c6d11fea1f, type: 3}
-    - {fileID: 5810600384853675113, guid: 593955f0c33322848b2926f943993782, type: 3}
-    - {fileID: 5810600384853675113, guid: eabbb77221c6a9f45ba638bf9e7890fa, type: 3}
-    - {fileID: 5810600384853675113, guid: 0e5cb72f590b6064f83745a383d834f4, type: 3}
     - {fileID: 4740395784054915281, guid: cac3677ec5163d74882eb8dff95a91e6, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -36,7 +29,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 6
       Data: 
@@ -65,26 +58,26 @@ MonoBehaviour:
       Entry: 10
       Data: 1
     - Name: _gameplayPrefab
-      Entry: 10
-      Data: 2
+      Entry: 6
+      Data: 
     - Name: _wallLModel
       Entry: 10
-      Data: 3
+      Data: 1
     - Name: _wallLGameplay
-      Entry: 10
-      Data: 4
+      Entry: 6
+      Data: 
     - Name: _wallTModel
       Entry: 10
-      Data: 5
+      Data: 1
     - Name: _wallTGameplay
-      Entry: 10
-      Data: 6
+      Entry: 6
+      Data: 
     - Name: _wallXModel
       Entry: 10
-      Data: 7
+      Data: 1
     - Name: _wallXGameplay
-      Entry: 10
-      Data: 8
+      Entry: 6
+      Data: 
     - Name: _IsChained
       Entry: 5
       Data: true
@@ -197,7 +190,7 @@ MonoBehaviour:
       Data: 8|Tartaros.Entities.EntityWallToGateData, Tartaros
     - Name: _gatePrefab
       Entry: 10
-      Data: 9
+      Data: 2
     - Name: _gatePrice
       Entry: 7
       Data: 9|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -278,6 +271,80 @@ MonoBehaviour:
     - Name: _description
       Entry: 1
       Data: NONE
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|Tartaros.Entities.EntityHealWithCostData, Tartaros
+    - Name: _fulllifeCost
+      Entry: 7
+      Data: 14|Tartaros.Economy.SectorResourcesWallet, Tartaros
+    - Name: _ressourceAmount
+      Entry: 7
+      Data: 15|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+        Tartaros],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 16|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+        Tartaros]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2535345861080177723}
   - component: {fileID: 1887435035698048007}
   - component: {fileID: 7705120993291523984}
+  - component: {fileID: 5780505988638116571}
   m_Layer: 0
   m_Name: Building.Resources.IronMine
   m_TagString: Untagged
@@ -129,6 +130,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+--- !u!114 &5780505988638116571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859859454919395600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3913393301472652673
 PrefabInstance:
   m_ObjectHideFlags: 0

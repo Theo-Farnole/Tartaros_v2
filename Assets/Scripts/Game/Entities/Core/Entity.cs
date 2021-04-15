@@ -126,6 +126,7 @@
 		{
 			gameObject.GetOrAddComponent<EntityFSM>();
 			gameObject.GetOrAddComponent<Selection.Selectable>();
+			gameObject.GetOrAddComponent<SectorObject>();
 
 			if (_team == Team.Player)
 			{

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8572922819082457272}
   - component: {fileID: 3379786364793707916}
   - component: {fileID: 3002595405880767657}
+  - component: {fileID: 1326604236127479612}
   m_Layer: 0
   m_Name: Building.Resources.Mill
   m_TagString: Untagged
@@ -34,8 +35,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4443972135201438522}
   - {fileID: 542595967767183004}
+  - {fileID: 1269426216974774044}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,7 +130,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
---- !u!1001 &3808884847478128314
+--- !u!114 &1326604236127479612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141674708461386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &1795284652005403292
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -139,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 682235464088241536, guid: a737af567d7a55e47979de735b1b07aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 682235464088241536, guid: a737af567d7a55e47979de735b1b07aa,
         type: 3}
@@ -194,15 +207,15 @@ PrefabInstance:
     - target: {fileID: 682235464088241539, guid: a737af567d7a55e47979de735b1b07aa,
         type: 3}
       propertyPath: m_Name
-      value: Building.Resources.Mill.Preview
+      value: Building.Resources.Mill.Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a737af567d7a55e47979de735b1b07aa, type: 3}
---- !u!4 &4443972135201438522 stripped
+--- !u!4 &1269426216974774044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 682235464088241536, guid: a737af567d7a55e47979de735b1b07aa,
     type: 3}
-  m_PrefabInstance: {fileID: 3808884847478128314}
+  m_PrefabInstance: {fileID: 1795284652005403292}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4301115802656705851
 PrefabInstance:
@@ -229,7 +242,7 @@ PrefabInstance:
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}

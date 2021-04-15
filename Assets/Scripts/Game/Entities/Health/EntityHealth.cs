@@ -14,7 +14,7 @@
 
 		#region Properties
 		Transform IAttackable.Transform => transform;
-		bool IAttackable.IsAlive => IsAlive;		
+		bool IAttackable.IsAlive => IsAlive;
 		public EntityHealthData EntityHealthData
 		{
 			get
@@ -46,22 +46,9 @@
 
 			set
 			{
-				bool doGetDamage = value < _currentHealth;
-
 				_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
 
 				HealthChanged?.Invoke(this, new HealthChangedArgs());
-
-				if (doGetDamage == true)
-				{
-					DamageTaken?.Invoke(this, new DamageTakenArgs());
-				}
-
-				if (IsDead)
-				{
-					Death?.Invoke(this, new DeathArgs());
-					GetComponent<Entity>().Kill();
-				}
 			}
 		}
 
@@ -71,11 +58,10 @@
 		#endregion Properties
 
 		#region Events
-		public class DamageTakenArgs : EventArgs
-		{
+		public class HealArgs : EventArgs { }
+		public event EventHandler<HealArgs> Heal = null;
 
-		}
-
+		public class DamageTakenArgs : EventArgs { }
 		public event EventHandler<DamageTakenArgs> DamageTaken = null;
 
 		public class DeathArgs : EventArgs { }
@@ -94,6 +80,21 @@
 		void IAttackable.TakeDamage(int damage)
 		{
 			CurrentHealth -= damage;
+
+			DamageTaken?.Invoke(this, new DamageTakenArgs());
+
+			if (IsDead)
+			{
+				Death?.Invoke(this, new DeathArgs());
+				GetComponent<Entity>().Kill();
+			}
+		}
+
+		void IHealthable.Heal(int amount)
+		{
+			CurrentHealth += amount;
+
+			Heal?.Invoke(this, new HealArgs());
 		}
 		#endregion
 	}

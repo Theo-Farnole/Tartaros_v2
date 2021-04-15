@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 480610525399392507}
   - component: {fileID: 6488230847132883514}
   - component: {fileID: 435715542111525154}
+  - component: {fileID: 9051523499025112307}
   m_Layer: 0
   m_Name: Building.Defense.Balista
   m_TagString: Untagged
@@ -54,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+  _prefabScale: 1
 --- !u!114 &2674278735904378252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,20 +144,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _canBeMultiSelected: 1
---- !u!114 &834045431216267731
+--- !u!114 &9051523499025112307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6061597699220490079}
+  m_GameObject: {fileID: 5657609668978460668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64de5000312a62b4a89a4c83a1890c19, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityData: {fileID: 11400000, guid: 2b97efc399d71d046aaa480fe09828bf, type: 2}
-  _team: 1
 --- !u!1001 &1917619717638062243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225,12 +225,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40135a875b18b894893b8965e1eb5987, type: 3}
---- !u!1 &6061597699220490079 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5657609668978460668, guid: 40135a875b18b894893b8965e1eb5987,
-    type: 3}
-  m_PrefabInstance: {fileID: 1917619717638062243}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6061597699220490076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5657609668978460671, guid: 40135a875b18b894893b8965e1eb5987,

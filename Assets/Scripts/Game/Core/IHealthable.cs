@@ -9,6 +9,7 @@
 	{
 		int CurrentHealth { get; }
 		int MaxHealth { get; }
-		event EventHandler<HealthChangedArgs> HealthChanged;		
+		event EventHandler<HealthChangedArgs> HealthChanged;
+		void Heal(int amount);
 	}
 }

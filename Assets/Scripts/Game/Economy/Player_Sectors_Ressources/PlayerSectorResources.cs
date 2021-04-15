@@ -54,6 +54,16 @@
 		{
 			return _playerWallet.ToString();
 		}
+
+		void ISectorResourcesWallet.SetAmount(SectorRessourceType ressource, int amount)
+		{
+			throw new NotImplementedException();
+		}
+
+		object ICloneable.Clone()
+		{
+			throw new NotImplementedException();
+		}
 		#endregion Methods
 	}
 }

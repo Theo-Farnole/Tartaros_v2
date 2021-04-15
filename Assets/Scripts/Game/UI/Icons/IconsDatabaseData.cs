@@ -24,6 +24,8 @@
 		private Sprite _closeDoorIcon = null;
 		[SerializeField]
 		private Dictionary<SectorRessourceType, Sprite> _icons = new Dictionary<SectorRessourceType, Sprite>();
+		[SerializeField]
+		private Sprite _healIcon = null;
 		#endregion Fields
 
 		#region Properties
@@ -34,6 +36,7 @@
 		public Sprite OpenDoorIcon => _openDoorIcon;
 		public Sprite CloseDoorIcon => _closeDoorIcon;
 		public Sprite PatrolIcon => _patrolIcon;
+		public Sprite HealIcon => _healIcon;
 		#endregion properties
 
 		#region Methods

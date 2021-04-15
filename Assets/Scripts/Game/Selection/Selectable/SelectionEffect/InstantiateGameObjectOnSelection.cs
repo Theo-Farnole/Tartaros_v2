@@ -13,10 +13,13 @@
 
 		[ShowInRuntime]
 		private GameObject _currentPrefab = null;
+
+		[SerializeField]
+		private float _prefabScale = 1;
 		#endregion Fields
 
 		#region Properties
-		public GameObject PrefabToInstantiateOnSelection { get => _prefabToInstantiateOnSelection; set => _prefabToInstantiateOnSelection = value; } 
+		public GameObject PrefabToInstantiateOnSelection { get => _prefabToInstantiateOnSelection; set => _prefabToInstantiateOnSelection = value; }
 		#endregion Properties
 
 		#region Methods
@@ -47,6 +50,7 @@
 			}
 
 			_currentPrefab = Instantiate(PrefabToInstantiateOnSelection, transform);
+			_currentPrefab.transform.localScale = Vector3.one * _prefabScale;
 		}
 
 		private void DestroyCurrentPrefab()

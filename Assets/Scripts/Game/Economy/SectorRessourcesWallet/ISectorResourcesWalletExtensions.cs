@@ -15,7 +15,7 @@
 			{
 				wallet.AddAmount(resourceType, walletToAdd.GetAmount(resourceType));
 			}
-		}
+		}		
 
 		public static void RemoveWallet(this ISectorResourcesWallet wallet, ISectorResourcesWallet walletToRemove)
 		{
@@ -77,6 +77,5 @@
 				return TartarosTexts.CAPTURE_SECTOR_FREE;
 			}
 		}
-
 	}
 }
