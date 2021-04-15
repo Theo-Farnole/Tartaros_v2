@@ -6,7 +6,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(IHealthable))]
-	public class EntityHealWithCost : AEntityBehaviour, IEntityOrderable
+	public class EntityHealWithCost : AEntityBehaviour, IOrderable
 	{
 		#region Fields
 		private EntityHealWithCostData _data = null;
@@ -49,7 +49,7 @@
 			_playerSectorResources.Buy(healCost);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders()
+		Order[] IOrderable.GenerateOrders()
 		{
 			if (_healthable.IsFullLife())
 			{

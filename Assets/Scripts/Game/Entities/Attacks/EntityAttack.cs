@@ -8,7 +8,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(EntityDetection), typeof(EntityFSM), typeof(Entity))]
-	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IEntityOrderable
+	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IOrderable
 	{
 		#region Fields
 		private EntityAttackData _entityAttackData = null;
@@ -83,7 +83,7 @@
 			_entityFSM.EnqueueOrderAttack(target);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders()
+		Order[] IOrderable.GenerateOrders()
 		{
 			Order[] orders = new Order[]
 			{

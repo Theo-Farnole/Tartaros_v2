@@ -8,7 +8,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class EntityWallToGate : AEntityBehaviour, IEntityOrderable
+	public class EntityWallToGate : AEntityBehaviour, IOrderable
 	{
 		private EntityWallToGateData _data = null;
 		private IconsDatabase _iconsDataBase = null;
@@ -29,7 +29,7 @@
 			_data = Entity.GetBehaviourData<EntityWallToGateData>();
 		}
 
-		Order[] IEntityOrderable.GenerateOrders()
+		Order[] IOrderable.GenerateOrders()
 		{
 			List<Order> orders = new List<Order>();
 

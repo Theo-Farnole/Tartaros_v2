@@ -1,6 +1,6 @@
 ﻿namespace Tartaros.Orders
 {
-	public interface IEntityOrderable
+	public interface IOrderable
 	{
 		Order[] GenerateOrders();
 	}

@@ -12,7 +12,7 @@
 
 	[SelectionBase]
 	[RequireComponent(typeof(SectorObject))]
-	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable, IEntityOrderable
+	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable, IOrderable
 	{
 		#region Fields
 		[SerializeField]
@@ -108,7 +108,7 @@
 			GetComponent<IOrderAttackReceiver>().Attack(attackable);
 		}
 
-		Order[] IEntityOrderable.GenerateOrders()
+		Order[] IOrderable.GenerateOrders()
 		{
 			return new Order[]
 			{

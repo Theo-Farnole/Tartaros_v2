@@ -9,7 +9,7 @@
     using UnityEngine;
     using UnityEngine.AI;
 
-    public class Gate : MonoBehaviour, IEntityOrderable
+    public class Gate : MonoBehaviour, IOrderable
     {
         [SerializeField]
         private bool _useAnimatorONEDITOR = false;
@@ -48,7 +48,7 @@
             }    
         }
 
-        Order[] IEntityOrderable.GenerateOrders()
+        Order[] IOrderable.GenerateOrders()
 		{
             List<Order> orders = new List<Order>();
 

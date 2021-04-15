@@ -13,9 +13,9 @@
 		public static Order[] GenerateAvailablesOrders(this GameObject gameObject)
 		{
 			List<Order> outputOrders = new List<Order>();
-			IEntityOrderable[] orderables = gameObject.GetComponents<IEntityOrderable>();
+			IOrderable[] orderables = gameObject.GetComponents<IOrderable>();
 
-			foreach (IEntityOrderable orderable in orderables)
+			foreach (IOrderable orderable in orderables)
 			{
 				if ((orderable as MonoBehaviour).enabled == true)
 				{
