@@ -55,7 +55,7 @@
 		public static EntityAttack AddAttackBehaviour(Entity entity, float attackRange)
 		{
 			EntityAttack entityAttack = entity.gameObject.AddComponent<EntityAttack>();
-			entityAttack.EntityAttackData = new EntityAttackData(0, 0, attackRange, null, null);
+			entityAttack.EntityAttackData = new EntityAttackData(0, attackRange, null, null);
 
 			return entityAttack;
 		}

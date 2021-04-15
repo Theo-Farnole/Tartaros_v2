@@ -6,59 +6,67 @@
 
 	public class RangeProjectile : MonoBehaviour
 	{
+		private const float THRESHOLD_HIT_DISTANCE = 0.3f;
+
 		[SerializeField]
 		private float _speed = 1;
 		private GameObject _projectile = null;
 		private Transform _attacker = null;
 		private IAttackable _target = null;
+		private int _damage = -1;
 
 		private IHitEffect _hitEffect = null;
 
 		private void Update()
 		{
-			if (_target.IsInterfaceDestroyed() == true) // must cast to MonoBehaviour to get if interface is destroy
+			if (_target.IsInterfaceDestroyed() == true)
 			{
 				Destroy(gameObject);
 				return;
 			}
 
-			ProjectileTravel();
-			IsReachTarget();
+			MoveTowardsTarget();
+			IsTargetReach();
 
 		}
 
-		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx)
+		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx, int damage)
 		{
 			_projectile = gameObject;
 			_attacker = attacker;
 			_target = target;
 			_hitEffect = vfx;
+			_damage = damage;
 		}
 
-		private void ProjectileTravel()
+		private void MoveTowardsTarget()
 		{
-			Vector3 directionYoTarget = (_projectile.transform.position - _target.Transform.position).normalized;
 			_projectile.transform.position += _projectile.transform.forward * _speed * Time.deltaTime;
 			_projectile.transform.LookAt(_target.Transform);
 		}
 
-		private void IsReachTarget()
+		private void IsTargetReach()
 		{
 			float distanceFromTarget = Vector3.Distance(_projectile.transform.position, _target.Transform.position);
-			float triggerToTouchTarget = 2f;
 
-			if (distanceFromTarget <= triggerToTouchTarget)
+			if (distanceFromTarget <= THRESHOLD_HIT_DISTANCE)
 			{
-				ReachTarget();
+				OnTargetReach();
 			}
 		}
 
-		private void ReachTarget()
+		private void OnTargetReach()
+		{
+			InflictDamageToTarget();
+
+			Destroy(gameObject);
+		}
+
+		private void InflictDamageToTarget()
 		{
 			_hitEffect.ExecuteHitEffect(_target.Transform.position);
-			EntityAttack entityAttack = _attacker.GetComponent<EntityAttack>();
-			_target.TakeDamage(entityAttack.EntityAttackData.Damage);
-			Destroy(gameObject);
+			
+			_target.TakeDamage(_damage);
 		}
 	}
 }

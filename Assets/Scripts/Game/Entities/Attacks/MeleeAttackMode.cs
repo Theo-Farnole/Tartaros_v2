@@ -8,8 +8,12 @@
 	{
 		[OdinSerialize]
 		private IHitEffect _vfxPrefab = null;
+		[SerializeField]
+		private int _damage = 1;
 
 		string IAttackMode.DisplayTypeUI => "Melee";
+
+		int IAttackMode.Damage => _damage;
 
 		void IAttackMode.Attack(Transform attacker, IAttackable target)
 		{

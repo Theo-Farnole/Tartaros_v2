@@ -9,5 +9,6 @@ namespace Tartaros.Entities.Attack
 		/// </summary>
 		string DisplayTypeUI { get; }
 		void Attack(Transform attacker, IAttackable target);
+		int Damage { get; }
 	}
 }
