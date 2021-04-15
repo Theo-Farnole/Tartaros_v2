@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Gamemode.State
 {
+	using System.Collections;
 	using System.Collections.Generic;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
@@ -15,6 +16,7 @@
 		private List<GameObject> _wallSections = new List<GameObject>();
 		private WallBuildingPreview _wallSectionPreview = null;
 		private GameObject _wallToHideAndShow = null;
+		private int _indexStartModel = 1;
 
 		private readonly IConstructable _constructable = null;
 		private readonly ConstructionInputs _inputs = null;
@@ -76,7 +78,7 @@
 				_wallSectionPreview.DestroyMethod();
 			}
 
-			if(_wallToHideAndShow != null)
+			if (_wallToHideAndShow != null)
 			{
 				_wallToHideAndShow.SetActive(true);
 			}
@@ -138,19 +140,20 @@
 		{
 			GameObject previewStart = _constructable.PreviewPrefab;
 
-			if(_buildingPreview.GetNeigboorManager() != null)
+			if (_buildingPreview.GetNeigboorManager() != null)
 			{
 				_wallToHideAndShow = _buildingPreview.GetObjectUnderCursor();
 				_wallToHideAndShow.SetActive(false);
+				_wallToHideAndShow.name = Random.Range(0, 10000).ToString();
 
-				previewStart = SelectPreviewStartPrefab();				
+				previewStart = SelectPreviewStartPrefab();
 			}
 			_wallSectionPreview = new WallBuildingPreview(_constructable, _buildingPreview.GetBuildingPreviewPosition(), previewStart);
 			_buildingPreview.DestroyMethod();
 			_buildingPreview = null;
 		}
 
-		
+
 
 		private GameObject SelectPreviewStartPrefab()
 		{
@@ -159,14 +162,17 @@
 
 			if (neigboorManager.GetNumberOfNeigboor() == 1)
 			{
+				_indexStartModel = 1;
 				previewStart = _constructable.WallLModel;
 			}
 			else if (neigboorManager.GetNumberOfNeigboor() == 2)
 			{
+				_indexStartModel = 2;
 				previewStart = _constructable.WallTModel;
 			}
 			else if (neigboorManager.GetNumberOfNeigboor() == 3)
 			{
+				_indexStartModel = 3;
 				previewStart = _constructable.WallXModel;
 			}
 
@@ -175,18 +181,17 @@
 
 		private GameObject SelectGameplayStartPrefab()
 		{
-			var neigboorManager = _buildingPreview.GetNeigboorManager();
 			GameObject gameplayPrefab = null;
 
-			if (neigboorManager.GetNumberOfNeigboor() == 1)
+			if (_indexStartModel == 1)
 			{
 				gameplayPrefab = _constructable.WallLGameplay;
 			}
-			else if (neigboorManager.GetNumberOfNeigboor() == 2)
+			else if (_indexStartModel == 2)
 			{
 				gameplayPrefab = _constructable.WallTGameplay;
 			}
-			else if (neigboorManager.GetNumberOfNeigboor() == 3)
+			else if (_indexStartModel == 3)
 			{
 				gameplayPrefab = _constructable.WallXGameplay;
 			}
@@ -197,8 +202,8 @@
 		{
 			AddWallPreviewOnList();
 			PayPriceRessources();
-			InstanciateWallSection();
-			LeaveState();
+			_stateOwner.StartCoroutine(InstanciateWallSection());
+			
 		}
 
 		private void AddWallPreviewOnList()
@@ -218,8 +223,29 @@
 			}
 		}
 
-		private void InstanciateWallSection()
+		private IEnumerator InstanciateWallSection()
 		{
+			GameObject gameplayStartPrefab = _constructable.GameplayPrefab;
+
+
+			if (_wallToHideAndShow != null)
+			{
+				gameplayStartPrefab = SelectGameplayStartPrefab();
+				_wallToHideAndShow.SetActive(false);
+				GameObject.Destroy(_wallToHideAndShow);
+			}
+
+			yield return new WaitForEndOfFrame();
+
+
+			Transform transformStart = _wallCorners[0].transform;
+			GameObject.Destroy(_wallCorners[0]);
+			GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
+
+			Transform transformEnd = _wallCorners[1].transform;
+			GameObject.Destroy(_wallCorners[1]);
+			GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformEnd.position, transformEnd.rotation);
+
 			foreach (GameObject wall in _wallSections)
 			{
 				Transform transform = wall.transform;
@@ -227,30 +253,7 @@
 				GameObject wallInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transform.position, transform.rotation);
 			}
 
-			foreach (GameObject corner in _wallCorners)
-			{
-				Transform transform = corner.transform;
-				GameObject.Destroy(corner);
-				GameObject wallInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transform.position, transform.rotation);
-			}
-
-			//GameObject gameplayStartPrefab = _constructable.GameplayPrefab;
-
-			
-
-			//if (_wallToHideAndShow != null)
-			//{
-			//	gameplayStartPrefab = SelectGameplayStartPrefab();
-			//	GameObject.Destroy(_wallToHideAndShow);
-			//}
-
-			//Transform transformStart = _wallCorners[1].transform;
-			//GameObject.Destroy(_wallCorners[1]);
-			//GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
-
-			//Transform transformEnd = _wallCorners[2].transform;
-			//GameObject.Destroy(_wallCorners[2]);
-			//GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformStart.position, transformStart.rotation);
+			LeaveState();
 		}
 
 		private bool CanConstructHere()

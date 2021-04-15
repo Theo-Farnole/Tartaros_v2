@@ -13,18 +13,18 @@
 		private EntityWallToGateData _data = null;
 		private IconsDatabase _iconsDataBase = null;
 		private IPlayerSectorResources _playerResources = null;
-		private NeigboorWallManager _neigboorManager = null;
+		private EntityNeigboorWallManager _neigboorManager = null;
 
 		public IconsDatabase IconData => _iconsDataBase;
 
 		public EntityWallToGateData EntityWallToGateData { get => _data; set => _data = value; }
-		public NeigboorWallManager NeigboorManager { get => _neigboorManager; set => _neigboorManager = value; }
+		public EntityNeigboorWallManager NeigboorManager { get => _neigboorManager; set => _neigboorManager = value; }
 
 		private void Awake()
 		{
 			_iconsDataBase = Services.Instance.Get<IconsDatabase>();
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
-			_neigboorManager = GetComponent<NeigboorWallManager>();
+			_neigboorManager = GetComponent<EntityNeigboorWallManager>();
 
 			_data = Entity.GetBehaviourData<EntityWallToGateData>();
 		}
