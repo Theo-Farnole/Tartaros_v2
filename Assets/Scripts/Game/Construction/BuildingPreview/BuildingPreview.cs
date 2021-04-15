@@ -37,14 +37,12 @@
 					if (constructable == _toBuild)
 					{
 						_buildingPreview.transform.position = MouseHelper.GetGameObjectUnderCursor().transform.position;
-						_isSnaped = true;
-						_neigboorManager = entity.gameObject.GetComponent<NeigboorWallManager>();
+						_neigboorManager = entity.gameObject.GetComponentInParent<NeigboorWallManager>();
 						return;
 					}
 				}
 			}
-
-			_isSnaped = false;
+			_neigboorManager = null;
 			_buildingPreview.transform.position = position;
 
 		}
@@ -57,6 +55,17 @@
 		public NeigboorWallManager GetNeigboorManager()
 		{
 			return _neigboorManager;
+		}
+
+		public GameObject GetObjectUnderCursor()
+		{
+			GameObject objectUnderCursor = MouseHelper.GetGameObjectUnderCursor();
+			if (objectUnderCursor != null && objectUnderCursor.TryGetComponentInParent(out Entity entity))
+			{
+				return entity.gameObject;
+			}
+			Debug.LogError("There is no entity to return");
+			return null;
 		}
 
 

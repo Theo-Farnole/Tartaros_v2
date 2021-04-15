@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3715602655463213870}
   - component: {fileID: 7032176481039760311}
   - component: {fileID: 6356215081659614489}
+  - component: {fileID: -4388995832814375950}
   m_Layer: 0
   m_Name: Building.Defense.WallCorner
   m_TagString: Untagged
@@ -114,8 +115,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0966ab54d19a84447ba65323343de821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _previousAdjacentWall: {fileID: 0}
-  _nextAdjacentWall: {fileID: 0}
+--- !u!114 &-4388995832814375950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740395784054915281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a80a96be91a1d40ba0dbf088fe0370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backAdjacentWall: {fileID: 0}
+  _frontAdjacentWall: {fileID: 0}
+  _rightAdjacecntWall: {fileID: 0}
+  _leftAdjacentWall: {fileID: 0}
 --- !u!1001 &4005607301400923076
 PrefabInstance:
   m_ObjectHideFlags: 0

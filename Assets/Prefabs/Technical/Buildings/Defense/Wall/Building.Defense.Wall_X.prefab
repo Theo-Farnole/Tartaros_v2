@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3616846463437891640}
   - component: {fileID: 4413853332208303120}
   - component: {fileID: 8542445940942554236}
+  - component: {fileID: -4727283968048486649}
   m_Layer: 0
   m_Name: Building.Defense.Wall_X
   m_TagString: Untagged
@@ -88,6 +89,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31da8d9a0020b4146919208799b4faf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4727283968048486649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810600384853675113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a80a96be91a1d40ba0dbf088fe0370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backAdjacentWall: {fileID: 0}
+  _frontAdjacentWall: {fileID: 0}
+  _rightAdjacecntWall: {fileID: 0}
+  _leftAdjacentWall: {fileID: 0}
 --- !u!1001 &3018959219623741382
 PrefabInstance:
   m_ObjectHideFlags: 0
