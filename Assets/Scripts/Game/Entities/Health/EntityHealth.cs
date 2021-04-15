@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities.Health
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using UnityEngine;
 
@@ -77,6 +78,8 @@
 			EntityHealthData = Entity.GetBehaviourData<EntityHealthData>();
 		}
 
+		[Button]
+		[ShowInRuntime]
 		void IAttackable.TakeDamage(int damage)
 		{
 			CurrentHealth -= damage;
