@@ -8,7 +8,7 @@
 	{
 		private GameObject _buildingPreview = null;
 		private GameObject _startBuildingPreview = null;
-
+		private CheckObjectUnderCursorManager _objectUnderCursorManager = null; 
 
 		private List<GameObject> _buildingsPreview = new List<GameObject>();
 		private Vector3 _startPosition = Vector3.zero;
@@ -25,6 +25,7 @@
 			_buildingPreview = toBuild.PreviewPrefab;
 			_startBuildingPreview = startPreview;
 			_startPosition = startPosition;
+			_objectUnderCursorManager = new CheckObjectUnderCursorManager(toBuild);
 			InstanciatePreviewStart(_startPosition);
 		}
 
@@ -39,6 +40,7 @@
 			if (numberOfWallSection > _buildingsPreview.Count)
 			{
 				Vector3 position = _startPosition + (realDirection * ((DistanceBetweenInstanciate) * _buildingsPreview.Count));
+
 				InstanciatePreviewWallSection(position);
 			}
 			else if (numberOfWallSection < _buildingsPreview.Count)
@@ -48,6 +50,8 @@
 
 			SetPositionRotationOfPreviews(end);
 		}
+
+
 
 		private float CaluclateAngleFromStartPointToDirection(Vector3 direction)
 		{
@@ -164,6 +168,12 @@
 
 			return wallCorner;
 		}
+
+		public bool IsUnderAnotherWall()
+		{
+			return _objectUnderCursorManager.IsTheSameConstructable();
+		}
+
 		public void DestroyMethod()
 		{
 			foreach (GameObject wallSection in _buildingsPreview)
