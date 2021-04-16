@@ -7,28 +7,34 @@
 
     public class CameraData : SerializedScriptableObject
     {
-        [OdinSerialize]
-        CameraZoomData _zoom = null;
-        [OdinSerialize]
-        CameraKeyboardPanData _keyboardPan = null;
-        [OdinSerialize]
-        CameraScreenEdgePanData _cameraScreenEdgePan = null;
-        [OdinSerialize]
+        [SerializeField]
+        float _speedKeyBoard = 1;
+		[SerializeField]
+		float _speedEdgePan = 1;
+		[SerializeField]
+        float _borderThickness = 3;
+        [SerializeField]
+        Bounds1D _zoomBounds = default;
+        [SerializeField]
+        float _zoomSpeed = 1;
+        [SerializeField]
         bool _enableScreenEdgeMovement = true;
 
-        public CameraData(CameraZoomData zoom, CameraKeyboardPanData keyboardPan, CameraScreenEdgePanData cameraScreenEdgePan, bool enableScreenEdgeMovement)
-        {
-            _zoom = zoom;
-            _keyboardPan = keyboardPan;
-            _cameraScreenEdgePan = cameraScreenEdgePan;
-            _enableScreenEdgeMovement = enableScreenEdgeMovement;
 
-        }
+        public CameraData(float speedKeyBoard, float speedEdgePan, float borderThickness, Bounds1D zoomBounds, float zoomSpeed, bool enableScreenEdgeMovement)
+		{
+			_speedKeyBoard = speedKeyBoard;
+			_speedEdgePan = speedEdgePan;
+			_borderThickness = borderThickness;
+			_zoomBounds = zoomBounds;
+			_zoomSpeed = zoomSpeed;
+		}
 
-        public CameraZoomData CameraZoomData => _zoom;
-        public CameraKeyboardPanData KeyboardPan => _keyboardPan;
-        public CameraScreenEdgePanData CameraScreenEdgePan => _cameraScreenEdgePan;
+		public float SpeedKeyBoard => _speedKeyBoard;
+        public float BorderThickness => _borderThickness;
+        public float SpeedEdgePan => _speedEdgePan;
+        public Bounds1D ZoomBounds => _zoomBounds;
+        public float ZoomSpeed => _zoomSpeed;
         public bool EnableScreenEdgeMovement => _enableScreenEdgeMovement;
-
     }
 }
