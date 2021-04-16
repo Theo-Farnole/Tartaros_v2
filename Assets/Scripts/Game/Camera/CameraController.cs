@@ -71,35 +71,35 @@
 		private void ProccessTranslateScreenEdge(float deltaTime, ref Vector3 deltaPosition)
 		{
 
-			if (_input.Camera.MousePosition.ReadValue<Vector2>().x >= Screen.width - _cameraData.CameraScreenEdgePan.BorderThickness)
-				deltaPosition.x += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+			if (_input.Camera.MousePosition.ReadValue<Vector2>().x >= Screen.width - _cameraData.BorderThickness)
+				deltaPosition.x += _cameraData.SpeedEdgePan * deltaTime;
 
-			if (_input.Camera.MousePosition.ReadValue<Vector2>().x <= _cameraData.CameraScreenEdgePan.BorderThickness)
-				deltaPosition.x -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+			if (_input.Camera.MousePosition.ReadValue<Vector2>().x <= _cameraData.BorderThickness)
+				deltaPosition.x -= _cameraData.SpeedEdgePan * deltaTime;
 
-			if (_input.Camera.MousePosition.ReadValue<Vector2>().y >= Screen.height - _cameraData.CameraScreenEdgePan.BorderThickness)
-				deltaPosition.z += _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+			if (_input.Camera.MousePosition.ReadValue<Vector2>().y >= Screen.height - _cameraData.BorderThickness)
+				deltaPosition.z += _cameraData.SpeedEdgePan * deltaTime;
 
-			if (_input.Camera.MousePosition.ReadValue<Vector2>().y <= _cameraData.CameraScreenEdgePan.BorderThickness)
-				deltaPosition.z -= _cameraData.CameraScreenEdgePan.Speed * deltaTime;
+			if (_input.Camera.MousePosition.ReadValue<Vector2>().y <= _cameraData.BorderThickness)
+				deltaPosition.z -= _cameraData.SpeedEdgePan * deltaTime;
 		}
 
 		private void ProccessTranslateKeyboardInput(float deltaTime, ref Vector3 deltaPosition)
 		{
 			if (_input.Camera.Forward.phase == InputActionPhase.Performed)
-				deltaPosition.z += _cameraData.KeyboardPan.Speed * deltaTime;
+				deltaPosition.z += _cameraData.SpeedKeyBoard * deltaTime;
 
 
 			if (_input.Camera.Backward.phase == InputActionPhase.Performed)
-				deltaPosition.z -= _cameraData.KeyboardPan.Speed * deltaTime;
+				deltaPosition.z -= _cameraData.SpeedKeyBoard * deltaTime;
 
 
 			if (_input.Camera.Right.phase == InputActionPhase.Performed)
-				deltaPosition.x += _cameraData.KeyboardPan.Speed * deltaTime;
+				deltaPosition.x += _cameraData.SpeedKeyBoard * deltaTime;
 
 
 			if (_input.Camera.Left.phase == InputActionPhase.Performed)
-				deltaPosition.x -= _cameraData.KeyboardPan.Speed * deltaTime;
+				deltaPosition.x -= _cameraData.SpeedKeyBoard * deltaTime;
 		}
 
 
@@ -108,7 +108,7 @@
 			if (MouseHelper.IsCursorOverWindow())
 			{
 				float inputDelta = _input.Camera.Zoom.ReadValue<Vector2>().y;
-				deltaPosition.y += inputDelta * deltaTime * _cameraData.CameraZoomData.ZoomSpeed;
+				deltaPosition.y += inputDelta * deltaTime * _cameraData.ZoomSpeed;
 			}
 		}
 
@@ -123,7 +123,7 @@
 			Vector3 deltaUp = position.y * up;
 
 			// if zoom reach bounds, the camera continue to moves on Z/X axis without zooming.        
-			if (transform.position.y + deltaUp.y > _cameraData.CameraZoomData.ZoomBounds.max || transform.position.y + deltaUp.y < _cameraData.CameraZoomData.ZoomBounds.min)
+			if (transform.position.y + deltaUp.y > _cameraData.ZoomBounds.max || transform.position.y + deltaUp.y < _cameraData.ZoomBounds.min)
 				deltaUp = Vector3.zero;
 
 			Vector3 finalDelta = deltaForward + deltaRight + deltaUp;
@@ -141,7 +141,7 @@
 			{
 				finalPosition.x = Mathf.Clamp(finalPosition.x, _Imap.MapBounds.boundsX.min, _Imap.MapBounds.boundsX.max);
 				finalPosition.z = Mathf.Clamp(finalPosition.z, _Imap.MapBounds.boundsY.min, _Imap.MapBounds.boundsY.max);
-				finalPosition.y = Mathf.Clamp(finalPosition.y, _cameraData.CameraZoomData.ZoomBounds.min, _cameraData.CameraZoomData.ZoomBounds.max);
+				finalPosition.y = Mathf.Clamp(finalPosition.y, _cameraData.ZoomBounds.min, _cameraData.ZoomBounds.max);
 			}
 			return finalPosition;
 		}

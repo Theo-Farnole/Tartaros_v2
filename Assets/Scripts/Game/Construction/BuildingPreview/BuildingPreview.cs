@@ -13,6 +13,7 @@
 		private IConstructable _toBuild = null;
 		private bool _isSnaped = false;
 		private EntityNeigboorWallManager _neigboorManager = null;
+		private CheckObjectUnderCursorManager _objectUnderCursorManager = null;
 
 		public BuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
 		{
@@ -20,28 +21,22 @@
 			_toBuild = toBuild;
 			_isWallPreview = toBuild.IsWall;
 			_buildingPreview = buildingPreview;
+			_objectUnderCursorManager = new CheckObjectUnderCursorManager(toBuild);
 		}
 
 		public void SetBuildingPreviewPosition(Vector3 position)
 		{
 			if (_isWallPreview)
 			{
-				GameObject objectUnderCursor = MouseHelper.GetGameObjectUnderCursor();
-
-				if (objectUnderCursor != null
-					&& objectUnderCursor.TryGetComponentInParent(out Entity entity)
-					&& entity.EntityData.TryGetBehaviour<EntityConstructableData>(out EntityConstructableData data))
+				if (_objectUnderCursorManager.IsTheSameConstructable())
 				{
-					IConstructable constructable = entity.EntityData.GetBehaviour<EntityConstructableData>() as IConstructable;
-
-					if (constructable == _toBuild)
-					{
-						_buildingPreview.transform.position = MouseHelper.GetGameObjectUnderCursor().transform.position;
-						_neigboorManager = entity.gameObject.GetComponentInParent<EntityNeigboorWallManager>();
-						return;
-					}
+					_buildingPreview.transform.position = MouseHelper.GetGameObjectUnderCursor().transform.position;
+					_neigboorManager = _objectUnderCursorManager.GetEntityUnderCursor().gameObject.GetComponentInParent<EntityNeigboorWallManager>();
+					return;
 				}
+
 			}
+
 			_neigboorManager = null;
 			_buildingPreview.transform.position = position;
 
@@ -52,6 +47,8 @@
 			return _buildingPreview.transform.position;
 		}
 
+		
+
 		public EntityNeigboorWallManager GetNeigboorManager()
 		{
 			return _neigboorManager;
@@ -59,13 +56,7 @@
 
 		public GameObject GetObjectUnderCursor()
 		{
-			GameObject objectUnderCursor = MouseHelper.GetGameObjectUnderCursor();
-			if (objectUnderCursor != null && objectUnderCursor.TryGetComponentInParent(out Entity entity))
-			{
-				return entity.gameObject;
-			}
-			Debug.LogError("There is no entity to return");
-			return null;
+			return _objectUnderCursorManager.GetObjectUnderCursor();
 		}
 
 

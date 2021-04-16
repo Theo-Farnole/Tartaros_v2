@@ -47,6 +47,13 @@
 		private GameObject _wallXGameplay = null;
 
 		[SerializeField]
+		private GameObject _constructionKitModel = null;
+
+		[SerializeField]
+		private int _timeToConstruct = 1;
+
+
+		[SerializeField]
 		private bool _IsChained = false;
 
 		[SerializeField]
@@ -85,6 +92,10 @@
 		GameObject IConstructable.WallXModel => _wallXModel;
 
 		GameObject IConstructable.WallXGameplay => _wallXGameplay;
+
+		GameObject IConstructable.ConstructionKitModel => _constructionKitModel;
+
+		int IConstructable.TimeToConstruct => _timeToConstruct;
 		#endregion Properties
 
 		#region Methods
