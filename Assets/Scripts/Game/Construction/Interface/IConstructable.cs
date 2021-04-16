@@ -15,6 +15,8 @@ namespace Tartaros.Construction
 		GameObject WallTGameplay { get; }
 		GameObject WallXModel { get; }
 		GameObject WallXGameplay { get; }
+		GameObject ConstructionKitModel { get; }
+		int TimeToConstruct { get; }
 		ISectorResourcesWallet Price { get; }
 		Vector2 Size { get; }
 		bool IsWall { get; }

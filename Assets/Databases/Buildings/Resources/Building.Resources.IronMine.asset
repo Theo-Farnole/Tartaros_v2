@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b84f554f028390f409c8654d4563df65, type: 3}
     - {fileID: 5781224918604581195, guid: b9b2dee965749f8439375ab3438e7336, type: 3}
     - {fileID: 7859859454919395600, guid: d699f8ac58525494ebfca53d8acd10bb, type: 3}
+    - {fileID: 5657609668978460668, guid: af2fa67ba1b380b468b455599eb1c95a, type: 3}
     - {fileID: 11400000}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -89,6 +90,12 @@ MonoBehaviour:
     - Name: _wallXGameplay
       Entry: 6
       Data: 
+    - Name: _constructionKitModel
+      Entry: 10
+      Data: 3
+    - Name: _timeToConstruct
+      Entry: 3
+      Data: 2
     - Name: _IsChained
       Entry: 5
       Data: false
@@ -192,7 +199,7 @@ MonoBehaviour:
       Data: 9|Tartaros.Construction.SameBuildingsCountLimitOnSectorRule, Tartaros
     - Name: _buildingToCheck
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: _buildingMaxCount
       Entry: 3
       Data: 1

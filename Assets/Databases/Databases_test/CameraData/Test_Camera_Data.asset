@@ -20,49 +20,12 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _zoom
-      Entry: 7
-      Data: 0|Tartaros.CameraSystem.CameraZoomData, Tartaros
-    - Name: _zoomBounds
-      Entry: 7
-      Data: Tartaros.Bounds1D, Tartaros.Utilities
-    - Name: min
-      Entry: 4
-      Data: 20
-    - Name: max
-      Entry: 4
-      Data: 40
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _zoomSpeed
-      Entry: 4
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _keyboardPan
-      Entry: 7
-      Data: 1|Tartaros.CameraSystem.CameraKeyboardPanData, Tartaros
-    - Name: _speed
-      Entry: 4
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _cameraScreenEdgePan
-      Entry: 7
-      Data: 2|Tartaros.CameraSystem.CameraScreenEdgePanData, Tartaros
-    - Name: _speed
-      Entry: 4
-      Data: 0
-    - Name: _borderThickness
-      Entry: 4
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _enableScreenEdgeMovement
-      Entry: 5
-      Data: true
+    SerializationNodes: []
+  _speedKeyBoard: 50
+  _speedEdgePan: 50
+  _borderThickness: 5
+  _zoomBounds:
+    min: 20
+    max: 40
+  _zoomSpeed: 5
+  _enableScreenEdgeMovement: 0

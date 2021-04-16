@@ -39,5 +39,9 @@
 		GameObject IConstructable.WallXModel => throw new System.NotImplementedException();
 
 		GameObject IConstructable.WallXGameplay => throw new System.NotImplementedException();
+
+		GameObject IConstructable.ConstructionKitModel => throw new System.NotImplementedException();
+
+		int IConstructable.TimeToConstruct => throw new System.NotImplementedException();
 	}
 }

@@ -113,8 +113,10 @@ namespace Tartaros.Construction
 
 		private void InstanciateBuilding()
 		{
-			Debug.Log(_constructable.GameplayPrefab);
-			GameObject.Instantiate(_constructable.GameplayPrefab, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
+			GameObject kitConstructionPrefab = GameObject.Instantiate(_constructable.ConstructionKitModel, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
+			var constructionDelay = kitConstructionPrefab.GetComponent<ConstructionDelay>();
+
+			constructionDelay.Construcatble = _constructable;
 		}
 
 		private void PayPriceRessources()
