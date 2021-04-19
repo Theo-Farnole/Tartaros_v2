@@ -51,13 +51,6 @@
 			SetPositionRotationOfPreviews(end);
 		}
 
-
-
-		private float CaluclateAngleFromStartPointToDirection(Vector3 direction)
-		{
-			return Vector3.Angle(direction, _startPosition);
-		}
-
 		private int CalculateNumberOfWallSections(Vector3 end)
 		{
 			return Mathf.RoundToInt(CalculateDistanceFromStartToPosition(end) / _toBuild.Size.x);
@@ -79,27 +72,6 @@
 		{
 			SetRotationOfPreview(end);
 			SetPositionOfPreview(end);
-		}
-
-
-		private bool IsSnapPreviewRightAngle(Vector3 end)
-		{
-			Vector3 startDirection = (_startPosition - end).normalized;
-
-			Vector3 direction = MathHelper.SnapXZToAxis(startDirection, _angleLimitation);
-
-			float runTimeAngle = CaluclateAngleFromStartPointToDirection(direction);
-
-			if (runTimeAngle >= _actualAngle + _angleLimitation || runTimeAngle <= _actualAngle - _angleLimitation)
-			{
-				Debug.Log(runTimeAngle);
-				_actualAngle = runTimeAngle;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
 		}
 
 		private void SetRotationOfPreview(Vector3 end)

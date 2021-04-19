@@ -33,11 +33,12 @@
         private void Start()
         {
             _rootTransform = _miniMap.RootTransform;
+            _targetPosition = FindObjectOfType<WavesEnemiesTarget>().gameObject.transform;
         }
 
         public void DrawPathNavigation()
         {
-            if (_spawnPoints.Length >= 1)
+            if (_spawnPoints.Length != 0)
             {
                 if (_rootTransform == null)
                 {
@@ -48,6 +49,7 @@
                 {
                     Vector3[] corners = GetCornersNavigationPath(path);
                     List<Vector2> vertexs = GetVectors2(corners);
+                    //Debug.Log(vertexs.Count);
 
                     GameObject navLine = GameObject.Instantiate(_navigationLine, _mapBackground.transform);
                     DrawLineUI navPath = navLine.GetComponent<DrawLineUI>();
@@ -97,7 +99,18 @@
             foreach (ISpawnPoint point in _spawnPoints)
             {
                 var path = new NavMeshPath();
-                NavMesh.CalculatePath(point.SpawnPoint, _targetPosition.position, NavMesh.AllAreas, path);
+
+                NavMeshHit hit;
+                Vector3 position = Vector3.zero;
+                if (NavMesh.SamplePosition(_targetPosition.position, out hit, 50, NavMesh.AllAreas))
+                {
+                    position = hit.position;
+                }
+
+                NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
+                Debug.Log(point.SpawnPoint);
+                Debug.Log(_targetPosition.position);
+
                 navPath.Add(path);
             }
 

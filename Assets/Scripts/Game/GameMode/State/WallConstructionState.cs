@@ -146,64 +146,19 @@
 				_wallToHideAndShow.SetActive(false);
 				_wallToHideAndShow.name = Random.Range(0, 10000).ToString();
 
-				previewStart = SelectPreviewStartPrefab();
+				previewStart = _constructable.WallLModel;
 			}
 			_wallSectionPreview = new WallBuildingPreview(_constructable, _buildingPreview.GetBuildingPreviewPosition(), previewStart);
 			_buildingPreview.DestroyMethod();
 			_buildingPreview = null;
 		}
 
-
-
-		private GameObject SelectPreviewStartPrefab()
-		{
-			var neigboorManager = _buildingPreview.GetNeigboorManager();
-			GameObject previewStart = null;
-
-			if (neigboorManager.GetNumberOfNeigboor() == 1)
-			{
-				_indexStartModel = 1;
-				previewStart = _constructable.WallLModel;
-			}
-			else if (neigboorManager.GetNumberOfNeigboor() == 2)
-			{
-				_indexStartModel = 2;
-				previewStart = _constructable.WallTModel;
-			}
-			else if (neigboorManager.GetNumberOfNeigboor() == 3)
-			{
-				_indexStartModel = 3;
-				previewStart = _constructable.WallXModel;
-			}
-
-			return previewStart;
-		}
-
-		private GameObject SelectGameplayStartPrefab()
-		{
-			GameObject gameplayPrefab = null;
-
-			if (_indexStartModel == 1)
-			{
-				gameplayPrefab = _constructable.WallLGameplay;
-			}
-			else if (_indexStartModel == 2)
-			{
-				gameplayPrefab = _constructable.WallTGameplay;
-			}
-			else if (_indexStartModel == 3)
-			{
-				gameplayPrefab = _constructable.WallXGameplay;
-			}
-
-			return gameplayPrefab;
-		}
 		private void ValidateFinish()
 		{
 			AddWallPreviewOnList();
 			PayPriceRessources();
 			_stateOwner.StartCoroutine(InstanciateWallSection());
-			
+
 		}
 
 		private void AddWallPreviewOnList()
@@ -230,7 +185,7 @@
 
 			if (_wallToHideAndShow != null)
 			{
-				gameplayStartPrefab = SelectGameplayStartPrefab();
+				gameplayStartPrefab = _constructable.WallLGameplay;
 				_wallToHideAndShow.SetActive(false);
 				GameObject.Destroy(_wallToHideAndShow);
 			}
@@ -238,13 +193,24 @@
 			yield return new WaitForEndOfFrame();
 
 
+
+
 			Transform transformStart = _wallCorners[0].transform;
 			GameObject.Destroy(_wallCorners[0]);
 			GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
 
-			Transform transformEnd = _wallCorners[1].transform;
-			GameObject.Destroy(_wallCorners[1]);
+			Transform transformEnd = _wallCorners[_wallCorners.Count - 1].transform;
+			GameObject.Destroy(_wallCorners[_wallCorners.Count - 1]);
 			GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformEnd.position, transformEnd.rotation);
+
+			//List<GameObject> wallCorners = new List<GameObject>(_wallCorners);
+			//wallCorners.RemoveAt(_wallCorners.Count - 1);
+			//wallCorners.RemoveAt(0);
+
+			//foreach (GameObject wallCorner in wallCorners)
+			//{
+
+			//}
 
 			foreach (GameObject wall in _wallSections)
 			{

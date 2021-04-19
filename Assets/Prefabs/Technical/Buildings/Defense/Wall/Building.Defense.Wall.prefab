@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
     type: 3}
+  _prefabScale: 1
 --- !u!114 &4413853332208303120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building.Defense.Wall.Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411335066361364757, guid: f63531dd88f368e48a1de23a7d34113e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8929290057864574522, guid: f63531dd88f368e48a1de23a7d34113e,
         type: 3}
