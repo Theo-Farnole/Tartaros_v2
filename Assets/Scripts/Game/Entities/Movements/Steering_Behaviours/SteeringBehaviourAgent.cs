@@ -1,40 +1,57 @@
 ﻿namespace Tartaros.Entities.Movement
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Runtime.InteropServices;
-	using UnityEditor.Graphs;
 	using UnityEngine;
 	using UnityEngine.AI;
 
-	public class SteeringBehaviourAgent : MonoBehaviour, ISteeringBehaviourAgent
+	public partial class SteeringBehaviourAgent : MonoBehaviour, ISteeringBehaviourAgent
 	{
 		#region Fields
+		private const string EDITOR_GROUP_SECURITY = "SECURITIES";
+		private const string EDITOR_GROUP_MAIN = "MAIN";
+
 		private static readonly Color ACCELERATION_COLOR = Color.yellow;
 		private static readonly Color VELOCITY_COLOR = Color.blue;
 		private static readonly Color DESTINATION_COLOR = Color.green;
 
-		[SerializeField]
-		private SteeringBehaviour _settings = new SteeringBehaviour();
-
+		[FoldoutGroup(EDITOR_GROUP_MAIN)]
 		[SerializeField]
 		private float _maxSpeed = 200;
 
+		[FoldoutGroup(EDITOR_GROUP_MAIN)]
 		[SerializeField]
 		private float _decelarationSpeed = 1;
 
+		[FoldoutGroup(EDITOR_GROUP_MAIN)]
+		[SerializeField]
+		private float _stoppingDistance = 0.3f;
+
+		[FoldoutGroup(EDITOR_GROUP_MAIN)]
 		[SerializeField]
 		private float _mass = 1;
 
+		[FoldoutGroup(EDITOR_GROUP_MAIN)]
 		[SerializeField]
 		private float _radius = 3;
 
+		[FoldoutGroup(EDITOR_GROUP_MAIN)]
+		[SerializeField]
+		private SteeringBehaviour _settings = new SteeringBehaviour();
+
+		[FoldoutGroup(EDITOR_GROUP_SECURITY)]
 		[SerializeField]
 		private bool _enforceNonPenetrationConstraint = false;
 
+		[FoldoutGroup(EDITOR_GROUP_SECURITY)]
 		[SerializeField]
 		private bool _forceToBeOnNavMesh = true;
+
+		[FoldoutGroup(EDITOR_GROUP_SECURITY)]
+		[SerializeField]
+		private bool _recalculatePathIfStuck = true;
 
 		[ShowInRuntime]
 		private Vector2 _velocity = Vector2.zero;
@@ -49,17 +66,7 @@
 			set
 			{
 				_destination = value;
-
-				if (IsThereANavMeshInScene())
-				{
-					_settings.EnablePathFollowing();
-					_settings.Path = CalculatePathTo(_destination);
-
-				}
-				else
-				{
-					_settings.DisablePathFollowing();
-				}
+				SetPathToDestination();
 			}
 		}
 
@@ -75,19 +82,9 @@
 			UpdatePosition();
 		}
 
-		private void OnDrawGizmos()
+		public bool DestinationReached()
 		{
-			if (Application.isPlaying == true)
-			{
-				Gizmos.color = VELOCITY_COLOR;
-				Gizmos.DrawRay(transform.position, _velocity.ToXZ() * 2);
-
-				Gizmos.color = DESTINATION_COLOR;
-				Gizmos.DrawLine(transform.position, _destination.ToXZ());
-			}
-
-			Gizmos.color = Color.white;
-			Gizmos.DrawWireSphere(transform.position, _radius);
+			return Vector3.Distance(transform.position, Destination.ToXZ()) <= _stoppingDistance;
 		}
 
 		private void UpdatePosition()
@@ -108,6 +105,16 @@
 				if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 10, NavMesh.AllAreas))
 				{
 					transform.position = hit.position;
+				}
+			}
+
+			if (_recalculatePathIfStuck == true)
+			{
+				bool stuck = DestinationReached() == false && Time.frameCount % 30 == 0;
+
+				if (stuck == true)
+				{
+					SetPathToDestination();
 				}
 			}
 		}
@@ -162,6 +169,20 @@
 			}
 		}
 
+		private void SetPathToDestination()
+		{
+			if (IsThereANavMeshInScene())
+			{
+				_settings.EnablePathFollowing();
+				_settings.Path = CalculatePathTo(_destination);
+
+			}
+			else
+			{
+				_settings.DisablePathFollowing();
+			}
+		}
+
 		private void UpdateSteeringBehaviourSettings()
 		{
 			_settings.MaxSpeed = _maxSpeed;
@@ -208,4 +229,23 @@
 		}
 		#endregion Methods
 	}
+
+#if UNITY_EDITOR
+	public partial class SteeringBehaviourAgent
+	{
+		private void OnDrawGizmos()
+		{
+			if (Application.isPlaying == true)
+			{
+				Gizmos.color = VELOCITY_COLOR;
+				Gizmos.DrawRay(transform.position, _velocity.ToXZ() * 2);
+
+				Gizmos.color = DESTINATION_COLOR;
+				Gizmos.DrawLine(transform.position, _destination.ToXZ());
+			}
+
+			Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, _radius, Color.white);
+		}
+	}
+#endif
 }
