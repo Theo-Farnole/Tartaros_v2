@@ -33,6 +33,9 @@
 		[SerializeField]
 		private bool _enforceNonPenetrationConstraint = false;
 
+		[SerializeField]
+		private bool _forceToBeOnNavMesh = true;
+
 		[ShowInRuntime]
 		private Vector2 _velocity = Vector2.zero;
 		private Vector2 _destination = Vector2.zero;
@@ -98,6 +101,14 @@
 			if (_enforceNonPenetrationConstraint == true)
 			{
 				EnforceNonPenetrationConstraint();
+			}
+
+			if (_forceToBeOnNavMesh == true)
+			{
+				if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 10, NavMesh.AllAreas))
+				{
+					transform.position = hit.position;
+				}
 			}
 		}
 
