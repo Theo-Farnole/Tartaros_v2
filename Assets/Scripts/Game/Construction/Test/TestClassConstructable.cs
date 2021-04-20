@@ -28,17 +28,9 @@
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
 
-		GameObject IConstructable.WallLModel => throw new System.NotImplementedException();
+		GameObject IConstructable.WallCornerModel => throw new System.NotImplementedException();
 
-		GameObject IConstructable.WallLGameplay => throw new System.NotImplementedException();
-
-		GameObject IConstructable.WallTModel => throw new System.NotImplementedException();
-
-		GameObject IConstructable.WallTGameplay => throw new System.NotImplementedException();
-
-		GameObject IConstructable.WallXModel => throw new System.NotImplementedException();
-
-		GameObject IConstructable.WallXGameplay => throw new System.NotImplementedException();
+		GameObject IConstructable.WallCornerGameplay => throw new System.NotImplementedException();
 
 		GameObject IConstructable.ConstructionKitModel => throw new System.NotImplementedException();
 

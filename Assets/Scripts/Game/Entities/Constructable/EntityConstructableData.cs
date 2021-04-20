@@ -24,27 +24,12 @@
 
 		[SerializeField]
 		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallLModel = null;
+		private GameObject _wallCornerModel = null;
 
 		[SerializeField]
 		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallLGameplay = null;
+		private GameObject _wallCornerGameplay = null;
 
-		[SerializeField]
-		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallTModel = null;
-
-		[SerializeField]
-		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallTGameplay = null;
-
-		[SerializeField]
-		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallXModel = null;
-
-		[SerializeField]
-		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallXGameplay = null;
 
 		[SerializeField]
 		private GameObject _constructionKitModel = null;
@@ -81,17 +66,9 @@
 
 		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
 
-		GameObject IConstructable.WallLModel => _wallLModel;
+		GameObject IConstructable.WallCornerModel => _wallCornerModel;
 
-		GameObject IConstructable.WallLGameplay => _wallLGameplay;
-
-		GameObject IConstructable.WallTModel => _wallTModel;
-
-		GameObject IConstructable.WallTGameplay => _wallTGameplay;
-
-		GameObject IConstructable.WallXModel => _wallXModel;
-
-		GameObject IConstructable.WallXGameplay => _wallXGameplay;
+		GameObject IConstructable.WallCornerGameplay => _wallCornerGameplay;
 
 		GameObject IConstructable.ConstructionKitModel => _constructionKitModel;
 

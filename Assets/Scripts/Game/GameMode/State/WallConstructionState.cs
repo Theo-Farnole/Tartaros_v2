@@ -146,7 +146,7 @@
 				_wallToHideAndShow.SetActive(false);
 				_wallToHideAndShow.name = Random.Range(0, 10000).ToString();
 
-				previewStart = _constructable.WallLModel;
+				previewStart = _constructable.WallCornerModel;
 			}
 			_wallSectionPreview = new WallBuildingPreview(_constructable, _buildingPreview.GetBuildingPreviewPosition(), previewStart);
 			_buildingPreview.DestroyMethod();
@@ -157,7 +157,7 @@
 		{
 			AddWallPreviewOnList();
 			PayPriceRessources();
-			_stateOwner.StartCoroutine(InstanciateWallSection());
+			_stateOwner.StartCoroutine(InstanciateWallGameplay());
 
 		}
 
@@ -171,6 +171,8 @@
 
 				}
 
+				int index = 0;
+
 				foreach (GameObject wallCorner in _wallSectionPreview.GetAllCornerPreview())
 				{
 					_wallCorners.Add(wallCorner);
@@ -178,39 +180,21 @@
 			}
 		}
 
-		private IEnumerator InstanciateWallSection()
+		private IEnumerator InstanciateWallGameplay()
 		{
 			GameObject gameplayStartPrefab = _constructable.GameplayPrefab;
 
 
 			if (_wallToHideAndShow != null)
 			{
-				gameplayStartPrefab = _constructable.WallLGameplay;
+				gameplayStartPrefab = _constructable.WallCornerGameplay;
 				_wallToHideAndShow.SetActive(false);
 				GameObject.Destroy(_wallToHideAndShow);
 			}
 
 			yield return new WaitForEndOfFrame();
 
-
-
-
-			Transform transformStart = _wallCorners[0].transform;
-			GameObject.Destroy(_wallCorners[0]);
-			GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
-
-			Transform transformEnd = _wallCorners[_wallCorners.Count - 1].transform;
-			GameObject.Destroy(_wallCorners[_wallCorners.Count - 1]);
-			GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformEnd.position, transformEnd.rotation);
-
-			//List<GameObject> wallCorners = new List<GameObject>(_wallCorners);
-			//wallCorners.RemoveAt(_wallCorners.Count - 1);
-			//wallCorners.RemoveAt(0);
-
-			//foreach (GameObject wallCorner in wallCorners)
-			//{
-
-			//}
+			InstanciateWallCornerGameplay(gameplayStartPrefab);
 
 			foreach (GameObject wall in _wallSections)
 			{
@@ -220,6 +204,36 @@
 			}
 
 			LeaveState();
+		}
+
+		private void InstanciateWallCornerGameplay(GameObject gameplayStartPrefab)
+		{
+			Transform transformStart = _wallCorners[0].transform;
+			GameObject.Destroy(_wallCorners[0]);
+			GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
+
+			Transform transformEnd = _wallCorners[_wallCorners.Count - 1].transform;
+			GameObject.Destroy(_wallCorners[_wallCorners.Count - 1]);
+			GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformEnd.position, transformEnd.rotation);
+
+			Vector3 previousWall = Vector3.zero;
+
+			List<GameObject> wallCorners = new List<GameObject>(_wallCorners);
+			wallCorners.RemoveAt(_wallCorners.Count - 1);
+			wallCorners.RemoveAt(0);
+
+			foreach (GameObject wallCorner in wallCorners)
+			{
+				Transform transformCorner = wallCorner.transform;
+				GameObject.Destroy(wallCorner);
+
+				if (previousWall != transformCorner.position)
+				{
+					GameObject wallCornerInstanciate = GameObject.Instantiate(_constructable.WallCornerGameplay, transformCorner.position, transformCorner.rotation);
+				}
+
+				previousWall = transformCorner.position;
+			}
 		}
 
 		private bool CanConstructHere()

@@ -9,12 +9,8 @@ namespace Tartaros.Construction
 	{
 		GameObject PreviewPrefab { get; }
 		GameObject GameplayPrefab { get; }
-		GameObject WallLModel { get; }
-		GameObject WallLGameplay { get; }
-		GameObject WallTModel { get; }
-		GameObject WallTGameplay { get; }
-		GameObject WallXModel { get; }
-		GameObject WallXGameplay { get; }
+		GameObject WallCornerModel { get; }
+		GameObject WallCornerGameplay { get; }
 		GameObject ConstructionKitModel { get; }
 		int TimeToConstruct { get; }
 		ISectorResourcesWallet Price { get; }

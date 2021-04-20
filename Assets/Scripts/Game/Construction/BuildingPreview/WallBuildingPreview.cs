@@ -136,7 +136,7 @@
 
 			wallCorner.Add(_buildingsPreview[0]);
 			wallCorner.Add(_buildingsPreview[lastIndex]);
-			Debug.DrawRay(_buildingsPreview[lastIndex].transform.position, Vector3.up * 5, Color.green, 9999f);
+			//Debug.DrawRay(_buildingsPreview[lastIndex].transform.position, Vector3.up * 5, Color.green, 9999f);
 
 			return wallCorner;
 		}
