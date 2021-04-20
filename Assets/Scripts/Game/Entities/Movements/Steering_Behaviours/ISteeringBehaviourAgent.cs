@@ -4,6 +4,8 @@
 
 	public interface ISteeringBehaviourAgent
 	{
-		Vector2 Position { get; }
+		Vector2 Position { get; set; }
+		float Radius { get; }
+		Vector2 Heading { get; }
 	}
 }

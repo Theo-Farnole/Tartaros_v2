@@ -1,8 +1,12 @@
 ﻿namespace Tartaros.Entities.Movement
 {
 	using Sirenix.OdinInspector;
+	using System.Collections.Generic;
 	using System.Linq;
+	using System.Runtime.InteropServices;
+	using UnityEditor.Graphs;
 	using UnityEngine;
+	using UnityEngine.AI;
 
 	public class SteeringBehaviourAgent : MonoBehaviour, ISteeringBehaviourAgent
 	{
@@ -26,15 +30,40 @@
 		[SerializeField]
 		private float _radius = 3;
 
+		[SerializeField]
+		private bool _enforceNonPenetrationConstraint = false;
+
 		[ShowInRuntime]
 		private Vector2 _velocity = Vector2.zero;
 		private Vector2 _destination = Vector2.zero;
 		#endregion Fields
 
 		#region Properties
-		public Vector2 Destination { get => _destination; set => _destination = value; }
+		public Vector2 Destination
+		{
+			get => _destination;
 
-		Vector2 ISteeringBehaviourAgent.Position => transform.position.GetVector2FromXZ();
+			set
+			{
+				_destination = value;
+
+				if (IsThereANavMeshInScene())
+				{
+					_settings.EnablePathFollowing();
+					_settings.Path = CalculatePathTo(_destination);
+
+				}
+				else
+				{
+					_settings.DisablePathFollowing();
+				}
+			}
+		}
+
+		Vector2 ISteeringBehaviourAgent.Position { get => transform.position.GetVector2FromXZ(); set => transform.position = value.ToXZ(); }
+		float ISteeringBehaviourAgent.Radius => _radius;
+
+		Vector2 ISteeringBehaviourAgent.Heading => transform.forward.GetVector2FromXZ();
 		#endregion Properties
 
 		#region Methods
@@ -52,10 +81,10 @@
 
 				Gizmos.color = DESTINATION_COLOR;
 				Gizmos.DrawLine(transform.position, _destination.ToXZ());
-
-				Gizmos.color = Color.white;
-				Gizmos.DrawWireSphere(transform.position, _radius);
 			}
+
+			Gizmos.color = Color.white;
+			Gizmos.DrawWireSphere(transform.position, _radius);
 		}
 
 		private void UpdatePosition()
@@ -65,6 +94,11 @@
 			transform.position += _velocity.ToXZ() * Time.deltaTime;
 
 			LookAtVelocity();
+
+			if (_enforceNonPenetrationConstraint == true)
+			{
+				EnforceNonPenetrationConstraint();
+			}
 		}
 
 		private void UpdateVelocity()
@@ -91,10 +125,30 @@
 		[Button]
 		private ISteeringBehaviourAgent[] GetNeighbors()
 		{
+			ISteeringBehaviourAgent self = (this as ISteeringBehaviourAgent);
+
 			return ObjectsFinder
 				.FindObjectsOfInterface<ISteeringBehaviourAgent>()
-				.Where(agent => agent != (this as ISteeringBehaviourAgent) && Vector3.Distance(transform.position, agent.Position) <= _radius)
+				.Where(agent => agent != self && Vector2.Distance(self.Position, agent.Position) <= _radius + agent.Radius)
 				.ToArray();
+		}
+
+		private void EnforceNonPenetrationConstraint()
+		{
+			ISteeringBehaviourAgent self = (this as ISteeringBehaviourAgent);
+
+			foreach (var neighbor in GetNeighbors())
+			{
+				var directionToNeighbor = self.Position - neighbor.Position;
+				float distanceToNeighbor = directionToNeighbor.magnitude;
+
+				float amountOfOverlap = self.Radius + neighbor.Radius - distanceToNeighbor;
+
+				if (amountOfOverlap >= 0)
+				{
+					self.Position = self.Position + directionToNeighbor / distanceToNeighbor * amountOfOverlap;
+				}
+			}
 		}
 
 		private void UpdateSteeringBehaviourSettings()
@@ -109,6 +163,37 @@
 				float angle = Mathf.Atan2(_velocity.y, _velocity.x) * Mathf.Rad2Deg;
 				transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
 			}
+		}
+
+		// TODO: move to utilities
+		// source: https://forum.unity.com/threads/check-if-there-is-a-navmesh-in-the-scene.445816/
+		private static bool IsThereANavMeshInScene()
+		{
+			return NavMesh.SamplePosition(Vector3.zero, out NavMeshHit hit, 1000.0f, NavMesh.AllAreas);
+		}
+
+		private Path CalculatePathTo(Vector2 target)
+		{
+			NavMeshPath path = new NavMeshPath();
+			bool succesful = NavMesh.CalculatePath(transform.position, target.ToXZ(), NavMesh.AllAreas, path);
+
+			if (succesful == false)
+			{
+				Debug.LogError("The entity \"{0}\" cannot get path to {1}. The path has been draw in the inspector in red for 30 seconds");
+				Debug.DrawLine(transform.position, target.ToXZ(), Color.red, 30);
+
+				// TODO: better handle this case
+				throw new System.NotSupportedException();
+			}
+
+			List<Vector2> waypoints = new List<Vector2>();
+
+			foreach (var waypoint in path.corners)
+			{
+				waypoints.Add(waypoint.GetVector2FromXZ());
+			}
+
+			return new Path(waypoints.ToArray());
 		}
 		#endregion Methods
 	}

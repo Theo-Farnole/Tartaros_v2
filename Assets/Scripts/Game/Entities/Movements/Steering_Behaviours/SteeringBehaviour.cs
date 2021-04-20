@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Entities
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using Tartaros.Entities.Movement;
 	using UnityEngine;
 	using UnityEngine.Rendering;
@@ -15,11 +16,15 @@
 			None = 0,
 			Seek = 1,
 			Arrive = 2,
-			Separation = 4
+			Separation = 4,
+			Alignment = 8,
+			PathFollowing = 16
 		}
 		#endregion Enums
 
 		#region Fields		
+		private const float REACH_PATH_WAYPOINT_THRESHOLD = 0.8f;
+
 		[SerializeField]
 		private Behaviours _enabledBehaviours = Behaviours.Seek;
 
@@ -44,15 +49,25 @@
 		[SerializeField]
 		private float _arriveWeight = 1;
 
+		[FoldoutGroup("Priorities")]
+		[SerializeField]
+		private float _alignementWeight = 1;
+
+		[FoldoutGroup("Priorities")]
+		[SerializeField]
+		private float _pathFollowingWeight = 1;
+
 		private Vector2 _position = Vector2.zero;
 		private Vector2 _velocity = Vector2.zero;
 		private ISteeringBehaviourAgent _agent = null;
 
+		private Path _path = null;
 		private float _maxSpeed = -1;
 		#endregion Fields
 
 		#region Properties
 		public float MaxSpeed { get => _maxSpeed; set => _maxSpeed = value; }
+		public Path Path { get => _path; set => _path = value; }
 		#endregion Properties
 
 		#region Methods
@@ -67,12 +82,33 @@
 			_position = agentPosition;
 			_velocity = agentVelocity;
 
-			Vector2 output = Vector2.zero;
+			Vector2 velocity = Vector2.zero;
 
 			if (IsOn(Behaviours.Separation) == true)
 			{
 				var force = Separation(neightbors) * _separationWeight;
-				if (AccumulateForce(ref output, force) == false) return output;
+				if (AccumulateForce(ref velocity, force) == false) return velocity;
+			}
+
+			if (IsOn(Behaviours.Alignment) == true)
+			{
+				var force = Alignment(neightbors) * _alignementWeight;
+
+				if (AccumulateForce(ref velocity, force) == false) return velocity;
+			}
+
+			if (IsOn(Behaviours.PathFollowing) == true)
+			{
+				if (_path != null)
+				{
+					var force = FollowPath() * _pathFollowingWeight;
+
+					if (AccumulateForce(ref velocity, force) == false) return velocity;
+				}
+				else
+				{
+					Debug.LogWarning("Path following behaviour is enabled but no path has been provided. Please set one with the _path field.");
+				}
 			}
 
 			if (IsOn(Behaviours.Seek) == true)
@@ -80,7 +116,7 @@
 				Debug.Log("Seek");
 				var force = Seek(targetPosition) * _seekWeight;
 
-				if (AccumulateForce(ref output, force) == false) return output;
+				if (AccumulateForce(ref velocity, force) == false) return velocity;
 			}
 
 			if (IsOn(Behaviours.Arrive) == true)
@@ -88,10 +124,10 @@
 				Debug.Log("Arrive");
 
 				var force = Arrive(targetPosition) * _arriveWeight;
-				if (AccumulateForce(ref output, force) == false) return output;
+				if (AccumulateForce(ref velocity, force) == false) return velocity;
 			}
 
-			return output;
+			return velocity;
 		}
 
 		private bool AccumulateForce(ref Vector2 currentSteeringBehaviour, Vector2 forceToAdd)
@@ -121,9 +157,59 @@
 			return _enabledBehaviours.HasFlag(behaviour);
 		}
 
+		public void EnablePathFollowing() => EnableBehaviour(Behaviours.PathFollowing);
+		public void DisablePathFollowing() => DisableBehaviour(Behaviours.PathFollowing);
+
+		private void EnableBehaviour(Behaviours behaviour)
+		{
+			_enabledBehaviours |= behaviour;
+		}
+
+		private void DisableBehaviour(Behaviours behaviour)
+		{
+			_enabledBehaviours &= ~behaviour;
+		}
+
 		private Vector2 Seek(Vector2 targetPosition)
 		{
 			return (GetDesiredVelocity(targetPosition) - _velocity);
+		}
+
+		private Vector2 Alignment(ISteeringBehaviourAgent[] neighbors)
+		{
+			Vector2 averageHeading = Vector2.zero;
+
+			foreach (var neighbor in neighbors)
+			{
+				averageHeading += neighbor.Heading;
+			}
+
+			if (neighbors.Length > 0)
+			{
+				averageHeading /= (float)neighbors.Length;
+				averageHeading -= _agent.Heading;
+			}
+
+			return averageHeading;
+		}
+
+		private Vector2 FollowPath()
+		{
+			bool hasReachedWaypoint = Vector3.Distance(_path.CurrentWaypoint, _position) <= REACH_PATH_WAYPOINT_THRESHOLD;
+
+			if (hasReachedWaypoint == true)
+			{
+				_path.SetNextWaypoint();
+			}
+
+			if (_path.IsLastWaypoint == false)
+			{
+				return Seek(_path.CurrentWaypoint);
+			}
+			else
+			{
+				return Arrive(_path.CurrentWaypoint);
+			}
 		}
 
 		private Vector2 Arrive(Vector2 targetPosition)
