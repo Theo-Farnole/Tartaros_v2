@@ -171,7 +171,7 @@
 
 		private void SetPathToDestination()
 		{
-			if (IsThereANavMeshInScene())
+			if (NavMeshHelper.IsThereANavMeshInScene())
 			{
 				_settings.EnablePathFollowing();
 				_settings.Path = CalculatePathTo(_destination);
@@ -195,13 +195,6 @@
 				float angle = Mathf.Atan2(_velocity.y, _velocity.x) * Mathf.Rad2Deg;
 				transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
 			}
-		}
-
-		// TODO: move to utilities
-		// source: https://forum.unity.com/threads/check-if-there-is-a-navmesh-in-the-scene.445816/
-		private static bool IsThereANavMeshInScene()
-		{
-			return NavMesh.SamplePosition(Vector3.zero, out NavMeshHit hit, 1000.0f, NavMesh.AllAreas);
 		}
 
 		private Path CalculatePathTo(Vector2 target)
