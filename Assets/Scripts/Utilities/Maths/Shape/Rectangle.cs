@@ -22,7 +22,17 @@
 		public float MinX => rect.xMin;
 		public float MaxX => rect.xMax;
 		public Vector2 Max => rect.max;
+
+		/// <summary>
+		/// Max property but with another name
+		/// </summary>
+		public Vector2 TopRight => Max;
 		public Vector2 Min => rect.min;
+
+		/// <summary>
+		/// Min property but with another name
+		/// </summary>
+		public Vector2 BottomLeft => rect.min;
 		public Vector2 TopLeft => new Vector2(MinX, MaxY);
 		public Vector2 BottomRight => new Vector2(MaxX, MinY);
 		#endregion Properties

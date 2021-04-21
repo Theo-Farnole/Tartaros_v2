@@ -25,16 +25,17 @@
 		{
 			if (IsThereSameTransformInMultipleCells())
 			{
-				throw new SameTransformInMultipleCellsException();
+				throw new SameElementInMultipleCellsException();
 			}
 		}
+
+		public void DebugDrawGrid(Color color, float duration = 0) => _cellsGrid.DebugDraw(color, duration);
 
 		public void AddElement(T element)
 		{
 			if (element is null) throw new System.ArgumentNullException(nameof(element));
 
 			var cell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
-			cell.AddElement(element);
 			cell.AddElement(element);
 		}
 
@@ -59,8 +60,11 @@
 			var oldCell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
 			var newCell = _cellsGrid.GetCellAtWorldPosition(position);
 
-			oldCell.RemoveElement(element);
-			newCell.AddElement(element);
+			if (oldCell != newCell)
+			{
+				oldCell.RemoveElement(element);
+				newCell.AddElement(element);
+			}
 
 			element.WorldPosition = position;
 		}
@@ -70,17 +74,21 @@
 			Cell<T>[] cellsInRadius = _cellsGrid.GetCellsInRadius(position, radius);
 
 			List<T> elementsInRadius = new List<T>();
-			float radiusSqr = radius * radius;
 
 			foreach (Cell<T> cell in cellsInRadius)
 			{
 				foreach (T element in cell.Elements)
 				{
-					if (MathHelper.DistanceSq(element.WorldPosition, position) <= radiusSqr)
+					if (Vector3.Distance(element.WorldPosition, position) <= radius)
 					{
 						elementsInRadius.Add(element);
 					}
 				}
+			}
+
+			if (elementsInRadius.HasDuplicate() == true)
+			{
+				throw new SameElementInMultipleCellsException(elementsInRadius.GetDuplicates()[0]);
 			}
 
 			return elementsInRadius.ToArray();

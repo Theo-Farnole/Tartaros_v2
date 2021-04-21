@@ -1,13 +1,11 @@
 ﻿namespace Tartaros.Entities.Movement
 {
-	using System.Linq;
 	using Tartaros.Utilities.SpatialPartioning;
-	using UnityEditor.UI;
 	using UnityEngine;
 
 	public static class SteeringBehaviourAgentsDetector
 	{
-		private const float CELL_SIZE = 1;
+		private const float CELL_SIZE = 5;
 
 		private static SpatialPartioning<ISteeringBehaviourAgent> _spatialPartionning = null;
 
@@ -24,6 +22,7 @@
 			}
 		}
 
+		public static void DebugDrawGrid(Color color, float duration = 0) => SpatialPartionning.DebugDrawGrid(color, duration);
 		public static void AddAgent(ISteeringBehaviourAgent agent) => SpatialPartionning.AddElement(agent);
 
 		public static void RemoveAgent(ISteeringBehaviourAgent agent) => SpatialPartionning.RemoveElement(agent);

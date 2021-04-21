@@ -44,21 +44,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4970fff959660b343960202d2aab831c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxSpeed: 2
+  _decelarationSpeed: 1
+  _stoppingDistance: 0.3
+  _mass: 1
+  _radius: 0.5
   _settings:
     _enabledBehaviours: 4
     _arrivalDeceleration: 0.6
     _arrivalDistance: 1
     _maxForce: 10
-    _separationWeight: 1
+    _separationWeight: 3
     _seekWeight: 1
     _arriveWeight: 1
     _alignementWeight: 1
-    _pathFollowingWeight: 3
-  _maxSpeed: 2
-  _decelarationSpeed: 1
-  _mass: 1
-  _radius: 0.5
+    _pathFollowingWeight: 1
   _enforceNonPenetrationConstraint: 0
+  _forceToBeOnNavMesh: 1
+  _recalculatePathIfStuck: 1
 --- !u!1 &3030105832054688177
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,6 +39,28 @@
 		#endregion Ctor
 
 		#region Methods
+		public void DebugDraw(Color color, float duration = 0)
+		{
+			foreach (var kvp in _cellsByPosition)
+			{
+				var cellCoords = kvp.Key;
+				var cellWorldPosition = GetWorldPositionFromCoords(cellCoords);
+
+				var halfHeight = Vector3.forward * _cellSize / 2;
+				var halfWidth = Vector3.right * _cellSize / 2;
+
+				Vector3 topLeft = cellWorldPosition + halfHeight - halfWidth;
+				Vector3 topRight = cellWorldPosition + halfHeight + halfWidth;
+				Vector3 bottomRight = cellWorldPosition - halfHeight + halfWidth;
+				Vector3 bottomLeft = cellWorldPosition - halfHeight - halfWidth;
+
+				Debug.DrawLine(topLeft, topRight, color, duration);
+				Debug.DrawLine(topRight, bottomRight, color, duration);
+				Debug.DrawLine(bottomRight, bottomLeft, color, duration);
+				Debug.DrawLine(bottomLeft, topLeft, color, duration);
+			}
+		}
+
 		public TCell[] GetCellsInRadius(Vector3 position, float radius)
 		{
 			Circle circle = new Circle(GetCoordsFromWorldPosition(position), radius);
@@ -48,7 +70,7 @@
 			foreach (var kvp in _cellsByPosition)
 			{
 				var cellPosition = kvp.Key;
-				var rectangle = new Rectangle(cellPosition, new Vector2(_cellSize, _cellSize));				
+				var rectangle = new Rectangle(cellPosition, new Vector2(_cellSize, _cellSize));
 
 				if (CollisionOverlapCalculator.DoOverlap(rectangle, circle) == true)
 				{
@@ -83,6 +105,11 @@
 			float coordsY = Mathf.Round(position.z / _cellSize);
 
 			return new Vector2(coordsX, coordsY);
+		}
+
+		public Vector3 GetWorldPositionFromCoords(Vector2 coords)
+		{
+			return new Vector3(coords.x * _cellSize, 0, coords.y * _cellSize);
 		}
 
 		private void AddCellFromWorldPosition(Vector3 position)
