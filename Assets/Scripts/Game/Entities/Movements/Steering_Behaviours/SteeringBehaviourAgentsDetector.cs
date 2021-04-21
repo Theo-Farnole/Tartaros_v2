@@ -7,7 +7,7 @@
 
 	public static class SteeringBehaviourAgentsDetector
 	{
-		private const float CELL_SIZE = 5;
+		private const float CELL_SIZE = 1;
 
 		private static SpatialPartioning<ISteeringBehaviourAgent> _spatialPartionning = null;
 

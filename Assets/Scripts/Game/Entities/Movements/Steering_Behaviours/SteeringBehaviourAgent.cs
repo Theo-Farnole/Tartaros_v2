@@ -135,9 +135,8 @@
 		private void UpdateVelocity()
 		{
 			UpdateSteeringBehaviourSettings();
-			ISteeringBehaviourAgent[] neightbors = GetNeighbors();
 
-			Vector2 steeringForce = _settings.CalculateVelocity(Destination, transform.position.GetVector2FromXZ(), _velocity, neightbors);
+			Vector2 steeringForce = _settings.CalculateVelocity(Destination, transform.position.GetVector2FromXZ(), _velocity, GetNeighbors());
 
 			if (steeringForce != Vector2.zero)
 			{
@@ -159,14 +158,10 @@
 		}
 
 		[Button]
-		// TODO TF: optimize this!
+		[ShowInRuntime]
 		private ISteeringBehaviourAgent[] GetNeighbors()
 		{
-			ISteeringBehaviourAgent self = (this as ISteeringBehaviourAgent);
-
-			return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius)
-				.Where(agent => agent != self) // exclude agent
-				.ToArray();
+			return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius);
 		}
 
 		private void EnforceNonPenetrationConstraint()

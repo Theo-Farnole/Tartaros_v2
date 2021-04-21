@@ -88,9 +88,42 @@
 			return DoOverlap(circle, rect);
 		}
 
-		public static bool DoOverlap(Circle circle, Rectangle rect)
+		// SOURCE http://www.jeffreythompson.org/collision-detection/circle-rect.php
+		public static bool DoOverlap(Circle circle, Rectangle rectangle)
 		{
-			return circle.ContainsPosition(rect.BottomRight) || circle.ContainsPosition(rect.TopLeft) || circle.ContainsPosition(rect.Min) || circle.ContainsPosition(rect.Max);
+			float cx = circle.position.x;
+			float cy = circle.position.y;
+			float radius = circle.radius;
+
+			float rw = rectangle.Width;
+			float rh = rectangle.Height;
+
+			Vector2 rMin = rectangle.Min;
+			float rx = rMin.x;
+			float ry = rMin.y;
+
+
+			// temporary variables to set edges for testing
+			float testX = cx;
+			float testY = cy;
+
+			// which edge is closest?
+			if (cx < rx) testX = rx;      // test left edge
+			else if (cx > rx + rw) testX = rx + rw;   // right edge
+			if (cy < ry) testY = ry;      // top edge
+			else if (cy > ry + rh) testY = ry + rh;   // bottom edge
+
+			// get distance from closest edges
+			float distX = cx - testX;
+			float distY = cy - testY;
+			float distance = Mathf.Sqrt((distX * distX) + (distY * distY));
+
+			// if the distance is less than the radius, collision!
+			if (distance <= radius)
+			{
+				return true;
+			}
+			return false;
 		}
 
 		public static bool DoOverlap(ConvexPolygon polygon, Circle circle)

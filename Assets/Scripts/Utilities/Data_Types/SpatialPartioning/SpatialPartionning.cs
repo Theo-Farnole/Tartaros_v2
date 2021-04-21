@@ -35,10 +35,7 @@
 
 			var cell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
 			cell.AddElement(element);
-
-#if UNITY_EDITOR
-			CheckForErrors();
-#endif
+			cell.AddElement(element);
 		}
 
 		public void AddElements(T[] elements)
@@ -55,10 +52,6 @@
 
 			var cell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
 			cell.AddElement(element);
-
-#if UNITY_EDITOR
-			CheckForErrors();
-#endif
 		}
 
 		public void Move(T element, Vector3 position)
@@ -97,6 +90,7 @@
 		{
 			// https://stackoverflow.com/questions/18547354/c-sharp-linq-find-duplicates-in-list
 			return _cellsGrid.AllCells
+				.Where(x => x != null)
 				.SelectMany(x => x.Elements)
 				.GroupBy(x => x)
 				.Where(g => g.Count() > 1)
