@@ -28,10 +28,10 @@
 		#endregion Ctor
 
 		#region Methods
-		public bool ContainsPosition(Vector2 worldPosition)
+		public bool ContainsPosition(Vector2 position2D)
 		{
 			// TODO TF: (perf) use sqrt
-			float dist = Vector2.Distance(position, worldPosition);
+			float dist = Vector2.Distance(position, position2D);
 			return dist <= radius;
 		}
 		#endregion Methods

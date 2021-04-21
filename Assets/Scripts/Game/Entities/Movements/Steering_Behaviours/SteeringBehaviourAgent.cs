@@ -141,6 +141,7 @@
 		}
 
 		[Button]
+		// TODO TF: optimize this!
 		private ISteeringBehaviourAgent[] GetNeighbors()
 		{
 			ISteeringBehaviourAgent self = (this as ISteeringBehaviourAgent);
