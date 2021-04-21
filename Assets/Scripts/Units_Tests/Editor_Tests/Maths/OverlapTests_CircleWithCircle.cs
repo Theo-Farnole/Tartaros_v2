@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Tests
+﻿namespace Tartaros.Tests.Maths
 {
 	using Tartaros.Math;
 	using NUnit.Framework;
