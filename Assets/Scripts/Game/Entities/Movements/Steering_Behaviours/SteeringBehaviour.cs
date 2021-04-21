@@ -1,10 +1,8 @@
 ﻿namespace Tartaros.Entities
 {
 	using Sirenix.OdinInspector;
-	using System;
 	using Tartaros.Entities.Movement;
 	using UnityEngine;
-	using UnityEngine.Rendering;
 
 	[System.Serializable]
 	public class SteeringBehaviour
@@ -181,12 +179,16 @@
 
 			foreach (var neighbor in neighbors)
 			{
-				averageHeading += neighbor.Heading;
+				if (neighbor != _agent)
+				{
+					averageHeading += neighbor.Heading;
+				}
 			}
 
-			if (neighbors.Length > 0)
+			// neighbors contains the agent
+			if (neighbors.Length > 1)
 			{
-				averageHeading /= (float)neighbors.Length;
+				averageHeading /= (float)neighbors.Length - 1;
 				averageHeading -= _agent.Heading;
 			}
 

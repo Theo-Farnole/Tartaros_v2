@@ -1,13 +1,13 @@
 ﻿namespace Tartaros.Entities.Movement
 {
 	using Sirenix.OdinInspector;
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Utilities.SpatialPartioning;
 	using UnityEngine;
 	using UnityEngine.AI;
 
+	[SelectionBase]
 	public partial class SteeringBehaviourAgent : MonoBehaviour, ISteeringBehaviourAgent
 	{
 		#region Fields
@@ -76,13 +76,23 @@
 
 		Vector2 ISteeringBehaviourAgent.Heading => transform.forward.GetVector2FromXZ();
 
-		Vector3 ISpatialPartioningObject.WorldPosition => transform.position;
+		Vector3 ISpatialPartioningObject.WorldPosition { get => transform.position; set => transform.position = value; }
 		#endregion Properties
 
 		#region Methods
 		private void Update()
 		{
 			UpdatePosition();
+		}
+
+		private void OnEnable()
+		{
+			SteeringBehaviourAgentsDetector.AddAgent(this);
+		}
+
+		private void OnDisable()
+		{
+			SteeringBehaviourAgentsDetector.RemoveAgent(this);
 		}
 
 		public bool DestinationReached()
@@ -94,7 +104,7 @@
 		{
 			UpdateVelocity();
 
-			transform.position += _velocity.ToXZ() * Time.deltaTime;
+			SetPosition(transform.position + _velocity.ToXZ() * Time.deltaTime);
 
 			LookAtVelocity();
 
@@ -107,7 +117,7 @@
 			{
 				if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 10, NavMesh.AllAreas))
 				{
-					transform.position = hit.position;
+					SetPosition(hit.position);
 				}
 			}
 
@@ -143,15 +153,19 @@
 			}
 		}
 
+		private void SetPosition(Vector3 position)
+		{
+			SteeringBehaviourAgentsDetector.MoveAgent(this, position);
+		}
+
 		[Button]
 		// TODO TF: optimize this!
 		private ISteeringBehaviourAgent[] GetNeighbors()
 		{
 			ISteeringBehaviourAgent self = (this as ISteeringBehaviourAgent);
 
-			return ObjectsFinder
-				.FindObjectsOfInterface<ISteeringBehaviourAgent>()
-				.Where(agent => agent != self && Vector2.Distance(self.Position, agent.Position) <= _radius + agent.Radius)
+			return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius)
+				.Where(agent => agent != self) // exclude agent
 				.ToArray();
 		}
 

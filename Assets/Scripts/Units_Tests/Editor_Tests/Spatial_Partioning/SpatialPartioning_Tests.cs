@@ -9,7 +9,7 @@
 	{
 		private class SpatialPartioningObject : MonoBehaviour, ISpatialPartioningObject
 		{
-			public Vector3 WorldPosition => transform.position;
+			Vector3 ISpatialPartioningObject.WorldPosition { get => transform.position; set => transform.position = value; }
 		}
 
 		private const float CELL_SIZE = 1;

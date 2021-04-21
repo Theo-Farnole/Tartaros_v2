@@ -5,6 +5,11 @@
 
 	public static class MathHelper
 	{
+		public static float DistanceSq(Vector3 p1, Vector3 p2)
+		{
+			return (p1 - p2).sqrMagnitude;
+		}
+
 		public static bool IsInRadius(Vector3 p1, Vector3 p2, float radius)
 		{
 			return Vector3.Distance(p1, p2) <= radius;

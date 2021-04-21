@@ -4,6 +4,6 @@
 
 	public interface ISpatialPartioningObject
 	{
-		Vector3 WorldPosition { get; }
+		Vector3 WorldPosition { get; set; }
 	}
 }

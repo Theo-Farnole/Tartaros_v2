@@ -1,7 +1,9 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
+	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
+	using UnityEngine.XR.WSA;
 
 	// Learn more: https://www.habrador.com/tutorials/programming-patterns/19-spatial-partition-pattern/
 	// Learn more (bis): http://gameprogrammingpatterns.com/spatial-partition.html
@@ -29,7 +31,7 @@
 
 		public void AddElement(T element)
 		{
-			if (element is null) throw new System.ArgumentNullException(nameof(element));			
+			if (element is null) throw new System.ArgumentNullException(nameof(element));
 
 			var cell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
 			cell.AddElement(element);
@@ -66,13 +68,29 @@
 
 			oldCell.RemoveElement(element);
 			newCell.AddElement(element);
+
+			element.WorldPosition = position;
 		}
 
 		public T[] GetElementsInRadius(Vector3 position, float radius)
 		{
 			Cell<T>[] cellsInRadius = _cellsGrid.GetCellsInRadius(position, radius);
 
-			return cellsInRadius.SelectMany(x => x.Elements).ToArray();
+			List<T> elementsInRadius = new List<T>();
+			float radiusSqr = radius * radius;
+
+			foreach (Cell<T> cell in cellsInRadius)
+			{
+				foreach (T element in cell.Elements)
+				{
+					if (MathHelper.DistanceSq(element.WorldPosition, position) <= radiusSqr)
+					{
+						elementsInRadius.Add(element);
+					}
+				}
+			}
+
+			return elementsInRadius.ToArray();
 		}
 
 		private bool IsThereSameTransformInMultipleCells()
