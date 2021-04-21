@@ -4,6 +4,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using Tartaros.Utilities.SpatialPartioning;
 	using UnityEngine;
 	using UnityEngine.AI;
 
@@ -74,6 +75,8 @@
 		float ISteeringBehaviourAgent.Radius => _radius;
 
 		Vector2 ISteeringBehaviourAgent.Heading => transform.forward.GetVector2FromXZ();
+
+		Vector3 ISpatialPartioningObject.WorldPosition => transform.position;
 		#endregion Properties
 
 		#region Methods
