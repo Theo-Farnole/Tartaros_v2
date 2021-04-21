@@ -62,6 +62,14 @@
 #endif
 		}
 
+		public void AddElements(Transform[] transforms)
+		{
+			foreach (var transform in transforms)
+			{
+				AddElement(transform);
+			}
+		}
+
 		public void RemoveElement(Transform trf)
 		{
 			var cell = _cellsGrid.GetCellAtWorldPosition(trf.position);
