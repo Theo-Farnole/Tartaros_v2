@@ -162,6 +162,7 @@
 		private ISteeringBehaviourAgent[] GetNeighbors()
 		{
 			return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius);
+			//return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius).Where(x => x != this as ISteeringBehaviourAgent).ToArray();
 		}
 
 		private void EnforceNonPenetrationConstraint()
@@ -199,6 +200,7 @@
 		private void UpdateSteeringBehaviourSettings()
 		{
 			_settings.MaxSpeed = _maxSpeed;
+			_settings.Construct(this, _maxSpeed);
 		}
 
 		private void LookAtVelocity()

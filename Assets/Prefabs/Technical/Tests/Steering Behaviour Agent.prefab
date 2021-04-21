@@ -54,11 +54,11 @@ MonoBehaviour:
     _arrivalDeceleration: 0.6
     _arrivalDistance: 1
     _maxForce: 10
-    _separationWeight: 3
+    _separationWeight: 1
     _seekWeight: 1
     _arriveWeight: 1
     _alignementWeight: 1
-    _pathFollowingWeight: 1
+    _pathFollowingWeight: 3
   _enforceNonPenetrationConstraint: 0
   _forceToBeOnNavMesh: 1
   _recalculatePathIfStuck: 1
