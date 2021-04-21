@@ -1,12 +1,8 @@
 ﻿namespace Tartaros.Entities
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Tartaros.Entities;
 	using Tartaros.Entities.Attack;
 	using Tartaros.Entities.Detection;
-	using UnityEditorInternal;
+	using UnityEngine;
 
 	public class EntityAttackData : IEntityBehaviourData
 	{

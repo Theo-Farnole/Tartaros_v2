@@ -16,6 +16,7 @@
 
 		#region Properties
 		public TCell[] AllCells => _cellsByPosition.Select(x => x.Value).ToArray();
+		public float CellSize => _cellSize;
 		#endregion Properties
 
 		#region Ctor
@@ -121,7 +122,7 @@
 
 		private void AddCellFromCoords(Vector2 coords)
 		{
-			_cellsByPosition.Add(coords, Activator.CreateInstance<TCell>());
+			_cellsByPosition.Add(coords, (TCell)Activator.CreateInstance(typeof(TCell), coords));
 		}
 		#endregion Methods
 	}

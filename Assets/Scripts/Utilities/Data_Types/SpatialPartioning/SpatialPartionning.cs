@@ -77,11 +77,19 @@
 
 			foreach (Cell<T> cell in cellsInRadius)
 			{
-				foreach (T element in cell.Elements)
+				if (IsCellCompletelyInRadius(position, radius, cell) == true)
 				{
-					if (Vector3.Distance(element.WorldPosition, position) <= radius)
+					elementsInRadius.AddRange(cell.Elements);
+				}
+				else
+				{
+					// is cell partial in radius, we must check each elements
+					foreach (T element in cell.Elements)
 					{
-						elementsInRadius.Add(element);
+						if (Vector3.Distance(element.WorldPosition, position) <= radius)
+						{
+							elementsInRadius.Add(element);
+						}
 					}
 				}
 			}
@@ -92,6 +100,42 @@
 			}
 
 			return elementsInRadius.ToArray();
+		}
+
+		private bool IsCellCompletelyInRadius(Vector3 worldPosition, float radius, Cell<T> cell)
+		{
+			float cx = worldPosition.x;
+			float cy = worldPosition.y;
+
+			float rw = _cellsGrid.CellSize;
+			float rh = _cellsGrid.CellSize;
+
+			Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(worldPosition);
+			float rx = coords.x;
+			float ry = coords.y;
+
+
+			// temporary variables to set edges for testing
+			float testX = cx;
+			float testY = cy;
+
+			// which edge is farest?
+			if (cx < rx) testX = rx + rw;      // test left edge
+			else if (cx > rx + rw) testX = rx;   // right edge
+			if (cy < ry) testY = ry + rh;      // top edge
+			else if (cy > ry + rh) testY = ry;   // bottom edge
+
+			// get distance from farest edges
+			float distX = cx - testX;
+			float distY = cy - testY;
+			float distance = Mathf.Sqrt((distX * distX) + (distY * distY));
+
+			// if the distance is less than the radius, collision!
+			if (distance <= radius)
+			{
+				return true;
+			}
+			return false;
 		}
 
 		private bool IsThereSameTransformInMultipleCells()

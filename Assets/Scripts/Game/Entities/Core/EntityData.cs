@@ -2,13 +2,10 @@
 {
 	using Sirenix.OdinInspector;
 	using Sirenix.Serialization;
-	using Tartaros.Construction;
-	using Tartaros.Economy;
 	using Tartaros.UI;
-	using UnityEditorInternal;
 	using UnityEngine;
 
-	public class EntityData : SerializedScriptableObject, ISpawnable
+	public partial class EntityData : SerializedScriptableObject, ISpawnable
 	{
 		#region Fields
 		[SerializeField]
@@ -75,7 +72,12 @@
 			behaviour = null;
 			return false;
 		}
+		#endregion Methods
+	}
 
+#if UNITY_EDITOR
+	public partial class EntityData
+	{
 		public void SpawnComponents(GameObject entity)
 		{
 			foreach (IEntityBehaviourData behaviour in _behaviours)
@@ -85,6 +87,6 @@
 				behaviour.SpawnRequiredComponents(entity);
 			}
 		}
-		#endregion Methods
 	}
+#endif
 }
