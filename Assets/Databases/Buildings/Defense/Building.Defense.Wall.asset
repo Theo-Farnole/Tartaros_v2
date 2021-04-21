@@ -21,10 +21,6 @@ MonoBehaviour:
     - {fileID: 5810600384853675113, guid: 096b7ee2b2c442c4db9b1e2286049ca8, type: 3}
     - {fileID: 4740395784054915281, guid: 143e5414af54bac419f653d75411d433, type: 3}
     - {fileID: 4740395784054915281, guid: 0570774ac9410f54eb861cb51c898dba, type: 3}
-    - {fileID: 5810600384853675113, guid: 956ffdbd604b72941872f3c6d11fea1f, type: 3}
-    - {fileID: 5810600384853675113, guid: 593955f0c33322848b2926f943993782, type: 3}
-    - {fileID: 5810600384853675113, guid: eabbb77221c6a9f45ba638bf9e7890fa, type: 3}
-    - {fileID: 5810600384853675113, guid: 0e5cb72f590b6064f83745a383d834f4, type: 3}
     - {fileID: 4740395784054915281, guid: cac3677ec5163d74882eb8dff95a91e6, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -67,24 +63,12 @@ MonoBehaviour:
     - Name: _gameplayPrefab
       Entry: 10
       Data: 2
-    - Name: _wallLModel
+    - Name: _wallCornerModel
       Entry: 10
       Data: 3
-    - Name: _wallLGameplay
+    - Name: _wallCornerGameplay
       Entry: 10
       Data: 4
-    - Name: _wallTModel
-      Entry: 10
-      Data: 5
-    - Name: _wallTGameplay
-      Entry: 10
-      Data: 6
-    - Name: _wallXModel
-      Entry: 10
-      Data: 7
-    - Name: _wallXGameplay
-      Entry: 10
-      Data: 8
     - Name: _constructionKitModel
       Entry: 6
       Data: 
@@ -203,7 +187,7 @@ MonoBehaviour:
       Data: 8|Tartaros.Entities.EntityWallToGateData, Tartaros
     - Name: _gatePrefab
       Entry: 10
-      Data: 9
+      Data: 5
     - Name: _gatePrice
       Entry: 7
       Data: 9|Tartaros.Economy.SectorResourcesWallet, Tartaros
