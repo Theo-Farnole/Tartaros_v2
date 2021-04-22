@@ -64,16 +64,14 @@
 
 		public TCell[] GetCellsInRadius(Vector3 position, float radius)
 		{
-			Circle circle = new Circle(GetCoordsFromWorldPosition(position), radius);
-			List<TCell> cellsInRadius = new List<TCell>();
+			List<TCell> cellsInRadius = new List<TCell>(_cellsByPosition.Count);
+			Vector2 circleCoords = GetCoordsFromWorldPosition(position);
 
-
-			foreach (var kvp in _cellsByPosition)
+			foreach (KeyValuePair<Vector2, TCell> kvp in _cellsByPosition)
 			{
 				var cellPosition = kvp.Key;
-				var rectangle = new Rectangle(cellPosition, new Vector2(_cellSize, _cellSize));
 
-				if (CollisionOverlapCalculator.DoOverlap(rectangle, circle) == true)
+				if (CollisionOverlapCalculator.circleRect(circleCoords.x, circleCoords.y, radius, cellPosition.x, cellPosition.y, _cellSize, _cellSize) == true)
 				{
 					TCell cell = kvp.Value;
 					cellsInRadius.Add(cell);

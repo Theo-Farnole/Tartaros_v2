@@ -102,6 +102,12 @@
 			float rx = rMin.x;
 			float ry = rMin.y;
 
+			return circleRect(cx, cy, radius, rx, ry, rw, rh);
+		}
+
+		// CIRCLE/RECTANGLE
+		public static bool circleRect(float cx, float cy, float radius, float rx, float ry, float rw, float rh)
+		{
 
 			// temporary variables to set edges for testing
 			float testX = cx;
