@@ -4,7 +4,7 @@
 	using Tartaros.Entities.Attack;
 	using UnityEngine;
 
-	public class Destroy : AGoalEntity
+	public class DestroyTargetGoal : AGoalEntity
 	{
 		private IAttackable _target = null;
 		private float _timeBeforeTargetFlee = 1;
@@ -14,7 +14,7 @@
 		private EntityMovement _entityMovement = null;
 		private EntityAttack _entityAttack = null;
 
-		public Destroy(Entity goalOwner, IAttackable target, float timeBeforeTargetFlee) : base(goalOwner)
+		public DestroyTargetGoal(Entity goalOwner, IAttackable target, float timeBeforeTargetFlee) : base(goalOwner)
 		{
 			_target = target;
 

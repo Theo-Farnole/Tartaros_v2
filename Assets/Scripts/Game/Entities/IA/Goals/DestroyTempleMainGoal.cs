@@ -17,11 +17,16 @@
 			base.OnEnter();
 
 			base.AddSubGoal(new MoveToTempleAndAttackNearest(_goalOwner, _templePosition));
+
+		}
+		public override void OnUpdate()
+		{
+			base.OnUpdate();
 		}
 
 		public override bool IsCompleted()
 		{
-			throw new System.NotImplementedException();
+			return false;
 		}
 	}
 }
