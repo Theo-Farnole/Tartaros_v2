@@ -1,4 +1,7 @@
-﻿public interface IHasRect 
+﻿namespace QuadTree
 {
-    Rectangle rect { get; }
+	public interface IHasRect
+	{
+		Rectangle rect { get; }
+	}
 }

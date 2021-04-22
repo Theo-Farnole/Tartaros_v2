@@ -1,7 +1,12 @@
-﻿
-[System.Serializable]
-public class Grid {
-    public int row;
-    public int column;
-    public int distanceBetween;
+﻿namespace QuadTree
+{
+
+	[System.Serializable]
+	public class Grid
+	{
+		public int row;
+		public int column;
+		public int distanceBetween;
+	}
+	
 }
