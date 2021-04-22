@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Utilities.SpatialPartioning;
+	using TMPro;
 	using UnityEngine;
 	using UnityEngine.AI;
 
@@ -57,6 +58,8 @@
 		[ShowInRuntime]
 		private Vector2 _velocity = Vector2.zero;
 		private Vector2 _destination = Vector2.zero;
+
+		private Transform _cachedTransform = null;
 		#endregion Fields
 
 		#region Properties
@@ -76,10 +79,15 @@
 
 		Vector2 ISteeringBehaviourAgent.Heading => transform.forward.GetVector2FromXZ();
 
-		Vector3 ISpatialPartioningObject.WorldPosition { get => transform.position; set => transform.position = value; }
+		Vector3 ISpatialPartioningObject.WorldPosition { get => _cachedTransform.position; set => transform.position = value; }
 		#endregion Properties
 
 		#region Methods
+		void Awake()
+		{
+			_cachedTransform = transform;
+		}
+
 		private void Update()
 		{
 			UpdatePosition();

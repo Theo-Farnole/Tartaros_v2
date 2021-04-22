@@ -5,7 +5,7 @@
 
 	internal class Cell<T> where T : ISpatialPartioningObject
 	{
-		private List<T> _elements = new List<T>();
+		private List<T> _elements = new List<T>(100);
 		private Vector2 _coords = Vector2.zero;
 
 		public Vector2 Position => _coords;

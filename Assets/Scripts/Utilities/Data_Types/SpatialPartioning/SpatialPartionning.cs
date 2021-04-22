@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
+	using Sirenix.Utilities;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -36,7 +37,16 @@
 			if (element is null) throw new System.ArgumentNullException(nameof(element));
 
 			var cell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
-			cell.AddElement(element);
+
+
+			if (cell.Contains(element) == false)
+			{
+				cell.AddElement(element);
+			}
+			else
+			{
+				Debug.LogErrorFormat("Cannot add element {0} to the SpatialPartioning because it is already in it", element.ToString());
+			}
 		}
 
 		public void AddElements(T[] elements)
@@ -52,7 +62,7 @@
 			if (element is null) throw new System.ArgumentNullException(nameof(element));
 
 			var cell = _cellsGrid.GetCellAtWorldPosition(element.WorldPosition);
-			cell.AddElement(element);
+			cell.RemoveElement(element);
 		}
 
 		public void Move(T element, Vector3 position)
@@ -75,17 +85,23 @@
 
 			List<T> elementsInRadius = new List<T>();
 
-			foreach (Cell<T> cell in cellsInRadius)
+			for (int cellIndex = 0, cellsLength = cellsInRadius.Length; cellIndex < cellsLength; cellIndex++)
 			{
+				Cell<T> cell = cellsInRadius[cellIndex];
+
 				if (IsCellCompletelyInRadius(position, radius, cell) == true)
 				{
 					elementsInRadius.AddRange(cell.Elements);
 				}
 				else
 				{
+					var cellElements = cell.Elements;
+
 					// is cell partial in radius, we must check each elements
-					foreach (T element in cell.Elements)
+					for (int elementIndex = 0, elementsLength = cell.Elements.Length; elementIndex < elementsLength; elementIndex++)
 					{
+						T element = cellElements[elementIndex];
+
 						if (Vector3.Distance(element.WorldPosition, position) <= radius)
 						{
 							elementsInRadius.Add(element);

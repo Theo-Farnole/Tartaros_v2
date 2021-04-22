@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fecad1517a3f748b116959be24117a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _instanceToSpawn: 500
+  _instanceToSpawn: 200
   _prefabToSpawn: {fileID: 3030105831726261720, guid: 4face28f2cf81a94fac16b4ccbe1300a,
     type: 3}
   _spawnOnStart: 1
@@ -390,6 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 645755421}
+  - component: {fileID: 645755422}
   m_Layer: 0
   m_Name: FPS Counter
   m_TagString: Untagged
@@ -411,6 +412,20 @@ Transform:
   m_Father: {fileID: 251823528}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645755422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645755420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7058a4924ee6c346aabf08cbcc1839e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayFPS: 1
+  _fontsize: 5
 --- !u!1 &688576722
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fecad1517a3f748b116959be24117a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _instanceToSpawn: 500
+  _instanceToSpawn: 200
   _prefabToSpawn: {fileID: 3030105831726261720, guid: 4face28f2cf81a94fac16b4ccbe1300a,
     type: 3}
   _spawnOnStart: 1
