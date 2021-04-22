@@ -2,7 +2,7 @@
 {
 	using UnityEngine;
 	using System.Collections.Generic;
-	class QuadTree<T> where T : IHasRect, IHasID
+	class QuadTree<T> where T : IHasRect
 	{
 		public Rectangle boundry;
 		T[] nodes;
@@ -100,20 +100,20 @@
 		}
 
 		/// <summary>Query through QuadTree with a give rectangle and return ID's of all nodes inside the searching area.</summary>
-		public List<int> Query(Rectangle searchingArea)
+		public T[] Query(Rectangle searchingArea)
 		{
-			List<int> foundedPoints = new List<int>();
-			if (numberOfNodesInserted == 0 && !root) return foundedPoints;
-			if (!boundry.Overlaps(searchingArea)) return foundedPoints;
+			List<T> foundedPoints = new List<T>();
+			if (numberOfNodesInserted == 0 && !root) return foundedPoints.ToArray();
+			if (!boundry.Overlaps(searchingArea)) return foundedPoints.ToArray();
 
 			if (!root && numberOfNodesInserted != 0)
 			{
 				for (int i = 0; i < numberOfNodesInserted; i++)
 				{
 					if (searchingArea.Overlaps(nodes[i].rect))
-						foundedPoints.Add(nodes[i].ID);
+						foundedPoints.Add(nodes[i]);
 				}
-				return foundedPoints;
+				return foundedPoints.ToArray();
 			}
 			else if (root && numberOfNodesInserted == 0)
 			{
@@ -122,7 +122,7 @@
 				foundedPoints.AddRange(southEast.Query(searchingArea));
 				foundedPoints.AddRange(southWest.Query(searchingArea));
 			}
-			return foundedPoints;
+			return foundedPoints.ToArray();
 		}
 		#endregion
 
