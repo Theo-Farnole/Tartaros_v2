@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_GloryGemsForeground
+  m_Shader: {fileID: 4800000, guid: 4ff706c300b77cd48971aa6e3c68faae, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CompletePatern:
+        m_Texture: {fileID: 2800000, guid: d8dab14710df470488579ac1ebb3ba9b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyPatern:
+        m_Texture: {fileID: 2800000, guid: 3069996c2de2d3342837ab1e854bd86a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FXTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UncompletePatern:
+        m_Texture: {fileID: 2800000, guid: 87001556610511241963bd5f7ebb1cde, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _AngleSpeed: 0.25
+    - _CircularLerp: 2
+    - _CircularLerp1: 0.2
+    - _ColorMask: 15
+    - _ColorsInBetween: 0.5
+    - _ColorsLerp: 2
+    - _InnerThickness: 0.05
+    - _MainColorBoost: 2
+    - _NoiseScale: 5
+    - _Patern: 3
+    - _Progress: 0
+    - _Shine: 0.25
+    - _SmoothStep: 2.99
+    - _SmoothStep2: -15.66
+    - _Square1: 0.71
+    - _Square2: 0.85
+    - _SquareFromUVthickness: -2.06
+    - _SquareFromUVtilling: -0.85
+    - _SquarePower: 0.46
+    - _SquareRadius: 0.04
+    - _SquaredFadeInner: 5
+    - _SquaredFadeOuter: 5.03
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureTiling: 0.5
+    - _UseUIAlphaClip: 0
+    - _VoroScale: 2
+    - __dirty: 0
+    - _yOffset: -1
+    - _yScale: 2
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmptyGemColor: {r: 0, g: 0.13207549, b: 0.09108653, a: 1}
+    - _GemCompleteColor: {r: 0, g: 0.6226415, b: 0.36477986, a: 1}
+    - _NoiseVariations: {r: -0.4, g: 0.4, b: 0.74, a: 0}
+    - _PaternColor: {r: 0.104660034, g: 1, b: 0, a: 1}
+    - _PaternColor2: {r: 0, g: 1, b: 0.46170044, a: 1}
+    - _PaternEmpty: {r: 0.05273228, g: 0.745283, b: 0.21805085, a: 1}
+    - _PaternFill: {r: 0.05126947, g: 0.05951124, b: 0.06847818, a: 1}
+    - _TextureOffset: {r: 0.25, g: 0.25, b: 0, a: 0}
+    - _UncompleteGemColor: {r: 0, g: 0.6226415, b: 0.36477986, a: 1}
