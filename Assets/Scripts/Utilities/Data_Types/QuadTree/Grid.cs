@@ -1,4 +1,4 @@
-﻿namespace QuadTree
+﻿namespace Tartaros.DataStructures.QuadTree
 {
 
 	[System.Serializable]
@@ -8,5 +8,5 @@
 		public int column;
 		public int distanceBetween;
 	}
-	
+
 }

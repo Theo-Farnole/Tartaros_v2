@@ -1,4 +1,4 @@
-﻿namespace QuadTree
+﻿namespace Tartaros.DataStructures.QuadTree
 {
 	public interface IHasRect
 	{

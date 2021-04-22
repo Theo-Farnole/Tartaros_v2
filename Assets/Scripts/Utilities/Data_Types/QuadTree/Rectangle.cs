@@ -1,4 +1,4 @@
-﻿namespace QuadTree
+﻿namespace Tartaros.DataStructures.QuadTree
 {
 	using UnityEngine;
 	public class Rectangle

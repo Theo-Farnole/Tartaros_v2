@@ -1,7 +1,8 @@
-﻿namespace QuadTree
+﻿namespace Tartaros.DataStructures.QuadTree
 {
 	using UnityEngine;
 	using System.Collections.Generic;
+
 	class QuadTree<T> where T : IHasRect
 	{
 		public Rectangle boundry;
