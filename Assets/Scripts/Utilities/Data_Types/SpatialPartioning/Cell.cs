@@ -1,22 +1,27 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
 	using System.Collections.Generic;
+	using Tartaros.Math;
 	using UnityEngine;
 
 	internal class Cell<T> where T : ISpatialPartioningObject
 	{
 		private List<T> _elements = new List<T>(100);
-		private Vector2 _coords = Vector2.zero;
-		private float _cellSize = -1;
 
-		public Vector2 Position => _coords;
-
-		public Cell(Vector2 coords, float cellSize)
-		{
-			_coords = coords;
-		}
+		private readonly Vector2 _coords = Vector2.zero;
+		private readonly CellsGrid2D<Cell<T>> _grid = null;
+		private readonly float _cellSize = -1;
 
 		public T[] Elements => _elements.ToArray();
+		public Vector2 Position => _coords;
+
+		public Cell(Vector2 coords, CellsGrid2D<Cell<T>> grid)
+		{
+			_coords = coords;
+			_grid = grid;
+			_cellSize = _grid.CellSize;
+		}
+
 
 		public bool Contains(T element)
 		{
@@ -26,29 +31,35 @@
 		public void RemoveElement(T element) => _elements.Remove(element);
 		public void AddElement(T element) => _elements.Add(element);
 
-		public T[] GetElementsInRadius(Vector2 coords, float radius)
+		public bool Overlap(Vector2 circleCoords, float circleRadius)
+		{
+			return CollisionOverlapCalculator.circleRect(circleCoords.x, circleCoords.y, circleRadius, _coords.x, _coords.y, _cellSize, _cellSize);
+		}
+
+		public List<T> GetElementsInRadius(Vector2 coords, float radius)
 		{
 			if (IsCellCompletelyInRadius(coords, radius) == true)
 			{
-				return _elements.ToArray();
+				return _elements;
 			}
 			else
 			{
-				var cellElements = _elements;
+				var worldPosition = _grid.GetWorldPositionFromCoords(coords);
+
 				List<T> output = new List<T>(_elements.Count);
 
 				// is cell partial in radius, we must check each elements
 				for (int elementIndex = 0, elementsLength = _elements.Count; elementIndex < elementsLength; elementIndex++)
 				{
-					T element = cellElements[elementIndex];
+					T element = _elements[elementIndex];
 
-					if (Vector3.Distance(element.WorldPosition, coords) <= radius)
+					if (Vector3.Distance(element.WorldPosition, worldPosition) <= radius)
 					{
 						output.Add(element);
 					}
 				}
 
-				return output.ToArray();
+				return output;
 			}
 		}
 

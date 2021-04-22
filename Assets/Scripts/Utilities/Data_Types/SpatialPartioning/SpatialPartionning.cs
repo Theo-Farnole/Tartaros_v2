@@ -1,10 +1,8 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
-	using Sirenix.Utilities;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using UnityEngine.XR.WSA;
 
 	// Learn more: https://www.habrador.com/tutorials/programming-patterns/19-spatial-partition-pattern/
 	// Learn more (bis): http://gameprogrammingpatterns.com/spatial-partition.html
@@ -81,14 +79,35 @@
 
 		public T[] GetElementsInRadius(Vector3 position, float radius)
 		{
+			List<T> elementsInRadius = new List<T>();
+			Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(position);
+
+			#region V2
+			var cells = _cellsGrid.AllCells;
+
+			for (int i = 0, length = cells.Length; i < length; i++)
+			{
+				Cell<T> cell = cells[i];
+
+				if (cell.Overlap(coords, radius))
+				{
+					elementsInRadius.AddRange(cell.GetElementsInRadius(coords, radius));
+				}
+			}
+
+			return elementsInRadius.ToArray();
+			#endregion
+
+
+
+			#region V1
 			Cell<T>[] cellsInRadius = _cellsGrid.GetCellsInRadius(position, radius);
 
-			List<T> elementsInRadius = new List<T>();
+
 
 			for (int cellIndex = 0, cellsLength = cellsInRadius.Length; cellIndex < cellsLength; cellIndex++)
 			{
 				Cell<T> cell = cellsInRadius[cellIndex];
-				Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(position);
 
 				elementsInRadius.AddRange(cell.GetElementsInRadius(coords, radius));
 			}
@@ -99,6 +118,7 @@
 			//}
 
 			return elementsInRadius.ToArray();
+			#endregion
 		}
 
 

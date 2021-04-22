@@ -15,7 +15,7 @@
 		#endregion Fields
 
 		#region Properties
-		public TCell[] AllCells => _cellsByPosition.Select(x => x.Value).ToArray();
+		public TCell[] AllCells => _cellsByPosition.Values.ToArray();
 		public float CellSize => _cellSize;
 		#endregion Properties
 
@@ -122,7 +122,7 @@
 		{
 			try
 			{
-				_cellsByPosition.Add(coords, (TCell)Activator.CreateInstance(typeof(TCell), coords, _cellSize));
+				_cellsByPosition.Add(coords, (TCell)Activator.CreateInstance(typeof(TCell), coords, this));
 			}
 			catch (MissingMethodException e)
 			{
