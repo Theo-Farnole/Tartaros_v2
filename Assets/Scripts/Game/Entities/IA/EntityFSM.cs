@@ -114,6 +114,11 @@
 			SetState(InstantiateDefaultState());
 		}
 
+		public void SetStateGoalPattern(Vector3 position)
+		{
+			SetState(new StateAttackTemple(Entity, position));
+		}
+
 		private AEntityState InstantiateDefaultState()
 		{
 			return new StateIdle(Entity);

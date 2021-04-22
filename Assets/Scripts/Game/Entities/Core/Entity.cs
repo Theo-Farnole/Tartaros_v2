@@ -21,6 +21,7 @@
 		[SerializeField]
 		private Team _team = Team.Player;
 
+		[SerializeField]
 		private EntityType _entityType = EntityType.Unit;
 
 		private EntityFSM _entityFSM = null;
@@ -71,6 +72,7 @@
 		private void Start()
 		{
 			AnyEntitySpawned?.Invoke(this, new EntitySpawnedArgs(this));
+			_entityFSM = GetComponent<EntityFSM>();
 		}
 
 		private void OnDestroy()
@@ -105,7 +107,12 @@
 
 		void IWaveSpawnable.Attack(IAttackable attackable)
 		{
-			GetComponent<IOrderAttackReceiver>().Attack(attackable);
+			//GetComponent<IOrderAttackReceiver>().Attack(attackable);
+
+			var position = attackable.Transform.position;
+			_entityFSM.SetStateGoalPattern(position);
+
+
 		}
 
 		Order[] IOrderable.GenerateOrders()

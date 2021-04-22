@@ -10,15 +10,13 @@
 	{
 		private GameObject _buildingPreview = null;
 		private bool _isWallPreview = false;
-		private IConstructable _toBuild = null;
-		private bool _isSnaped = false;
 		private EntityNeigboorWallManager _neigboorManager = null;
 		private CheckObjectUnderCursorManager _objectUnderCursorManager = null;
 
 		public BuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
 		{
 			GameObject buildingPreview = GameObject.Instantiate(toBuild.PreviewPrefab, positionToInstancate, Quaternion.identity);
-			_toBuild = toBuild;
+			
 			_isWallPreview = toBuild.IsWall;
 			_buildingPreview = buildingPreview;
 			_objectUnderCursorManager = new CheckObjectUnderCursorManager(toBuild);

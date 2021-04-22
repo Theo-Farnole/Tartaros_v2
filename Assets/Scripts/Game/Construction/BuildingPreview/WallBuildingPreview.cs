@@ -15,7 +15,6 @@
 		private IConstructable _toBuild = null;
 
 		private float _angleLimitation = 4;
-		private float _actualAngle = 0;
 
 		public float DistanceBetweenInstanciate => _toBuild.Size.y;
 

@@ -6,7 +6,8 @@
 
 	public abstract class AGoalComposite : AGoalEntity
 	{
-		List<AGoalEntity> _subGoal = new List<AGoalEntity>();
+		Stack<AGoalEntity> _subGoal = new Stack<AGoalEntity>();
+
 
 		protected AGoalComposite(Entity goalOwner) : base(goalOwner)
 		{
@@ -15,30 +16,54 @@
 
 		public void AddSubGoal(AGoalEntity goal)
 		{
-			_subGoal.Add(goal);
+			if (_subGoal.Count > 0)
+			{
+				_subGoal.Peek().OnExit();
+			}
+
+			_subGoal.Push(goal);
+
+			_subGoal.Peek().OnEnter();
 		}
 
 		public void ProcessSubGoal()
 		{
+			bool containsSubGoal = _subGoal.Count > 0;
 
-			if (_subGoal.Count >= 1)
+			if (containsSubGoal == true)
 			{
-				AGoalEntity currentSubGoal = _subGoal[_subGoal.Count - 1];
+				AGoalEntity currentSubGoal = _subGoal.Peek();
 
 
-				if(currentSubGoal.IsCompleted() == true)
+				if (currentSubGoal.IsCompleted() == true)
 				{
-					_subGoal.RemoveAt(_subGoal.Count - 1);
-					return;
+					Debug.Log(_subGoal.Count);
+					currentSubGoal.OnExit();
+					_subGoal.Pop();
+
+					if (_subGoal.Count > 0)
+					{
+						var newSubGoal = _subGoal.Peek();
+						newSubGoal.OnEnter();
+						currentSubGoal = newSubGoal;
+						Debug.Log(newSubGoal);
+					}
 				}
 
 				currentSubGoal.OnUpdate();
 			}
 		}
 
+		public Stack<AGoalEntity> GetSubGoals()
+		{
+			return _subGoal;
+		}
+
+
 		public override void OnUpdate()
 		{
 			ProcessSubGoal();
+
 		}
 	}
 }

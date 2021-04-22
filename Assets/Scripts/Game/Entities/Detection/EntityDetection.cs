@@ -176,6 +176,11 @@
 			return distance <= AttackRange;
 		}
 
+		public Entity[] GetEveryOpponentInRange()
+		{
+			return _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange);
+		}
+
 		[Obsolete("This function doesn't work.")]
 		private IEnumerable<Entity> GetOpponentsOrderByDistance()
 		{

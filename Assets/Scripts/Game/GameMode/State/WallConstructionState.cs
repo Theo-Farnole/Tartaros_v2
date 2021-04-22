@@ -16,7 +16,6 @@
 		private List<GameObject> _wallSections = new List<GameObject>();
 		private WallBuildingPreview _wallSectionPreview = null;
 		private GameObject _wallToHideAndShow = null;
-		private int _indexStartModel = 1;
 
 		private readonly IConstructable _constructable = null;
 		private readonly ConstructionInputs _inputs = null;
@@ -170,8 +169,6 @@
 					_wallSections.Add(wallSection);
 
 				}
-
-				int index = 0;
 
 				foreach (GameObject wallCorner in _wallSectionPreview.GetAllCornerPreview())
 				{

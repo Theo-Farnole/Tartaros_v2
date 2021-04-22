@@ -108,8 +108,6 @@
                 }
 
                 NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
-                Debug.Log(point.SpawnPoint);
-                Debug.Log(_targetPosition.position);
 
                 navPath.Add(path);
             }

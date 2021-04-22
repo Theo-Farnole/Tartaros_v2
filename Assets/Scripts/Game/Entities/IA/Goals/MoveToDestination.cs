@@ -9,17 +9,20 @@
 		private Vector3 _targetDestination = Vector3.zero;
 		private EntityMovement _entityMovement = null;
 		private bool _completed = false;
-		private bool _isActive = false;
+		//private bool _isActive = false;
 		
 
 		public MoveToDestination(Entity goalOwner, Vector3 targetDestination) : base(goalOwner)
 		{
-			_targetDestination = targetDestination;	
+			_targetDestination = targetDestination;
+			_entityMovement = _goalOwner.GetComponent<EntityMovement>();
 		}
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
+
+			Debug.Log("MoveDestination");
 
 			_entityMovement.StopMovement();
 			_entityMovement.MoveToPoint(_targetDestination);
