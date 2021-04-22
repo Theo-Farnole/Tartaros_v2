@@ -122,7 +122,15 @@
 
 		private void AddCellFromCoords(Vector2 coords)
 		{
-			_cellsByPosition.Add(coords, (TCell)Activator.CreateInstance(typeof(TCell), coords));
+			try
+			{
+				_cellsByPosition.Add(coords, (TCell)Activator.CreateInstance(typeof(TCell), coords, _cellSize));
+			}
+			catch (MissingMethodException e)
+			{
+				// TODO TF: let user create own action to create new cell
+				throw new System.NotSupportedException("The constructor TCell is not valid. The cell needs a Vector2 coords as first arg and a float cellSize as second arg.");
+			}
 		}
 		#endregion Methods
 	}

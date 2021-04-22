@@ -7,10 +7,11 @@
 	{
 		private List<T> _elements = new List<T>(100);
 		private Vector2 _coords = Vector2.zero;
+		private float _cellSize = -1;
 
 		public Vector2 Position => _coords;
 
-		public Cell(Vector2 coords)
+		public Cell(Vector2 coords, float cellSize)
 		{
 			_coords = coords;
 		}
@@ -24,5 +25,62 @@
 
 		public void RemoveElement(T element) => _elements.Remove(element);
 		public void AddElement(T element) => _elements.Add(element);
+
+		public T[] GetElementsInRadius(Vector2 coords, float radius)
+		{
+			if (IsCellCompletelyInRadius(coords, radius) == true)
+			{
+				return _elements.ToArray();
+			}
+			else
+			{
+				var cellElements = _elements;
+				List<T> output = new List<T>(_elements.Count);
+
+				// is cell partial in radius, we must check each elements
+				for (int elementIndex = 0, elementsLength = _elements.Count; elementIndex < elementsLength; elementIndex++)
+				{
+					T element = cellElements[elementIndex];
+
+					if (Vector3.Distance(element.WorldPosition, coords) <= radius)
+					{
+						output.Add(element);
+					}
+				}
+
+				return output.ToArray();
+			}
+		}
+
+		private bool IsCellCompletelyInRadius(Vector2 coords, float radius)
+		{
+			float cx = coords.x;
+			float cy = coords.y;
+
+			float rw = _cellSize;
+			float rh = _cellSize;
+
+			float rx = _coords.x;
+			float ry = _coords.y;
+
+
+			// temporary variables to set edges for testing
+			float testX = cx;
+			float testY = cy;
+
+			// which edge is farest?
+			if (cx < rx) testX = rx + rw;      // test left edge
+			else if (cx > rx + rw) testX = rx;   // right edge
+			if (cy < ry) testY = ry + rh;      // top edge
+			else if (cy > ry + rh) testY = ry;   // bottom edge
+
+			// get distance from farest edges
+			float distX = cx - testX;
+			float distY = cy - testY;
+			float distance = Mathf.Sqrt((distX * distX) + (distY * distY));
+
+			// if the distance is less than the radius, collision!
+			return (distance <= radius);
+		}
 	}
 }
