@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -77,12 +78,18 @@
 			element.WorldPosition = position;
 		}
 
+		public T[] GetElementsInCell(Vector3 position)
+		{
+			var cell = _cellsGrid.GetCellAtWorldPosition(position);
+
+			return cell.Elements;
+		}
+
 		public T[] GetElementsInRadius(Vector3 position, float radius)
 		{
 			List<T> elementsInRadius = new List<T>();
 			Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(position);
 
-			#region V2
 			var cells = _cellsGrid.AllCells;
 
 			for (int i = 0, length = cells.Length; i < length; i++)
@@ -96,29 +103,26 @@
 			}
 
 			return elementsInRadius.ToArray();
-			#endregion
+		}
 
+		public IEnumerable<T> GetElementsInRadiusEnumerator(Vector3 position, float radius)
+		{
+			Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(position);
 
+			var cells = _cellsGrid.AllCells;
 
-			#region V1
-			Cell<T>[] cellsInRadius = _cellsGrid.GetCellsInRadius(position, radius);
-
-
-
-			for (int cellIndex = 0, cellsLength = cellsInRadius.Length; cellIndex < cellsLength; cellIndex++)
+			for (int i = 0, length = cells.Length; i < length; i++)
 			{
-				Cell<T> cell = cellsInRadius[cellIndex];
+				Cell<T> cell = cells[i];
 
-				elementsInRadius.AddRange(cell.GetElementsInRadius(coords, radius));
+				if (cell.Overlap(coords, radius))
+				{
+					foreach (T element in cell.GetElementsInRadiusEnumerator(coords, radius))
+					{
+						yield return element;
+					}
+				}
 			}
-
-			//if (elementsInRadius.HasDuplicate() == true)
-			//{
-			//	throw new SameElementInMultipleCellsException(elementsInRadius.GetDuplicates()[0]);
-			//}
-
-			return elementsInRadius.ToArray();
-			#endregion
 		}
 
 

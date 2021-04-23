@@ -1,6 +1,8 @@
 ﻿namespace Tartaros.Entities
 {
 	using Sirenix.OdinInspector;
+	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.Entities.Movement;
 	using UnityEngine;
 
@@ -58,6 +60,7 @@
 		private Vector2 _position = Vector2.zero;
 		private Vector2 _velocity = Vector2.zero;
 		private ISteeringBehaviourAgent _agent = null;
+		private IEnumerable<ISteeringBehaviourAgent> _neighbors = null;
 
 		private Path _path = null;
 		private float _maxSpeed = -1;
@@ -75,22 +78,23 @@
 			_agent = agent;
 		}
 
-		public Vector2 CalculateVelocity(Vector2 targetPosition, Vector2 agentPosition, Vector2 agentVelocity, ISteeringBehaviourAgent[] neightbors)
+		public Vector2 CalculateVelocity(Vector2 targetPosition, Vector2 agentPosition, Vector2 agentVelocity, IEnumerable<ISteeringBehaviourAgent> neightbors)
 		{
 			_position = agentPosition;
 			_velocity = agentVelocity;
+			_neighbors = neightbors;
 
 			Vector2 velocity = Vector2.zero;
 
 			if (IsOn(Behaviours.Separation) == true)
 			{
-				var force = Separation(neightbors) * _separationWeight;
+				var force = Separation() * _separationWeight;
 				if (AccumulateForce(ref velocity, force) == false) return velocity;
 			}
 
 			if (IsOn(Behaviours.Alignment) == true)
 			{
-				var force = Alignment(neightbors) * _alignementWeight;
+				var force = Alignment() * _alignementWeight;
 
 				if (AccumulateForce(ref velocity, force) == false) return velocity;
 			}
@@ -173,11 +177,11 @@
 			return (GetDesiredVelocity(targetPosition) - _velocity);
 		}
 
-		private Vector2 Alignment(ISteeringBehaviourAgent[] neighbors)
+		private Vector2 Alignment()
 		{
 			Vector2 averageHeading = Vector2.zero;
 
-			foreach (var neighbor in neighbors)
+			foreach (var neighbor in _neighbors)
 			{
 				if (neighbor != _agent)
 				{
@@ -186,9 +190,9 @@
 			}
 
 			// neighbors contains the agent
-			if (neighbors.Length > 1)
+			if (_neighbors.Count() > 1)
 			{
-				averageHeading /= (float)neighbors.Length - 1;
+				averageHeading /= (float)_neighbors.Count() - 1;
 				averageHeading -= _agent.Heading;
 			}
 
@@ -231,11 +235,11 @@
 			return Vector2.zero;
 		}
 
-		private Vector2 Separation(ISteeringBehaviourAgent[] neighbors)
+		private Vector2 Separation()
 		{
 			Vector2 steeringForce = Vector2.zero;
 
-			foreach (ISteeringBehaviourAgent neighbor in neighbors)
+			foreach (ISteeringBehaviourAgent neighbor in _neighbors)
 			{
 				if (neighbor != _agent)
 				{

@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Entities.Movement
 {
 	using Sirenix.OdinInspector;
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Utilities.SpatialPartioning;
@@ -167,7 +168,7 @@
 
 		[Button]
 		[ShowInRuntime]
-		private ISteeringBehaviourAgent[] GetNeighbors()
+		private IEnumerable<ISteeringBehaviourAgent> GetNeighbors()
 		{
 			return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius);
 			//return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius).Where(x => x != this as ISteeringBehaviourAgent).ToArray();

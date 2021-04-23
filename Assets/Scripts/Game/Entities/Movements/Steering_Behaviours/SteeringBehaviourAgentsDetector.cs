@@ -1,11 +1,13 @@
 ﻿namespace Tartaros.Entities.Movement
 {
+	using System.Collections;
+	using System.Collections.Generic;
 	using Tartaros.Utilities.SpatialPartioning;
 	using UnityEngine;
 
 	public static class SteeringBehaviourAgentsDetector
 	{
-		private const float CELL_SIZE = 3;
+		private const float CELL_SIZE = 2;
 
 		private static SpatialPartioning<ISteeringBehaviourAgent> _spatialPartionning = null;
 
@@ -29,11 +31,13 @@
 
 		public static void MoveAgent(ISteeringBehaviourAgent agent, Vector3 position) => SpatialPartionning.Move(agent, position);
 
-		public static ISteeringBehaviourAgent[] GetAgentsInRadius(Vector3 position, float neighborRadius)
+		public static ISteeringBehaviourAgent[] GetAgentsInCell(Vector3 position) => SpatialPartionning.GetElementsInCell(position);
+
+		public static IEnumerable<ISteeringBehaviourAgent> GetAgentsInRadius(Vector3 position, float neighborRadius)
 		{
 			float neighborDiameter = neighborRadius + neighborRadius;
 
-			return SpatialPartionning.GetElementsInRadius(position, neighborDiameter);
+			return SpatialPartionning.GetElementsInRadiusEnumerator(position, neighborDiameter);
 		}
 	}
 }

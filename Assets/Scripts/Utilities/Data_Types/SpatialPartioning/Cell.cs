@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
+	using System.Collections;
 	using System.Collections.Generic;
 	using Tartaros.Math;
 	using UnityEngine;
@@ -60,6 +61,32 @@
 				}
 
 				return output;
+			}
+		}
+
+		public IEnumerable<T> GetElementsInRadiusEnumerator(Vector2 coords, float radius)
+		{
+			if (IsCellCompletelyInRadius(coords, radius) == true)
+			{
+				for (int i = 0, length = _elements.Count; i < length; i++)
+				{
+					yield return _elements[i];
+				}
+			}
+			else
+			{
+				Vector3 worldPosition = _grid.GetWorldPositionFromCoords(coords);
+
+				// is cell partial in radius, we must check each elements
+				for (int elementIndex = 0, elementsLength = _elements.Count; elementIndex < elementsLength; elementIndex++)
+				{
+					T element = _elements[elementIndex];
+
+					if (Vector3.Distance(element.WorldPosition, worldPosition) <= radius)
+					{
+						yield return element;
+					}
+				}
 			}
 		}
 
