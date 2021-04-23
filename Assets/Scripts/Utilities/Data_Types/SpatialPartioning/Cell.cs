@@ -1,11 +1,10 @@
 ﻿namespace Tartaros.Utilities.SpatialPartioning
 {
-	using System.Collections;
 	using System.Collections.Generic;
 	using Tartaros.Math;
 	using UnityEngine;
 
-	internal class Cell<T> where T : ISpatialPartioningObject
+	public class Cell<T> where T : class, ISpatialPartioningObject
 	{
 		private List<T> _elements = new List<T>(100);
 
@@ -71,6 +70,7 @@
 				for (int i = 0, length = _elements.Count; i < length; i++)
 				{
 					yield return _elements[i];
+
 				}
 			}
 			else

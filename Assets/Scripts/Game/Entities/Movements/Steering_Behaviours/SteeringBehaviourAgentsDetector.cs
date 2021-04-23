@@ -33,7 +33,7 @@
 
 		public static ISteeringBehaviourAgent[] GetAgentsInCell(Vector3 position) => SpatialPartionning.GetElementsInCell(position);
 
-		public static IEnumerable<ISteeringBehaviourAgent> GetAgentsInRadius(Vector3 position, float neighborRadius)
+		public static IEnumerable<ISteeringBehaviourAgent> GetNeighbors(Vector3 position, float neighborRadius)
 		{
 			float neighborDiameter = neighborRadius + neighborRadius;
 

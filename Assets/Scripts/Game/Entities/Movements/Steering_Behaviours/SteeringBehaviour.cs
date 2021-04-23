@@ -4,6 +4,10 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Entities.Movement;
+	using Unity.Burst;
+	using Unity.Collections;
+	using Unity.Jobs;
+	using Unity.Mathematics;
 	using UnityEngine;
 
 	[System.Serializable]
@@ -109,13 +113,13 @@
 				}
 				else
 				{
-					Debug.LogWarning("Path following behaviour is enabled but no path has been provided. Please set one with the _path field.");
+					UnityEngine.Debug.LogWarning("Path following behaviour is enabled but no path has been provided. Please set one with the _path field.");
 				}
 			}
 
 			if (IsOn(Behaviours.Seek) == true)
 			{
-				Debug.Log("Seek");
+				UnityEngine.Debug.Log("Seek");
 				var force = Seek(targetPosition) * _seekWeight;
 
 				if (AccumulateForce(ref velocity, force) == false) return velocity;
@@ -123,7 +127,7 @@
 
 			if (IsOn(Behaviours.Arrive) == true)
 			{
-				Debug.Log("Arrive");
+				UnityEngine.Debug.Log("Arrive");
 
 				var force = Arrive(targetPosition) * _arriveWeight;
 				if (AccumulateForce(ref velocity, force) == false) return velocity;
@@ -235,16 +239,33 @@
 			return Vector2.zero;
 		}
 
+		//[BurstCompile(CompileSynchronously = true)]
+		//public struct SeparationJob : IJobParallelFor
+		//{
+		//	[WriteOnly]
+		//	public float2 steeringForce;
+		//	[Unity.Collections.ReadOnly]
+		//	public float2 agentPosition;
+
+		//	[Unity.Collections.ReadOnly]
+		//	public NativeArray<float2> neighborsPositions;
+
+		//	public void Execute(int index)
+		//	{
+		//		float2 directionToAgent = agentPosition - neighborsPositions[index];
+		//		steeringForce += math.normalize(directionToAgent) / math.length(directionToAgent);
+		//	}
+		//}
+
 		private Vector2 Separation()
 		{
 			Vector2 steeringForce = Vector2.zero;
 
-			foreach (ISteeringBehaviourAgent neighbor in _neighbors)
+			foreach (var neighbor in _neighbors)
 			{
 				if (neighbor != _agent)
 				{
 					Vector2 directionToAgent = _position - neighbor.Position;
-
 					steeringForce += directionToAgent.normalized / directionToAgent.magnitude;
 				}
 			}

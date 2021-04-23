@@ -90,16 +90,9 @@
 			List<T> elementsInRadius = new List<T>();
 			Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(position);
 
-			var cells = _cellsGrid.AllCells;
-
-			for (int i = 0, length = cells.Length; i < length; i++)
+			foreach (var cell in _cellsGrid.GetCellsInRadius(position, radius))
 			{
-				Cell<T> cell = cells[i];
-
-				if (cell.Overlap(coords, radius))
-				{
-					elementsInRadius.AddRange(cell.GetElementsInRadius(coords, radius));
-				}
+				elementsInRadius.AddRange(cell.GetElementsInRadius(coords, radius));
 			}
 
 			return elementsInRadius.ToArray();
@@ -109,18 +102,11 @@
 		{
 			Vector2 coords = _cellsGrid.GetCoordsFromWorldPosition(position);
 
-			var cells = _cellsGrid.AllCells;
-
-			for (int i = 0, length = cells.Length; i < length; i++)
+			foreach (var cell in _cellsGrid.GetCellsInRadius(position, radius))
 			{
-				Cell<T> cell = cells[i];
-
-				if (cell.Overlap(coords, radius))
+				foreach (var element in cell.GetElementsInRadius(coords, radius))
 				{
-					foreach (T element in cell.GetElementsInRadiusEnumerator(coords, radius))
-					{
-						yield return element;
-					}
+					yield return element;
 				}
 			}
 		}

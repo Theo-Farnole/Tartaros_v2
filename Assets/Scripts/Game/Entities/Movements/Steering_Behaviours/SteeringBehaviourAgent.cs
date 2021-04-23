@@ -170,7 +170,7 @@
 		[ShowInRuntime]
 		private IEnumerable<ISteeringBehaviourAgent> GetNeighbors()
 		{
-			return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius);
+			return SteeringBehaviourAgentsDetector.GetNeighbors(transform.position, _radius);
 			//return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius).Where(x => x != this as ISteeringBehaviourAgent).ToArray();
 		}
 

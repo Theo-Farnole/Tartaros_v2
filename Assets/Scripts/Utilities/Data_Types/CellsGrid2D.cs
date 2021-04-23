@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Math;
+	using Tartaros.Utilities.SpatialPartioning;
 	using UnityEngine;
 
 	public class CellsGrid2D<TCell>
@@ -62,23 +63,24 @@
 			}
 		}
 
-		public TCell[] GetCellsInRadius(Vector3 position, float radius)
+		public IEnumerable<TCell> GetCellsInRadius(Vector3 worldPosition, float radius)
 		{
-			List<TCell> cellsInRadius = new List<TCell>(_cellsByPosition.Count);
-			Vector2 circleCoords = GetCoordsFromWorldPosition(position);
+			Vector3 topLeftPosition = worldPosition + new Vector3(-radius, 0, radius);
+			Vector3 bottomRightPosition = worldPosition + new Vector3(radius, 0, -radius);
 
-			foreach (KeyValuePair<Vector2, TCell> kvp in _cellsByPosition)
+			Vector2 topLeftCoords = GetCoordsFromWorldPosition(topLeftPosition);
+			Vector2 bottomRightCoords = GetCoordsFromWorldPosition(bottomRightPosition);
+
+			// from left to right
+			for (float x = topLeftCoords.x; x <= bottomRightCoords.x; x++)
 			{
-				var cellPosition = kvp.Key;
-
-				if (CollisionOverlapCalculator.circleRect(circleCoords.x, circleCoords.y, radius, cellPosition.x, cellPosition.y, _cellSize, _cellSize) == true)
+				// from bottom to top
+				for (float y = bottomRightCoords.y; y <= topLeftCoords.y; y++)
 				{
-					TCell cell = kvp.Value;
-					cellsInRadius.Add(cell);
+					Vector2 coords = new Vector2(x, y);
+					yield return GetCellAtCoord(coords);
 				}
 			}
-
-			return cellsInRadius.ToArray();
 		}
 
 		public TCell GetCellAtWorldPosition(Vector3 position)
@@ -127,7 +129,7 @@
 			catch (MissingMethodException e)
 			{
 				// TODO TF: let user create own action to create new cell
-				throw new System.NotSupportedException("The constructor TCell is not valid. The cell needs a Vector2 coords as first arg and a float cellSize as second arg.");
+				throw new System.NotSupportedException("The constructor TCell is not valid. The constructor needs to be updated.");
 			}
 		}
 		#endregion Methods
