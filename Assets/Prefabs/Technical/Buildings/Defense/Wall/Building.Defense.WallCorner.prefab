@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7258171856972684099}
   - component: {fileID: 5984636632109656817}
   - component: {fileID: 7004378787413141332}
+  - component: {fileID: 2728149883149680789}
   m_Layer: 0
   m_Name: Building.Defense.WallCorner
   m_TagString: Untagged
@@ -55,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 93f56da6c07b91e45a5cffdf5c761f1a, type: 2}
   _team: 1
+  _entityType: 0
 --- !u!114 &-6813697487309791797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +162,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &2728149883149680789
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740395784054915281}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5, y: 0.5, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &4005607301400923076
 PrefabInstance:
   m_ObjectHideFlags: 0

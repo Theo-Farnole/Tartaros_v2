@@ -22,8 +22,6 @@
 		{
 			base.OnEnter();
 
-			Debug.Log("MoveDestination");
-
 			_entityMovement.StopMovement();
 			_entityMovement.MoveToPoint(_targetDestination);
 

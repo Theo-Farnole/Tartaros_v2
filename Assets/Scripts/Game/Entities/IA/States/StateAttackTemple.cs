@@ -19,13 +19,8 @@
 		{
 			base.OnStateEnter();
 
-			NavMeshHit hit;
-			Vector3 position = _templePosition;
-			if (NavMesh.SamplePosition(_templePosition, out hit, 16, NavMesh.AllAreas))
-			{
-				position = hit.position;
-			}
-
+			var position = NavMeshHelper.AdjustPositionToFitNavMesh(_templePosition);
+			Debug.Log(position);
 
 			_goal = new DestroyTempleMainGoal(_stateOwner, position);
 

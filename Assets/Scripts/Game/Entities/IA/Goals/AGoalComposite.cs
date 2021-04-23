@@ -37,7 +37,6 @@
 
 				if (currentSubGoal.IsCompleted() == true)
 				{
-					Debug.Log(_subGoal.Count);
 					currentSubGoal.OnExit();
 					_subGoal.Pop();
 

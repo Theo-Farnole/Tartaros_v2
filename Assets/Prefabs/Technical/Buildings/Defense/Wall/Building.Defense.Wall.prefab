@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6073263459150086886}
   - component: {fileID: 3556129785545932030}
   - component: {fileID: 1114249956890718782}
+  - component: {fileID: 1436077689975309611}
   m_Layer: 0
   m_Name: Building.Defense.Wall
   m_TagString: Untagged
@@ -55,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 93f56da6c07b91e45a5cffdf5c761f1a, type: 2}
   _team: 1
+  _entityType: 1
 --- !u!114 &3616846463437891640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +162,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &1436077689975309611
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810600384853675113}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 0.5, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1035043831809296912
 PrefabInstance:
   m_ObjectHideFlags: 0

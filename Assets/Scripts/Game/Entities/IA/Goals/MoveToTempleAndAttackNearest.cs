@@ -13,7 +13,6 @@
 		public MoveToTempleAndAttackNearest(Entity goalOwner, Vector3 templePosition) : base(goalOwner)
 		{
 			_templePosition = templePosition;
-
 			_entityDetection = goalOwner.GetComponent<EntityDetection>();
 		}
 
@@ -39,6 +38,8 @@
 		private void TryClearPath()
 		{
 			bool isDestroyAlreadyEnable = GetSubGoals().Count > 1;
+
+			Debug.Log(_entityDetection.GetEveryOpponentInRange().Length);
 			
 			if(_entityDetection.IsNearestOpponentInDetectionRange() == true && isDestroyAlreadyEnable == false)
 			{
@@ -70,7 +71,7 @@
 
 		private void AddDestroySubGoal(IAttackable target)
 		{
-			base.AddSubGoal(new DestroyTargetGoal(_goalOwner, target, 5));
+			base.AddSubGoal(new DestroyTarget(_goalOwner, target, 5));
 		}
 
 		private bool IsDetectionIsPriority()

@@ -15,9 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 6298112130364849783, guid: 992dfbd2dcd34d5439d763dfa0125e74, type: 3}
-    - {fileID: 4004279344480064026, guid: 6a623a0eee17c9a44a0d4e1d8281d326, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -37,21 +35,12 @@ MonoBehaviour:
       Data: 1
     - Name: _attackRange
       Entry: 4
-      Data: 2
+      Data: 4
     - Name: _attackMode
       Entry: 7
-      Data: 2|Tartaros.Entities.Attack.RangeAttackMode, Tartaros
-    - Name: _prefabProjectile
-      Entry: 10
-      Data: 0
+      Data: 2|Tartaros.Entities.Attack.MeleeAttackMode, Tartaros
     - Name: _vfxPrefab
-      Entry: 7
-      Data: 3|Tartaros.Entities.Attack.SingleEffect, Tartaros
-    - Name: _vfxPrefab
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: _damage
       Entry: 3
@@ -64,7 +53,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Tartaros.Entities.EntityHealthData, Tartaros
+      Data: 3|Tartaros.Entities.EntityHealthData, Tartaros
     - Name: _health
       Entry: 3
       Data: 10
@@ -79,7 +68,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Tartaros.Entities.EntityMovementData, Tartaros
+      Data: 4|Tartaros.Entities.EntityMovementData, Tartaros
     - Name: _speed
       Entry: 4
       Data: 1
@@ -91,7 +80,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
+      Data: 5|Tartaros.Entities.Detection.EntityDetectionData, Tartaros
     - Name: _detectionRange
       Entry: 4
       Data: 5
@@ -100,7 +89,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|Tartaros.Entities.EntityGloryIncomeData, Tartaros
+      Data: 6|Tartaros.Entities.EntityGloryIncomeData, Tartaros
     - Name: _gloryIncome
       Entry: 3
       Data: 7
