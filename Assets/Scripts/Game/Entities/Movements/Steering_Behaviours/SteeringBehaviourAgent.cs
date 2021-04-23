@@ -10,7 +10,7 @@
 	using UnityEngine.AI;
 
 	[SelectionBase]
-	public partial class SteeringBehaviourAgent : MonoBehaviour, ISteeringBehaviourAgent
+	public partial class SteeringBehaviourAgent : MonoBehaviour, ISpatialPartioningObject
 	{
 		#region Fields
 		private const string EDITOR_GROUP_SECURITY = "SECURITIES";
@@ -75,12 +75,12 @@
 			}
 		}
 
-		Vector2 ISteeringBehaviourAgent.Position { get => transform.position.GetVector2FromXZ(); set => transform.position = value.ToXZ(); }
-		float ISteeringBehaviourAgent.Radius => _radius;
+		public Vector2 CoordsPosition { get => _cachedTransform.position.GetVector2FromXZ(); set => _cachedTransform.position = value.ToXZ(); }
+		public float Radius => _radius;
 
-		Vector2 ISteeringBehaviourAgent.Heading => transform.forward.GetVector2FromXZ();
+		public Vector2 Heading => _cachedTransform.forward.GetVector2FromXZ();
 
-		Vector3 ISpatialPartioningObject.WorldPosition { get => _cachedTransform.position; set => transform.position = value; }
+		Vector3 ISpatialPartioningObject.WorldPosition { get => _cachedTransform.position; set => _cachedTransform.position = value; }
 		#endregion Properties
 
 		#region Methods
@@ -168,28 +168,27 @@
 
 		[Button]
 		[ShowInRuntime]
-		private IEnumerable<ISteeringBehaviourAgent> GetNeighbors()
+		private IEnumerable<SteeringBehaviourAgent> GetNeighbors()
 		{
 			return SteeringBehaviourAgentsDetector.GetNeighbors(transform.position, _radius);
-			//return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius).Where(x => x != this as ISteeringBehaviourAgent).ToArray();
+			//return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius).Where(x => x != this as SteeringBehaviourAgent).ToArray();
 		}
 
 		private void EnforceNonPenetrationConstraint()
 		{
-			ISteeringBehaviourAgent self = (this as ISteeringBehaviourAgent);
+			throw new System.NotImplementedException();
+			//foreach (var neighbor in GetNeighbors())
+			//{
+			//	var directionToNeighbor = CoordsPosition - neighbor.CoordsPosition;
+			//	float distanceToNeighbor = directionToNeighbor.magnitude;
 
-			foreach (var neighbor in GetNeighbors())
-			{
-				var directionToNeighbor = self.Position - neighbor.Position;
-				float distanceToNeighbor = directionToNeighbor.magnitude;
+			//	float amountOfOverlap = _radius + neighbor.Radius - distanceToNeighbor;
 
-				float amountOfOverlap = self.Radius + neighbor.Radius - distanceToNeighbor;
-
-				if (amountOfOverlap >= 0)
-				{
-					self.Position = self.Position + directionToNeighbor / distanceToNeighbor * amountOfOverlap;
-				}
-			}
+			//	if (amountOfOverlap >= 0)
+			//	{
+			//		CoordsPosition += directionToNeighbor / distanceToNeighbor * amountOfOverlap;
+			//	}
+			//}
 		}
 
 		private void SetPathToDestination()

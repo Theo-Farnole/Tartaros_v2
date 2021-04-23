@@ -63,8 +63,8 @@
 
 		private Vector2 _position = Vector2.zero;
 		private Vector2 _velocity = Vector2.zero;
-		private ISteeringBehaviourAgent _agent = null;
-		private IEnumerable<ISteeringBehaviourAgent> _neighbors = null;
+		private SteeringBehaviourAgent _agent = null;
+		private IEnumerable<SteeringBehaviourAgent> _neighbors = null;
 
 		private Path _path = null;
 		private float _maxSpeed = -1;
@@ -76,13 +76,13 @@
 		#endregion Properties
 
 		#region Methods
-		public void Construct(ISteeringBehaviourAgent agent, float maxSpeed)
+		public void Construct(SteeringBehaviourAgent agent, float maxSpeed)
 		{
 			_maxSpeed = MaxSpeed;
 			_agent = agent;
 		}
 
-		public Vector2 CalculateVelocity(Vector2 targetPosition, Vector2 agentPosition, Vector2 agentVelocity, IEnumerable<ISteeringBehaviourAgent> neightbors)
+		public Vector2 CalculateVelocity(Vector2 targetPosition, Vector2 agentPosition, Vector2 agentVelocity, IEnumerable<SteeringBehaviourAgent> neightbors)
 		{
 			_position = agentPosition;
 			_velocity = agentVelocity;
@@ -265,7 +265,7 @@
 			{
 				if (neighbor != _agent)
 				{
-					Vector2 directionToAgent = _position - neighbor.Position;
+					Vector2 directionToAgent = _position - neighbor.CoordsPosition;
 					steeringForce += directionToAgent.normalized / directionToAgent.magnitude;
 				}
 			}
