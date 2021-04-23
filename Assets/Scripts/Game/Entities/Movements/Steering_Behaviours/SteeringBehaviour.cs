@@ -41,6 +41,9 @@
 		[SerializeField]
 		private float _maxForce = 200;
 
+		[SerializeField]
+		private int _neighborsCaps = 15;
+
 		[FoldoutGroup("Priorities")]
 		[SerializeField]
 		private float _separationWeight = 1;
@@ -261,13 +264,22 @@
 		{
 			Vector2 steeringForce = Vector2.zero;
 
+			int i = 0;
+
 			foreach (var neighbor in _neighbors)
 			{
+				if (i > _neighborsCaps)
+				{
+					break;
+				}
+
 				if (neighbor != _agent)
 				{
 					Vector2 directionToAgent = _position - neighbor.CoordsPosition;
 					steeringForce += directionToAgent.normalized / directionToAgent.magnitude;
 				}
+
+				i++;
 			}
 
 			return steeringForce;

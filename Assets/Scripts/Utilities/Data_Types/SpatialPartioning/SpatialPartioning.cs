@@ -104,7 +104,7 @@
 
 			foreach (var cell in _cellsGrid.GetCellsInRadius(position, radius))
 			{
-				foreach (var element in cell.GetElementsInRadius(coords, radius))
+				foreach (var element in cell.EnumerateElementsInRadius(coords, radius))
 				{
 					yield return element;
 				}

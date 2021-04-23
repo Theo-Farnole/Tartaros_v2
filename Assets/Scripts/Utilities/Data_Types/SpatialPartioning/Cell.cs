@@ -63,7 +63,7 @@
 			}
 		}
 
-		public IEnumerable<T> GetElementsInRadiusEnumerator(Vector2 coords, float radius)
+		public IEnumerable<T> EnumerateElementsInRadius(Vector2 coords, float radius)
 		{
 			if (IsCellCompletelyInRadius(coords, radius) == true)
 			{
