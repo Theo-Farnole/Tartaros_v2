@@ -61,6 +61,7 @@
 		private Vector2 _destination = Vector2.zero;
 
 		private Transform _cachedTransform = null;
+		private Vector2 _coords = Vector2.zero;
 		#endregion Fields
 
 		#region Properties
@@ -75,18 +76,28 @@
 			}
 		}
 
-		public Vector2 CoordsPosition { get => _cachedTransform.position.GetVector2FromXZ(); set => _cachedTransform.position = value.ToXZ(); }
+		public Vector2 CoordsPosition { get => _coords; /*set => _cachedTransform.position = value.ToXZ();*/ }
 		public float Radius => _radius;
 
 		public Vector2 Heading => _cachedTransform.forward.GetVector2FromXZ();
 
-		Vector3 ISpatialPartioningObject.WorldPosition { get => _cachedTransform.position; set => _cachedTransform.position = value; }
+		Vector3 ISpatialPartioningObject.WorldPosition
+		{
+			get => _cachedTransform.position;
+
+			set
+			{
+				_cachedTransform.position = value;
+				SetCoordsFromWorldPosition();
+			}
+		}
 		#endregion Properties
 
 		#region Methods
 		void Awake()
 		{
 			_cachedTransform = transform;
+			SetCoordsFromWorldPosition();
 		}
 
 		private void Update()
@@ -139,6 +150,11 @@
 					SetPathToDestination();
 				}
 			}
+		}
+
+		private void SetCoordsFromWorldPosition()
+		{
+			_coords = _cachedTransform.position.GetVector2FromXZ();
 		}
 
 		private void UpdateVelocity()
