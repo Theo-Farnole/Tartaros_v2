@@ -19,8 +19,11 @@
 		{
 			base.OnStateEnter();
 
+
+
 			var position = NavMeshHelper.AdjustPositionToFitNavMesh(_templePosition);
-			Debug.Log(position);
+
+			
 
 			_goal = new DestroyTempleMainGoal(_stateOwner, position);
 

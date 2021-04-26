@@ -75,7 +75,7 @@
 
 		public bool IsInRange(IAttackable target)
 		{
-			return _entityDetection.IsInAttackRange(target.Transform.position);
+			return _entityDetection.IsInAttackRange(target);
 		}
 
 		public bool CanAttackCooldown()

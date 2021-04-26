@@ -56,6 +56,8 @@
 		int IHealthable.CurrentHealth => Mathf.RoundToInt(_currentHealth);
 
 		int IHealthable.MaxHealth => MaxHealth;
+
+		float IAttackable.SizeRadius => _entityHealthData.SizeRadius;
 		#endregion Properties
 
 		#region Events

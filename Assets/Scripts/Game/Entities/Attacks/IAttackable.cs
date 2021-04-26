@@ -9,5 +9,7 @@
 		void TakeDamage(int damage);
 
 		Transform Transform { get; }
+
+		float SizeRadius { get; }
 	}
 }

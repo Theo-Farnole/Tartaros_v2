@@ -170,18 +170,30 @@
 		{
 			if (AttackRange == -1) Debug.LogWarningFormat("EntityDetection has not attack range. Calling IsInAttackRange requires a EntityAttack component.");
 
-
 			float distance = Vector3.Distance(transform.position, point);
 
 			return distance <= AttackRange;
 		}
 
-		public Entity[] GetEveryOpponentInRange()
+		public bool IsInAttackRange(IAttackable target)
 		{
-			return _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange);
+			float distance = Vector3.Distance(transform.position, target.Transform.position);
+			float targetRadius = target.SizeRadius;
+
+			return _entitiesKDTrees.IsTheTwoRadiusAreOverlapping(DetectionRange, targetRadius, distance);
 		}
 
-		[Obsolete("This function doesn't work.")]
+		public Entity[] GetEveryOpponentInRange()
+		{
+			foreach (var entity in _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange))
+			{
+				Vector3 direction = transform.position - entity.gameObject.transform.position;
+
+				Debug.DrawRay(transform.position, -direction, Color.cyan);
+			}
+			return _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange);
+		}
+		
 		private IEnumerable<Entity> GetOpponentsOrderByDistance()
 		{
 			IEnumerable<Entity> enumerable = _entitiesKDTrees.FindClose(OpponentTeam, transform.position);

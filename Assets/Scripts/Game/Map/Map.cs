@@ -70,7 +70,7 @@
 				}
 			}
 
-			Debug.LogFormat("No sector found at position {0}", position);
+			//Debug.LogFormat("No sector found at position {0}", position);
 			return null;
 		}
 

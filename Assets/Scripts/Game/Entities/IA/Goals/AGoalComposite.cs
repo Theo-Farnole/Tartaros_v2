@@ -45,7 +45,6 @@
 						var newSubGoal = _subGoal.Peek();
 						newSubGoal.OnEnter();
 						currentSubGoal = newSubGoal;
-						Debug.Log(newSubGoal);
 					}
 				}
 
