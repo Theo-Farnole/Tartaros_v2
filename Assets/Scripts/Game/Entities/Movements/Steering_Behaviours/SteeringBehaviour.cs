@@ -85,6 +85,9 @@
 			_agent = agent;
 		}
 
+		public void EnablePathFollowing() => EnableBehaviour(Behaviours.PathFollowing);
+		public void DisablePathFollowing() => DisableBehaviour(Behaviours.PathFollowing);
+
 		public Vector2 CalculateVelocity(Vector2 targetPosition, Vector2 agentPosition, Vector2 agentVelocity, IEnumerable<SteeringBehaviourAgent> neightbors)
 		{
 			_position = agentPosition;
@@ -139,6 +142,7 @@
 			return velocity;
 		}
 
+
 		private bool AccumulateForce(ref Vector2 currentSteeringBehaviour, Vector2 forceToAdd)
 		{
 			float currentMagnitude = currentSteeringBehaviour.magnitude;
@@ -165,9 +169,6 @@
 		{
 			return _enabledBehaviours.HasFlag(behaviour);
 		}
-
-		public void EnablePathFollowing() => EnableBehaviour(Behaviours.PathFollowing);
-		public void DisablePathFollowing() => DisableBehaviour(Behaviours.PathFollowing);
 
 		private void EnableBehaviour(Behaviours behaviour)
 		{
@@ -241,24 +242,6 @@
 
 			return Vector2.zero;
 		}
-
-		//[BurstCompile(CompileSynchronously = true)]
-		//public struct SeparationJob : IJobParallelFor
-		//{
-		//	[WriteOnly]
-		//	public float2 steeringForce;
-		//	[Unity.Collections.ReadOnly]
-		//	public float2 agentPosition;
-
-		//	[Unity.Collections.ReadOnly]
-		//	public NativeArray<float2> neighborsPositions;
-
-		//	public void Execute(int index)
-		//	{
-		//		float2 directionToAgent = agentPosition - neighborsPositions[index];
-		//		steeringForce += math.normalize(directionToAgent) / math.length(directionToAgent);
-		//	}
-		//}
 
 		private Vector2 Separation()
 		{

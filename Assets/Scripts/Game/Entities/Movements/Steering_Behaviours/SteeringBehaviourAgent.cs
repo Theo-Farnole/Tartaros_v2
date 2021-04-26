@@ -187,24 +187,11 @@
 		private IEnumerable<SteeringBehaviourAgent> GetNeighbors()
 		{
 			return SteeringBehaviourAgentsDetector.GetNeighbors(transform.position, _radius);
-			//return SteeringBehaviourAgentsDetector.GetAgentsInRadius(transform.position, _radius).Where(x => x != this as SteeringBehaviourAgent).ToArray();
 		}
 
 		private void EnforceNonPenetrationConstraint()
 		{
 			throw new System.NotImplementedException();
-			//foreach (var neighbor in GetNeighbors())
-			//{
-			//	var directionToNeighbor = CoordsPosition - neighbor.CoordsPosition;
-			//	float distanceToNeighbor = directionToNeighbor.magnitude;
-
-			//	float amountOfOverlap = _radius + neighbor.Radius - distanceToNeighbor;
-
-			//	if (amountOfOverlap >= 0)
-			//	{
-			//		CoordsPosition += directionToNeighbor / distanceToNeighbor * amountOfOverlap;
-			//	}
-			//}
 		}
 
 		private void SetPathToDestination()
