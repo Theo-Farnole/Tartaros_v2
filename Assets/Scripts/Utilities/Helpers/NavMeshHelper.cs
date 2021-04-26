@@ -26,7 +26,7 @@
 
 			navAgent.CalculatePath(point, navMeshPath);
 
-			if (navMeshPath.status == NavMeshPathStatus.PathComplete)
+			if (navMeshPath.status == NavMeshPathStatus.PathComplete || navMeshPath.status == NavMeshPathStatus.PathPartial)
 			{
 				return true;
 			}

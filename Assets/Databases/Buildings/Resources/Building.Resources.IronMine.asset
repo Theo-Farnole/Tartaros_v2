@@ -57,6 +57,9 @@ MonoBehaviour:
     - Name: _regenerationDelayWithoutTakingDamage
       Entry: 4
       Data: 0
+    - Name: _sizeRadius
+      Entry: 4
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -72,22 +75,10 @@ MonoBehaviour:
     - Name: _gameplayPrefab
       Entry: 10
       Data: 2
-    - Name: _wallLModel
+    - Name: _wallCornerModel
       Entry: 6
       Data: 
-    - Name: _wallLGameplay
-      Entry: 6
-      Data: 
-    - Name: _wallTModel
-      Entry: 6
-      Data: 
-    - Name: _wallTGameplay
-      Entry: 6
-      Data: 
-    - Name: _wallXModel
-      Entry: 6
-      Data: 
-    - Name: _wallXGameplay
+    - Name: _wallCornerGameplay
       Entry: 6
       Data: 
     - Name: _constructionKitModel

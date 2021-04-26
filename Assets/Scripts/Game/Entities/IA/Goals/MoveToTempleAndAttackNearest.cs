@@ -39,7 +39,7 @@
 		{
 			bool isDestroyAlreadyEnable = GetSubGoals().Count > 1;
 
-			Debug.Log(_entityDetection.GetEveryOpponentInRange().Length);
+			//Debug.Log(GetSubGoals().Peek());
 			
 			if(_entityDetection.IsNearestOpponentInDetectionRange() == true && isDestroyAlreadyEnable == false)
 			{
@@ -50,10 +50,16 @@
 					if(target.EntityType == EntityType.Unit)
 					{
 						AddOnSubGoal(target);
+						return;
 					}
-					else if (target.EntityType == EntityType.Building)
+				}
+
+				foreach (var target in targets)
+				{
+					if (target.EntityType == EntityType.Building)
 					{
 						AddOnSubGoal(target);
+						return;
 					}
 				}
 			}

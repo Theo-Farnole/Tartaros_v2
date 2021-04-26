@@ -28,12 +28,12 @@
         private void Awake()
         {
             _spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
+            _targetPosition = FindObjectOfType<WavesEnemiesTarget>().gameObject.transform;
         }
 
         private void Start()
         {
             _rootTransform = _miniMap.RootTransform;
-            _targetPosition = FindObjectOfType<WavesEnemiesTarget>().gameObject.transform;
         }
 
         public void DrawPathNavigation()
@@ -102,6 +102,7 @@
 
                 NavMeshHit hit;
                 Vector3 position = Vector3.zero;
+                Debug.Log(_targetPosition);
                 if (NavMesh.SamplePosition(_targetPosition.position, out hit, 50, NavMesh.AllAreas))
                 {
                     position = hit.position;

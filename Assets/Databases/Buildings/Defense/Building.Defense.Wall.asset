@@ -20,7 +20,6 @@ MonoBehaviour:
     - {fileID: 5810600384853675113, guid: f63531dd88f368e48a1de23a7d34113e, type: 3}
     - {fileID: 5810600384853675113, guid: 096b7ee2b2c442c4db9b1e2286049ca8, type: 3}
     - {fileID: 4740395784054915281, guid: 143e5414af54bac419f653d75411d433, type: 3}
-    - {fileID: 4740395784054915281, guid: 0570774ac9410f54eb861cb51c898dba, type: 3}
     - {fileID: 4740395784054915281, guid: cac3677ec5163d74882eb8dff95a91e6, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -48,6 +47,9 @@ MonoBehaviour:
     - Name: _regenerationDelayWithoutTakingDamage
       Entry: 4
       Data: 0
+    - Name: _sizeRadius
+      Entry: 4
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -67,8 +69,8 @@ MonoBehaviour:
       Entry: 10
       Data: 3
     - Name: _wallCornerGameplay
-      Entry: 10
-      Data: 4
+      Entry: 6
+      Data: 
     - Name: _constructionKitModel
       Entry: 6
       Data: 
@@ -187,7 +189,7 @@ MonoBehaviour:
       Data: 8|Tartaros.Entities.EntityWallToGateData, Tartaros
     - Name: _gatePrefab
       Entry: 10
-      Data: 5
+      Data: 4
     - Name: _gatePrice
       Entry: 7
       Data: 9|Tartaros.Economy.SectorResourcesWallet, Tartaros

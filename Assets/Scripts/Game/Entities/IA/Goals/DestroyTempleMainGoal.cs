@@ -10,7 +10,7 @@
 		private Vector3 _templePosition = Vector3.zero;
 		private AGoalComposite _currentMoveToTemple = null;
 		private EntityDetection _entityDetection = null;
-		
+
 		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition) : base(goalOwner)
 		{
 			_templePosition = templePosition;
@@ -28,14 +28,21 @@
 		{
 			base.OnUpdate();
 
-			var currentSubGoal = GetSubGoals().Peek();
-
-			if (currentSubGoal == _currentMoveToTemple)
+			if (GetSubGoals().Count != 0)
 			{
-				if (currentSubGoal.IsCompleted() == true)
+				var currentSubGoal = GetSubGoals().Peek();
+
+				if (currentSubGoal == _currentMoveToTemple)
 				{
-					ReachPosition();
+					if (currentSubGoal.IsCompleted() == true)
+					{
+						ReachPosition();
+					}
 				}
+			}
+			else
+			{
+				ReachPosition();
 			}
 		}
 
@@ -48,7 +55,7 @@
 		{
 			_currentMoveToTemple = null;
 
-			if(FinalDestinationIsReach() == true)
+			if (FinalDestinationIsReach() == true)
 			{
 				DestroyObstacle();
 			}
@@ -56,7 +63,8 @@
 			{
 				if (IsThePathPatrial() == true)
 				{
-					AddClearPath();
+					//AddClearPath();
+					AddMoveToTemple();
 				}
 				else
 				{
@@ -67,11 +75,11 @@
 
 		private bool IsThePathPatrial()
 		{
-			if(NavMeshHelper.GetNavPathStatus(_goalOwner.transform.position, _templePosition) == NavMeshPathStatus.PathPartial)
+			if (NavMeshHelper.GetNavPathStatus(_goalOwner.transform.position, _templePosition) == NavMeshPathStatus.PathPartial)
 			{
 				return true;
 			}
-			else if(NavMeshHelper.GetNavPathStatus(_goalOwner.transform.position, _templePosition) == NavMeshPathStatus.PathComplete)
+			else if (NavMeshHelper.GetNavPathStatus(_goalOwner.transform.position, _templePosition) == NavMeshPathStatus.PathComplete)
 			{
 				return false;
 			}
@@ -84,12 +92,16 @@
 
 		private void AddClearPath()
 		{
+			Debug.Log("ClearPathEnable");
 			base.AddSubGoal(new ClearPath(_goalOwner));
 		}
 
 		private void AddMoveToTemple()
 		{
-			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, _templePosition);
+			Debug.Log("MoveToTempleEnable");
+			Vector3 targetPosition = GoalPosition();
+
+			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, targetPosition);
 
 			base.AddSubGoal(_currentMoveToTemple);
 		}
@@ -106,6 +118,7 @@
 			if (_entityDetection.GetNearestOpponentBuilding() != null)
 			{
 				var target = _entityDetection.GetNearestOpponentBuilding();
+				Debug.Log(target);
 
 				AddOnSubGoal(target);
 			}
@@ -118,6 +131,11 @@
 
 			AddDestroySubGoal(targetAttackable);
 
+		}
+
+		private Vector3 GoalPosition()
+		{
+			return NavMeshHelper.lastPositionOnPartialNavMesh(_goalOwner.transform.position, _templePosition);
 		}
 
 		private void AddDestroySubGoal(IAttackable target)

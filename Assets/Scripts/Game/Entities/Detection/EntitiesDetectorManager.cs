@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using Tartaros.Entities.Health;
 	using UnityEngine;
 
 	public class EntitiesDetectorManager : MonoBehaviour
@@ -49,7 +50,7 @@
 		}
 
 		public Entity FindClosest(Team entityTeamToGet, Vector3 position) => _kdTrees[entityTeamToGet].FindClosest(position);
-		public IEnumerable<Entity> FindClose(Team entityTeamToGet, Vector3 position) => _kdTrees[entityTeamToGet].FindClose(position);
+		public IEnumerable<Entity> FindClose(Team entityTeamToGet, Vector3 position) => FindAllEntitiesOfTeam(entityTeamToGet).OrderBy(entity => Vector3.Distance(position, entity.transform.position));
 
 		private void AddEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].Add(entity);
 		private void RemoveEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].RemoveAll(x => x == entity);
@@ -62,13 +63,33 @@
 
 			foreach (Entity entity in entitiesOfTeam)
 			{
-				if (Vector3.Distance(position, entity.transform.position) <= radius)
+				
+				
+
+				float distance = Vector3.Distance(position, entity.transform.position);
+				float targetRadius = entity.GetComponent<IAttackable>().SizeRadius;
+
+				if(IsTheTwoRadiusAreOverlapping(radius, targetRadius, distance))
 				{
 					output.Add(entity);
 				}
+
+				//if (Vector3.Distance(position, entity.transform.position) <= radius)
+				//{
+				//	output.Add(entity);
+				//}
 			}
 
 			return output.ToArray();
+		}
+
+		
+
+		public bool IsTheTwoRadiusAreOverlapping(float entityRadius, float targetRadius, float distance)
+		{
+			var radius = entityRadius + targetRadius;
+
+			return radius >= distance; 
 		}
 
 		public Entity[] FindAllEntitiesOfTeam(Team team)
