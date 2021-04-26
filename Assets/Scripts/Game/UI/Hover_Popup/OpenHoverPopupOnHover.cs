@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.UI.HoverPopup
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
@@ -7,7 +8,11 @@
 	public class OpenHoverPopupOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		#region Fields
-		private HoverPopupData _hoverPopupData = null;
+		[SerializeField]
+		[SuffixLabel("optional")]
+		private HoverPopupDataSO _toShowDataAsset = null;
+
+		private HoverPopupData _toShowData = null;
 		private HoverPopupManager _hoverPopup = null;
 		#endregion Fields
 
@@ -15,16 +20,17 @@
 		void Awake()
 		{
 			_hoverPopup = Services.Instance.Get<HoverPopupManager>();
+			_toShowData = _toShowDataAsset.HoverPopupData;
 		}
 
 		void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
 		{
-			_hoverPopup.Show(_hoverPopupData, transform.position);
+			_hoverPopup.Show(_toShowData, transform.position);
 		}
 
 		void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
 		{
-			if (_hoverPopup.HoverPopupData == _hoverPopupData)
+			if (_hoverPopup.HoverPopupData == _toShowData)
 			{
 				_hoverPopup.Hide();
 			}

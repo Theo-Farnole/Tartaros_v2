@@ -1,8 +1,11 @@
 ﻿namespace Tartaros.UI.HoverPopup
 {
+	using Sirenix.OdinInspector;
+	using Sirenix.Serialization;
 	using Tartaros.Economy;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class HoverPopupData
 	{
 		#region Fields
@@ -14,7 +17,7 @@
 		[SerializeField]
 		private string _description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
 
-		[SerializeField]
+		[OdinSerialize]
 		private ISectorResourcesWallet _sectorResourcesCost = null;
 
 		[SerializeField]
@@ -24,13 +27,24 @@
 		private float _cooldown = 0;
 
 		[SerializeField]
+		private bool _hasHotkey = false;
+
+		[ShowIf(nameof(_hasHotkey))]
+		[SerializeField]
 		private KeyCode _hotkey = KeyCode.A;
 		#endregion Fields
 
 		#region Properties
+		[ShowInInspector]
+		public bool HasName => !string.IsNullOrEmpty(_name);
 		public string Name => _name;
+		[ShowInInspector]
+		public bool HasDescription => !string.IsNullOrEmpty(_description);
 		public string Description => _description;
+		[ShowInInspector]
+		public bool HasCooldown => _cooldown != 0;
 		public string Cooldown => string.Format(COOLDOWN_FORMAT, _cooldown);
+		[ShowInInspector]
 		public bool HasCost => HasFavorCost || HasSectorResourcesCost;
 		public string Cost
 		{
@@ -50,6 +64,8 @@
 				}
 			}
 		}
+
+		public bool HasHotkey => _hasHotkey;
 		public string Hotkey => _hotkey.ToString();
 
 		private bool HasFavorCost => _favorCost != 0;

@@ -774,6 +774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5494600410755793446}
+  - component: {fileID: 5859500094825571028}
   - component: {fileID: 5494600410755793447}
   m_Layer: 5
   m_Name: UI.Resource
@@ -805,6 +806,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 313.6, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5859500094825571028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494600410755793441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b922dc05fd289541937481c49b4a310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _hoverPopupData
+      Entry: 7
+      Data: 0|Tartaros.ValueReference`2[[Tartaros.UI.HoverPopup.HoverPopupData, Tartaros],[Tartaros.UI.HoverPopup.HoverPopupDataSO,
+        Tartaros]], Tartaros.Utilities
+    - Name: value
+      Entry: 7
+      Data: 1|Tartaros.UI.HoverPopup.HoverPopupData, Tartaros
+    - Name: _name
+      Entry: 1
+      Data: Lorem ipsum
+    - Name: _description
+      Entry: 1
+      Data: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    - Name: _sectorResourcesCost
+      Entry: 6
+      Data: 
+    - Name: _favorCost
+      Entry: 3
+      Data: 0
+    - Name: _cooldown
+      Entry: 4
+      Data: 0
+    - Name: _hotkey
+      Entry: 3
+      Data: 97
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: assetReferenceField
+      Entry: 6
+      Data: 
+    - Name: assetReferenceView
+      Entry: 6
+      Data: 
+    - Name: useValue
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &5494600410755793447
 MonoBehaviour:
   m_ObjectHideFlags: 0

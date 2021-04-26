@@ -491,7 +491,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.05
+  m_fontSize: 17.7
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -568,7 +568,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 185.74, y: 100}
+  m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2529656037787183727
 GameObject:
@@ -1954,17 +1954,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2d010a0000005f00730065006c0065006300740069006f006e00
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _selection
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   _margin:
     m_Left: 20
     m_Right: 0
@@ -2229,17 +2226,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2d010b0000005f006800650061006c0074006800610062006c006500
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _healthable
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   _radialHealth: {fileID: 2529656039548724240}
   _cursor: {fileID: 2529656039505977157}
 --- !u!1 &2529656038183464383
@@ -10358,7 +10352,7 @@ GameObject:
   - component: {fileID: 3255083116768252729}
   - component: {fileID: 3733671657705949193}
   m_Layer: 0
-  m_Name: Lor
+  m_Name: Lore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10437,7 +10431,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.75
+  m_fontSize: 22.45
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10841,10 +10835,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 2387208934857487949}
-  _name: {fileID: 0}
-  _description: {fileID: 0}
-  _costLabel: {fileID: 0}
-  _cooldownLabel: {fileID: 0}
+  _name: {fileID: 8067462301575752286}
+  _description: {fileID: 6597686184945123974}
+  _costLabel: {fileID: 4463023142888676788}
+  _cooldownLabel: {fileID: 8281585554811615161}
 --- !u!223 &1945738000922983925
 Canvas:
   m_ObjectHideFlags: 0
@@ -11202,6 +11196,12 @@ PrefabInstance:
       propertyPath: _sectorRessourceType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9006568005848097414, guid: bde66afd2366ad7458662c85549af1e2,
+        type: 3}
+      propertyPath: _toShowDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e04cfcdb57b03f4ea845a98e8fecc1a,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde66afd2366ad7458662c85549af1e2, type: 3}
 --- !u!224 &4825458148959195967 stripped
@@ -12280,6 +12280,12 @@ PrefabInstance:
       propertyPath: _sectorRessourceType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9006568005848097414, guid: bde66afd2366ad7458662c85549af1e2,
+        type: 3}
+      propertyPath: _toShowDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 61e691e31444b204eb182204f2e21b61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde66afd2366ad7458662c85549af1e2, type: 3}
 --- !u!224 &4825458148068411715 stripped
@@ -13140,6 +13146,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5859500094825571028, guid: 582d6fea77474da40862287705eab8d0,
+        type: 3}
+      propertyPath: _toShowDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 15213071b79f7e74a9d40923d7ad0c79,
+        type: 2}
     - target: {fileID: 7736665989222359473, guid: 582d6fea77474da40862287705eab8d0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -14300,6 +14312,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9006568005848097414, guid: bde66afd2366ad7458662c85549af1e2,
+        type: 3}
+      propertyPath: _toShowDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ab15da578c2e6843ae472ce71f80014,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde66afd2366ad7458662c85549af1e2, type: 3}
 --- !u!224 &2529656039927595408 stripped
