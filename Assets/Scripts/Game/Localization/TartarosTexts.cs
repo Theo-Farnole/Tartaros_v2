@@ -7,6 +7,7 @@
 		public static string CAPTURE_SECTOR_FREE = "FREE";
 		public static string CAPTURE_SECTOR = "Capture";
 		public static string SECTOR_CAPTURED = "Sector captured";
+		public static string FAVOR = "favor";
 
 
 		public static string GetResourceSectorName(ISector sector)

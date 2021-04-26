@@ -10,6 +10,7 @@
 	using Tartaros.Population;
 	using Tartaros.Power;
 	using Tartaros.Selection;
+	using Tartaros.UI.HoverPopup;
 	using Tartaros.UI.MiniMap;
 	
 	using Tartaros.Wave;
@@ -51,6 +52,7 @@
 			RegisterFromChildren<CurrentSelection>();
 			RegisterFromChildren<IconsDatabase>();
 			RegisterFromChildren<UserErrorsLogger>();
+			RegisterFromHierarchy<HoverPopupManager>();
 		}
 
 		private void RegisterFromHierarchy<T>()
