@@ -16,6 +16,7 @@
 		private EntityMovementData _entityMovementData = null;
 		private NavMeshAgent _navMeshAgent = null;
 		private EntityFSM _entityFSM = null;
+		private int _navMeshArea = -1;
 		#endregion
 
 		#region Properties
@@ -29,6 +30,8 @@
 				_navMeshAgent.speed = _entityMovementData.Speed;
 			}
 		}
+
+		public int NavMeshArea { get => _navMeshAgent.areaMask = _navMeshArea; set => _navMeshAgent.areaMask = value; }
 		#endregion Properties
 
 		#region Events
@@ -48,7 +51,15 @@
 
 			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
 
+			
+
 			//NavMesh.avoidancePredictionTime = Mathf.Infinity; // overclock the nav mesh calculator
+		}
+
+		private void Start()
+		{
+			
+			Debug.Log(_navMeshAgent.areaMask);
 		}
 
 		private void Update()
