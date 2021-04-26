@@ -2,10 +2,13 @@
 {
     public enum SpawnPointIdentifier
     {
-        Delta,
-        Echo,
-        Foxtrot,
-        Golf,
-        Hotel
+        Delta = 3,
+        Echo = 4,
+        Foxtrot = 5,
+        Golf = 6,
+        Hotel = 7,
+        India = 8,
+        Juliette = 9,
+        Kilo = 10
     }
 }

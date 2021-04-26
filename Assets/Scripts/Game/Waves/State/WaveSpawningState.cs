@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Wave
 {
 	using System.Collections;
+	using Tartaros.Entities;
 	using UnityEngine;
 
 	public class WaveSpawningState : AWaveSpawnerState
@@ -110,6 +111,12 @@
 				yield return null; // wait for the entity to configure itself (see Entity.SpawnRequiredComponents)
 
 				IWaveSpawnable waveSpawnable = spawnedEntity.GetComponent<IWaveSpawnable>();
+
+				var entityMovementSpawned = spawnedEntity.GetComponent<EntityMovement>();
+				entityMovementSpawned.NavMeshArea = (int)spawnPoint.Identifier;
+
+				Debug.Log((int)spawnPoint.Identifier);
+
 				waveSpawnable.Attack(_stateOwner.EnemiesTarget);
 				_stillAliveManger.AddEnemyWave(waveSpawnable);
 
