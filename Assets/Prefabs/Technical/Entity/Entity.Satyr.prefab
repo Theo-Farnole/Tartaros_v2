@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 7446995093344909706}
   - component: {fileID: 4914162101903876982}
   - component: {fileID: 3737431887952081801}
+  - component: {fileID: 1511345337627185528}
   m_Layer: 0
   m_Name: Entity.Satyr
   m_TagString: Untagged
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0527f2a60fb19408a6c7a813bc75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileSpawnPoint: {x: 0, y: 1, z: 0}
 --- !u!195 &7346568056699488540
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -237,6 +239,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1511345337627185528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729383663548792512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4970fff959660b343960202d2aab831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeed: 200
+  _decelarationSpeed: 1
+  _stoppingDistance: 0.3
+  _mass: 1
+  _radius: 2
+  _settings:
+    _enabledBehaviours: 4
+    _arrivalDeceleration: 0.9
+    _arrivalDistance: 2
+    _maxForce: 10
+    _neighborsCaps: 15
+    _separationWeight: 1
+    _seekWeight: 1
+    _arriveWeight: 1
+    _alignementWeight: 1
+    _pathFollowingWeight: 3
+  _enforceNonPenetrationConstraint: 0
+  _forceToBeOnNavMesh: 1
+  _recalculatePathIfStuck: 1
 --- !u!1 &8729383665189449600
 GameObject:
   m_ObjectHideFlags: 0

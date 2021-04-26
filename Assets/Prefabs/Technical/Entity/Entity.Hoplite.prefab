@@ -117,6 +117,8 @@ GameObject:
   - component: {fileID: 8375428395443169606}
   - component: {fileID: 5147011089507111393}
   - component: {fileID: 7812716105732699722}
+  - component: {fileID: 2331906748483789305}
+  - component: {fileID: 645269150375088245}
   m_Layer: 0
   m_Name: Entity.Hoplite
   m_TagString: Untagged
@@ -267,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0527f2a60fb19408a6c7a813bc75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileSpawnPoint: {x: 0, y: 1, z: 0}
 --- !u!195 &6761392221939020968
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -327,6 +330,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _canBeMultiSelected: 1
+--- !u!114 &2331906748483789305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321277518661800559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &645269150375088245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321277518661800559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4970fff959660b343960202d2aab831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeed: 200
+  _decelarationSpeed: 1
+  _stoppingDistance: 0.3
+  _mass: 1
+  _radius: 2
+  _settings:
+    _enabledBehaviours: 4
+    _arrivalDeceleration: 0.9
+    _arrivalDistance: 2
+    _maxForce: 10
+    _neighborsCaps: 15
+    _separationWeight: 1
+    _seekWeight: 1
+    _arriveWeight: 1
+    _alignementWeight: 1
+    _pathFollowingWeight: 3
+  _enforceNonPenetrationConstraint: 0
+  _forceToBeOnNavMesh: 1
+  _recalculatePathIfStuck: 1
 --- !u!1001 &7123265987962326151
 PrefabInstance:
   m_ObjectHideFlags: 0

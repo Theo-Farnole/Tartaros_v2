@@ -62,6 +62,7 @@
 
 		private Transform _cachedTransform = null;
 		private Vector2 _coords = Vector2.zero;
+		private bool _isStopped = true;
 		#endregion Fields
 
 		#region Properties
@@ -71,13 +72,16 @@
 
 			set
 			{
+				_isStopped = false;
 				_destination = value;
+				_settings.EnableMoveTo();
 				SetPathToDestination();
 			}
 		}
 
 		public Vector2 CoordsPosition { get => _coords; /*set => _cachedTransform.position = value.ToXZ();*/ }
 		public float Radius => _radius;
+		public bool IsStopped => _isStopped;
 
 		public Vector2 Heading => _cachedTransform.forward.GetVector2FromXZ();
 
@@ -91,6 +95,8 @@
 				SetCoordsFromWorldPosition();
 			}
 		}
+
+		public float MaxSpeed { get => _maxSpeed; set => _maxSpeed = value; }
 		#endregion Properties
 
 		#region Methods
@@ -103,6 +109,11 @@
 		private void Update()
 		{
 			UpdatePosition();
+
+			if (_isStopped == false && DestinationReached() == true)
+			{
+				Stop();
+			}
 		}
 
 		private void OnEnable()
@@ -118,6 +129,20 @@
 		public bool DestinationReached()
 		{
 			return Vector3.Distance(transform.position, Destination.ToXZ()) <= _stoppingDistance;
+		}
+
+		public void Stop()
+		{
+			_isStopped = true;
+			_settings.DisableMoveTo();
+		}
+
+		public NavMeshPath CalculatePath(Vector3 target)
+		{
+			var navMeshPath = new NavMeshPath();
+			NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, navMeshPath);
+
+			return navMeshPath;
 		}
 
 		private void UpdatePosition()
@@ -163,6 +188,8 @@
 
 			Vector2 steeringForce = _settings.CalculateVelocity(Destination, transform.position.GetVector2FromXZ(), _velocity, GetNeighbors());
 
+			Debug.LogFormat("SteeringBehaviourAgent {0} has {1} neighbors.", name, GetNeighbors().Count());
+
 			if (steeringForce != Vector2.zero)
 			{
 				Vector2 acceleration = steeringForce / _mass;
@@ -173,8 +200,13 @@
 			}
 			else
 			{
-				_velocity = Vector3.MoveTowards(_velocity, Vector2.zero, _decelarationSpeed * Time.deltaTime);
+				DecelerateVelocity();
 			}
+		}
+
+		private void DecelerateVelocity()
+		{
+			_velocity = Vector3.MoveTowards(_velocity, Vector2.zero, _decelarationSpeed * Time.deltaTime);
 		}
 
 		private void SetPosition(Vector3 position)
@@ -196,16 +228,8 @@
 
 		private void SetPathToDestination()
 		{
-			if (NavMeshHelper.IsThereANavMeshInScene())
-			{
-				_settings.EnablePathFollowing();
-				_settings.Path = CalculatePathTo(_destination);
-
-			}
-			else
-			{
-				_settings.DisablePathFollowing();
-			}
+			_settings.EnablePathFollowing();
+			_settings.Path = CalculatePathTo(_destination);
 		}
 
 		private void UpdateSteeringBehaviourSettings()
@@ -230,11 +254,10 @@
 
 			if (succesful == false)
 			{
-				Debug.LogError("The entity \"{0}\" cannot get path to {1}. The path has been draw in the inspector in red for 30 seconds");
-				Debug.DrawLine(transform.position, target.ToXZ(), Color.red, 30);
+				string message = string.Format("The entity \"{0}\" cannot get path to {1}. The path has been draw in the inspector in red for 30 seconds", name, target);
 
-				// TODO: better handle this case
-				throw new System.NotSupportedException();
+				Debug.LogError(message);
+				Debug.DrawLine(transform.position, target.ToXZ(), Color.red, 30);
 			}
 
 			List<Vector2> waypoints = new List<Vector2>();

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 9203144602428361529}
   - component: {fileID: 2752916773125657007}
   - component: {fileID: 913978860526421923}
+  - component: {fileID: -8623671426564640962}
   m_Layer: 0
   m_Name: Entity.Archer
   m_TagString: Untagged
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0527f2a60fb19408a6c7a813bc75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpawnPoint: {x: 0, y: 0, z: 0}
+  _projectileSpawnPoint: {x: 1.3294288e+37, y: 7.61e-43, z: 0}
 --- !u!195 &7669539524184917896
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -247,6 +248,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8623671426564640962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812927556283947172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4970fff959660b343960202d2aab831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeed: 200
+  _decelarationSpeed: 1
+  _stoppingDistance: 0.3
+  _mass: 1
+  _radius: 2
+  _settings:
+    _enabledBehaviours: 4
+    _arrivalDeceleration: 0.9
+    _arrivalDistance: 2
+    _maxForce: 10
+    _neighborsCaps: 15
+    _separationWeight: 1
+    _seekWeight: 1
+    _arriveWeight: 1
+    _alignementWeight: 1
+    _pathFollowingWeight: 3
+  _enforceNonPenetrationConstraint: 0
+  _forceToBeOnNavMesh: 1
+  _recalculatePathIfStuck: 1
 --- !u!1 &6812927557317958458
 GameObject:
   m_ObjectHideFlags: 0

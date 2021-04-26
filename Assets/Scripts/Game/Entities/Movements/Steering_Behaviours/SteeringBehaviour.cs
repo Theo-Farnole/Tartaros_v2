@@ -87,6 +87,19 @@
 
 		public void EnablePathFollowing() => EnableBehaviour(Behaviours.PathFollowing);
 		public void DisablePathFollowing() => DisableBehaviour(Behaviours.PathFollowing);
+		public void DisableMoveTo()
+		{
+			DisableBehaviour(Behaviours.Arrive);
+			DisableBehaviour(Behaviours.Seek);
+			DisableBehaviour(Behaviours.PathFollowing);
+		}
+
+		public void EnableMoveTo()
+		{
+			EnableBehaviour(Behaviours.Arrive);
+			EnableBehaviour(Behaviours.Seek);
+			EnableBehaviour(Behaviours.PathFollowing);
+		}
 
 		public Vector2 CalculateVelocity(Vector2 targetPosition, Vector2 agentPosition, Vector2 agentVelocity, IEnumerable<SteeringBehaviourAgent> neightbors)
 		{

@@ -9,12 +9,12 @@
 	using UnityEngine;
 	using UnityEngine.AI;
 
-	[RequireComponent(typeof(NavMeshAgent), typeof(EntityFSM))]
+	[RequireComponent(typeof(SteeringBehaviourAgent), typeof(EntityFSM))]
 	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderable
 	{
 		#region Fields
 		private EntityMovementData _entityMovementData = null;
-		private NavMeshAgent _navMeshAgent = null;
+		private SteeringBehaviourAgent _steeringBehaviourAgent = null;
 		private EntityFSM _entityFSM = null;
 		#endregion
 
@@ -26,7 +26,7 @@
 			set
 			{
 				_entityMovementData = value;
-				_navMeshAgent.speed = _entityMovementData.Speed;
+				_steeringBehaviourAgent.MaxSpeed = _entityMovementData.Speed;
 			}
 		}
 		#endregion Properties
@@ -43,7 +43,9 @@
 		#region Methods
 		private void Awake()
 		{
-			_navMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
+			DestroyObsoleteComponents();
+
+			_steeringBehaviourAgent = gameObject.GetOrAddComponent<SteeringBehaviourAgent>();
 			_entityFSM = GetComponent<EntityFSM>();
 
 			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
@@ -51,9 +53,17 @@
 			//NavMesh.avoidancePredictionTime = Mathf.Infinity; // overclock the nav mesh calculator
 		}
 
+		private void DestroyObsoleteComponents()
+		{
+			if (gameObject.TryGetComponent(out NavMeshAgent agent))
+			{
+				Destroy(agent);
+			}
+		}
+
 		private void Update()
 		{
-			if (_navMeshAgent.isStopped == false && _navMeshAgent.HasReachedDestination() == true)
+			if (_steeringBehaviourAgent.IsStopped == false && _steeringBehaviourAgent.DestinationReached() == true)
 			{
 				StopMovement();
 				DestinationReached?.Invoke(this, new DestinationReachedArgs());
@@ -64,9 +74,7 @@
 		{
 			point = NavMeshHelper.AdjustPositionToFitNavMesh(point);
 
-			var navMeshPath = new NavMeshPath();
-
-			_navMeshAgent.CalculatePath(point, navMeshPath);
+			NavMeshPath navMeshPath = _steeringBehaviourAgent.CalculatePath(point);
 
 			if (navMeshPath.status == NavMeshPathStatus.PathComplete)
 			{
@@ -84,8 +92,7 @@
 		{
 			if (CanMoveToPoint(point))
 			{
-				_navMeshAgent.isStopped = false;
-				_navMeshAgent.SetDestination(point);
+				_steeringBehaviourAgent.Destination = point.GetVector2FromXZ();
 			}
 			else
 			{
@@ -93,10 +100,9 @@
 			}
 		}
 
-
 		public void StopMovement()
 		{
-			_navMeshAgent.isStopped = true;
+			_steeringBehaviourAgent.Stop();			
 		}
 
 		#region IOrder
