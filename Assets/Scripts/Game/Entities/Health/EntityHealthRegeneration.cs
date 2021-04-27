@@ -3,7 +3,7 @@
 	using System.Collections;
 	using UnityEngine;
 
-	public class EntityHealthRegeneration : MonoBehaviour
+	public class EntityHealthRegeneration : AEntityBehaviour
 	{
 		#region Fields
 		private Coroutine _healthRegenerationCoroutine = null;
@@ -20,6 +20,7 @@
 		private void Awake()
 		{
 			_entityHealth = GetComponent<EntityHealth>();
+			_entityHealthData = Entity.GetBehaviourData<EntityHealthData>();
 		}
 
 		private void OnEnable()
@@ -35,7 +36,7 @@
 
 		private void DamageTaken(object sender, EntityHealth.DamageTakenArgs e)
 		{
-			if (_entityHealth.IsAlive)
+			if (_entityHealth.IsAlive && Entity.Team == Team.Player && Entity.EntityType == EntityType.Unit)
 			{
 				StartRegenerationCoroutine();
 			}
@@ -53,7 +54,7 @@
 
 		void RegenerateHealth()
 		{
-			_entityHealth.CurrentHealth += _entityHealthData.HealthPointsRegenerationPerSeconds;
+			_entityHealth.CurrentHealth += _entityHealthData.HealthPointsRegenerationPerSeconds * Time.deltaTime;
 		}
 
 		IEnumerator RegenerationCoroutine()
