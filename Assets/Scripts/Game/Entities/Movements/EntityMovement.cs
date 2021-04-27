@@ -36,14 +36,19 @@
 			get => _navMeshAgent.areaMask = _navMeshArea;
 			set
 			{
-				int mask = 0;
-				mask += 1 << NavMesh.GetAreaFromName("Walkable");
-				mask += 0 << NavMesh.GetAreaFromName("Not walkable");
-				mask += 1 << NavMesh.GetAreaFromName("Jump");
-				mask += 1 << value;
-				
-				_navMeshAgent.areaMask = mask;
+				SetAreaMask(value);
 			}
+		}
+
+		private void SetAreaMask(int value)
+		{
+			int mask = 0;
+			mask += 1 << NavMesh.GetAreaFromName("Walkable");
+			mask += 0 << NavMesh.GetAreaFromName("Not walkable");
+			mask += 1 << NavMesh.GetAreaFromName("Jump");
+			mask += 1 << value;
+
+			_navMeshAgent.areaMask = mask;
 		}
 		#endregion Properties
 
@@ -63,16 +68,6 @@
 			_entityFSM = GetComponent<EntityFSM>();
 
 			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
-
-			
-
-			//NavMesh.avoidancePredictionTime = Mathf.Infinity; // overclock the nav mesh calculator
-		}
-
-		private void Start()
-		{
-			
-			Debug.Log(_navMeshAgent.areaMask);
 		}
 
 		private void Update()

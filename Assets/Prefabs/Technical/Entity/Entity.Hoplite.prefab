@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 8375428395443169606}
   - component: {fileID: 5147011089507111393}
   - component: {fileID: 7812716105732699722}
+  - component: {fileID: 6006492623173472447}
   m_Layer: 0
   m_Name: Entity.Hoplite
   m_TagString: Untagged
@@ -154,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: ef88a5278bc6e0d469c259828f48c5ad, type: 2}
   _team: 1
+  _entityType: 0
 --- !u!114 &2900519924700786984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0527f2a60fb19408a6c7a813bc75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileSpawnPoint: {x: 0, y: 1, z: 0}
 --- !u!195 &6761392221939020968
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -327,6 +330,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _canBeMultiSelected: 1
+--- !u!114 &6006492623173472447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321277518661800559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da9d06c7675159468e992e785e846b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7123265987962326151
 PrefabInstance:
   m_ObjectHideFlags: 0
