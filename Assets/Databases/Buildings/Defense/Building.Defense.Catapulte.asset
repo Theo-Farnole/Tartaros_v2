@@ -21,6 +21,7 @@ MonoBehaviour:
     - {fileID: 3622053809958350417, guid: 94b35ba774d328646a05a469b22e9ec1, type: 3}
     - {fileID: 3622053809958350417, guid: 0f5fa3744f0a0804fa4b60f206a59651, type: 3}
     - {fileID: 5657609668978460668, guid: af2fa67ba1b380b468b455599eb1c95a, type: 3}
+    - {fileID: 11400000, guid: cc22395aa07b1784daee9503b458c28e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -128,6 +129,9 @@ MonoBehaviour:
     - Name: _constructionKitModel
       Entry: 10
       Data: 4
+    - Name: _hoverPopupData
+      Entry: 10
+      Data: 5
     - Name: _timeToConstruct
       Entry: 3
       Data: 2
@@ -189,7 +193,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 3
-      Data: 0
+      Data: 15
     - Name: 
       Entry: 8
       Data: 

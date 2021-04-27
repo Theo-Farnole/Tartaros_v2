@@ -76,6 +76,22 @@
 
 		private bool HasFavorCost => _favorCost != 0;
 		private bool HasSectorResourcesCost => _sectorResourcesCost != null;
+
+		public ISectorResourcesWallet SectorResourcesCost { get => _sectorResourcesCost; set => _sectorResourcesCost = value; }
 		#endregion Properties
+
+		#region Ctor
+		public HoverPopupData(HoverPopupData hoverPopupData)
+		{
+			_name = hoverPopupData._name;
+			_description = hoverPopupData._description;
+			_loreDescription = hoverPopupData._loreDescription;
+			_sectorResourcesCost = hoverPopupData._sectorResourcesCost;
+			_favorCost = hoverPopupData._favorCost;
+			_cooldown = hoverPopupData._cooldown;
+			_hasHotkey = hoverPopupData._hasHotkey;
+			_hotkey = hoverPopupData._hotkey;
+		}
+		#endregion Ctor
 	}
 }

@@ -2,6 +2,7 @@
 {
 	using Tartaros.Construction;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -41,6 +42,8 @@
 			_toConstructOnClick = toConstructOnClick;
 
 			_buildingPortrait.sprite = _toConstructOnClick.Portrait;
+
+			GetComponent<OpenHoverPopupOnHover>().ToShowData = toConstructOnClick.HoverPopupData;
 		}
 
 		private void OnButtonClick()

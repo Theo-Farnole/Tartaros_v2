@@ -4,6 +4,7 @@
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 	using UnityEngine.AI;
 
@@ -35,6 +36,9 @@
 		private GameObject _constructionKitModel = null;
 
 		[SerializeField]
+		private HoverPopupDataSO _hoverPopupData = null;
+
+		[SerializeField]
 		private int _timeToConstruct = 1;
 
 
@@ -48,7 +52,7 @@
 		private Vector2 _size = Vector2.one;
 
 		[SerializeField]
-		private IConstructionRule[] _rules = new IConstructionRule[0];
+		private IConstructionRule[] _rules = new IConstructionRule[0];		
 		#endregion Fields
 
 		#region Properties
@@ -73,6 +77,17 @@
 		GameObject IConstructable.ConstructionKitModel => _constructionKitModel;
 
 		int IConstructable.TimeToConstruct => _timeToConstruct;
+
+		HoverPopupData IConstructable.HoverPopupData
+		{
+			get
+			{
+				return new HoverPopupData(_hoverPopupData.HoverPopupData)
+				{
+					SectorResourcesCost = _constructionPrice
+				};
+			}
+		}
 		#endregion Properties
 
 		#region Methods

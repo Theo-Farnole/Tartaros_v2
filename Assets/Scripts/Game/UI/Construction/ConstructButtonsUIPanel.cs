@@ -22,12 +22,11 @@
 		private void Awake()
 		{
 			_constructionManager = Services.Instance.Get<ConstructionManager>();
+			_constructionManagerData = _constructionManager.ConstructionManagerData;
 		}
 
 		private void Start()
 		{
-			_constructionManagerData = _constructionManager.ConstructionManagerData;
-
 			BuildUI();
 		}
 

@@ -1,8 +1,9 @@
 ﻿namespace Tartaros.Construction
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.Economy;
 	using Tartaros.UI;
-	using Sirenix.OdinInspector;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class TestClassConstructable : SerializedMonoBehaviour, IConstructable
@@ -35,5 +36,7 @@
 		GameObject IConstructable.ConstructionKitModel => throw new System.NotImplementedException();
 
 		int IConstructable.TimeToConstruct => throw new System.NotImplementedException();
+
+		HoverPopupData IConstructable.HoverPopupData => throw new System.NotImplementedException();
 	}
 }
