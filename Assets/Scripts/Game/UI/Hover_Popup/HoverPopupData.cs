@@ -17,6 +17,9 @@
 		[SerializeField]
 		private string _description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
 
+		[SerializeField]
+		private string _loreDescription = "";
+
 		[OdinSerialize]
 		private ISectorResourcesWallet _sectorResourcesCost = null;
 
@@ -67,6 +70,9 @@
 
 		public bool HasHotkey => _hasHotkey;
 		public string Hotkey => _hotkey.ToString();
+
+		public bool HasLoreDescription => !string.IsNullOrEmpty(_loreDescription);
+		public string LoreDescription => _loreDescription;
 
 		private bool HasFavorCost => _favorCost != 0;
 		private bool HasSectorResourcesCost => _sectorResourcesCost != null;

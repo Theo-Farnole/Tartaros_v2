@@ -16,64 +16,84 @@
 		private TextMeshProUGUI _costLabel = null;
 		[SerializeField]
 		private TextMeshProUGUI _cooldownLabel = null;
+		[SerializeField]
+		private TextMeshProUGUI _loreDescription = null;
+		[SerializeField]
+		private TextMeshProUGUI _hotkey = null;
 
-		private HoverPopupData _displayedHoverPopupData = null;
+		private HoverPopupData _displayedData = null;
 		#endregion Fields
 
 		#region Properties
-		public HoverPopupData HoverPopupData => _displayedHoverPopupData;
+		public HoverPopupData HoverPopupData => _displayedData;
 		#endregion Properties
 
 		#region Methods
-		public void Show(HoverPopupData hoverPopupData, Vector3 hoveredCenterPosition)
+		public void Show(HoverPopupData toDisplayData, Vector3 hoveredCenterPosition)
 		{
+			_displayedData = toDisplayData;
+
 			_root.SetActive(true);
 
-			UpdateName(hoverPopupData);
-			UpdateDescription(hoverPopupData);
-			UpdateCost(hoverPopupData);
-			UpdateCooldown(hoverPopupData);
+			UpdateName();
+			UpdateDescription();
+			UpdateCost();
+			UpdateCooldown();
+			UpdateLoreDescription();
+			UpdateHotkey();
 		}
 
-		private void UpdateCooldown(HoverPopupData hoverPopupData)
+		private void UpdateHotkey()
 		{
-			if (_cooldownLabel != null)
+			bool hasHotkey = _displayedData.HasHotkey;
+
+			_hotkey.gameObject.SetActive(hasHotkey);
+
+			if (hasHotkey == true)
 			{
-				_cooldownLabel.gameObject.SetActive(hoverPopupData.HasCooldown);
-				_cooldownLabel.text = hoverPopupData.Cooldown;
+				_hotkey.text = _displayedData.Hotkey;
 			}
 		}
 
-		private void UpdateCost(HoverPopupData hoverPopupData)
+		private void UpdateCooldown()
 		{
-			if (_costLabel != null)
+			_cooldownLabel.gameObject.SetActive(_displayedData.HasCooldown);
+			_cooldownLabel.text = _displayedData.Cooldown;
+		}
+
+		private void UpdateCost()
+		{
+			bool hasCost = _displayedData.HasCost;
+			_costLabel.gameObject.SetActive(hasCost);
+
+			if (hasCost == true)
 			{
-				_costLabel.gameObject.SetActive(hoverPopupData.HasCost);
-				_costLabel.text = hoverPopupData.Cost;
+				_costLabel.text = _displayedData.Cost;
 			}
 		}
 
-		private void UpdateDescription(HoverPopupData hoverPopupData)
+		private void UpdateDescription()
 		{
-			if (_description != null)
-			{
-				_description.gameObject.SetActive(hoverPopupData.HasDescription);
-				_description.text = hoverPopupData.Description;
-			}
+			_description.gameObject.SetActive(_displayedData.HasDescription);
+			_description.text = _displayedData.Description;
 		}
 
-		private void UpdateName(HoverPopupData hoverPopupData)
+		private void UpdateName()
 		{
-			if (_name != null)
-			{
-				_name.gameObject.SetActive(hoverPopupData.HasName);
-				_name.text = hoverPopupData.Name;
-			}
+			_name.gameObject.SetActive(_displayedData.HasName);
+			_name.text = _displayedData.Name;
+		}
+
+		private void UpdateLoreDescription()
+		{
+			_loreDescription.gameObject.SetActive(_displayedData.HasLoreDescription);
+			_loreDescription.text = _displayedData.LoreDescription;
 		}
 
 		public void Hide()
 		{
 			_root.SetActive(false);
+			_displayedData = null;
 		}
 		#endregion Methods
 	}
