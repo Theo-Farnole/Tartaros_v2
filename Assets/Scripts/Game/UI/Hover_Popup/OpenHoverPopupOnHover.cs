@@ -12,23 +12,41 @@
 		[SuffixLabel("optional")]
 		private HoverPopupDataSO _toShowDataAsset = null;
 
+		[ShowInRuntime]
 		private HoverPopupData _toShowData = null;
 		private HoverPopupManager _hoverPopup = null;
 
 		private RectTransform _rectTransform = null;
 		#endregion Fields
 
+		#region Properties
+		public HoverPopupData ToShowData { get => _toShowData; set => _toShowData = value; }
+		#endregion Properties
+
 		#region Methods
 		void Awake()
 		{
 			_hoverPopup = Services.Instance.Get<HoverPopupManager>();
-			_toShowData = _toShowDataAsset.HoverPopupData;
 			_rectTransform = GetComponent<RectTransform>();
+
+			if (_toShowDataAsset != null)
+			{
+				_toShowData = _toShowDataAsset.HoverPopupData;
+			}
 		}
 
 		void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
 		{
-			_hoverPopup.Show(_toShowData, _rectTransform);
+
+			if (_toShowData != null)
+			{
+				Debug.LogFormat("enter {0} showed", name);
+				_hoverPopup.Show(_toShowData, _rectTransform);
+			}
+			else
+			{
+				Debug.LogFormat("enter {0} null", name);
+			}
 		}
 
 		void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

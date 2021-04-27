@@ -7,12 +7,13 @@
 	using Tartaros.Gamemode;
 	using Tartaros.OrderGiver;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class PatrolOrder : Order
 	{
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.PatrolIcon;
-		public PatrolOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement))
+		public PatrolOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement), Services.Instance.Get<HoverPopupsDatabase>().Database.Patrol)
 		{
 		}
 

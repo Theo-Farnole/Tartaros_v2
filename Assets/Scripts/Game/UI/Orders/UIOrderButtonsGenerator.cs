@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using Tartaros.Entities;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class UIOrderButtonsGenerator : MonoBehaviour
@@ -16,7 +17,7 @@
 		[SerializeField]
 		private bool _destroyRootChildrenBeforeGeneration = true;
 
-		private List<GameObject> _buttons = new List<GameObject>();		
+		private List<GameObject> _buttons = new List<GameObject>();
 		#endregion Fields
 
 		#region Methods		
@@ -49,6 +50,7 @@
 			_buttons.Add(button);
 
 			button.GetOrAddComponent<OrderButton>().Order = order;
+			button.GetOrAddComponent<OpenHoverPopupOnHover>().ToShowData = order.HoverPopupData;
 		}
 		#endregion Methods
 	}

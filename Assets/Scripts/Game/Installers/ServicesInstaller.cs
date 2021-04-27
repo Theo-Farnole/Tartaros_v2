@@ -37,6 +37,7 @@
 			RegisterFromHierarchy<MiniMap>();
 			RegisterFromHierarchy<NavigationPathMiniMap>();
 
+			RegisterFromChildren<HoverPopupsDatabase>();
 			RegisterFromChildren<ConstructionManager>();
 			RegisterFromChildren<IPlayerGloryWallet>();
 			RegisterFromChildren<IPlayerIncomeManager>();

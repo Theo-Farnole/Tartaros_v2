@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703d24f39afcbff4c90157f8babb84e2, type: 3}
+  m_Name: Hover_Popups_Database
+  m_EditorClassIdentifier: 
+  _attack: {fileID: 11400000, guid: 89796e3bea673334aa846816e4789483, type: 2}
+  _closeGate: {fileID: 11400000, guid: 3be3a61356758cb4595db7f7c2aa77e2, type: 2}
+  _heal: {fileID: 11400000, guid: 85badf6946ba87c41b7ead31871d5f0e, type: 2}
+  _move: {fileID: 11400000, guid: c70613ea4093723489be0825bb79ae5a, type: 2}
+  _moveAggressively: {fileID: 11400000, guid: 69d24684251ace24b8a7c214c9ccf7a4, type: 2}
+  _openGate: {fileID: 11400000, guid: 7aed9b6cbf33d214394717dac8281dd9, type: 2}
+  _patrol: {fileID: 11400000, guid: 6745d7d4a31e963489fb43f2a3576c94, type: 2}
+  _selfKill: {fileID: 11400000, guid: 02e87f62042afc2489fb18e6a5f5e18a, type: 2}
+  _turnIntoGate: {fileID: 11400000, guid: 36b34505a14cbc341982ed126310b091, type: 2}

@@ -2,6 +2,7 @@
 {
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class HealOrder : Order
@@ -11,7 +12,7 @@
 		#endregion Properties
 
 		#region Ctor
-		public HealOrder(EntityHealWithCost healWithCostEntity) : base(Icon, healWithCostEntity.HealWholeLife)
+		public HealOrder(EntityHealWithCost healWithCostEntity) : base(Icon, healWithCostEntity.HealWholeLife, Services.Instance.Get<HoverPopupsDatabase>().Database.Heal)
 		{ }
 		#endregion Ctor
 	}

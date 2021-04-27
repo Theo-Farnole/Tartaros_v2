@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 818789223aab9bb45bfa1e6207b38fd7, type: 3}
-  m_Name: HP.UI.Food
+  m_Name: HP.OpenGate
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,12 +26,12 @@ MonoBehaviour:
       Data: 0|Tartaros.UI.HoverPopup.HoverPopupData, Tartaros
     - Name: _name
       Entry: 1
-      Data: Food
+      Data: Open gate
     - Name: _description
       Entry: 1
       Data: 
     - Name: _loreDescription
-      Entry: 6
+      Entry: 1
       Data: 
     - Name: _sectorResourcesCost
       Entry: 6

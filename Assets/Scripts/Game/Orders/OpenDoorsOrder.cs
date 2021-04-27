@@ -4,11 +4,12 @@
     using System.Collections;
     using Tartaros.Construction;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
     public class OpenDoorsOrder : Order
     {
         private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.OpenDoorIcon;
-        public OpenDoorsOrder(Gate gate) : base(Icon, OpenDoorsAction(gate))
+        public OpenDoorsOrder(Gate gate) : base(Icon, OpenDoorsAction(gate), Services.Instance.Get<HoverPopupsDatabase>().Database.OpenGate)
         {
         }
 

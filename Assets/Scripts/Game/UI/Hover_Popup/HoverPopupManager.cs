@@ -38,8 +38,16 @@
 		#endregion Properties
 
 		#region Methods
+		private void Awake()
+		{
+			Hide();
+		}
+
 		public void Show(HoverPopupData toDisplayData, RectTransform hovered)
 		{
+			if (hovered is null) throw new System.ArgumentNullException(nameof(hovered));
+			if (toDisplayData is null) throw new System.ArgumentNullException(nameof(toDisplayData));
+
 			_displayedData = toDisplayData;
 
 			_root.gameObject.SetActive(true);

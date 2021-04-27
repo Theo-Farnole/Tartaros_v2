@@ -7,13 +7,14 @@
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class MoveOrder : Order
 	{
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.MoveIcon;
 
-		public MoveOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement))
+		public MoveOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement), Services.Instance.Get<HoverPopupsDatabase>().Database.Move)
 		{
 		}
 

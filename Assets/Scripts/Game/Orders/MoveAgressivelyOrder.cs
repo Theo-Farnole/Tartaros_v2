@@ -6,12 +6,13 @@
 	using Tartaros.Gamemode;
 	using Tartaros.OrderGiver;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class MoveAgressivelyOrder : Order
 	{
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.MoveAgressivelyIcon;
-		public MoveAgressivelyOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement))
+		public MoveAgressivelyOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement), Services.Instance.Get<HoverPopupsDatabase>().Database.MoveAggressively)
 		{
 		}
 		private static Action Create(EntityMovement entityMovement)

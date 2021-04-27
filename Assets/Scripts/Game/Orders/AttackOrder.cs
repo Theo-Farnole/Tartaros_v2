@@ -1,13 +1,12 @@
 ﻿namespace Tartaros.Orders
 {
 	using System;
-	using System.Collections.Generic;
 	using Tartaros.Entities;
 	using Tartaros.Gamemode;
 	using Tartaros.OrderGiver;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
-	using UnityEngine.InputSystem;
 
 	public class AttackOrder : Order
 	{
@@ -16,7 +15,7 @@
 		#endregion Properties
 
 		#region Ctor
-		public AttackOrder(Entity entity) : base(Icon, Create(entity))
+		public AttackOrder(Entity entity) : base(Icon, Create(entity), Services.Instance.Get<HoverPopupsDatabase>().Database.Attack)
 		{ }
 		#endregion Ctor
 
