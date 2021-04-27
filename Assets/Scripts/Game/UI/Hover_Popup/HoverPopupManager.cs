@@ -7,17 +7,26 @@
 	{
 		#region Fields
 		[SerializeField]
-		private GameObject _root = null;
+		private RectTransform _root = null;
+
+		[SerializeField]
+		private float _heightOffset = 30;
+
 		[SerializeField]
 		private TextMeshProUGUI _name = null;
+
 		[SerializeField]
 		private TextMeshProUGUI _description = null;
+
 		[SerializeField]
 		private TextMeshProUGUI _costLabel = null;
+
 		[SerializeField]
 		private TextMeshProUGUI _cooldownLabel = null;
+
 		[SerializeField]
 		private TextMeshProUGUI _loreDescription = null;
+
 		[SerializeField]
 		private TextMeshProUGUI _hotkey = null;
 
@@ -29,11 +38,12 @@
 		#endregion Properties
 
 		#region Methods
-		public void Show(HoverPopupData toDisplayData, Vector3 hoveredCenterPosition)
+		public void Show(HoverPopupData toDisplayData, RectTransform hovered)
 		{
 			_displayedData = toDisplayData;
 
-			_root.SetActive(true);
+			_root.gameObject.SetActive(true);
+			SetRootPosition(hovered);
 
 			UpdateName();
 			UpdateDescription();
@@ -41,6 +51,14 @@
 			UpdateCooldown();
 			UpdateLoreDescription();
 			UpdateHotkey();
+		}
+
+		private void SetRootPosition(RectTransform hovered)
+		{
+			_root.CenterAnchor();
+
+			_root.position = hovered.position;
+			_root.anchoredPosition += new Vector2(0, _heightOffset + hovered.rect.height / 2);
 		}
 
 		private void UpdateHotkey()
@@ -92,7 +110,7 @@
 
 		public void Hide()
 		{
-			_root.SetActive(false);
+			_root.gameObject.SetActive(false);
 			_displayedData = null;
 		}
 		#endregion Methods

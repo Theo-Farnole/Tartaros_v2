@@ -14,6 +14,8 @@
 
 		private HoverPopupData _toShowData = null;
 		private HoverPopupManager _hoverPopup = null;
+
+		private RectTransform _rectTransform = null;
 		#endregion Fields
 
 		#region Methods
@@ -21,11 +23,12 @@
 		{
 			_hoverPopup = Services.Instance.Get<HoverPopupManager>();
 			_toShowData = _toShowDataAsset.HoverPopupData;
+			_rectTransform = GetComponent<RectTransform>();
 		}
 
 		void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
 		{
-			_hoverPopup.Show(_toShowData, transform.position);
+			_hoverPopup.Show(_toShowData, _rectTransform);
 		}
 
 		void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
