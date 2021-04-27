@@ -31,7 +31,20 @@
 			}
 		}
 
-		public int NavMeshArea { get => _navMeshAgent.areaMask = _navMeshArea; set => _navMeshAgent.areaMask = value; }
+		public int NavMeshArea 
+		{
+			get => _navMeshAgent.areaMask = _navMeshArea;
+			set
+			{
+				int mask = 0;
+				mask += 1 << NavMesh.GetAreaFromName("Walkable");
+				mask += 0 << NavMesh.GetAreaFromName("Not walkable");
+				mask += 1 << NavMesh.GetAreaFromName("Jump");
+				mask += 1 << value;
+				
+				_navMeshAgent.areaMask = mask;
+			}
+		}
 		#endregion Properties
 
 		#region Events

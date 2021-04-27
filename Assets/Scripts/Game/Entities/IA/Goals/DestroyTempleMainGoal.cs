@@ -10,6 +10,8 @@
 		private Vector3 _templePosition = Vector3.zero;
 		private AGoalComposite _currentMoveToTemple = null;
 		private EntityDetection _entityDetection = null;
+		private DestroyTarget _destroyTempleGoal = null;
+		private bool _completed = false;
 
 		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition) : base(goalOwner)
 		{
@@ -28,27 +30,35 @@
 		{
 			base.OnUpdate();
 
-			if (GetSubGoals().Count != 0)
+			if(_destroyTempleGoal != null && _destroyTempleGoal.IsCompleted() == true)
 			{
-				var currentSubGoal = GetSubGoals().Peek();
-
-				if (currentSubGoal == _currentMoveToTemple)
-				{
-					if (currentSubGoal.IsCompleted() == true)
-					{
-						ReachPosition();
-					}
-				}
+				_completed = true;
+				return;
 			}
 			else
 			{
-				ReachPosition();
+				if (GetSubGoals().Count != 0)
+				{
+					var currentSubGoal = GetSubGoals().Peek();
+
+					if (currentSubGoal == _currentMoveToTemple)
+					{
+						if (currentSubGoal.IsCompleted() == true)
+						{
+							ReachPosition();
+						}
+					}
+				}
+				else
+				{
+					ReachPosition();
+				}
 			}
 		}
 
 		public override bool IsCompleted()
 		{
-			return false;
+			return _completed;
 		}
 
 		private void ReachPosition()
@@ -128,7 +138,6 @@
 		{
 			IAttackable targetAttackable = (target.GetComponent<IAttackable>());
 
-
 			AddDestroySubGoal(targetAttackable);
 
 		}
@@ -140,7 +149,8 @@
 
 		private void AddDestroySubGoal(IAttackable target)
 		{
-			base.AddSubGoal(new DestroyTarget(_goalOwner, target, 5));
+			_destroyTempleGoal = new DestroyTarget(_goalOwner, target, 5);
+			base.AddSubGoal(_destroyTempleGoal);
 		}
 	}
 }
