@@ -31,6 +31,8 @@
 			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
 		}
 
+		public ISectorResourcesWallet GetSpawnPrice(ISpawnable gameObject) => _data.GetSpawnPrice(gameObject);
+
 		public void Spawn(ISpawnable prefabToSpawn)
 		{
 			if (CanSpawn(prefabToSpawn) == false)

@@ -2,10 +2,8 @@
 {
 	using Sirenix.OdinInspector;
 	using Sirenix.Serialization;
-	using Tartaros.Construction;
-	using Tartaros.Economy;
 	using Tartaros.UI;
-	using UnityEditorInternal;
+	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class EntityData : SerializedScriptableObject, ISpawnable
@@ -20,6 +18,9 @@
 		[SerializeField]
 		private int _population = 1;
 
+		[SerializeField]
+		private HoverPopupDataSO _hoverPopupData = null;
+
 		[OdinSerialize]
 		private IEntityBehaviourData[] _behaviours = new IEntityBehaviourData[0];
 		#endregion Fields
@@ -32,6 +33,8 @@
 		Sprite IPortraiteable.Portrait => _portrait;
 		int ISpawnable.PopulationAmount => _population;
 		public int Population => _population;
+
+		HoverPopupData ISpawnable.HoverPopupData => _hoverPopupData.HoverPopupData;
 		#endregion Properties
 
 		#region Methods
