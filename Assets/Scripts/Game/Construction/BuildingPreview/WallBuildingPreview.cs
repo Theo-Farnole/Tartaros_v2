@@ -3,16 +3,18 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
+	using UnityEngine.AI;
 
 	public class WallBuildingPreview
 	{
 		private GameObject _buildingPreview = null;
 		private GameObject _startBuildingPreview = null;
-		private CheckObjectUnderCursorManager _objectUnderCursorManager = null; 
+		private CheckObjectUnderCursorManager _objectUnderCursorManager = null;
 
 		private List<GameObject> _buildingsPreview = new List<GameObject>();
 		private Vector3 _startPosition = Vector3.zero;
 		private IConstructable _toBuild = null;
+		private Vector2[] _pointsToCheck = null;
 
 		private float _angleLimitation = 4;
 
@@ -26,6 +28,7 @@
 			_startPosition = startPosition;
 			_objectUnderCursorManager = new CheckObjectUnderCursorManager(toBuild);
 			InstanciatePreviewStart(_startPosition);
+			//_pointsToCheck = GetPointToCheckTheConstructionViability();
 		}
 
 		public void Update(Vector3 end)
@@ -143,6 +146,68 @@
 		public bool IsUnderAnotherWall()
 		{
 			return _objectUnderCursorManager.IsTheSameConstructable();
+		}
+		public bool IsConstructableHere()
+		{
+			RaycastHit mousePosition;
+			MouseHelper.GetHitUnderCursor(out mousePosition);
+
+			foreach (Vector2 position in _pointsToCheck)
+			{
+				float buildingPosX = _buildingPreview.transform.position.x - _toBuild.Size.x / 2;
+				float buildingPosZ = _buildingPreview.transform.position.z - _toBuild.Size.y / 2;
+				Vector3 positionV3 = new Vector3(position.x + buildingPosX, 1, position.y + buildingPosZ);
+
+
+				RaycastHit hit;
+
+				if (Physics.Raycast(positionV3, Vector3.down, out hit, Mathf.Infinity, NavMesh.AllAreas))
+				{
+					if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
+					{
+						//Debug.DrawRay(positionV3, Vector3.down * hit.distance, Color.yellow);
+
+						if (_objectUnderCursorManager.IsTheSameConstructable() == false)
+						{
+							return false;
+						}
+
+					}
+				}
+				else
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private Vector2[] GetPointToCheckTheConstructionViability()
+		{
+			float previewWidght = _toBuild.Size.x;
+			float previewLenght = _toBuild.Size.y;
+			List<Vector2> output = new List<Vector2>();
+
+			//center
+			output.Add(new Vector2(previewWidght / 2, previewLenght / 2));
+			//bottomLeft
+			output.Add(Vector2.zero);
+			//topRight
+			output.Add(new Vector2(previewWidght, previewLenght));
+			//bottomRight
+			output.Add(new Vector2(previewWidght, 0));
+			//topLeft
+			output.Add(new Vector2(0, previewLenght));
+			//centerLeft
+			output.Add(new Vector2(0, previewLenght / 2));
+			//centerUp
+			output.Add(new Vector2(previewWidght / 2, previewLenght));
+			//centerRight
+			output.Add(new Vector2(previewWidght, previewLenght / 2));
+			//centerBottom
+			output.Add(new Vector2(previewWidght / 2, 0));
+
+			return output.ToArray();
 		}
 
 		public void DestroyMethod()

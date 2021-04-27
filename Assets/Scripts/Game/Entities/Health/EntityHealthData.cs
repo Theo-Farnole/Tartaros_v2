@@ -34,7 +34,7 @@
 #if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{
-			entityRoot.GetOrAddComponent<EntityHealth>();			
+			entityRoot.GetOrAddComponent<EntityHealth>();
 		} 
 #endif
 		#endregion

@@ -69,7 +69,7 @@
 			return navMeshPath.status;
 		}
 
-		public static Vector3 lastPositionOnPartialNavMesh(Vector3 startPosition, Vector3 targetPosition)
+		public static Vector3 LastPositionOnPartialNavMesh(Vector3 startPosition, Vector3 targetPosition)
 		{
 			Vector3 point = AdjustPositionToFitNavMesh(targetPosition);
 
@@ -78,6 +78,13 @@
 			NavMesh.CalculatePath(startPosition, point, NavMesh.AllAreas, navMeshPath);
 
 			return navMeshPath.corners[navMeshPath.corners.Length - 1];
+		}
+
+		public static bool IsPositionOnNavMesh(Vector3 position)
+		{
+			bool positionFound = NavMesh.SamplePosition(position, out NavMeshHit hit, 0.1f, NavMesh.AllAreas);
+
+			return positionFound;
 		}
 	}
 }

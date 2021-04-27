@@ -115,8 +115,6 @@
 				var entityMovementSpawned = spawnedEntity.GetComponent<EntityMovement>();
 				entityMovementSpawned.NavMeshArea = (int)spawnPoint.Identifier;
 
-				Debug.Log((int)spawnPoint.Identifier);
-
 				waveSpawnable.Attack(_stateOwner.EnemiesTarget);
 				_stillAliveManger.AddEnemyWave(waveSpawnable);
 

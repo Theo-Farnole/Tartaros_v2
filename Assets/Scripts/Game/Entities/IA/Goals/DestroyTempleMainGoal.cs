@@ -108,7 +108,6 @@
 
 		private void AddMoveToTemple()
 		{
-			Debug.Log("MoveToTempleEnable");
 			Vector3 targetPosition = GoalPosition();
 
 			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, targetPosition);
@@ -144,7 +143,7 @@
 
 		private Vector3 GoalPosition()
 		{
-			return NavMeshHelper.lastPositionOnPartialNavMesh(_goalOwner.transform.position, _templePosition);
+			return NavMeshHelper.LastPositionOnPartialNavMesh(_goalOwner.transform.position, _templePosition);
 		}
 
 		private void AddDestroySubGoal(IAttackable target)

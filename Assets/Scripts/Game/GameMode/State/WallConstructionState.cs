@@ -89,9 +89,9 @@
 		{
 			if (CanConstructHere())
 			{
-				bool isInPreviewMode = _wallSectionPreview != null;
+				bool isWallSectionPreviewEnable = _wallSectionPreview != null;
 
-				if (isInPreviewMode)
+				if (isWallSectionPreviewEnable)
 				{
 					if (_inputs.IsAddNewWallSectionsPerformed() == true)
 					{
@@ -143,7 +143,6 @@
 			{
 				_wallToHideAndShow = _buildingPreview.GetObjectUnderCursor();
 				_wallToHideAndShow.SetActive(false);
-				_wallToHideAndShow.name = Random.Range(0, 10000).ToString();
 
 				previewStart = _constructable.WallCornerModel;
 			}
@@ -235,7 +234,10 @@
 
 		private bool CanConstructHere()
 		{
-			//return true;
+			if(_buildingPreview != null && _buildingPreview.IsConstructableHere() == false)
+			{
+				return false; 
+			}
 
 			return DoCanConstructOnMap() && DoCanConstructRulesAreValid();
 		}

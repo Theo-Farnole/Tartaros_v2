@@ -64,7 +64,10 @@ namespace Tartaros.Construction
 			base.OnUpdate();
 
 			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetMousePosition());
+			Debug.Log(_buildingPreview.IsConstructableHere());
 		}
+
+		
 
 		private void InputValidatePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 		{
@@ -72,11 +75,20 @@ namespace Tartaros.Construction
 			{
 				ValidateConstruction();
 			}
+			else
+			{
+				Debug.Log("Can't build here");
+			}
 		}
 
 		bool CanConstructHere()
 		{
 			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
+
+			if(_buildingPreview.IsConstructableHere() == false)
+			{
+				return false;
+			}	
 
 			return _map.CanBuild(buildingPosition, _constructable.Size) && DoCanConstructRulesAreValid();
 		}
