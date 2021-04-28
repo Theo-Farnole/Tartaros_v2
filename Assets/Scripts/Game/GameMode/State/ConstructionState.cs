@@ -38,6 +38,8 @@ namespace Tartaros.Construction
 		{
 			base.OnStateEnter();
 
+			_stateOwner.InvokeConstructionStateEnable();
+
 			_constructionInput.ValidatePerformed -= InputValidatePerformed;
 			_constructionInput.ValidatePerformed += InputValidatePerformed;
 
@@ -64,7 +66,6 @@ namespace Tartaros.Construction
 			base.OnUpdate();
 
 			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetMousePosition());
-			Debug.Log(_buildingPreview.IsConstructableHere());
 		}
 
 		

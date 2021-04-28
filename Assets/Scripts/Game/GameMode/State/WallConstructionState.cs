@@ -36,6 +36,8 @@
 		{
 			base.OnStateEnter();
 
+			_stateOwner.InvokeConstructionStateEnable();
+
 			_inputs.ValidatePerformed -= InputsValidatePerformed;
 			_inputs.ValidatePerformed += InputsValidatePerformed;
 

@@ -16,11 +16,15 @@
 		private Camera _camera = null;
 		private IMap _Imap = null;
 		private bool _enableScreenEdgeMovement = false;
-
-
+		private bool _useUnscaledDeltaTime = false;
 		#endregion
 
 		#region Properties
+		private float DeltaTime => _useUnscaledDeltaTime ? Time.unscaledDeltaTime : Time.deltaTime;
+		public bool UseUnscaledDeltaTime { get => _useUnscaledDeltaTime; set => _useUnscaledDeltaTime = value; }
+		#endregion Propeties
+
+		#region Ctor
 		public CameraController(CameraData data, Camera camera)
 		{
 			_cameraData = data;
@@ -55,7 +59,7 @@
 
 		private void MovementManager()
 		{
-			float deltaTime = Time.deltaTime;
+			float deltaTime = DeltaTime;
 			Vector3 deltaPosition = Vector3.zero;
 
 			if (_enableScreenEdgeMovement)
