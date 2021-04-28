@@ -34,6 +34,14 @@
 			Entity.AnyEntityKilled -= Entity_EntityKilled;
 		}
 
+		private void OnApplicationQuit()
+		{
+			// unregister from the events to avoid to spawn a glory text when destroyed
+			// to avoid this error: Some objects were not cleaned up when closing the scene. (Did you spawn new GameObjects from OnDestroy?)
+			Entity.AnyEntitySpawned -= Entity_EntitySpawned;
+			Entity.AnyEntityKilled -= Entity_EntityKilled;
+		}
+
 		private void Entity_EntityKilled(object sender, Entity.EntityKilledArgs e)
 		{
 			if (e.entity.Team == Team.Enemy)
