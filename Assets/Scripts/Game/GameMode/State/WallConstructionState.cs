@@ -91,7 +91,7 @@
 			{
 				bool isWallSectionPreviewEnable = _wallSectionPreview != null;
 
-				if (isWallSectionPreviewEnable)
+				if (isWallSectionPreviewEnable && _wallSectionPreview.CanConstructHere() == true)
 				{
 					if (_inputs.IsAddNewWallSectionsPerformed() == true)
 					{
@@ -102,7 +102,7 @@
 						ValidateFinish();
 					}
 				}
-				else
+				else if(isWallSectionPreviewEnable == false)
 				{
 					ValidateFirstPreview();
 				}
@@ -178,6 +178,13 @@
 
 		private IEnumerator InstanciateWallGameplay()
 		{
+
+			if(_constructable.GameplayPrefab == null || _constructable.WallCornerGameplay == null)
+			{
+				Debug.LogError("there is no prefab on the database");
+			}
+
+
 			GameObject gameplayStartPrefab = _constructable.GameplayPrefab;
 
 

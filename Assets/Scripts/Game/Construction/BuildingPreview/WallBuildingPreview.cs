@@ -10,6 +10,8 @@
 		private GameObject _buildingPreview = null;
 		private GameObject _startBuildingPreview = null;
 		private CheckObjectUnderCursorManager _objectUnderCursorManager = null;
+		private GameObject _wallCantConstruct = null;
+		private bool _canConstruct = true;
 
 		private List<GameObject> _buildingsPreview = new List<GameObject>();
 		private Vector3 _startPosition = Vector3.zero;
@@ -22,13 +24,24 @@
 
 		public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition, GameObject startPreview)
 		{
+
 			_toBuild = toBuild;
 			_buildingPreview = toBuild.PreviewPrefab;
 			_startBuildingPreview = startPreview;
 			_startPosition = startPosition;
-			_objectUnderCursorManager = new CheckObjectUnderCursorManager(toBuild);
+
+			SetUp();
+		}
+
+		private void SetUp()
+		{
+			if (_toBuild.PreviewPrefab == null || _toBuild.WallCornerModel == null)
+			{
+				Debug.LogError("there is no prefab on the dataBase");
+			}
+			_objectUnderCursorManager = new CheckObjectUnderCursorManager(_toBuild);
 			InstanciatePreviewStart(_startPosition);
-			//_pointsToCheck = GetPointToCheckTheConstructionViability();
+			_pointsToCheck = GetPointToCheckTheConstructionViability();
 		}
 
 		public void Update(Vector3 end)
@@ -51,6 +64,11 @@
 			}
 
 			SetPositionRotationOfPreviews(end);
+
+			if(_wallCantConstruct == null)
+			{
+				_canConstruct = true;
+			}
 		}
 
 		private int CalculateNumberOfWallSections(Vector3 end)
@@ -62,6 +80,12 @@
 		{
 			GameObject wallInstance = GameObject.Instantiate(_buildingPreview, position, Quaternion.identity);
 			AddPreviewWall(wallInstance);
+
+			if (_wallCantConstruct == null && IsValidPositionToBuild(wallInstance.transform.position) == false)
+			{
+				_wallCantConstruct = wallInstance;
+				_canConstruct = false;
+			}
 		}
 
 		private void InstanciatePreviewStart(Vector3 position)
@@ -138,24 +162,25 @@
 
 			wallCorner.Add(_buildingsPreview[0]);
 			wallCorner.Add(_buildingsPreview[lastIndex]);
-			//Debug.DrawRay(_buildingsPreview[lastIndex].transform.position, Vector3.up * 5, Color.green, 9999f);
+
 
 			return wallCorner;
 		}
 
-		public bool IsUnderAnotherWall()
+		public bool CanConstructHere()
 		{
-			return _objectUnderCursorManager.IsTheSameConstructable();
+			return _canConstruct;
 		}
-		public bool IsConstructableHere()
+
+		private bool IsValidPositionToBuild(Vector3 wallPreview)
 		{
 			RaycastHit mousePosition;
 			MouseHelper.GetHitUnderCursor(out mousePosition);
 
 			foreach (Vector2 position in _pointsToCheck)
 			{
-				float buildingPosX = _buildingPreview.transform.position.x - _toBuild.Size.x / 2;
-				float buildingPosZ = _buildingPreview.transform.position.z - _toBuild.Size.y / 2;
+				float buildingPosX = wallPreview.x - _toBuild.Size.x / 2;
+				float buildingPosZ = wallPreview.z - _toBuild.Size.y / 2;
 				Vector3 positionV3 = new Vector3(position.x + buildingPosX, 1, position.y + buildingPosZ);
 
 
@@ -171,7 +196,6 @@
 						{
 							return false;
 						}
-
 					}
 				}
 				else
