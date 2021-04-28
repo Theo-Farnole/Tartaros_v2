@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Cheats
 {
 	using Tartaros.CameraSystem;
+	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
@@ -26,6 +27,10 @@
 				}
 			}
 		}
+
+		[Cheat] public static void GiveStone(int amount = 100) => Services.Instance.Get<IPlayerSectorResources>().AddAmount(SectorRessourceType.Stone, amount);
+		[Cheat] public static void GiveIron(int amount = 100) => Services.Instance.Get<IPlayerSectorResources>().AddAmount(SectorRessourceType.Iron, amount);
+		[Cheat] public static void GiveFood(int amount = 100) => Services.Instance.Get<IPlayerSectorResources>().AddAmount(SectorRessourceType.Food, amount);
 
 
 		/// <summary>
