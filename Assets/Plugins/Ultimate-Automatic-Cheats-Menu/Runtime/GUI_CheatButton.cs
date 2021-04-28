@@ -202,20 +202,18 @@
 
 			for (int i = 0, length = parameters.Length; i < length; i++)
 			{
-				object defaultValue;
-
-				if (parameters[i].ParameterType == typeof(int)) defaultValue = 0;
-				else if (parameters[i].ParameterType == typeof(float)) defaultValue = 0.0f;
-				else if (parameters[i].ParameterType == typeof(bool)) defaultValue = true;
-				else if (parameters[i].ParameterType == typeof(string)) defaultValue = "";
-				else
+				if (IsSupportedType(parameters[i].ParameterType) == false)
 				{
 					Debug.LogWarningFormat("Parameter of type {0} is not supported. (method {1} with label {2})", parameters[i].ParameterType, _methodInfo.Name, ButtonLabel);
-					defaultValue = null;
 				}
 
-				_parametersValues.Add(parameters[i], defaultValue);
+				_parametersValues.Add(parameters[i], parameters[i].DefaultValue);
 			}
+		}
+
+		private bool IsSupportedType(Type type)
+		{
+			return SUPPORTED_PARAMETER_TYPE.Contains(type);
 		}
 		#endregion
 	}
