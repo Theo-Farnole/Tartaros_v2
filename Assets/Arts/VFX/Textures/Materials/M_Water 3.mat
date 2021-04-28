@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_Water 3
+  m_Shader: {fileID: 4800000, guid: 712174435dfd75449bffa3d4cee570f9, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaMult: 2.4
+    - _ChromaticAberration: 0.3
+    - _Distance: 1
+    - _Distance1: 1
+    - _Float0: 0
+    - _FoamAmount: 0
+    - _FoamCutoff: 4.09
+    - _FoamCutoff1: 1.8
+    - _FoamScale: 1
+    - _FresnelPower: 1
+    - _FresnelPower1: 1
+    - _MovementSpeed: -0.1
+    - _MovementSpeed1: -0.1
+    - _Reflection: 1
+    - _RefractionStrength: 2
+    - _RefractionStrength1: 1
+    - _Scale: 0.5
+    - _Scale1: 0.5
+    - _ScaleFoam: 100
+    - _ScaleFoam1: 100
+    - _VertexOffset: 0.16
+    - _WaterDepth: 1
+    - _WaterDepth1: 46
+    - _WaveScale: 40
+    - _WaveScale1: 40
+    - _WaveSpeed: 1
+    - _WaveSpeed1: 1
+    - _WavesSpeed: -0.1
+    - __dirty: 0
+    m_Colors:
+    - _BSP: {r: 0, g: 1, b: 5, a: 0}
+    - _Caustics: {r: 1, g: 1, b: 1, a: 1}
+    - _CausticsColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0.14901961}
+    - _CausticsColor1: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0.14901961}
+    - _Depths: {r: 0.13363299, g: 0.4706989, b: 0.7264151, a: 0.64705884}
+    - _Depths1: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 0.20825918, g: 0.4867719, b: 0.6792453, a: 0.8666667}
+    - _FoamColor1: {r: 0.36405307, g: 0.6763245, b: 0.764151, a: 1}
+    - _SmoothStepWaves: {r: -0.5, g: 1, b: 0, a: 0}
+    - _SmoothStepWaves1: {r: 1, g: 1, b: 0, a: 0}
+    - _Surface: {r: 0, g: 0.28026968, b: 0.509434, a: 0.80784315}
+    - _Surface1: {r: 0, g: 0.3435535, b: 0.4339623, a: 1}
+    - _WavesScale: {r: 0.5, g: 1.5, b: 0, a: 0}
+    - _WavesScale1: {r: 0.5, g: 1.5, b: 0, a: 0}
+    - _WavesSpeed: {r: 0, g: -0.3, b: 0, a: 0}
+    - _WavesSpeed1: {r: 0, g: -0.3, b: 0, a: 0}
