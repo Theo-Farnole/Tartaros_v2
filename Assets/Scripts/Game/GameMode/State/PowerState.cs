@@ -30,6 +30,8 @@
         {
             base.OnStateEnter();
 
+            _stateOwner.InvokePowerStateEnable();
+
             _inputs.ValidatePerformed -= ValidatePerformed;
             _inputs.ValidatePerformed += ValidatePerformed;
 
@@ -71,7 +73,6 @@
         private void CastSpell()
         {
             GameObject powerInstanciate = GameObject.Instantiate(_power.PrefabPower, _inputs.GetMousePosition(), Quaternion.identity);
-            Debug.LogFormat("Spend {0}.", _power.Price);
             _playerGloryWallet.Spend(_power.Price);
             _preview.DestroyMethods();
             _stateOwner.SetState(new PlayState(_stateOwner));

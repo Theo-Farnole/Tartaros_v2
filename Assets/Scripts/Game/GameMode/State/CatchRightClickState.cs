@@ -30,6 +30,8 @@
 		{
 			base.OnStateEnter();
 
+			_stateOwner.InvokeOrdersStateEnable();
+
 			_selectionOrderGiverInput.enabled = false;
 
 			_gameInputs.Orders.RightClick.performed -= RightClick;

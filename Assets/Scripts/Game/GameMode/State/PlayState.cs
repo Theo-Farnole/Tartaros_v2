@@ -9,6 +9,13 @@
         public PlayState(GamemodeManager stateOwner) : base(stateOwner)
         {
         }
-    }
+
+		public override void OnStateEnter()
+		{
+			base.OnStateEnter();
+
+            _stateOwner.InvokeDefaultStateEnable();
+		}
+	}
 
 }
