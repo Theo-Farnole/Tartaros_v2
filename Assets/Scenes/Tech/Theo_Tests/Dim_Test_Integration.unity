@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 847575395a37f544ebc3b675ef367bbe, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 43aa1c6a4f34b7142bd5aff0f7fc1e1d, type: 2}
 --- !u!1001 &7842133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3679,6 +3679,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5795913912497625708, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116617421405888728, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -7277,8 +7312,8 @@ GameObject:
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!64 &1010676804
 MeshCollider:
@@ -8430,6 +8465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187324986}
   - component: {fileID: 1187324985}
+  - component: {fileID: 1187324987}
   m_Layer: 0
   m_Name: GameObject (2)
   m_TagString: Untagged
@@ -8465,6 +8501,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1187324987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187324984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46788d65f3461b42a7bf82081959732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 0}
+  _modeManger: {fileID: 1809758874}
 --- !u!1001 &1201434544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8837,7 +8887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _randomRadius: 5
-  _identifier: 0
+  _identifier: 3
 --- !u!4 &1245928939
 Transform:
   m_ObjectHideFlags: 0
@@ -12119,6 +12169,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1df84701a6d1778489b3424924aaa9a8, type: 3}
+--- !u!114 &1809758874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1450499036371107595, guid: 7437cc53c4108e34ca23f4e54c07f636,
+    type: 3}
+  m_PrefabInstance: {fileID: 553141965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed16f8a2e08c964ebc50815d00b82c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1811742680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13204,7 +13266,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13602
+  m_Name: pb_Mesh-13656
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
