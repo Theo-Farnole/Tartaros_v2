@@ -2,12 +2,19 @@
 {
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI;
 	using UnityEngine;
 
 	public class PlayerGloryIncomeManager : MonoBehaviour
 	{
+		[SerializeField]
+		private Vector3 _textPositionOffset = new Vector3(0, 0.5f, 0);
+
+		[SerializeField]
+		private EarnGloryText _prefabGloryText = null;
+
 		private IPlayerGloryWallet _playerGloryWallet = null;
-		
+
 		private void Awake()
 		{
 			_playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
@@ -35,7 +42,7 @@
 				if (e.entity.EntityData.HasBehaviour<EntityGloryIncomeData>() == true)
 				{
 					int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
-					FillWallet(gloryIncome);
+					AddGlory(e.entity.transform, gloryIncome);
 
 					//Debug.LogFormat("Add {0} glory because {1} is killed.", gloryIncome, e.entity.name);
 				}
@@ -57,7 +64,7 @@
 				if (e.entity.EntityData.HasBehaviour<EntityGloryIncomeData>() == true)
 				{
 					int gloryIncome = e.entity.EntityData.GetBehaviour<EntityGloryIncomeData>().GloryIncome;
-					FillWallet(gloryIncome);
+					AddGlory(e.entity.transform, gloryIncome);
 
 					//Debug.LogFormat("Add {0} glory because {1} is spawned.", gloryIncome, e.entity.name);
 				}
@@ -68,9 +75,24 @@
 			}
 		}
 
-		private void FillWallet(int amount)
+		private void AddGlory(Transform sender, int amount)
 		{
+			InstantiateGloryText(sender, amount);
+
 			_playerGloryWallet.AddAmount(amount);
+		}
+
+		private void InstantiateGloryText(Transform sender, int amount)
+		{
+			if (_prefabGloryText != null)
+			{
+				var x = Instantiate(_prefabGloryText, sender.position + _textPositionOffset, Quaternion.identity);
+				x.EarnedGloryAmount = amount;
+			}
+			else
+			{
+				Debug.LogError("Missing prefab in Player Glory Income Manager", gameObject);
+			}
 		}
 	}
 }
