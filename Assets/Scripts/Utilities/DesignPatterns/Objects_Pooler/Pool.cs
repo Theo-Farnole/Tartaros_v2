@@ -91,7 +91,7 @@
 
 			private void RemoveNullElements()
 			{
-				while (_disabledObjects.ContainsElement() && _disabledObjects.Peek() == null)
+				while (_disabledObjects.IsPopulated() && _disabledObjects.Peek() == null)
 				{
 					_disabledObjects.Dequeue();
 				}

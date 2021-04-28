@@ -1,5 +1,6 @@
 ﻿namespace Tartaros
 {
+	using System.Collections;
 	using System.Collections.Generic;
 
 	public static class CollectionExtensions
@@ -14,9 +15,12 @@
 			return collection.Count > 0;
 		}
 
-		public static bool IsEmpty<T>(this Queue<T> queue) => (queue as ICollection<T>).IsEmpty();
+		public static bool IsEmpty<T>(this Queue<T> queue) => queue.Count == 0;
 
-		public static bool ContainsElement<T>(this Queue<T> queue) => (queue as ICollection<T>).ContainsElement();
+		/// <summary>
+		/// Do contains elements ?
+		/// </summary>
+		public static bool IsPopulated<T>(this Queue<T> queue) => queue.Count > 0;
 
 		public static bool IsEmpty<T>(this T[] array)
 		{

@@ -30,6 +30,18 @@
 			}
 		}
 
+		public float GetSpawnTime(ISpawnable spawnable)
+		{
+			if (_unitsSpawnable.TryGetValue(spawnable, out SpawnSettings value))
+			{
+				return value.SpawnTime;
+			}
+			else
+			{
+				throw new NotSupportedException("Unit cannot spawn {0}.".Format(spawnable));
+			}
+		}
+
 #if UNITY_EDITOR
 		void IEntityBehaviourData.SpawnRequiredComponents(GameObject entityRoot)
 		{

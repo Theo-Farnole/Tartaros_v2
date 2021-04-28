@@ -2,17 +2,24 @@
 {
 	using Assets.Scripts.Game.Orders;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.Economy;
 	using Tartaros.Orders;
 	using Tartaros.Population;
+	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
+	using UnityEngine.Rendering;
 
 	public class EntityUnitsSpawner : AEntityBehaviour, IOrderable
 	{
 		#region Fields
-		private EntityUnitsSpawnerData _data = null;
+		[ShowInRuntime]
+		private Queue<ISpawnable> _spawningQueue = new Queue<ISpawnable>();
+		[ShowInRuntime]
+		private float _spawnNextInQueueSpawn = 0;
 
+		private EntityUnitsSpawnerData _data = null;
 		private IPlayerSectorResources _playerResources = null;
 		private IPopulationManager _populationManager = null;
 		#endregion Fields
@@ -31,18 +38,44 @@
 			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
 		}
 
+		private void Update()
+		{
+			if (_spawningQueue.IsPopulated() == true && Time.time >= _spawnNextInQueueSpawn)
+			{
+				Spawn(_spawningQueue.Dequeue());
+
+				if (_spawningQueue.IsPopulated() == true)
+				{
+					SetSpawnTimer();
+				}
+			}
+		}
+
+		private void OnGUI()
+		{
+			if ((Services.Instance.Get<CurrentSelection>() as ISelection).SelectedSelectables.Contains(GetComponent<ISelectable>()) == true)
+			{
+				foreach (var toSpawn in _spawningQueue)
+				{
+					GUILayout.Label(toSpawn.ToString());
+				}
+			}
+		}
+
 		public ISectorResourcesWallet GetSpawnPrice(ISpawnable gameObject) => _data.GetSpawnPrice(gameObject);
 
-		public void Spawn(ISpawnable prefabToSpawn)
+		public void EnqueueEntitySpawn(ISpawnable prefabToSpawn)
 		{
-			if (CanSpawn(prefabToSpawn) == false)
+			if (CanSpawn(prefabToSpawn, true) == false)
 			{
 				Debug.LogErrorFormat("Entity {0} cannot spawn a {1}.", name, prefabToSpawn.Prefab.name);
 				return;
 			}
 
-			Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
+			_spawningQueue.Enqueue(prefabToSpawn);
+
+			SetSpawnTimer();
 		}
 
 		public bool CanSpawn(ISpawnable gameObject, bool logToUser = false)
@@ -77,6 +110,24 @@
 			return _populationManager.CanSpawn(gameObject.PopulationAmount);
 		}
 
+		private void SetSpawnTimer()
+		{
+			if (_spawningQueue.IsEmpty() == true) throw new System.NotSupportedException("Cannot set spawn timer if the queue is empty.");
+
+			_spawnNextInQueueSpawn = Time.time + _data.GetSpawnTime(_spawningQueue.Peek());
+		}
+
+		private void Spawn(ISpawnable prefabToSpawn)
+		{
+			Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
+		}
+
+		private Vector3 GetSpawnPoint()
+		{
+			return transform.position + Vector3.right;
+		}
+
+		#region IOrderable
 		Order[] IOrderable.GenerateOrders()
 		{
 			List<Order> orders = new List<Order>();
@@ -88,11 +139,7 @@
 
 			return orders.ToArray();
 		}
-
-		private Vector3 GetSpawnPoint()
-		{
-			return transform.position + Vector3.right;
-		}
+		#endregion IOrderable
 		#endregion Methods
 	}
 }
