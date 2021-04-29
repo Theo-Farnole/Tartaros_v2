@@ -78,6 +78,7 @@
 		private void InstanciateCastVFX()
 		{
 			_castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
+			_castVFX.transform.localScale = Vector3.one * _data.SpellRadius * 2;
 		}
 
 		private void AppliedDamage()
@@ -102,7 +103,7 @@
 
 		IEnumerator ApplyDamageFrequently()
 		{
-			for (int i = 0; i < _data.LifeTime; i++)
+			for (float i = 0; i < _data.LifeTime; i += _data.AttackFrequency)
 			{
 				AppliedDamage();
 				yield return new WaitForSeconds(_data.AttackFrequency);

@@ -22,10 +22,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _spellRadius: 5
-  _preCastVFXPrefab: {fileID: 135118496584773360, guid: fd28007adf2c51348b2cbbe6911fc8c7,
+  _preCastVFXPrefab: {fileID: 0}
+  _castVFXPrefab: {fileID: 4496740460531192509, guid: eb5673efb7a612142be11fbf3a1f8544,
     type: 3}
-  _castVFXPrefab: {fileID: 2715093854450190327, guid: 16549f5dca0c18f4bb6df7aba46b58c0,
-    type: 3}
-  _attackFrequency: 1
-  _timeBeforeAppliedDamage: 1
+  _attackFrequency: 0.1
+  _timeBeforeAppliedDamage: 0
   _gloryPrice: 25
+  _spellLifetime: 3

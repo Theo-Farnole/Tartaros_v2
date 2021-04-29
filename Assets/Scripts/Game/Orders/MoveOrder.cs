@@ -24,6 +24,7 @@
 			{
 				GamemodeManager gamemodeManager = Services.Instance.Get<GamemodeManager>();
 
+
 				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderMoveToPositionUnderCursor(entityMovement));
 
 				gamemodeManager.SetState(state);

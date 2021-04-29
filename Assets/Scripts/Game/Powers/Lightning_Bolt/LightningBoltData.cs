@@ -19,13 +19,15 @@
 		private float _timeBeforeAppliedDamage = 1;
 		[SerializeField]
 		private int _gloryPrice = 0;
+		[SerializeField]
+		private float _spellLifetime = 3;
 
 
 
 		public float SpellRadius => _spellRadius;
 		public GameObject PreCastVFXPrefab => _preCastVFXPrefab;
 		public GameObject CastVFXPrefab => _castVFXPrefab;
-		public float VFXLifeTime => _castVFXPrefab.GetComponent<ParticleSystem>().main.duration;
+		public float VFXLifeTime => _spellLifetime;
 		public float AttackFrequency => _attackFrequency;
 		public float TimeBeforeAppliedDamage => _timeBeforeAppliedDamage;
 		public int GloryPrice => _gloryPrice;
