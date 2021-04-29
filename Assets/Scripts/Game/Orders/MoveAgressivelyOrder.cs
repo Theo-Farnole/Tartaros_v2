@@ -12,16 +12,17 @@
 	public class MoveAgressivelyOrder : Order
 	{
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.MoveAgressivelyIcon;
-		public MoveAgressivelyOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement), Services.Instance.Get<HoverPopupsDatabase>().Database.MoveAggressively)
+		public MoveAgressivelyOrder(EntityMovement entityMovement) : base(Icon, Services.Instance.Get<HoverPopupsDatabase>().Database.MoveAggressively)
 		{
+			_executeAction = Create(entityMovement, this);
 		}
-		private static Action Create(EntityMovement entityMovement)
+		private static Action Create(EntityMovement entityMovement, Order order)
 		{
 			return () =>
 			{
 				GamemodeManager gamemodeManager = Services.Instance.Get<GamemodeManager>();
 
-				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderMoveToPositionUnderCursor(entityMovement));
+				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderMoveToPositionUnderCursor(entityMovement), order);
 
 				gamemodeManager.SetState(state);
 			};

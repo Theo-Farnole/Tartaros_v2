@@ -14,7 +14,7 @@
 		{
 			base.OnStateEnter();
 
-            _stateOwner.InvokeDefaultStateEnable();
+            _stateOwner.InvokeDefaultStateEnable(this);
 		}
 	}
 

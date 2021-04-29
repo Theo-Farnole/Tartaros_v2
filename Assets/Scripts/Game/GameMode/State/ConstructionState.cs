@@ -38,7 +38,7 @@ namespace Tartaros.Construction
 		{
 			base.OnStateEnter();
 
-			_stateOwner.InvokeConstructionStateEnable();
+			_stateOwner.InvokeConstructionStateEnable(this, null);
 
 			_constructionInput.ValidatePerformed -= InputValidatePerformed;
 			_constructionInput.ValidatePerformed += InputValidatePerformed;
@@ -82,7 +82,7 @@ namespace Tartaros.Construction
 			}
 		}
 
-		bool CanConstructHere()
+		public bool CanConstructHere()
 		{
 			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
 

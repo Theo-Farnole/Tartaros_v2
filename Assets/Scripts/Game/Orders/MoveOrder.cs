@@ -14,18 +14,18 @@
 	{
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.MoveIcon;
 
-		public MoveOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement), Services.Instance.Get<HoverPopupsDatabase>().Database.Move)
+		public MoveOrder(EntityMovement entityMovement) : base(Icon, Services.Instance.Get<HoverPopupsDatabase>().Database.Move)
 		{
+			_executeAction = Create(entityMovement, this);
 		}
 
-		private static Action Create(EntityMovement entityMovement)
+		private static Action Create(EntityMovement entityMovement, Order order)
 		{
 			return () =>
 			{
 				GamemodeManager gamemodeManager = Services.Instance.Get<GamemodeManager>();
 
-
-				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderMoveToPositionUnderCursor(entityMovement));
+				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderMoveToPositionUnderCursor(entityMovement), order);
 
 				gamemodeManager.SetState(state);
 			};

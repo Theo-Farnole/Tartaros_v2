@@ -30,7 +30,7 @@
 		{
 			base.OnStateEnter();
 
-			_stateOwner.InvokePowerStateEnable();
+            _stateOwner.InvokePowerStateEnable(this);
 
 			_inputs.ValidatePerformed -= ValidatePerformed;
 			_inputs.ValidatePerformed += ValidatePerformed;

@@ -15,17 +15,19 @@
 		#endregion Properties
 
 		#region Ctor
-		public AttackOrder(Entity entity) : base(Icon, Create(entity), Services.Instance.Get<HoverPopupsDatabase>().Database.Attack)
-		{ }
+		public AttackOrder(Entity entity) : base(Icon,  Services.Instance.Get<HoverPopupsDatabase>().Database.Attack)
+		{
+			_executeAction = Create(entity, this);
+		}
 		#endregion Ctor
 
-		private static Action Create(Entity entity)
+		private static Action Create(Entity entity, Order order)
 		{
 			return () =>
 			{
 				GamemodeManager gamemodeManager = Services.Instance.Get<GamemodeManager>();
 
-				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderAttackOnEntityUnderCursor(entity));
+				CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderAttackOnEntityUnderCursor(entity), order);
 
 				gamemodeManager.SetState(state);
 			};

@@ -6,8 +6,9 @@
 	using System.Text;
 	using System.Threading.Tasks;
 	using Tartaros.OrderGiver;
+	using Tartaros.Orders;
 	using Tartaros.ServicesLocator;
-	
+
 	using UnityEngine.InputSystem;
 
 	public class CatchRightClickState : AGameState
@@ -15,12 +16,13 @@
 		private GameInputs _gameInputs = null;
 		private Action _rightClickAction = null;
 		private SelectionOrderGiverInput _selectionOrderGiverInput = null;
+		private Order _order = null;
 
-		public CatchRightClickState(GamemodeManager stateOwner, Action rightClickAction) : base(stateOwner)
+		public CatchRightClickState(GamemodeManager stateOwner, Action rightClickAction, Order currentOrder) : base(stateOwner)
 		{
 			_gameInputs = new GameInputs();
 			_gameInputs.Orders.RightClick.Enable();
-
+			_order = currentOrder;
 			_rightClickAction = rightClickAction;
 
 			_selectionOrderGiverInput = Services.Instance.Get<SelectionOrderGiverInput>();
@@ -30,7 +32,7 @@
 		{
 			base.OnStateEnter();
 
-			_stateOwner.InvokeOrdersStateEnable();
+			_stateOwner.InvokeOrdersStateEnable(this, _order);
 
 			_selectionOrderGiverInput.enabled = false;
 

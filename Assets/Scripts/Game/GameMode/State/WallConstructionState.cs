@@ -36,7 +36,7 @@
 		{
 			base.OnStateEnter();
 
-			_stateOwner.InvokeConstructionStateEnable();
+			_stateOwner.InvokeConstructionStateEnable(null, this);
 
 			_inputs.ValidatePerformed -= InputsValidatePerformed;
 			_inputs.ValidatePerformed += InputsValidatePerformed;
@@ -93,7 +93,7 @@
 			{
 				bool isWallSectionPreviewEnable = _wallSectionPreview != null;
 
-				if (isWallSectionPreviewEnable && _wallSectionPreview.CanConstructHere() == true)
+				if (isWallSectionPreviewEnable && IsWallPreviewValide())
 				{
 					if (_inputs.IsAddNewWallSectionsPerformed() == true)
 					{
@@ -104,12 +104,14 @@
 						ValidateFinish();
 					}
 				}
-				else if(isWallSectionPreviewEnable == false)
+				else if (isWallSectionPreviewEnable == false)
 				{
 					ValidateFirstPreview();
 				}
 			}
 		}
+
+		
 
 		private void ContinueWallPreview()
 		{
@@ -241,14 +243,26 @@
 			}
 		}
 
-		private bool CanConstructHere()
+		public bool CanConstructHere()
 		{
 			if(_buildingPreview != null && _buildingPreview.IsConstructableHere() == false)
 			{
 				return false; 
 			}
 
+			if(_wallSectionPreview != null && IsWallPreviewValide() == false)
+			{
+				return false;
+			}
+			Debug.Log(DoCanConstructOnMap());
+			Debug.Log(DoCanConstructRulesAreValid());
+
 			return DoCanConstructOnMap() && DoCanConstructRulesAreValid();
+		}
+
+		private bool IsWallPreviewValide()
+		{
+			return _wallSectionPreview.CanConstructHere() == true;
 		}
 
 		private bool DoCanConstructOnMap()

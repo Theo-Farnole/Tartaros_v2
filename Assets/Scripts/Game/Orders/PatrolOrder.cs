@@ -13,25 +13,26 @@
 	public class PatrolOrder : Order
 	{
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.PatrolIcon;
-		public PatrolOrder(EntityMovement entityMovement) : base(Icon, Create(entityMovement), Services.Instance.Get<HoverPopupsDatabase>().Database.Patrol)
+		public PatrolOrder(EntityMovement entityMovement) : base(Icon, Services.Instance.Get<HoverPopupsDatabase>().Database.Patrol)
 		{
+			_executeAction = Create(entityMovement, this);
 		}
 
 		// Use this for initialization
-		private static Action Create(EntityMovement entityMovement)
+		private static Action Create(EntityMovement entityMovement, Order order)
 		{
 			return () =>
 			{
 				GamemodeManager gamemodeManager = Services.Instance.Get<GamemodeManager>();
 
-				CatchRightClickState state = new CatchRightClickState(gamemodeManager, GetFirstPatrolPoint(entityMovement));
+				CatchRightClickState state = new CatchRightClickState(gamemodeManager, GetFirstPatrolPoint(entityMovement, order), order);
 
 				gamemodeManager.SetState(state);
 			};
 		}
 
 
-		private static Action GetFirstPatrolPoint(EntityMovement entityMovement)
+		private static Action GetFirstPatrolPoint(EntityMovement entityMovement, Order order)
 		{
 			return () =>
 			{
@@ -44,7 +45,7 @@
 				{
 					GamemodeManager gamemodeManager = Services.Instance.Get<GamemodeManager>();
 
-					CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderSetPatrol(entityMovement, position));
+					CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderSetPatrol(entityMovement, position), order);
 
 					Debug.Log("firstPositionEnable");
 					gamemodeManager.SetState(state);
