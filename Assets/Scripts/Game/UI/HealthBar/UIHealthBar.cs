@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.UI
 {
+	using DG.Tweening;
 	using Sirenix.OdinInspector;
 	using Tartaros.Entities;
 	using UnityEngine;
@@ -71,6 +72,8 @@
 
 		private void Start()
 		{
+			_slider.transform.forward = -Camera.main.transform.forward;
+
 			SetSliderBounds();
 			SetSliderValue();
 		}
