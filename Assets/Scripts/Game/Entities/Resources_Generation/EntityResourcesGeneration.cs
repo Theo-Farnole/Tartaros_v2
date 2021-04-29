@@ -1,10 +1,10 @@
 ﻿namespace Tartaros.Entities.ResourcesGeneration
 {
-	using System.Collections;
+	using Tartaros.Economy;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
-	using Tartaros.Economy;
 
+	[DisallowMultipleComponent]
 	public class EntityResourcesGeneration : AEntityBehaviour, IIncomeGenerator
 	{
 		#region Fields

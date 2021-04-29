@@ -9,6 +9,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(Entity))]
+	[DisallowMultipleComponent]
 	public partial class EntityDetection : AEntityBehaviour
 	{
 		#region Fields

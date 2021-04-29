@@ -6,6 +6,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(IHealthable))]
+	[DisallowMultipleComponent]
 	public class EntityHealWithCost : AEntityBehaviour, IOrderable
 	{
 		#region Fields

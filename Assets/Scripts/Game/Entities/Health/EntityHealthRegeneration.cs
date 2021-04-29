@@ -3,6 +3,7 @@
 	using System.Collections;
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public class EntityHealthRegeneration : AEntityBehaviour
 	{
 		#region Fields

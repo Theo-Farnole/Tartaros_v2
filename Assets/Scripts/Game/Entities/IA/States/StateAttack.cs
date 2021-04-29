@@ -35,9 +35,12 @@
 
 		public override void OnUpdate()
 		{
+			Debug.Log("state attack");
+
 			if (IsTargetDead() == true)
 			{
 				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
+				Debug.Log("Target dead");
 			}
 			else
 			{

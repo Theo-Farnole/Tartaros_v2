@@ -4,9 +4,9 @@
 	using System.Collections.Generic;
 	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
-	
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public partial class EntityFSM : AEntityBehaviour
 	{
 		#region Fields
@@ -51,6 +51,8 @@
 
 		private void SetState(AEntityState newState)
 		{
+			if (this.name == "Entity.Archer") Debug.LogFormat("Archer change state from {1} to {0}.", newState.GetType(), _finiteStateMachine.CurrentState);
+
 			_finiteStateMachine.CurrentState = newState;
 		}
 

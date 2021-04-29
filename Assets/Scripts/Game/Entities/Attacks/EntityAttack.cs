@@ -1,15 +1,13 @@
 ﻿namespace Tartaros.Entities.Attack
 {
-	using Sirenix.OdinInspector;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
-	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
-	using TMPro;
 	using UnityEngine;
 
 	[RequireComponent(typeof(EntityDetection), typeof(EntityFSM), typeof(Entity))]
+	[DisallowMultipleComponent]
 	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IOrderable
 	{
 		#region Fields

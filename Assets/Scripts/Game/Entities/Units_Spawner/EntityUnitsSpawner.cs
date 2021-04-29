@@ -9,8 +9,8 @@
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
-	using UnityEngine.Rendering;
 
+	[DisallowMultipleComponent]
 	public class EntityUnitsSpawner : AEntityBehaviour, IOrderable
 	{
 		#region Fields

@@ -9,6 +9,7 @@
 	using UnityEngine;
 	using UnityEngine.AI;
 
+	[DisallowMultipleComponent]
 	[RequireComponent(typeof(NavMeshAgent), typeof(EntityFSM))]
 	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderable
 	{

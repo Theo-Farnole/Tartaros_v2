@@ -2,7 +2,7 @@
 {
 	using UnityEngine;
 
-	[RequireComponent(typeof(Entity))]
+	[RequireComponent(typeof(Entity))]	
 	public abstract class AEntityBehaviour : MonoBehaviour
 	{
 		private Entity _entity = null;

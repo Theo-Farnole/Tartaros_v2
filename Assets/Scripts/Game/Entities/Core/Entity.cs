@@ -12,6 +12,7 @@
 
 	[SelectionBase]
 	[RequireComponent(typeof(SectorObject))]
+	[DisallowMultipleComponent]
 	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable, IOrderable
 	{
 		#region Fields

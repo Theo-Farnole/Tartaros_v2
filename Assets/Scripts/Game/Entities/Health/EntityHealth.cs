@@ -4,6 +4,7 @@
 	using System;
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public class EntityHealth : AEntityBehaviour, IAttackable, IHealthable
 	{
 		#region Fields

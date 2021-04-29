@@ -4,6 +4,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public class EntityPlayerPopulationTaker : AEntityBehaviour
 	{
 		#region Fields

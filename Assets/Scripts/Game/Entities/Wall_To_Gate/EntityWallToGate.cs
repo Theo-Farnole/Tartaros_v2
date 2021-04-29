@@ -1,6 +1,5 @@
 ﻿namespace Tartaros.Entities
 {
-	using System.Collections;
 	using System.Collections.Generic;
 	using Tartaros.Economy;
 	using Tartaros.Orders;
@@ -8,6 +7,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public class EntityWallToGate : AEntityBehaviour, IOrderable
 	{
 		private EntityWallToGateData _data = null;
