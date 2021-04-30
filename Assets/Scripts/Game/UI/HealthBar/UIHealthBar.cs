@@ -72,10 +72,16 @@
 
 		private void Start()
 		{
-			_slider.transform.forward = -Camera.main.transform.forward;
-
 			SetSliderBounds();
 			SetSliderValue();
+		}
+
+		private void Update()
+		{
+			if (_slider.enabled == true)
+			{
+				_slider.transform.forward = -Camera.main.transform.forward;
+			}
 		}
 
 		private void OnEnable()
