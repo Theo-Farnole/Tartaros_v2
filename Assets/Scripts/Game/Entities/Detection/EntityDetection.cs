@@ -178,6 +178,10 @@
 
 		public bool IsInAttackRange(IAttackable target)
 		{
+			if(target == null)
+			{
+				return false;
+			}
 			float distance = Vector3.Distance(transform.position, target.Transform.position);
 			float targetRadius = target.SizeRadius;
 
