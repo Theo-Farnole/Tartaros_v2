@@ -23,6 +23,8 @@
 		[SerializeField]
 		private Texture2D _orderMoveCursor = null;
 		[SerializeField]
+		private Texture2D _orderCantMoveCursor = null;
+		[SerializeField]
 		private Texture2D _orderMoveAndAttackCursor = null;
 		[SerializeField]
 		private Texture2D _orderPatrolCursor = null;
@@ -37,6 +39,7 @@
 		public Texture2D AddAllyInSelectionCursor => _addAllyInSelectionCursor;
 		public Texture2D OrderAttackCursor => _orderAttackCursor;
 		public Texture2D OrderMoveCursor => _orderMoveCursor;
+		public Texture2D OrderCantMoveCursor => _orderCantMoveCursor;
 		public Texture2D OrderMoveAndAttackCursor => _orderMoveAndAttackCursor;
 		public Texture2D OrderPatrolCursor => _orderPatrolCursor;
 		public Texture2D PowerCursor => _powerCursor;

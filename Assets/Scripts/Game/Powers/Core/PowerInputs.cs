@@ -17,7 +17,7 @@
         {
             _input = new GameInputs();
             _input.Construction.Enable();
-            _mousePosition = new SetMousePositionWithPlane();            
+            _mousePosition = new SnapMousePositionOnPlane();            
         }
 
         public event Action<CallbackContext> ValidatePerformed

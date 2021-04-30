@@ -1,17 +1,19 @@
-﻿namespace Tartaros.Construction
+﻿namespace Tartaros
 {
 	using System.Collections;
+	using Tartaros.Construction;
 	using UnityEngine;
-	public class SetMousePositionWithPlane : IMousePosition
+
+	public class SnapMousePositionOnGrid : IMousePosition
 	{
 
 		private Vector3 _planeDistanceFromCamera;
 		private Plane _plane;
-		private GameInputs _inputs = null;
-		private int _cellSize = 3;
+		private readonly GameInputs _inputs = null;
+		private readonly int _cellSize = 3;
 		
 
-		public SetMousePositionWithPlane()
+		public SnapMousePositionOnGrid()
 		{
 			_inputs = new GameInputs();
 			_inputs.Camera.Enable();

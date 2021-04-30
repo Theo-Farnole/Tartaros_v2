@@ -9,7 +9,7 @@
 		[SerializeField]
 		private MiniMap _miniMap = null;
 		[SerializeField]
-		private GameObject _mapBackground = null;
+		private GameObject _frustumRoot = null;
 		[SerializeField]
 		private GameObject _navigationLine = null;
 
@@ -91,7 +91,7 @@
 
 			var cameraCorners = GetVectors2(GetViewportCorner());
 
-			GameObject cameraLine = GameObject.Instantiate(_navigationLine, _mapBackground.transform);
+			GameObject cameraLine = GameObject.Instantiate(_navigationLine, _frustumRoot.transform);
 			_drawLine = cameraLine.GetComponent<DrawLineUI>();
 
 
