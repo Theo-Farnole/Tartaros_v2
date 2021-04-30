@@ -57,8 +57,8 @@
 		{
 			RefreshCachedIcon();
 
-			_minimap.AddIcon(this);
 			_minimap.RemoveIcon(this);
+			_minimap.AddIcon(this);
 		}
 
 		private void RefreshCachedIcon()

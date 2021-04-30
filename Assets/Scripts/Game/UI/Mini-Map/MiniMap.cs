@@ -169,8 +169,8 @@
 		{
 			if (_icons.ContainsKey(icon) == true)
 			{
-				_icons.Remove(icon);
 				Destroy(_icons[icon].gameObject);
+				_icons.Remove(icon);
 			}
 			else
 			{
