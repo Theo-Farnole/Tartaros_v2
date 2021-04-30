@@ -4,7 +4,7 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public class DrawLineUI : Graphic
+	public class DrawLineUI : MaskableGraphic
     {
         private Vector2Int _gridSize;
         [SerializeField]
