@@ -12,21 +12,36 @@
 
         Vector3 IMiniMapIcon.WorldPosition => transform.position;
 
-        Sprite IMiniMapIcon.Icon => _icon;
+        Sprite IMiniMapIcon.Icon => Icon;
 
-        private void Start()
+		public Sprite Icon
+		{
+			get => _icon; set
+			{
+				_icon = value;
+				RefreshIcon(); // when the icon is changed, it must be manually updated
+			}
+		}
+
+		private void Awake()
         {
             _miniMap = Services.Instance.Get<MiniMap>();
-            if(_miniMap != null)
-            {
-                _miniMap.AddIcon(this);
-            }
         }
 
+        void OnEnable()
+		{
+            _miniMap.AddIcon(this);
+		}
   
         void OnDisable()
         {
             _miniMap.RemoveIcon(this);
+        }
+
+        private void RefreshIcon()
+        {
+            _miniMap.RemoveIcon(this);
+            _miniMap.AddIcon(this);
         }
 
         //void OnDrawGizmos()
