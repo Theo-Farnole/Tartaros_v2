@@ -79,14 +79,17 @@
 			return false;
 		}
 
+		// TODO: wrap entire method in #if UNITY_EDITOR 
 		public void SpawnComponents(GameObject entity)
 		{
+#if UNITY_EDITOR
 			foreach (IEntityBehaviourData behaviour in _behaviours)
 			{
 				if (behaviour is null) throw new System.NullReferenceException(string.Format("Behaviour of {0} is null", this.name));
 
 				behaviour.SpawnRequiredComponents(entity);
-			}
+			} 
+#endif
 		}
 		#endregion Methods
 	}

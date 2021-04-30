@@ -32,6 +32,9 @@
 		{
 			if (Map.MapData == null) return;
 
+			//Logic
+			EditorUtility.SetDirty(target);
+
 			if (DoVerticesMoveHandleShouldBeDraw())
 			{
 				DrawVerticesMoveHandle();

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c8f89608bdc6b4d94ebadf43d2452c, type: 3}
+  m_Name: Build_Scene_Build_30_04
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 0
+    SerializedBytes: 2b010b00000069006e0069007400690061006c0069007a0065006400012701090000006200750069006c00640052006f006f007400014700000044003a002f006700690074002f005000460045005f005400610072007400610072006f0073005f004c0045005f0042004500530054002f005400610072007400610072006f0073005f00760032002f004200750069006c00640073002f005400610072007400610072006f0073005f007600320020002800330030002d0034002d00320031002900200032002f00
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  appName: Build_Scene_Build_30_04
+  pipelineRootRel: Builds
+  scenes:
+  - enabled: 1
+    scene: {fileID: 102900000, guid: 5cf8e186a410cf04c8ce0a88346728ef, type: 3}
+  developmentBuild: 0
+  autoconnectProfiler: 0
+  strictMode: 0
+  overrideOptions: 0
+  buildConfigs:
+  - enabled: 1
+    name: build_scene_build_30_04
+    fileExt: .exe
+    targetGroup: 1
+    target: 19
+    options: 2097152
+    done: 0
+  returnToActiveTarget: 0
+  openExplorerAfter: 1
+  pipelineGroup: 0

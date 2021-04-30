@@ -137,7 +137,7 @@ Projector:
   m_FieldOfView: 60
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 100
+  m_OrthographicSize: 200
   m_Material: {fileID: 2100000, guid: e05a1a7ae75b42f4b89dcb7b71577180, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -305,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6807748295176984981
 Transform:
   m_ObjectHideFlags: 0
@@ -591,7 +591,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 50
+  orthographic size: 200
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -744,7 +744,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 50
+  orthographic size: 200
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

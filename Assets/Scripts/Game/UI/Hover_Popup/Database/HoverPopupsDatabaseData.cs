@@ -1,7 +1,6 @@
 ﻿namespace Tartaros.UI.HoverPopup
 {
 	using System;
-	using UnityEditorInternal;
 	using UnityEngine;
 
 	public class HoverPopupsDatabaseData : ScriptableObject
