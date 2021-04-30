@@ -54,7 +54,7 @@
         {
             _input = new GameInputs();
             _input.Construction.Enable();
-            _mousePosition = new SetMousePositionWithPlane();
+            _mousePosition = new SnapMousePositionOnGrid();
         }
 
         public Vector3 GetMousePosition()
