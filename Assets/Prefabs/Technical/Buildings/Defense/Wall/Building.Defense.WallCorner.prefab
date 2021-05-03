@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5984636632109656817}
   - component: {fileID: 7004378787413141332}
   - component: {fileID: 2728149883149680789}
+  - component: {fileID: 2203876633589763659}
   m_Layer: 0
   m_Name: Building.Defense.WallCorner
   m_TagString: Untagged
@@ -178,6 +179,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &2203876633589763659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740395784054915281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851a463b7d46cae44870c6814bf01543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4005607301400923076
 PrefabInstance:
   m_ObjectHideFlags: 0

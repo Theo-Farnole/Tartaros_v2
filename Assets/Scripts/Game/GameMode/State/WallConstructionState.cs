@@ -185,7 +185,7 @@
 
 			if(_constructable.GameplayPrefab == null || _constructable.WallCornerGameplay == null)
 			{
-				Debug.LogError("there is no prefab on the database");
+				Debug.LogError("One element of the database Wall is null");
 			}
 
 
@@ -254,8 +254,7 @@
 			{
 				return false;
 			}
-			Debug.Log(DoCanConstructOnMap());
-			Debug.Log(DoCanConstructRulesAreValid());
+		
 
 			return DoCanConstructOnMap() && DoCanConstructRulesAreValid();
 		}

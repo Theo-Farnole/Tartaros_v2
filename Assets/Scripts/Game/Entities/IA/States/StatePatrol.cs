@@ -1,6 +1,8 @@
 ﻿namespace Tartaros.Entities.State
 {
 	using Tartaros.Entities;
+	using Tartaros.Entities.Attack;
+	using Tartaros.Entities.Detection;
 	using Tartaros.Entities.Movement;
 	using UnityEngine;
 
@@ -8,13 +10,17 @@
 	{
 		private readonly PatrolPoints _patrolPoints = null;
 		private readonly EntityMovement _entityMovement = null;
+		private readonly EntityAttack _entityAttack = null;
 		private int _currentIndex = 0;
 		private int _maxIndex = 0;
+
+		private bool CanTryAttackNearest => _entityAttack != null;
 
 		public StatePatrol(Entity stateOwner, PatrolPoints patrolPoints) : base(stateOwner)
 		{
 			_patrolPoints = patrolPoints;
 			_entityMovement = stateOwner.GetComponent<EntityMovement>();
+			_entityAttack = stateOwner.GetComponent<EntityAttack>();
 		}
 
 		public override void OnStateEnter()
@@ -25,6 +31,16 @@
 
 			_entityMovement.DestinationReached -= DestinationReached;
 			_entityMovement.DestinationReached += DestinationReached;
+		}
+
+		public override void OnUpdate()
+		{
+			base.OnUpdate();
+
+			if (CanTryAttackNearest == true)
+			{
+				_entityAttack.TryOrderAttackNearestOpponent();
+			}
 		}
 
 		public override void OnStateExit()

@@ -14,7 +14,6 @@
 
 		#region Fields
 		private readonly EntityMovement _entityMovement = null;
-		private readonly EntityDetection _entityDetection = null;
 		private readonly EntityAttack _entityAttack = null;
 		#endregion Fields
 
@@ -26,7 +25,6 @@
 		public StateIdle(Entity stateOwner) : base(stateOwner)
 		{
 			_entityMovement = stateOwner.GetComponent<EntityMovement>();
-			_entityDetection = stateOwner.GetComponent<EntityDetection>();
 			_entityAttack = stateOwner.GetComponent<EntityAttack>();
 		}
 		#endregion Ctor

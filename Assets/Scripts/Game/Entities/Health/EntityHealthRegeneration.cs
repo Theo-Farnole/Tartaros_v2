@@ -37,7 +37,7 @@
 
 		private void DamageTaken(object sender, EntityHealth.DamageTakenArgs e)
 		{
-			if (_entityHealth.IsAlive && Entity.Team == Team.Player && Entity.EntityType == EntityType.Unit)
+			if (_entityHealth.IsAlive && Entity.Team == Team.Player)
 			{
 				StartRegenerationCoroutine();
 			}

@@ -102,8 +102,8 @@
 
 		private Vector2[] GetPointToCheckTheConstructionViability()
 		{
-			float previewWidght = _toBuild.Size.x;
-			float previewLenght = _toBuild.Size.y;
+			float previewWidght = _toBuild.Size.x - 0.5f;
+			float previewLenght = _toBuild.Size.y - 0.5f;
 			List<Vector2> output = new List<Vector2>();
 
 			//center

@@ -62,7 +62,6 @@ public class CursorManager : MonoBehaviour
 
 	private void OrderStateEnable(object sender, GamemodeManager.OrdersStateEnableArgs e)
 	{
-		Debug.Log("OrdersEnable");
 		_enbaleState = gameModeState.ordersState;
 		_ordersState = e.ordersState;
 		_currentOrder = e.currentOrder;
@@ -70,21 +69,18 @@ public class CursorManager : MonoBehaviour
 
 	private void PowerStateEnable(object sender, GamemodeManager.PowerStateEnableArgs e)
 	{
-		Debug.Log("PowerEnable");
 		_enbaleState = gameModeState.powerState;
 		_powerState = e.powerState;
 	}
 
 	private void DefaultStateEnable(object sender, GamemodeManager.DefaultStateEnableArgs e)
 	{
-		Debug.Log("DefaultEnable");
 		_enbaleState = gameModeState.defaultState;
 		_defaultState = e.defaultState;
 	}
 
 	private void ConstructionStateEnable(object sender, GamemodeManager.ConstructionStateEnableArgs e)
 	{
-		Debug.Log("ConstructionEnable");
 		_enbaleState = gameModeState.constructionState;
 		_constructionState = e.constructionState;
 		_wallConstructionState = e.wallConstructionState;
@@ -92,8 +88,6 @@ public class CursorManager : MonoBehaviour
 
 	private void Update()
 	{
-		Debug.Log(_enbaleState);
-
 		SetCursorModel();
 	}
 
@@ -256,7 +250,7 @@ public class CursorManager : MonoBehaviour
 			.Where(x => x != null)
 			.FirstOrDefault();
 
-		return entity != null && entity.Team == Team.Player;
+		return entity != null && entity.Team == Team.Player && entity.EntityType == EntityType.Unit;
 	}
 
 	private bool IsCursorHoverSelectable()
@@ -278,7 +272,6 @@ public class CursorManager : MonoBehaviour
 
 		if (underCursor.TryGetComponentInParent(out Entity entity))
 		{
-			Debug.Log(entity);
 			return entity.Team == Team.Enemy;
 		}
 

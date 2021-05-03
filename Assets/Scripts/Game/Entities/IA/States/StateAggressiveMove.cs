@@ -22,6 +22,9 @@
 			base.OnStateEnter();
 
 			_entityMovement.MoveToPoint(_targetPoint);
+
+			_entityMovement.DestinationReached -= DestinationReached;
+			_entityMovement.DestinationReached += DestinationReached;
 		}
 
 		public override void OnStateExit()
@@ -29,6 +32,7 @@
 			base.OnStateExit();
 
 			_entityMovement.StopMovement();
+			_entityMovement.DestinationReached -= DestinationReached;
 		}
 
 		public override void OnUpdate()
@@ -38,6 +42,11 @@
 				IAttackable target = _entityDetection.GetNearestAttackableOpponent();
 				_stateOwner.GetComponent<EntityFSM>().OrderAttack(target);
 			}
+		}
+
+		private void DestinationReached(object sender, EntityMovement.DestinationReachedArgs e)
+		{
+			_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
 		}
 	}
 }
