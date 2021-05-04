@@ -1,0 +1,86 @@
+CTS Performance Optimisation
+====================
+
+The CTS terrain shader is a profile driven shader, which means that you can generate as many profiles as you like, and apply them any time you want. 
+
+CTS profiles keep their settings as you switch between design time and runtime. This allows you to configure your profile exactly the way you want in game, and retain the settings when you exit back to editor mode.
+
+The default profiles have been configured to use 2k textures which brings out the best in the textures, however this comes at a cost as there is more data being moved to the GPU. To use them first Add CTS to your terrain : Window -> CTS -> Add CTS To Terrains. Then click on a profile and select Apply Profile.
+
+In terms of GPU cost the performance will decrease and the framerate will decrease as you choose more sophisticated shaders:
+
+* Unity Shader - Faster until you use more than 8 textures, then CTS basic is generally the faster because it is a 1 pass shader.
+
+* Lite Shader - Fastest shader - best for mobile or VR or any scene where you have strict performance requirements. Missing snow and triplanar,
+
+* Basic Shader - Fast shader - good	fast shader. Adds snow and per texture triplanar. Traplanar should only be used on cliffs.
+
+* Advanced Shader - All of basic shader plus height blending and texture based AO - more sophisticated but also more expensive / slightly slower.
+
+* Tesselation Shader - All of advanced shader plus tesselation - the most expensive shader - many AAA games will even struggle with tesselation.
+
+
+While CTS runs very well on modern GPUs, you can have issues on older GPUs. It's always a balance between visual quality and speed so try the following things:
+
+USE PERFORMANCE BASED PROFILES:
+Create different CTS profiles for the same terrain. Switch between them at runtime based on the performance of your customers machines. If performance really does tank, then swap in a Unity shader based profile.
+
+SHADER SPEEDS:
+Switch down to a faster shader. Our "lite" shader is still considerably nicer than the unity terrain shader.
+
+TESSELATION:
+Tesselation is expensive and in general should not be used unless targeting your game at modern desktop systems. Tesselation strength should be treated like normals. Add a litte just for a small but nice effect. Reduce the Density in the Global Tesselation settings - you dont need a very high density to get a good result 7 is a good default. Reduce the Tesselation Max Distance and therefore the amount of work your GPU needs to do.
+
+TRIPLANAR:
+Triplanar is designed to reduce stretching on vertical walls, however it is a more expensive effect requiring 9 texture samples instead one. Make sure that Triplanar is only enabled on textures that have steep faces or preferably not at all. If pushed for performance then disable completely.
+
+AO SETTINGS:
+Change to cheaper AO or disable it altogether. None - Cheapest, then Normal Map based, then Texture based - most expensive.
+
+COLORMAP SETTINGS:
+Set close and far to zero. This will remove color maps from calculations and speed things up.
+
+CUTOUT SETTINGS:
+Cutouts are expensive. Set up cutouts only on the terrains where needed - for all other terrains run the normal shaders.
+
+DETAIL SETTINGS:
+Set close and far to zero. This will remove details from calculations and speed things up.
+
+GEOLOGICAL SETTINGS:
+Set close and far to zero. This will remove gelogical settings from calculations and speed things up.
+
+OPTIMISATION SETTINGS:
+
+-- CTS TEXTURE SIZES:
+Reduce albedo and normal texture size to 1024 (or smaller) and rebake. This will reduce the visual quality of the texture, but will also reduce the amount of data being sent to GPU.
+
+-- CTS TEXTURE COMPRESSION:
+This should always be set to on. However on WebGL does not support compressed textures and you should switch them off, choose a faster shader, and reduce your textures sizes to offset the slowdown.
+
+-- CTS LOD DISTANCE:
+Reduce LOD distance. This will reduce the distance before cheaper LOD render settings are applied and increase framerate.
+
+-- RUNTIME OPTIMIZATION:
+Enable Strip Textures under Runtime Optimization tab. This will remove terrain textures and ensure that CTS is the one pass shader it was designed to be. With every 4 additional textures you will see a speedup from CTS as the number of batches is reduced when compared to Unity terrain.
+
+--BUILD OPTIMIZATION:
+You can disconnect your CTS profile to remove unnecessary texture and CTS profile references in a build. This will reduce build size and memory footprint of CTS. Please refer to the instructions in the general readme for details.
+
+
+GENERAL TERRAIN SETTINGS:
+* Make sure that terrain size is a power of two eg 256x256, or 512x512, 1024x1024, 2048x2048, 4096x4096 etc. 
+* Its generally good practice to make the heightmap half the sizeof the terrain (+1). 
+* Make the control settings and other settings half the size of the terrain as well. 
+* Increase terrain pixel error to increase FPS. 
+* Resist the desire at add lots of different textures and grasses to your terrain. The more you add the more it costs to render them.
+
+GENERAL QUALITY SETTINGS:
+We all want the best quality but reducing visual quality increases FPS. Instead of Beautiful try Good or Fast etc. CTS handles changes in quality settings quite well.
+
+GENERAL SHADOW SETTINGS:
+The default shadow distance is 150m. You can increase this to get nicer looking environments with more shadows but this comes at the cost of FPS.
+
+GENERAL POST FX:
+Post FX such as AO can be expensive. Experiment with them.
+
+For more performance tips check out : http://www.procedural-worlds.com/gaia/tutorials/mobile-unity-scene-optimisation-with-gaia/

@@ -1,0 +1,97 @@
+
+#define _TERRAIN_INSTANCED_PERPIXEL_NORMAL
+
+#ifndef LIGHTWEIGHT_TERRAIN_LIT_PASSES_INCLUDED
+#define LIGHTWEIGHT_TERRAIN_LIT_PASSES_INCLUDED
+
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+#if defined(UNITY_INSTANCING_ENABLED) && defined(_TERRAIN_INSTANCED_PERPIXEL_NORMAL)
+    #define ENABLE_TERRAIN_PERPIXEL_NORMAL
+#endif
+
+#ifdef UNITY_INSTANCING_ENABLED
+    TEXTURE2D(_TerrainHeightmapTexture);
+    TEXTURE2D(_TerrainNormalmapTexture);
+    SAMPLER(sampler_TerrainNormalmapTexture);
+    float4 _TerrainHeightmapRecipSize;   // float4(1.0f/width, 1.0f/height, 1.0f/(width-1), 1.0f/(height-1))
+    float4 _TerrainHeightmapScale;       // float4(hmScale.x, hmScale.y / (float)(kMaxHeight), hmScale.z, 0.0f)
+#endif
+
+UNITY_INSTANCING_BUFFER_START(Terrain)
+    UNITY_DEFINE_INSTANCED_PROP(float4, _TerrainPatchInstanceData)  // float4(xBase, yBase, skipScale, ~)
+UNITY_INSTANCING_BUFFER_END(Terrain)
+
+
+
+
+void InitializeInputData(float2 texCord,
+	inout float3 WorldSpaceNormal,
+	inout float3 WorldSpaceTangent,
+	inout float3 WorldSpaceBiTangent)
+{
+	half3 normalTS = half3(0.0h, 0.0h, 1.0h);
+
+
+#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
+	float2 sampleCoords = (texCord / _TerrainHeightmapRecipSize.zw + 0.5f) * _TerrainHeightmapRecipSize.xy;
+	WorldSpaceNormal = TransformObjectToWorldNormal(normalize(SAMPLE_TEXTURE2D(_TerrainNormalmapTexture, sampler_TerrainNormalmapTexture, sampleCoords).rgb * 2 - 1));
+	WorldSpaceTangent = cross(GetObjectToWorldMatrix()._13_23_33, WorldSpaceNormal)*-1;
+	WorldSpaceNormal = TransformTangentToWorld(normalTS, half3x3(WorldSpaceTangent, cross(WorldSpaceNormal, WorldSpaceTangent), WorldSpaceNormal));
+	WorldSpaceNormal = NormalizeNormalPerPixel(WorldSpaceNormal);
+
+	WorldSpaceBiTangent = normalize(cross(WorldSpaceNormal, WorldSpaceTangent) * -1);
+#endif	
+
+
+	
+
+}
+
+						
+
+
+
+
+void TerrainInstancing(inout float4 vertex, inout float3 normal, inout float2 uv)
+{
+#ifdef UNITY_INSTANCING_ENABLED
+    float2 patchVertex = vertex.xy;
+    float4 instanceData = UNITY_ACCESS_INSTANCED_PROP(Terrain, _TerrainPatchInstanceData);
+
+    float2 sampleCoords = (patchVertex.xy + instanceData.xy) * instanceData.z; // (xy + float2(xBase,yBase)) * skipScale
+    float height = UnpackHeightmap(_TerrainHeightmapTexture.Load(int3(sampleCoords, 0)));
+
+    vertex.xz = sampleCoords * _TerrainHeightmapScale.xz;
+    vertex.y = height * _TerrainHeightmapScale.y;
+
+    #ifdef ENABLE_TERRAIN_PERPIXEL_NORMAL
+        normal = float3(0, 1, 0);
+    #else
+        normal = _TerrainNormalmapTexture.Load(int3(sampleCoords, 0)).rgb * 2 - 1;
+    #endif
+    uv = sampleCoords * _TerrainHeightmapRecipSize.zw;
+#endif
+}
+
+void TerrainInstancing(inout float4 vertex, inout float3 normal)
+{
+#ifdef UNITY_INSTANCING_ENABLED
+	float2 patchVertex = vertex.xy;
+	float4 instanceData = UNITY_ACCESS_INSTANCED_PROP(Terrain, _TerrainPatchInstanceData);
+
+	float2 sampleCoords = (patchVertex.xy + instanceData.xy) * instanceData.z; // (xy + float2(xBase,yBase)) * skipScale
+	float height = UnpackHeightmap(_TerrainHeightmapTexture.Load(int3(sampleCoords, 0)));
+
+	vertex.xz = sampleCoords * _TerrainHeightmapScale.xz;
+	vertex.y = height * _TerrainHeightmapScale.y;
+
+#ifdef ENABLE_TERRAIN_PERPIXEL_NORMAL
+	normal = float3(0, 1, 0);
+#else
+	normal = _TerrainNormalmapTexture.Load(int3(sampleCoords, 0)).rgb * 2 - 1;
+#endif
+
+#endif
+}
+#endif

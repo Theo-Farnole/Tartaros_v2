@@ -1,0 +1,182 @@
+v2019.1.6
+- Changed URP shaders to prevent an unity issue with URP shadow cascades (black ring artifacts being rendered on the terrain)
+- Support for SRP versions 7.2.0 to 7.3.1 added.  The summary of supported SRP versions is:
+
+	SRP 4.8 in Unity 2018.3 & 2018.4
+	SRP 5.7.2 in Unity 2019.1
+	SRP 6.9.1 in Unity 2019.2
+	SRP 7.2.0 - 7.3.1 in Unity 2019.3
+
+	We will continue to support higher Unity & SRP versions with future releases.
+
+v2019.1.5
+- Support for SRP 7.1.8 added. This release includes new URP/HDRP shaders that are compatible with SRP 7.1.8 and therefore CTS can be used in URP / HDRP under Unity 2019.3 now. The summary of supported SRP versions is:
+
+	SRP 4.8 in Unity 2018.3 & 2018.4
+	SRP 5.7.2 in Unity 2019.1
+	SRP 6.9.1 in Unity 2019.2
+	SRP 7.1.8 in Unity 2019.3
+
+	We will continue to support higher Unity & SRP versions with future releases.
+
+- Support for the unity terrain hole system added in Built-in and URP rendering. Activate the "Use Cutout" feature in the CTS component to display terrain holes drawn with the terrain inspector. The original controls for cutouts / holes in CTS still work so you can use them in addition to the hole painting system.
+- Optimizations for Snow and Detail normal maps: If the snow and / or the detail normal map feature is not used, CTS will now remove those textures from the texture array to save memory
+- Fixed a bug where baking an array with the normal map resolution being higher than the albedo map resolution could result in an error
+- Fixed a bug where switching the hole texture back to "None" would not update the CTS material.
+
+
+v2019.1.4
+- Support for SRP 6.9.1 added. This release includes new LWRP/HDRP shaders that are compatible with SRP 6.9.1 and therefore CTS can be used in HDRP / LWRP under Unity 2019.2 now. The summary of supported SRP versions is:
+
+	SRP 4.8 in Unity 2018.3 & 2018.4
+	SRP 5.7.2 in Unity 2019.1
+	SRP 6.9.1 in Unity 2019.2
+
+	We will continue to support higher Unity & SRP versions with future updates.
+
+- Improved shader installation: CTS will now use only the shaders of the rendering pipeline that is currently active, and will prompt you to install shaders when using a different pipeline. When CTS notices that the current shader are not matching the rendering pipeline, it will request you to run a shader installation via Window menu via Window > Procedural Worlds > CTS > Shader Installation. It is recommended to perform this installation in an empty scene to prevent any errors from switching out the terrain shaders while they are still being used for rendering.
+- Per-pixel normals on instanced terrain: CTS now uses per pixel normals on terrains that have the "Draw Instanced" setting enabled. This means greatly improved visual quality on distant terrains.
+- The weather manager has now a list of texture IDs to exclude from seasonal tinting. In this way you can apply seasonal tint to only some of your textures while leaving others untouched.
+- Added options to bake normal maps and color maps for all terrains in one go in the CTS Window menu.
+- Fixed a bug where activating the "use cutout" checkbox would not automatically update the CTS shader until textures were baked again
+
+
+v2019.1.3
+- Support for SRP 5.7 added. This release includes new LWRP/HDRP shaders that are compatible with SRP 5.7 and therefore can be used under Unity 2019.1. Please use these shaders with the LWRP / HDRP packages in version 5.7 installed.
+- Shader library added: To support multiple versions of the SRP CTS now contains a library of shaders for the different SRP versions. The shaders in the library are deactivated by default by having their extension renamed. The correct shader version will automatically be activated by CTS according to your unity version (currently 2018 = 4.8, 2019 = 5.7)
+The shaders for the builtin pipeline are not depending on the SRP version and can be found in the CTS\Shader directory as before. The SRP Shaders can be found in a folder corresponding to the active SRP version number. If SRP 4.8 shaders are active, you can find those under CTS\Shader\4.8 for example. Normally you won't need to interfere with the shaders, but if you want to optimize you can remove or rename unused shaders in this directory.
+- Disconnecting Profiles will export the resulting splat maps uncompressed
+We noticed during development that compression on the splatmaps can result in noticeable, blocky artifacts on the terrain, therefore the splatmaps are exported uncompressed to get a texture distribution that corresponds 1:1 to the original terrain. If you are concerned about filesize you can still apply compression in the import settings for the splatmaps.
+- Improved stability for package import in Unity 2019.1 and above
+- Demo scenes were reviewed to better function across the different SRP versions. If you change the rendering pipeline or add / remove the post processing installation while a demo scene is open, please make sure the scene view is open so that the demo scene can adapt to these changes, alternatively you can alsp press the "Reset Lighting" button in the demo scene controller.
+- The "Strip Textures" optimization setting was disabled per default for profiles in 2019.1 as it creates problems with the unity terrain grass in a build. You can still get a even better performance gain than "Strip Textures" by disconnecting your profile for the build.
+- The CTS texture arrays are now created with an anisotropic filtering level of 4 per default, as we noticed this brings a noticeable performance gain in Unity 2018.3+
+- Terrain normal maps are now being added to the CTS component directly after baking them
+- Added an entry field for custom render queue order for the CTS Shader. Please use this only if required for your own shader development, leave the value at "-1" otherwise.
+- Changed the warning message for missing profile when adding CTS to the terrain to a "softer" info message
+- Fixed a potential bug for the new Unity 2018.4 LTS release
+- Assetdatabase refresh / saving is now only performend once after texture baking when both Albedo and Normal arrays are being updated
+- Fixed a bug that would invert normal maps when instancing was disabled in HDRP
+- Fixed a bug where splatmaps would not be updated in the CTS shader when a new profile was created based on an existing profile
+
+
+
+v2019.1.2
+- Support for changed treatment of scripts in Unity 2019.1 import process
+- Made the directory check for old versions of CTS less aggressive, should only find folders called CTS now
+- Added a check for maximum texture limit
+- Fixed an error when CTS 2019 is installed in versions earlier than 2018.3
+- Fixed issue with the LOD snow shader when individual textures had set a low snow power
+- Fixed an issue with snow noise when individual textures has set a low snow power
+- Fixed a potential cause for seeing a black terrain when selecting a CTS profile
+- Disconnecting Profiles sets the texture wrap mode to "Clamp" for the resulting splat maps
+
+v2019.1.1
+-Fixed a bug where CTS would throw a compilation error after installation
+
+v2019
+
+**Read this first:**
+
+CTS now uses a different folder structure, it will be installed under
+
+Assets/Procedural Worlds/CTS
+instead of
+Assets/CTS
+
+It is therefore recommended to backup all files from your previous CTS installation if you need them (E.g. profiles that you created and that are still placed inside the CTS folder), then remove the original directory and then install the package.
+If you don't do this CTS will still function but you will have two CTS folders in your hierarchy with the CTS contents split across them. It is in theory possible to merge the folders, but we really recommend doing a clean install after removing the older version.
+
+**Known Issues**
+
+The demo scenes included in v2019 are adapted to the Unity 2018.3 terrain changes. Opening these scenes in older versions of unity might result in visual issues.
+The tessellation shader type is not available when the "Draw Instanced" or LWRP or HDRP is active at the same time. This is not a bug, but a technical limitation of instanced rendering / the rendering pipelines.
+There currently is an issue with switching profiles during runtime in a build when "Draw Instanced" is enabled. We currently assume this is an Unity bug or "by design" regarding the instanced rendering, but there is a workaround if needed.
+The cutout feature is currently not working in LWRP & HDRP, we are still investigating this at the moment.
+When working in HDRP, the terrain might appear a bit darker than if rendered by the default unity terrain shader due to the different rendering techniques applied in HDRP. To mitigate this, you can adjust the following settings in the CTS profile:
+
+-Global Smoothness
+-Ambient Occlusion Power
+-Texture Brightness
+-Texture Normal Power
+-Detail Map settings
+-Color Map settings
+-Geographical settings
+
+The HD SRP pipeline is currently a preview and is evolving rapidly. We are exploring how to get similar rendering results across all pipelines without having to adjust CTS profiles for each pipeline.
+
+**Rendering Pipelines:**
+If you plan to use rendering pipelines in your project, you need to install additional packages from the package manager. Please install these packages IN THE EXACT VERSION:
+
+Lightweight RP 4.8.0 (for use of the Lightweight Rendering Pipeline)
+High Definition RP 4.8.0 (for use of the High Definition Rendering Pipeline)
+Core RP Library 4.8.0 (for use of the High Definition Rendering Pipeline)
+
+Choosing the right version is important, else the shaders will not work correctly! In a project that is using a LWRP / HDRP asset in the Graphics settings, CTS will pick the correct shader automatically upon profile creation. If the rendering pipeline is switched in an existing project, you just need to select the terrain in your project hierarchy or re-apply the CTS profile to update to the correct shader type.
+When you switch rendering pipelines and open the demo scenes again, it would be best to apply the different profiles once to the terrain in the editor to make sure all profiles are switched to the new rendering pipeline before running the demo scene & switching during runtime.
+
+Please note that the scripted rendering pipelines are still considered an experimental preview feature by unity and are still in active development. You might run into issues such as crashes or visual issues while using those pipelines. While we do everything possible to make SRP usage as convenient as possible for you, we can't rule out that you won't run into any issues since the pipeline development itself lies beyond our control.
+LWRP and HDRP support will continue and improve further with the coming versions of CTS.
+
+**Misc**
+
+The recommended texture formats for target platforms originate from this unity manual page: <https://docs.unity3d.com/Manual/class-TextureImporterOverride.html>
+The default material for switching back to unity rendering when using SRPs is taken from RenderPipelineAsset.GetDefaultTerrainMaterial()
+
+Native substance support will work as before in the older unity versions. In the newer versions you can install the Allegorithmic Plugin for substances from the asset store:
+https://assetstore.unity.com/packages/tools/utilities/substance-in-unity-110555
+When that is installed, CTS will allow you to reference a substance for each texture just as with native support before.
+
+If you are using the High Definition Render Pipeline, a  HDRP scene settings prefab will automatically be added to the scene when pressing play. You can add this prefab to the scene hierarchy manually as well to preview / adjust the scene settings during design time.
+
+**Changelog v 2019**
+
+Fixed an issue with bad LOD switching when using Snow
+Added selection fields for custom albedo and normal texture compression formats. CTS will display warning boxes if the selected format is not suitable for your target platform.
+Fixed an issue where CTS would override the "Detail Resolution per Patch" value with 64. In 2018.3 this value is now kept correctly, in versions 2018.2 and below you can enter a desired target value in the optimization settings.
+Fixed an issue where CTS would ignore the existing splatmaps on the terrain in rare cases
+Added a checkbox to seasonal tint in the CTS weather manager that allows you to switch off seasonal tint while keeping the other weather manager features.
+The rain value in the weather manager will now influence global profile smoothness instead of overriding individual texture smoothness.
+CTS will use the correct default rendering material of the current rendering pipeline when switching shader type to "Unity"
+Added support for the new terrain layer system in Unity versions 2018.3 and above. CTS will create new layers in the CTS/Profile/TerrainLayers folder
+Added substance support when the Allegorithmic substance plugin is installed
+Moved CTS material application from Start() to OnEnable() to prevent issues when using CTS with the Vegetation System asset
+Aligned the CTS menu and folder structure with the other Procedural Worlds products
+Added a confirmation popup message when using the "Apply profile" button to prevent accidental profile application
+Fixed an issue with runtime profile switching in a build
+Added detection of the current rendering pipeline for future support of LWRP and HDRP
+Added LWRP and HDRP compatible shaders
+Added detection for rendering pipeline and CTS shader mismatch
+Added support for the unity "Draw Instanced" terrain setting, added a checkbox for this in the CTS profile.
+Changed demo scenes to use Post Processing Stack v2 instead of v1
+Added HDRP Scene settings for the demo scenes.
+Added a configurable path for terrain layer asset files in the CTS profile 
+
+** Disconnecting & Reconnecting Profiles **
+
+Added a new feature to disconnect / reconnect CTS profiles: 
+Disconnecting a profile means CTS will create a persistent material for that terrain, and remove all references to terrain textures and the CTS profile itself. This is useful to reduce build duration / filesize and make CTS terrains as low profile as possible in terms of memory / filesize usage. 
+
+Disconnecting a profile will:
+-Create a persistent material in the Profiles\Material folder
+-Create persistent copy of the terrain splatmaps in the Profiles\Splatmaps folder
+-Remove references to the CTS profile, normal, color map and cutout mask texture
+-Remove all splatmap prototypes / terrain layers from the terrain
+-Remove all splatmaps from the terrain data object
+ 
+Connecting a profile will
+-Re-apply the last used CTS profile to the terrain to restore a full editable state again (as before the disconnect)
+-Restore all splatmap prototypes / terrain layers on the terrain (based on the CTS profile info)
+-Restore the  profile, normal, color map and cutout mask texture in the CTS component
+-Restore the terrain splatmaps in the terrain data object from the persistent copies
+
+You can disconnect / reconnect via a button on the CTS component on the terrain, or perform these operation en masse with two new Window menu entries:
+
+Disconnect ALL Terrains
+Reconnect ALL Terrains
+
+This system is limited in so far as that it relies on the associated files staying intact between disconnect and reconnect. If you would delete the persistent copies of the splatmaps for example, it is not possible to restore the splatmap again later on reconnect. It is recommended to use this only before/after a build and to back up your project first.
+
+
+
+

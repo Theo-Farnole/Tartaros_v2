@@ -1,0 +1,4 @@
+The Shader directory contains the shaders for the built-in rendering pipeline as well as "Library"-folders which contain the shaders for the Scripted Rendering Pipelines (HDRP/LWRP/URP) in their respective version. CTS will install the correct shaders from the library according to your Unity version.
+Upon installation it will take the files contained in the library folder and will turn them into usable shader files in a folder named after the current SRP version number.
+
+You should normally not need to manipulate the contents of these folders. If you want to reduce the number of shaders in use, you can handpick the shaders you actually want to use, and disable the rest by renaming or deleting them.

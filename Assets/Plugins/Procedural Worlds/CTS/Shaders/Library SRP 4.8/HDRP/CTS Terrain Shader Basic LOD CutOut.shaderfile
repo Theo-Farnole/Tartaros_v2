@@ -1,0 +1,2762 @@
+Shader "CTS/HDRP/CTS Terrain Shader Basic LOD CutOut"
+{
+	/*CustomNodeUI:HDPBR*/
+    Properties
+    {
+		_Geological_Tiling_Far("Geological_Tiling_Far", Range( 0 , 1000)) = 87
+		_Geological_Map_Offset_Far("Geological_Map_Offset _Far", Range( 0 , 1)) = 1
+		_Geological_Map_Far_Power("Geological_Map_Far_Power", Range( 0 , 1)) = 1
+		_Global_Color_Map_Far_Power("Global_Color_Map_Far_Power", Range( 0 , 10)) = 0
+		_Perlin_Normal_Tiling_Far("Perlin_Normal_Tiling_Far", Range( 0.01 , 1000)) = 40
+		_Perlin_Normal_Power("Perlin_Normal_Power", Range( 0 , 10)) = 1
+		_Terrain_Smoothness("Terrain_Smoothness", Range( 0 , 2)) = 1
+		_Global_Color_Opacity_Power("Global_Color_Opacity_Power", Range( 0 , 1)) = 0
+		_Terrain_Specular("Terrain_Specular", Range( 0 , 3)) = 1
+		_Global_Normalmap_Power("Global_Normalmap_Power", Range( 0 , 10)) = 0
+		_Texture_1_Tiling("Texture_1_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_2_Tiling("Texture_2_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_3_Tiling("Texture_3_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_4_Tiling("Texture_4_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_5_Tiling("Texture_5_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_6_Tiling("Texture_6_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_7_Tiling("Texture_7_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_8_Tiling("Texture_8_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_9_Tiling("Texture_9_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_10_Tiling("Texture_10_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_11_Tiling("Texture_11_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_12_Tiling("Texture_12_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_13_Tiling("Texture_13_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_14_Tiling("Texture_14_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_15_Tiling("Texture_15_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_16_Tiling("Texture_16_Tiling", Range( 0.0001 , 100)) = 15
+		_Texture_1_Far_Multiplier("Texture_1_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_2_Far_Multiplier("Texture_2_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_3_Far_Multiplier("Texture_3_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_4_Far_Multiplier("Texture_4_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_5_Far_Multiplier("Texture_5_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_6_Far_Multiplier("Texture_6_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_7_Far_Multiplier("Texture_7_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_8_Far_Multiplier("Texture_8_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_9_Far_Multiplier("Texture_9_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_10_Far_Multiplier("Texture_10_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_11_Far_Multiplier("Texture_11_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_12_Far_Multiplier("Texture_12_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_13_Far_Multiplier("Texture_13_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_14_Far_Multiplier("Texture_14_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_15_Far_Multiplier("Texture_15_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_16_Far_Multiplier("Texture_16_Far_Multiplier", Range( 0 , 10)) = 3
+		_Texture_1_Perlin_Power("Texture_1_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_2_Perlin_Power("Texture_2_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_3_Perlin_Power("Texture_3_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_4_Perlin_Power("Texture_4_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_5_Perlin_Power("Texture_5_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_6_Perlin_Power("Texture_6_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_7_Perlin_Power("Texture_7_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_8_Perlin_Power("Texture_8_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_9_Perlin_Power("Texture_9_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_10_Perlin_Power("Texture_10_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_11_Perlin_Power("Texture_11_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_12_Perlin_Power("Texture_12_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_13_Perlin_Power("Texture_13_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_14_Perlin_Power("Texture_14_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_15_Perlin_Power("Texture_15_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_16_Perlin_Power("Texture_16_Perlin_Power", Range( 0 , 1)) = 0
+		_Texture_1_Geological_Power("Texture_1_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_2_Geological_Power("Texture_2_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_3_Geological_Power("Texture_3_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_4_Geological_Power("Texture_4_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_5_Geological_Power("Texture_5_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_6_Geological_Power("Texture_6_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_Array_Normal("Texture_Array_Normal", 2DArray ) = "" {}
+		_Texture_7_Geological_Power("Texture_7_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_8_Geological_Power("Texture_8_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_Array_Albedo("Texture_Array_Albedo", 2DArray ) = "" {}
+		_Texture_9_Geological_Power("Texture_9_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_10_Geological_Power("Texture_10_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_11_Geological_Power("Texture_11_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_12_Geological_Power("Texture_12_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_13_Geological_Power("Texture_13_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_14_Geological_Power("Texture_14_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_15_Geological_Power("Texture_15_Geological_Power", Range( 0 , 5)) = 1
+		_Texture_16_Geological_Power("Texture_16_Geological_Power", Range( 0 , 5)) = 1
+		_Snow_Specular("Snow_Specular", Range( 0 , 3)) = 1
+		_Snow_Amount("Snow_Amount", Range( 0 , 2)) = 0
+		_Snow_Perlin_Power("Snow_Perlin_Power", Range( 0 , 1)) = 0
+		_Snow_Min_Height("Snow_Min_Height", Range( -1000 , 10000)) = -1000
+		_Snow_Min_Height_Blending("Snow_Min_Height_Blending", Range( 0 , 500)) = 1
+		_Snow_Maximum_Angle("Snow_Maximum_Angle", Range( 0.001 , 180)) = 30
+		_Snow_Maximum_Angle_Hardness("Snow_Maximum_Angle_Hardness", Range( 0.01 , 3)) = 1
+		_Texture_1_Snow_Reduction("Texture_1_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_2_Snow_Reduction("Texture_2_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_3_Snow_Reduction("Texture_3_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_4_Snow_Reduction("Texture_4_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_5_Snow_Reduction("Texture_5_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_6_Snow_Reduction("Texture_6_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_7_Snow_Reduction("Texture_7_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_8_Snow_Reduction("Texture_8_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_9_Snow_Reduction("Texture_9_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_10_Snow_Reduction("Texture_10_Snow_Reduction", Range( 0 , 1)) = 0
+		_Snow_Noise_Power("Snow_Noise_Power", Range( 0 , 1)) = 1
+		_Snow_Noise_Tiling("Snow_Noise_Tiling", Range( 0.001 , 1)) = 0.02
+		_Texture_11_Snow_Reduction("Texture_11_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_12_Snow_Reduction("Texture_12_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_13_Snow_Reduction("Texture_13_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_14_Snow_Reduction("Texture_14_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_15_Snow_Reduction("Texture_15_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_16_Snow_Reduction("Texture_16_Snow_Reduction", Range( 0 , 1)) = 0
+		_Texture_Perlin_Normal_Index("Texture_Perlin_Normal_Index", Int) = -1
+		_Texture_Splat_1("Texture_Splat_1", 2D) = "black" {}
+		_Texture_Splat_2("Texture_Splat_2", 2D) = "black" {}
+		_Texture_Splat_3("Texture_Splat_3", 2D) = "black" {}
+		_Texture_Splat_4("Texture_Splat_4", 2D) = "black" {}
+		_Global_Normal_Map("Global_Normal_Map", 2D) = "bump" {}
+		_Texture_Geological_Map("Texture_Geological_Map", 2D) = "white" {}
+		_Texture_4_Color("Texture_4_Color", Vector) = (1,1,1,1)
+		_Snow_Color("Snow_Color", Vector) = (1,1,1,1)
+		_Texture_16_Color("Texture_16_Color", Vector) = (1,1,1,1)
+		_Texture_8_Color("Texture_8_Color", Vector) = (1,1,1,1)
+		_Texture_7_Color("Texture_7_Color", Vector) = (1,1,1,1)
+		_Texture_6_Color("Texture_6_Color", Vector) = (1,1,1,1)
+		_Texture_5_Color("Texture_5_Color", Vector) = (1,1,1,1)
+		_Texture_3_Color("Texture_3_Color", Vector) = (1,1,1,1)
+		_Texture_13_Color("Texture_13_Color", Vector) = (1,1,1,1)
+		_Texture_15_Color("Texture_15_Color", Vector) = (1,1,1,1)
+		_Texture_14_Color("Texture_14_Color", Vector) = (1,1,1,1)
+		_Texture_9_Color("Texture_9_Color", Vector) = (1,1,1,1)
+		_Texture_12_Color("Texture_12_Color", Vector) = (1,1,1,1)
+		_Texture_11_Color("Texture_11_Color", Vector) = (1,1,1,1)
+		_Texture_10_Color("Texture_10_Color", Vector) = (1,1,1,1)
+		_Texture_1_Color("Texture_1_Color", Vector) = (1,1,1,1)
+		_Texture_2_Color("Texture_2_Color", Vector) = (1,1,1,1)
+		_Ambient_Occlusion_Power("Ambient_Occlusion_Power", Range( 0 , 1)) = 1
+		_Texture_10_Albedo_Index("Texture_10_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_9_Albedo_Index("Texture_9_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_11_Albedo_Index("Texture_11_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_12_Albedo_Index("Texture_12_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_13_Albedo_Index("Texture_13_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_14_Albedo_Index("Texture_14_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_8_Albedo_Index("Texture_8_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_7_Albedo_Index("Texture_7_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_15_Albedo_Index("Texture_15_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_16_Albedo_Index("Texture_16_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_6_Albedo_Index("Texture_6_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_3_Albedo_Index("Texture_3_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_2_Albedo_Index("Texture_2_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_5_Albedo_Index("Texture_5_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_4_Albedo_Index("Texture_4_Albedo_Index", Range( -1 , 100)) = -1
+		_Texture_1_Albedo_Index("Texture_1_Albedo_Index", Range( -1 , 100)) = -1
+		[Toggle(_USE_AO_ON)] _Use_AO("Use_AO", Float) = 0
+		_Global_Color_Map("Global_Color_Map", 2D) = "white" {}
+		_Texture_Snow_Average("Texture_Snow_Average", Vector) = (0,0,0,0)
+		_Remove_Vert_Height("Remove_Vert_Height", Range( -10000 , 10000)) = -1000
+		_Global_Color_Map_Scale("Global_Color_Map_Scale", Float) = 1
+		_Global_Color_Map_Offset("Global_Color_Map_Offset", Vector) = (0,0,0,0)
+		_Texture_Additional_Masks("Texture_Additional_Masks", 2D) = "white" {}
+		[HideInInspector] _texcoord( "", 2D ) = "white" {}
+    }
+
+    SubShader
+    {
+		
+        Tags { "RenderPipeline"="HDRenderPipeline" "RenderType"="Opaque" "Queue"="Geometry" }
+        
+		Cull Back
+		Blend One Zero , One Zero
+		ZTest LEqual
+		ZWrite On
+		ZClip [_ZClip]
+
+		HLSLINCLUDE
+		#pragma target 4.5
+		#pragma only_renderers d3d11 ps4 xboxone vulkan metal switch
+		#pragma multi_compile_instancing
+		#pragma instancing_options renderinglayer
+		#pragma multi_compile _ LOD_FADE_CROSSFADE
+
+		struct GlobalSurfaceDescription
+		{
+			//Standard
+			float3 Albedo;
+			float3 Normal;
+			float3 Specular;
+			float Metallic;
+			float3 Emission;
+			float Smoothness;
+			float Occlusion;
+			float Alpha;
+			float AlphaClipThreshold;
+			float CoatMask;
+			//SSS
+			uint DiffusionProfile;
+			float SubsurfaceMask;
+			//Transmission
+			float Thickness;
+			// Anisotropic
+			float3 TangentWS;
+			float Anisotropy; 
+			//Iridescence
+			float IridescenceThickness;
+			float IridescenceMask;
+			// Transparency
+			float IndexOfRefraction;
+			float3 TransmittanceColor;
+			float TransmittanceAbsorptionDistance;
+			float TransmittanceMask;
+		};
+
+		struct AlphaSurfaceDescription
+		{
+			float Alpha;
+			float AlphaClipThreshold;
+		};
+
+		ENDHLSL
+		
+        Pass
+        {
+			
+            Name "GBuffer"
+            Tags { "LightMode"="GBuffer" }    
+			Stencil
+			{
+				Ref 2
+				WriteMask 7
+				Comp Always
+				Pass Replace
+				Fail Keep
+				ZFail Keep
+			}
+
+     
+            HLSLPROGRAM
+        	//#define UNITY_MATERIAL_LIT
+			#pragma vertex Vert
+			#pragma fragment Frag
+			
+			#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
+			#define _NORMALMAP 1
+			#define _ALPHATEST_ON 1
+			#pragma multi_compile __ _USE_AO_ON
+			#include "TerrainVertexCTSHD.hlsl"
+			#pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
+
+		
+        
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Wind.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/NormalSurfaceGradient.hlsl"        
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
+        
+            #define SHADERPASS SHADERPASS_GBUFFER
+            #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile _ DYNAMICLIGHTMAP_ON
+            #pragma multi_compile _ SHADOWS_SHADOWMASK
+            #define ATTRIBUTES_NEED_NORMAL
+            #define ATTRIBUTES_NEED_TANGENT
+            #define ATTRIBUTES_NEED_TEXCOORD1
+            #define ATTRIBUTES_NEED_TEXCOORD2
+            #define VARYINGS_NEED_POSITION_WS
+            #define VARYINGS_NEED_TANGENT_TO_WORLD
+            #define VARYINGS_NEED_TEXCOORD1
+            #define VARYINGS_NEED_TEXCOORD2
+        
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/Lit.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinUtilities.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/MaterialUtilities.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphFunctions.hlsl"
+
+			CBUFFER_START(UnityPerMaterial)
+			half _Global_Color_Map_Far_Power;
+			sampler2D _Global_Color_Map;
+			float2 _Global_Color_Map_Offset;
+			float _Global_Color_Map_Scale;
+			half _Global_Color_Opacity_Power;
+			sampler2D _Texture_Splat_4;
+			sampler2D _Texture_Splat_3;
+			sampler2D _Texture_Splat_2;
+			sampler2D _Texture_Splat_1;
+			half _Texture_1_Albedo_Index;
+			TEXTURE2D_ARRAY( _Texture_Array_Albedo );
+			uniform SAMPLER( sampler_Texture_Array_Albedo );
+			half _Texture_1_Tiling;
+			half _Texture_1_Far_Multiplier;
+			half4 _Texture_1_Color;
+			half _Texture_2_Albedo_Index;
+			half _Texture_2_Tiling;
+			half _Texture_2_Far_Multiplier;
+			half4 _Texture_2_Color;
+			half _Texture_3_Albedo_Index;
+			half _Texture_3_Tiling;
+			half _Texture_3_Far_Multiplier;
+			half4 _Texture_3_Color;
+			half _Texture_4_Albedo_Index;
+			half _Texture_4_Tiling;
+			half _Texture_4_Far_Multiplier;
+			half4 _Texture_4_Color;
+			half _Texture_5_Albedo_Index;
+			half _Texture_5_Tiling;
+			half _Texture_5_Far_Multiplier;
+			half4 _Texture_5_Color;
+			half _Texture_6_Albedo_Index;
+			half _Texture_6_Tiling;
+			half _Texture_6_Far_Multiplier;
+			half4 _Texture_6_Color;
+			half _Texture_7_Albedo_Index;
+			half _Texture_7_Tiling;
+			half _Texture_7_Far_Multiplier;
+			half4 _Texture_7_Color;
+			half _Texture_8_Albedo_Index;
+			half _Texture_8_Tiling;
+			half _Texture_8_Far_Multiplier;
+			half4 _Texture_8_Color;
+			half _Texture_9_Albedo_Index;
+			half _Texture_9_Tiling;
+			half _Texture_9_Far_Multiplier;
+			half4 _Texture_9_Color;
+			half _Texture_10_Albedo_Index;
+			half _Texture_10_Tiling;
+			half _Texture_10_Far_Multiplier;
+			half4 _Texture_10_Color;
+			half _Texture_11_Albedo_Index;
+			half _Texture_11_Tiling;
+			half _Texture_11_Far_Multiplier;
+			half4 _Texture_11_Color;
+			half _Texture_12_Albedo_Index;
+			half _Texture_12_Tiling;
+			half _Texture_12_Far_Multiplier;
+			half4 _Texture_12_Color;
+			half _Texture_13_Albedo_Index;
+			half _Texture_13_Tiling;
+			half _Texture_13_Far_Multiplier;
+			half4 _Texture_13_Color;
+			half _Texture_14_Albedo_Index;
+			half _Texture_14_Tiling;
+			half _Texture_14_Far_Multiplier;
+			half4 _Texture_14_Color;
+			half _Texture_15_Albedo_Index;
+			half _Texture_15_Tiling;
+			half _Texture_15_Far_Multiplier;
+			half4 _Texture_15_Color;
+			half _Texture_16_Albedo_Index;
+			half _Texture_16_Tiling;
+			half _Texture_16_Far_Multiplier;
+			half4 _Texture_16_Color;
+			half _Geological_Map_Far_Power;
+			sampler2D _Texture_Geological_Map;
+			half _Geological_Tiling_Far;
+			half _Geological_Map_Offset_Far;
+			half _Texture_16_Geological_Power;
+			half _Texture_15_Geological_Power;
+			half _Texture_14_Geological_Power;
+			half _Texture_13_Geological_Power;
+			half _Texture_12_Geological_Power;
+			half _Texture_11_Geological_Power;
+			half _Texture_10_Geological_Power;
+			half _Texture_9_Geological_Power;
+			half _Texture_8_Geological_Power;
+			half _Texture_7_Geological_Power;
+			half _Texture_6_Geological_Power;
+			half _Texture_5_Geological_Power;
+			half _Texture_1_Geological_Power;
+			half _Texture_2_Geological_Power;
+			half _Texture_4_Geological_Power;
+			half _Texture_3_Geological_Power;
+			half4 _Texture_Snow_Average;
+			half4 _Snow_Color;
+			half _Snow_Amount;
+			half _Snow_Noise_Tiling;
+			half _Snow_Noise_Power;
+			half _Snow_Maximum_Angle;
+			half _Snow_Maximum_Angle_Hardness;
+			half _Snow_Min_Height;
+			half _Snow_Min_Height_Blending;
+			half _Texture_16_Snow_Reduction;
+			half _Texture_15_Snow_Reduction;
+			half _Texture_13_Snow_Reduction;
+			half _Texture_12_Snow_Reduction;
+			half _Texture_11_Snow_Reduction;
+			half _Texture_9_Snow_Reduction;
+			half _Texture_8_Snow_Reduction;
+			half _Texture_7_Snow_Reduction;
+			half _Texture_5_Snow_Reduction;
+			half _Texture_1_Snow_Reduction;
+			half _Texture_2_Snow_Reduction;
+			half _Texture_3_Snow_Reduction;
+			half _Texture_4_Snow_Reduction;
+			half _Texture_6_Snow_Reduction;
+			half _Texture_10_Snow_Reduction;
+			half _Texture_14_Snow_Reduction;
+			TEXTURE2D_ARRAY( _Texture_Array_Normal );
+			uniform SAMPLER( sampler_Texture_Array_Normal );
+			half _Perlin_Normal_Tiling_Far;
+			int _Texture_Perlin_Normal_Index;
+			half _Perlin_Normal_Power;
+			float _Texture_16_Perlin_Power;
+			float _Texture_15_Perlin_Power;
+			float _Texture_14_Perlin_Power;
+			float _Texture_13_Perlin_Power;
+			float _Texture_12_Perlin_Power;
+			float _Texture_11_Perlin_Power;
+			float _Texture_10_Perlin_Power;
+			float _Texture_9_Perlin_Power;
+			float _Texture_8_Perlin_Power;
+			float _Texture_7_Perlin_Power;
+			float _Texture_6_Perlin_Power;
+			float _Texture_5_Perlin_Power;
+			float _Texture_1_Perlin_Power;
+			float _Texture_2_Perlin_Power;
+			float _Texture_4_Perlin_Power;
+			float _Texture_3_Perlin_Power;
+			half _Snow_Perlin_Power;
+			half _Global_Normalmap_Power;
+			sampler2D _Global_Normal_Map;
+			half _Terrain_Specular;
+			half _Snow_Specular;
+			half _Terrain_Smoothness;
+			half _Ambient_Occlusion_Power;
+			sampler2D _Texture_Additional_Masks;
+			float4 _Texture_Additional_Masks_ST;
+			half _Remove_Vert_Height;
+			CBUFFER_END
+			float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+			float snoise( float2 v )
+			{
+				const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+				float2 i = floor( v + dot( v, C.yy ) );
+				float2 x0 = v - i + dot( i, C.xx );
+				float2 i1;
+				i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+				float4 x12 = x0.xyxy + C.xxzz;
+				x12.xy -= i1;
+				i = mod2D289( i );
+				float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+				float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+				m = m * m;
+				m = m * m;
+				float3 x = 2.0 * frac( p * C.www ) - 1.0;
+				float3 h = abs( x ) - 0.5;
+				float3 ox = floor( x + 0.5 );
+				float3 a0 = x - ox;
+				m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+				float3 g;
+				g.x = a0.x * x0.x + h.x * x0.y;
+				g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+				return 130.0 * dot( m, g );
+			}
+			
+
+            //float3x3 BuildWorldToTangent(float4 tangentWS, float3 normalWS)
+            //{
+        	//    float3 unnormalizedNormalWS = normalWS;
+            //    float renormFactor = 1.0 / length(unnormalizedNormalWS);
+            //    float3x3 worldToTangent = CreateWorldToTangent(unnormalizedNormalWS, tangentWS.xyz, tangentWS.w > 0.0 ? 1.0 : -1.0);
+            //    worldToTangent[0] = worldToTangent[0] * renormFactor;
+            //    worldToTangent[1] = worldToTangent[1] * renormFactor;
+            //    worldToTangent[2] = worldToTangent[2] * renormFactor;
+            //    return worldToTangent;
+            //}
+
+            struct AttributesMesh 
+			{
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+                float4 tangentOS : TANGENT;
+                float4 uv1 : TEXCOORD1;
+                float4 uv2 : TEXCOORD2;
+				float4 ase_texcoord : TEXCOORD0;
+				#if UNITY_ANY_INSTANCING_ENABLED
+				uint instanceID : INSTANCEID_SEMANTIC;
+				#endif
+            };
+
+            struct PackedVaryingsMeshToPS 
+			{
+                float4 positionCS : SV_Position;
+                float3 interp00 : TEXCOORD0;
+                float3 interp01 : TEXCOORD1;
+                float4 interp02 : TEXCOORD2;
+                float4 interp03 : TEXCOORD3;
+				float4 interp04 : TEXCOORD4;
+				float4 ase_texcoord5 : TEXCOORD5;
+				float4 ase_texcoord6 : TEXCOORD6;
+				#if UNITY_ANY_INSTANCING_ENABLED
+				uint instanceID : INSTANCEID_SEMANTIC;
+				#endif
+            };
+        
+			void BuildSurfaceData ( FragInputs fragInputs, GlobalSurfaceDescription surfaceDescription, float3 V, out SurfaceData surfaceData )
+			{
+				ZERO_INITIALIZE ( SurfaceData, surfaceData );
+
+				float3 normalTS = float3( 0.0f, 0.0f, 1.0f );
+				normalTS = surfaceDescription.Normal;
+				GetNormalWS ( fragInputs, normalTS, surfaceData.normalWS );
+
+				surfaceData.ambientOcclusion = 1.0f;
+
+				surfaceData.baseColor = surfaceDescription.Albedo;
+				surfaceData.perceptualSmoothness = surfaceDescription.Smoothness;
+				surfaceData.ambientOcclusion = surfaceDescription.Occlusion;
+
+				surfaceData.materialFeatures = MATERIALFEATUREFLAGS_LIT_STANDARD;
+
+#ifdef _MATERIAL_FEATURE_SPECULAR_COLOR
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SPECULAR_COLOR;
+				surfaceData.specularColor = surfaceDescription.Specular;
+#else
+				surfaceData.metallic = surfaceDescription.Metallic;
+#endif
+
+#if defined(_MATERIAL_FEATURE_SUBSURFACE_SCATTERING) || defined(_MATERIAL_FEATURE_TRANSMISSION)
+				surfaceData.diffusionProfile = surfaceDescription.DiffusionProfile;
+#endif
+
+#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SUBSURFACE_SCATTERING;
+				surfaceData.subsurfaceMask = surfaceDescription.SubsurfaceMask;
+#else
+				surfaceData.subsurfaceMask = 1.0f;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSMISSION
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_TRANSMISSION;
+				surfaceData.thickness = surfaceDescription.Thickness;
+#endif
+
+				surfaceData.tangentWS = normalize ( fragInputs.worldToTangent[ 0 ].xyz );
+				surfaceData.tangentWS = Orthonormalize ( surfaceData.tangentWS, surfaceData.normalWS );
+
+#ifdef _MATERIAL_FEATURE_ANISOTROPY
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_ANISOTROPY;
+				surfaceData.anisotropy = surfaceDescription.Anisotropy;
+
+#else
+				surfaceData.anisotropy = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_CLEAR_COAT;
+				surfaceData.coatMask = surfaceDescription.CoatMask;
+#else
+				surfaceData.coatMask = 0.0f;
+#endif
+
+#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_IRIDESCENCE;
+				surfaceData.iridescenceThickness = surfaceDescription.IridescenceThickness;
+				surfaceData.iridescenceMask = surfaceDescription.IridescenceMask;
+#else
+				surfaceData.iridescenceThickness = 0.0;
+				surfaceData.iridescenceMask = 1.0;
+#endif
+
+				//ASE CUSTOM TAG
+#ifdef _MATERIAL_FEATURE_TRANSPARENCY
+				surfaceData.ior = surfaceDescription.IndexOfRefraction;
+				surfaceData.transmittanceColor = surfaceDescription.TransmittanceColor;
+				surfaceData.atDistance = surfaceDescription.TransmittanceAbsorptionDistance;
+				surfaceData.transmittanceMask = surfaceDescription.TransmittanceMask;
+#else
+				surfaceData.ior = 1.0;
+				surfaceData.transmittanceColor = float3( 1.0, 1.0, 1.0 );
+				surfaceData.atDistance = 1000000.0;
+				surfaceData.transmittanceMask = 0.0;
+#endif
+
+				surfaceData.specularOcclusion = 1.0;
+
+#if defined(_BENTNORMALMAP) && defined(_ENABLESPECULAROCCLUSION)
+				surfaceData.specularOcclusion = GetSpecularOcclusionFromBentAO ( V, bentNormalWS, surfaceData );
+#elif defined(_MASKMAP)
+				surfaceData.specularOcclusion = GetSpecularOcclusionFromAmbientOcclusion ( NdotV, surfaceData.ambientOcclusion, PerceptualSmoothnessToRoughness ( surfaceData.perceptualSmoothness ) );
+#endif
+			}
+
+            void GetSurfaceAndBuiltinData( GlobalSurfaceDescription surfaceDescription , FragInputs fragInputs, float3 V, inout PositionInputs posInput, out SurfaceData surfaceData, out BuiltinData builtinData)
+            {
+        
+#if _ALPHATEST_ON
+				DoAlphaTest ( surfaceDescription.Alpha, surfaceDescription.AlphaClipThreshold );
+#endif
+				BuildSurfaceData( fragInputs, surfaceDescription, V, surfaceData );
+        
+                // Builtin Data
+                // For back lighting we use the oposite vertex normal 
+                InitBuiltinData(surfaceDescription.Alpha, surfaceData.normalWS, -fragInputs.worldToTangent[2], fragInputs.positionRWS, fragInputs.texCoord1, fragInputs.texCoord2, builtinData);
+        
+				builtinData.emissiveColor =             surfaceDescription.Emission;
+                builtinData.distortion =                float2(0.0, 0.0);           // surfaceDescription.Distortion -- if distortion pass
+                builtinData.distortionBlur =            0.0;                        // surfaceDescription.DistortionBlur -- if distortion pass
+                builtinData.depthOffset =               0.0;                        // ApplyPerPixelDisplacement(input, V, layerTexCoord, blendMasks); #ifdef _DEPTHOFFSET_ON : ApplyDepthOffsetPositionInput(V, depthOffset, GetWorldToHClipMatrix(), posInput);
+        
+                PostInitBuiltinData(V, posInput, surfaceData, builtinData);            
+            }
+        
+			PackedVaryingsMeshToPS Vert ( AttributesMesh inputMesh  )
+			{
+				PackedVaryingsMeshToPS outputPackedVaryingsMeshToPS;
+
+				UNITY_SETUP_INSTANCE_ID ( inputMesh );
+				UNITY_TRANSFER_INSTANCE_ID ( inputMesh, outputPackedVaryingsMeshToPS );
+				 TerrainInstancingUV(inputMesh.positionOS, inputMesh.normalOS, inputMesh.tangentOS, inputMesh.ase_texcoord.xy);
+				#if UNITY_ANY_INSTANCING_ENABLED
+				outputPackedVaryingsMeshToPS.instanceID = inputMesh.instanceID;
+				#endif
+
+				float3 ase_worldNormal = TransformObjectToWorldNormal(inputMesh.normalOS);
+				float3 ase_worldTangent = TransformObjectToWorldDir(inputMesh.tangentOS.xyz);
+				float ase_vertexTangentSign = inputMesh.tangentOS.w * unity_WorldTransformParams.w;
+				float3 ase_worldBitangent = cross( ase_worldNormal, ase_worldTangent ) * ase_vertexTangentSign;
+				outputPackedVaryingsMeshToPS.ase_texcoord6.xyz = ase_worldBitangent;
+				
+				outputPackedVaryingsMeshToPS.ase_texcoord5.xy = inputMesh.ase_texcoord.xy;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				outputPackedVaryingsMeshToPS.ase_texcoord5.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord6.w = 0;
+				float3 vertexValue =  float3( 0, 0, 0 ) ;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				inputMesh.positionOS.xyz = vertexValue;
+				#else
+				inputMesh.positionOS.xyz += vertexValue;
+				#endif
+
+				inputMesh.normalOS =  inputMesh.normalOS ;
+
+				float3 positionRWS = TransformObjectToWorld ( inputMesh.positionOS.xyz );
+				float3 normalWS = TransformObjectToWorldNormal ( inputMesh.normalOS );
+				float4 tangentWS = float4( TransformObjectToWorldDir ( inputMesh.tangentOS.xyz ), inputMesh.tangentOS.w );
+				float4 positionCS = TransformWorldToHClip ( positionRWS );
+
+				outputPackedVaryingsMeshToPS.positionCS = positionCS;
+				outputPackedVaryingsMeshToPS.interp00.xyz = positionRWS;
+				outputPackedVaryingsMeshToPS.interp01.xyz = normalWS;
+				outputPackedVaryingsMeshToPS.interp02.xyzw = tangentWS;
+				outputPackedVaryingsMeshToPS.interp03 = inputMesh.uv1;
+				outputPackedVaryingsMeshToPS.interp04 = inputMesh.uv2;
+			
+				return outputPackedVaryingsMeshToPS;
+			}
+
+			void Frag ( PackedVaryingsMeshToPS packedInput, 
+						OUTPUT_GBUFFER ( outGBuffer )
+						#ifdef _DEPTHOFFSET_ON
+						, out float outputDepth : SV_Depth
+						#endif
+						 
+						)
+			{
+				FragInputs input;
+				ZERO_INITIALIZE ( FragInputs, input );
+				input.worldToTangent = k_identity3x3;
+				
+				float3 positionRWS = packedInput.interp00.xyz;
+				float3 normalWS = packedInput.interp01.xyz;
+				float4 tangentWS = packedInput.interp02.xyzw;
+			
+				input.positionSS = packedInput.positionCS;
+				input.positionRWS = positionRWS;
+				input.worldToTangent = BuildWorldToTangent ( tangentWS, normalWS );
+				input.texCoord1 = packedInput.interp03;
+				input.texCoord2 = packedInput.interp04;
+
+				// input.positionSS is SV_Position
+				PositionInputs posInput = GetPositionInput ( input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS );
+
+				float3 normalizedWorldViewDir = GetWorldSpaceNormalizeViewDir ( input.positionRWS );
+
+				SurfaceData surfaceData;
+				BuiltinData builtinData;
+
+				GlobalSurfaceDescription surfaceDescription = ( GlobalSurfaceDescription ) 0;
+				float2 uv2588 = packedInput.ase_texcoord5.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode6148 = tex2D( _Global_Color_Map, ( _Global_Color_Map_Offset + ( _Global_Color_Map_Scale * uv2588 ) ) );
+				float clampResult6182 = clamp( ( tex2DNode6148.a + ( 1.0 - _Global_Color_Opacity_Power ) ) , 0.0 , 1.0 );
+				float2 appendResult6159 = (float2(1.0 , ( _Global_Color_Map_Far_Power * clampResult6182 )));
+				float4 tex2DNode4371 = tex2D( _Texture_Splat_4, uv2588 );
+				float4 tex2DNode4370 = tex2D( _Texture_Splat_3, uv2588 );
+				float4 tex2DNode4369 = tex2D( _Texture_Splat_2, uv2588 );
+				float4 tex2DNode4368 = tex2D( _Texture_Splat_1, uv2588 );
+				float3 ase_worldPos = GetAbsolutePositionWS( positionRWS );
+				float3 break6186 = ase_worldPos;
+				float2 appendResult6176 = (float2(break6186.x , break6186.z));
+				half2 Top_Bottom1999 = appendResult6176;
+				float temp_output_3830_0 = ( 1.0 / _Texture_1_Tiling );
+				float2 appendResult3284 = (float2(temp_output_3830_0 , temp_output_3830_0));
+				float4 texArray3292 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3284 ) / _Texture_1_Far_Multiplier ), _Texture_1_Albedo_Index );
+				float4 ifLocalVar6119 = 0;
+				UNITY_BRANCH 
+				if( _Texture_1_Albedo_Index > -1.0 )
+				ifLocalVar6119 = ( texArray3292 * _Texture_1_Color );
+				half4 Texture_1_Final950 = ifLocalVar6119;
+				float temp_output_3831_0 = ( 1.0 / _Texture_2_Tiling );
+				float2 appendResult3349 = (float2(temp_output_3831_0 , temp_output_3831_0));
+				float4 texArray3339 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3349 ) / _Texture_2_Far_Multiplier ), _Texture_2_Albedo_Index );
+				float4 ifLocalVar6120 = 0;
+				UNITY_BRANCH 
+				if( _Texture_2_Albedo_Index > -1.0 )
+				ifLocalVar6120 = ( texArray3339 * _Texture_2_Color );
+				half4 Texture_2_Final3385 = ifLocalVar6120;
+				float temp_output_3832_0 = ( 1.0 / _Texture_3_Tiling );
+				float2 appendResult3415 = (float2(temp_output_3832_0 , temp_output_3832_0));
+				float4 texArray3406 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3415 ) / _Texture_3_Far_Multiplier ), _Texture_3_Albedo_Index );
+				float4 ifLocalVar6121 = 0;
+				UNITY_BRANCH 
+				if( _Texture_3_Albedo_Index > -1.0 )
+				ifLocalVar6121 = ( texArray3406 * _Texture_3_Color );
+				half4 Texture_3_Final3451 = ifLocalVar6121;
+				float4 texArray3473 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * ( 1.0 / _Texture_4_Tiling ) ) / _Texture_4_Far_Multiplier ), _Texture_4_Albedo_Index );
+				float4 ifLocalVar6122 = 0;
+				UNITY_BRANCH 
+				if( _Texture_4_Albedo_Index > -1.0 )
+				ifLocalVar6122 = ( texArray3473 * _Texture_4_Color );
+				half4 Texture_4_Final3518 = ifLocalVar6122;
+				float4 layeredBlendVar5643 = tex2DNode4368;
+				float4 layeredBlend5643 = ( lerp( lerp( lerp( lerp( float4( 0,0,0,0 ) , Texture_1_Final950 , layeredBlendVar5643.x ) , Texture_2_Final3385 , layeredBlendVar5643.y ) , Texture_3_Final3451 , layeredBlendVar5643.z ) , Texture_4_Final3518 , layeredBlendVar5643.w ) );
+				float temp_output_4397_0 = ( 1.0 / _Texture_5_Tiling );
+				float2 appendResult4399 = (float2(temp_output_4397_0 , temp_output_4397_0));
+				float4 texArray4445 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4399 ) / _Texture_5_Far_Multiplier ), _Texture_5_Albedo_Index );
+				float4 ifLocalVar6123 = 0;
+				UNITY_BRANCH 
+				if( _Texture_5_Albedo_Index > -1.0 )
+				ifLocalVar6123 = ( texArray4445 * _Texture_5_Color );
+				half4 Texture_5_Final4396 = ifLocalVar6123;
+				float temp_output_4469_0 = ( 1.0 / _Texture_6_Tiling );
+				float2 appendResult4471 = (float2(temp_output_4469_0 , temp_output_4469_0));
+				float4 texArray4512 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4471 ) / _Texture_6_Far_Multiplier ), _Texture_6_Albedo_Index );
+				float4 ifLocalVar6124 = 0;
+				UNITY_BRANCH 
+				if( _Texture_6_Albedo_Index > -1.0 )
+				ifLocalVar6124 = ( texArray4512 * _Texture_6_Color );
+				half4 Texture_6_Final4536 = ifLocalVar6124;
+				float temp_output_4543_0 = ( 1.0 / _Texture_7_Tiling );
+				float2 appendResult4545 = (float2(temp_output_4543_0 , temp_output_4543_0));
+				float4 texArray4586 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4545 ) / _Texture_7_Far_Multiplier ), _Texture_7_Albedo_Index );
+				float4 ifLocalVar6125 = 0;
+				UNITY_BRANCH 
+				if( _Texture_7_Albedo_Index > -1.0 )
+				ifLocalVar6125 = ( texArray4586 * _Texture_7_Color );
+				half4 Texture_7_Final4614 = ifLocalVar6125;
+				float temp_output_4617_0 = ( 1.0 / _Texture_8_Tiling );
+				float2 appendResult4619 = (float2(temp_output_4617_0 , temp_output_4617_0));
+				float4 texArray4660 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4619 ) / _Texture_8_Far_Multiplier ), _Texture_8_Albedo_Index );
+				float4 ifLocalVar6126 = 0;
+				UNITY_BRANCH 
+				if( _Texture_8_Albedo_Index > -1.0 )
+				ifLocalVar6126 = ( texArray4660 * _Texture_8_Color );
+				half4 Texture_8_Final4689 = ifLocalVar6126;
+				float4 layeredBlendVar5644 = tex2DNode4369;
+				float4 layeredBlend5644 = ( lerp( lerp( lerp( lerp( layeredBlend5643 , Texture_5_Final4396 , layeredBlendVar5644.x ) , Texture_6_Final4536 , layeredBlendVar5644.y ) , Texture_7_Final4614 , layeredBlendVar5644.z ) , Texture_8_Final4689 , layeredBlendVar5644.w ) );
+				float temp_output_4703_0 = ( 1.0 / _Texture_9_Tiling );
+				float2 appendResult4736 = (float2(temp_output_4703_0 , temp_output_4703_0));
+				float4 texArray4889 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4736 ) / _Texture_9_Far_Multiplier ), _Texture_9_Albedo_Index );
+				float4 ifLocalVar6134 = 0;
+				UNITY_BRANCH 
+				if( _Texture_9_Albedo_Index > -1.0 )
+				ifLocalVar6134 = ( texArray4889 * _Texture_9_Color );
+				half4 Texture_9_Final4987 = ifLocalVar6134;
+				float temp_output_4734_0 = ( 1.0 / _Texture_10_Tiling );
+				float2 appendResult4738 = (float2(temp_output_4734_0 , temp_output_4734_0));
+				float4 texArray4913 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4738 ) / _Texture_10_Far_Multiplier ), _Texture_10_Albedo_Index );
+				float4 ifLocalVar6133 = 0;
+				UNITY_BRANCH 
+				if( _Texture_10_Albedo_Index > -1.0 )
+				ifLocalVar6133 = ( texArray4913 * _Texture_10_Color );
+				half4 Texture_10_Final4994 = ifLocalVar6133;
+				float temp_output_4739_0 = ( 1.0 / _Texture_11_Tiling );
+				float2 appendResult4741 = (float2(temp_output_4739_0 , temp_output_4739_0));
+				float4 texArray4923 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4741 ) / _Texture_11_Far_Multiplier ), _Texture_11_Albedo_Index );
+				float4 ifLocalVar6132 = 0;
+				UNITY_BRANCH 
+				if( _Texture_11_Albedo_Index > -1.0 )
+				ifLocalVar6132 = ( texArray4923 * _Texture_11_Color );
+				half4 Texture_11_Final4996 = ifLocalVar6132;
+				float temp_output_4745_0 = ( 1.0 / _Texture_12_Tiling );
+				float2 appendResult4751 = (float2(temp_output_4745_0 , temp_output_4745_0));
+				float4 texArray4952 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4751 ) / _Texture_12_Far_Multiplier ), _Texture_12_Albedo_Index );
+				float4 ifLocalVar6131 = 0;
+				UNITY_BRANCH 
+				if( _Texture_12_Albedo_Index > -1.0 )
+				ifLocalVar6131 = ( texArray4952 * _Texture_12_Color );
+				half4 Texture_12_Final4997 = ifLocalVar6131;
+				float4 layeredBlendVar5645 = tex2DNode4370;
+				float4 layeredBlend5645 = ( lerp( lerp( lerp( lerp( layeredBlend5644 , Texture_9_Final4987 , layeredBlendVar5645.x ) , Texture_10_Final4994 , layeredBlendVar5645.y ) , Texture_11_Final4996 , layeredBlendVar5645.z ) , Texture_12_Final4997 , layeredBlendVar5645.w ) );
+				float temp_output_5125_0 = ( 1.0 / _Texture_13_Tiling );
+				float2 appendResult5027 = (float2(temp_output_5125_0 , temp_output_5125_0));
+				float4 texArray5034 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5027 ) / _Texture_13_Far_Multiplier ), _Texture_13_Albedo_Index );
+				float4 ifLocalVar6130 = 0;
+				UNITY_BRANCH 
+				if( _Texture_13_Albedo_Index > -1.0 )
+				ifLocalVar6130 = ( texArray5034 * _Texture_13_Color );
+				half4 Texture_13_Final5058 = ifLocalVar6130;
+				float temp_output_5006_0 = ( 1.0 / _Texture_14_Tiling );
+				float2 appendResult5033 = (float2(temp_output_5006_0 , temp_output_5006_0));
+				float4 texArray5171 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5033 ) / _Texture_14_Far_Multiplier ), _Texture_14_Albedo_Index );
+				float4 ifLocalVar6129 = 0;
+				UNITY_BRANCH 
+				if( _Texture_14_Albedo_Index > -1.0 )
+				ifLocalVar6129 = ( texArray5171 * _Texture_14_Color );
+				half4 Texture_14_Final5163 = ifLocalVar6129;
+				float temp_output_5210_0 = ( 1.0 / _Texture_15_Tiling );
+				float2 appendResult5212 = (float2(temp_output_5210_0 , temp_output_5210_0));
+				float4 texArray5272 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5212 ) / _Texture_15_Far_Multiplier ), _Texture_15_Albedo_Index );
+				float4 ifLocalVar6128 = 0;
+				UNITY_BRANCH 
+				if( _Texture_15_Albedo_Index > -1.0 )
+				ifLocalVar6128 = ( texArray5272 * _Texture_15_Color );
+				half4 Texture_15_Final5270 = ifLocalVar6128;
+				float temp_output_5075_0 = ( 1.0 / _Texture_16_Tiling );
+				float2 appendResult5078 = (float2(temp_output_5075_0 , temp_output_5075_0));
+				float4 texArray5145 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5078 ) / _Texture_16_Far_Multiplier ), _Texture_16_Albedo_Index );
+				float4 ifLocalVar6127 = 0;
+				UNITY_BRANCH 
+				if( _Texture_16_Albedo_Index > -1.0 )
+				ifLocalVar6127 = ( texArray5145 * _Texture_16_Color );
+				half4 Texture_16_Final5094 = ifLocalVar6127;
+				float4 layeredBlendVar5646 = tex2DNode4371;
+				float4 layeredBlend5646 = ( lerp( lerp( lerp( lerp( layeredBlend5645 , Texture_13_Final5058 , layeredBlendVar5646.x ) , Texture_14_Final5163 , layeredBlendVar5646.y ) , Texture_15_Final5270 , layeredBlendVar5646.z ) , Texture_16_Final5094 , layeredBlendVar5646.w ) );
+				float4 break3856 = layeredBlend5646;
+				float3 appendResult3857 = (float3(break3856.x , break3856.y , break3856.z));
+				float3 appendResult6149 = (float3(tex2DNode6148.r , tex2DNode6148.g , tex2DNode6148.b));
+				float2 weightedBlendVar6160 = appendResult6159;
+				float3 weightedAvg6160 = ( ( weightedBlendVar6160.x*appendResult3857 + weightedBlendVar6160.y*appendResult6149 )/( weightedBlendVar6160.x + weightedBlendVar6160.y ) );
+				float2 temp_cast_0 = (( ( ase_worldPos.y / _Geological_Tiling_Far ) + _Geological_Map_Offset_Far )).xx;
+				float4 tex2DNode5983 = tex2D( _Texture_Geological_Map, temp_cast_0 );
+				float3 appendResult5985 = (float3(tex2DNode5983.r , tex2DNode5983.g , tex2DNode5983.b));
+				half Splat4_A2546 = tex2DNode4371.a;
+				half Splat4_B2545 = tex2DNode4371.b;
+				half Splat4_G2544 = tex2DNode4371.g;
+				half Splat4_R2543 = tex2DNode4371.r;
+				half Splat3_A2540 = tex2DNode4370.a;
+				half Splat3_B2539 = tex2DNode4370.b;
+				half Splat3_G2538 = tex2DNode4370.g;
+				half Splat3_R2537 = tex2DNode4370.r;
+				half Splat2_A2109 = tex2DNode4369.a;
+				half Splat2_B2108 = tex2DNode4369.b;
+				half Splat2_G2107 = tex2DNode4369.g;
+				half Splat2_R2106 = tex2DNode4369.r;
+				half Splat1_R1438 = tex2DNode4368.r;
+				half Splat1_G1441 = tex2DNode4368.g;
+				half Splat1_A1491 = tex2DNode4368.a;
+				half Splat1_B1442 = tex2DNode4368.b;
+				float3 blendOpSrc4362 = weightedAvg6160;
+				float3 blendOpDest4362 = ( ( _Geological_Map_Far_Power * ( appendResult5985 + float3( -0.3,-0.3,-0.3 ) ) ) * ( ( _Texture_16_Geological_Power * Splat4_A2546 ) + ( ( _Texture_15_Geological_Power * Splat4_B2545 ) + ( ( _Texture_14_Geological_Power * Splat4_G2544 ) + ( ( _Texture_13_Geological_Power * Splat4_R2543 ) + ( ( _Texture_12_Geological_Power * Splat3_A2540 ) + ( ( _Texture_11_Geological_Power * Splat3_B2539 ) + ( ( _Texture_10_Geological_Power * Splat3_G2538 ) + ( ( _Texture_9_Geological_Power * Splat3_R2537 ) + ( ( _Texture_8_Geological_Power * Splat2_A2109 ) + ( ( _Texture_7_Geological_Power * Splat2_B2108 ) + ( ( _Texture_6_Geological_Power * Splat2_G2107 ) + ( ( _Texture_5_Geological_Power * Splat2_R2106 ) + ( ( _Texture_1_Geological_Power * Splat1_R1438 ) + ( ( _Texture_2_Geological_Power * Splat1_G1441 ) + ( ( _Texture_4_Geological_Power * Splat1_A1491 ) + ( _Texture_3_Geological_Power * Splat1_B1442 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) );
+				float3 clampResult5715 = clamp( ( saturate( ( blendOpSrc4362 + blendOpDest4362 ) )) , float3( 0,0,0 ) , float3( 1,1,1 ) );
+				float4 break1409 = ( _Texture_Snow_Average * _Snow_Color );
+				float3 appendResult1410 = (float3(break1409.x , break1409.y , break1409.z));
+				half3 _Vector0 = half3(0,0,1);
+				float3 ase_worldBitangent = packedInput.ase_texcoord6.xyz;
+				float3 tanToWorld0 = float3( tangentWS.xyz.x, ase_worldBitangent.x, normalWS.x );
+				float3 tanToWorld1 = float3( tangentWS.xyz.y, ase_worldBitangent.y, normalWS.y );
+				float3 tanToWorld2 = float3( tangentWS.xyz.z, ase_worldBitangent.z, normalWS.z );
+				float3 tanNormal3706 = _Vector0;
+				float3 worldNormal3706 = float3(dot(tanToWorld0,tanNormal3706), dot(tanToWorld1,tanNormal3706), dot(tanToWorld2,tanNormal3706));
+				float simplePerlin2D6191 = snoise( ( Top_Bottom1999 * _Snow_Noise_Tiling ) );
+				float clampResult6212 = clamp( simplePerlin2D6191 , 0.0 , 1.0 );
+				float lerpResult6192 = lerp( 1.0 , clampResult6212 , _Snow_Noise_Power);
+				float clampResult4302 = clamp( ( lerpResult6192 * _Snow_Amount ) , 0.4 , 1.0 );
+				float clampResult1354 = clamp( normalWS.y , 0.0 , 0.9999 );
+				float temp_output_1349_0 = ( _Snow_Maximum_Angle / 90.0 );
+				float clampResult1347 = clamp( ( clampResult1354 - ( 1.0 - temp_output_1349_0 ) ) , 0.0 , 2.0 );
+				half SnowSlope1352 = pow( ( 1.0 - ( clampResult1347 * ( 1.0 / temp_output_1349_0 ) ) ) , _Snow_Maximum_Angle_Hardness );
+				float clampResult4146 = clamp( SnowSlope1352 , 0.0 , 1.0 );
+				float lerpResult4293 = lerp( ( _Snow_Amount * clampResult4302 ) , 0.0 , clampResult4146);
+				float temp_output_3751_0 = ( ( 1.0 - _Snow_Min_Height ) + ase_worldPos.y );
+				float clampResult4220 = clamp( ( temp_output_3751_0 + 1.0 ) , 0.0 , 1.0 );
+				float clampResult4260 = clamp( ( ( 1.0 - ( ( temp_output_3751_0 + _Snow_Min_Height_Blending ) / temp_output_3751_0 ) ) + -0.5 ) , 0.0 , 1.0 );
+				float clampResult4263 = clamp( ( clampResult4220 + clampResult4260 ) , 0.0 , 1.0 );
+				float lerpResult3759 = lerp( 0.0 , lerpResult4293 , clampResult4263);
+				float clampResult4298 = clamp( lerpResult3759 , 0.0 , 1.0 );
+				float lerpResult4350 = lerp( _Vector0.x , worldNormal3706.y , pow( clampResult4298 , 2.0 ));
+				float clampResult4299 = clamp( ( lerpResult4350 * clampResult4298 ) , 0.0 , 1.0 );
+				float clampResult3702 = clamp( pow( ( ( ( _Texture_16_Snow_Reduction * Splat4_A2546 ) + ( ( _Texture_15_Snow_Reduction * Splat4_B2545 ) + ( ( ( _Texture_13_Snow_Reduction * Splat4_R2543 ) + ( ( _Texture_12_Snow_Reduction * Splat3_A2540 ) + ( ( _Texture_11_Snow_Reduction * Splat3_B2539 ) + ( ( ( _Texture_9_Snow_Reduction * Splat3_R2537 ) + ( ( _Texture_8_Snow_Reduction * Splat2_A2109 ) + ( ( _Texture_7_Snow_Reduction * Splat2_B2108 ) + ( ( ( _Texture_5_Snow_Reduction * Splat2_R2106 ) + ( ( _Texture_1_Snow_Reduction * Splat1_R1438 ) + ( ( _Texture_2_Snow_Reduction * Splat1_G1441 ) + ( ( _Texture_3_Snow_Reduction * Splat1_B1442 ) + ( _Texture_4_Snow_Reduction * Splat1_A1491 ) ) ) ) ) + ( _Texture_6_Snow_Reduction * Splat2_G2107 ) ) ) ) ) + ( _Texture_10_Snow_Reduction * Splat3_G2538 ) ) ) ) ) + ( _Texture_14_Snow_Reduction * Splat4_G2544 ) ) ) ) * ( lerpResult6192 * 5.0 ) ) , 3.0 ) , 0.0 , 1.0 );
+				float lerpResult3742 = lerp( saturate( clampResult4299 ) , 0.0 , clampResult3702);
+				float3 lerpResult1356 = lerp( clampResult5715 , appendResult1410 , lerpResult3742);
+				
+				float4 texArray4374 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Normal, sampler_Texture_Array_Normal, ( Top_Bottom1999 / _Perlin_Normal_Tiling_Far ), (float)_Texture_Perlin_Normal_Index );
+				float2 appendResult11_g223 = (float2(texArray4374.w , texArray4374.y));
+				float2 temp_output_4_0_g223 = ( ( ( appendResult11_g223 * float2( 2,2 ) ) + float2( -1,-1 ) ) * _Perlin_Normal_Power );
+				float2 break8_g223 = temp_output_4_0_g223;
+				float dotResult5_g223 = dot( temp_output_4_0_g223 , temp_output_4_0_g223 );
+				float temp_output_9_0_g223 = sqrt( ( 1.0 - saturate( dotResult5_g223 ) ) );
+				float3 appendResult20_g223 = (float3(break8_g223.x , break8_g223.y , temp_output_9_0_g223));
+				float3 temp_output_6050_0 = appendResult20_g223;
+				float clampResult3775 = clamp( ( ( _Texture_16_Perlin_Power * Splat4_A2546 ) + ( ( _Texture_15_Perlin_Power * Splat4_B2545 ) + ( ( _Texture_14_Perlin_Power * Splat4_G2544 ) + ( ( _Texture_13_Perlin_Power * Splat4_R2543 ) + ( ( _Texture_12_Perlin_Power * Splat3_A2540 ) + ( ( _Texture_11_Perlin_Power * Splat3_B2539 ) + ( ( _Texture_10_Perlin_Power * Splat3_G2538 ) + ( ( _Texture_9_Perlin_Power * Splat3_R2537 ) + ( ( _Texture_8_Perlin_Power * Splat2_A2109 ) + ( ( _Texture_7_Perlin_Power * Splat2_B2108 ) + ( ( _Texture_6_Perlin_Power * Splat2_G2107 ) + ( ( _Texture_5_Perlin_Power * Splat2_R2106 ) + ( ( _Texture_1_Perlin_Power * Splat1_R1438 ) + ( ( _Texture_2_Perlin_Power * Splat1_G1441 ) + ( ( _Texture_4_Perlin_Power * Splat1_A1491 ) + ( _Texture_3_Perlin_Power * Splat1_B1442 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) , 0.0 , 1.0 );
+				float3 lerpResult3776 = lerp( float3( 0,0,1 ) , temp_output_6050_0 , clampResult3775);
+				float3 lerpResult3906 = lerp( float3( 0,0,1 ) , temp_output_6050_0 , ( _Snow_Perlin_Power * 0.5 ));
+				float3 lerpResult5722 = lerp( lerpResult3776 , lerpResult3906 , lerpResult3742);
+				float3 normalizeResult3901 = normalize( UnpackNormalmapRGorAG( tex2D( _Global_Normal_Map, uv2588 ), _Global_Normalmap_Power ) );
+				float3 temp_output_4100_0 = BlendNormal( lerpResult5722 , normalizeResult3901 );
+				
+				float3 clampResult5471 = clamp( appendResult1410 , float3( 0,0,0 ) , float3( 0.5,0.5,0.5 ) );
+				float3 lerpResult4040 = lerp( ( ( appendResult3857 * float3( 0.3,0.3,0.3 ) ) * _Terrain_Specular ) , ( clampResult5471 * _Snow_Specular ) , lerpResult3742);
+				
+				float lerpResult3951 = lerp( ( break3856.w * _Terrain_Smoothness ) , break1409.w , lerpResult3742);
+				
+				float clampResult6096 = clamp( ( ( 1.0 + temp_output_4100_0.y ) * 0.5 ) , ( 1.0 - _Ambient_Occlusion_Power ) , 1.0 );
+				#ifdef _USE_AO_ON
+				float staticSwitch6142 = clampResult6096;
+				#else
+				float staticSwitch6142 = 1.0;
+				#endif
+				
+				float2 uv_Texture_Additional_Masks = packedInput.ase_texcoord5.xy * _Texture_Additional_Masks_ST.xy + _Texture_Additional_Masks_ST.zw;
+				float clampResult6167 = clamp( ( ase_worldPos.y + ( 0.0 - _Remove_Vert_Height ) ) , 0.0 , 1.0 );
+				
+				surfaceDescription.Albedo = lerpResult1356;
+				surfaceDescription.Normal = temp_output_4100_0;
+				surfaceDescription.Emission = 0;
+				surfaceDescription.Specular = lerpResult4040;
+				surfaceDescription.Metallic = 0;
+				surfaceDescription.Smoothness = lerpResult3951;
+				surfaceDescription.Occlusion = staticSwitch6142;
+				surfaceDescription.Alpha = ( tex2D( _Texture_Additional_Masks, uv_Texture_Additional_Masks ).a * clampResult6167 );
+				surfaceDescription.AlphaClipThreshold = 0.5;
+
+#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+				surfaceDescription.CoatMask = 0;
+#endif
+
+#if defined(_MATERIAL_FEATURE_SUBSURFACE_SCATTERING) || defined(_MATERIAL_FEATURE_TRANSMISSION)
+				surfaceDescription.DiffusionProfile = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+				surfaceDescription.SubsurfaceMask = 1;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSMISSION
+				surfaceDescription.Thickness = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_ANISOTROPY
+				surfaceDescription.Anisotropy = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+				surfaceDescription.IridescenceThickness = 0;
+				surfaceDescription.IridescenceMask = 1;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSPARENCY
+				surfaceDescription.IndexOfRefraction = 1;
+				surfaceDescription.TransmittanceColor = float3( 1, 1, 1 );
+				surfaceDescription.TransmittanceAbsorptionDistance = 1000000;
+				surfaceDescription.TransmittanceMask = 0;
+#endif
+				GetSurfaceAndBuiltinData ( surfaceDescription, input, normalizedWorldViewDir, posInput, surfaceData, builtinData );
+				ENCODE_INTO_GBUFFER ( surfaceData, builtinData, posInput.positionSS, outGBuffer );
+#ifdef _DEPTHOFFSET_ON
+				outputDepth = posInput.deviceDepth;
+#endif
+			}
+
+            ENDHLSL
+        }
+        
+		
+		
+        Pass
+        {
+			
+            Name "META"
+            Tags { "LightMode"="Meta" }
+            Cull Off
+            HLSLPROGRAM
+			//#define UNITY_MATERIAL_LIT
+			#pragma vertex Vert
+			#pragma fragment Frag
+
+			#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
+			#define _NORMALMAP 1
+			#define _ALPHATEST_ON 1
+			#pragma multi_compile __ _USE_AO_ON
+			#include "TerrainVertexCTSHD.hlsl"
+			#pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
+
+        
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Wind.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/NormalSurfaceGradient.hlsl"
+        
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
+        
+			#define SHADERPASS SHADERPASS_LIGHT_TRANSPORT
+            #define ATTRIBUTES_NEED_NORMAL
+            #define ATTRIBUTES_NEED_TANGENT
+            #define ATTRIBUTES_NEED_TEXCOORD0
+            #define ATTRIBUTES_NEED_TEXCOORD1
+            #define ATTRIBUTES_NEED_TEXCOORD2
+			#define ATTRIBUTES_NEED_COLOR
+        
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/Lit.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinUtilities.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/MaterialUtilities.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphFunctions.hlsl"
+        
+			CBUFFER_START(UnityPerMaterial)
+			half _Global_Color_Map_Far_Power;
+			sampler2D _Global_Color_Map;
+			float2 _Global_Color_Map_Offset;
+			float _Global_Color_Map_Scale;
+			half _Global_Color_Opacity_Power;
+			sampler2D _Texture_Splat_4;
+			sampler2D _Texture_Splat_3;
+			sampler2D _Texture_Splat_2;
+			sampler2D _Texture_Splat_1;
+			half _Texture_1_Albedo_Index;
+			TEXTURE2D_ARRAY( _Texture_Array_Albedo );
+			uniform SAMPLER( sampler_Texture_Array_Albedo );
+			half _Texture_1_Tiling;
+			half _Texture_1_Far_Multiplier;
+			half4 _Texture_1_Color;
+			half _Texture_2_Albedo_Index;
+			half _Texture_2_Tiling;
+			half _Texture_2_Far_Multiplier;
+			half4 _Texture_2_Color;
+			half _Texture_3_Albedo_Index;
+			half _Texture_3_Tiling;
+			half _Texture_3_Far_Multiplier;
+			half4 _Texture_3_Color;
+			half _Texture_4_Albedo_Index;
+			half _Texture_4_Tiling;
+			half _Texture_4_Far_Multiplier;
+			half4 _Texture_4_Color;
+			half _Texture_5_Albedo_Index;
+			half _Texture_5_Tiling;
+			half _Texture_5_Far_Multiplier;
+			half4 _Texture_5_Color;
+			half _Texture_6_Albedo_Index;
+			half _Texture_6_Tiling;
+			half _Texture_6_Far_Multiplier;
+			half4 _Texture_6_Color;
+			half _Texture_7_Albedo_Index;
+			half _Texture_7_Tiling;
+			half _Texture_7_Far_Multiplier;
+			half4 _Texture_7_Color;
+			half _Texture_8_Albedo_Index;
+			half _Texture_8_Tiling;
+			half _Texture_8_Far_Multiplier;
+			half4 _Texture_8_Color;
+			half _Texture_9_Albedo_Index;
+			half _Texture_9_Tiling;
+			half _Texture_9_Far_Multiplier;
+			half4 _Texture_9_Color;
+			half _Texture_10_Albedo_Index;
+			half _Texture_10_Tiling;
+			half _Texture_10_Far_Multiplier;
+			half4 _Texture_10_Color;
+			half _Texture_11_Albedo_Index;
+			half _Texture_11_Tiling;
+			half _Texture_11_Far_Multiplier;
+			half4 _Texture_11_Color;
+			half _Texture_12_Albedo_Index;
+			half _Texture_12_Tiling;
+			half _Texture_12_Far_Multiplier;
+			half4 _Texture_12_Color;
+			half _Texture_13_Albedo_Index;
+			half _Texture_13_Tiling;
+			half _Texture_13_Far_Multiplier;
+			half4 _Texture_13_Color;
+			half _Texture_14_Albedo_Index;
+			half _Texture_14_Tiling;
+			half _Texture_14_Far_Multiplier;
+			half4 _Texture_14_Color;
+			half _Texture_15_Albedo_Index;
+			half _Texture_15_Tiling;
+			half _Texture_15_Far_Multiplier;
+			half4 _Texture_15_Color;
+			half _Texture_16_Albedo_Index;
+			half _Texture_16_Tiling;
+			half _Texture_16_Far_Multiplier;
+			half4 _Texture_16_Color;
+			half _Geological_Map_Far_Power;
+			sampler2D _Texture_Geological_Map;
+			half _Geological_Tiling_Far;
+			half _Geological_Map_Offset_Far;
+			half _Texture_16_Geological_Power;
+			half _Texture_15_Geological_Power;
+			half _Texture_14_Geological_Power;
+			half _Texture_13_Geological_Power;
+			half _Texture_12_Geological_Power;
+			half _Texture_11_Geological_Power;
+			half _Texture_10_Geological_Power;
+			half _Texture_9_Geological_Power;
+			half _Texture_8_Geological_Power;
+			half _Texture_7_Geological_Power;
+			half _Texture_6_Geological_Power;
+			half _Texture_5_Geological_Power;
+			half _Texture_1_Geological_Power;
+			half _Texture_2_Geological_Power;
+			half _Texture_4_Geological_Power;
+			half _Texture_3_Geological_Power;
+			half4 _Texture_Snow_Average;
+			half4 _Snow_Color;
+			half _Snow_Amount;
+			half _Snow_Noise_Tiling;
+			half _Snow_Noise_Power;
+			half _Snow_Maximum_Angle;
+			half _Snow_Maximum_Angle_Hardness;
+			half _Snow_Min_Height;
+			half _Snow_Min_Height_Blending;
+			half _Texture_16_Snow_Reduction;
+			half _Texture_15_Snow_Reduction;
+			half _Texture_13_Snow_Reduction;
+			half _Texture_12_Snow_Reduction;
+			half _Texture_11_Snow_Reduction;
+			half _Texture_9_Snow_Reduction;
+			half _Texture_8_Snow_Reduction;
+			half _Texture_7_Snow_Reduction;
+			half _Texture_5_Snow_Reduction;
+			half _Texture_1_Snow_Reduction;
+			half _Texture_2_Snow_Reduction;
+			half _Texture_3_Snow_Reduction;
+			half _Texture_4_Snow_Reduction;
+			half _Texture_6_Snow_Reduction;
+			half _Texture_10_Snow_Reduction;
+			half _Texture_14_Snow_Reduction;
+			TEXTURE2D_ARRAY( _Texture_Array_Normal );
+			uniform SAMPLER( sampler_Texture_Array_Normal );
+			half _Perlin_Normal_Tiling_Far;
+			int _Texture_Perlin_Normal_Index;
+			half _Perlin_Normal_Power;
+			float _Texture_16_Perlin_Power;
+			float _Texture_15_Perlin_Power;
+			float _Texture_14_Perlin_Power;
+			float _Texture_13_Perlin_Power;
+			float _Texture_12_Perlin_Power;
+			float _Texture_11_Perlin_Power;
+			float _Texture_10_Perlin_Power;
+			float _Texture_9_Perlin_Power;
+			float _Texture_8_Perlin_Power;
+			float _Texture_7_Perlin_Power;
+			float _Texture_6_Perlin_Power;
+			float _Texture_5_Perlin_Power;
+			float _Texture_1_Perlin_Power;
+			float _Texture_2_Perlin_Power;
+			float _Texture_4_Perlin_Power;
+			float _Texture_3_Perlin_Power;
+			half _Snow_Perlin_Power;
+			half _Global_Normalmap_Power;
+			sampler2D _Global_Normal_Map;
+			half _Terrain_Specular;
+			half _Snow_Specular;
+			half _Terrain_Smoothness;
+			half _Ambient_Occlusion_Power;
+			sampler2D _Texture_Additional_Masks;
+			float4 _Texture_Additional_Masks_ST;
+			half _Remove_Vert_Height;
+			CBUFFER_END
+			float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+			float snoise( float2 v )
+			{
+				const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+				float2 i = floor( v + dot( v, C.yy ) );
+				float2 x0 = v - i + dot( i, C.xx );
+				float2 i1;
+				i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+				float4 x12 = x0.xyxy + C.xxzz;
+				x12.xy -= i1;
+				i = mod2D289( i );
+				float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+				float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+				m = m * m;
+				m = m * m;
+				float3 x = 2.0 * frac( p * C.www ) - 1.0;
+				float3 h = abs( x ) - 0.5;
+				float3 ox = floor( x + 0.5 );
+				float3 a0 = x - ox;
+				m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+				float3 g;
+				g.x = a0.x * x0.x + h.x * x0.y;
+				g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+				return 130.0 * dot( m, g );
+			}
+			
+
+            struct AttributesMesh 
+			{
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+                float4 tangentOS : TANGENT;
+                float2 uv0 : TEXCOORD0;
+                float2 uv1 : TEXCOORD1;
+                float2 uv2 : TEXCOORD2;
+                float4 color : COLOR;
+				
+            };
+
+            struct PackedVaryingsMeshToPS
+			{
+                float4 positionCS : SV_Position;
+				float4 ase_texcoord : TEXCOORD0;
+				float4 ase_texcoord1 : TEXCOORD1;
+				float4 ase_texcoord2 : TEXCOORD2;
+				float4 ase_texcoord3 : TEXCOORD3;
+				float4 ase_texcoord4 : TEXCOORD4;
+            };
+            
+			void BuildSurfaceData ( FragInputs fragInputs, GlobalSurfaceDescription surfaceDescription, float3 V, out SurfaceData surfaceData )
+			{
+				ZERO_INITIALIZE ( SurfaceData, surfaceData );
+
+				float3 normalTS = float3( 0.0f, 0.0f, 1.0f );
+				normalTS = surfaceDescription.Normal;
+				GetNormalWS ( fragInputs, normalTS, surfaceData.normalWS );
+
+				surfaceData.ambientOcclusion = 1.0f;
+
+				surfaceData.baseColor = surfaceDescription.Albedo;
+				surfaceData.perceptualSmoothness = surfaceDescription.Smoothness;
+				surfaceData.ambientOcclusion = surfaceDescription.Occlusion;
+
+				surfaceData.materialFeatures = MATERIALFEATUREFLAGS_LIT_STANDARD;
+
+#ifdef _MATERIAL_FEATURE_SPECULAR_COLOR
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SPECULAR_COLOR;
+				surfaceData.specularColor = surfaceDescription.Specular;
+#else
+				surfaceData.metallic = surfaceDescription.Metallic;
+#endif
+
+#if defined(_MATERIAL_FEATURE_SUBSURFACE_SCATTERING) || defined(_MATERIAL_FEATURE_TRANSMISSION)
+				surfaceData.diffusionProfile = surfaceDescription.DiffusionProfile;
+#endif
+
+#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SUBSURFACE_SCATTERING;
+				surfaceData.subsurfaceMask = surfaceDescription.SubsurfaceMask;
+
+#else
+				surfaceData.subsurfaceMask = 1.0f;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSMISSION
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_TRANSMISSION;
+				surfaceData.thickness = surfaceDescription.Thickness;
+#endif
+
+				surfaceData.tangentWS = normalize ( fragInputs.worldToTangent[ 0 ].xyz );
+				surfaceData.tangentWS = Orthonormalize ( surfaceData.tangentWS, surfaceData.normalWS );
+
+#ifdef _MATERIAL_FEATURE_ANISOTROPY
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_ANISOTROPY;
+				surfaceData.anisotropy = surfaceDescription.Anisotropy;
+
+#else
+				surfaceData.anisotropy = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_CLEAR_COAT;
+				surfaceData.coatMask = surfaceDescription.CoatMask;
+#else
+				surfaceData.coatMask = 0.0f;
+#endif
+
+#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_IRIDESCENCE;
+				surfaceData.iridescenceThickness = surfaceDescription.IridescenceThickness;
+				surfaceData.iridescenceMask = surfaceDescription.IridescenceMask;
+#else
+				surfaceData.iridescenceThickness = 0.0;
+				surfaceData.iridescenceMask = 1.0;
+#endif
+
+				//ASE CUSTOM TAG
+#ifdef _MATERIAL_FEATURE_TRANSPARENCY
+				surfaceData.ior = surfaceDescription.IndexOfRefraction;
+				surfaceData.transmittanceColor = surfaceDescription.TransmittanceColor;
+				surfaceData.atDistance = surfaceDescription.TransmittanceAbsorptionDistance;
+				surfaceData.transmittanceMask = surfaceDescription.TransmittanceMask;
+#else
+				surfaceData.ior = 1.0;
+				surfaceData.transmittanceColor = float3( 1.0, 1.0, 1.0 );
+				surfaceData.atDistance = 1000000.0;
+				surfaceData.transmittanceMask = 0.0;
+#endif
+
+				surfaceData.specularOcclusion = 1.0;
+
+#if defined(_BENTNORMALMAP) && defined(_ENABLESPECULAROCCLUSION)
+				surfaceData.specularOcclusion = GetSpecularOcclusionFromBentAO ( V, bentNormalWS, surfaceData );
+#elif defined(_MASKMAP)
+				surfaceData.specularOcclusion = GetSpecularOcclusionFromAmbientOcclusion ( NdotV, surfaceData.ambientOcclusion, PerceptualSmoothnessToRoughness ( surfaceData.perceptualSmoothness ) );
+#endif
+			}
+
+            void GetSurfaceAndBuiltinData( GlobalSurfaceDescription surfaceDescription, FragInputs fragInputs, float3 V, inout PositionInputs posInput, out SurfaceData surfaceData, out BuiltinData builtinData)
+            {
+#if _ALPHATEST_ON
+				DoAlphaTest ( surfaceDescription.Alpha, surfaceDescription.AlphaClipThreshold );
+#endif
+				BuildSurfaceData (fragInputs, surfaceDescription, V, surfaceData);
+        
+               // Builtin Data
+                // For back lighting we use the oposite vertex normal 
+                InitBuiltinData(surfaceDescription.Alpha, surfaceData.normalWS, -fragInputs.worldToTangent[2], fragInputs.positionRWS, fragInputs.texCoord1, fragInputs.texCoord2, builtinData);
+        
+		        builtinData.emissiveColor =             surfaceDescription.Emission;
+                builtinData.distortion =                float2(0.0, 0.0);           // surfaceDescription.Distortion -- if distortion pass
+                builtinData.distortionBlur =            0.0;                        // surfaceDescription.DistortionBlur -- if distortion pass
+                builtinData.depthOffset =               0.0;                        // ApplyPerPixelDisplacement(input, V, layerTexCoord, blendMasks); #ifdef _DEPTHOFFSET_ON : ApplyDepthOffsetPositionInput(V, depthOffset, GetWorldToHClipMatrix(), posInput);
+        
+                PostInitBuiltinData(V, posInput, surfaceData, builtinData);
+            }
+        
+           
+			CBUFFER_START ( UnityMetaPass )
+				bool4 unity_MetaVertexControl;
+				bool4 unity_MetaFragmentControl;
+			CBUFFER_END
+
+
+			float unity_OneOverOutputBoost;
+			float unity_MaxOutputValue;
+
+			PackedVaryingsMeshToPS Vert ( AttributesMesh inputMesh  )
+			{
+				PackedVaryingsMeshToPS outputPackedVaryingsMeshToPS;
+
+				UNITY_SETUP_INSTANCE_ID ( inputMesh );
+				UNITY_TRANSFER_INSTANCE_ID ( inputMesh, outputPackedVaryingsMeshToPS );
+				TerrainInstancing(inputMesh.positionOS, inputMesh.normalOS, inputMesh.tangentOS);
+				float3 ase_worldPos = GetAbsolutePositionWS( TransformObjectToWorld( (inputMesh.positionOS).xyz ) );
+				outputPackedVaryingsMeshToPS.ase_texcoord1.xyz = ase_worldPos;
+				float3 ase_worldTangent = TransformObjectToWorldDir(inputMesh.tangentOS.xyz);
+				outputPackedVaryingsMeshToPS.ase_texcoord2.xyz = ase_worldTangent;
+				float3 ase_worldNormal = TransformObjectToWorldNormal(inputMesh.normalOS);
+				outputPackedVaryingsMeshToPS.ase_texcoord3.xyz = ase_worldNormal;
+				float ase_vertexTangentSign = inputMesh.tangentOS.w * unity_WorldTransformParams.w;
+				float3 ase_worldBitangent = cross( ase_worldNormal, ase_worldTangent ) * ase_vertexTangentSign;
+				outputPackedVaryingsMeshToPS.ase_texcoord4.xyz = ase_worldBitangent;
+				
+				outputPackedVaryingsMeshToPS.ase_texcoord.xy = inputMesh.uv0;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				outputPackedVaryingsMeshToPS.ase_texcoord.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord1.w = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord2.w = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord3.w = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord4.w = 0;
+				float3 vertexValue =  float3( 0, 0, 0 ) ;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				inputMesh.positionOS.xyz = vertexValue;
+				#else
+				inputMesh.positionOS.xyz += vertexValue;
+				#endif
+
+				inputMesh.normalOS =  inputMesh.normalOS ;
+
+				float2 uv;
+
+				if ( unity_MetaVertexControl.x )
+				{
+					uv = inputMesh.uv1 * unity_LightmapST.xy + unity_LightmapST.zw;
+				}
+				else if ( unity_MetaVertexControl.y )
+				{
+					uv = inputMesh.uv2 * unity_DynamicLightmapST.xy + unity_DynamicLightmapST.zw;
+				}
+
+				outputPackedVaryingsMeshToPS.positionCS = float4( uv * 2.0 - 1.0, inputMesh.positionOS.z > 0 ? 1.0e-4 : 0.0, 1.0 );
+
+				return outputPackedVaryingsMeshToPS;
+			}
+
+			float4 Frag ( PackedVaryingsMeshToPS packedInput  ) : SV_Target
+			{
+				FragInputs input;
+				ZERO_INITIALIZE ( FragInputs, input );
+				input.worldToTangent = k_identity3x3;
+				input.positionSS = packedInput.positionCS;
+
+				PositionInputs posInput = GetPositionInput ( input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS );
+
+				float3 V = 0;
+
+				SurfaceData surfaceData;
+				BuiltinData builtinData;
+
+				GlobalSurfaceDescription surfaceDescription = ( GlobalSurfaceDescription ) 0;
+				float2 uv2588 = packedInput.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode6148 = tex2D( _Global_Color_Map, ( _Global_Color_Map_Offset + ( _Global_Color_Map_Scale * uv2588 ) ) );
+				float clampResult6182 = clamp( ( tex2DNode6148.a + ( 1.0 - _Global_Color_Opacity_Power ) ) , 0.0 , 1.0 );
+				float2 appendResult6159 = (float2(1.0 , ( _Global_Color_Map_Far_Power * clampResult6182 )));
+				float4 tex2DNode4371 = tex2D( _Texture_Splat_4, uv2588 );
+				float4 tex2DNode4370 = tex2D( _Texture_Splat_3, uv2588 );
+				float4 tex2DNode4369 = tex2D( _Texture_Splat_2, uv2588 );
+				float4 tex2DNode4368 = tex2D( _Texture_Splat_1, uv2588 );
+				float3 ase_worldPos = packedInput.ase_texcoord1.xyz;
+				float3 break6186 = ase_worldPos;
+				float2 appendResult6176 = (float2(break6186.x , break6186.z));
+				half2 Top_Bottom1999 = appendResult6176;
+				float temp_output_3830_0 = ( 1.0 / _Texture_1_Tiling );
+				float2 appendResult3284 = (float2(temp_output_3830_0 , temp_output_3830_0));
+				float4 texArray3292 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3284 ) / _Texture_1_Far_Multiplier ), _Texture_1_Albedo_Index );
+				float4 ifLocalVar6119 = 0;
+				UNITY_BRANCH 
+				if( _Texture_1_Albedo_Index > -1.0 )
+				ifLocalVar6119 = ( texArray3292 * _Texture_1_Color );
+				half4 Texture_1_Final950 = ifLocalVar6119;
+				float temp_output_3831_0 = ( 1.0 / _Texture_2_Tiling );
+				float2 appendResult3349 = (float2(temp_output_3831_0 , temp_output_3831_0));
+				float4 texArray3339 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3349 ) / _Texture_2_Far_Multiplier ), _Texture_2_Albedo_Index );
+				float4 ifLocalVar6120 = 0;
+				UNITY_BRANCH 
+				if( _Texture_2_Albedo_Index > -1.0 )
+				ifLocalVar6120 = ( texArray3339 * _Texture_2_Color );
+				half4 Texture_2_Final3385 = ifLocalVar6120;
+				float temp_output_3832_0 = ( 1.0 / _Texture_3_Tiling );
+				float2 appendResult3415 = (float2(temp_output_3832_0 , temp_output_3832_0));
+				float4 texArray3406 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3415 ) / _Texture_3_Far_Multiplier ), _Texture_3_Albedo_Index );
+				float4 ifLocalVar6121 = 0;
+				UNITY_BRANCH 
+				if( _Texture_3_Albedo_Index > -1.0 )
+				ifLocalVar6121 = ( texArray3406 * _Texture_3_Color );
+				half4 Texture_3_Final3451 = ifLocalVar6121;
+				float4 texArray3473 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * ( 1.0 / _Texture_4_Tiling ) ) / _Texture_4_Far_Multiplier ), _Texture_4_Albedo_Index );
+				float4 ifLocalVar6122 = 0;
+				UNITY_BRANCH 
+				if( _Texture_4_Albedo_Index > -1.0 )
+				ifLocalVar6122 = ( texArray3473 * _Texture_4_Color );
+				half4 Texture_4_Final3518 = ifLocalVar6122;
+				float4 layeredBlendVar5643 = tex2DNode4368;
+				float4 layeredBlend5643 = ( lerp( lerp( lerp( lerp( float4( 0,0,0,0 ) , Texture_1_Final950 , layeredBlendVar5643.x ) , Texture_2_Final3385 , layeredBlendVar5643.y ) , Texture_3_Final3451 , layeredBlendVar5643.z ) , Texture_4_Final3518 , layeredBlendVar5643.w ) );
+				float temp_output_4397_0 = ( 1.0 / _Texture_5_Tiling );
+				float2 appendResult4399 = (float2(temp_output_4397_0 , temp_output_4397_0));
+				float4 texArray4445 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4399 ) / _Texture_5_Far_Multiplier ), _Texture_5_Albedo_Index );
+				float4 ifLocalVar6123 = 0;
+				UNITY_BRANCH 
+				if( _Texture_5_Albedo_Index > -1.0 )
+				ifLocalVar6123 = ( texArray4445 * _Texture_5_Color );
+				half4 Texture_5_Final4396 = ifLocalVar6123;
+				float temp_output_4469_0 = ( 1.0 / _Texture_6_Tiling );
+				float2 appendResult4471 = (float2(temp_output_4469_0 , temp_output_4469_0));
+				float4 texArray4512 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4471 ) / _Texture_6_Far_Multiplier ), _Texture_6_Albedo_Index );
+				float4 ifLocalVar6124 = 0;
+				UNITY_BRANCH 
+				if( _Texture_6_Albedo_Index > -1.0 )
+				ifLocalVar6124 = ( texArray4512 * _Texture_6_Color );
+				half4 Texture_6_Final4536 = ifLocalVar6124;
+				float temp_output_4543_0 = ( 1.0 / _Texture_7_Tiling );
+				float2 appendResult4545 = (float2(temp_output_4543_0 , temp_output_4543_0));
+				float4 texArray4586 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4545 ) / _Texture_7_Far_Multiplier ), _Texture_7_Albedo_Index );
+				float4 ifLocalVar6125 = 0;
+				UNITY_BRANCH 
+				if( _Texture_7_Albedo_Index > -1.0 )
+				ifLocalVar6125 = ( texArray4586 * _Texture_7_Color );
+				half4 Texture_7_Final4614 = ifLocalVar6125;
+				float temp_output_4617_0 = ( 1.0 / _Texture_8_Tiling );
+				float2 appendResult4619 = (float2(temp_output_4617_0 , temp_output_4617_0));
+				float4 texArray4660 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4619 ) / _Texture_8_Far_Multiplier ), _Texture_8_Albedo_Index );
+				float4 ifLocalVar6126 = 0;
+				UNITY_BRANCH 
+				if( _Texture_8_Albedo_Index > -1.0 )
+				ifLocalVar6126 = ( texArray4660 * _Texture_8_Color );
+				half4 Texture_8_Final4689 = ifLocalVar6126;
+				float4 layeredBlendVar5644 = tex2DNode4369;
+				float4 layeredBlend5644 = ( lerp( lerp( lerp( lerp( layeredBlend5643 , Texture_5_Final4396 , layeredBlendVar5644.x ) , Texture_6_Final4536 , layeredBlendVar5644.y ) , Texture_7_Final4614 , layeredBlendVar5644.z ) , Texture_8_Final4689 , layeredBlendVar5644.w ) );
+				float temp_output_4703_0 = ( 1.0 / _Texture_9_Tiling );
+				float2 appendResult4736 = (float2(temp_output_4703_0 , temp_output_4703_0));
+				float4 texArray4889 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4736 ) / _Texture_9_Far_Multiplier ), _Texture_9_Albedo_Index );
+				float4 ifLocalVar6134 = 0;
+				UNITY_BRANCH 
+				if( _Texture_9_Albedo_Index > -1.0 )
+				ifLocalVar6134 = ( texArray4889 * _Texture_9_Color );
+				half4 Texture_9_Final4987 = ifLocalVar6134;
+				float temp_output_4734_0 = ( 1.0 / _Texture_10_Tiling );
+				float2 appendResult4738 = (float2(temp_output_4734_0 , temp_output_4734_0));
+				float4 texArray4913 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4738 ) / _Texture_10_Far_Multiplier ), _Texture_10_Albedo_Index );
+				float4 ifLocalVar6133 = 0;
+				UNITY_BRANCH 
+				if( _Texture_10_Albedo_Index > -1.0 )
+				ifLocalVar6133 = ( texArray4913 * _Texture_10_Color );
+				half4 Texture_10_Final4994 = ifLocalVar6133;
+				float temp_output_4739_0 = ( 1.0 / _Texture_11_Tiling );
+				float2 appendResult4741 = (float2(temp_output_4739_0 , temp_output_4739_0));
+				float4 texArray4923 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4741 ) / _Texture_11_Far_Multiplier ), _Texture_11_Albedo_Index );
+				float4 ifLocalVar6132 = 0;
+				UNITY_BRANCH 
+				if( _Texture_11_Albedo_Index > -1.0 )
+				ifLocalVar6132 = ( texArray4923 * _Texture_11_Color );
+				half4 Texture_11_Final4996 = ifLocalVar6132;
+				float temp_output_4745_0 = ( 1.0 / _Texture_12_Tiling );
+				float2 appendResult4751 = (float2(temp_output_4745_0 , temp_output_4745_0));
+				float4 texArray4952 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4751 ) / _Texture_12_Far_Multiplier ), _Texture_12_Albedo_Index );
+				float4 ifLocalVar6131 = 0;
+				UNITY_BRANCH 
+				if( _Texture_12_Albedo_Index > -1.0 )
+				ifLocalVar6131 = ( texArray4952 * _Texture_12_Color );
+				half4 Texture_12_Final4997 = ifLocalVar6131;
+				float4 layeredBlendVar5645 = tex2DNode4370;
+				float4 layeredBlend5645 = ( lerp( lerp( lerp( lerp( layeredBlend5644 , Texture_9_Final4987 , layeredBlendVar5645.x ) , Texture_10_Final4994 , layeredBlendVar5645.y ) , Texture_11_Final4996 , layeredBlendVar5645.z ) , Texture_12_Final4997 , layeredBlendVar5645.w ) );
+				float temp_output_5125_0 = ( 1.0 / _Texture_13_Tiling );
+				float2 appendResult5027 = (float2(temp_output_5125_0 , temp_output_5125_0));
+				float4 texArray5034 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5027 ) / _Texture_13_Far_Multiplier ), _Texture_13_Albedo_Index );
+				float4 ifLocalVar6130 = 0;
+				UNITY_BRANCH 
+				if( _Texture_13_Albedo_Index > -1.0 )
+				ifLocalVar6130 = ( texArray5034 * _Texture_13_Color );
+				half4 Texture_13_Final5058 = ifLocalVar6130;
+				float temp_output_5006_0 = ( 1.0 / _Texture_14_Tiling );
+				float2 appendResult5033 = (float2(temp_output_5006_0 , temp_output_5006_0));
+				float4 texArray5171 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5033 ) / _Texture_14_Far_Multiplier ), _Texture_14_Albedo_Index );
+				float4 ifLocalVar6129 = 0;
+				UNITY_BRANCH 
+				if( _Texture_14_Albedo_Index > -1.0 )
+				ifLocalVar6129 = ( texArray5171 * _Texture_14_Color );
+				half4 Texture_14_Final5163 = ifLocalVar6129;
+				float temp_output_5210_0 = ( 1.0 / _Texture_15_Tiling );
+				float2 appendResult5212 = (float2(temp_output_5210_0 , temp_output_5210_0));
+				float4 texArray5272 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5212 ) / _Texture_15_Far_Multiplier ), _Texture_15_Albedo_Index );
+				float4 ifLocalVar6128 = 0;
+				UNITY_BRANCH 
+				if( _Texture_15_Albedo_Index > -1.0 )
+				ifLocalVar6128 = ( texArray5272 * _Texture_15_Color );
+				half4 Texture_15_Final5270 = ifLocalVar6128;
+				float temp_output_5075_0 = ( 1.0 / _Texture_16_Tiling );
+				float2 appendResult5078 = (float2(temp_output_5075_0 , temp_output_5075_0));
+				float4 texArray5145 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5078 ) / _Texture_16_Far_Multiplier ), _Texture_16_Albedo_Index );
+				float4 ifLocalVar6127 = 0;
+				UNITY_BRANCH 
+				if( _Texture_16_Albedo_Index > -1.0 )
+				ifLocalVar6127 = ( texArray5145 * _Texture_16_Color );
+				half4 Texture_16_Final5094 = ifLocalVar6127;
+				float4 layeredBlendVar5646 = tex2DNode4371;
+				float4 layeredBlend5646 = ( lerp( lerp( lerp( lerp( layeredBlend5645 , Texture_13_Final5058 , layeredBlendVar5646.x ) , Texture_14_Final5163 , layeredBlendVar5646.y ) , Texture_15_Final5270 , layeredBlendVar5646.z ) , Texture_16_Final5094 , layeredBlendVar5646.w ) );
+				float4 break3856 = layeredBlend5646;
+				float3 appendResult3857 = (float3(break3856.x , break3856.y , break3856.z));
+				float3 appendResult6149 = (float3(tex2DNode6148.r , tex2DNode6148.g , tex2DNode6148.b));
+				float2 weightedBlendVar6160 = appendResult6159;
+				float3 weightedAvg6160 = ( ( weightedBlendVar6160.x*appendResult3857 + weightedBlendVar6160.y*appendResult6149 )/( weightedBlendVar6160.x + weightedBlendVar6160.y ) );
+				float2 temp_cast_0 = (( ( ase_worldPos.y / _Geological_Tiling_Far ) + _Geological_Map_Offset_Far )).xx;
+				float4 tex2DNode5983 = tex2D( _Texture_Geological_Map, temp_cast_0 );
+				float3 appendResult5985 = (float3(tex2DNode5983.r , tex2DNode5983.g , tex2DNode5983.b));
+				half Splat4_A2546 = tex2DNode4371.a;
+				half Splat4_B2545 = tex2DNode4371.b;
+				half Splat4_G2544 = tex2DNode4371.g;
+				half Splat4_R2543 = tex2DNode4371.r;
+				half Splat3_A2540 = tex2DNode4370.a;
+				half Splat3_B2539 = tex2DNode4370.b;
+				half Splat3_G2538 = tex2DNode4370.g;
+				half Splat3_R2537 = tex2DNode4370.r;
+				half Splat2_A2109 = tex2DNode4369.a;
+				half Splat2_B2108 = tex2DNode4369.b;
+				half Splat2_G2107 = tex2DNode4369.g;
+				half Splat2_R2106 = tex2DNode4369.r;
+				half Splat1_R1438 = tex2DNode4368.r;
+				half Splat1_G1441 = tex2DNode4368.g;
+				half Splat1_A1491 = tex2DNode4368.a;
+				half Splat1_B1442 = tex2DNode4368.b;
+				float3 blendOpSrc4362 = weightedAvg6160;
+				float3 blendOpDest4362 = ( ( _Geological_Map_Far_Power * ( appendResult5985 + float3( -0.3,-0.3,-0.3 ) ) ) * ( ( _Texture_16_Geological_Power * Splat4_A2546 ) + ( ( _Texture_15_Geological_Power * Splat4_B2545 ) + ( ( _Texture_14_Geological_Power * Splat4_G2544 ) + ( ( _Texture_13_Geological_Power * Splat4_R2543 ) + ( ( _Texture_12_Geological_Power * Splat3_A2540 ) + ( ( _Texture_11_Geological_Power * Splat3_B2539 ) + ( ( _Texture_10_Geological_Power * Splat3_G2538 ) + ( ( _Texture_9_Geological_Power * Splat3_R2537 ) + ( ( _Texture_8_Geological_Power * Splat2_A2109 ) + ( ( _Texture_7_Geological_Power * Splat2_B2108 ) + ( ( _Texture_6_Geological_Power * Splat2_G2107 ) + ( ( _Texture_5_Geological_Power * Splat2_R2106 ) + ( ( _Texture_1_Geological_Power * Splat1_R1438 ) + ( ( _Texture_2_Geological_Power * Splat1_G1441 ) + ( ( _Texture_4_Geological_Power * Splat1_A1491 ) + ( _Texture_3_Geological_Power * Splat1_B1442 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) );
+				float3 clampResult5715 = clamp( ( saturate( ( blendOpSrc4362 + blendOpDest4362 ) )) , float3( 0,0,0 ) , float3( 1,1,1 ) );
+				float4 break1409 = ( _Texture_Snow_Average * _Snow_Color );
+				float3 appendResult1410 = (float3(break1409.x , break1409.y , break1409.z));
+				half3 _Vector0 = half3(0,0,1);
+				float3 ase_worldTangent = packedInput.ase_texcoord2.xyz;
+				float3 ase_worldNormal = packedInput.ase_texcoord3.xyz;
+				float3 ase_worldBitangent = packedInput.ase_texcoord4.xyz;
+				float3 tanToWorld0 = float3( ase_worldTangent.x, ase_worldBitangent.x, ase_worldNormal.x );
+				float3 tanToWorld1 = float3( ase_worldTangent.y, ase_worldBitangent.y, ase_worldNormal.y );
+				float3 tanToWorld2 = float3( ase_worldTangent.z, ase_worldBitangent.z, ase_worldNormal.z );
+				float3 tanNormal3706 = _Vector0;
+				float3 worldNormal3706 = float3(dot(tanToWorld0,tanNormal3706), dot(tanToWorld1,tanNormal3706), dot(tanToWorld2,tanNormal3706));
+				float simplePerlin2D6191 = snoise( ( Top_Bottom1999 * _Snow_Noise_Tiling ) );
+				float clampResult6212 = clamp( simplePerlin2D6191 , 0.0 , 1.0 );
+				float lerpResult6192 = lerp( 1.0 , clampResult6212 , _Snow_Noise_Power);
+				float clampResult4302 = clamp( ( lerpResult6192 * _Snow_Amount ) , 0.4 , 1.0 );
+				float clampResult1354 = clamp( ase_worldNormal.y , 0.0 , 0.9999 );
+				float temp_output_1349_0 = ( _Snow_Maximum_Angle / 90.0 );
+				float clampResult1347 = clamp( ( clampResult1354 - ( 1.0 - temp_output_1349_0 ) ) , 0.0 , 2.0 );
+				half SnowSlope1352 = pow( ( 1.0 - ( clampResult1347 * ( 1.0 / temp_output_1349_0 ) ) ) , _Snow_Maximum_Angle_Hardness );
+				float clampResult4146 = clamp( SnowSlope1352 , 0.0 , 1.0 );
+				float lerpResult4293 = lerp( ( _Snow_Amount * clampResult4302 ) , 0.0 , clampResult4146);
+				float temp_output_3751_0 = ( ( 1.0 - _Snow_Min_Height ) + ase_worldPos.y );
+				float clampResult4220 = clamp( ( temp_output_3751_0 + 1.0 ) , 0.0 , 1.0 );
+				float clampResult4260 = clamp( ( ( 1.0 - ( ( temp_output_3751_0 + _Snow_Min_Height_Blending ) / temp_output_3751_0 ) ) + -0.5 ) , 0.0 , 1.0 );
+				float clampResult4263 = clamp( ( clampResult4220 + clampResult4260 ) , 0.0 , 1.0 );
+				float lerpResult3759 = lerp( 0.0 , lerpResult4293 , clampResult4263);
+				float clampResult4298 = clamp( lerpResult3759 , 0.0 , 1.0 );
+				float lerpResult4350 = lerp( _Vector0.x , worldNormal3706.y , pow( clampResult4298 , 2.0 ));
+				float clampResult4299 = clamp( ( lerpResult4350 * clampResult4298 ) , 0.0 , 1.0 );
+				float clampResult3702 = clamp( pow( ( ( ( _Texture_16_Snow_Reduction * Splat4_A2546 ) + ( ( _Texture_15_Snow_Reduction * Splat4_B2545 ) + ( ( ( _Texture_13_Snow_Reduction * Splat4_R2543 ) + ( ( _Texture_12_Snow_Reduction * Splat3_A2540 ) + ( ( _Texture_11_Snow_Reduction * Splat3_B2539 ) + ( ( ( _Texture_9_Snow_Reduction * Splat3_R2537 ) + ( ( _Texture_8_Snow_Reduction * Splat2_A2109 ) + ( ( _Texture_7_Snow_Reduction * Splat2_B2108 ) + ( ( ( _Texture_5_Snow_Reduction * Splat2_R2106 ) + ( ( _Texture_1_Snow_Reduction * Splat1_R1438 ) + ( ( _Texture_2_Snow_Reduction * Splat1_G1441 ) + ( ( _Texture_3_Snow_Reduction * Splat1_B1442 ) + ( _Texture_4_Snow_Reduction * Splat1_A1491 ) ) ) ) ) + ( _Texture_6_Snow_Reduction * Splat2_G2107 ) ) ) ) ) + ( _Texture_10_Snow_Reduction * Splat3_G2538 ) ) ) ) ) + ( _Texture_14_Snow_Reduction * Splat4_G2544 ) ) ) ) * ( lerpResult6192 * 5.0 ) ) , 3.0 ) , 0.0 , 1.0 );
+				float lerpResult3742 = lerp( saturate( clampResult4299 ) , 0.0 , clampResult3702);
+				float3 lerpResult1356 = lerp( clampResult5715 , appendResult1410 , lerpResult3742);
+				
+				float4 texArray4374 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Normal, sampler_Texture_Array_Normal, ( Top_Bottom1999 / _Perlin_Normal_Tiling_Far ), (float)_Texture_Perlin_Normal_Index );
+				float2 appendResult11_g223 = (float2(texArray4374.w , texArray4374.y));
+				float2 temp_output_4_0_g223 = ( ( ( appendResult11_g223 * float2( 2,2 ) ) + float2( -1,-1 ) ) * _Perlin_Normal_Power );
+				float2 break8_g223 = temp_output_4_0_g223;
+				float dotResult5_g223 = dot( temp_output_4_0_g223 , temp_output_4_0_g223 );
+				float temp_output_9_0_g223 = sqrt( ( 1.0 - saturate( dotResult5_g223 ) ) );
+				float3 appendResult20_g223 = (float3(break8_g223.x , break8_g223.y , temp_output_9_0_g223));
+				float3 temp_output_6050_0 = appendResult20_g223;
+				float clampResult3775 = clamp( ( ( _Texture_16_Perlin_Power * Splat4_A2546 ) + ( ( _Texture_15_Perlin_Power * Splat4_B2545 ) + ( ( _Texture_14_Perlin_Power * Splat4_G2544 ) + ( ( _Texture_13_Perlin_Power * Splat4_R2543 ) + ( ( _Texture_12_Perlin_Power * Splat3_A2540 ) + ( ( _Texture_11_Perlin_Power * Splat3_B2539 ) + ( ( _Texture_10_Perlin_Power * Splat3_G2538 ) + ( ( _Texture_9_Perlin_Power * Splat3_R2537 ) + ( ( _Texture_8_Perlin_Power * Splat2_A2109 ) + ( ( _Texture_7_Perlin_Power * Splat2_B2108 ) + ( ( _Texture_6_Perlin_Power * Splat2_G2107 ) + ( ( _Texture_5_Perlin_Power * Splat2_R2106 ) + ( ( _Texture_1_Perlin_Power * Splat1_R1438 ) + ( ( _Texture_2_Perlin_Power * Splat1_G1441 ) + ( ( _Texture_4_Perlin_Power * Splat1_A1491 ) + ( _Texture_3_Perlin_Power * Splat1_B1442 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) , 0.0 , 1.0 );
+				float3 lerpResult3776 = lerp( float3( 0,0,1 ) , temp_output_6050_0 , clampResult3775);
+				float3 lerpResult3906 = lerp( float3( 0,0,1 ) , temp_output_6050_0 , ( _Snow_Perlin_Power * 0.5 ));
+				float3 lerpResult5722 = lerp( lerpResult3776 , lerpResult3906 , lerpResult3742);
+				float3 normalizeResult3901 = normalize( UnpackNormalmapRGorAG( tex2D( _Global_Normal_Map, uv2588 ), _Global_Normalmap_Power ) );
+				float3 temp_output_4100_0 = BlendNormal( lerpResult5722 , normalizeResult3901 );
+				
+				float3 clampResult5471 = clamp( appendResult1410 , float3( 0,0,0 ) , float3( 0.5,0.5,0.5 ) );
+				float3 lerpResult4040 = lerp( ( ( appendResult3857 * float3( 0.3,0.3,0.3 ) ) * _Terrain_Specular ) , ( clampResult5471 * _Snow_Specular ) , lerpResult3742);
+				
+				float lerpResult3951 = lerp( ( break3856.w * _Terrain_Smoothness ) , break1409.w , lerpResult3742);
+				
+				float clampResult6096 = clamp( ( ( 1.0 + temp_output_4100_0.y ) * 0.5 ) , ( 1.0 - _Ambient_Occlusion_Power ) , 1.0 );
+				#ifdef _USE_AO_ON
+				float staticSwitch6142 = clampResult6096;
+				#else
+				float staticSwitch6142 = 1.0;
+				#endif
+				
+				float2 uv_Texture_Additional_Masks = packedInput.ase_texcoord.xy * _Texture_Additional_Masks_ST.xy + _Texture_Additional_Masks_ST.zw;
+				float clampResult6167 = clamp( ( ase_worldPos.y + ( 0.0 - _Remove_Vert_Height ) ) , 0.0 , 1.0 );
+				
+				surfaceDescription.Albedo = lerpResult1356;
+				surfaceDescription.Normal = temp_output_4100_0;
+				surfaceDescription.Emission = 0;
+				surfaceDescription.Specular = lerpResult4040;
+				surfaceDescription.Metallic = 0;
+				surfaceDescription.Smoothness = lerpResult3951;
+				surfaceDescription.Occlusion = staticSwitch6142;
+				surfaceDescription.Alpha = ( tex2D( _Texture_Additional_Masks, uv_Texture_Additional_Masks ).a * clampResult6167 );
+				surfaceDescription.AlphaClipThreshold = 0.5;
+
+#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+				surfaceDescription.CoatMask = 0;
+#endif
+
+#if defined(_MATERIAL_FEATURE_SUBSURFACE_SCATTERING) || defined(_MATERIAL_FEATURE_TRANSMISSION)
+				surfaceDescription.DiffusionProfile = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+				surfaceDescription.SubsurfaceMask = 1;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSMISSION
+				surfaceDescription.Thickness = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_ANISOTROPY
+				surfaceDescription.Anisotropy = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+				surfaceDescription.IridescenceThickness = 0;
+				surfaceDescription.IridescenceMask = 1;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSPARENCY
+				surfaceDescription.IndexOfRefraction = 1;
+				surfaceDescription.TransmittanceColor = float3( 1, 1, 1 );
+				surfaceDescription.TransmittanceAbsorptionDistance = 1000000;
+				surfaceDescription.TransmittanceMask = 0;
+#endif
+
+				GetSurfaceAndBuiltinData ( surfaceDescription, input, V, posInput, surfaceData, builtinData );
+
+				BSDFData bsdfData = ConvertSurfaceDataToBSDFData ( input.positionSS.xy, surfaceData );
+
+				LightTransportData lightTransportData = GetLightTransportData ( surfaceData, builtinData, bsdfData );
+
+				float4 res = float4( 0.0, 0.0, 0.0, 1.0 );
+				if ( unity_MetaFragmentControl.x )
+				{
+					res.rgb = clamp ( pow ( abs ( lightTransportData.diffuseColor ), saturate ( unity_OneOverOutputBoost ) ), 0, unity_MaxOutputValue );
+				}
+
+				if ( unity_MetaFragmentControl.y )
+				{
+					res.rgb = lightTransportData.emissiveColor;
+				}
+
+				return res;
+			}
+       
+            ENDHLSL
+        }
+
+		
+		 Pass
+		{
+			Name "ShadowCaster"
+			Tags{ "LightMode" = "ShadowCaster" }
+
+			Cull[_CullMode]
+
+			ZClip[_ZClip]
+			ZWrite On
+			ZTest LEqual
+
+			ColorMask 0
+
+			HLSLPROGRAM
+
+				#pragma target 4.5
+				#pragma only_renderers d3d11 ps4 xboxone vulkan metal switch
+
+				#pragma shader_feature _TERRAIN_8_LAYERS
+				#pragma shader_feature _TERRAIN_BLEND_HEIGHT
+				#pragma shader_feature _NORMALMAP
+				#pragma shader_feature _MASKMAP
+
+				#pragma shader_feature _TERRAIN_INSTANCED_PERPIXEL_NORMAL
+				#pragma shader_feature _DISABLE_DECALS
+
+				#define SURFACE_GRADIENT
+				#define HAVE_MESH_MODIFICATION
+
+				#pragma multi_compile_instancing
+				#pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
+
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
+
+				#define SHADERPASS SHADERPASS_SHADOWS
+				#define USE_LEGACY_UNITY_MATRIX_VARIABLES
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/Lit.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/ShaderPass/LitDepthPass.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/TerrainLit/TerrainLitData.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPassDepthOnly.hlsl"
+
+
+				#pragma vertex Vert
+				#pragma fragment Frag
+
+			ENDHLSL
+		}
+
+		
+        Pass
+        {
+			
+            Name "DepthOnly"
+            Tags { "LightMode"="DepthOnly" }
+			ColorMask 0
+            
+            HLSLPROGRAM
+				//#define UNITY_MATERIAL_LIT
+				#pragma vertex Vert
+				#pragma fragment Frag
+        
+				#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
+				#define _ALPHATEST_ON 1
+				#include "TerrainVertexCTSHD.hlsl"
+				#pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
+
+
+        
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Wind.hlsl"
+        
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/NormalSurfaceGradient.hlsl"
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
+        
+				#define SHADERPASS SHADERPASS_DEPTH_ONLY
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/Lit.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinUtilities.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/MaterialUtilities.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphFunctions.hlsl"
+        
+				struct AttributesMesh 
+				{
+					float3 positionOS : POSITION;
+					float3 normalOS : NORMAL;
+					float4 ase_texcoord : TEXCOORD0;
+					#if UNITY_ANY_INSTANCING_ENABLED
+					uint instanceID : INSTANCEID_SEMANTIC;
+					#endif
+				};
+
+				struct PackedVaryingsMeshToPS 
+				{
+					float4 positionCS : SV_Position;
+					float4 ase_texcoord : TEXCOORD0;
+					float4 ase_texcoord1 : TEXCOORD1;
+					#if UNITY_ANY_INSTANCING_ENABLED
+					uint instanceID : INSTANCEID_SEMANTIC;
+					#endif
+				};
+
+				CBUFFER_START(UnityPerMaterial)
+				sampler2D _Texture_Additional_Masks;
+				float4 _Texture_Additional_Masks_ST;
+				half _Remove_Vert_Height;
+				CBUFFER_END
+				        
+				void BuildSurfaceData(FragInputs fragInputs, AlphaSurfaceDescription surfaceDescription, float3 V, out SurfaceData surfaceData)
+				{
+					ZERO_INITIALIZE(SurfaceData, surfaceData);
+					surfaceData.ambientOcclusion =      1.0f;
+					surfaceData.subsurfaceMask =        1.0f;
+
+					surfaceData.materialFeatures = MATERIALFEATUREFLAGS_LIT_STANDARD;
+			#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+					surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SUBSURFACE_SCATTERING;
+			#endif
+			#ifdef _MATERIAL_FEATURE_TRANSMISSION
+					surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_TRANSMISSION;
+			#endif
+			#ifdef _MATERIAL_FEATURE_ANISOTROPY
+					surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_ANISOTROPY;
+			#endif
+			#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+					surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_CLEAR_COAT;
+			#endif
+			#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+					surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_IRIDESCENCE;
+			#endif
+			#ifdef _MATERIAL_FEATURE_SPECULAR_COLOR
+					surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SPECULAR_COLOR;
+			#endif
+					float3 normalTS =                   float3(0.0f, 0.0f, 1.0f);
+					GetNormalWS(fragInputs, normalTS, surfaceData.normalWS);
+					surfaceData.tangentWS = normalize(fragInputs.worldToTangent[0].xyz);    // The tangent is not normalize in worldToTangent for mikkt. TODO: Check if it expected that we normalize with Morten. Tag: SURFACE_GRADIENT
+					surfaceData.tangentWS = Orthonormalize(surfaceData.tangentWS, surfaceData.normalWS);
+					surfaceData.anisotropy = 0;
+					surfaceData.coatMask = 0.0f;
+					surfaceData.iridescenceThickness = 0.0;
+					surfaceData.iridescenceMask = 1.0;
+					surfaceData.ior = 1.0;
+					surfaceData.transmittanceColor = float3(1.0, 1.0, 1.0);
+					surfaceData.atDistance = 1000000.0;
+					surfaceData.transmittanceMask = 0.0;
+					surfaceData.specularOcclusion = 1.0;
+			#if defined(_BENTNORMALMAP) && defined(_ENABLESPECULAROCCLUSION)
+					surfaceData.specularOcclusion = GetSpecularOcclusionFromBentAO(V, bentNormalWS, surfaceData);
+			#elif defined(_MASKMAP)
+					surfaceData.specularOcclusion = GetSpecularOcclusionFromAmbientOcclusion(NdotV, surfaceData.ambientOcclusion, PerceptualSmoothnessToRoughness(surfaceData.perceptualSmoothness));
+			#endif
+				}
+        
+            void GetSurfaceAndBuiltinData(AlphaSurfaceDescription surfaceDescription,FragInputs fragInputs, float3 V, inout PositionInputs posInput, out SurfaceData surfaceData, out BuiltinData builtinData)
+            {
+				#if _ALPHATEST_ON
+					DoAlphaTest ( surfaceDescription.Alpha, surfaceDescription.AlphaClipThreshold );
+				#endif
+                BuildSurfaceData(fragInputs, surfaceDescription, V, surfaceData);
+                InitBuiltinData(surfaceDescription.Alpha, surfaceData.normalWS, -fragInputs.worldToTangent[2], fragInputs.positionRWS, fragInputs.texCoord1, fragInputs.texCoord2, builtinData);
+                builtinData.distortion =                float2(0.0, 0.0);           // surfaceDescription.Distortion -- if distortion pass
+                builtinData.distortionBlur =            0.0;                        // surfaceDescription.DistortionBlur -- if distortion pass
+                builtinData.depthOffset =               0.0;                        // ApplyPerPixelDisplacement(input, V, layerTexCoord, blendMasks); #ifdef _DEPTHOFFSET_ON : ApplyDepthOffsetPositionInput(V, depthOffset, GetWorldToHClipMatrix(), posInput);
+                PostInitBuiltinData(V, posInput, surfaceData, builtinData);
+            }
+
+			PackedVaryingsMeshToPS Vert(AttributesMesh inputMesh  )
+			{
+				PackedVaryingsMeshToPS outputPackedVaryingsMeshToPS;
+				UNITY_SETUP_INSTANCE_ID(inputMesh);
+				UNITY_TRANSFER_INSTANCE_ID(inputMesh, outputPackedVaryingsMeshToPS);
+				TerrainInstancing(inputMesh.positionOS, inputMesh.normalOS);
+				float3 ase_worldPos = GetAbsolutePositionWS( TransformObjectToWorld( (inputMesh.positionOS).xyz ) );
+				outputPackedVaryingsMeshToPS.ase_texcoord1.xyz = ase_worldPos;
+				
+				outputPackedVaryingsMeshToPS.ase_texcoord.xy = inputMesh.ase_texcoord.xy;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				outputPackedVaryingsMeshToPS.ase_texcoord.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord1.w = 0;
+				float3 vertexValue =  float3( 0, 0, 0 ) ;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				inputMesh.positionOS.xyz = vertexValue;
+				#else
+				inputMesh.positionOS.xyz += vertexValue;
+				#endif
+
+				inputMesh.normalOS =  inputMesh.normalOS ;
+
+				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
+				outputPackedVaryingsMeshToPS.positionCS = TransformWorldToHClip(positionRWS);
+				return outputPackedVaryingsMeshToPS;
+			}
+
+			void Frag(  PackedVaryingsMeshToPS packedInput
+						#ifdef WRITE_NORMAL_BUFFER
+						, out float4 outNormalBuffer : SV_Target0
+							#ifdef WRITE_MSAA_DEPTH
+						, out float1 depthColor : SV_Target1
+							#endif
+						#else
+						, out float4 outColor : SV_Target0
+						#endif
+
+						#ifdef _DEPTHOFFSET_ON
+						, out float outputDepth : SV_Depth
+						#endif
+						
+					)
+			{
+							
+				FragInputs input;
+				ZERO_INITIALIZE(FragInputs, input);
+				input.worldToTangent = k_identity3x3;
+				input.positionSS = packedInput.positionCS;
+				
+				PositionInputs posInput = GetPositionInput(input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS);
+
+				float3 V = float3(1.0, 1.0, 1.0);
+
+				SurfaceData surfaceData;
+				BuiltinData builtinData;
+				AlphaSurfaceDescription surfaceDescription = ( AlphaSurfaceDescription ) 0;
+				float2 uv_Texture_Additional_Masks = packedInput.ase_texcoord.xy * _Texture_Additional_Masks_ST.xy + _Texture_Additional_Masks_ST.zw;
+				float3 ase_worldPos = packedInput.ase_texcoord1.xyz;
+				float clampResult6167 = clamp( ( ase_worldPos.y + ( 0.0 - _Remove_Vert_Height ) ) , 0.0 , 1.0 );
+				
+				surfaceDescription.Alpha = ( tex2D( _Texture_Additional_Masks, uv_Texture_Additional_Masks ).a * clampResult6167 );
+				surfaceDescription.AlphaClipThreshold = 0.5;
+
+				GetSurfaceAndBuiltinData(surfaceDescription, input, V, posInput, surfaceData, builtinData);
+
+			#ifdef _DEPTHOFFSET_ON
+				outputDepth = posInput.deviceDepth;
+			#endif
+
+			#ifdef WRITE_NORMAL_BUFFER
+				EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surfaceData), posInput.positionSS, outNormalBuffer);
+				#ifdef WRITE_MSAA_DEPTH
+				depthColor = packedInput.positionCS.z;
+				#endif
+			#elif defined(SCENESELECTIONPASS)
+				outColor = float4(_ObjectId, _PassValue, 1.0, 1.0);
+			#else
+				outColor = float4(0.0, 0.0, 0.0, 0.0);
+			#endif
+			}
+        
+            ENDHLSL
+        }
+
+		
+        Pass
+        {
+            
+            
+			Name "Forward"
+			Tags { "LightMode"="Forward" }
+			Stencil
+			{
+				Ref 2
+				WriteMask 7
+				Comp Always
+				Pass Replace
+				Fail Keep
+				ZFail Keep
+			}
+
+
+            HLSLPROGRAM
+                //#define UNITY_MATERIAL_LIT
+				#pragma vertex Vert
+				#pragma fragment Frag
+        
+				#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
+				#define _NORMALMAP 1
+				#define _ALPHATEST_ON 1
+				#pragma multi_compile __ _USE_AO_ON
+				#include "TerrainVertexCTSHD.hlsl"
+				#pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
+
+        
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Wind.hlsl"
+        
+				#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/NormalSurfaceGradient.hlsl"
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
+        
+                #define SHADERPASS SHADERPASS_FORWARD
+                #pragma multi_compile _ LIGHTMAP_ON
+                #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+                #pragma multi_compile _ DYNAMICLIGHTMAP_ON
+                #pragma multi_compile _ SHADOWS_SHADOWMASK
+                #define LIGHTLOOP_TILE_PASS
+                #pragma multi_compile USE_FPTL_LIGHTLIST USE_CLUSTERED_LIGHTLIST
+				#pragma multi_compile SHADOW_LOW SHADOW_MEDIUM SHADOW_HIGH
+        
+                #define ATTRIBUTES_NEED_NORMAL
+                #define ATTRIBUTES_NEED_TANGENT
+                #define ATTRIBUTES_NEED_TEXCOORD1
+                #define ATTRIBUTES_NEED_TEXCOORD2
+                #define VARYINGS_NEED_POSITION_WS
+                #define VARYINGS_NEED_TANGENT_TO_WORLD
+                #define VARYINGS_NEED_TEXCOORD1
+                #define VARYINGS_NEED_TEXCOORD2
+        
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/Lighting.hlsl"
+        
+				#define HAS_LIGHTLOOP
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/LightLoopDef.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/Lit.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/LightLoop.hlsl"
+        
+        
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinUtilities.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/MaterialUtilities.hlsl"
+				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphFunctions.hlsl"
+        
+				//float3x3 BuildWorldToTangent(float4 tangentWS, float3 normalWS)
+				//{
+        		//	float3 unnormalizedNormalWS = normalWS;
+				//	float renormFactor = 1.0 / length(unnormalizedNormalWS);
+				//	float3x3 worldToTangent = CreateWorldToTangent(unnormalizedNormalWS, tangentWS.xyz, tangentWS.w > 0.0 ? 1.0 : -1.0);
+				//	worldToTangent[0] = worldToTangent[0] * renormFactor;
+				//	worldToTangent[1] = worldToTangent[1] * renormFactor;
+				//	worldToTangent[2] = worldToTangent[2] * renormFactor;
+				//	return worldToTangent;
+				//}
+        
+				struct AttributesMesh 
+				{
+					float3 positionOS : POSITION;
+					float3 normalOS : NORMAL;
+					float4 tangentOS : TANGENT;
+					float4 uv1 : TEXCOORD1;
+					float4 uv2 : TEXCOORD2;
+					float4 ase_texcoord : TEXCOORD0;
+					#if UNITY_ANY_INSTANCING_ENABLED
+					uint instanceID : INSTANCEID_SEMANTIC;
+					#endif
+				};
+        
+				struct PackedVaryingsMeshToPS 
+				{
+					float4 positionCS : SV_Position;
+					float3 interp00 : TEXCOORD0;
+					float3 interp01 : TEXCOORD1;
+					float4 interp02 : TEXCOORD2;
+					float4 interp03 : TEXCOORD3;
+					float4 interp04 : TEXCOORD4;
+					float4 ase_texcoord5 : TEXCOORD5;
+					float4 ase_texcoord6 : TEXCOORD6;
+					#if UNITY_ANY_INSTANCING_ENABLED
+					uint instanceID : INSTANCEID_SEMANTIC;
+					#endif
+				};
+
+        
+				CBUFFER_START(UnityPerMaterial)
+				half _Global_Color_Map_Far_Power;
+				sampler2D _Global_Color_Map;
+				float2 _Global_Color_Map_Offset;
+				float _Global_Color_Map_Scale;
+				half _Global_Color_Opacity_Power;
+				sampler2D _Texture_Splat_4;
+				sampler2D _Texture_Splat_3;
+				sampler2D _Texture_Splat_2;
+				sampler2D _Texture_Splat_1;
+				half _Texture_1_Albedo_Index;
+				TEXTURE2D_ARRAY( _Texture_Array_Albedo );
+				uniform SAMPLER( sampler_Texture_Array_Albedo );
+				half _Texture_1_Tiling;
+				half _Texture_1_Far_Multiplier;
+				half4 _Texture_1_Color;
+				half _Texture_2_Albedo_Index;
+				half _Texture_2_Tiling;
+				half _Texture_2_Far_Multiplier;
+				half4 _Texture_2_Color;
+				half _Texture_3_Albedo_Index;
+				half _Texture_3_Tiling;
+				half _Texture_3_Far_Multiplier;
+				half4 _Texture_3_Color;
+				half _Texture_4_Albedo_Index;
+				half _Texture_4_Tiling;
+				half _Texture_4_Far_Multiplier;
+				half4 _Texture_4_Color;
+				half _Texture_5_Albedo_Index;
+				half _Texture_5_Tiling;
+				half _Texture_5_Far_Multiplier;
+				half4 _Texture_5_Color;
+				half _Texture_6_Albedo_Index;
+				half _Texture_6_Tiling;
+				half _Texture_6_Far_Multiplier;
+				half4 _Texture_6_Color;
+				half _Texture_7_Albedo_Index;
+				half _Texture_7_Tiling;
+				half _Texture_7_Far_Multiplier;
+				half4 _Texture_7_Color;
+				half _Texture_8_Albedo_Index;
+				half _Texture_8_Tiling;
+				half _Texture_8_Far_Multiplier;
+				half4 _Texture_8_Color;
+				half _Texture_9_Albedo_Index;
+				half _Texture_9_Tiling;
+				half _Texture_9_Far_Multiplier;
+				half4 _Texture_9_Color;
+				half _Texture_10_Albedo_Index;
+				half _Texture_10_Tiling;
+				half _Texture_10_Far_Multiplier;
+				half4 _Texture_10_Color;
+				half _Texture_11_Albedo_Index;
+				half _Texture_11_Tiling;
+				half _Texture_11_Far_Multiplier;
+				half4 _Texture_11_Color;
+				half _Texture_12_Albedo_Index;
+				half _Texture_12_Tiling;
+				half _Texture_12_Far_Multiplier;
+				half4 _Texture_12_Color;
+				half _Texture_13_Albedo_Index;
+				half _Texture_13_Tiling;
+				half _Texture_13_Far_Multiplier;
+				half4 _Texture_13_Color;
+				half _Texture_14_Albedo_Index;
+				half _Texture_14_Tiling;
+				half _Texture_14_Far_Multiplier;
+				half4 _Texture_14_Color;
+				half _Texture_15_Albedo_Index;
+				half _Texture_15_Tiling;
+				half _Texture_15_Far_Multiplier;
+				half4 _Texture_15_Color;
+				half _Texture_16_Albedo_Index;
+				half _Texture_16_Tiling;
+				half _Texture_16_Far_Multiplier;
+				half4 _Texture_16_Color;
+				half _Geological_Map_Far_Power;
+				sampler2D _Texture_Geological_Map;
+				half _Geological_Tiling_Far;
+				half _Geological_Map_Offset_Far;
+				half _Texture_16_Geological_Power;
+				half _Texture_15_Geological_Power;
+				half _Texture_14_Geological_Power;
+				half _Texture_13_Geological_Power;
+				half _Texture_12_Geological_Power;
+				half _Texture_11_Geological_Power;
+				half _Texture_10_Geological_Power;
+				half _Texture_9_Geological_Power;
+				half _Texture_8_Geological_Power;
+				half _Texture_7_Geological_Power;
+				half _Texture_6_Geological_Power;
+				half _Texture_5_Geological_Power;
+				half _Texture_1_Geological_Power;
+				half _Texture_2_Geological_Power;
+				half _Texture_4_Geological_Power;
+				half _Texture_3_Geological_Power;
+				half4 _Texture_Snow_Average;
+				half4 _Snow_Color;
+				half _Snow_Amount;
+				half _Snow_Noise_Tiling;
+				half _Snow_Noise_Power;
+				half _Snow_Maximum_Angle;
+				half _Snow_Maximum_Angle_Hardness;
+				half _Snow_Min_Height;
+				half _Snow_Min_Height_Blending;
+				half _Texture_16_Snow_Reduction;
+				half _Texture_15_Snow_Reduction;
+				half _Texture_13_Snow_Reduction;
+				half _Texture_12_Snow_Reduction;
+				half _Texture_11_Snow_Reduction;
+				half _Texture_9_Snow_Reduction;
+				half _Texture_8_Snow_Reduction;
+				half _Texture_7_Snow_Reduction;
+				half _Texture_5_Snow_Reduction;
+				half _Texture_1_Snow_Reduction;
+				half _Texture_2_Snow_Reduction;
+				half _Texture_3_Snow_Reduction;
+				half _Texture_4_Snow_Reduction;
+				half _Texture_6_Snow_Reduction;
+				half _Texture_10_Snow_Reduction;
+				half _Texture_14_Snow_Reduction;
+				TEXTURE2D_ARRAY( _Texture_Array_Normal );
+				uniform SAMPLER( sampler_Texture_Array_Normal );
+				half _Perlin_Normal_Tiling_Far;
+				int _Texture_Perlin_Normal_Index;
+				half _Perlin_Normal_Power;
+				float _Texture_16_Perlin_Power;
+				float _Texture_15_Perlin_Power;
+				float _Texture_14_Perlin_Power;
+				float _Texture_13_Perlin_Power;
+				float _Texture_12_Perlin_Power;
+				float _Texture_11_Perlin_Power;
+				float _Texture_10_Perlin_Power;
+				float _Texture_9_Perlin_Power;
+				float _Texture_8_Perlin_Power;
+				float _Texture_7_Perlin_Power;
+				float _Texture_6_Perlin_Power;
+				float _Texture_5_Perlin_Power;
+				float _Texture_1_Perlin_Power;
+				float _Texture_2_Perlin_Power;
+				float _Texture_4_Perlin_Power;
+				float _Texture_3_Perlin_Power;
+				half _Snow_Perlin_Power;
+				half _Global_Normalmap_Power;
+				sampler2D _Global_Normal_Map;
+				half _Terrain_Specular;
+				half _Snow_Specular;
+				half _Terrain_Smoothness;
+				half _Ambient_Occlusion_Power;
+				sampler2D _Texture_Additional_Masks;
+				float4 _Texture_Additional_Masks_ST;
+				half _Remove_Vert_Height;
+				CBUFFER_END
+				float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+				float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+				float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+				float snoise( float2 v )
+				{
+					const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+					float2 i = floor( v + dot( v, C.yy ) );
+					float2 x0 = v - i + dot( i, C.xx );
+					float2 i1;
+					i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+					float4 x12 = x0.xyxy + C.xxzz;
+					x12.xy -= i1;
+					i = mod2D289( i );
+					float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+					float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+					m = m * m;
+					m = m * m;
+					float3 x = 2.0 * frac( p * C.www ) - 1.0;
+					float3 h = abs( x ) - 0.5;
+					float3 ox = floor( x + 0.5 );
+					float3 a0 = x - ox;
+					m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+					float3 g;
+					g.x = a0.x * x0.x + h.x * x0.y;
+					g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+					return 130.0 * dot( m, g );
+				}
+				
+                
+        
+				void BuildSurfaceData ( FragInputs fragInputs, GlobalSurfaceDescription surfaceDescription, float3 V, out SurfaceData surfaceData )
+			{
+				ZERO_INITIALIZE ( SurfaceData, surfaceData );
+
+				float3 normalTS = float3( 0.0f, 0.0f, 1.0f );
+				normalTS = surfaceDescription.Normal;
+				GetNormalWS ( fragInputs, normalTS, surfaceData.normalWS );
+
+				surfaceData.ambientOcclusion = 1.0f;
+
+				surfaceData.baseColor = surfaceDescription.Albedo;
+				surfaceData.perceptualSmoothness = surfaceDescription.Smoothness;
+				surfaceData.ambientOcclusion = surfaceDescription.Occlusion;
+
+				surfaceData.materialFeatures = MATERIALFEATUREFLAGS_LIT_STANDARD;
+
+#ifdef _MATERIAL_FEATURE_SPECULAR_COLOR
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SPECULAR_COLOR;
+				surfaceData.specularColor = surfaceDescription.Specular;
+#else
+				surfaceData.metallic = surfaceDescription.Metallic;
+#endif
+
+#if defined(_MATERIAL_FEATURE_SUBSURFACE_SCATTERING) || defined(_MATERIAL_FEATURE_TRANSMISSION)
+				surfaceData.diffusionProfile = surfaceDescription.DiffusionProfile;
+#endif
+
+#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_SUBSURFACE_SCATTERING;
+				surfaceData.subsurfaceMask = surfaceDescription.SubsurfaceMask;
+#else
+				surfaceData.subsurfaceMask = 1.0f;
+#endif
+
+#ifdef _MATERIAL_FEATURE_TRANSMISSION
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_TRANSMISSION;
+				surfaceData.thickness = surfaceDescription.Thickness;
+#endif
+
+				surfaceData.tangentWS = normalize ( fragInputs.worldToTangent[ 0 ].xyz );
+				surfaceData.tangentWS = Orthonormalize ( surfaceData.tangentWS, surfaceData.normalWS );
+
+#ifdef _MATERIAL_FEATURE_ANISOTROPY
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_ANISOTROPY;
+				surfaceData.anisotropy = surfaceDescription.Anisotropy;
+
+#else
+				surfaceData.anisotropy = 0;
+#endif
+
+#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_CLEAR_COAT;
+				surfaceData.coatMask = surfaceDescription.CoatMask;
+#else
+				surfaceData.coatMask = 0.0f;
+#endif
+
+#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+				surfaceData.materialFeatures |= MATERIALFEATUREFLAGS_LIT_IRIDESCENCE;
+				surfaceData.iridescenceThickness = surfaceDescription.IridescenceThickness;
+				surfaceData.iridescenceMask = surfaceDescription.IridescenceMask;
+#else
+				surfaceData.iridescenceThickness = 0.0;
+				surfaceData.iridescenceMask = 1.0;
+#endif
+
+				//ASE CUSTOM TAG
+#ifdef _MATERIAL_FEATURE_TRANSPARENCY
+				surfaceData.ior = surfaceDescription.IndexOfRefraction;
+				surfaceData.transmittanceColor = surfaceDescription.TransmittanceColor;
+				surfaceData.atDistance = surfaceDescription.TransmittanceAbsorptionDistance;
+				surfaceData.transmittanceMask = surfaceDescription.TransmittanceMask;
+#else
+				surfaceData.ior = 1.0;
+				surfaceData.transmittanceColor = float3( 1.0, 1.0, 1.0 );
+				surfaceData.atDistance = 1000000.0;
+				surfaceData.transmittanceMask = 0.0;
+#endif
+
+				surfaceData.specularOcclusion = 1.0;
+
+#if defined(_BENTNORMALMAP) && defined(_ENABLESPECULAROCCLUSION)
+				surfaceData.specularOcclusion = GetSpecularOcclusionFromBentAO ( V, bentNormalWS, surfaceData );
+#elif defined(_MASKMAP)
+				surfaceData.specularOcclusion = GetSpecularOcclusionFromAmbientOcclusion ( NdotV, surfaceData.ambientOcclusion, PerceptualSmoothnessToRoughness ( surfaceData.perceptualSmoothness ) );
+#endif
+			}
+        
+				void GetSurfaceAndBuiltinData( GlobalSurfaceDescription surfaceDescription , FragInputs fragInputs, float3 V, inout PositionInputs posInput, out SurfaceData surfaceData, out BuiltinData builtinData)
+				{
+				#if _ALPHATEST_ON
+					DoAlphaTest ( surfaceDescription.Alpha, surfaceDescription.AlphaClipThreshold );
+				#endif
+		
+					BuildSurfaceData(fragInputs, surfaceDescription, V, surfaceData);
+					InitBuiltinData(surfaceDescription.Alpha, surfaceData.normalWS, -fragInputs.worldToTangent[2], fragInputs.positionRWS, fragInputs.texCoord1, fragInputs.texCoord2, builtinData);
+        
+					builtinData.emissiveColor =             surfaceDescription.Emission;
+					builtinData.distortion =                float2(0.0, 0.0);           // surfaceDescription.Distortion -- if distortion pass
+					builtinData.distortionBlur =            0.0;                        // surfaceDescription.DistortionBlur -- if distortion pass
+        
+					builtinData.depthOffset =               0.0;                        // ApplyPerPixelDisplacement(input, V, layerTexCoord, blendMasks); #ifdef _DEPTHOFFSET_ON : ApplyDepthOffsetPositionInput(V, depthOffset, GetWorldToHClipMatrix(), posInput);
+        
+					PostInitBuiltinData(V, posInput, surfaceData, builtinData);
+				}
+        
+			
+				PackedVaryingsMeshToPS Vert(AttributesMesh inputMesh  )
+				{
+					PackedVaryingsMeshToPS outputPackedVaryingsMeshToPS;
+
+					UNITY_SETUP_INSTANCE_ID(inputMesh);
+					UNITY_TRANSFER_INSTANCE_ID(inputMesh, outputPackedVaryingsMeshToPS);
+					   TerrainInstancingUV(inputMesh.positionOS, inputMesh.normalOS, inputMesh.tangentOS, inputMesh.ase_texcoord.xy);
+					float3 ase_worldNormal = TransformObjectToWorldNormal(inputMesh.normalOS);
+					float3 ase_worldTangent = TransformObjectToWorldDir(inputMesh.tangentOS.xyz);
+					float ase_vertexTangentSign = inputMesh.tangentOS.w * unity_WorldTransformParams.w;
+					float3 ase_worldBitangent = cross( ase_worldNormal, ase_worldTangent ) * ase_vertexTangentSign;
+					outputPackedVaryingsMeshToPS.ase_texcoord6.xyz = ase_worldBitangent;
+					
+					outputPackedVaryingsMeshToPS.ase_texcoord5.xy = inputMesh.ase_texcoord.xy;
+					
+					//setting value to unused interpolator channels and avoid initialization warnings
+					outputPackedVaryingsMeshToPS.ase_texcoord5.zw = 0;
+					outputPackedVaryingsMeshToPS.ase_texcoord6.w = 0;
+					float3 vertexValue =  float3( 0, 0, 0 ) ;
+					#ifdef ASE_ABSOLUTE_VERTEX_POS
+					inputMesh.positionOS.xyz = vertexValue;
+					#else
+					inputMesh.positionOS.xyz += vertexValue;
+					#endif
+					
+					inputMesh.normalOS =  inputMesh.normalOS ;
+
+					float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
+					float3 normalWS = TransformObjectToWorldNormal(inputMesh.normalOS);
+					float4 tangentWS = float4(TransformObjectToWorldDir(inputMesh.tangentOS.xyz), inputMesh.tangentOS.w);
+
+					outputPackedVaryingsMeshToPS.positionCS = TransformWorldToHClip(positionRWS);
+					outputPackedVaryingsMeshToPS.interp00.xyz = positionRWS;
+					outputPackedVaryingsMeshToPS.interp01.xyz = normalWS;
+					outputPackedVaryingsMeshToPS.interp02.xyzw = tangentWS;
+					outputPackedVaryingsMeshToPS.interp03.xyzw = inputMesh.uv1;
+					outputPackedVaryingsMeshToPS.interp04.xyzw = inputMesh.uv2;
+
+					return outputPackedVaryingsMeshToPS;
+				}
+
+				void Frag(PackedVaryingsMeshToPS packedInput,
+						#ifdef OUTPUT_SPLIT_LIGHTING
+							out float4 outColor : SV_Target0,  // outSpecularLighting
+							out float4 outDiffuseLighting : SV_Target1,
+							OUTPUT_SSSBUFFER(outSSSBuffer)
+						#else
+							out float4 outColor : SV_Target0
+						#endif
+						#ifdef _DEPTHOFFSET_ON
+							, out float outputDepth : SV_Depth
+						#endif
+						 
+						  )
+				{
+					FragInputs input;
+					ZERO_INITIALIZE(FragInputs, input);
+        
+					input.worldToTangent = k_identity3x3;
+					input.positionSS = packedInput.positionCS;
+					float3 positionRWS = packedInput.interp00.xyz;
+					float3 normalWS = packedInput.interp01.xyz;
+					float4 tangentWS = packedInput.interp02.xyzw;
+						
+					input.positionRWS = positionRWS;
+					input.worldToTangent = BuildWorldToTangent(tangentWS, normalWS);
+					input.texCoord1 = packedInput.interp03.xyzw;
+					input.texCoord2 = packedInput.interp04.xyzw;
+
+					// input.positionSS is SV_Position
+					PositionInputs posInput = GetPositionInput_Stereo(input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS.xyz, uint2(input.positionSS.xy) / GetTileSize(), unity_StereoEyeIndex);
+
+					float3 normalizedWorldViewDir = GetWorldSpaceNormalizeViewDir ( input.positionRWS );
+
+					SurfaceData surfaceData;
+					BuiltinData builtinData;
+					GlobalSurfaceDescription surfaceDescription = ( GlobalSurfaceDescription ) 0;
+					float2 uv2588 = packedInput.ase_texcoord5.xy * float2( 1,1 ) + float2( 0,0 );
+					float4 tex2DNode6148 = tex2D( _Global_Color_Map, ( _Global_Color_Map_Offset + ( _Global_Color_Map_Scale * uv2588 ) ) );
+					float clampResult6182 = clamp( ( tex2DNode6148.a + ( 1.0 - _Global_Color_Opacity_Power ) ) , 0.0 , 1.0 );
+					float2 appendResult6159 = (float2(1.0 , ( _Global_Color_Map_Far_Power * clampResult6182 )));
+					float4 tex2DNode4371 = tex2D( _Texture_Splat_4, uv2588 );
+					float4 tex2DNode4370 = tex2D( _Texture_Splat_3, uv2588 );
+					float4 tex2DNode4369 = tex2D( _Texture_Splat_2, uv2588 );
+					float4 tex2DNode4368 = tex2D( _Texture_Splat_1, uv2588 );
+					float3 ase_worldPos = GetAbsolutePositionWS( positionRWS );
+					float3 break6186 = ase_worldPos;
+					float2 appendResult6176 = (float2(break6186.x , break6186.z));
+					half2 Top_Bottom1999 = appendResult6176;
+					float temp_output_3830_0 = ( 1.0 / _Texture_1_Tiling );
+					float2 appendResult3284 = (float2(temp_output_3830_0 , temp_output_3830_0));
+					float4 texArray3292 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3284 ) / _Texture_1_Far_Multiplier ), _Texture_1_Albedo_Index );
+					float4 ifLocalVar6119 = 0;
+					UNITY_BRANCH 
+					if( _Texture_1_Albedo_Index > -1.0 )
+					ifLocalVar6119 = ( texArray3292 * _Texture_1_Color );
+					half4 Texture_1_Final950 = ifLocalVar6119;
+					float temp_output_3831_0 = ( 1.0 / _Texture_2_Tiling );
+					float2 appendResult3349 = (float2(temp_output_3831_0 , temp_output_3831_0));
+					float4 texArray3339 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3349 ) / _Texture_2_Far_Multiplier ), _Texture_2_Albedo_Index );
+					float4 ifLocalVar6120 = 0;
+					UNITY_BRANCH 
+					if( _Texture_2_Albedo_Index > -1.0 )
+					ifLocalVar6120 = ( texArray3339 * _Texture_2_Color );
+					half4 Texture_2_Final3385 = ifLocalVar6120;
+					float temp_output_3832_0 = ( 1.0 / _Texture_3_Tiling );
+					float2 appendResult3415 = (float2(temp_output_3832_0 , temp_output_3832_0));
+					float4 texArray3406 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult3415 ) / _Texture_3_Far_Multiplier ), _Texture_3_Albedo_Index );
+					float4 ifLocalVar6121 = 0;
+					UNITY_BRANCH 
+					if( _Texture_3_Albedo_Index > -1.0 )
+					ifLocalVar6121 = ( texArray3406 * _Texture_3_Color );
+					half4 Texture_3_Final3451 = ifLocalVar6121;
+					float4 texArray3473 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * ( 1.0 / _Texture_4_Tiling ) ) / _Texture_4_Far_Multiplier ), _Texture_4_Albedo_Index );
+					float4 ifLocalVar6122 = 0;
+					UNITY_BRANCH 
+					if( _Texture_4_Albedo_Index > -1.0 )
+					ifLocalVar6122 = ( texArray3473 * _Texture_4_Color );
+					half4 Texture_4_Final3518 = ifLocalVar6122;
+					float4 layeredBlendVar5643 = tex2DNode4368;
+					float4 layeredBlend5643 = ( lerp( lerp( lerp( lerp( float4( 0,0,0,0 ) , Texture_1_Final950 , layeredBlendVar5643.x ) , Texture_2_Final3385 , layeredBlendVar5643.y ) , Texture_3_Final3451 , layeredBlendVar5643.z ) , Texture_4_Final3518 , layeredBlendVar5643.w ) );
+					float temp_output_4397_0 = ( 1.0 / _Texture_5_Tiling );
+					float2 appendResult4399 = (float2(temp_output_4397_0 , temp_output_4397_0));
+					float4 texArray4445 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4399 ) / _Texture_5_Far_Multiplier ), _Texture_5_Albedo_Index );
+					float4 ifLocalVar6123 = 0;
+					UNITY_BRANCH 
+					if( _Texture_5_Albedo_Index > -1.0 )
+					ifLocalVar6123 = ( texArray4445 * _Texture_5_Color );
+					half4 Texture_5_Final4396 = ifLocalVar6123;
+					float temp_output_4469_0 = ( 1.0 / _Texture_6_Tiling );
+					float2 appendResult4471 = (float2(temp_output_4469_0 , temp_output_4469_0));
+					float4 texArray4512 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4471 ) / _Texture_6_Far_Multiplier ), _Texture_6_Albedo_Index );
+					float4 ifLocalVar6124 = 0;
+					UNITY_BRANCH 
+					if( _Texture_6_Albedo_Index > -1.0 )
+					ifLocalVar6124 = ( texArray4512 * _Texture_6_Color );
+					half4 Texture_6_Final4536 = ifLocalVar6124;
+					float temp_output_4543_0 = ( 1.0 / _Texture_7_Tiling );
+					float2 appendResult4545 = (float2(temp_output_4543_0 , temp_output_4543_0));
+					float4 texArray4586 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4545 ) / _Texture_7_Far_Multiplier ), _Texture_7_Albedo_Index );
+					float4 ifLocalVar6125 = 0;
+					UNITY_BRANCH 
+					if( _Texture_7_Albedo_Index > -1.0 )
+					ifLocalVar6125 = ( texArray4586 * _Texture_7_Color );
+					half4 Texture_7_Final4614 = ifLocalVar6125;
+					float temp_output_4617_0 = ( 1.0 / _Texture_8_Tiling );
+					float2 appendResult4619 = (float2(temp_output_4617_0 , temp_output_4617_0));
+					float4 texArray4660 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4619 ) / _Texture_8_Far_Multiplier ), _Texture_8_Albedo_Index );
+					float4 ifLocalVar6126 = 0;
+					UNITY_BRANCH 
+					if( _Texture_8_Albedo_Index > -1.0 )
+					ifLocalVar6126 = ( texArray4660 * _Texture_8_Color );
+					half4 Texture_8_Final4689 = ifLocalVar6126;
+					float4 layeredBlendVar5644 = tex2DNode4369;
+					float4 layeredBlend5644 = ( lerp( lerp( lerp( lerp( layeredBlend5643 , Texture_5_Final4396 , layeredBlendVar5644.x ) , Texture_6_Final4536 , layeredBlendVar5644.y ) , Texture_7_Final4614 , layeredBlendVar5644.z ) , Texture_8_Final4689 , layeredBlendVar5644.w ) );
+					float temp_output_4703_0 = ( 1.0 / _Texture_9_Tiling );
+					float2 appendResult4736 = (float2(temp_output_4703_0 , temp_output_4703_0));
+					float4 texArray4889 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4736 ) / _Texture_9_Far_Multiplier ), _Texture_9_Albedo_Index );
+					float4 ifLocalVar6134 = 0;
+					UNITY_BRANCH 
+					if( _Texture_9_Albedo_Index > -1.0 )
+					ifLocalVar6134 = ( texArray4889 * _Texture_9_Color );
+					half4 Texture_9_Final4987 = ifLocalVar6134;
+					float temp_output_4734_0 = ( 1.0 / _Texture_10_Tiling );
+					float2 appendResult4738 = (float2(temp_output_4734_0 , temp_output_4734_0));
+					float4 texArray4913 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4738 ) / _Texture_10_Far_Multiplier ), _Texture_10_Albedo_Index );
+					float4 ifLocalVar6133 = 0;
+					UNITY_BRANCH 
+					if( _Texture_10_Albedo_Index > -1.0 )
+					ifLocalVar6133 = ( texArray4913 * _Texture_10_Color );
+					half4 Texture_10_Final4994 = ifLocalVar6133;
+					float temp_output_4739_0 = ( 1.0 / _Texture_11_Tiling );
+					float2 appendResult4741 = (float2(temp_output_4739_0 , temp_output_4739_0));
+					float4 texArray4923 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4741 ) / _Texture_11_Far_Multiplier ), _Texture_11_Albedo_Index );
+					float4 ifLocalVar6132 = 0;
+					UNITY_BRANCH 
+					if( _Texture_11_Albedo_Index > -1.0 )
+					ifLocalVar6132 = ( texArray4923 * _Texture_11_Color );
+					half4 Texture_11_Final4996 = ifLocalVar6132;
+					float temp_output_4745_0 = ( 1.0 / _Texture_12_Tiling );
+					float2 appendResult4751 = (float2(temp_output_4745_0 , temp_output_4745_0));
+					float4 texArray4952 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult4751 ) / _Texture_12_Far_Multiplier ), _Texture_12_Albedo_Index );
+					float4 ifLocalVar6131 = 0;
+					UNITY_BRANCH 
+					if( _Texture_12_Albedo_Index > -1.0 )
+					ifLocalVar6131 = ( texArray4952 * _Texture_12_Color );
+					half4 Texture_12_Final4997 = ifLocalVar6131;
+					float4 layeredBlendVar5645 = tex2DNode4370;
+					float4 layeredBlend5645 = ( lerp( lerp( lerp( lerp( layeredBlend5644 , Texture_9_Final4987 , layeredBlendVar5645.x ) , Texture_10_Final4994 , layeredBlendVar5645.y ) , Texture_11_Final4996 , layeredBlendVar5645.z ) , Texture_12_Final4997 , layeredBlendVar5645.w ) );
+					float temp_output_5125_0 = ( 1.0 / _Texture_13_Tiling );
+					float2 appendResult5027 = (float2(temp_output_5125_0 , temp_output_5125_0));
+					float4 texArray5034 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5027 ) / _Texture_13_Far_Multiplier ), _Texture_13_Albedo_Index );
+					float4 ifLocalVar6130 = 0;
+					UNITY_BRANCH 
+					if( _Texture_13_Albedo_Index > -1.0 )
+					ifLocalVar6130 = ( texArray5034 * _Texture_13_Color );
+					half4 Texture_13_Final5058 = ifLocalVar6130;
+					float temp_output_5006_0 = ( 1.0 / _Texture_14_Tiling );
+					float2 appendResult5033 = (float2(temp_output_5006_0 , temp_output_5006_0));
+					float4 texArray5171 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5033 ) / _Texture_14_Far_Multiplier ), _Texture_14_Albedo_Index );
+					float4 ifLocalVar6129 = 0;
+					UNITY_BRANCH 
+					if( _Texture_14_Albedo_Index > -1.0 )
+					ifLocalVar6129 = ( texArray5171 * _Texture_14_Color );
+					half4 Texture_14_Final5163 = ifLocalVar6129;
+					float temp_output_5210_0 = ( 1.0 / _Texture_15_Tiling );
+					float2 appendResult5212 = (float2(temp_output_5210_0 , temp_output_5210_0));
+					float4 texArray5272 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5212 ) / _Texture_15_Far_Multiplier ), _Texture_15_Albedo_Index );
+					float4 ifLocalVar6128 = 0;
+					UNITY_BRANCH 
+					if( _Texture_15_Albedo_Index > -1.0 )
+					ifLocalVar6128 = ( texArray5272 * _Texture_15_Color );
+					half4 Texture_15_Final5270 = ifLocalVar6128;
+					float temp_output_5075_0 = ( 1.0 / _Texture_16_Tiling );
+					float2 appendResult5078 = (float2(temp_output_5075_0 , temp_output_5075_0));
+					float4 texArray5145 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Albedo, sampler_Texture_Array_Albedo, ( ( Top_Bottom1999 * appendResult5078 ) / _Texture_16_Far_Multiplier ), _Texture_16_Albedo_Index );
+					float4 ifLocalVar6127 = 0;
+					UNITY_BRANCH 
+					if( _Texture_16_Albedo_Index > -1.0 )
+					ifLocalVar6127 = ( texArray5145 * _Texture_16_Color );
+					half4 Texture_16_Final5094 = ifLocalVar6127;
+					float4 layeredBlendVar5646 = tex2DNode4371;
+					float4 layeredBlend5646 = ( lerp( lerp( lerp( lerp( layeredBlend5645 , Texture_13_Final5058 , layeredBlendVar5646.x ) , Texture_14_Final5163 , layeredBlendVar5646.y ) , Texture_15_Final5270 , layeredBlendVar5646.z ) , Texture_16_Final5094 , layeredBlendVar5646.w ) );
+					float4 break3856 = layeredBlend5646;
+					float3 appendResult3857 = (float3(break3856.x , break3856.y , break3856.z));
+					float3 appendResult6149 = (float3(tex2DNode6148.r , tex2DNode6148.g , tex2DNode6148.b));
+					float2 weightedBlendVar6160 = appendResult6159;
+					float3 weightedAvg6160 = ( ( weightedBlendVar6160.x*appendResult3857 + weightedBlendVar6160.y*appendResult6149 )/( weightedBlendVar6160.x + weightedBlendVar6160.y ) );
+					float2 temp_cast_0 = (( ( ase_worldPos.y / _Geological_Tiling_Far ) + _Geological_Map_Offset_Far )).xx;
+					float4 tex2DNode5983 = tex2D( _Texture_Geological_Map, temp_cast_0 );
+					float3 appendResult5985 = (float3(tex2DNode5983.r , tex2DNode5983.g , tex2DNode5983.b));
+					half Splat4_A2546 = tex2DNode4371.a;
+					half Splat4_B2545 = tex2DNode4371.b;
+					half Splat4_G2544 = tex2DNode4371.g;
+					half Splat4_R2543 = tex2DNode4371.r;
+					half Splat3_A2540 = tex2DNode4370.a;
+					half Splat3_B2539 = tex2DNode4370.b;
+					half Splat3_G2538 = tex2DNode4370.g;
+					half Splat3_R2537 = tex2DNode4370.r;
+					half Splat2_A2109 = tex2DNode4369.a;
+					half Splat2_B2108 = tex2DNode4369.b;
+					half Splat2_G2107 = tex2DNode4369.g;
+					half Splat2_R2106 = tex2DNode4369.r;
+					half Splat1_R1438 = tex2DNode4368.r;
+					half Splat1_G1441 = tex2DNode4368.g;
+					half Splat1_A1491 = tex2DNode4368.a;
+					half Splat1_B1442 = tex2DNode4368.b;
+					float3 blendOpSrc4362 = weightedAvg6160;
+					float3 blendOpDest4362 = ( ( _Geological_Map_Far_Power * ( appendResult5985 + float3( -0.3,-0.3,-0.3 ) ) ) * ( ( _Texture_16_Geological_Power * Splat4_A2546 ) + ( ( _Texture_15_Geological_Power * Splat4_B2545 ) + ( ( _Texture_14_Geological_Power * Splat4_G2544 ) + ( ( _Texture_13_Geological_Power * Splat4_R2543 ) + ( ( _Texture_12_Geological_Power * Splat3_A2540 ) + ( ( _Texture_11_Geological_Power * Splat3_B2539 ) + ( ( _Texture_10_Geological_Power * Splat3_G2538 ) + ( ( _Texture_9_Geological_Power * Splat3_R2537 ) + ( ( _Texture_8_Geological_Power * Splat2_A2109 ) + ( ( _Texture_7_Geological_Power * Splat2_B2108 ) + ( ( _Texture_6_Geological_Power * Splat2_G2107 ) + ( ( _Texture_5_Geological_Power * Splat2_R2106 ) + ( ( _Texture_1_Geological_Power * Splat1_R1438 ) + ( ( _Texture_2_Geological_Power * Splat1_G1441 ) + ( ( _Texture_4_Geological_Power * Splat1_A1491 ) + ( _Texture_3_Geological_Power * Splat1_B1442 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) );
+					float3 clampResult5715 = clamp( ( saturate( ( blendOpSrc4362 + blendOpDest4362 ) )) , float3( 0,0,0 ) , float3( 1,1,1 ) );
+					float4 break1409 = ( _Texture_Snow_Average * _Snow_Color );
+					float3 appendResult1410 = (float3(break1409.x , break1409.y , break1409.z));
+					half3 _Vector0 = half3(0,0,1);
+					float3 ase_worldBitangent = packedInput.ase_texcoord6.xyz;
+					float3 tanToWorld0 = float3( tangentWS.xyz.x, ase_worldBitangent.x, normalWS.x );
+					float3 tanToWorld1 = float3( tangentWS.xyz.y, ase_worldBitangent.y, normalWS.y );
+					float3 tanToWorld2 = float3( tangentWS.xyz.z, ase_worldBitangent.z, normalWS.z );
+					float3 tanNormal3706 = _Vector0;
+					float3 worldNormal3706 = float3(dot(tanToWorld0,tanNormal3706), dot(tanToWorld1,tanNormal3706), dot(tanToWorld2,tanNormal3706));
+					float simplePerlin2D6191 = snoise( ( Top_Bottom1999 * _Snow_Noise_Tiling ) );
+					float clampResult6212 = clamp( simplePerlin2D6191 , 0.0 , 1.0 );
+					float lerpResult6192 = lerp( 1.0 , clampResult6212 , _Snow_Noise_Power);
+					float clampResult4302 = clamp( ( lerpResult6192 * _Snow_Amount ) , 0.4 , 1.0 );
+					float clampResult1354 = clamp( normalWS.y , 0.0 , 0.9999 );
+					float temp_output_1349_0 = ( _Snow_Maximum_Angle / 90.0 );
+					float clampResult1347 = clamp( ( clampResult1354 - ( 1.0 - temp_output_1349_0 ) ) , 0.0 , 2.0 );
+					half SnowSlope1352 = pow( ( 1.0 - ( clampResult1347 * ( 1.0 / temp_output_1349_0 ) ) ) , _Snow_Maximum_Angle_Hardness );
+					float clampResult4146 = clamp( SnowSlope1352 , 0.0 , 1.0 );
+					float lerpResult4293 = lerp( ( _Snow_Amount * clampResult4302 ) , 0.0 , clampResult4146);
+					float temp_output_3751_0 = ( ( 1.0 - _Snow_Min_Height ) + ase_worldPos.y );
+					float clampResult4220 = clamp( ( temp_output_3751_0 + 1.0 ) , 0.0 , 1.0 );
+					float clampResult4260 = clamp( ( ( 1.0 - ( ( temp_output_3751_0 + _Snow_Min_Height_Blending ) / temp_output_3751_0 ) ) + -0.5 ) , 0.0 , 1.0 );
+					float clampResult4263 = clamp( ( clampResult4220 + clampResult4260 ) , 0.0 , 1.0 );
+					float lerpResult3759 = lerp( 0.0 , lerpResult4293 , clampResult4263);
+					float clampResult4298 = clamp( lerpResult3759 , 0.0 , 1.0 );
+					float lerpResult4350 = lerp( _Vector0.x , worldNormal3706.y , pow( clampResult4298 , 2.0 ));
+					float clampResult4299 = clamp( ( lerpResult4350 * clampResult4298 ) , 0.0 , 1.0 );
+					float clampResult3702 = clamp( pow( ( ( ( _Texture_16_Snow_Reduction * Splat4_A2546 ) + ( ( _Texture_15_Snow_Reduction * Splat4_B2545 ) + ( ( ( _Texture_13_Snow_Reduction * Splat4_R2543 ) + ( ( _Texture_12_Snow_Reduction * Splat3_A2540 ) + ( ( _Texture_11_Snow_Reduction * Splat3_B2539 ) + ( ( ( _Texture_9_Snow_Reduction * Splat3_R2537 ) + ( ( _Texture_8_Snow_Reduction * Splat2_A2109 ) + ( ( _Texture_7_Snow_Reduction * Splat2_B2108 ) + ( ( ( _Texture_5_Snow_Reduction * Splat2_R2106 ) + ( ( _Texture_1_Snow_Reduction * Splat1_R1438 ) + ( ( _Texture_2_Snow_Reduction * Splat1_G1441 ) + ( ( _Texture_3_Snow_Reduction * Splat1_B1442 ) + ( _Texture_4_Snow_Reduction * Splat1_A1491 ) ) ) ) ) + ( _Texture_6_Snow_Reduction * Splat2_G2107 ) ) ) ) ) + ( _Texture_10_Snow_Reduction * Splat3_G2538 ) ) ) ) ) + ( _Texture_14_Snow_Reduction * Splat4_G2544 ) ) ) ) * ( lerpResult6192 * 5.0 ) ) , 3.0 ) , 0.0 , 1.0 );
+					float lerpResult3742 = lerp( saturate( clampResult4299 ) , 0.0 , clampResult3702);
+					float3 lerpResult1356 = lerp( clampResult5715 , appendResult1410 , lerpResult3742);
+					
+					float4 texArray4374 = SAMPLE_TEXTURE2D_ARRAY(_Texture_Array_Normal, sampler_Texture_Array_Normal, ( Top_Bottom1999 / _Perlin_Normal_Tiling_Far ), (float)_Texture_Perlin_Normal_Index );
+					float2 appendResult11_g223 = (float2(texArray4374.w , texArray4374.y));
+					float2 temp_output_4_0_g223 = ( ( ( appendResult11_g223 * float2( 2,2 ) ) + float2( -1,-1 ) ) * _Perlin_Normal_Power );
+					float2 break8_g223 = temp_output_4_0_g223;
+					float dotResult5_g223 = dot( temp_output_4_0_g223 , temp_output_4_0_g223 );
+					float temp_output_9_0_g223 = sqrt( ( 1.0 - saturate( dotResult5_g223 ) ) );
+					float3 appendResult20_g223 = (float3(break8_g223.x , break8_g223.y , temp_output_9_0_g223));
+					float3 temp_output_6050_0 = appendResult20_g223;
+					float clampResult3775 = clamp( ( ( _Texture_16_Perlin_Power * Splat4_A2546 ) + ( ( _Texture_15_Perlin_Power * Splat4_B2545 ) + ( ( _Texture_14_Perlin_Power * Splat4_G2544 ) + ( ( _Texture_13_Perlin_Power * Splat4_R2543 ) + ( ( _Texture_12_Perlin_Power * Splat3_A2540 ) + ( ( _Texture_11_Perlin_Power * Splat3_B2539 ) + ( ( _Texture_10_Perlin_Power * Splat3_G2538 ) + ( ( _Texture_9_Perlin_Power * Splat3_R2537 ) + ( ( _Texture_8_Perlin_Power * Splat2_A2109 ) + ( ( _Texture_7_Perlin_Power * Splat2_B2108 ) + ( ( _Texture_6_Perlin_Power * Splat2_G2107 ) + ( ( _Texture_5_Perlin_Power * Splat2_R2106 ) + ( ( _Texture_1_Perlin_Power * Splat1_R1438 ) + ( ( _Texture_2_Perlin_Power * Splat1_G1441 ) + ( ( _Texture_4_Perlin_Power * Splat1_A1491 ) + ( _Texture_3_Perlin_Power * Splat1_B1442 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) , 0.0 , 1.0 );
+					float3 lerpResult3776 = lerp( float3( 0,0,1 ) , temp_output_6050_0 , clampResult3775);
+					float3 lerpResult3906 = lerp( float3( 0,0,1 ) , temp_output_6050_0 , ( _Snow_Perlin_Power * 0.5 ));
+					float3 lerpResult5722 = lerp( lerpResult3776 , lerpResult3906 , lerpResult3742);
+					float3 normalizeResult3901 = normalize( UnpackNormalmapRGorAG( tex2D( _Global_Normal_Map, uv2588 ), _Global_Normalmap_Power ) );
+					float3 temp_output_4100_0 = BlendNormal( lerpResult5722 , normalizeResult3901 );
+					
+					float3 clampResult5471 = clamp( appendResult1410 , float3( 0,0,0 ) , float3( 0.5,0.5,0.5 ) );
+					float3 lerpResult4040 = lerp( ( ( appendResult3857 * float3( 0.3,0.3,0.3 ) ) * _Terrain_Specular ) , ( clampResult5471 * _Snow_Specular ) , lerpResult3742);
+					
+					float lerpResult3951 = lerp( ( break3856.w * _Terrain_Smoothness ) , break1409.w , lerpResult3742);
+					
+					float clampResult6096 = clamp( ( ( 1.0 + temp_output_4100_0.y ) * 0.5 ) , ( 1.0 - _Ambient_Occlusion_Power ) , 1.0 );
+					#ifdef _USE_AO_ON
+					float staticSwitch6142 = clampResult6096;
+					#else
+					float staticSwitch6142 = 1.0;
+					#endif
+					
+					float2 uv_Texture_Additional_Masks = packedInput.ase_texcoord5.xy * _Texture_Additional_Masks_ST.xy + _Texture_Additional_Masks_ST.zw;
+					float clampResult6167 = clamp( ( ase_worldPos.y + ( 0.0 - _Remove_Vert_Height ) ) , 0.0 , 1.0 );
+					
+					surfaceDescription.Albedo = lerpResult1356;
+					surfaceDescription.Normal = temp_output_4100_0;
+					surfaceDescription.Emission = 0;
+					surfaceDescription.Specular = lerpResult4040;
+					surfaceDescription.Metallic = 0;
+					surfaceDescription.Smoothness = lerpResult3951;
+					surfaceDescription.Occlusion = staticSwitch6142;
+					surfaceDescription.Alpha = ( tex2D( _Texture_Additional_Masks, uv_Texture_Additional_Masks ).a * clampResult6167 );
+					surfaceDescription.AlphaClipThreshold = 0.5;
+
+	#ifdef _MATERIAL_FEATURE_CLEAR_COAT
+					surfaceDescription.CoatMask = 0;
+	#endif
+
+	#if defined(_MATERIAL_FEATURE_SUBSURFACE_SCATTERING) || defined(_MATERIAL_FEATURE_TRANSMISSION)
+					surfaceDescription.DiffusionProfile = 0;
+	#endif
+
+	#ifdef _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
+					surfaceDescription.SubsurfaceMask = 1;
+	#endif
+
+	#ifdef _MATERIAL_FEATURE_TRANSMISSION
+					surfaceDescription.Thickness = 0;
+	#endif
+
+	#ifdef _MATERIAL_FEATURE_ANISOTROPY
+					surfaceDescription.Anisotropy = 0;
+	#endif
+
+	#ifdef _MATERIAL_FEATURE_IRIDESCENCE
+					surfaceDescription.IridescenceThickness = 0;
+					surfaceDescription.IridescenceMask = 1;
+	#endif
+
+	#ifdef _MATERIAL_FEATURE_TRANSPARENCY
+					surfaceDescription.IndexOfRefraction = 1;
+					surfaceDescription.TransmittanceColor = float3( 1, 1, 1 );
+					surfaceDescription.TransmittanceAbsorptionDistance = 1000000;
+					surfaceDescription.TransmittanceMask = 0;
+	#endif
+					GetSurfaceAndBuiltinData(surfaceDescription, input, normalizedWorldViewDir, posInput, surfaceData, builtinData);
+
+					BSDFData bsdfData = ConvertSurfaceDataToBSDFData(input.positionSS.xy, surfaceData);
+
+					PreLightData preLightData = GetPreLightData(normalizedWorldViewDir, posInput, bsdfData);
+
+					outColor = float4(0.0, 0.0, 0.0, 0.0);
+
+					{
+				#ifdef _SURFACE_TYPE_TRANSPARENT
+						uint featureFlags = LIGHT_FEATURE_MASK_FLAGS_TRANSPARENT;
+				#else
+						uint featureFlags = LIGHT_FEATURE_MASK_FLAGS_OPAQUE;
+				#endif
+						float3 diffuseLighting;
+						float3 specularLighting;
+
+						LightLoop(normalizedWorldViewDir, posInput, preLightData, bsdfData, builtinData, featureFlags, diffuseLighting, specularLighting);
+
+				#ifdef OUTPUT_SPLIT_LIGHTING
+						if (_EnableSubsurfaceScattering != 0 && ShouldOutputSplitLighting(bsdfData))
+						{
+							outColor = float4(specularLighting, 1.0);
+							outDiffuseLighting = float4(TagLightingForSSS(diffuseLighting), 1.0);
+						}
+						else
+						{
+							outColor = float4(diffuseLighting + specularLighting, 1.0);
+							outDiffuseLighting = 0;
+						}
+						ENCODE_INTO_SSSBUFFER(surfaceData, posInput.positionSS, outSSSBuffer);
+				#else
+						outColor = ApplyBlendMode(diffuseLighting, specularLighting, builtinData.opacity);
+						outColor = EvaluateAtmosphericScattering(posInput, normalizedWorldViewDir, outColor);
+				#endif
+					}
+
+				#ifdef _DEPTHOFFSET_ON
+					outputDepth = posInput.deviceDepth;
+				#endif
+				}
+
+            ENDHLSL
+        }
+		   UsePass "Hidden/Nature/Terrain/Utilities/PICKING"
+    UsePass "Hidden/Nature/Terrain/Utilities/SELECTION"
+
+		
+    }
+    FallBack "Hidden/InternalErrorShader"
+	
+	
+}
