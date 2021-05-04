@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities.Attack
 {
+	using System;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
 	using Tartaros.OrderGiver;
@@ -30,6 +31,11 @@
 		}
 		#endregion Properties
 
+		#region Events
+		public class AttackCastedArgs : EventArgs { }
+		public event EventHandler<AttackCastedArgs> AttackCasted = null;
+		#endregion Events
+
 		#region Methods
 		private void Start()
 		{
@@ -59,6 +65,7 @@
 			_entityAttackData.AttackMode.Attack(transform, target);
 			_lastTimeAttack = Time.time;
 
+			AttackCasted?.Invoke(this, new AttackCastedArgs());
 		}
 
 		public void TryOrderAttackNearestOpponent()

@@ -27,7 +27,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Wave.WaveData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Wave.WaveData, Tartaros
@@ -71,84 +71,13 @@ MonoBehaviour:
       Data: 0
     - Name: _entitiesCount
       Entry: 3
-      Data: 1
+      Data: 5
     - Name: _secondsBetweenUnits
       Entry: 4
       Data: 0.2
     - Name: _secondsBeforeSpawn
       Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 6|Tartaros.Wave.WaveData, Tartaros
-    - Name: _sequencesBySpawnPoint
-      Entry: 7
-      Data: 7|System.Collections.Generic.Dictionary`2[[Tartaros.Wave.SpawnPointIdentifier,
-        Tartaros],[Tartaros.Wave.UnitSequence[], Tartaros]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 8|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Wave.SpawnPointIdentifier,
-        Tartaros]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 7
-      Data: 9|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 10|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 1
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
+      Data: 0.1
     - Name: 
       Entry: 8
       Data: 
@@ -176,4 +105,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _secondsBetweenWaves: 1
+  _secondsBetweenWaves: 0

@@ -60,7 +60,7 @@
 
 		public static event EventHandler<EntityKilledArgs> AnyEntityKilled = null;
 
-		event EventHandler<KilledArgs> EntityKilled = null;
+		public event EventHandler<KilledArgs> EntityKilled = null;
 		event EventHandler<KilledArgs> IWaveSpawnable.Killed { add => EntityKilled += value; remove => EntityKilled -= value; }
 		#endregion Events
 

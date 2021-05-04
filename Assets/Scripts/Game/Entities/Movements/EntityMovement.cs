@@ -3,7 +3,6 @@
 	using System;
 	using System.Collections.Generic;
 	using Tartaros.Entities.Movement;
-	using Tartaros.Entities.State;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
 	using UnityEngine;
@@ -14,10 +13,12 @@
 	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderable
 	{
 		#region Fields
+		private int _navMeshArea = -1;
 		private EntityMovementData _entityMovementData = null;
+
 		private NavMeshAgent _navMeshAgent = null;
 		private EntityFSM _entityFSM = null;
-		private int _navMeshArea = -1;
+		private Animator _animator = null;
 		#endregion
 
 		#region Properties
@@ -32,7 +33,7 @@
 			}
 		}
 
-		public int NavMeshArea 
+		public int NavMeshArea
 		{
 			get => _navMeshAgent.areaMask = _navMeshArea;
 			set
@@ -40,26 +41,18 @@
 				SetAreaMask(value);
 			}
 		}
-
-		private void SetAreaMask(int value)
-		{
-			int mask = 0;
-			mask += 1 << NavMesh.GetAreaFromName("Walkable");
-			mask += 0 << NavMesh.GetAreaFromName("Not walkable");
-			mask += 1 << NavMesh.GetAreaFromName("Jump");
-			mask += 1 << value;
-
-			_navMeshAgent.areaMask = mask;
-		}
 		#endregion Properties
 
 		#region Events
 		public class DestinationReachedArgs : EventArgs
-		{
-
-		}
-
+		{ }
 		public event EventHandler<DestinationReachedArgs> DestinationReached = null;
+
+		public class StartMovingArgs : EventArgs { }
+		public event EventHandler<StartMovingArgs> StartMoving = null;
+
+		public class StopMovingArgs : EventArgs { }
+		public event EventHandler<StopMovingArgs> StopMoving = null;
 		#endregion
 
 		#region Methods
@@ -67,6 +60,7 @@
 		{
 			_navMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
 			_entityFSM = GetComponent<EntityFSM>();
+			_animator = GetComponent<Animator>();
 
 			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
 		}
@@ -89,19 +83,41 @@
 		{
 			if (CanMoveToPoint(point))
 			{
+				bool wasStopped = _navMeshAgent.isStopped;
+
 				_navMeshAgent.isStopped = false;
 				_navMeshAgent.SetDestination(point);
+
+				if (wasStopped == true)
+				{
+					StartMoving?.Invoke(this, new StartMovingArgs());
+				}
 			}
 			else
 			{
 				Debug.LogErrorFormat("Entity {0} can't move to {1}.", name, point);
 			}
 		}
-
-
 		public void StopMovement()
 		{
+			bool wasStopped = _navMeshAgent.isStopped;
 			_navMeshAgent.isStopped = true;
+
+			if (wasStopped == false)
+			{
+				StopMoving?.Invoke(this, new StopMovingArgs());
+			}
+		}
+
+		private void SetAreaMask(int value)
+		{
+			int mask = 0;
+			mask += 1 << NavMesh.GetAreaFromName("Walkable");
+			mask += 0 << NavMesh.GetAreaFromName("Not walkable");
+			mask += 1 << NavMesh.GetAreaFromName("Jump");
+			mask += 1 << value;
+
+			_navMeshAgent.areaMask = mask;
 		}
 
 		#region IOrder

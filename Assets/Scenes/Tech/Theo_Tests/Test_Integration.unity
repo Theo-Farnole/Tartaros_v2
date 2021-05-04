@@ -983,12 +983,12 @@ PrefabInstance:
     - target: {fileID: 2529656039489970139, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2529656039489970139, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2529656039489970139, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
@@ -998,7 +998,7 @@ PrefabInstance:
     - target: {fileID: 2529656039489970139, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2529656039489970139, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
@@ -1008,7 +1008,7 @@ PrefabInstance:
     - target: {fileID: 2529656039489970139, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2529656039556815393, guid: db4244ecaf69d4445a046fcd5162a6ac,
         type: 3}
@@ -3263,7 +3263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _randomRadius: 5
-  _identifier: 0
+  _identifier: 3
 --- !u!4 &1245928939
 Transform:
   m_ObjectHideFlags: 0
