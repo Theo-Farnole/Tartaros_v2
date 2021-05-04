@@ -13,7 +13,8 @@ public class buidlBundle : MonoBehaviour
     {
         CheckDirectory(Path);
         BuildPipeline.BuildAssetBundles(Path, BuildAssetBundleOptions.ChunkBasedCompression, EditorUserBuildSettings.activeBuildTarget);
-        FileUtil.DeleteFileOrDirectory("Assets/StreamingAssets/" + FolderName);
+        FileUtil.DeleteFileOrDirectory("Assets/StreamingAssets/" + FolderName);        
+
         FileUtil.CopyFileOrDirectory(Path, "Assets/StreamingAssets/" + FolderName);
     }
 

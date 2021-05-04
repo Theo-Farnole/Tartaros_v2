@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 5147011089507111393}
   - component: {fileID: 7812716105732699722}
   - component: {fileID: 6006492623173472447}
+  - component: {fileID: 7791077507071480630}
   m_Layer: 0
   m_Name: Entity.Hoplite
   m_TagString: Untagged
@@ -342,6 +343,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da9d06c7675159468e992e785e846b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7791077507071480630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321277518661800559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f47bf4169ec5dd4cbf530cf6929eeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prototype: {fileID: 6321277518661800559}
+  playSpeed: 1
+  shadowCastingMode: 0
+  receiveShadow: 0
+  applyRootMotion: 0
+  bonePerVertex: 4
 --- !u!1001 &7123265987962326151
 PrefabInstance:
   m_ObjectHideFlags: 0
