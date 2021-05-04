@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Wave
 {
 	using System.Collections;
+	using System.Linq;
 	using Tartaros.Entities;
 	using UnityEngine;
 
@@ -71,6 +72,13 @@
 		private void SpawnWave(MonoBehaviour coroutineOwner)
 		{
 			SpawnPointIdentifier[] pointsUses = _waveData.GetSpawnPointActiveInTheWave();
+
+			if (_waveData.DoSpawnPointsIsMissingInScene(_spawnPoints) == true)
+			{
+				Debug.LogWarningFormat("Missing spawn points in scenes");
+			}
+
+
 
 			foreach (ISpawnPoint spawnPoint in _spawnPoints)
 			{

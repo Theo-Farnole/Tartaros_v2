@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Wave
 {
+	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -35,6 +36,21 @@
 			//    .Select(x => x.Value)
 			//    .SelectMany(x => x)
 			//    .Sum(x => x.EntitiesCount);
+		}
+
+		public bool DoSpawnPointsIsMissingInScene(ISpawnPoint[] inSceneSpawnPoints)
+		{
+			SpawnPointIdentifier[] array = inSceneSpawnPoints.Select(x => x.Identifier).ToArray();
+
+			foreach (var sequence in _sequencesBySpawnPoint)
+			{
+				if (Array.Exists(array, x => x == sequence.Key) == false)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 	}
 }
