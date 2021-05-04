@@ -5,6 +5,7 @@
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
+	using System;
 
 	public class Village : MonoBehaviour
 	{
@@ -22,6 +23,14 @@
 		public VillageData Data { get => _data; set => _data = value; }
 		#endregion Properties
 
+
+
+		public class VillageCapturedArgs : EventArgs
+		{
+		}
+		public event EventHandler<VillageCapturedArgs> VillageCaptured;
+
+
 		#region Methods		
 
 		private void Awake()
@@ -34,13 +43,10 @@
 		{
 			_sector = _map.GetSectorOnPosition(transform.position);
 
-			UpdateAbilityToSpawnUnits();
-		}
-
-		private void OnEnable()
-		{
 			_sector.Captured -= OnCaptureSector;
 			_sector.Captured += OnCaptureSector;
+
+			UpdateAbilityToSpawnUnits();
 		}
 
 		private void OnDisable()
@@ -50,6 +56,8 @@
 
 		private void OnCaptureSector(object sender, CapturedArgs e)
 		{
+			VillageCaptured?.Invoke(this, new VillageCapturedArgs());
+
 			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
 			UpdateAbilityToSpawnUnits();
 		}

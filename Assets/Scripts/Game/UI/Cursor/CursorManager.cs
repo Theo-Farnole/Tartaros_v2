@@ -35,6 +35,7 @@ public class CursorManager : MonoBehaviour
 	private CatchRightClickState _ordersState = null;
 	private Order _currentOrder = null;
 
+	
 
 	private void OnEnable()
 	{

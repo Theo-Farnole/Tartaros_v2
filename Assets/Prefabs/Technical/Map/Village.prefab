@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3078358237934760514}
   - component: {fileID: 1148300551697249208}
   - component: {fileID: 2667007775621549684}
+  - component: {fileID: 7296963357974439194}
   m_Layer: 0
   m_Name: Village
   m_TagString: Untagged
@@ -82,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 7d41c4c3065316c46b435073b4babba6, type: 2}
   _team: 0
+  _entityType: 0
 --- !u!114 &4277914932607880243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +143,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 437a6e41acd02ca4185d0176626de8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7296963357974439194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117897160694990056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157523a2b741b6c4fb61aa8aaac40e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7972884783828447936
