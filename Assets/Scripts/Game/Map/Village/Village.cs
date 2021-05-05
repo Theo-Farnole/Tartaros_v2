@@ -10,6 +10,7 @@
 	public class Village : MonoBehaviour
 	{
 		#region Fields
+
 		[SerializeField]
 		private VillageData _data = null;
 
@@ -37,6 +38,7 @@
 		{
 			_map = Services.Instance.Get<IMap>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
+			_data = GetComponent<Entity>().GetBehaviourData<VillageData>();
 		}
 
 		private void Start()
@@ -45,6 +47,8 @@
 
 			_sector.Captured -= OnCaptureSector;
 			_sector.Captured += OnCaptureSector;
+
+			//Debug.Log(PopulationToIncrease);
 
 			UpdateAbilityToSpawnUnits();
 		}
@@ -57,7 +61,7 @@
 		private void OnCaptureSector(object sender, CapturedArgs e)
 		{
 			VillageCaptured?.Invoke(this, new VillageCapturedArgs());
-
+			
 			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
 			UpdateAbilityToSpawnUnits();
 		}
