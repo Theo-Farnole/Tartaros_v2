@@ -33,19 +33,22 @@
 		}
 
 		/// <summary>
-		/// Execute task after one frame.
+		/// Execute task after specified frame coutn.
 		/// </summary>
 		/// <param name="mono"></param>
 		/// <param name="time"></param>
 		/// <param name="task"></param>
-		public static Coroutine ExecuteAfterFrame(this MonoBehaviour mono, Action task)
+		public static Coroutine ExecuteAfterFrame(this MonoBehaviour mono, Action task, int frameCount = 1)
 		{
-			return mono.StartCoroutine(ExecuteAfterFrameCoroutine(task));
+			return mono.StartCoroutine(ExecuteAfterFrameCoroutine(task, frameCount));
 		}
 
-		static IEnumerator ExecuteAfterFrameCoroutine(Action task)
+		static IEnumerator ExecuteAfterFrameCoroutine(Action task, int frameCount)
 		{
+			for (int i = 0; i < frameCount; i++)
+			{
 			yield return new WaitForEndOfFrame();
+			}
 
 			task();
 		}

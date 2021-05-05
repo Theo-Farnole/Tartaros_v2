@@ -63,6 +63,8 @@ GameObject:
   - component: {fileID: 4423504264441649126}
   - component: {fileID: 6184808952790126858}
   - component: {fileID: 151944690951034759}
+  - component: {fileID: 5991597866423299833}
+  - component: {fileID: 1255649792}
   m_Layer: 0
   m_Name: Entity.Satyr
   m_TagString: Untagged
@@ -305,6 +307,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db30b58c1ec8a4943b50ef3ae2c5de2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5991597866423299833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729383663548792512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970c36bafa26192439ea32067899f253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 5334325722198455337}
+  _deathAnimation: {fileID: -694422787386160666, guid: 12701860c990cd04ea4e9ae590417477,
+    type: 3}
+--- !u!114 &1255649792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729383663548792512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
+    type: 3}
+  _prefabScale: 1
 --- !u!1001 &5099830881859864952
 PrefabInstance:
   m_ObjectHideFlags: 0
