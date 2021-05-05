@@ -8,20 +8,13 @@
 
 	public class PlayerGloryWallet : MonoBehaviour, IPlayerGloryWallet
 	{
-		private IGloryWallet _gloryWallet = null;
+		private IGloryWallet _gloryWallet = new GloryWallet();
 
 		event EventHandler<GloryAmountChangedArgs> IGloryWallet.AmountChanged
 		{
 			add => _gloryWallet.AmountChanged += value;
 			remove => _gloryWallet.AmountChanged -= value;
 		}
-
-
-		private void Awake()
-		{
-			_gloryWallet = new GloryWallet();
-		}
-
 
 		int IGloryWallet.GetAmount() => _gloryWallet.GetAmount();
 
