@@ -28,7 +28,7 @@
 			}
 		}
 
-		public static bool CanBuyWallet(this ISectorResourcesWallet w1, ISectorResourcesWallet w2)
+		public static bool CanBuy(this ISectorResourcesWallet w1, ISectorResourcesWallet w2)
 		{
 			if (w1 is null) throw new System.ArgumentNullException(nameof(w1));
 			if (w2 is null) throw new System.ArgumentNullException(nameof(w2));

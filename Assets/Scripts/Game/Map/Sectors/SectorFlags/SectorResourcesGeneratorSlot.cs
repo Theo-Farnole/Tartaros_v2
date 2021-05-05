@@ -2,6 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.Economy;
+	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 	public class SectorResourcesGeneratorSlot : SerializedMonoBehaviour
@@ -10,6 +11,7 @@
 		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;
 
 		private bool _isAvailable = false;
+		private IPlayerSectorResources _playerWallet = null;
 		#endregion Fields
 
 		#region Properties
@@ -18,9 +20,14 @@
 		#endregion Properties
 
 		#region Methods
-		public void CanConstruct()
+		private void Awake()
 		{
-			throw new System.NotImplementedException();
+			_playerWallet = Services.Instance.Get<PlayerSectorResources>();
+		}
+
+		public bool CanConstruct()
+		{
+			return _playerWallet.CanBuy(_constructionPrice);
 		}
 
 		public void Construct()

@@ -102,7 +102,7 @@
 
 		public bool CanBuy(ISpawnable gameObject)
 		{
-			return _playerResources.CanBuyWallet(Data.GetSpawnPrice(gameObject));
+			return ISectorResourcesWalletExtensions.CanBuy(_playerResources, Data.GetSpawnPrice(gameObject));
 		}
 
 		public bool HasEnoughPopulationToSpawn(ISpawnable gameObject)
