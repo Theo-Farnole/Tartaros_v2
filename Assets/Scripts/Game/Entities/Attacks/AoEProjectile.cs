@@ -15,10 +15,8 @@
 		[SerializeField]
 		private float _speed = 1;
 		private GameObject _projectile = null;
-		private Transform _attacker = null;
-		private IAttackable _target = null;
 		private Vector3 _targetPosition = Vector3.zero;
-		private int _damage = -1;
+
 		private float _radiusDamage = 1;
 		private EntitiesDetectorManager _detector = null;
 
@@ -42,7 +40,7 @@
 			}
 			_projectile = gameObject;
 			_hitEffect = vfx;
-			_damage = damage;
+
 			_targetPosition = target.Transform.position;
 			_radiusDamage = radiusDamage;
 			_detector = Services.Instance.Get<EntitiesDetectorManager>();

@@ -27,6 +27,8 @@
 		SectorRessourceType IIncomeGenerator.SectorRessourceType => _data.ResourcesType;
 
 		int IIncomeGenerator.ResourcesPerTick => _data.ResourcesPerTick;
+
+		int IIncomeGenerator.MaxRessourcesBeforeEmpty => _data.MaxRessourcesBeforeEmpty;
 		#endregion Properties
 
 		#region Methods
@@ -46,9 +48,15 @@
 			}
 		}
 
+
 		private void OnDisable()
 		{
 			_incomeManager.RemoveGeneratorIncome(this);
+		}
+
+		void IIncomeGenerator.RessourcesIsEmpty()
+		{
+			Debug.LogFormat("ressource is {0} empty", this.gameObject);
 		}
 		#endregion Methods
 	}
