@@ -24,10 +24,7 @@
 
 		[SerializeField]
 		private Power _powerToCast = Power.LightningBolt;
-
-		private Village _village = null;
 		private PowerManager _powerManager = null;
-		private bool _powerIsLocked = false;
 		#endregion Fields
 
 		#region Methods
@@ -35,33 +32,28 @@
 		{
 			_button = GetComponent<Button>();
 			_powerManager = Services.Instance.Get<PowerManager>();
-			_village = FindObjectOfType<Village>();
 		}
 
 		private void OnEnable()
 		{
 			_button.onClick.RemoveListener(OnButtonClick);
 			_button.onClick.AddListener(OnButtonClick);
-
-			if (_village != null)
-			{
-				_village.VillageCaptured -= VillageCaptured;
-				_village.VillageCaptured += VillageCaptured;
-			}
 		}
 
 		private void Start()
 		{
-			if (_powerToCast == Power.ControlledAoE)
+			if(_powerToCast == Power.ControlledAoE && _powerManager.IsAVillageToCaptureOnTheScene() == true)
 			{
 				_button.interactable = false;
 			}
 		}
 
-		private void VillageCaptured(object sender, Village.VillageCapturedArgs e)
+		private void Update()
 		{
-			_powerIsLocked = true;
-			_button.interactable = true;
+			if(_button.interactable == false && _powerManager.IsVillageCaptured() == true)
+			{
+				_button.interactable = true;
+			}
 		}
 
 		private void OnDisable()
@@ -79,6 +71,21 @@
 			CastPower();
 		}
 
+		public void EnablePower()
+		{
+			if (_powerToCast == Power.ControlledAoE)
+			{
+				_button.interactable = true;
+			}
+		}
+
+		public void DisablePower()
+		{
+			if (_powerToCast == Power.ControlledAoE)
+			{
+				_button.interactable = false;
+			}
+		}
 
 
 		private void CastPower()
