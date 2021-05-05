@@ -67,6 +67,20 @@
 		{
 			Gizmos.color = Color.red;
 			Gizmos.DrawRay(transform.position, Vector3.up * 3);
+
+#if UNITY_EDITOR
+			if (Application.isPlaying == true && _isCovered == true)
+			{
+				Vector3 handleDeltaPosition = Vector3.up * 0.5f;
+
+				GUIStyle style = new GUIStyle("BoldLabel");
+				//style.alignment = TextAnchor.MiddleCenter;        
+				style.normal.textColor = Color.black;
+				style.normal.background = TextureGenerator.GenerateTexture2D(Color.yellow);
+
+				UnityEditor.Handles.Label(transform.position, "Hidden by fog", style);
+			}
+#endif
 		}
 		#endregion Methods
 	}
