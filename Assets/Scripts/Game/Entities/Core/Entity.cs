@@ -26,6 +26,8 @@
 		private EntityType _entityType = EntityType.Unit;
 
 		private EntityFSM _entityFSM = null;
+		private bool _destroyWithKillMethod = false;
+		private bool _applicationIsQuiting = false;
 		#endregion Fields
 
 		#region Properties
@@ -78,12 +80,24 @@
 
 		private void OnDestroy()
 		{
-			EntityKilled?.Invoke(this, new KilledArgs());
-			AnyEntityKilled?.Invoke(this, new EntityKilledArgs(this));
+			if (_applicationIsQuiting == false && _destroyWithKillMethod == false)
+			{
+				Debug.LogWarningFormat("The entity {0} has been destroyed without calling Kill() method. You should call it instead of GameObject.Destroy method.", name);
+			}
+		}
+
+		private void OnApplicationQuit()
+		{
+			_applicationIsQuiting = true;
 		}
 
 		public void Kill()
 		{
+			EntityKilled?.Invoke(this, new KilledArgs());
+			AnyEntityKilled?.Invoke(this, new EntityKilledArgs(this));
+
+			_destroyWithKillMethod = true;
+
 			Destroy(gameObject);
 		}
 
