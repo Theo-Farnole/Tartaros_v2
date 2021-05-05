@@ -37,12 +37,17 @@
 		public void Show()
 		{
 			_canvas.enabled = true;
+			OnShow();
 		}
 
 		public void Hide()
 		{
 			_canvas.enabled = false;
+			OnHide();
 		}
+
+		protected virtual void OnShow() { }
+		protected virtual void OnHide() { }
 		#endregion Methods
 	}
 }
