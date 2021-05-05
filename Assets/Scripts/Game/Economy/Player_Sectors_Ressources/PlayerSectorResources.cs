@@ -3,6 +3,7 @@
 	using ServicesLocator;
 	using System;
 	using UnityEngine;
+	using UnityEngine.UIElements;
 
 	public class PlayerSectorResources : MonoBehaviour, IPlayerSectorResources
 	{
@@ -14,23 +15,47 @@
 		#endregion Fields
 
 		#region Properties
-		event EventHandler<AmountChangedArgs> ISectorResourcesWallet.AmountChanged
+		private ISectorResourcesWallet PlayerWallet
 		{
-			add
+			get
 			{
-				_playerWallet.AmountChanged += value;
-			}
+				if (_playerWallet == null)
+				{
+					InitializePlayerWallet();
+				}
 
-			remove
-			{
-				_playerWallet.AmountChanged -= value;
+				return _playerWallet;
 			}
 		}
 		#endregion Properties
 
+		#region Events
+		event EventHandler<AmountChangedArgs> ISectorResourcesWallet.AmountChanged
+		{
+			add
+			{
+				PlayerWallet.AmountChanged += value;
+			}
+
+			remove
+			{
+				PlayerWallet.AmountChanged -= value;
+			}
+		}
+		#endregion Events
+
 		#region Methods
 		private void Awake()
 		{
+			InitializePlayerWallet();
+
+			Services.Instance.RegisterService<IPlayerSectorResources>(this);
+		}
+
+		private void InitializePlayerWallet()
+		{
+			if (_playerWallet != null) return; // don't initialize if already initialized
+
 			if (_playerSectorRessourcesData != null)
 			{
 				_playerWallet = (_playerSectorRessourcesData.StartingIncome as ICloneable).Clone() as ISectorResourcesWallet;
@@ -40,8 +65,6 @@
 				Debug.LogWarning("Missing _playerSectorResourcesData field in inspector. Default wallet is equals to zero.");
 				_playerWallet = SectorResourcesWallet.Zero;
 			}
-
-			Services.Instance.RegisterService<IPlayerSectorResources>(this);
 		}
 
 		int ISectorResourcesWallet.GetAmount(SectorRessourceType ressource) => _playerWallet.GetAmount(ressource);
