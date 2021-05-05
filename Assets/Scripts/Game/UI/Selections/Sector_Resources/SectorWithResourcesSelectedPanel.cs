@@ -15,6 +15,7 @@
 		private CaptureSectorButton _captureButton = null;
 
 		[SerializeField]
+		private ConstructSectorResourcesIncomeBuildingButton _constructButton = null;
 
 		[SerializeField]
 		private Image _resourceIcon = null;
