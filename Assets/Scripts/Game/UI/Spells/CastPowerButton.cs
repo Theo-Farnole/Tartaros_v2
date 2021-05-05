@@ -43,13 +43,16 @@
 			_button.onClick.RemoveListener(OnButtonClick);
 			_button.onClick.AddListener(OnButtonClick);
 
-			_village.VillageCaptured -= VillageCaptured;
-			_village.VillageCaptured += VillageCaptured;
+			if (_village != null)
+			{
+				_village.VillageCaptured -= VillageCaptured;
+				_village.VillageCaptured += VillageCaptured;
+			}
 		}
 
 		private void Start()
 		{
-			if(_powerToCast == Power.ControlledAoE)
+			if (_powerToCast == Power.ControlledAoE)
 			{
 				_button.interactable = false;
 			}
@@ -64,6 +67,11 @@
 		private void OnDisable()
 		{
 			_button.onClick.RemoveListener(OnButtonClick);
+
+			if (_village != null)
+			{
+				_village.VillageCaptured -= VillageCaptured;
+			}
 		}
 
 		private void OnButtonClick()
