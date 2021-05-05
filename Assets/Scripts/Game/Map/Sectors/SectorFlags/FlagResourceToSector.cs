@@ -6,7 +6,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(SectorObject))]
-	public class FlagResourceToSector : MonoBehaviour
+	public partial class FlagResourceToSector : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -35,11 +35,16 @@
 			_miniMapIcon = gameObject.GetOrAddComponent<ResourceMiniMapIcon>();
 			_miniMapIcon.ResourceType = _type;
 		}
+		#endregion Methods
+	}
 
+#if UNITY_EDITOR
+	public partial class FlagResourceToSector
+	{
 		private void OnDrawGizmos()
 		{
 			_type.DrawIcon(transform.position);
 		}
-		#endregion Methods
 	}
+#endif
 }

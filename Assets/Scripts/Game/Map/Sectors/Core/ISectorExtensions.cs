@@ -1,5 +1,7 @@
 ﻿namespace Tartaros
 {
+	using System.Collections;
+	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -16,6 +18,28 @@
 				.ToArray();
 
 			return entitiesInSector;
+		}
+
+		public static IEnumerable<T> EnumerateObjectsOfType<T>(this ISector sector)
+		{
+			return sector.ObjectsInSector
+				.Select(x => x.GetComponent<T>())
+				.Where(x => x != null);
+		}
+
+		public static SectorResourcesGeneratorSlot GetAvailableResourcesGeneratorSlot(this ISector sector)
+		{
+			IEnumerable<SectorResourcesGeneratorSlot> slots = sector.EnumerateObjectsOfType<SectorResourcesGeneratorSlot>();
+
+			foreach (SectorResourcesGeneratorSlot slot in slots)
+			{
+				if (slot.IsAvailable == true)
+				{
+					return slot;
+				}
+			}
+
+			return null;
 		}
 
 		public static Entity[] GetEntitiesInSector(this ISector sector)
