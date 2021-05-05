@@ -59,11 +59,6 @@
 		private void OnDisable()
 		{
 			_button.onClick.RemoveListener(OnButtonClick);
-
-			if (_village != null)
-			{
-				_village.VillageCaptured -= VillageCaptured;
-			}
 		}
 
 		private void OnButtonClick()
