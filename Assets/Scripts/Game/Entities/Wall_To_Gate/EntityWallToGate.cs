@@ -44,8 +44,9 @@
 				Vector3 position = (transform.position + _neigboorManager.BackAdjacentWall.gameObject.transform.position) / 2;
 
 				GameObject gate = GameObject.Instantiate(_data.GatePrefab, position, transform.rotation);
-				Destroy(_neigboorManager.BackAdjacentWall.gameObject);
-				Destroy(this.gameObject);
+
+				_neigboorManager.BackAdjacentWall.GetComponent<Entity>().Kill();
+				this.GetComponent<Entity>().Kill();
 
 				ISelection selction = Services.Instance.Get<CurrentSelection>();
 				selction.ClearSelection();

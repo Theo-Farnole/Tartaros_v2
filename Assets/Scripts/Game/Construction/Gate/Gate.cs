@@ -11,22 +11,24 @@
 
     public class Gate : MonoBehaviour, IOrderable
     {
-        [SerializeField]
-        private bool _useAnimatorONEDITOR = false;
-
-        private Animator _animator = null;
+  
         private bool _isOpen = false;
         private NavMeshObstacle _navObstacle = null;
 
-        public Animator Animator => _animator;
-
+        private IGateEffect[] _gateEffects = null;
+      
         private void Awake()
         {
             _navObstacle = GetComponent<NavMeshObstacle>();
-            _animator = GetComponent<Animator>();
+            _navObstacle.carving = true;
         }
 
-        private void Update()
+		private void OnEnable()
+		{
+            _gateEffects = GetComponents<IGateEffect>();
+		}
+
+		private void Update()
         {
             NavMeshObstacleUpdate();
         }
@@ -36,15 +38,18 @@
             if(_navObstacle == null)
             {
                 _navObstacle = GetComponent<NavMeshObstacle>();
+                _navObstacle.carving = true;
             }
+
+            Debug.Log(_navObstacle.carving);
 
             if(_isOpen == false)
             {
-                _navObstacle.carving = false;
+                _navObstacle.enabled = false;
             }
             else
             {
-                _navObstacle.carving = true;
+                _navObstacle.enabled = true;
             }    
         }
 
@@ -59,19 +64,20 @@
 
         public void OpenGate()
         {
-            if (_useAnimatorONEDITOR)
-            {
-                _animator.SetBool("isOpen", true);
-            }
+			foreach (var gateEffect in _gateEffects)
+			{
+                gateEffect.GateOpen();
+			}
             _isOpen = true;
         }
 
         public void CloseGate()
         {
-            if (_useAnimatorONEDITOR)
+            foreach (var gateEffect in _gateEffects)
             {
-                _animator.SetBool("isOpen", false);
+                gateEffect.GateClose();
             }
+
             _isOpen = false;
         }
     }

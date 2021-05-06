@@ -7,12 +7,13 @@
 	public class StateAttackTemple : AEntityState
 	{
 		private Vector3 _templePosition = Vector3.zero;
-
+		private IAttackable _templeTarget = null;
 		[SerializeField]
 		private AGoalComposite _goal = null;
-		public StateAttackTemple(Entity stateOwner, Vector3 templePosition) : base(stateOwner)
+		public StateAttackTemple(Entity stateOwner, Vector3 templePosition, IAttackable temple) : base(stateOwner)
 		{
 			_templePosition = templePosition;
+			_templeTarget = temple;
 		}
 
 		public override void OnStateEnter()
@@ -25,7 +26,7 @@
 
 			
 
-			_goal = new DestroyTempleMainGoal(_stateOwner, position);
+			_goal = new DestroyTempleMainGoal(_stateOwner, position, _templeTarget);
 
 			_goal.OnEnter();
 

@@ -338,8 +338,12 @@ public class KdTree<T> : IEnumerable<T>, IEnumerable where T : Component
 		while (openCur < _open.Length && _open[openCur] != null)
 		{
 			var current = _open[openCur++];
+
+		
 			if (traversed != null)
 				traversed.Add(current.component);
+
+			
 
 			var nodeDist = _distance(position, current.component.transform.position);
 			if (nodeDist < nearestDist)
