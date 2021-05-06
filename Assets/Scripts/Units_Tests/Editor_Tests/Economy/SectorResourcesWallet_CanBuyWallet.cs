@@ -12,7 +12,7 @@
 			SectorResourcesWallet w1 = new SectorResourcesWallet(100, 100, 100);
 			SectorResourcesWallet w2 = new SectorResourcesWallet(0, 0, 0);
 
-			Assert.IsTrue(w1.CanBuyWallet(w2));
+			Assert.IsTrue(w1.CanBuy(w2));
 		}
 
 		[Test]
@@ -21,7 +21,7 @@
 			SectorResourcesWallet w1 = new SectorResourcesWallet(100, 100, 100);
 			SectorResourcesWallet w2 = new SectorResourcesWallet(100, 100, 100);
 
-			Assert.IsTrue(w1.CanBuyWallet(w2));
+			Assert.IsTrue(w1.CanBuy(w2));
 		}
 
 		[Test]
@@ -30,7 +30,7 @@
 			SectorResourcesWallet w1 = new SectorResourcesWallet(100, 100, 100);
 			SectorResourcesWallet w2 = new SectorResourcesWallet(200, 200, 200);
 
-			Assert.IsFalse(w1.CanBuyWallet(w2));
+			Assert.IsFalse(w1.CanBuy(w2));
 		}
 
 		[Test]
@@ -39,7 +39,7 @@
 			SectorResourcesWallet w1 = new SectorResourcesWallet(100, 100, 100);
 			SectorResourcesWallet w2 = new SectorResourcesWallet(0, 0, 0);
 
-			Assert.IsTrue(w1.CanBuyWallet(w2));
+			Assert.IsTrue(w1.CanBuy(w2));
 		}
 
 		[Test]
@@ -48,7 +48,7 @@
 			SectorResourcesWallet w1 = new SectorResourcesWallet(100, 100, 100);
 			SectorResourcesWallet w2 = new SectorResourcesWallet(100, 0, 0);
 
-			Assert.IsTrue(w1.CanBuyWallet(w2));
+			Assert.IsTrue(w1.CanBuy(w2));
 		}
 
 		[Test]
@@ -57,7 +57,7 @@
 			SectorResourcesWallet w1 = new SectorResourcesWallet(100, 100, 100);
 			SectorResourcesWallet w2 = new SectorResourcesWallet(106, 0, 0);
 
-			Assert.IsFalse(w1.CanBuyWallet(w2));
+			Assert.IsFalse(w1.CanBuy(w2));
 		}
 	}
 }

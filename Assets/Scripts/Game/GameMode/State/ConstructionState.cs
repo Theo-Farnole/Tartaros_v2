@@ -12,11 +12,11 @@ namespace Tartaros.Construction
 	public class ConstructionState : AGameState
 	{
 		#region Fields
-		private BuildingPreview _buildingPreview = null;
+		private readonly BuildingPreview _buildingPreview = null;
+		private readonly IConstructable _constructable = null;
 
 		private readonly ConstructionInputs _constructionInput = null;
 		private readonly UserErrorsLogger _errorsLogger = null;
-		private readonly IConstructable _constructable = null;
 		private readonly IPlayerSectorResources _playerSectorRessources = null;
 		private readonly IMap _map = null;
 		#endregion Fields
@@ -68,7 +68,7 @@ namespace Tartaros.Construction
 			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetMousePosition());
 		}
 
-		
+
 
 		private void InputValidatePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 		{
@@ -86,10 +86,10 @@ namespace Tartaros.Construction
 		{
 			Vector3 buildingPosition = _buildingPreview.GetBuildingPreviewPosition();
 
-			if(_buildingPreview.IsConstructableHere() == false)
+			if (_buildingPreview.IsConstructableHere() == false)
 			{
 				return false;
-			}	
+			}
 
 			return _map.CanBuild(buildingPosition, _constructable.Size) && DoCanConstructRulesAreValid();
 		}
@@ -126,10 +126,7 @@ namespace Tartaros.Construction
 
 		private void InstanciateBuilding()
 		{
-			GameObject kitConstructionPrefab = GameObject.Instantiate(_constructable.ConstructionKitModel, _buildingPreview.GetBuildingPreviewPosition(), Quaternion.identity);
-			var constructionDelay = kitConstructionPrefab.GetComponent<ConstructionDelay>();
-
-			constructionDelay.Construcatble = _constructable;
+			_constructable.InstantiateConstructionKit(_buildingPreview.GetBuildingPreviewPosition());
 		}
 
 		private void PayPriceRessources()

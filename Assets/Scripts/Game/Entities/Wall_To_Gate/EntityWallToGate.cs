@@ -61,7 +61,7 @@
 
 		public bool CanSpawn()
 		{
-			return _playerResources.CanBuyWallet(_data.GatePrice);
+			return ISectorResourcesWalletExtensions.CanBuy(_playerResources, _data.GatePrice);
 		}
 	}
 }

@@ -18,7 +18,7 @@
 		[SerializeField]
 		private Vector2 _scrollPosition = Vector2.zero;
 
-		[MenuItem("Tools/Open SceneBrowser &b")]
+		[MenuItem("Tartaros/Open SceneBrowser &b")]
 		public static void OpenWindow()
 		{
 			var window = GetWindow<SceneBrowserWindow>();
@@ -27,7 +27,7 @@
 
 		private void OnEnable()
 		{
-			this.titleContent = new GUIContent("Tartaros Scene Browser");
+			this.titleContent = new GUIContent("Tartaros Scene Browser", SceneBrowserResources.GetWindowIcon());
 
 			if (_projectScenes == null || _projectScenes.Length == 0)
 			{

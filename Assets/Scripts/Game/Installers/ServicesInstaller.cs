@@ -2,6 +2,7 @@
 {
 	using Tartaros.Construction;
 	using Tartaros.Economy;
+	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
 	using Tartaros.FogOfWar;
 	using Tartaros.Gamemode;
@@ -11,8 +12,7 @@
 	using Tartaros.Power;
 	using Tartaros.Selection;
 	using Tartaros.UI.HoverPopup;
-	using Tartaros.UI.MiniMap;
-	
+	using Tartaros.UI.MiniMap;	
 	using Tartaros.Wave;
 	using UnityEngine;
 
@@ -37,6 +37,7 @@
 			RegisterFromHierarchy<MiniMap>();
 			RegisterFromHierarchy<NavigationPathMiniMap>();
 
+			RegisterFromChildren<BuildingsDatabase>();
 			RegisterFromChildren<HoverPopupsDatabase>();
 			RegisterFromChildren<ConstructionManager>();
 			RegisterFromChildren<IPlayerGloryWallet>();

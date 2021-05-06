@@ -15,6 +15,9 @@
 		private CaptureSectorButton _captureButton = null;
 
 		[SerializeField]
+		private ConstructAtBuildingSlot_Button _constructButton = null;
+
+		[SerializeField]
 		private Image _resourceIcon = null;
 
 		[SerializeField]
@@ -77,7 +80,27 @@
 			_name.text = TartarosTexts.GetResourceSectorName(sector);
 			_description.text = TartarosTexts.GetResourceSectorDescription(sector);
 
-			_captureButton.Sector = sector;
+			UpdateButtons();
+
+			void UpdateButtons()
+			{
+				_captureButton.gameObject.SetActive(!sector.IsCaptured);
+				_captureButton.Sector = sector;
+
+
+				BuildingSlot slot = sector.GetBuildingSlotAvailable();
+				_constructButton.gameObject.SetActive(sector.IsCaptured && slot != null);
+
+				if (slot != null)
+				{
+					_constructButton.Sector = sector;
+				}
+
+				if (_captureButton.isActiveAndEnabled == false && _constructButton.isActiveAndEnabled == false)
+				{
+					Debug.LogWarning("Capture and construct buttons are hide. There is maybe a problem.");
+				}
+			}
 		}
 		#endregion Methods
 	}

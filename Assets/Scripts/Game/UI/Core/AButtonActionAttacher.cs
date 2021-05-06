@@ -10,6 +10,10 @@
 		private Button _button = null;
 		#endregion Fields
 
+		#region Properties
+		protected Button Button => _button;
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{

@@ -1,5 +1,6 @@
 ﻿namespace TF.SceneBrowser.Editor
 {
+	using UnityEditor;
 	using UnityEngine;
 
 	internal static class SceneBrowserResources
@@ -15,6 +16,12 @@
 		public static Texture GetEmptyStarTexture()
 		{
 			return Resources.Load<Texture>(FILENAME_STAR_EMPTY);
+		}
+
+		public static Texture GetWindowIcon()
+		{
+			// SOURCE: https://github.com/halak/unity-editor-icons
+			return EditorGUIUtility.IconContent("Favorite").image;
 		}
 	}
 }
