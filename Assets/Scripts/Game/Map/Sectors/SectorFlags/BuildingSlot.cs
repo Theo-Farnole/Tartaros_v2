@@ -10,7 +10,7 @@
 		#region Fields
 		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;
 
-		private bool _isAvailable = false;
+		private bool _isAvailable = true;
 		private IPlayerSectorResources _playerWallet = null;
 		#endregion Fields
 

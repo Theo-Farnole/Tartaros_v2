@@ -95,6 +95,11 @@
 				{
 					_constructButton.Sector = sector;
 				}
+
+				if (_captureButton.isActiveAndEnabled == false && _constructButton.isActiveAndEnabled == false)
+				{
+					Debug.LogWarning("Capture and construct buttons are hide. There is maybe a problem.");
+				}
 			}
 		}
 		#endregion Methods
