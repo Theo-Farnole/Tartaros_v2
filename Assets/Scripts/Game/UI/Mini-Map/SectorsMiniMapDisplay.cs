@@ -8,6 +8,19 @@
 
 	public class SectorsMiniMapDisplay : MonoBehaviour
 	{
+		private class SectorDrawMiniMap
+		{
+			public Sector _sector = null;
+			public DrawLineUI _line = null;
+
+			public SectorDrawMiniMap(Sector sector, DrawLineUI line)
+			{
+				_sector = sector;
+				_line = line;
+			}
+		}
+		[SerializeField]
+		private SectorOutlineData _outlineData = null;
 		[SerializeField]
 		private GameObject _miniMapBackground = null;
 		[SerializeField]
@@ -15,6 +28,8 @@
 		[SerializeField]
 		private MiniMap _miniMap = null;
 
+
+		private List<SectorDrawMiniMap> _sectorsLines = new List<SectorDrawMiniMap>();
 		private IMap _map = null;
 
 		//TODO DJ: Avoid this 
@@ -30,6 +45,8 @@
 				return _map;
 			}
 		}
+
+
 
 		public RectTransform RootTransform => _miniMap.RootTransform;
 
@@ -59,8 +76,61 @@
 				drawLineUI.Setup(
 					Mathf.RoundToInt(RootTransform.rect.width),
 					Mathf.RoundToInt(RootTransform.rect.height));
-				drawLineUI.SetColor(Color.blue);
+
+				SetOutline(drawLineUI);
+
 				drawLineUI.SetNavigationPoints(listOfVertice);
+
+				_sectorsLines.Add(new SectorDrawMiniMap(sector, drawLineUI));
+				sector.Captured -= SectorCaptured;
+				sector.Captured += SectorCaptured;
+			}
+		}
+
+		private void SetOutline(DrawLineUI drawLineUI)
+		{
+			if (_outlineData != null)
+			{
+				if (_outlineData.UnCapturedSectorsMaterial != null)
+				{
+					drawLineUI.SetMaterial(_outlineData.UnCapturedSectorsMaterial);
+				}
+				else
+				{
+					drawLineUI.SetColor(_outlineData.UnCapturedSectorsColor);
+				}
+			}
+			else
+			{
+				Debug.LogWarningFormat("There is no SectorOutlineData in {0}", this);
+			}
+		}
+
+		private void SectorCaptured(object sender, CapturedArgs e)
+		{
+			foreach (var sectorLines in _sectorsLines)
+			{
+				if (Equals(sender, sectorLines._sector))
+				{
+					if (_outlineData != null)
+					{
+						if (_outlineData.CapturedSectorsMaterial != null)
+						{
+							sectorLines._line.SetMaterial(_outlineData.CapturedSectorsMaterial);
+						}
+						else
+						{
+							sectorLines._line.SetColor(_outlineData.CapturedSectorsColor);
+						}
+					}
+					else
+					{
+						Debug.LogWarningFormat("There is no SectorOutlineData in {0}", this);
+					}
+					sectorLines._sector.Captured -= SectorCaptured;
+					_sectorsLines.Remove(sectorLines);
+					return;
+				}
 			}
 		}
 

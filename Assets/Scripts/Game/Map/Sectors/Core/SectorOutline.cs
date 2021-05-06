@@ -3,14 +3,17 @@
 	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
 	using System.Linq;
-    using Tartaros.Map;
-    using Tartaros.Selection;
+	using Tartaros.Map;
+	using Tartaros.Selection;
 	using UnityEngine;
 
 	public class SectorOutline : MonoBehaviour, ISelectionEffect
 	{
 		#region Fields
 		private const string EDITOR_GROUP_COLORS = "Colors";
+
+		[SerializeField]
+		private SectorOutlineData _data = null;
 
 		[SerializeField]
 		private float _outlineHeightOffset = 0.1f;
@@ -32,13 +35,23 @@
 		[FoldoutGroup(EDITOR_GROUP_COLORS)]
 		[SerializeField]
 		private Color _uncapturedOutlineColor = Color.grey;
-		
+
 		private bool _selected = false;
 		#endregion Fields
 
 		#region Methods		
 		private void Start()
 		{
+			if (_data != null)
+			{
+				_capturedOutlineColor = _data.CapturedSectorsColor;
+				_uncapturedOutlineColor = _data.UnCapturedSectorsColor;
+			}
+			else
+			{
+				Debug.LogWarningFormat("There is no SectorOutlineData in {0}", this);
+			}
+
 			SetupLinePoints();
 			SetUnselectedColor();
 		}

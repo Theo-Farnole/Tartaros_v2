@@ -2,11 +2,13 @@
 {
 	using Sirenix.OdinInspector;
 	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using Tartaros.Map;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
 	using Tartaros.Wave;
+	using UnityEditorInternal;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -28,6 +30,7 @@
 		private EntityFSM _entityFSM = null;
 		private bool _destroyWithKillMethod = false;
 		private bool _applicationIsQuiting = false;
+		private bool _isKilled = false;
 		#endregion Fields
 
 		#region Properties
@@ -93,10 +96,26 @@
 
 		public void Kill()
 		{
+			if (_isKilled == true)
+			{
+				Debug.LogWarning("Cannot call Kill if the entity is already dead.");
+				return;
+			}
+
+			StartCoroutine(Kill_Coroutine());
+
+			_destroyWithKillMethod = true;
+			_isKilled = true;
+		}
+
+		private IEnumerator Kill_Coroutine()
+		{
+			if (_isKilled == true) throw new NotSupportedException("Cannot start Kill_Coroutine if the entity is already dead.");
+
 			EntityKilled?.Invoke(this, new KilledArgs());
 			AnyEntityKilled?.Invoke(this, new EntityKilledArgs(this));
 
-			_destroyWithKillMethod = true;
+			yield return new WaitForEndOfFrame();
 
 			Destroy(gameObject);
 		}
@@ -107,7 +126,7 @@
 			_entityType = entityType;
 		}
 
-		
+
 
 		public T GetBehaviourData<T>() where T : class
 		{
