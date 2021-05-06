@@ -64,8 +64,14 @@
 
 			_entityAttackData.AttackMode.Attack(transform, target);
 			_lastTimeAttack = Time.time;
+			LookAt(target);
 
 			AttackCasted?.Invoke(this, new AttackCastedArgs());
+		}
+
+		private void LookAt(IAttackable target)
+		{
+			transform.forward = (target.Transform.position - transform.position);
 		}
 
 		public void TryOrderAttackNearestOpponent()
