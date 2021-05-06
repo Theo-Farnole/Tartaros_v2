@@ -80,7 +80,22 @@
 			_name.text = TartarosTexts.GetResourceSectorName(sector);
 			_description.text = TartarosTexts.GetResourceSectorDescription(sector);
 
-			_captureButton.Sector = sector;
+			UpdateButtons();
+
+			void UpdateButtons()
+			{
+				_captureButton.gameObject.SetActive(!sector.IsCaptured);
+				_captureButton.Sector = sector;
+
+
+				BuildingSlot slot = sector.GetBuildingSlotAvailable();
+				_constructButton.gameObject.SetActive(sector.IsCaptured && slot != null);
+
+				if (slot != null)
+				{
+					_constructButton.Sector = sector;
+				}
+			}
 		}
 		#endregion Methods
 	}

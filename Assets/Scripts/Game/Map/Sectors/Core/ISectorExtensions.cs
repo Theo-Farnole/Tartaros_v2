@@ -27,6 +27,11 @@
 				.Where(x => x != null);
 		}
 
+		public static IEnumerable<BuildingSlot> GetBuildingSlots(this ISector sector)
+		{
+			return sector.EnumerateObjectsOfType<BuildingSlot>();
+		}
+
 		/// <summary>
 		/// Returns null if no slot is available
 		/// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Map
 {
+	using System.Linq;
 	using Tartaros.Economy;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI.MiniMap;
@@ -31,9 +32,24 @@
 		#region Methods
 		private void Awake()
 		{
-			gameObject.GetOrAddComponent<SectorObject>();
 			_miniMapIcon = gameObject.GetOrAddComponent<ResourceMiniMapIcon>();
 			_miniMapIcon.ResourceType = _type;
+
+			CheckIfBuildingSlotIsMissing();
+		}
+
+		private void CheckIfBuildingSlotIsMissing()
+		{
+			IMap map = Services.Instance.Get<IMap>();
+			ISector sector = map.GetSectorOnPosition(transform.position);
+
+			Debug.Assert(sector != null, "Resource flag must be placed on a sector.", this);
+
+			if (sector != null)
+			{
+				int slotCount = sector.GetBuildingSlots().Count();
+				Debug.Assert(slotCount > 0, "There is no building slot whereas we have a flag resource to sector! Please add one.", this);
+			}
 		}
 		#endregion Methods
 	}

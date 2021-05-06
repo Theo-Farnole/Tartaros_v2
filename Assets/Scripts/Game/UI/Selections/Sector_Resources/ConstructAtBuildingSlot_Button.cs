@@ -52,8 +52,7 @@
 
 			if (_sector == null || slot == null)
 			{
-				Button.interactable = false;
-				_constructPriceLabel.text = "TODO: HIDE THIS BUTTON";
+				throw new System.NotSupportedException("No building slot. Cannot display informations on button {0}.".Format(name));
 			}
 			else
 			{
