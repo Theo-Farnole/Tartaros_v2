@@ -56,7 +56,7 @@
 
 		void IIncomeGenerator.RessourcesIsEmpty()
 		{
-			Debug.LogFormat("ressource is {0} empty", this.gameObject);
+			Debug.LogFormat("ressource {0} is empty", this.gameObject);
 		}
 		#endregion Methods
 	}
