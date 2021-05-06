@@ -3,12 +3,10 @@
 	using Sirenix.OdinInspector;
 	using System;
 	using System.Collections;
-	using System.Collections.Generic;
 	using Tartaros.Map;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
 	using Tartaros.Wave;
-	using UnityEditorInternal;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -85,7 +83,7 @@
 		{
 			if (_applicationIsQuiting == false && _destroyWithKillMethod == false)
 			{
-				Debug.LogWarningFormat("The entity {0} has been destroyed without calling Kill() method. You should call it instead of GameObject.Destroy method.", name);
+				Debug.LogErrorFormat("The entity {0} has been destroyed without calling Kill() method. You should call it instead of GameObject.Destroy method.", name);
 			}
 		}
 
@@ -144,7 +142,7 @@
 			//GetComponent<IOrderAttackReceiver>().Attack(attackable);
 
 			var position = attackable.Transform.position;
-			_entityFSM.SetStateGoalPattern(position);
+			_entityFSM.SetStateGoalPattern(position, attackable);
 
 
 		}

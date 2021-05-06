@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3721422765171975980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3354511648309442262}
+  - component: {fileID: 2479522953080652379}
+  m_Layer: 0
+  m_Name: ClickCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3354511648309442262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3721422765171975980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8729383663548792514}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2479522953080652379
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3721422765171975980}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.53, z: 0}
 --- !u!95 &1837131222303528686
 Animator:
   serializedVersion: 3
@@ -58,13 +103,11 @@ GameObject:
   - component: {fileID: 7346568056699488540}
   - component: {fileID: 4077966187037685672}
   - component: {fileID: 7446995093344909706}
-  - component: {fileID: 4914162101903876982}
   - component: {fileID: 3737431887952081801}
   - component: {fileID: 4423504264441649126}
   - component: {fileID: 6184808952790126858}
   - component: {fileID: 151944690951034759}
   - component: {fileID: 5991597866423299833}
-  - component: {fileID: 1255649792}
   m_Layer: 0
   m_Name: Entity.Satyr
   m_TagString: Untagged
@@ -84,6 +127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4705281223137586835}
+  - {fileID: 3354511648309442262}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,20 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b997af4d82253040817d76bd5c8219f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4914162101903876982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8729383663548792512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81667f48f39b062419c1ff93bfe03d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _team: 1
-  _canBeMultiSelected: 1
 --- !u!114 &3737431887952081801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,21 +352,6 @@ MonoBehaviour:
   _model: {fileID: 5334325722198455337}
   _deathAnimation: {fileID: -694422787386160666, guid: 12701860c990cd04ea4e9ae590417477,
     type: 3}
---- !u!114 &1255649792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8729383663548792512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa090ce895c909a4a8b2c4307b1fed50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabToInstantiateOnSelection: {fileID: 7668282519628187711, guid: 2108d35e691c8e441864eda0169706db,
-    type: 3}
-  _prefabScale: 1
 --- !u!1001 &5099830881859864952
 PrefabInstance:
   m_ObjectHideFlags: 0

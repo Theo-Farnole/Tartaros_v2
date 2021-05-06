@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.UI
 {
+	using System;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -11,24 +12,46 @@
 		#endregion Fields
 
 		#region Properties
-		protected Button Button => _button;
+		protected Button Button
+		{
+			get
+			{
+				if (_button == null)
+				{
+					_button = GetComponent<Button>();
+				}
+
+				return _button;
+			}
+		}
 		#endregion Properties
 
-		#region Methods
-		private void Awake()
-		{
-			_button = GetComponent<Button>();
-		}
+		#region Events
+		public class LateButtonClickedArgs : EventArgs { }
+		/// <summary>
+		/// Invoked after the button has done its stuff.
+		/// </summary>
+		public event EventHandler<LateButtonClickedArgs> LateButtonClicked = null;
+		#endregion Events
 
+		#region Methods
 		private void OnEnable()
 		{
-			_button.onClick.RemoveListener(OnButtonClick);
-			_button.onClick.AddListener(OnButtonClick);
+			Button.onClick.RemoveListener(internal_OnButtonClick);
+			Button.onClick.AddListener(internal_OnButtonClick);
 		}
 
 		private void OnDisable()
 		{
-			_button.onClick.RemoveListener(OnButtonClick);
+			Button.onClick.RemoveListener(internal_OnButtonClick);
+		}
+
+		private void internal_OnButtonClick()
+		{
+			// make sure we d
+			OnButtonClick();
+
+			LateButtonClicked?.Invoke(this, new LateButtonClickedArgs());
 		}
 
 		protected abstract void OnButtonClick();
