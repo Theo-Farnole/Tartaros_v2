@@ -32,39 +32,49 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaBlend: -3.48
     - _BorderSize: 2.84
     - _ChromaticAberration: 0.1
     - _Cutoff: 0.01
     - _Depths: 67.1
     - _DiscoveredPercent: 0.5524474
+    - _Dist: 0.65
     - _FarExplored: -1.51
     - _Float0: -0.26
     - _NoiseScale: -1.35
     - _Opacity: 0.75
-    - _PaternPower: 0.48
+    - _PaternPower: 0.09
     - _PaternSpeed: 1
+    - _RevelatedPercent: 0.84
     - _RimPower: 5.07
     - _RimPower2: -0.43
-    - _STEP: 0.41
+    - _STEP: 1
     - _ShroudAlphaMult: 2
     - _SmoothRim: 2
     - _Step: 0.11
+    - _VertexOffset: 0.2
     - _VoroPower: 0.92
     - _VoroScale: 50
     - _VoroScaleRim: 500
     - _VoroScaleRim1: 500
+    - _WorldPower: 2
     - __dirty: 0
     m_Colors:
     - _BorderColor: {r: 2.670157, g: 1.1463501, b: 0, a: 1}
     - _BorderColor2: {r: 1.4980392, g: 0.36862746, b: 0, a: 1}
     - _BorderColorRange: {r: 1.5, g: 1, b: 0, a: 0}
     - _Compare: {r: 1, g: 0, b: 0.5, a: 0}
-    - _DiscoveredStep: {r: 5, g: 2, b: 0, a: 0}
-    - _PaternColor: {r: 1.1529412, g: 0.29803923, b: 0, a: 1}
-    - _RevelatedStep: {r: 0.5, g: 2, b: 0, a: 0}
+    - _DiscoveredStep: {r: 0, g: 1, b: 0, a: 0}
+    - _PaternColor: {r: 1, g: 0.2627451, b: 0, a: 1}
+    - _PaternSteps: {r: 0.85, g: 0.86, b: 0, a: 0}
+    - _Remap1: {r: 0, g: 1, b: 0, a: 1}
+    - _Remap2: {r: 0, g: 1, b: 0, a: 1}
+    - _RevelatedStep: {r: 0.7, g: 2, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor2: {r: 0, g: 0, b: 0, a: 1}
     - _ShroudAlphaMult: {r: -0.22, g: 1, b: 0, a: -0.08}
     - _SmoothStep: {r: 0, g: 0.64, b: 0, a: 0}
+    - _SmoothStepTop: {r: 0, g: 0.91, b: 0, a: 0}
     - _TrueFalse: {r: 1, g: 0.64, b: 0, a: 0}
     - _VoroColor: {r: 0.066037714, g: 0.054119505, b: 0.04890529, a: 1}
+    - _VoroController: {r: 1, g: 50, b: 2, a: 0}
