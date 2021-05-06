@@ -8,15 +8,17 @@
 	public class DestroyTempleMainGoal : AGoalComposite
 	{
 		private Vector3 _templePosition = Vector3.zero;
+		private IAttackable _templeTarget = null;
 		private AGoalComposite _currentMoveToTemple = null;
 		private EntityDetection _entityDetection = null;
 		private DestroyTarget _destroyTempleGoal = null;
 		private bool _completed = false;
 
-		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition) : base(goalOwner)
+		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition, IAttackable targetTemple) : base(goalOwner)
 		{
 			_templePosition = templePosition;
 			_entityDetection = _goalOwner.GetComponent<EntityDetection>();
+			_templeTarget = targetTemple;
 		}
 
 		public override void OnEnter()
@@ -135,9 +137,9 @@
 
 		private void AddOnSubGoal(Entity target)
 		{
-			IAttackable targetAttackable = (target.GetComponent<IAttackable>());
+			//IAttackable targetAttackable = (target.GetComponent<IAttackable>());
 
-			AddDestroySubGoal(targetAttackable);
+			AddDestroySubGoal(_templeTarget);
 
 		}
 
@@ -148,7 +150,7 @@
 
 		private void AddDestroySubGoal(IAttackable target)
 		{
-			_destroyTempleGoal = new DestroyTarget(_goalOwner, target, 5);
+			_destroyTempleGoal = new DestroyTarget(_goalOwner, target, 50);
 			base.AddSubGoal(_destroyTempleGoal);
 		}
 	}

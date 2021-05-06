@@ -116,9 +116,9 @@
 			SetState(InstantiateDefaultState());
 		}
 
-		public void SetStateGoalPattern(Vector3 position)
+		public void SetStateGoalPattern(Vector3 position, IAttackable target)
 		{
-			SetState(new StateAttackTemple(Entity, position));
+			SetState(new StateAttackTemple(Entity, position, target));
 		}
 
 		private AEntityState InstantiateDefaultState()

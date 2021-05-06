@@ -142,7 +142,7 @@
 			//GetComponent<IOrderAttackReceiver>().Attack(attackable);
 
 			var position = attackable.Transform.position;
-			_entityFSM.SetStateGoalPattern(position);
+			_entityFSM.SetStateGoalPattern(position, attackable);
 
 
 		}
