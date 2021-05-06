@@ -85,7 +85,7 @@
 		{
 			if (_applicationIsQuiting == false && _destroyWithKillMethod == false)
 			{
-				Debug.LogWarningFormat("The entity {0} has been destroyed without calling Kill() method. You should call it instead of GameObject.Destroy method.", name);
+				Debug.LogErrorFormat("The entity {0} has been destroyed without calling Kill() method. You should call it instead of GameObject.Destroy method.", name);
 			}
 		}
 
