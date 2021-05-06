@@ -5,7 +5,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
-	public class SectorResourcesGeneratorSlot : SerializedMonoBehaviour
+	public class BuildingSlot : SerializedMonoBehaviour
 	{
 		#region Fields
 		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;

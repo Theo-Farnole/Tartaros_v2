@@ -5,7 +5,7 @@
 	using TMPro;
 	using UnityEngine;
 
-	public class ConstructSectorResourcesIncomeBuildingButton : AButtonActionAttacher
+	public class ConstructAtBuildingSlot_Button : AButtonActionAttacher
 	{
 		#region Fields
 		[SerializeField]
@@ -31,7 +31,7 @@
 		#region Methods
 		protected override void OnButtonClick()
 		{
-			SectorResourcesGeneratorSlot availableSlot = _sector.GetAvailableResourcesGeneratorSlot();
+			BuildingSlot availableSlot = _sector.GetBuildingSlotAvailable();
 
 			if (availableSlot == null) throw new NotSupportedException("No available slots on sector {0}: cannot construct resources generator.".Format(_sector.ToString()));
 
@@ -43,11 +43,11 @@
 
 		private void UpdateButtonInformations()
 		{
-			SectorResourcesGeneratorSlot slot = null;
+			BuildingSlot slot = null;
 
 			if (_sector != null)
 			{
-				slot = _sector.GetAvailableResourcesGeneratorSlot();
+				slot = _sector.GetBuildingSlotAvailable();
 			}
 
 			if (_sector == null || slot == null)

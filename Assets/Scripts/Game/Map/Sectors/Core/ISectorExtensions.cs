@@ -27,11 +27,14 @@
 				.Where(x => x != null);
 		}
 
-		public static SectorResourcesGeneratorSlot GetAvailableResourcesGeneratorSlot(this ISector sector)
+		/// <summary>
+		/// Returns null if no slot is available
+		/// </summary>
+		public static BuildingSlot GetBuildingSlotAvailable(this ISector sector)
 		{
-			IEnumerable<SectorResourcesGeneratorSlot> slots = sector.EnumerateObjectsOfType<SectorResourcesGeneratorSlot>();
+			IEnumerable<BuildingSlot> slots = sector.EnumerateObjectsOfType<BuildingSlot>();
 
-			foreach (SectorResourcesGeneratorSlot slot in slots)
+			foreach (BuildingSlot slot in slots)
 			{
 				if (slot.IsAvailable == true)
 				{
