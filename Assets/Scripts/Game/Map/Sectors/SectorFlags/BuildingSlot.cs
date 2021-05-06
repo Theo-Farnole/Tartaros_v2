@@ -1,7 +1,9 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
+	using Tartaros.Construction;
 	using Tartaros.Economy;
+	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
@@ -9,7 +11,9 @@
 	{
 		#region Fields
 		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;
+		[SerializeField, SuffixLabel("get IConstructable from behaviour")] private EntityData _constructableEntity = null;
 
+		private IConstructable _constructable = null;
 		private bool _isAvailable = true;
 		private IPlayerSectorResources _playerWallet = null;
 		#endregion Fields
@@ -23,16 +27,29 @@
 		private void Awake()
 		{
 			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
+
+			if (_constructableEntity != null && _constructable == null)
+			{
+				_constructable = _constructableEntity.GetBehaviour<IConstructable>();
+			}
 		}
 
 		public bool CanConstruct()
 		{
+			if (_constructable == null) throw new System.NotSupportedException("Missing constructable in inspector.");
+
 			return _playerWallet.CanBuy(_constructionPrice);
 		}
 
 		public void Construct()
 		{
-			throw new System.NotImplementedException();
+			if (_constructable == null) throw new System.NotSupportedException("Missing constructable in inspector.");
+
+			if (CanConstruct() == true)
+			{
+				_playerWallet.Buy(_constructionPrice);
+				_constructable.InstantiateConstructionKit(transform.position);
+			}
 		}
 		#endregion Methods
 	}

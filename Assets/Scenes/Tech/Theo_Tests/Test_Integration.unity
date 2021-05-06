@@ -2445,7 +2445,7 @@ GameObject:
   - component: {fileID: 469958106}
   - component: {fileID: 469958107}
   m_Layer: 0
-  m_Name: GameObject (5)
+  m_Name: Food Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2579,6 +2579,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _constructableEntity: {fileID: 11400000, guid: 266102ea2d9e0e549adf693dd2d41a5f,
+    type: 2}
 --- !u!1 &516008906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,6 +2992,7 @@ Transform:
   - {fileID: 469958104}
   - {fileID: 1096787042}
   - {fileID: 1791992031}
+  - {fileID: 1073857839}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3006,7 +3009,7 @@ GameObject:
   - component: {fileID: 919398563}
   - component: {fileID: 919398564}
   m_Layer: 0
-  m_Name: GameObject (4)
+  m_Name: Food Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3140,6 +3143,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _constructableEntity: {fileID: 11400000, guid: 266102ea2d9e0e549adf693dd2d41a5f,
+    type: 2}
 --- !u!1 &1010676803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,6 +3239,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1073857838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073857839}
+  - component: {fileID: 1073857840}
+  - component: {fileID: 1073857841}
+  m_Layer: 0
+  m_Name: Start Sector (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073857839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073857838}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 98.2, y: 1, z: 50.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 880915239}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073857840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073857838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e745c78327ba774497317aed14aa649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1073857841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073857838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1096787041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3247,7 +3308,7 @@ GameObject:
   - component: {fileID: 1096787044}
   - component: {fileID: 1096787045}
   m_Layer: 0
-  m_Name: GameObject (8)
+  m_Name: Iron Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3381,6 +3442,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _constructableEntity: {fileID: 11400000, guid: f782db0389b33be45b8bf92963d59dc6,
+    type: 2}
 --- !u!1 &1129155215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3394,7 +3457,7 @@ GameObject:
   - component: {fileID: 1129155218}
   - component: {fileID: 1129155219}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: Stone Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3528,6 +3591,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _constructableEntity: {fileID: 11400000, guid: e091fb80bc9b71848a326d21fc00a624,
+    type: 2}
 --- !u!1001 &1171615894
 PrefabInstance:
   m_ObjectHideFlags: 0

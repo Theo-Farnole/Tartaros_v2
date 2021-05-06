@@ -1,12 +1,13 @@
 ﻿namespace Tartaros.Map
 {
+	using Sirenix.OdinInspector;
 	using System.Linq;
 	using Tartaros.Economy;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI.MiniMap;
 	using UnityEngine;
 
-	[RequireComponent(typeof(SectorObject))]
+	[RequireComponent(typeof(SectorObject)), InfoBox("Will fill building slot constructable type")]
 	public partial class FlagResourceToSector : MonoBehaviour
 	{
 		#region Fields
