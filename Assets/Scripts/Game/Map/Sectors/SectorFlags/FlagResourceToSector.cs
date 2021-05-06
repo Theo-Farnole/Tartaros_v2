@@ -2,12 +2,14 @@
 {
 	using Sirenix.OdinInspector;
 	using System.Linq;
+	using Tartaros.Construction;
 	using Tartaros.Economy;
+	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI.MiniMap;
 	using UnityEngine;
 
-	[RequireComponent(typeof(SectorObject)), InfoBox("Will fill building slot constructable type")]
+	[RequireComponent(typeof(SectorObject)), InfoBox("Fill constructable of building slot AUTOMATICALLY")]
 	public partial class FlagResourceToSector : MonoBehaviour
 	{
 		#region Fields
@@ -37,6 +39,18 @@
 			_miniMapIcon.ResourceType = _type;
 
 			CheckIfBuildingSlotIsMissing();
+			SetBuildingSlotConstructable();
+		}
+
+		private void SetBuildingSlotConstructable()
+		{
+			IMap map = Services.Instance.Get<IMap>();
+			BuildingsDatabase buildingsDatabase = Services.Instance.Get<BuildingsDatabase>();
+
+			ISector sector = map.GetSectorOnPosition(transform.position);
+			BuildingSlot buildingsSlot = sector.GetBuildingSlotAvailable();
+
+			buildingsSlot.Constructable = buildingsDatabase.GetResourceBuildingAsConstructable(_type);
 		}
 
 		private void CheckIfBuildingSlotIsMissing()

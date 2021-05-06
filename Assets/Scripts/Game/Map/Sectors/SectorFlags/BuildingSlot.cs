@@ -21,6 +21,8 @@
 		#region Properties
 		public bool IsAvailable => _isAvailable;
 		public ISectorResourcesWallet ConstructionPrice => _constructionPrice;
+
+		public IConstructable Constructable { get => _constructable; set => _constructable = value; }
 		#endregion Properties
 
 		#region Methods
