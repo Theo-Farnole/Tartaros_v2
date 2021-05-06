@@ -40,7 +40,7 @@
 		{
 			if (_constructable == null) throw new System.NotSupportedException("Missing constructable in inspector.");
 
-			return _playerWallet.CanBuy(_constructionPrice);
+			return _isAvailable == true && _playerWallet.CanBuy(_constructionPrice);
 		}
 
 		public void Construct()
@@ -51,6 +51,7 @@
 			{
 				_playerWallet.Buy(_constructionPrice);
 				_constructable.InstantiateConstructionKit(transform.position);
+				_isAvailable = false;
 			}
 		}
 		#endregion Methods

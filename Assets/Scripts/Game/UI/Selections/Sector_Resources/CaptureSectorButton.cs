@@ -1,20 +1,15 @@
 ﻿namespace Tartaros.UI
 {
 	using Sirenix.OdinInspector;
-	using Tartaros.Economy;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using TMPro;
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public class CaptureSectorButton : MonoBehaviour
+	public class CaptureSectorButton : AButtonActionAttacher
 	{
-		#region Fields
-		[SerializeField]
-		[Required]
-		private Button _button = null;
-
+		#region Fields		
 		[SerializeField]
 		[Required]
 		private TextMeshProUGUI _text = null;
@@ -55,18 +50,7 @@
 			_sectorsCaptureManager = Services.Instance.Get<ISectorsCaptureManager>();
 		}
 
-		private void OnEnable()
-		{
-			_button.onClick.RemoveListener(OnButtonClick);
-			_button.onClick.AddListener(OnButtonClick);
-		}
-
-		private void OnDisable()
-		{
-			_button.onClick.RemoveListener(OnButtonClick);
-		}
-
-		private void OnButtonClick()
+		protected override void OnButtonClick()
 		{
 			if (_sectorsCaptureManager.CanCapture(_sector) == true)
 			{
@@ -82,7 +66,7 @@
 
 		private void UpdateButtonInteractability()
 		{
-			_button.interactable = _sector != null && _sector.IsCaptured == false;
+			Button.interactable = _sector != null && _sector.IsCaptured == false;
 		}
 
 		private void UpdateButtonText()
