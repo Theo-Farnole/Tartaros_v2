@@ -22,7 +22,7 @@
 		#region Methods
 		private void Awake()
 		{
-			_playerWallet = Services.Instance.Get<PlayerSectorResources>();
+			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
 		}
 
 		public bool CanConstruct()

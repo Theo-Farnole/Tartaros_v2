@@ -5,7 +5,7 @@
 	using System.Linq;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	
+
 	using Tartaros.Wave;
 	using UnityEngine;
 	using UnityEngine.UI;
@@ -169,7 +169,11 @@
 		{
 			if (_icons.ContainsKey(icon) == true)
 			{
-				Destroy(_icons[icon].gameObject);
+				if (_icons[icon] != null)
+				{
+					Destroy(_icons[icon].gameObject);
+				}
+
 				_icons.Remove(icon);
 			}
 			else

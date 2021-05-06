@@ -17,10 +17,7 @@
 		private void Awake()
 		{
 			_map = Services.Instance.Get<IMap>();
-		}
 
-		private void Start()
-		{
 			SetCurrentSector(GetSectorOnPosition());
 			_lastPosition = transform.position;
 		}

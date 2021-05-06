@@ -58,7 +58,7 @@
 			{
 
 				Button.interactable = slot.CanConstruct();
-				_constructPriceLabel.text = slot.ConstructionPrice.ToRichTextString();
+				_constructPriceLabel.text = "{0} {1}".Format(TartarosTexts.CONSTRUCT, slot.ConstructionPrice.ToRichTextString());
 			}
 		}
 		#endregion Methods
