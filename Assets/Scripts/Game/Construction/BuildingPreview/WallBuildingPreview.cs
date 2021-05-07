@@ -65,7 +65,7 @@
 
 			SetPositionRotationOfPreviews(end);
 
-			if(_wallCantConstruct == null)
+			if (_wallCantConstruct == null)
 			{
 				_canConstruct = true;
 			}
@@ -174,9 +174,6 @@
 
 		private bool IsValidPositionToBuild(Vector3 wallPreview)
 		{
-			RaycastHit mousePosition;
-			MouseHelper.GetHitUnderCursor(out mousePosition);
-
 			foreach (Vector2 position in _pointsToCheck)
 			{
 				float buildingPosX = wallPreview.x - _toBuild.Size.x / 2;
@@ -188,18 +185,23 @@
 
 				if (Physics.Raycast(positionV3, Vector3.down, out hit, Mathf.Infinity, NavMesh.AllAreas))
 				{
+					//Debug.DrawRay(positionV3, Vector3.down * 1000, Color.yellow);
 					if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
 					{
-						//Debug.DrawRay(positionV3, Vector3.down * hit.distance, Color.yellow);
+						Debug.Log("NotOnNavMesh");
+						//Debug.DrawRay(positionV3, Vector3.down * 1000, Color.yellow);
 
 						if (_objectUnderCursorManager.IsTheSameConstructable() == false)
 						{
+							Debug.Log("NotSameConstrucatble");
 							return false;
 						}
 					}
+					Debug.Log("OnNavMesh");
 				}
 				else
 				{
+					Debug.Log("DontTouchNavMeshAtAll");
 					return false;
 				}
 			}
@@ -208,8 +210,8 @@
 
 		private Vector2[] GetPointToCheckTheConstructionViability()
 		{
-			float previewWidght = _toBuild.Size.x;
-			float previewLenght = _toBuild.Size.y;
+			float previewWidght = _toBuild.Size.x - 1f;
+			float previewLenght = _toBuild.Size.y - 1f;
 			List<Vector2> output = new List<Vector2>();
 
 			//center

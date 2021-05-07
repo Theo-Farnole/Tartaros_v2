@@ -7,6 +7,7 @@
 	{
 		public static Vector2 CursorPosition => Mouse.current.position.ReadValue();
 
+
 		public static bool IsCursorOverWindow()
 		{
 			if (Camera.main == null)
@@ -31,7 +32,34 @@
 			return null;
 		}
 
-	
+		public static GameObject GetGameObjectUnderCursorWithGrid()
+		{
+			var NearestPos = GetNearestPosition(CursorPosition.x, CursorPosition.y);
+
+			Ray ray = Camera.main.ScreenPointToRay(NearestPos);
+
+			if (Physics.Raycast(ray, out RaycastHit hit))
+			{
+				return hit.transform.gameObject;
+			}
+
+			return null;
+		}
+
+		private static Vector2 GetNearestPosition(float x, float z)
+		{
+			float xCount = Mathf.Round(x / 3);
+			//float yCount = Mathf.Round(y / 3);
+			float zCount = Mathf.Round(z / 3);
+
+			Vector2 result = new Vector2(
+				 xCount * 3,
+				 zCount * 3);
+
+			return result;
+		}
+
+
 
 		public static bool GetHitUnderCursor(out RaycastHit hit)
 		{

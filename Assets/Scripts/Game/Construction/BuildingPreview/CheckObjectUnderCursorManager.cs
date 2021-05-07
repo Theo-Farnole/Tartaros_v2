@@ -43,6 +43,23 @@
 			return false;
 		}
 
+		public bool IsTheSameConstructableWithGrid()
+		{
+			GameObject objectUnderCursor = MouseHelper.GetGameObjectUnderCursorWithGrid();
+
+			if (objectUnderCursor != null
+				&& objectUnderCursor.TryGetComponentInParent(out Entity entity)
+				&& entity.EntityData.TryGetBehaviour<EntityConstructableData>(out EntityConstructableData data))
+			{
+				IConstructable constructable = entity.EntityData.GetBehaviour<EntityConstructableData>() as IConstructable;
+				if (constructable == _toBuild)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public Entity GetEntityUnderCursor()
 		{
 			return GetObjectUnderCursor().GetComponent<Entity>();
