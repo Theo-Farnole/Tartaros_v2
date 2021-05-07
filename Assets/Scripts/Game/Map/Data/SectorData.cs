@@ -7,6 +7,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Math;
 	using UnityEngine;
+	using UnityEngine.UIElements;
 
 	[Serializable]
 	public class SectorData
@@ -17,6 +18,9 @@
 
 		[OdinSerialize]
 		private ISectorResourcesWallet _capturePrice = null;
+
+		private Vector3[] _allWorldsPoints = null;
+		private ConvexPolygon _convexPolygon = null;
 		#endregion Fields
 
 		#region Properties
@@ -26,9 +30,32 @@
 
 		public Vertex2D this[int i] => _vertices[i];
 		public int VerticesCount => _vertices.Count;
-		public Vector3[] AllWorldsPoint => _vertices.Select(x => x.WorldPosition).ToArray();
+		public Vector3[] AllWorldsPoint
+		{
+			get
+			{
+				if (_allWorldsPoints == null)
+				{
+					_allWorldsPoints = _vertices.Select(x => x.WorldPosition).ToArray();
+				}
+
+				return _allWorldsPoints;
+			}
+		}
+
 		public Vector3 Centroid => MathHelper.CalculateCentroid(AllWorldsPoint);
-		public ConvexPolygon ConvexPolygon => new ConvexPolygon(AllWorldsPoint.Select(vector => new Vector2(vector.x, vector.z)).ToArray());
+		public ConvexPolygon ConvexPolygon
+		{
+			get
+			{
+				if (_convexPolygon == null)
+				{
+					_convexPolygon = new ConvexPolygon(AllWorldsPoint.Select(vector => new Vector2(vector.x, vector.z)).ToArray());
+				}
+
+				return _convexPolygon;
+			}
+		}
 		#endregion Properties
 
 		#region Ctor

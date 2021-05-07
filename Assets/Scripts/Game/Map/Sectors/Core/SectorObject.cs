@@ -24,9 +24,16 @@
 
 		private void Update()
 		{
-			if (HasMoved() && IsOnNewSector())
+			if (HasMoved() == true)
 			{
-				SetCurrentSector(GetSectorOnPosition());
+				ISector sectorOnPosition = GetSectorOnPosition();
+
+				bool isOnNewSector = _currentSector != sectorOnPosition;
+
+				if (isOnNewSector == true)
+				{
+					SetCurrentSector(sectorOnPosition);
+				}
 			}
 
 			_lastPosition = transform.position;
@@ -40,13 +47,6 @@
 		private ISector GetSectorOnPosition()
 		{
 			return _map.GetSectorOnPosition(transform.position);
-		}
-
-		private bool IsOnNewSector()
-		{
-			ISector sectorOnPosition = GetSectorOnPosition();
-
-			return _currentSector != sectorOnPosition;
 		}
 
 		private void SetCurrentSector(ISector sector)

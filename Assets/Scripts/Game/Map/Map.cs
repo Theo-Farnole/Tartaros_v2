@@ -4,7 +4,7 @@
 	using System.IO;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	
+
 	using UnityEngine;
 
 	public partial class Map : MonoBehaviour, IMap
@@ -62,8 +62,10 @@
 
 		ISector IMap.GetSectorOnPosition(Vector3 position)
 		{
-			foreach (var sector in _sectors)
+			for (int i = 0, length = _sectors.Length; i < length; i++)
 			{
+				ISector sector = _sectors[i];
+
 				if (sector.ContainsPosition(position))
 				{
 					return sector;
