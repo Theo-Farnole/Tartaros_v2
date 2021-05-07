@@ -51,8 +51,6 @@
 
 		private void SetState(AEntityState newState)
 		{
-			if (this.name == "Entity.Archer") Debug.LogFormat("Archer change state from {1} to {0}.", newState.GetType(), _finiteStateMachine.CurrentState);
-
 			_finiteStateMachine.CurrentState = newState;
 		}
 

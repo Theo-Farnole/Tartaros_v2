@@ -17,7 +17,9 @@
 
 		void IAttackMode.Attack(Transform attacker, IAttackable target)
 		{
-			if(_vfxPrefab != null)
+			if (target is null) throw new System.ArgumentNullException(nameof(target));
+
+			if (_vfxPrefab != null)
 			{
 				_vfxPrefab.ExecuteHitEffect(target.Transform.position);
 			}

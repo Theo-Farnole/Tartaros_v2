@@ -31,6 +31,7 @@
 			base.OnStateExit();
 
 			StopMovement();
+			_entityAttack.StopAttacking();
 		}
 
 		public override void OnUpdate()
@@ -44,11 +45,13 @@
 			{
 				if (_entityAttack.IsInRange(_target) == true)
 				{
+					_entityAttack.StartAttacking();
 					StopMovement();
 					_entityAttack.CastAttackIfPossible(_target);
 				}
 				else
 				{
+					_entityAttack.StopAttacking();
 					MoveToTarget();
 				}
 			}

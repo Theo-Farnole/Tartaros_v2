@@ -8,6 +8,7 @@
 		#region Fields
 		public static readonly int PARAMETER_IS_MOVING = Animator.StringToHash("isMoving");
 		public static readonly int PARAMETER_ATTACK = Animator.StringToHash("attack");
+		public static readonly int PARAMETER_IS_ATTACKING = Animator.StringToHash("isAttacking");
 		public static readonly int PARAMETER_DEAD = Animator.StringToHash("isDead");
 
 		private EntityMovement _entityMovement = null;
@@ -36,14 +37,32 @@
 
 			Entity.EntityKilled -= EntityKilled;
 			Entity.EntityKilled += EntityKilled;
+
+			_entityAttack.StartAttack -= StartAttack;
+			_entityAttack.StartAttack += StartAttack;
+
+			_entityAttack.StopAttack -= StopAttack;
+			_entityAttack.StopAttack += StopAttack;
 		}
 
 		private void OnDisable()
 		{
 			_entityAttack.AttackCasted -= AttackCasted;
+			_entityAttack.StartAttack -= StartAttack;
+			_entityAttack.StopAttack -= StopAttack;
 			_entityMovement.StartMoving -= StartMoving;
 			_entityMovement.StopMoving -= StopMoving;
 			Entity.EntityKilled -= EntityKilled;
+		}
+
+		private void StopAttack(object sender, EntityAttack.StopAttackArgs e)
+		{
+			_animator.SetBool(PARAMETER_IS_ATTACKING, false);
+		}
+
+		private void StartAttack(object sender, EntityAttack.StartAttackArgs e)
+		{
+			_animator.SetBool(PARAMETER_IS_ATTACKING, true);
 		}
 
 		private void EntityKilled(object sender, Wave.KilledArgs e)

@@ -522,9 +522,11 @@ namespace AnimationInstancing
 				lodLevel = Mathf.Clamp(lodLevel, 0, lodInfo.Length - 1);
 			}
 		}
-
+		
 		private void UpdateAnimationEvent()
 		{
+			return;
+
 			AnimationInfo info = GetCurrentAnimationInfo();
 			if (info == null)
 				return;

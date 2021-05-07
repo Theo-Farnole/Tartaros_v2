@@ -15,10 +15,16 @@
 		[SerializeField]
 		private Vector3 _projectileSpawnPoint = Vector3.up;
 
+		[SerializeField]
+		private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
+
 		private EntityAttackData _entityAttackData = null;
 		private EntityDetection _entityDetection = null;
 		private EntityFSM _entityFSM = null;
 		private float _lastTimeAttack = 0;
+
+		private IAttackable _target = null;
+		private bool _isAttacking = false;
 		#endregion
 
 		#region Properties
@@ -34,6 +40,12 @@
 		#region Events
 		public class AttackCastedArgs : EventArgs { }
 		public event EventHandler<AttackCastedArgs> AttackCasted = null;
+
+		public class StartAttackArgs : EventArgs { }
+		public event EventHandler<StartAttackArgs> StartAttack = null;
+
+		public class StopAttackArgs : EventArgs { }
+		public event EventHandler<StopAttackArgs> StopAttack = null;
 		#endregion Events
 
 		#region Methods
@@ -50,6 +62,39 @@
 			}
 		}
 
+		private void OnEnable()
+		{
+			if (_inflictDamageAnimationEvent != null)
+			{
+				_inflictDamageAnimationEvent.InflictDamageAnimationPlayed -= InflictDamageAnimation;
+				_inflictDamageAnimationEvent.InflictDamageAnimationPlayed += InflictDamageAnimation;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (_inflictDamageAnimationEvent != null)
+			{
+				_inflictDamageAnimationEvent.InflictDamageAnimationPlayed -= InflictDamageAnimation;
+			}
+		}
+
+		public void StartAttacking()
+		{
+			if (_isAttacking == true) return;
+
+			StartAttack?.Invoke(this, new StartAttackArgs());
+			_isAttacking = true;
+		}
+
+		public void StopAttacking()
+		{
+			if (_isAttacking == false) return;
+
+			StopAttack?.Invoke(this, new StopAttackArgs());
+			_isAttacking = false;
+		}
+
 		public void CastAttackIfPossible(IAttackable target)
 		{
 			if (IsInRange(target) == false) return;
@@ -62,11 +107,32 @@
 				return;
 			}
 
-			_entityAttackData.AttackMode.Attack(transform, target);
+			_target = target;
+
 			_lastTimeAttack = Time.time;
 			LookAt(target);
 
+			if (DoInflictDamageOnSpecificKey() == false)
+			{
+				InflictDamageToTarget(); // inflict damage now
+			}
+
 			AttackCasted?.Invoke(this, new AttackCastedArgs());
+		}
+
+		private bool DoInflictDamageOnSpecificKey()
+		{
+			return _inflictDamageAnimationEvent != null;
+		}
+
+		private void InflictDamageAnimation(object sender, InflictDamageAnimationEvent.InflictDamageAnimationPlayedArgs e)
+		{
+			InflictDamageToTarget();
+		}
+
+		private void InflictDamageToTarget()
+		{
+			_entityAttackData.AttackMode.Attack(transform, _target);
 		}
 
 		private void LookAt(IAttackable target)
