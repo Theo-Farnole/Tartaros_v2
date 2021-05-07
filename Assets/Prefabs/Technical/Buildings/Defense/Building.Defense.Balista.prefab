@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 9051523499025112307}
   - component: {fileID: 777838268106696224}
   - component: {fileID: -5669996113312669063}
+  - component: {fileID: 7875013129109803936}
   m_Layer: 0
   m_Name: Building.Defense.Balista
   m_TagString: Untagged
@@ -84,6 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 2b97efc399d71d046aaa480fe09828bf, type: 2}
   _team: 1
+  _entityType: 0
 --- !u!114 &862083210611260464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +189,25 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!95 &7875013129109803936
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8bf6d9faee05c8e43838349647b90770, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1917619717638062243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253,6 +274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744238055757577805, guid: 40135a875b18b894893b8965e1eb5987,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40135a875b18b894893b8965e1eb5987, type: 3}
@@ -362,7 +388,7 @@ PrefabInstance:
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.35
+      value: 10.19
       objectReference: {fileID: 0}
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}

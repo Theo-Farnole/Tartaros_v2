@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
+	using Tartaros.Entities;
 	using Tartaros.Map;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
@@ -196,7 +197,7 @@
 			{
 				gameplayStartPrefab = _constructable.WallCornerGameplay;
 				_wallToHideAndShow.SetActive(false);
-				GameObject.Destroy(_wallToHideAndShow);
+				_wallToHideAndShow.GetComponent<Entity>().Kill();
 			}
 
 			yield return new WaitForEndOfFrame();
