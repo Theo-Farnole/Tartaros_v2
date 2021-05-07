@@ -13,7 +13,7 @@
 	{
 		#region Fields
 		[SerializeField]
-		private Vector3 _projectileSpawnPoint = Vector3.up;
+		private Transform _projectileSpawnPoint = null;
 
 		[SerializeField]
 		private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
@@ -32,8 +32,7 @@
 		public float AttackRange => _entityAttackData.AttackRange;
 		public Vector3 ProjectileSpawnWorldPoint
 		{
-			get => transform.InverseTransformPoint(_projectileSpawnPoint);
-			set => _projectileSpawnPoint = transform.TransformPoint(value);
+			get => _projectileSpawnPoint.transform.position;
 		}
 		#endregion Properties
 
@@ -190,6 +189,12 @@
 			if (_entityAttackData != null)
 			{
 				Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, AttackRange, Color.red);
+			}
+
+			if (_projectileSpawnPoint != null)
+			{
+				Gizmos.color = Color.blue;
+				Gizmos.DrawWireSphere(_projectileSpawnPoint.position, 0.1f);
 			}
 		}
 	}
