@@ -25,7 +25,8 @@
 			}
 
 			EntityAttack entityAttack = attacker.GetComponent<EntityAttack>();
-			target.TakeDamage(entityAttack.EntityAttackData.Damage);
+			IAttackable attackerReference = attacker.GetComponent<IAttackable>();
+			target.TakeDamage(entityAttack.EntityAttackData.Damage, attackerReference);
 		}
 	}
 }

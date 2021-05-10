@@ -13,7 +13,7 @@
 	{
 		#region Fields
 		[SerializeField]
-		private Transform _projectileSpawnPoint = null;
+		private Vector3 _projectileSpawnPoint = Vector3.up;
 
 		[SerializeField]
 		private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
@@ -32,7 +32,8 @@
 		public float AttackRange => _entityAttackData.AttackRange;
 		public Vector3 ProjectileSpawnWorldPoint
 		{
-			get => _projectileSpawnPoint.transform.position;
+			get => transform.InverseTransformPoint(_projectileSpawnPoint);
+			set => _projectileSpawnPoint = transform.TransformPoint(value);
 		}
 		#endregion Properties
 
@@ -96,6 +97,8 @@
 
 		public void CastAttackIfPossible(IAttackable target)
 		{
+			if (target == null) return;
+
 			if (IsInRange(target) == false) return;
 
 			if (CanAttackCooldown() == false) return;
@@ -136,7 +139,10 @@
 
 		private void LookAt(IAttackable target)
 		{
-			transform.forward = (target.Transform.position - transform.position);
+			if (target != null)
+			{
+				transform.forward = (target.Transform.position - transform.position);
+			}
 		}
 
 		public void TryOrderAttackNearestOpponent()
@@ -161,7 +167,10 @@
 
 		void IOrderAttackReceiver.Attack(IAttackable target)
 		{
-			_entityFSM.OrderAttack(target);
+			if (target != null)
+			{
+				_entityFSM.OrderAttack(target);
+			}
 		}
 
 		void IOrderAttackReceiver.AttackAdditive(IAttackable target)
@@ -189,12 +198,6 @@
 			if (_entityAttackData != null)
 			{
 				Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, AttackRange, Color.red);
-			}
-
-			if (_projectileSpawnPoint != null)
-			{
-				Gizmos.color = Color.blue;
-				Gizmos.DrawWireSphere(_projectileSpawnPoint.position, 0.1f);
 			}
 		}
 	}

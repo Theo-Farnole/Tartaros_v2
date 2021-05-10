@@ -65,7 +65,15 @@
 		public class HealArgs : EventArgs { }
 		public event EventHandler<HealArgs> Heal = null;
 
-		public class DamageTakenArgs : EventArgs { }
+		public class DamageTakenArgs : EventArgs 
+		{
+			public readonly IAttackable attacker;
+
+			public DamageTakenArgs(IAttackable attacker)
+			{
+				this.attacker = attacker;
+			}
+		}
 		public event EventHandler<DamageTakenArgs> DamageTaken = null;
 
 		public class DeathArgs : EventArgs { }
@@ -83,11 +91,11 @@
 
 		[Button]
 		[ShowInRuntime]
-		void IAttackable.TakeDamage(int damage)
+		void IAttackable.TakeDamage(int damage, IAttackable attackable)
 		{
 			CurrentHealth -= damage;
 
-			DamageTaken?.Invoke(this, new DamageTakenArgs());
+			DamageTaken?.Invoke(this, new DamageTakenArgs(attackable));
 
 			if (IsDead)
 			{

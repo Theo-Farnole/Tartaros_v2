@@ -35,6 +35,8 @@ public class CursorManager : MonoBehaviour
 	private CatchRightClickState _ordersState = null;
 	private Order _currentOrder = null;
 
+	
+
 	private void OnEnable()
 	{
 		Security();
@@ -55,7 +57,8 @@ public class CursorManager : MonoBehaviour
 	private void Start()
 	{
 		_enbaleState = gameModeState.defaultState;
-		ChangeCursor(_data.DefaultCursor, Vector2.zero);
+		var cursorHotspot = new Vector2(_data.DefaultCursor.width / 2, _data.DefaultCursor.height / 2);
+		ChangeCursor(_data.DefaultCursor, cursorHotspot);
 	}
 
 	private void OrderStateEnable(object sender, GamemodeManager.OrdersStateEnableArgs e)
@@ -165,12 +168,12 @@ public class CursorManager : MonoBehaviour
 
 				if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
 				{
-					cursorHotspot = SetHotspotCursor(_data.OrderCantMoveCursor);
+					 cursorHotspot = SetHotspotCursor(_data.OrderCantMoveCursor);
 					ChangeCursor(_data.OrderCantMoveCursor, cursorHotspot);
 				}
 				else
 				{
-					cursorHotspot = SetHotspotCursor(_data.OrderMoveCursor);
+					 cursorHotspot = SetHotspotCursor(_data.OrderMoveCursor);
 					ChangeCursor(_data.OrderMoveCursor, cursorHotspot);
 				}
 			}
@@ -194,11 +197,11 @@ public class CursorManager : MonoBehaviour
 
 	private void DefaultStateMethod()
 	{
-		if (IsUnitSelected() == true)
+		if(IsUnitSelected() == true)
 		{
 			MouseHelper.GetHitUnderCursor(out RaycastHit hit);
 
-			if (ObjectUnderCursorIsEnemy() == true)
+			if(ObjectUnderCursorIsEnemy() == true)
 			{
 				var cursorHotspot = SetHotspotCursor(_data.OrderAttackCursor);
 				ChangeCursor(_data.OrderAttackCursor, cursorHotspot);
@@ -278,8 +281,6 @@ public class CursorManager : MonoBehaviour
 
 	private void ChangeCursor(Texture2D sprite, Vector2 spot)
 	{
-		spot = new Vector2(sprite.width / 2, 0);
-
 		if (_currentCursor != sprite)
 		{
 			Cursor.SetCursor(sprite, spot, CursorMode.Auto);

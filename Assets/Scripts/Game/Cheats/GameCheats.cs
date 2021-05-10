@@ -23,7 +23,7 @@
 			{
 				if (selected is MonoBehaviour selectedMonoBehaviour && selectedMonoBehaviour.TryGetComponent(out IAttackable attackable) == true)
 				{
-					attackable.TakeDamage(damage);
+					attackable.TakeDamage(damage, null);
 				}
 			}
 		}

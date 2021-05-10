@@ -33,7 +33,7 @@
 
 		public void Initialize(IAttackable target, IHitEffect vfx, int damage, float radiusDamage)
 		{
-			if(target == null)
+			if(target == null || target.Transform == null)
 			{
 				Destroy(gameObject);
 				return;
@@ -73,6 +73,7 @@
 		private void InflictDamageToTarget()
 		{
 			_hitEffect.ExecuteHitEffect(_targetPosition);
+			Debug.Log(_targetPosition);
 
 			var Entities = _detector.GetEveryEntityInRadius(Team.Enemy, _targetPosition, _radiusDamage);
 
