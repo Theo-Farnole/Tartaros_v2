@@ -32,7 +32,7 @@
 		{
 			base.OnUpdate();
 
-			if(_destroyTempleGoal != null && _destroyTempleGoal.IsCompleted() == true)
+			if (_destroyTempleGoal != null && _destroyTempleGoal.IsCompleted() == true)
 			{
 				_completed = true;
 				return;
@@ -126,12 +126,11 @@
 
 		private void DestroyObstacle()
 		{
-			if (_entityDetection.GetNearestOpponentBuilding() != null)
-			{
-				var target = _entityDetection.GetNearestOpponentBuilding();
-				Debug.Log(target);
+			Entity nearestBuilding = _entityDetection.GetNearestOpponentBuilding();
 
-				AddOnSubGoal(target);
+			if (nearestBuilding != null)
+			{
+				AddOnSubGoal(nearestBuilding);
 			}
 		}
 
