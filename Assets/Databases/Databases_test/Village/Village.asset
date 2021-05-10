@@ -28,7 +28,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.EntityUnitsSpawnerData, Tartaros
@@ -230,6 +230,21 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 12|Tartaros.Map.Village.VillageData, Tartaros
+    - Name: _populationIncreaseAmount
+      Entry: 3
+      Data: 0
+    - Name: _outpostPrefab
+      Entry: 6
+      Data: 
+    - Name: _villagerPrefab
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -238,3 +253,4 @@ MonoBehaviour:
   _prefab: {fileID: 0}
   _portrait: {fileID: 0}
   _population: 0
+  _hoverPopupData: {fileID: 0}

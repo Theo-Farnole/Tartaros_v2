@@ -178,7 +178,7 @@
 
 		public bool IsInAttackRange(IAttackable target)
 		{
-			if(target == null)
+			if(target.IsInterfaceDestroyed() == true)
 			{
 				return false;
 			}
