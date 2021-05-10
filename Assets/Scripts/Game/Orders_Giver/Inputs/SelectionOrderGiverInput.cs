@@ -1,8 +1,10 @@
 ﻿namespace Tartaros.OrderGiver
 {
+	using System.Linq;
 	using Tartaros.Entities;
+	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
-	
+
 	using UnityEngine;
 
 	public class SelectionOrderGiverInput : MonoBehaviour
@@ -11,8 +13,13 @@
 		[SerializeField]
 		private SelectionOrderGiver _selectionOrderGiver = null;
 
+		[SerializeField]
+		private GameObject _prefabMoveVFX = null;
+
 		private GameInputs _gameInputs = null;
 		private Camera _camera = null;
+		private GameObject _moveVFX = null;
+		private ISelection _selection = null;
 		#endregion Fields
 
 		#region Methods
@@ -22,6 +29,7 @@
 			_gameInputs.Orders.Enable();
 
 			_camera = Camera.main;
+			_selection = Services.Instance.Get<CurrentSelection>();
 		}
 
 		private void OnEnable()
@@ -37,6 +45,8 @@
 
 		private void MoveToOrAttack(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 		{
+			if (DoMoveableSelected() == false) return;
+
 			GameObject gameObject = MouseHelper.GetGameObjectUnderCursor();
 
 			if (gameObject == null)
@@ -59,7 +69,26 @@
 			else if (MouseHelper.GetHitUnderCursor(out RaycastHit hit))
 			{
 				_selectionOrderGiver.Move(hit.point);
+				PlayVFX(hit.point);
 			}
+		}
+
+		private bool DoMoveableSelected()
+		{
+			return _selection.SelectedSelectables
+				.Where(x => (x as MonoBehaviour).GetComponent<IOrderMoveReceiver>() != null)
+				.Count() > 0;
+		}
+
+		private void PlayVFX(Vector3 position)
+		{
+			if (_moveVFX == null)
+			{
+				_moveVFX = Instantiate(_prefabMoveVFX);
+			}
+
+			_moveVFX.transform.position = position;
+			_moveVFX.GetComponent<ParticleSystem>().Play();
 		}
 
 		private bool IsEntityOpponentOfSelection(Entity entity)
