@@ -16,7 +16,6 @@
 		[SerializeField]
 		private float _parabolaHeight = 4;
 
-		private GameObject _projectile = null;
 		private Transform _attacker = null;
 		private IAttackable _target = null;
 		private int _damage = -1;
@@ -35,6 +34,8 @@
 		private void Start()
 		{
 			_startingPosition = transform.position;
+
+			_velocity = PhysicsHelper.GetParabolaInitVelocity(transform.position, Destination, GRAVITY, _parabolaHeight);
 		}
 
 		private void Update()
@@ -53,7 +54,6 @@
 
 		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx, int damage)
 		{
-			_projectile = gameObject;
 			_attacker = attacker;
 			_target = target;
 			_hitEffect = vfx;
@@ -62,28 +62,13 @@
 
 		private void MoveTowardsTarget()
 		{
-			// Compute the next position, with arc added in
-			float x0 = _startingPosition.x;
-			float x1 = Destination.x;
-			float dist = x1 - x0;
-			float nextX = Mathf.MoveTowards(transform.position.x, x1, _speed * Time.deltaTime);
-			float baseY = Mathf.Lerp(_startingPosition.y, Destination.y, (nextX - x0) / dist);
-			float arc = _parabolaHeight * (nextX - x0) * (nextX - x1) / (-0.25f * dist * dist);
-			Vector3 nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
-
-			//// Rotate to face the next position, and then move there
-			//transform.rotation = LookAt2D(nextPos - transform.position);
-			//transform.position = nextPos;
-
-			//float deltaTime = Time.deltaTime * _speed;
-			//transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime);
-			transform.LookAt(transform.position - nextPos);
-			transform.position = nextPos;
+			transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, Time.deltaTime);
+			transform.LookAt(PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, Time.deltaTime));
 		}
 
 		private void IsTargetReach()
 		{
-			float distanceFromTarget = Vector3.Distance(_projectile.transform.position, _target.Transform.position);
+			float distanceFromTarget = Vector3.Distance(transform.position, _target.Transform.position);
 
 			if (distanceFromTarget <= THRESHOLD_HIT_DISTANCE)
 			{
