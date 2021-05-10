@@ -47,9 +47,7 @@
 			}
 
 			MoveTowardsTarget();
-			IsTargetReach();
-
-			_velocity.y += GRAVITY * Time.deltaTime;
+			IsTargetReach();			
 		}
 
 		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx, int damage)
@@ -62,8 +60,12 @@
 
 		private void MoveTowardsTarget()
 		{
-			transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, Time.deltaTime);
-			transform.LookAt(PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, Time.deltaTime));
+			float deltaTime = Time.deltaTime * _speed;
+
+			transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime);
+			transform.LookAt(PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime));
+
+			_velocity.y += GRAVITY * deltaTime;
 		}
 
 		private void IsTargetReach()
