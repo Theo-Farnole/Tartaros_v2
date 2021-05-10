@@ -6,7 +6,12 @@
 
 	public class RangeProjectile : MonoBehaviour
 	{
+		#region Fields
+		private readonly float GRAVITY = Physics.gravity.y;
 		private const float THRESHOLD_HIT_DISTANCE = 0.3f;
+
+		[SerializeField]
+		private float _speed = 1;
 
 		[SerializeField]
 		private float _speed = 1;
@@ -16,6 +21,20 @@
 		private int _damage = -1;
 
 		private IHitEffect _hitEffect = null;
+
+		private Vector3 _startingPosition = Vector3.zero;
+		private Vector3 _velocity = Vector3.zero;
+		#endregion Fields
+
+		#region Methods
+		public Vector3 Destination => _target.Transform.position;
+		#endregion Methods
+
+		#region Methods
+		private void Start()
+		{
+			_startingPosition = transform.position;
+		}
 
 		private void Update()
 		{
@@ -28,6 +47,7 @@
 			MoveTowardsTarget();
 			IsTargetReach();
 
+			_velocity.y += GRAVITY * Time.deltaTime;
 		}
 
 		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx, int damage)
@@ -41,8 +61,23 @@
 
 		private void MoveTowardsTarget()
 		{
-			_projectile.transform.position += _projectile.transform.forward * _speed * Time.deltaTime;
-			_projectile.transform.LookAt(_target.Transform);
+			// Compute the next position, with arc added in
+			float x0 = _startingPosition.x;
+			float x1 = Destination.x;
+			float dist = x1 - x0;
+			float nextX = Mathf.MoveTowards(transform.position.x, x1, _speed * Time.deltaTime);
+			float baseY = Mathf.Lerp(_startingPosition.y, Destination.y, (nextX - x0) / dist);
+			float arc = _parabolaHeight * (nextX - x0) * (nextX - x1) / (-0.25f * dist * dist);
+			Vector3 nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
+
+			//// Rotate to face the next position, and then move there
+			//transform.rotation = LookAt2D(nextPos - transform.position);
+			//transform.position = nextPos;
+
+			//float deltaTime = Time.deltaTime * _speed;
+			//transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime);
+			transform.LookAt(transform.position - nextPos);
+			transform.position = nextPos;
 		}
 
 		private void IsTargetReach()
@@ -69,5 +104,6 @@
 			IAttackable attacker = _attacker.GetComponent<IAttackable>();
 			_target.TakeDamage(_damage, attacker);
 		}
+		#endregion Methods
 	}
 }
