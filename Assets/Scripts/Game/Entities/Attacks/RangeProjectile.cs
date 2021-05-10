@@ -14,7 +14,8 @@
 		private float _speed = 1;
 
 		[SerializeField]
-		private float _speed = 1;
+		private float _parabolaHeight = 4;
+
 		private GameObject _projectile = null;
 		private Transform _attacker = null;
 		private IAttackable _target = null;
