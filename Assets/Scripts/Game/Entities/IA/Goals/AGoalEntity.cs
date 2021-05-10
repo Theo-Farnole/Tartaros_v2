@@ -6,6 +6,12 @@
 
 	public abstract class AGoalEntity : AGoal<Entity>
 	{
+
+		[ShowInRuntime]
+#pragma warning disable IDE0051 // Supprimer les membres privés non utilisés
+		private string MyType => this.GetType().Name;
+#pragma warning restore IDE0051 // Supprimer les membres privés non utilisés
+
 		protected AGoalEntity(Entity goalOwner) : base(goalOwner)
 		{
 

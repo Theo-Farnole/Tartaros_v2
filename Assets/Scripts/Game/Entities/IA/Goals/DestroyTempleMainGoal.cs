@@ -129,7 +129,6 @@
 			if (_entityDetection.GetNearestOpponentBuilding() != null)
 			{
 				var target = _entityDetection.GetNearestOpponentBuilding();
-				Debug.Log(target);
 
 				AddOnSubGoal(target);
 			}
