@@ -22,7 +22,7 @@ MonoBehaviour:
   m_showGeoSettings: 0
   m_showDetailSettings: 0
   m_showColorMapSettings: 0
-  m_showOptimisationSettings: 1
+  m_showOptimisationSettings: 0
   m_ctsDirectory: Assets\Plugins\Procedural Worlds\CTS/
   m_shaderType: 2
   m_currentRenderPipelineType: 0
@@ -85,16 +85,16 @@ MonoBehaviour:
   m_albedoFormat: 12
   m_albedoAniso: 8
   m_albedoFilterMode: 1
-  m_albedoTextureSize: 2
-  m_albedoTextureSizePx: 256
+  m_albedoTextureSize: 4
+  m_albedoTextureSizePx: 1024
   m_albedoCompress: 1
   m_normalFormat: 12
   m_normalAniso: 8
   m_normalFilterMode: 1
-  m_normalTextureSize: 2
-  m_normalTextureSizePx: 256
+  m_normalTextureSize: 4
+  m_normalTextureSizePx: 1024
   m_normalCompress: 1
-  m_globalDetailNormalMapIdx: 11
+  m_globalDetailNormalMapIdx: 12
   m_globalDetailNormalMap: {fileID: 2800000, guid: 34f66994040def1499e148b92d4f3b07,
     type: 3}
   m_snowAlbedoTextureIdx: -1
@@ -130,7 +130,7 @@ MonoBehaviour:
     m_albedoIdx: 0
     m_albedoTilingClose: 17
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.56471163, y: 0.32314324, z: 0.20863685, w: 1}
+    m_albedoAverage: {x: 0.5583405, y: 0.31398875, z: 0.20863685, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: e88c176d7dc11024e988344e0285d064, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -143,8 +143,8 @@ MonoBehaviour:
     m_heightBlendClose: 1
     m_heightBlendFar: 1
     m_heightTesselationDepth: 0
-    m_heightMin: 0.25490198
-    m_heightMax: 0.9372549
+    m_heightMin: 0.21960784
+    m_heightMax: 0.96862745
     m_heightTexture: {fileID: 2800000, guid: 0fa97088905c2b94284d8d1dad0169e8, type: 3}
     m_aoIdx: -1
     m_aoPower: 1
@@ -165,7 +165,7 @@ MonoBehaviour:
     m_albedoIdx: 2
     m_albedoTilingClose: 30
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.18782076, y: 0.25415218, z: 0.06301003, w: 1}
+    m_albedoAverage: {x: 0.18116423, y: 0.25015837, z: 0.057805434, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: ccca8b9af36b90a44808a150655e852a, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
     m_heightBlendClose: 4.6
     m_heightBlendFar: 1
     m_heightTesselationDepth: 0
-    m_heightMin: 0.20392157
+    m_heightMin: 0.1882353
     m_heightMax: 0.8745098
     m_heightTexture: {fileID: 2800000, guid: c661dd8ac7c0ebf44a0714cdc6ab9b26, type: 3}
     m_aoIdx: -1
@@ -200,7 +200,7 @@ MonoBehaviour:
     m_albedoIdx: 4
     m_albedoTilingClose: 8
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.5972019, y: 0.3467041, z: 0.23839766, w: 1}
+    m_albedoAverage: {x: 0.5457246, y: 0.33245158, z: 0.23074007, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: d88f498dd8e073f4a8a3eb20f6d4f79e, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
     m_heightBlendClose: 10
     m_heightBlendFar: 10
     m_heightTesselationDepth: 0
-    m_heightMin: 0.20392157
+    m_heightMin: 0.2
     m_heightMax: 1
     m_heightTexture: {fileID: 2800000, guid: 0cc6b6ebbada4d84fb2bb6540c44b968, type: 3}
     m_aoIdx: -1
@@ -235,7 +235,7 @@ MonoBehaviour:
     m_albedoIdx: 6
     m_albedoTilingClose: 8
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.33245158, y: 0.2874409, z: 0.23839766, w: 1}
+    m_albedoAverage: {x: 0.33245158, y: 0.27889434, z: 0.23074007, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: a6389bde8e8f8e14c964960cd5b855f6, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -248,7 +248,7 @@ MonoBehaviour:
     m_heightBlendClose: 7.26
     m_heightBlendFar: 1
     m_heightTesselationDepth: 0
-    m_heightMin: 0.39607844
+    m_heightMin: 0.41960785
     m_heightMax: 0.96862745
     m_heightTexture: {fileID: 2800000, guid: c3df07cd6b3735745a92bb739dd4d2b4, type: 3}
     m_aoIdx: -1
@@ -305,7 +305,7 @@ MonoBehaviour:
     m_albedoIdx: 9
     m_albedoTilingClose: 30
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.25015837, y: 0.34191445, z: 0.06847818, w: 1}
+    m_albedoAverage: {x: 0.25015837, y: 0.33245158, z: 0.06847818, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: 9500f37a81e9541488c201edc3384216, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -340,7 +340,7 @@ MonoBehaviour:
     m_albedoIdx: 10
     m_albedoTilingClose: 30
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.20863685, y: 0.23455065, z: 0.045186203, w: 1}
+    m_albedoAverage: {x: 0.20863685, y: 0.23074007, z: 0.045186203, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: e96d5632f177b994a9e6b3836fbbc45c, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -375,7 +375,7 @@ MonoBehaviour:
     m_albedoIdx: 11
     m_albedoTilingClose: 8
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.31854683, y: 0.2917707, z: 0.20863685, w: 1}
+    m_albedoAverage: {x: 0.31854683, y: 0.2874409, z: 0.20863685, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: c7a4e3b422176ff4c834694752e442ba, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -388,8 +388,8 @@ MonoBehaviour:
     m_heightBlendClose: 7.26
     m_heightBlendFar: 1
     m_heightTesselationDepth: 0
-    m_heightMin: 0.39607844
-    m_heightMax: 0.9843137
+    m_heightMin: 0.4117647
+    m_heightMax: 0.96862745
     m_heightTexture: {fileID: 2800000, guid: 03c11f6d38d5ae6439e1a802e4430174, type: 3}
     m_aoIdx: -1
     m_aoPower: 1
@@ -410,7 +410,7 @@ MonoBehaviour:
     m_albedoIdx: 13
     m_albedoTilingClose: 8
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.33245158, y: 0.2874409, z: 0.23074007, w: 1}
+    m_albedoAverage: {x: 0.33245158, y: 0.27889434, z: 0.23074007, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: 68f02e2f685d2e445a723337b3f85797, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -423,8 +423,8 @@ MonoBehaviour:
     m_heightBlendClose: 7.26
     m_heightBlendFar: 1
     m_heightTesselationDepth: 0
-    m_heightMin: 0.39607844
-    m_heightMax: 0.9529412
+    m_heightMin: 0.4117647
+    m_heightMax: 0.96862745
     m_heightTexture: {fileID: 2800000, guid: 52828e125268473459e979a820d07207, type: 3}
     m_aoIdx: -1
     m_aoPower: 1
@@ -445,7 +445,7 @@ MonoBehaviour:
     m_albedoIdx: 15
     m_albedoTilingClose: 8
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.6104956, y: 0.36130688, z: 0.27049786, w: 1}
+    m_albedoAverage: {x: 0.56471163, y: 0.3813261, z: 0.29613832, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: 3f791e37114903a42a0909f638c1e6eb, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -467,7 +467,7 @@ MonoBehaviour:
     m_emissionIdx: -1
     m_emissionStrength: 1
     m_emissionTexture: {fileID: 0}
-  - m_isOpenInEditor: 1
+  - m_isOpenInEditor: 0
     m_textureIdx: 10
     m_name: Grass_Flower_basecolor
     m_detailPower: 0.25
@@ -480,7 +480,7 @@ MonoBehaviour:
     m_albedoIdx: 17
     m_albedoTilingClose: 30
     m_albedoTilingFar: 3
-    m_albedoAverage: {x: 0.18782076, y: 0.25415218, z: 0.06301003, w: 1}
+    m_albedoAverage: {x: 0.18782076, y: 0.25015837, z: 0.057805434, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: 5eaf4eb384969724ab096e7319b97639, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
@@ -492,6 +492,41 @@ MonoBehaviour:
     m_heightContrast: 1
     m_heightBlendClose: 1
     m_heightBlendFar: 1
+    m_heightTesselationDepth: 0
+    m_heightMin: 0
+    m_heightMax: 1
+    m_heightTexture: {fileID: 0}
+    m_aoIdx: -1
+    m_aoPower: 1
+    m_aoTexture: {fileID: 0}
+    m_emissionIdx: -1
+    m_emissionStrength: 1
+    m_emissionTexture: {fileID: 0}
+  - m_isOpenInEditor: 1
+    m_textureIdx: 11
+    m_name: Gravel_basecolor
+    m_detailPower: 0
+    m_snowReductionPower: 0
+    m_geologicalPower: 1
+    m_triplanar: 0
+    m_tint: {r: 1, g: 1, b: 1, a: 1}
+    m_tintBrightness: 2
+    m_smoothness: 0.7
+    m_albedoIdx: 18
+    m_albedoTilingClose: 8
+    m_albedoTilingFar: 0
+    m_albedoAverage: {x: 0.56471163, y: 0.3813261, z: 0.29613832, w: 1}
+    m_albedoTexture: {fileID: 2800000, guid: 3f791e37114903a42a0909f638c1e6eb, type: 3}
+    m_smoothnessTexture: {fileID: 0}
+    m_roughnessTexture: {fileID: 0}
+    m_normalIdx: 11
+    m_normalStrength: 0
+    m_normalTexture: {fileID: 2800000, guid: 81e8a7ec1d9938441ac9a5dad066ed5f, type: 3}
+    m_heightIdx: -1
+    m_heightDepth: 10
+    m_heightContrast: 10
+    m_heightBlendClose: 10
+    m_heightBlendFar: 10
     m_heightTesselationDepth: 0
     m_heightMin: 0
     m_heightMax: 1
@@ -520,3 +555,6 @@ MonoBehaviour:
   - {fileID: 8574412962073106934, guid: 39541582d619f454190981138230a3eb, type: 2}
   - {fileID: 8574412962073106934, guid: d8f88b7597622fd40bb8356b7701befa, type: 2}
   - {fileID: 8574412962073106934, guid: f79830b8e4c42a545a9459dca94a920c, type: 2}
+  - {fileID: 8574412962073106934, guid: 1be6a6bfc602e504d933b2d15e32d001, type: 2}
+  - {fileID: 8574412962073106934, guid: 821e2a0e2dc20e9468494201292d079c, type: 2}
+  - {fileID: 8574412962073106934, guid: 15142d86e854efa4ea1a49b13bf9faa0, type: 2}
