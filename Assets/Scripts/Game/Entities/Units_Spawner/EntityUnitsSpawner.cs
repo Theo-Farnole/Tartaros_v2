@@ -22,6 +22,7 @@
 		private EntityUnitsSpawnerData _data = null;
 		private IPlayerSectorResources _playerResources = null;
 		private IPopulationManager _populationManager = null;
+		private VillagerSpawnerManager _villagerSpawner = null;
 		#endregion Fields
 
 		#region Properties
@@ -36,6 +37,11 @@
 			_populationManager = Services.Instance.Get<IPopulationManager>();
 
 			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
+		}
+
+		private void OnEnable()
+		{
+			_villagerSpawner = GetComponent<VillagerSpawnerManager>();
 		}
 
 		private void Update()
@@ -74,6 +80,15 @@
 
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
 			_spawningQueue.Enqueue(prefabToSpawn);
+
+			if(_villagerSpawner != null)
+			{
+				_villagerSpawner.SpawnFuturHoplite();
+			}
+			else
+			{
+				Debug.LogWarningFormat("The variable VillagerSpawnerManager is nul on {0}", this.gameObject.name);
+			}
 
 			SetSpawnTimer();
 		}
