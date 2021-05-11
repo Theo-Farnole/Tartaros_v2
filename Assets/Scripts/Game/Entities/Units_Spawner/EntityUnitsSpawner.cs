@@ -139,7 +139,7 @@
 
 		private Vector3 GetSpawnPoint()
 		{
-			return transform.position + Vector3.right;
+			return transform.position + Vector3.right * 2;
 		}
 
 		#region IOrderable

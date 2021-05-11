@@ -16,8 +16,6 @@
 
 		[SerializeField]
 		private GameObject _villagetFemalePrefab = null;
-
-		[SerializeField]
 		private Transform _templePosition = null;
 
 		private EntityUnitsSpawner _spawner = null;
@@ -27,6 +25,7 @@
 		private void Start()
 		{
 			_spawner = GetComponent<EntityUnitsSpawner>();
+			_templePosition = GetComponent<Transform>();
 			_targetPosition = GetTargetPosition();
 		}
 
@@ -61,6 +60,7 @@
 		{
 			var templeLenght = _templePosition.GetComponent<NavMeshObstacle>().size.z;
 			var position = new Vector3(_templePosition.position.x, _templePosition.position.y, _templePosition.position.z - templeLenght);
+			Debug.Log(NavMeshHelper.AdjustPositionToFitNavMesh(position));
 
 			return NavMeshHelper.AdjustPositionToFitNavMesh(position);
 		}

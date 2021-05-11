@@ -4,7 +4,7 @@
 
 	public static class SetDirtySelected
 	{
-		[MenuItem("Set dirty selected objects than save.")]
+		[MenuItem("Tartaros/Set dirty selected objects than save.")]
 		public static void SetDirtSelected()
 		{
 			foreach (UnityEngine.Object obj in Selection.objects)
