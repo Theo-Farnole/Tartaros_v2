@@ -16,6 +16,10 @@
 		private IPopulationManager _populationManager = null;
 		#endregion Fields
 
+		#region Properties
+		public TextMeshProUGUI CurrentPopulationLabel { get => _currentPopulationLabel; set => _currentPopulationLabel = value; }
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{

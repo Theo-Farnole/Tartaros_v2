@@ -16,6 +16,10 @@
 		private IPopulationManager _populationManager = null;
 		#endregion Fields
 
+		#region Properties
+		public TextMeshProUGUI MaximumPopulationLabel { get => _maximumPopulationLabel; set => _maximumPopulationLabel = value; }
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{
