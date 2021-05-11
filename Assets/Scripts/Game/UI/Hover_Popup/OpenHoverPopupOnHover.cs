@@ -40,12 +40,11 @@
 
 			if (_toShowData != null)
 			{
-				Debug.LogFormat("enter {0} showed", name);
 				_hoverPopup.Show(_toShowData, _rectTransform);
 			}
 			else
 			{
-				Debug.LogFormat("enter {0} null", name);
+				Debug.LogWarning("Missing show data asset to open hover popup.", this);
 			}
 		}
 
