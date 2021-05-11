@@ -8,11 +8,12 @@
 	public class ConstructButtonsUIPanel : MonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		private GameObject _constructButtonPrefab = null;
+		[SerializeField] private int _constructionSlotsCount = 4;
 
-		[SerializeField]
-		private RectTransform _constructButtonRoot = null;
+		[SerializeField] private GameObject _constructButtonPrefab = null;
+		[SerializeField] private GameObject _constructButtonLockedPrefab = null;
+
+		[SerializeField] private RectTransform _constructButtonRoot = null;
 
 		private ConstructionManagerData _constructionManagerData = null;
 		private ConstructionManager _constructionManager = null;
@@ -28,19 +29,40 @@
 		private void Start()
 		{
 			BuildUI();
+
+			if (_constructionManagerData.Constructables.Length > _constructionSlotsCount)
+			{
+				Debug.LogWarning("There is more constructables to display than available construction slot.");
+			}
 		}
 
 		void BuildUI()
 		{
 			RemoveConstructButtonInRoot();
 
-			foreach (IConstructable constructable in _constructionManagerData.Constructables)
+			IConstructable[] constructables = _constructionManagerData.Constructables;
+
+			for (int i = 0; i < _constructionSlotsCount; i++)
 			{
-				GameObject button = Instantiate(_constructButtonPrefab);
+				GameObject button = InstantiateButton(i);
+
 				button.transform.SetParent(_constructButtonRoot);
 				button.transform.localScale = Vector3.one;
+			}
 
-				button.GetComponent<ConstructButton>().Initialize(constructable);
+			GameObject InstantiateButton(int i)
+			{
+				if (i < constructables.Length)
+				{
+					GameObject button = Instantiate(_constructButtonPrefab);
+					button.GetComponent<ConstructButton>().Initialize(constructables[i]);
+
+					return button;
+				}
+				else
+				{
+					return Instantiate(_constructButtonLockedPrefab);
+				}
 			}
 		}
 
