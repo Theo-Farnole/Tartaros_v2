@@ -52,6 +52,8 @@
 
 				if (_spawningQueue.IsPopulated() == true)
 				{
+					SpawnVillager(_spawningQueue.Peek());
+
 					SetSpawnTimer();
 				}
 			}
@@ -79,18 +81,38 @@
 			}
 
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
-			_spawningQueue.Enqueue(prefabToSpawn);
 
-			if(_villagerSpawner != null)
+			if(_spawningQueue.IsPopulated() == false)
 			{
-				_villagerSpawner.SpawnFuturHoplite();
+				SpawnVillager(prefabToSpawn);
+			}
+
+			_spawningQueue.Enqueue(prefabToSpawn);
+			SetSpawnTimer();
+		}
+
+		private void SpawnVillager(ISpawnable prefabToSpawn)
+		{
+			var archer = _data.SpawnablePrefabs[0];
+			var hoplite = _data.SpawnablePrefabs[1];
+
+			if (_villagerSpawner != null)
+			{
+
+				if (prefabToSpawn == archer)
+				{
+					_villagerSpawner.SpawnFuturArcher();
+				}
+				else if (prefabToSpawn == hoplite)
+				{
+					_villagerSpawner.SpawnFuturHoplite();
+				}
+
 			}
 			else
 			{
 				Debug.LogWarningFormat("The variable VillagerSpawnerManager is nul on {0}", this.gameObject.name);
 			}
-
-			SetSpawnTimer();
 		}
 
 		public bool CanSpawn(ISpawnable gameObject, bool logToUser = false)

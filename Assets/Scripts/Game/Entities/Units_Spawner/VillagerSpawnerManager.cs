@@ -21,12 +21,18 @@
 		private EntityUnitsSpawner _spawner = null;
 		private Vector3 _targetPosition = Vector3.zero;
 		private GameObject _villager = null;
+		private GameObject _particleSystem = null;
 
 		private void Start()
 		{
 			_spawner = GetComponent<EntityUnitsSpawner>();
 			_templePosition = GetComponent<Transform>();
 			_targetPosition = GetTargetPosition();
+
+			if(_villagetFemalePrefab == null || _villagerMalePrefab == null)
+			{
+				Debug.LogError("there is no villager Prefab");
+			}
 		}
 
 		private void Update()
@@ -45,8 +51,24 @@
 				return;
 			}
 
+			SpawnVillager(_villagerMalePrefab);
+		}
+
+		public void SpawnFuturArcher()
+		{
+			if (_spawnPoints.Length <= 0)
+			{
+				Debug.LogError("there is no spawnPoint to spawn villager");
+				return;
+			}
+
+			SpawnVillager(_villagetFemalePrefab);
+		}
+
+		private void SpawnVillager(GameObject prefab)
+		{
 			Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length - 1)];
-			GameObject villager = GameObject.Instantiate(_villagerMalePrefab, spawnPoint.position, Quaternion.identity);
+			GameObject villager = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity);
 			_villager = villager;
 			SetDestinationToVillager(villager);
 		}
@@ -59,10 +81,19 @@
 		private Vector3 GetTargetPosition()
 		{
 			var templeLenght = _templePosition.GetComponent<NavMeshObstacle>().size.z;
-			var position = new Vector3(_templePosition.position.x, _templePosition.position.y, _templePosition.position.z - templeLenght);
-			Debug.Log(NavMeshHelper.AdjustPositionToFitNavMesh(position));
+			var position = _templePosition.position + Vector3.back * (templeLenght / 2 + 1f);
 
-			return NavMeshHelper.AdjustPositionToFitNavMesh(position);
+			if (NavMeshHelper.IsPositionOnNavMesh(position))
+			{
+				return position;
+			}
+			else
+			{
+				Debug.Log("notOnNav");
+				return NavMeshHelper.AdjustPositionToFitNavMesh(position);
+			}
+
+			
 		}
 
 		private void AsReachDestination()
@@ -77,11 +108,6 @@
 			{
 				Destroy(_villager);
 			}
-		}
-
-		public void DestroySecurity()
-		{
-			
 		}
 	}
 }
