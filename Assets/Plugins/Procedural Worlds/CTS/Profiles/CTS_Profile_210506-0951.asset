@@ -22,7 +22,7 @@ MonoBehaviour:
   m_showGeoSettings: 0
   m_showDetailSettings: 0
   m_showColorMapSettings: 0
-  m_showOptimisationSettings: 0
+  m_showOptimisationSettings: 1
   m_ctsDirectory: Assets\Plugins\Procedural Worlds\CTS/
   m_shaderType: 2
   m_currentRenderPipelineType: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_normalTextureSize: 4
   m_normalTextureSizePx: 1024
   m_normalCompress: 1
-  m_globalDetailNormalMapIdx: 12
+  m_globalDetailNormalMapIdx: 11
   m_globalDetailNormalMap: {fileID: 2800000, guid: 34f66994040def1499e148b92d4f3b07,
     type: 3}
   m_snowAlbedoTextureIdx: -1
@@ -502,9 +502,9 @@ MonoBehaviour:
     m_emissionIdx: -1
     m_emissionStrength: 1
     m_emissionTexture: {fileID: 0}
-  - m_isOpenInEditor: 1
+  - m_isOpenInEditor: 0
     m_textureIdx: 11
-    m_name: Gravel_basecolor
+    m_name: Missing Albedo
     m_detailPower: 0
     m_snowReductionPower: 0
     m_geologicalPower: 1
@@ -512,16 +512,16 @@ MonoBehaviour:
     m_tint: {r: 1, g: 1, b: 1, a: 1}
     m_tintBrightness: 2
     m_smoothness: 0.7
-    m_albedoIdx: 18
-    m_albedoTilingClose: 8
+    m_albedoIdx: -1
+    m_albedoTilingClose: 0
     m_albedoTilingFar: 0
     m_albedoAverage: {x: 0.56471163, y: 0.3813261, z: 0.29613832, w: 1}
-    m_albedoTexture: {fileID: 2800000, guid: 3f791e37114903a42a0909f638c1e6eb, type: 3}
+    m_albedoTexture: {fileID: 0}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
-    m_normalIdx: 11
+    m_normalIdx: -1
     m_normalStrength: 0
-    m_normalTexture: {fileID: 2800000, guid: 81e8a7ec1d9938441ac9a5dad066ed5f, type: 3}
+    m_normalTexture: {fileID: 0}
     m_heightIdx: -1
     m_heightDepth: 10
     m_heightContrast: 10
