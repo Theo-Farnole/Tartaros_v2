@@ -21,7 +21,7 @@
 		private EntityUnitsSpawner _spawner = null;
 		private Vector3 _targetPosition = Vector3.zero;
 		private GameObject _villager = null;
-		private GameObject _particleSystem = null;
+		//private GameObject _particleSystem = null;
 
 		private void Start()
 		{
