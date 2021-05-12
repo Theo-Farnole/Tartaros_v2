@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7267782444628715352}
   - component: {fileID: 5639385597640521167}
+  - component: {fileID: 4122337259775013648}
   m_Layer: 0
   m_Name: GPU Animation Instancing Manager
   m_TagString: Untagged
@@ -44,6 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useInstancing: 1
+--- !u!114 &4122337259775013648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268293330527530424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f699a817ba7a394eba7fd504cc00855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1450499035366032156
 GameObject:
   m_ObjectHideFlags: 0
