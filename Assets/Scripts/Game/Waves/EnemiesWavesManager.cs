@@ -6,7 +6,7 @@
 	using System.IO;
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
-	
+
 	using UnityEngine;
 
 
@@ -29,6 +29,24 @@
 		public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
 		public ISpawnPoint[] SpawnPoints => _spawnPoints;
 		public int CurrentWaveIndex => _currentWaveIndex;
+		public int LastWaveIndex => _waveSpawnerData.LastWaveIndex;
+		public bool IsInWaveCooldown => _waveFSM.CurrentState is WaveCooldownState;
+		public float PassedSecondsBeforeWave
+		{
+			get
+			{
+				if (_waveFSM.CurrentState is WaveCooldownState cooldownState)
+				{
+					return cooldownState.PassedSeconds;
+				}
+				else
+				{
+					throw new System.NotSupportedException("The system is not in wave cooldown. Please, ensure IsInWaveCooldown property equals true before getting this property.");
+				}
+			}
+		}
+		public float SecondsUntilWaveSpawn => SecondsBetweenWaves - PassedSecondsBeforeWave;
+		public float SecondsBetweenWaves => _waveSpawnerData.SecondsBetweenWaves;
 		public IWaveSpawnable[] SpawnedEnemies => _spawnedEnemies;
 		public WaveSpawnerFSM WaveFSM => _waveFSM;
 		public IAttackable EnemiesTarget => _enemiesTarget;
@@ -60,8 +78,7 @@
 		private void Awake()
 		{
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
-			_waveFSM = new WaveSpawnerFSM();			
-			//TODO: WaveFSM registerService & Call it
+			_waveFSM = new WaveSpawnerFSM();
 		}
 
 		private void Start()
@@ -77,14 +94,13 @@
 
 		public bool IsThereWavesToSpawn()
 		{
-			return _currentWaveIndex < _waveSpawnerData.FinalWaveIndex;
+			return _currentWaveIndex <= _waveSpawnerData.LastWaveIndex;
 		}
 
 		public void StartNewWave()
 		{
 			if (IsThereWavesToSpawn() == true)
-			{
-				_currentWaveIndex++;
+			{				
 				_waveFSM.CurrentState = new WaveSpawningState(this);
 			}
 			else
@@ -98,8 +114,9 @@
 			WaveSpawnStart?.Invoke(this, new WaveSpawningStartArgs());
 		}
 
-		public void InvokeWaveCooldown()
+		public void InvokeWaveStartCooldown()
 		{
+			_currentWaveIndex++;
 			WaveStartCooldown?.Invoke(this, new WaveStartCooldownArgs());
 		}
 
@@ -114,7 +131,7 @@
 
 			if (target == null)
 			{
-				Debug.LogErrorFormat("A WavesEnemiesTarget is missing in the scene. Please add one in the scene.");
+				Debug.LogError("A WavesEnemiesTarget is missing in the scene. Please add one in the scene.");
 			}
 			else
 			{
@@ -125,7 +142,7 @@
 				}
 				else
 				{
-					Debug.LogErrorFormat("Missing a component IAttackable on {0}, the enemies target.", target);
+					Debug.LogError("Missing a component IAttackable on the enemies target \"{0}\".".Format(target), target);
 				}
 			}
 		}

@@ -21,16 +21,23 @@
 
 		#region Properties
 		private int PlayerIncome => _playerIncome.GetIncomeAmount(_sectorRessourceType);
+
+		public TextMeshProUGUI IncomeLabel { get => _incomeLabel; set => _incomeLabel = value; }
+		public SectorRessourceType SectorRessourceType
+		{
+			get => _sectorRessourceType; 
+			
+			set
+			{
+				_sectorRessourceType = value;
+				UpdateAmountLabel();
+			}
+		}
 		#endregion Properties
 
 		#region Methods
 		private void Awake()
 		{
-			if (_incomeLabel == null)
-			{
-				_incomeLabel = GetComponent<TextMeshProUGUI>();
-			}
-
 			_playerIncome = Services.Instance.Get<IPlayerIncomeManager>();
 		}
 

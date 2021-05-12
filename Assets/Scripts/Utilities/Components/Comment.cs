@@ -9,7 +9,9 @@
 		#region Fields
 		[TextArea(5, 1000)]
 		[SerializeField]
-		private string _comment = null; 
+#pragma warning disable IDE0051 // Remove unused private members
+		private string _comment = null;
+#pragma warning restore IDE0051 // Remove unused private members
 		#endregion Fields
 	}
 }

@@ -6,8 +6,13 @@
 
 	public class WaveCooldownState : AWaveSpawnerState
 	{
+		#region Fields
+		private float _passedSeconds = 0;
+		#endregion Fields
+
 		#region Properties
-		public float SecondsBetweenWaves => _stateOwner.WaveSpawnerData.SecondsBetweenWaves;
+		public float PassedSeconds => _passedSeconds;
+		private float SecondsBetweenWaves => _stateOwner.WaveSpawnerData.SecondsBetweenWaves;
 		#endregion Properties
 
 		#region Ctor
@@ -22,7 +27,14 @@
 			base.OnStateEnter();
 
 			_stateOwner.StartCoroutine(DelayBeforeNextWave(SecondsBetweenWaves));
-			_stateOwner.InvokeWaveCooldown();
+			_stateOwner.InvokeWaveStartCooldown();			
+		}
+
+		public override void OnUpdate()
+		{
+			base.OnUpdate();
+
+			_passedSeconds += Time.deltaTime;
 		}
 
 		private IEnumerator DelayBeforeNextWave(float delay)

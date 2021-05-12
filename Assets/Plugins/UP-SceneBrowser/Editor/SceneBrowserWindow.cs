@@ -18,7 +18,7 @@
 		[SerializeField]
 		private Vector2 _scrollPosition = Vector2.zero;
 
-		[MenuItem("Tartaros/Open SceneBrowser &b")]
+		[MenuItem("Tartaros/Open SceneBrowser &b", priority = 500)]
 		public static void OpenWindow()
 		{
 			var window = GetWindow<SceneBrowserWindow>();

@@ -19,6 +19,20 @@
 		private IPlayerSectorResources _playerSectorResources = null;
 		#endregion Fields
 
+		#region Properties
+		public TextMeshProUGUI AmountLabel { get => _amountLabel; set => _amountLabel = value; }
+		public SectorRessourceType SectorRessourceType
+		{
+			get => _sectorRessourceType;
+
+			set
+			{
+				_sectorRessourceType = value;
+				UpdateAmountLabel();
+			}
+		}
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{
