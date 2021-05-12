@@ -1,8 +1,5 @@
 ﻿namespace Tartaros.Entities.Attack
 {
-	using Sirenix.Utilities.Editor;
-	using System.Collections;
-	using System.Collections.Generic;
 	using UnityEngine;
 
 	public class RangeProjectile : MonoBehaviour
