@@ -6,30 +6,18 @@
 
 	public class CursorManagerData : SerializedScriptableObject
 	{
-		[SerializeField]
-		private Texture2D _defaultCursor = null;
-		[SerializeField]
-		private Texture2D _defaultCursorHoverable = null;
-		[SerializeField]
-		private Texture2D _defaultCursorHoverableEnemy = null;
-		[SerializeField]
-		private Texture2D _constructionCursor = null;
-		[SerializeField]
-		private Texture2D _constructionInvalideCursor = null;
-		[SerializeField]
-		private Texture2D _addAllyInSelectionCursor = null;
-		[SerializeField]
-		private Texture2D _orderAttackCursor = null;
-		[SerializeField]
-		private Texture2D _orderMoveCursor = null;
-		[SerializeField]
-		private Texture2D _orderCantMoveCursor = null;
-		[SerializeField]
-		private Texture2D _orderMoveAndAttackCursor = null;
-		[SerializeField]
-		private Texture2D _orderPatrolCursor = null;
-		[SerializeField]
-		private Texture2D _powerCursor = null;
+		[SerializeField, PreviewField] private Texture2D _defaultCursor = null;
+		[SerializeField, PreviewField] private Texture2D _defaultCursorHoverable = null;
+		[SerializeField, PreviewField] private Texture2D _defaultCursorHoverableEnemy = null;
+		[SerializeField, PreviewField] private Texture2D _constructionCursor = null;
+		[SerializeField, PreviewField] private Texture2D _constructionInvalideCursor = null;
+		[SerializeField, PreviewField] private Texture2D _addAllyInSelectionCursor = null;
+		[SerializeField, PreviewField] private Texture2D _orderAttackCursor = null;
+		[SerializeField, PreviewField] private Texture2D _orderMoveCursor = null;
+		[SerializeField, PreviewField] private Texture2D _orderCantMoveCursor = null;
+		[SerializeField, PreviewField] private Texture2D _orderMoveAndAttackCursor = null;
+		[SerializeField, PreviewField] private Texture2D _orderPatrolCursor = null;
+		[SerializeField, PreviewField] private Texture2D _powerCursor = null;
 
 		public Texture2D DefaultCursor => _defaultCursor;
 		public Texture2D DefaultCursorHoverable => _defaultCursorHoverable;
