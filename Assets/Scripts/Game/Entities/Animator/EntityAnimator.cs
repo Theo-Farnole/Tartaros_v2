@@ -21,16 +21,19 @@
 		{
 			_entityMovement = GetComponent<EntityMovement>();
 			_entityAttack = GetComponent<EntityAttack>();
-			_animator = GetComponent<Animator>();
+			_animator = GetComponentInChildren<Animator>();
 		}
 
 		private void OnEnable()
 		{
-			_entityMovement.StartMoving -= StartMoving;
-			_entityMovement.StartMoving += StartMoving;
+			if (_entityMovement != null)
+			{
+				_entityMovement.StartMoving -= StartMoving;
+				_entityMovement.StartMoving += StartMoving;
 
-			_entityMovement.StopMoving -= StopMoving;
-			_entityMovement.StopMoving += StopMoving;
+				_entityMovement.StopMoving -= StopMoving;
+				_entityMovement.StopMoving += StopMoving;
+			}
 
 			_entityAttack.AttackCasted -= AttackCasted;
 			_entityAttack.AttackCasted += AttackCasted;
@@ -47,11 +50,14 @@
 
 		private void OnDisable()
 		{
+			if (_entityMovement != null)
+			{
+				_entityMovement.StartMoving -= StartMoving;
+				_entityMovement.StopMoving -= StopMoving;
+			}
 			_entityAttack.AttackCasted -= AttackCasted;
 			_entityAttack.StartAttack -= StartAttack;
 			_entityAttack.StopAttack -= StopAttack;
-			_entityMovement.StartMoving -= StartMoving;
-			_entityMovement.StopMoving -= StopMoving;
 			Entity.EntityKilled -= EntityKilled;
 		}
 

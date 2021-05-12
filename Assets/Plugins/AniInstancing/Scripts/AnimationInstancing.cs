@@ -439,7 +439,19 @@ namespace AnimationInstancing
 		}
 
 		[Button]
-		public string GetCurrentAnimationName() => GetCurrentAnimationInfo().animationName;
+		public string GetCurrentAnimationName()
+		{
+			AnimationInfo animationInfo = GetCurrentAnimationInfo();
+
+			if (animationInfo != null)
+			{
+				return animationInfo.animationName;
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
 
 		public void UpdateAnimation()
 		{
@@ -522,7 +534,7 @@ namespace AnimationInstancing
 				lodLevel = Mathf.Clamp(lodLevel, 0, lodInfo.Length - 1);
 			}
 		}
-		
+
 		private void UpdateAnimationEvent()
 		{
 			//AnimationInfo info = GetCurrentAnimationInfo();

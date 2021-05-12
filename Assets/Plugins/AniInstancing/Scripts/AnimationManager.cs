@@ -44,6 +44,16 @@ namespace AnimationInstancing
             m_requestList = new List<CreateAnimationRequest>();
         }
 
+		private void Start()
+		{
+            LoadAB();
+        }
+
+		void LoadAB()
+        {
+            StartCoroutine(AnimationManager.GetInstance().LoadAnimationAssetBundle(Application.streamingAssetsPath + "/animationtexture"));
+        }
+
         private void Update()
         {
             if (m_mainBundle == null || m_requestList.Count == 0)

@@ -18,8 +18,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 6298112130364849783, guid: 992dfbd2dcd34d5439d763dfa0125e74, type: 3}
     - {fileID: 21300000, guid: b1ffca23ee75f2f43833e96b01ff2213, type: 3}
-    - {fileID: 5657609668978460668, guid: 40135a875b18b894893b8965e1eb5987, type: 3}
-    - {fileID: 5657609668978460668, guid: 6c854dce3fc8b564bb55753400db7878, type: 3}
     - {fileID: 5657609668978460668, guid: af2fa67ba1b380b468b455599eb1c95a, type: 3}
     - {fileID: 11400000, guid: 1f67af3b14f260443919eda09ed41054, type: 2}
     SerializedBytesString: 
@@ -56,7 +54,7 @@ MonoBehaviour:
       Data: 2|Tartaros.Entities.EntityAttackData, Tartaros
     - Name: _secondsBetweenAttacks
       Entry: 4
-      Data: 0.5
+      Data: 2
     - Name: _attackRange
       Entry: 4
       Data: 10
@@ -115,11 +113,11 @@ MonoBehaviour:
       Entry: 10
       Data: 1
     - Name: _modelPrefab
-      Entry: 10
-      Data: 2
+      Entry: 6
+      Data: 
     - Name: _gameplayPrefab
-      Entry: 10
-      Data: 3
+      Entry: 6
+      Data: 
     - Name: _wallCornerModel
       Entry: 6
       Data: 
@@ -128,10 +126,10 @@ MonoBehaviour:
       Data: 
     - Name: _constructionKitModel
       Entry: 10
-      Data: 4
+      Data: 2
     - Name: _hoverPopupData
       Entry: 10
-      Data: 5
+      Data: 3
     - Name: _timeToConstruct
       Entry: 3
       Data: 2

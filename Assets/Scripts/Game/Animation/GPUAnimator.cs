@@ -16,6 +16,9 @@
 		private AnimatorClipInfo _currentClipInfo = default;
 		#endregion Fields
 
+		[ShowInRuntime]
+		private AnimationClip CurrentClip => _currentClipInfo.clip;
+
 		#region Methods
 		private void Awake()
 		{
@@ -30,20 +33,29 @@
 			}
 		}
 
+		private void Start()
+		{
+			CrossToWantedClip();
+		}
+
 		private void Update()
 		{
 			if (_animator != null)
 			{
-				var clips = _animator.GetCurrentAnimatorClipInfo(0);
+				AnimatorClipInfo wantedClip = _animator.GetCurrentAnimatorClipInfo(0)[0];
 
-				AnimatorClipInfo clip = clips[0];
-
-				if (clip.clip != _currentClipInfo.clip)
+				if (wantedClip.clip.name != _animationInstancing.GetCurrentAnimationName())
 				{
-					_currentClipInfo = clip;
-					_animationInstancing.CrossFade(_currentClipInfo.clip.name, _animationInterpolationDuration);
+					CrossToWantedClip();
 				}
 			}
+		}
+
+		private void CrossToWantedClip()
+		{
+			AnimatorClipInfo wantedClip = _animator.GetCurrentAnimatorClipInfo(0)[0];
+			_currentClipInfo = wantedClip;
+			_animationInstancing.CrossFade(_currentClipInfo.clip.name, _animationInterpolationDuration);
 		}
 		#endregion Methods
 	}
