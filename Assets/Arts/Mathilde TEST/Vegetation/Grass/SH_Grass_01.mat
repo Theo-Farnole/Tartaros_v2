@@ -27,12 +27,31 @@ Material:
         m_Texture: {fileID: 2800000, guid: 9238fdd1a9fa02141851a4aebc81915e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WindNoise:
+        m_Texture: {fileID: 2800000, guid: ee26f74768b09234b8cb0876d287f3b3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - __dirty: 1
+    - _Ampl: 0.2
+    - _Float12: 0.7
+    - _Float13: 1
+    - _Float7: 0.2
+    - _Frequency: 5
+    - _Speed: 0.2
+    - _WindDensity: 0.8
+    - _WindPeriod: 0.1
+    - _WindPositionScale: 0.1
+    - _WindStrenght: 0.1
+    - _WindStrenght1: 1
+    - __dirty: 0
     m_Colors:
+    - _Color0: {r: 0.27995786, g: 0.31132078, b: 0.14244395, a: 1}
     - _ColorBottom: {r: 0.62882954, g: 0.6792453, b: 0.3364186, a: 1}
     - _ColorTop: {r: 0.46430665, g: 0.5, b: 0.2334905, a: 1}
+    - _Colorbottom: {r: 0.27995786, g: 0.31132078, b: 0.14244395, a: 1}
+    - _Vector1: {r: 6, g: 0, b: 0, a: 0}
+    - _WindMovement: {r: 6, g: 0, b: 0, a: 0}
