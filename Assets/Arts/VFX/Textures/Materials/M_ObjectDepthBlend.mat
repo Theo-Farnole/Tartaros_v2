@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_ObjectDepthBlend
+  m_Shader: {fileID: 4800000, guid: 596a0d1639a99d14dab9d19157a0b301, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 8400000, guid: 2c4196d99a7c55b4e96096ad481db9de, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: f2303874735f8fd41a332cafb27cd796, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 8076055246465206876, guid: 3856cdc774c1e1747abcafa4fe1529fb,
+          type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample3:
+        m_Texture: {fileID: 8400000, guid: b39ddb9e2c956f648bfec9764b433cd8, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample4:
+        m_Texture: {fileID: 8400000, guid: b39ddb9e2c956f648bfec9764b433cd8, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Ampl: 0.2
+    - _Blend: 100
+    - _DistanceScale: 6
+    - _Float0: 104.4
+    - _Float1: 0.2
+    - _Float2: 2
+    - _Float3: 24
+    - _Float4: -4
+    - _Float5: -9
+    - _Frequency: 5
+    - _GlobalScale: 24
+    - _LERP: 12.49
+    - _LERPy: 0.32
+    - _OffsetX: -50
+    - _OffsetY: -50
+    - _OffsetZ: -9
+    - _Scale: 100
+    - _TB_OFFSET_X: -4
+    - _TB_OFFSET_Z: 6.7
+    - _TB_SCALE: 10
+    - __dirty: 0
+    - _blendThickness: 1.27
+    - _falloff: 2.12
+    - _noiseScale: 0.004
+    - _voroScale: 200
+    m_Colors:
+    - _Color0: {r: 0.19416976, g: 1, b: 0, a: 1}
+    - _Color1: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+    - _ColorBottom: {r: 0.2799576, g: 0.31132054, b: 0.14244372, a: 1}
+    - _ColorTop: {r: 0.4506861, g: 0.5, b: 0.2287733, a: 1}
+    - _GradiantPowMul: {r: 1, g: 1, b: 0, a: 0}
+    - _TILING: {r: 1, g: 1, b: 0, a: 0}
+    - _Vector0: {r: 0, g: 0, b: 10000, a: 0}
+    - _Vector1: {r: 1, g: 1, b: 0, a: 0}
+    - _clamp1max: {r: 1, g: 0, b: 0, a: 0}
+    - _clamp1min: {r: 0.01, g: 0, b: 0, a: 0}
+    - _clamp2max: {r: 1, g: 0, b: 0, a: 0}
+    - _clamp2min: {r: 0.01, g: 0, b: 0, a: 0}
