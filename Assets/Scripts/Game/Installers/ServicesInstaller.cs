@@ -12,15 +12,15 @@
 	using Tartaros.Power;
 	using Tartaros.Selection;
 	using Tartaros.UI.HoverPopup;
-	using Tartaros.UI.MiniMap;	
+	using Tartaros.UI.MiniMap;
 	using Tartaros.Wave;
 	using UnityEngine;
 
 	public class ServicesInstaller : MonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		private Services _services = null;
+		[SerializeField] private Services _services = null;
+		[SerializeField] private bool _silentMissingServiceError = false;
 		#endregion Fields
 
 		#region Methods
@@ -63,7 +63,10 @@
 
 			if (objectsFound.Length == 0)
 			{
-				Debug.LogErrorFormat("No object of type {0} found in the scene.", typeof(T));
+				if (_silentMissingServiceError == false)
+				{
+					Debug.LogErrorFormat("No object of type {0} found in the scene.", typeof(T));
+				}
 			}
 			else
 			{
@@ -83,7 +86,10 @@
 
 			if (objectsFound.Length == 0)
 			{
-				Debug.LogErrorFormat("No object of type {0} found in the children of {1}.", typeof(T), name);
+				if (_silentMissingServiceError == false)
+				{
+					Debug.LogErrorFormat("No object of type {0} found in the children of {1}.", typeof(T), name);
+				}
 			}
 			else
 			{
