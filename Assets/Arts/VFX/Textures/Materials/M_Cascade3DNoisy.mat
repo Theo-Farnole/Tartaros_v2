@@ -45,6 +45,7 @@ Material:
     - _Cutoff: 0.5
     - _EdgeLength: 15
     - _Float0: 1
+    - _LerpWhite: 0.72
     - _LerpWhiteToPatern: 0.61
     - _NoiseScale: 0
     - _NoiseStrength: 1
@@ -59,7 +60,10 @@ Material:
     - _VoroAngle: 2
     - _VoroScale: 5
     - _VoroSpeed: 2
-    - _WhiteLinesStrength: 1.18
+    - _WhiteInnerStep: 0.5
+    - _WhiteLinesStrength: 1.05
+    - _WhiteOuterStep: 0.02
+    - _WhitePower: 7.06
     - __dirty: 0
     m_Colors:
     - _MainColor: {r: 0.028702382, g: 0.26016325, b: 0.4056604, a: 1}
@@ -73,9 +77,10 @@ Material:
     - _SmoothStep: {r: -0.1, g: 1.23, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _UV_Offset: {r: 0.5, g: 0, b: 0, a: 0}
-    - _Vector0: {r: -0.16, g: 0, b: 0, a: 0}
+    - _Vector0: {r: -10, g: 1.06, b: -1.87, a: -2.28}
     - _Vector1: {r: 0.5, g: 0, b: 0, a: 0}
     - _VoroTiling: {r: 2, g: -0.5, b: 0, a: 0}
     - _WhiteLines: {r: 1, g: 1, b: 1, a: 1}
-    - _WhiteLinesTilingOffset: {r: 0.1, g: 0, b: 0, a: 0}
-    - _WhiteLinesTilingWidth: {r: -0.5, g: 0, b: 0, a: 0}
+    - _WhiteLinesTilingOffset: {r: -0.8, g: 0, b: 0, a: 0}
+    - _WhiteLinesTilingWidth: {r: 4, g: 0, b: 0, a: 0}
+    - _WhiteStep: {r: 0.5, g: 0.08, b: 0, a: 0}
