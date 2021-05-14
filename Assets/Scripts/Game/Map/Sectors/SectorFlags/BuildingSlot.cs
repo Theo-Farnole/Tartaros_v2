@@ -7,6 +7,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
+	[RequireComponent(typeof(SectorObject))]
 	public class BuildingSlot : SerializedMonoBehaviour
 	{
 		#region Fields
