@@ -80,6 +80,36 @@
 				_gems[i].GloryAmount = gemGlory;
 			}
 		}
+
+		[Button]
+		public void ShowCostPreview(int gloryCost)
+		{
+			int gemsCountForCost = GetGemsCountForCost(gloryCost);
+
+			for (int i = 0; i < _gems.Length; i++)
+			{
+				bool showCostPreview = i < gemsCountForCost;
+
+				GloryGemUI gem = _gems[i];
+				gem.ShowCostPreview = showCostPreview;
+			}
+		}
+
+		private int GetGemsCountForCost(int gloryCost)
+		{
+			float raw = (float)gloryCost / (float)_maxGloryPerGem;
+			int ceiled = Mathf.CeilToInt(raw);
+			return ceiled;
+		}
+
+		[Button]
+		public void HideCostPreview()
+		{
+			foreach (var gem in _gems)
+			{
+				gem.ShowCostPreview = false;
+			}
+		}
 		#endregion Methods
 	}
 }
