@@ -380,6 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 715760357603444857}
   - component: {fileID: 2239824139211333946}
+  - component: {fileID: 4501621589100752709}
   m_Layer: 5
   m_Name: P_UI_GloryGemsPrefab
   m_TagString: Untagged
@@ -425,3 +426,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fillImage: {fileID: 6958978433941420198}
   _costPreview: {fileID: 6958978433155829239}
+--- !u!114 &4501621589100752709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8650037450812628716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89a43a4598cdef4a860caba8cf59e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gloryGemsManagerUI: {fileID: 0}
+  _gloryCost: 1
