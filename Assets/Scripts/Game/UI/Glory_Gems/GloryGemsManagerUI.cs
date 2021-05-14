@@ -13,7 +13,7 @@
 		[SerializeField] private int _maxGloryPerGem = 10;
 
 		[Title("References")]
-		[SerializeField] private GameObject _prefabGem = null;
+		[SerializeField, AssetsOnly] private GameObject _prefabGem = null;
 		[SerializeField] private RectTransform _gemsParent = null;
 
 		private GloryGemUI[] _gems = null;
@@ -81,7 +81,6 @@
 			}
 		}
 
-		[Button]
 		public void ShowCostPreview(int gloryCost)
 		{
 			int gemsCountForCost = GetGemsCountForCost(gloryCost);
@@ -102,7 +101,6 @@
 			return ceiled;
 		}
 
-		[Button]
 		public void HideCostPreview()
 		{
 			foreach (var gem in _gems)

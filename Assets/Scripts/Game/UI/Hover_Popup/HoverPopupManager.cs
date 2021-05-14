@@ -1,40 +1,39 @@
 ﻿namespace Tartaros.UI.HoverPopup
 {
+	using Sirenix.OdinInspector;
 	using TMPro;
 	using UnityEngine;
 
 	public class HoverPopupManager : MonoBehaviour
 	{
+		public enum HoverPopupPosition
+		{
+			Top,
+			Bottom
+		}
+
+
 		#region Fields
-		[SerializeField]
-		private RectTransform _root = null;
+		[Title("Settings")]
+		[SerializeField] private float _heightOffset = 30;
+		[SerializeField] private HoverPopupPosition _popupPosition = HoverPopupPosition.Top;
 
-		[SerializeField]
-		private float _heightOffset = 30;
-
-		[SerializeField]
-		private TextMeshProUGUI _name = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _description = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _costLabel = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _cooldownLabel = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _loreDescription = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _hotkey = null;
+		[Title("References")]
+		[SerializeField] private RectTransform _root = null;
+		[SerializeField] private TextMeshProUGUI _name = null;
+		[SerializeField] private TextMeshProUGUI _description = null;
+		[SerializeField] private TextMeshProUGUI _costLabel = null;
+		[SerializeField] private TextMeshProUGUI _cooldownLabel = null;
+		[SerializeField] private TextMeshProUGUI _loreDescription = null;
+		[SerializeField] private TextMeshProUGUI _hotkey = null;
 
 		private HoverPopupData _displayedData = null;
 		#endregion Fields
 
 		#region Properties
 		public HoverPopupData HoverPopupData => _displayedData;
+
+		public HoverPopupPosition PopupPosition { get => _popupPosition; set => _popupPosition = value; }
 		#endregion Properties
 
 		#region Methods
@@ -66,7 +65,20 @@
 			_root.CenterAnchor();
 
 			_root.position = hovered.position;
-			_root.anchoredPosition += new Vector2(0, _heightOffset + hovered.rect.height / 2);
+
+			switch (_popupPosition)
+			{
+				case HoverPopupPosition.Top:
+					_root.anchoredPosition += new Vector2(0, _heightOffset + hovered.rect.height / 2);
+					break;
+
+				case HoverPopupPosition.Bottom:
+					_root.anchoredPosition -= new Vector2(0, _heightOffset + hovered.rect.height / 2);
+					break;
+
+				default:
+					throw new System.NotSupportedException();
+			}
 		}
 
 		private void UpdateHotkey()
