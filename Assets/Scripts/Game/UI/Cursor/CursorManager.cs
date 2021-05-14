@@ -13,10 +13,9 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-	[SerializeField]
-	private CursorManagerData _data = null;
-	[SerializeField]
-	private GamemodeManager _modeManger = null;
+	[SerializeField] private CursorManagerData _data = null;
+	
+	private GamemodeManager _gamemodeManager = null;
 
 	private enum gameModeState
 	{
@@ -35,23 +34,26 @@ public class CursorManager : MonoBehaviour
 	private CatchRightClickState _ordersState = null;
 	private Order _currentOrder = null;
 
-
+	private void Awake()
+	{
+		_gamemodeManager = Services.Instance.Get<GamemodeManager>();
+	}
 
 	private void OnEnable()
 	{
-		Security();
+		CheckForMissingScripts();
 
-		_modeManger.DefaultStateEnable -= DefaultStateEnable;
-		_modeManger.DefaultStateEnable += DefaultStateEnable;
+		_gamemodeManager.DefaultStateEnable -= DefaultStateEnable;
+		_gamemodeManager.DefaultStateEnable += DefaultStateEnable;
 
-		_modeManger.ConstructionStateEnable -= ConstructionStateEnable;
-		_modeManger.ConstructionStateEnable += ConstructionStateEnable;
+		_gamemodeManager.ConstructionStateEnable -= ConstructionStateEnable;
+		_gamemodeManager.ConstructionStateEnable += ConstructionStateEnable;
 
-		_modeManger.PowerStateEnable -= PowerStateEnable;
-		_modeManger.PowerStateEnable += PowerStateEnable;
+		_gamemodeManager.PowerStateEnable -= PowerStateEnable;
+		_gamemodeManager.PowerStateEnable += PowerStateEnable;
 
-		_modeManger.OrdersStateEnable -= OrderStateEnable;
-		_modeManger.OrdersStateEnable += OrderStateEnable;
+		_gamemodeManager.OrdersStateEnable -= OrderStateEnable;
+		_gamemodeManager.OrdersStateEnable += OrderStateEnable;
 	}
 
 	private void Start()
@@ -267,9 +269,9 @@ public class CursorManager : MonoBehaviour
 		}
 	}
 
-	private void Security()
+	private void CheckForMissingScripts()
 	{
-		if (_modeManger == null)
+		if (_gamemodeManager == null)
 		{
 			Debug.LogError("the field _modeManager is null");
 		}
