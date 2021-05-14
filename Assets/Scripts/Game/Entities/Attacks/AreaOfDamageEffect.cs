@@ -4,6 +4,7 @@
 	using Tartaros.Entities.Attack;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class AreaOfDamageEffect : IHitEffect
 	{
 		#region Fields

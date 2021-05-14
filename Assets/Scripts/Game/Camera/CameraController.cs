@@ -172,11 +172,17 @@
 			_isInFollowTargetMode = mode;
 		}
 
+		public void SetCameraTarget(Transform target)
+		{
+			_targetDestination = target;
+		}
+
 		private void FollowTargetTactical()
 		{
+			float lerpRange = 10;
 			var distanceToTarget = Vector3.Distance(transform.position, _targetDestination.position);
 			Vector3 distanceBetweenCameraAndTarget = _targetDestination.position - transform.forward * distanceToTarget;
-			transform.position = Vector3.Lerp(transform.position, distanceBetweenCameraAndTarget, _cameraData.SpeedKeyBoard * DeltaTime);
+			transform.position = Vector3.Lerp(transform.position, distanceBetweenCameraAndTarget, lerpRange * DeltaTime);
 		}
 		#endregion
 	}

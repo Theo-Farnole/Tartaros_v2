@@ -7,9 +7,9 @@
 	public class DialogueSequence
 	{
 		[SerializeField] private SpeechSequence[] _dialogue = null;
-		[SerializeField] private Transform _cameraTarget = null;
+		[SerializeField] private bool _isCameraTarget = false;
 
 		public SpeechSequence[] Dialogue => _dialogue;
-		public Transform CameraTarget => _cameraTarget;
+		public bool IsCameraTarget => _isCameraTarget;
 	}
 }

@@ -7,8 +7,9 @@
 	using Tartaros.Map.Village;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
+	using UnityEngine.Rendering;
 
-	public class PowerManager : MonoBehaviour
+	public partial class PowerManager : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -37,7 +38,7 @@
 
 		private void OnEnable()
 		{
-			if(_OnCaptureVillageUnlockPower != null)
+			if (_OnCaptureVillageUnlockPower != null)
 			{
 				_OnCaptureVillageUnlockPower.VillageCaptured -= VillageCaptured;
 				_OnCaptureVillageUnlockPower.VillageCaptured += VillageCaptured;
@@ -66,6 +67,26 @@
 		public void CastControlledAoE()
 		{
 			Cast(_controlledAoEPrefab);
+		}
+
+		public int GetGloryCost(Power power)
+		{
+			return GetPowerPrefab(power).GetComponent<IPower>().Price;
+		}
+
+		private GameObject GetPowerPrefab(Power power)
+		{
+			switch (power)
+			{
+				case Power.LightningBolt:
+					return _lightningBoltPrefab;
+
+				case Power.ControlledAoE:
+					return _controlledAoEPrefab;
+
+				default:
+					throw new System.NotImplementedException();
+			}
 		}
 
 		private void Cast(GameObject prefab)
