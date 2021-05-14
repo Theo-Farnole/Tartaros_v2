@@ -7,6 +7,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
+	[RequireComponent(typeof(SectorObject))]
 	public class BuildingSlot : SerializedMonoBehaviour
 	{
 		#region Fields
@@ -53,6 +54,11 @@
 				_constructable.InstantiateConstructionKit(transform.position);
 				_isAvailable = false;
 			}
+		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.DrawIcon(transform.position, "gear-hammer.png");
 		}
 		#endregion Methods
 	}

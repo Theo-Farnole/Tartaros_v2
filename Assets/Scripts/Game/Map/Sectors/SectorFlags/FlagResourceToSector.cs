@@ -48,9 +48,12 @@
 			BuildingsDatabase buildingsDatabase = Services.Instance.Get<BuildingsDatabase>();
 
 			ISector sector = map.GetSectorOnPosition(transform.position);
-			BuildingSlot buildingsSlot = sector.GetBuildingSlotAvailable();
+			BuildingSlot buildingSlot = sector.GetBuildingSlotAvailable();
 
-			buildingsSlot.Constructable = buildingsDatabase.GetResourceBuildingAsConstructable(_type);
+			if (buildingSlot != null)
+			{
+				buildingSlot.Constructable = buildingsDatabase.GetResourceBuildingAsConstructable(_type);
+			}
 		}
 
 		private void CheckIfBuildingSlotIsMissing()
