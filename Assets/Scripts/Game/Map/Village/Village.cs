@@ -6,6 +6,7 @@
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 	using System;
+	using Tartaros.Dialogue;
 
 	public class Village : MonoBehaviour
 	{
@@ -14,9 +15,12 @@
 		[SerializeField]
 		private VillageData _data = null;
 
+		[SerializeField] private bool _ENABLE_DIALOGUE_STATE_EDITOR = false;
+
 		private IMap _map = null;
 		private ISector _sector = null;
 		private IPopulationManager _populationManager = null;
+		private DialogueManager _dialogueManager = null;
 		#endregion Fields
 
 		#region Properties
@@ -39,6 +43,7 @@
 			_map = Services.Instance.Get<IMap>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
 			_data = GetComponent<Entity>().GetBehaviourData<VillageData>();
+			_dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
 		}
 
 		private void Start()
@@ -64,6 +69,11 @@
 			
 			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
 			UpdateAbilityToSpawnUnits();
+
+			if(_dialogueManager != null && _ENABLE_DIALOGUE_STATE_EDITOR == true)
+			{
+				_dialogueManager.EnterDialogueState();
+			}
 		}
 
 		private void UpdateAbilityToSpawnUnits()
