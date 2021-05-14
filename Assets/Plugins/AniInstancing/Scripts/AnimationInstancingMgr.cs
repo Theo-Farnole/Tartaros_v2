@@ -932,6 +932,12 @@ namespace AnimationInstancing
 
         private void CullingStateChanged(CullingGroupEvent evt)
         {
+            foreach (var aahcabug in aniInstancingList)
+			{
+                aahcabug.visible = true;
+			}
+
+            return;
             Debug.Assert(evt.index < usedBoundingSphereCount);
             if (evt.hasBecomeVisible)
             {

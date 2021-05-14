@@ -537,35 +537,35 @@ namespace AnimationInstancing
 
 		private void UpdateAnimationEvent()
 		{
-			//AnimationInfo info = GetCurrentAnimationInfo();
-			//if (info == null)
-			//	return;
-			//if (info.eventList.Count == 0)
-			//	return;
+			AnimationInfo info = GetCurrentAnimationInfo();
+			if (info == null)
+				return;
+			if (info.eventList.Count == 0)
+				return;
 
-			//if (aniEvent == null)
-			//{
-			//	float time = curFrame / info.fps;
-			//	for (int i = eventIndex >= 0 ? eventIndex : 0; i < info.eventList.Count; ++i)
-			//	{
-			//		if (info.eventList[i].time > time)
-			//		{
-			//			aniEvent = info.eventList[i];
-			//			eventIndex = i;
-			//			break;
-			//		}
-			//	}
-			//}
+			if (aniEvent == null)
+			{
+				float time = curFrame / info.fps;
+				for (int i = eventIndex >= 0 ? eventIndex : 0; i < info.eventList.Count; ++i)
+				{
+					if (info.eventList[i].time > time)
+					{
+						aniEvent = info.eventList[i];
+						eventIndex = i;
+						break;
+					}
+				}
+			}
 
-			//if (aniEvent != null)
-			//{
-			//	float time = curFrame / info.fps;
-			//	if (aniEvent.time <= time)
-			//	{
-			//		gameObject.SendMessage(aniEvent.function, aniEvent);
-			//		aniEvent = null;
-			//	}
-			//}
+			if (aniEvent != null)
+			{
+				float time = curFrame / info.fps;
+				if (aniEvent.time <= time)
+				{
+					gameObject.SendMessage(aniEvent.function, aniEvent);
+					aniEvent = null;
+				}
+			}
 		}
 
 		private int FindAnimationInfo(int hash)
