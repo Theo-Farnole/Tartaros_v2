@@ -108,7 +108,7 @@ namespace AnimationInstancing
 
 			if (request.assetBundle != null)
             {
-                Debug.LogFormat("Load the AB {0} successed.", path);
+                //Debug.LogFormat("Load the AB {0} successed.", path);
                 m_mainBundle = request.assetBundle;
             }
         }
