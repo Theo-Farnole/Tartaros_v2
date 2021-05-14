@@ -3,6 +3,7 @@
 	using Sirenix.Serialization;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class RangeAttackMode : IAttackMode
 	{
 		[OdinSerialize]

@@ -7,6 +7,7 @@
 	using Tartaros.Entities.Attacks;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class AoEAttackMode : IAttackMode
 	{
 		[OdinSerialize]

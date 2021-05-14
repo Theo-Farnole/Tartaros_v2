@@ -4,6 +4,7 @@
 	using Tartaros.Entities.Detection;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class EntityAttackData : IEntityBehaviourData
 	{
 
