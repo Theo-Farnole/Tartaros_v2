@@ -17,6 +17,8 @@
 		private IMap _Imap = null;
 		private bool _enableScreenEdgeMovement = false;
 		private bool _useUnscaledDeltaTime = false;
+		private bool _isInFollowTargetMode = false;
+		private Transform _targetDestination = null;
 		#endregion
 
 		#region Properties
@@ -54,7 +56,16 @@
 
 		private void Update()
 		{
-			MovementManager();
+			if (_isInFollowTargetMode == false)
+			{
+				MovementManager();
+			}
+			else
+			{
+				FollowTargetTactical();
+			}
+
+
 		}
 
 		private void MovementManager()
@@ -154,6 +165,18 @@
 		{
 			//finalPosition.z = Mathf.Clamp(finalPosition.z, _cameraData.CameraZoomData.ZoomBounds.min, _cameraData.CameraZoomData.ZoomBounds.max);
 			return finalPosition;
+		}
+
+		public void SetCameraFollowTargetMode(bool mode)
+		{
+			_isInFollowTargetMode = mode;
+		}
+
+		private void FollowTargetTactical()
+		{
+			var distanceToTarget = Vector3.Distance(transform.position, _targetDestination.position);
+			Vector3 distanceBetweenCameraAndTarget = _targetDestination.position - transform.forward * distanceToTarget;
+			transform.position = Vector3.Lerp(transform.position, distanceBetweenCameraAndTarget, _cameraData.SpeedKeyBoard * DeltaTime);
 		}
 		#endregion
 	}

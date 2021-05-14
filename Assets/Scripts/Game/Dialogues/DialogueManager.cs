@@ -10,6 +10,8 @@
 	{
 		[SerializeField] private DialoguesData _data = null;
 
+		private int _indexDialogue = 0;
+
 		private GamemodeManager _gamemodeManager = null;
 
 		private void Awake()
@@ -19,7 +21,8 @@
 
 		public void EnterDialogueState()
 		{
-			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data));
+			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data, _indexDialogue));
+			_indexDialogue += 1;
 		}
 	}
 }

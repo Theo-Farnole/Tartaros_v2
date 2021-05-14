@@ -2,6 +2,7 @@
 {
 	using System.Collections;
 	using System.Collections.Generic;
+	using Tartaros.CameraSystem;
 	using Tartaros.Dialogue;
 	using UnityEngine;
 
@@ -10,15 +11,20 @@
 
 		private DialoguesData _data = null;
 		private DialogueInputs _inputs = null;
-
 		private int _indexDialogue = 0;
+
+		
 		private int _currentSpeechIndex = 0;
 
-		public DialogueState(GamemodeManager stateOwner, DialoguesData data) : base(stateOwner)
+		public DialogueState(GamemodeManager stateOwner, DialoguesData data, int indexDialogue) : base(stateOwner)
 		{
 			_data = data;
 			_inputs = new DialogueInputs();
+			_indexDialogue = indexDialogue;
+			
 		}
+
+		
 
 		public override void OnStateEnter()
 		{
@@ -28,7 +34,7 @@
 
 			if (_data.Dialogues[_indexDialogue].CameraTarget != null)
 			{
-				MoveCameraOnTargetPosition();
+				SetCameraMode(true);
 			}
 
 			EnableDialogueUI();
@@ -44,6 +50,10 @@
 			base.OnStateExit();
 
 			EnableAllInteractionAndGameplay();
+			if (_data.Dialogues[_indexDialogue].CameraTarget != null)
+			{
+				SetCameraMode(false);
+			}
 			Debug.Log("dialogueStateFinish");
 		}
 
@@ -88,9 +98,9 @@
 
 		}
 
-		private void TEST_ShowLinesAndAvatar(string avatar, string dialogue)
+		private void TEST_ShowLinesAndAvatar(string name, string dialogue)
 		{
-			Debug.LogFormat("{0}: {1}", avatar, dialogue);
+			Debug.LogFormat("{0}: {1}", name, dialogue);
 		}
 
 		private void EnableAllInteractionAndGameplay()
@@ -98,9 +108,16 @@
 
 		}
 
-		private void MoveCameraOnTargetPosition()
+		private void SetCameraMode(bool mode)
 		{
-
+			if(Camera.main.TryGetComponent<CameraController>(out CameraController cameraController))
+			{
+				cameraController.SetCameraFollowTargetMode(mode);
+			}
+			else
+			{
+				Debug.LogError("Dialogue State don't find cameraController");
+			}
 		}
 
 
