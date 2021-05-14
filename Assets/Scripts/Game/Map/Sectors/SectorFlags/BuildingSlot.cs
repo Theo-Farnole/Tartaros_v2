@@ -54,6 +54,11 @@
 				_isAvailable = false;
 			}
 		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.DrawIcon(transform.position, "gear-hammer.png");
+		}
 		#endregion Methods
 	}
 }
