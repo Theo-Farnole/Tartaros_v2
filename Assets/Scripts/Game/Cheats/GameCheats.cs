@@ -1,8 +1,11 @@
 ﻿namespace Tartaros.Cheats
 {
 	using Tartaros.CameraSystem;
+	using Tartaros.Dialogue;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
+	using Tartaros.Gamemode;
+	using Tartaros.Gamemode.State;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;
@@ -46,6 +49,21 @@
 			if (Camera.main.TryGetComponent(out CameraController cameraController))
 			{
 				cameraController.UseUnscaledDeltaTime = _isInDebugPause;
+			}
+		}
+
+		[Cheat]
+		public static void EnterDialogueState()
+		{
+			var dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
+
+			if(dialogueManager != null)
+			{
+				dialogueManager.EnterDialogueState();
+			}
+			else
+			{
+				Debug.LogWarning("there is no sialogueManager on the scene");
 			}
 		}
 	}
