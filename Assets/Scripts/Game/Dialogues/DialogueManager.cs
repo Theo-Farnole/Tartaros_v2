@@ -9,6 +9,7 @@
 	public class DialogueManager : MonoBehaviour
 	{
 		[SerializeField] private DialoguesData _data = null;
+		[SerializeField] private Transform _cameraTarget = null;
 
 		private int _indexDialogue = 0;
 
@@ -21,7 +22,7 @@
 
 		public void EnterDialogueState()
 		{
-			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data, _indexDialogue));
+			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data, _indexDialogue, _cameraTarget));
 			_indexDialogue += 1;
 		}
 	}
