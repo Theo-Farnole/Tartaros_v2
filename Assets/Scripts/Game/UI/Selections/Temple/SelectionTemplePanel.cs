@@ -38,13 +38,36 @@
 		{
 			if (_selection.SelectedSelectables.Length == 1)
 			{
-				var selectedMonoBehaviour = (_selection.SelectedSelectables[0] as MonoBehaviour);
+				ISelectable selectable = _selection.SelectedSelectables[0];
 
-				if (selectedMonoBehaviour.TryGetComponent(out EntityUnitsSpawner unitsSpawner))
+				if (TryGetTemple(selectable, out _shownSpawner))
 				{
-					_shownSpawner = unitsSpawner;
 					UpdatePanel();
 				}
+				else
+				{
+					_shownSpawner = null;
+				}
+			}
+			else
+			{
+				_shownSpawner = null;
+			}
+		}
+
+		private bool TryGetTemple(ISelectable selectable, out EntityUnitsSpawner templeUnitsSpawner)
+		{
+			bool isTemple = (selectable as MonoBehaviour).TryGetComponent(out Entity entity) && entity.EntityData == _templeData;
+
+			if (isTemple == true)
+			{
+				templeUnitsSpawner = entity.GetComponent<EntityUnitsSpawner>();
+				return true;
+			}
+			else
+			{
+				templeUnitsSpawner = null;
+				return false;
 			}
 		}
 
