@@ -197,6 +197,7 @@
 			{
 				gameplayStartPrefab = _constructable.WallCornerGameplay;
 				_wallToHideAndShow.SetActive(false);
+				//Debug.Log(_wallToHideAndShow, _wallToHideAndShow);
 				_wallToHideAndShow.GetComponent<Entity>().Kill();
 			}
 
@@ -218,11 +219,11 @@
 		{
 			Transform transformStart = _wallCorners[0].transform;
 			GameObject.Destroy(_wallCorners[0]);
-			GameObject wallStartInstanciate = GameObject.Instantiate(gameplayStartPrefab, transformStart.position, transformStart.rotation);
+			GameObject wallStartInstanciate = GameObject.Instantiate(_constructable.WallCornerGameplay, transformStart.position, transformStart.rotation);
 
 			Transform transformEnd = _wallCorners[_wallCorners.Count - 1].transform;
 			GameObject.Destroy(_wallCorners[_wallCorners.Count - 1]);
-			GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.GameplayPrefab, transformEnd.position, transformEnd.rotation);
+			GameObject wallEndInstanciate = GameObject.Instantiate(_constructable.WallCornerGameplay, transformEnd.position, transformEnd.rotation);
 
 			Vector3 previousWall = Vector3.zero;
 

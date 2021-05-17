@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0966ab54d19a84447ba65323343de821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numberOfWallToInstanciateGate: 2
 --- !u!114 &7258171856972684099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +336,16 @@ PrefabInstance:
     - target: {fileID: 122475025227966452, guid: 143e5414af54bac419f653d75411d433,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539522506849528456, guid: 143e5414af54bac419f653d75411d433,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539522506849528456, guid: 143e5414af54bac419f653d75411d433,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4740395784054915280, guid: 143e5414af54bac419f653d75411d433,

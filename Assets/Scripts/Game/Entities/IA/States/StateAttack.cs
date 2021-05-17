@@ -12,6 +12,9 @@
 		private readonly IAttackable _target = null;
 		private readonly EntityAttack _entityAttack = null;
 		private readonly EntityMovement _entityMovement = null;
+		private readonly Animator _animator = null;
+
+		private AnimatorClipInfo _clip;
 
 		public StateAttack(Entity stateOwner, IAttackable target) : base(stateOwner)
 		{
@@ -24,6 +27,7 @@
 
 			_entityMovement = stateOwner.GetComponent<EntityMovement>();
 			_entityAttack = stateOwner.GetComponent<EntityAttack>();
+			_animator = stateOwner.GetComponent<Animator>();
 		}
 
 		public override void OnStateExit()
@@ -48,11 +52,16 @@
 					_entityAttack.StartAttacking();
 					StopMovement();
 					_entityAttack.CastAttackIfPossible(_target);
+					_clip = _animator.GetCurrentAnimatorClipInfo(0)[0];
 				}
 				else
 				{
 					_entityAttack.StopAttacking();
-					MoveToTarget();
+
+					if(IsCurrentAttackAnimationFinish() == true)
+					{
+						MoveToTarget();
+					}
 				}
 			}
 		}
@@ -68,6 +77,17 @@
 			{
 				_entityMovement.StopMovement();
 			}
+		}
+
+		private bool IsCurrentAttackAnimationFinish()
+		{
+			if(_animator == null)
+			{
+				return true;
+			}
+			AnimatorClipInfo currentClip = _animator.GetCurrentAnimatorClipInfo(0)[0];
+
+			return currentClip.clip.name != _clip.clip.name;
 		}
 
 		private void MoveToTarget()

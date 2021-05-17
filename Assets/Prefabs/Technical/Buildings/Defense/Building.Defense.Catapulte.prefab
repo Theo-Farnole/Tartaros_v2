@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: b39b75c5f7de033428e9633636aee9dd, type: 2}
   _team: 1
+  _entityType: 0
 --- !u!114 &6474790578246595102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpawnPoint: {x: 0, y: 9.75, z: 0}
+  _inflictDamageAnimationEvent: {fileID: 0}
+  _turretTransform: {fileID: 0}
 --- !u!114 &7033158893081403326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +256,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building.Defense.Catapulte.Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273672269944958404, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273672269944958404, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94b35ba774d328646a05a469b22e9ec1, type: 3}
