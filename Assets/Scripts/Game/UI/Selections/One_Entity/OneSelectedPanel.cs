@@ -79,12 +79,7 @@
 					_showSelectable = firstSelectable;
 
 					UpdatePanelInformations();
-					Show();
 				}
-			}
-			else
-			{
-				Hide();
 			}
 		}
 

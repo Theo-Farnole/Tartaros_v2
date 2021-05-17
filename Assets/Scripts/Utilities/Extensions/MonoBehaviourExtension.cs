@@ -33,6 +33,21 @@
 		}
 
 		/// <summary>
+		/// Get component. If missing, throw exception.
+		/// </summary>
+		public static T GetComponentWithException<T>(this MonoBehaviour monoBehaviour)
+		{
+			if (monoBehaviour.TryGetComponent(out T component))
+			{
+				return component;
+			}
+			else
+			{
+				throw new MissingComponentException(typeof(T), monoBehaviour);
+			}
+		}
+
+		/// <summary>
 		/// Execute task after specified frame coutn.
 		/// </summary>
 		/// <param name="mono"></param>
@@ -47,7 +62,7 @@
 		{
 			for (int i = 0; i < frameCount; i++)
 			{
-			yield return new WaitForEndOfFrame();
+				yield return new WaitForEndOfFrame();
 			}
 
 			task();

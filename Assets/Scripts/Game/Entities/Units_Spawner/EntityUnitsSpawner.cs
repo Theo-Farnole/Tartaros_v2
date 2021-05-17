@@ -26,7 +26,7 @@
 		#endregion Fields
 
 		#region Properties
-		public ISpawnable[] SpawnablePrefabs => Data.SpawnablePrefabs;
+		public ISpawnable[] Spawnable => Data.SpawnablePrefabs;
 		public EntityUnitsSpawnerData Data { get => _data; set => _data = value; }
 		#endregion Properties
 
@@ -169,7 +169,7 @@
 		{
 			List<Order> orders = new List<Order>();
 
-			foreach (ISpawnable spawnable in SpawnablePrefabs)
+			foreach (ISpawnable spawnable in Spawnable)
 			{
 				orders.Add(new SpawnUnitOrder(spawnable, this));
 			}
