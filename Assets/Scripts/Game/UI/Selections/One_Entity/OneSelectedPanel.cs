@@ -18,20 +18,11 @@
 			typeof(SelfKillOrder)
 		};
 
-		[SerializeField]
-		private UIOrderButtonsGenerator _topButtons = null;
-
-		[SerializeField]
-		private UIOrderButtonsGenerator _sideButtons = null;
-
-		[SerializeField]
-		private RadialHealthSlider _radialHealthSlider = null;
-
-		[SerializeField]
-		private EntityInformationsUI _entityInformations = null;
-
-		[SerializeField]
-		private EntityAttackStatsUI _attacksStatsUI = null;
+		[SerializeField] private UIOrderButtonsGenerator _topButtons = null;
+		[SerializeField] private UIOrderButtonsGenerator _sideButtons = null;
+		[SerializeField] private RadialHealthSlider _radialHealthSlider = null;
+		[SerializeField] private EntityInformationsUI _entityInformations = null;
+		[SerializeField] private EntityAttackStatsUI _attacksStatsUI = null;
 
 		private ISelection _currentSelection = null;
 		private ISelectable _showSelectable = null;

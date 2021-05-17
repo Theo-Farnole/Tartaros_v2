@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.UI
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.Entities;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
@@ -8,8 +9,12 @@
 	public class SelectionTemplePanel : APanel
 	{
 		#region Fields
+		[Title("Data")]
 		[SerializeField] private EntityData _templeData = null;
+
+		[Title("UI References")]
 		[SerializeField] private SpawnButton[] _spawnButtons = null;
+		[SerializeField] private RadialHealthSlider _radialHealthSlider = null;
 
 		private EntityUnitsSpawner _shownSpawner = null;
 		private ISelection _selection = null;
@@ -73,15 +78,19 @@
 
 		private void UpdatePanel()
 		{
-			EntityUnitsSpawner unitsSpawner = _shownSpawner.GetComponentWithException<EntityUnitsSpawner>();
+			SetupSpawnButtons();
+			_radialHealthSlider.Healthable = _shownSpawner.GetComponent<IHealthable>();
+		}
 
-			ISpawnable[] spawnables = unitsSpawner.Spawnable;
+		private void SetupSpawnButtons()
+		{
+			ISpawnable[] spawnables = _shownSpawner.Spawnable;
 
 			for (int i = 0, length = _spawnButtons.Length; i < length; i++)
 			{
 				if (i < spawnables.Length)
 				{
-					_spawnButtons[i].Construct(unitsSpawner, spawnables[i]);
+					_spawnButtons[i].Construct(_shownSpawner, spawnables[i]);
 				}
 			}
 		}
