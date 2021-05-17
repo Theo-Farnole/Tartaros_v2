@@ -1712,10 +1712,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6316cad4437edd143be7108b23fb77b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonsRoot: {fileID: 2529656038019463379}
   _prefabButton: {fileID: 8199583524872428170, guid: 46ceee37029b11542a07bdd084b04a28,
     type: 3}
-  _buttonsRoot: {fileID: 2529656038019463379}
+  _prefabLockedButton: {fileID: 8199583524872428170, guid: cfb37aa342980f4489f9e9e04789df4d,
+    type: 3}
   _destroyRootChildrenBeforeGeneration: 1
+  _buttonsCount: 4
 --- !u!1 &2529656037861763572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,10 +2034,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6316cad4437edd143be7108b23fb77b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonsRoot: {fileID: 2529656039125383360}
   _prefabButton: {fileID: 8199583524872428170, guid: 46ceee37029b11542a07bdd084b04a28,
     type: 3}
-  _buttonsRoot: {fileID: 2529656039125383360}
+  _prefabLockedButton: {fileID: 8199583524872428170, guid: cfb37aa342980f4489f9e9e04789df4d,
+    type: 3}
   _destroyRootChildrenBeforeGeneration: 1
+  _buttonsCount: 2
 --- !u!1 &2529656037909257068
 GameObject:
   m_ObjectHideFlags: 0
@@ -7292,10 +7298,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 25
+    m_Top: 41
     m_Bottom: 30
-  m_ChildAlignment: 4
-  m_Spacing: 0
+  m_ChildAlignment: 1
+  m_Spacing: 11.67
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
