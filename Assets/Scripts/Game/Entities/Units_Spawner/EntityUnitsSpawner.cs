@@ -22,6 +22,7 @@
 		private EntityUnitsSpawnerData _data = null;
 		private IPlayerSectorResources _playerResources = null;
 		private IPopulationManager _populationManager = null;
+		private VillagerSpawnerManager _villagerSpawner = null;
 		#endregion Fields
 
 		#region Properties
@@ -38,6 +39,11 @@
 			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
 		}
 
+		private void OnEnable()
+		{
+			_villagerSpawner = GetComponent<VillagerSpawnerManager>();
+		}
+
 		private void Update()
 		{
 			if (_spawningQueue.IsPopulated() == true && Time.time >= _spawnNextInQueueSpawn)
@@ -46,6 +52,8 @@
 
 				if (_spawningQueue.IsPopulated() == true)
 				{
+					SpawnVillager(_spawningQueue.Peek());
+
 					SetSpawnTimer();
 				}
 			}
@@ -73,9 +81,38 @@
 			}
 
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
-			_spawningQueue.Enqueue(prefabToSpawn);
 
+			if(_spawningQueue.IsPopulated() == false)
+			{
+				SpawnVillager(prefabToSpawn);
+			}
+
+			_spawningQueue.Enqueue(prefabToSpawn);
 			SetSpawnTimer();
+		}
+
+		private void SpawnVillager(ISpawnable prefabToSpawn)
+		{
+			var archer = _data.SpawnablePrefabs[0];
+			var hoplite = _data.SpawnablePrefabs[1];
+
+			if (_villagerSpawner != null)
+			{
+
+				if (prefabToSpawn == archer)
+				{
+					_villagerSpawner.SpawnFuturArcher();
+				}
+				else if (prefabToSpawn == hoplite)
+				{
+					_villagerSpawner.SpawnFuturHoplite();
+				}
+
+			}
+			else
+			{
+				Debug.LogWarningFormat("The variable VillagerSpawnerManager is nul on {0}", this.gameObject.name);
+			}
 		}
 
 		public bool CanSpawn(ISpawnable gameObject, bool logToUser = false)
@@ -124,7 +161,7 @@
 
 		private Vector3 GetSpawnPoint()
 		{
-			return transform.position + Vector3.right;
+			return transform.position + Vector3.right * 2;
 		}
 
 		#region IOrderable

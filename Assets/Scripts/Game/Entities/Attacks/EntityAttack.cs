@@ -18,6 +18,9 @@
 		[SerializeField]
 		private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
 
+		[SerializeField]
+		private Transform _turretTransform = null;
+
 		private EntityAttackData _entityAttackData = null;
 		private EntityDetection _entityDetection = null;
 		private EntityFSM _entityFSM = null;
@@ -141,7 +144,14 @@
 		{
 			if (target != null)
 			{
-				transform.forward = (target.Transform.position - transform.position);
+				if(_turretTransform == null)
+				{
+					transform.forward = (target.Transform.position - transform.position);
+				}
+				else
+				{
+					_turretTransform.forward = (target.Transform.position - transform.position);
+				}
 			}
 		}
 

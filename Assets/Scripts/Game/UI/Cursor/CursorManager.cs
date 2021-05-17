@@ -13,10 +13,9 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-	[SerializeField]
-	private CursorManagerData _data = null;
-	[SerializeField]
-	private GamemodeManager _modeManger = null;
+	[SerializeField] private CursorManagerData _data = null;
+	
+	private GamemodeManager _gamemodeManager = null;
 
 	private enum gameModeState
 	{
@@ -35,30 +34,33 @@ public class CursorManager : MonoBehaviour
 	private CatchRightClickState _ordersState = null;
 	private Order _currentOrder = null;
 
-	
+	private void Awake()
+	{
+		_gamemodeManager = Services.Instance.Get<GamemodeManager>();
+	}
 
 	private void OnEnable()
 	{
-		Security();
+		CheckForMissingScripts();
 
-		_modeManger.DefaultStateEnable -= DefaultStateEnable;
-		_modeManger.DefaultStateEnable += DefaultStateEnable;
+		_gamemodeManager.DefaultStateEnable -= DefaultStateEnable;
+		_gamemodeManager.DefaultStateEnable += DefaultStateEnable;
 
-		_modeManger.ConstructionStateEnable -= ConstructionStateEnable;
-		_modeManger.ConstructionStateEnable += ConstructionStateEnable;
+		_gamemodeManager.ConstructionStateEnable -= ConstructionStateEnable;
+		_gamemodeManager.ConstructionStateEnable += ConstructionStateEnable;
 
-		_modeManger.PowerStateEnable -= PowerStateEnable;
-		_modeManger.PowerStateEnable += PowerStateEnable;
+		_gamemodeManager.PowerStateEnable -= PowerStateEnable;
+		_gamemodeManager.PowerStateEnable += PowerStateEnable;
 
-		_modeManger.OrdersStateEnable -= OrderStateEnable;
-		_modeManger.OrdersStateEnable += OrderStateEnable;
+		_gamemodeManager.OrdersStateEnable -= OrderStateEnable;
+		_gamemodeManager.OrdersStateEnable += OrderStateEnable;
 	}
 
 	private void Start()
 	{
 		_enbaleState = gameModeState.defaultState;
 		var cursorHotspot = new Vector2(_data.DefaultCursor.width / 2, _data.DefaultCursor.height / 2);
-		ChangeCursor(_data.DefaultCursor, cursorHotspot);
+		ChangeCursor(_data.DefaultCursor);
 	}
 
 	private void OrderStateEnable(object sender, GamemodeManager.OrdersStateEnableArgs e)
@@ -123,26 +125,22 @@ public class CursorManager : MonoBehaviour
 
 			if (_constructionState.CanConstructHere() == true)
 			{
-				cursorHotspot = SetHotspotCursor(_data.ConstructionCursor);
-				ChangeCursor(_data.ConstructionCursor, cursorHotspot);
+				ChangeCursor(_data.ConstructionCursor);
 			}
 			else
 			{
-				cursorHotspot = SetHotspotCursor(_data.ConstructionInvalideCursor);
-				ChangeCursor(_data.ConstructionInvalideCursor, cursorHotspot);
+				ChangeCursor(_data.ConstructionInvalideCursor);
 			}
 		}
 		else if (_wallConstructionState != null)
 		{
 			if (_wallConstructionState.CanConstructHere() == true)
 			{
-				cursorHotspot = SetHotspotCursor(_data.ConstructionCursor);
-				ChangeCursor(_data.ConstructionCursor, cursorHotspot);
+				ChangeCursor(_data.ConstructionCursor);
 			}
 			else
 			{
-				cursorHotspot = SetHotspotCursor(_data.ConstructionInvalideCursor);
-				ChangeCursor(_data.ConstructionInvalideCursor, cursorHotspot);
+				ChangeCursor(_data.ConstructionInvalideCursor);
 			}
 		}
 	}
@@ -151,8 +149,7 @@ public class CursorManager : MonoBehaviour
 	{
 		if (_powerState != null)
 		{
-			var cursorHotspot = SetHotspotCursor(_data.PowerCursor);
-			ChangeCursor(_data.PowerCursor, cursorHotspot);
+			ChangeCursor(_data.PowerCursor);
 		}
 	}
 
@@ -168,75 +165,64 @@ public class CursorManager : MonoBehaviour
 
 				if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
 				{
-					 cursorHotspot = SetHotspotCursor(_data.OrderCantMoveCursor);
-					ChangeCursor(_data.OrderCantMoveCursor, cursorHotspot);
+					ChangeCursor(_data.OrderCantMoveCursor);
 				}
 				else
 				{
-					 cursorHotspot = SetHotspotCursor(_data.OrderMoveCursor);
-					ChangeCursor(_data.OrderMoveCursor, cursorHotspot);
+					ChangeCursor(_data.OrderMoveCursor);
 				}
 			}
 			else if (_currentOrder.GetType() == typeof(AttackOrder))
 			{
-				cursorHotspot = SetHotspotCursor(_data.OrderAttackCursor);
-				ChangeCursor(_data.OrderAttackCursor, cursorHotspot);
+				ChangeCursor(_data.OrderAttackCursor);
 			}
 			else if (_currentOrder.GetType() == typeof(MoveAgressivelyOrder))
 			{
-				cursorHotspot = SetHotspotCursor(_data.OrderMoveAndAttackCursor);
-				ChangeCursor(_data.OrderMoveAndAttackCursor, cursorHotspot);
+				ChangeCursor(_data.OrderMoveAndAttackCursor);
 			}
 			else if (_currentOrder.GetType() == typeof(PatrolOrder))
 			{
-				cursorHotspot = SetHotspotCursor(_data.OrderPatrolCursor);
-				ChangeCursor(_data.OrderPatrolCursor, cursorHotspot);
+				ChangeCursor(_data.OrderPatrolCursor);
 			}
 		}
 	}
 
 	private void DefaultStateMethod()
 	{
-		if(IsUnitSelected() == true)
+		if (IsUnitSelected() == true)
 		{
 			MouseHelper.GetHitUnderCursor(out RaycastHit hit);
 
-			if(ObjectUnderCursorIsEnemy() == true)
+			if (ObjectUnderCursorIsEnemy() == true)
 			{
-				var cursorHotspot = SetHotspotCursor(_data.OrderAttackCursor);
-				ChangeCursor(_data.OrderAttackCursor, cursorHotspot);
+				ChangeCursor(_data.OrderAttackCursor);
 				return;
 			}
 
 			if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
 			{
-				var cursorHotspot = SetHotspotCursor(_data.OrderCantMoveCursor);
-				ChangeCursor(_data.OrderCantMoveCursor, cursorHotspot);
+				ChangeCursor(_data.OrderCantMoveCursor);
 			}
 			else
 			{
-				var cursorHotspot = SetHotspotCursor(_data.OrderMoveCursor);
-				ChangeCursor(_data.OrderMoveCursor, cursorHotspot);
+				ChangeCursor(_data.OrderMoveCursor);
 			}
 		}
 		else
 		{
 			if (IsCursorHoverSelectable() == false)
 			{
-				var cursorHotspot = SetHotspotCursor(_data.DefaultCursor);
-				ChangeCursor(_data.DefaultCursor, cursorHotspot);
+				ChangeCursor(_data.DefaultCursor);
 			}
 			else
 			{
 				if (ObjectUnderCursorIsEnemy() == false)
 				{
-					var cursorHotspot = SetHotspotCursor(_data.DefaultCursorHoverable);
-					ChangeCursor(_data.DefaultCursorHoverable, cursorHotspot);
+					ChangeCursor(_data.DefaultCursorHoverable);
 				}
 				else
 				{
-					var cursorHotspot = SetHotspotCursor(_data.DefaultCursorHoverableEnemy);
-					ChangeCursor(_data.DefaultCursorHoverableEnemy, cursorHotspot);
+					ChangeCursor(_data.DefaultCursorHoverableEnemy);
 				}
 			}
 		}
@@ -262,11 +248,6 @@ public class CursorManager : MonoBehaviour
 		//return underCursor.TryGetComponentInParent(out ISelectable selectable);
 	}
 
-	private Vector2 SetHotspotCursor(Texture2D texture)
-	{
-		return new Vector2(texture.width / 2, texture.height / 2);
-	}
-
 	private bool ObjectUnderCursorIsEnemy()
 	{
 		var underCursor = MouseHelper.GetGameObjectUnderCursor();
@@ -279,18 +260,18 @@ public class CursorManager : MonoBehaviour
 		return false;
 	}
 
-	private void ChangeCursor(Texture2D sprite, Vector2 spot)
+	private void ChangeCursor(Texture2D sprite)
 	{
 		if (_currentCursor != sprite)
 		{
-			Cursor.SetCursor(sprite, spot, CursorMode.Auto);
+			Cursor.SetCursor(sprite, new Vector2(0, 0), CursorMode.Auto);
 			_currentCursor = sprite;
 		}
 	}
 
-	private void Security()
+	private void CheckForMissingScripts()
 	{
-		if (_modeManger == null)
+		if (_gamemodeManager == null)
 		{
 			Debug.LogError("the field _modeManager is null");
 		}

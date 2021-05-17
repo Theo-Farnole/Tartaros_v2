@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_LaserBeam 2
-  m_Shader: {fileID: 4800000, guid: e57766641da5b594b9c7018ebab8b0e9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6230f2d2e1825c947a3b81d95c191f64, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
@@ -32,31 +32,37 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Bottom: 1.02
+    - _BottomImpactance: 1.02
     - _Cutoff: 0.5
     - _FireRadius: 5
-    - _LaserPower: 1
+    - _LaserPower: 7.79
     - _LaserPrincipalPower: 10
     - _LaserRimPatern: 4.25
     - _LaserRimPatern1: 0.91
     - _LaserRimPower: 10
-    - _LaserStrength: 5
+    - _LaserStrength: 1.13
     - _LaserWidth: 1
     - _LazerSize: 0.24
     - _Lerp: 0.16
     - _LinearSpace: 0.6
     - _MaskOpacity: 2.8
     - _Opacity: 0.63
-    - _OpacityPatern: 5
-    - _OpacityTexture: 0
+    - _OpacityPatern: 1
+    - _OpacityTexture: 1
     - _PaternScale1: 3.84
     - _PaternScale2: 1
-    - _PaternSpeed: 0
+    - _PaternSpeed: 1
     - _PaternSpeed2: 2
+    - _PowerBot: 1.08
     - _VoroScale: 2
+    - _Widement: -4.63
     - __dirty: 0
     m_Colors:
+    - _BeamRadius: {r: 1, g: 1.5, b: 0, a: 0}
+    - _BeamRadiusOffset: {r: 1, g: 1.5, b: 0, a: 0}
     - _Color0: {r: 0.6792453, g: 0, b: 0.045282975, a: 1}
-    - _Color1: {r: 0.32549024, g: 1, b: 0.75491244, a: 1}
+    - _Color1: {r: 0.2981043, g: 0.7811747, b: 0.8207547, a: 1}
     - _Fresnel: {r: 1.85, g: 0.35, b: 0, a: 0}
     - _LaserBalancePatern: {r: 2.48, g: 32.7, b: 0, a: 0}
     - _LaserStrength: {r: 3.81, g: 3.79, b: 0, a: 0}
@@ -64,7 +70,9 @@ Material:
     - _LazerSize: {r: 0.21, g: 0.29, b: 0, a: 0}
     - _RadialShear: {r: 1, g: 1, b: 0, a: 0}
     - _RimTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _SmoothStep: {r: -0.05, g: 0.39, b: 0, a: 0}
+    - _SmoothStep: {r: 0.15, g: -0.19, b: 0, a: 0}
     - _Tiling: {r: 2, g: 1, b: 0, a: 0}
+    - _TilingOffset: {r: -1, g: 0, b: 0, a: 0}
+    - _TilingWidth: {r: 1, g: 1, b: 0, a: 0}
     - _UV_direction: {r: -1, g: 0, b: 0, a: 0}
-    - _UV_tiling: {r: -1.04, g: 1, b: 0, a: 0}
+    - _UV_tiling: {r: -1, g: 1, b: 0, a: 0}

@@ -9,19 +9,28 @@
 
 	public class AoEProjectile : MonoBehaviour
 	{
+		private readonly float GRAVITY = Physics.gravity.y;
+		
 		private const float THRESHOLD_HIT_DISTANCE = 0.3f;
+		private const float THRESHOLD_DELAY_MISS_TARGET = 4;
 
+		[SerializeField]
+		private float _parabolaHeight = 5;
 
 		[SerializeField]
 		private float _speed = 1;
 		private GameObject _projectile = null;
+		private Vector3 _velocity = Vector3.zero;
 		private Vector3 _targetPosition = Vector3.zero;
+		private Vector3 _destination = default;
+
+		public Vector3 Destination => _destination;
 
 		private float _radiusDamage = 1;
 		private EntitiesDetectorManager _detector = null;
 
 		private IHitEffect _hitEffect = null;
-
+		private bool _projectileIsMaxHeight = false;
 
 		private void Update()
 		{
@@ -42,14 +51,31 @@
 			_hitEffect = vfx;
 
 			_targetPosition = target.Transform.position;
+			_destination = target.Transform.position;
 			_radiusDamage = radiusDamage;
 			_detector = Services.Instance.Get<EntitiesDetectorManager>();
+			_velocity = PhysicsHelper.GetParabolaInitVelocity(transform.position, Destination, GRAVITY, _parabolaHeight);
 		}
 
 		private void MoveTowardsTarget()
 		{
-			_projectile.transform.position += _projectile.transform.forward * _speed * Time.deltaTime;
-			_projectile.transform.LookAt(_targetPosition);
+			//_projectile.transform.position += _projectile.transform.forward * _speed * Time.deltaTime;
+			//_projectile.transform.LookAt(_targetPosition);
+
+			
+
+			float deltaTime = Time.deltaTime * _speed;
+
+			transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime);
+			transform.LookAt(PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime));
+
+			_velocity.y += GRAVITY * deltaTime;
+
+			if(_projectileIsMaxHeight == false && _velocity.y <= -2f)
+			{
+				_hitEffect.ExecuteHitEffect(transform.position);
+				_projectileIsMaxHeight = true;
+			}
 		}
 
 		private void IsTargetReach()
@@ -72,7 +98,7 @@
 
 		private void InflictDamageToTarget()
 		{
-			_hitEffect.ExecuteHitEffect(_targetPosition);
+			//_hitEffect.ExecuteHitEffect(_targetPosition);
 			Debug.Log(_targetPosition);
 
 			var Entities = _detector.GetEveryEntityInRadius(Team.Enemy, _targetPosition, _radiusDamage);

@@ -4,6 +4,7 @@
 	using System.Collections;
 	using UnityEngine;
 
+	[System.Serializable]
 	public class MeleeAttackMode : IAttackMode
 	{
 		[OdinSerialize]

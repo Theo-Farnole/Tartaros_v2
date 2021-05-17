@@ -2,6 +2,7 @@
 {
 	using UnityEngine;
 
+	[System.Serializable]
 	public class SingleEffect : IHitEffect
 	{
 		#region Fields
@@ -16,7 +17,7 @@
 			{
 				GameObject.Instantiate(_vfxPrefab, positionToInstanciate, Quaternion.identity);
 			}
-		} 
+		}
 		#endregion Methods
 	}
 }

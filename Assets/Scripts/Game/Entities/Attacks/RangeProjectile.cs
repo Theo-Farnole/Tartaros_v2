@@ -1,7 +1,5 @@
 ﻿namespace Tartaros.Entities.Attack
 {
-	using System.Collections;
-	using System.Collections.Generic;
 	using UnityEngine;
 
 	public class RangeProjectile : MonoBehaviour
@@ -9,6 +7,7 @@
 		#region Fields
 		private readonly float GRAVITY = Physics.gravity.y;
 		private const float THRESHOLD_HIT_DISTANCE = 0.3f;
+		private const float THRESHOLD_DELAY_MISS_TARGET = 4;
 
 		[SerializeField]
 		private float _speed = 1;
@@ -19,24 +18,19 @@
 		private Transform _attacker = null;
 		private IAttackable _target = null;
 		private int _damage = -1;
+		private float _delay = 0;
 
 		private IHitEffect _hitEffect = null;
 
-		private Vector3 _startingPosition = Vector3.zero;
 		private Vector3 _velocity = Vector3.zero;
+		private Vector3 _destination = default;
 		#endregion Fields
 
 		#region Methods
-		public Vector3 Destination => _target.Transform.position;
+		public Vector3 Destination => _destination; // _target.Transform.position + Vector3.up*2;
 		#endregion Methods
 
 		#region Methods
-		private void Start()
-		{
-			_startingPosition = transform.position;
-
-			_velocity = PhysicsHelper.GetParabolaInitVelocity(transform.position, Destination, GRAVITY, _parabolaHeight);
-		}
 
 		private void Update()
 		{
@@ -46,8 +40,20 @@
 				return;
 			}
 
+			SecurityArrowMiss();
+
 			MoveTowardsTarget();
-			IsTargetReach();			
+			IsTargetReach();
+		}
+
+		private void SecurityArrowMiss()
+		{
+			_delay += Time.deltaTime;
+
+			if (_delay >= THRESHOLD_DELAY_MISS_TARGET)
+			{
+				Destroy(gameObject);
+			}
 		}
 
 		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx, int damage)
@@ -56,6 +62,8 @@
 			_target = target;
 			_hitEffect = vfx;
 			_damage = damage;
+			_destination = target.Transform.position;
+			_velocity = PhysicsHelper.GetParabolaInitVelocity(transform.position, Destination, GRAVITY, _parabolaHeight);
 		}
 
 		private void MoveTowardsTarget()
@@ -70,7 +78,9 @@
 
 		private void IsTargetReach()
 		{
-			float distanceFromTarget = Vector3.Distance(transform.position, _target.Transform.position);
+			float distanceFromTarget = Vector3.Distance(transform.position, Destination);
+
+			Debug.DrawLine(transform.position, Destination);
 
 			if (distanceFromTarget <= THRESHOLD_HIT_DISTANCE)
 			{
@@ -87,7 +97,13 @@
 
 		private void InflictDamageToTarget()
 		{
-			_hitEffect.ExecuteHitEffect(_target.Transform.position);
+			if (_target.IsInterfaceDestroyed() == true)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
+			_hitEffect.ExecuteHitEffect(Destination);
 
 			IAttackable attacker = _attacker.GetComponent<IAttackable>();
 			_target.TakeDamage(_damage, attacker);

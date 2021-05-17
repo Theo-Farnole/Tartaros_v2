@@ -9,7 +9,7 @@
 	{
 		#region Fields
 		private const string DBG_ERROR_DB_NOT_REGISTER = "Cannot get the database of type {0}: it has not be registed. Please, register it with the method {1}.";
-		private const string DBG_ERROR_ALREADY_INITIALIZED = "Initialization of DatabaseLocator aborted: it is already initialized.";
+		private const string DBG_ERROR_ALREADY_INITIALIZED = "Initialization of DatabaseLocator aborted: it is already initialized.";		
 
 		private Dictionary<Type, object> _databases = new Dictionary<Type, object>();
 		private bool _isInitialized = false;

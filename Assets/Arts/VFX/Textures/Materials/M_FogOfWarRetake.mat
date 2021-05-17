@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_FogOfWarRetake
-  m_Shader: {fileID: 4800000, guid: aa7ed8ec8cdc9b0428b86fac6506fd42, type: 3}
+  m_Shader: {fileID: 4800000, guid: 877b47a43b0c88144a61fa7d3a36138a, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
@@ -27,54 +27,89 @@ Material:
         m_Texture: {fileID: 8400000, guid: 4f79457e6662c064cbf77b6bca8e6023, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 8400000, guid: 0be5428491ac8a04483b5bc91fb068f6, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample3:
+        m_Texture: {fileID: 8400000, guid: 4f79457e6662c064cbf77b6bca8e6023, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample4:
+        m_Texture: {fileID: 8400000, guid: 4f79457e6662c064cbf77b6bca8e6023, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaBlend: -3.48
+    - _BLEND: -0.49
     - _BorderSize: 2.84
     - _ChromaticAberration: 0.1
     - _Cutoff: 0.01
     - _Depths: 67.1
     - _DiscoveredPercent: 0.5524474
     - _Dist: 0.65
-    - _FarExplored: -1.51
-    - _Float0: -0.26
+    - _FarExplored: 3.81
+    - _FarExplored1: 0.15
+    - _FarExplored2: 0.3
+    - _Float0: 0.5
     - _NoiseScale: -1.35
     - _Opacity: 0.75
+    - _OpacityLerp: 0.23
     - _PaternPower: 0.09
     - _PaternSpeed: 1
     - _RevelatedPercent: 0.84
-    - _RimPower: 5.07
-    - _RimPower2: -0.43
+    - _RimPower: 1
+    - _RimPower2: -0.45
+    - _RimPower4: -0.25
     - _STEP: 1
     - _ShroudAlphaMult: 2
     - _SmoothRim: 2
+    - _SmoothingRatio: 2.68
     - _Step: 0.11
     - _VertexOffset: 0.2
     - _VoroPower: 0.92
+    - _VoroPower2: 0.92
     - _VoroScale: 50
+    - _VoroScale2: 10
     - _VoroScaleRim: 500
     - _VoroScaleRim1: 500
-    - _WorldPower: 2
+    - _VoroScaleRim2: 500
+    - _WorldPower: 1
     - __dirty: 0
+    - _yOffset: -0.48
     m_Colors:
     - _BorderColor: {r: 2.670157, g: 1.1463501, b: 0, a: 1}
     - _BorderColor2: {r: 1.4980392, g: 0.36862746, b: 0, a: 1}
     - _BorderColorRange: {r: 1.5, g: 1, b: 0, a: 0}
+    - _Color0: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}
     - _Compare: {r: 1, g: 0, b: 0.5, a: 0}
+    - _DiscoveredColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
+    - _DiscoveredColor1: {r: 0.83127534, g: 0.83127534, b: 0.83127534, a: 1}
     - _DiscoveredStep: {r: 0, g: 1, b: 0, a: 0}
-    - _PaternColor: {r: 1, g: 0.2627451, b: 0, a: 1}
+    - _MINMAX: {r: 0.97, g: 1.05, b: 0, a: 0}
+    - _MINMAXMIN: {r: 0.21, g: -0.04, b: 0, a: 0}
+    - _PaternColor: {r: 0.24528301, g: 0.06444691, b: 0, a: 1}
     - _PaternSteps: {r: 0.85, g: 0.86, b: 0, a: 0}
     - _Remap1: {r: 0, g: 1, b: 0, a: 1}
     - _Remap2: {r: 0, g: 1, b: 0, a: 1}
     - _RevelatedStep: {r: 0.7, g: 2, b: 0, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor2: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.6509434, g: 0.106235415, b: 0, a: 1}
+    - _RimColor2: {r: 0, g: 0, b: 0, a: 0}
+    - _RimColor4: {r: 2, g: 0.52912116, b: 0, a: 1}
     - _ShroudAlphaMult: {r: -0.22, g: 1, b: 0, a: -0.08}
     - _SmoothStep: {r: 0, g: 0.64, b: 0, a: 0}
+    - _SmoothStep2: {r: -0.36, g: 0.7, b: 0, a: 0}
     - _SmoothStepTop: {r: 0, g: 0.91, b: 0, a: 0}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _TrueFalse: {r: 1, g: 0.64, b: 0, a: 0}
-    - _VoroColor: {r: 0.066037714, g: 0.054119505, b: 0.04890529, a: 1}
+    - _TrueFalse0: {r: 0.5, g: 1.17, b: 0, a: 0}
+    - _UndiscoveredColor: {r: 0.009433985, g: 0.009433985, b: 0.009433985, a: 1}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 1}
+    - _VertexOffsetRemap: {r: 0, g: 1, b: 0, a: 1}
+    - _VoroColor: {r: 0, g: 0, b: 0, a: 1}
+    - _VoroColor2: {r: 0.066037714, g: 0.054119505, b: 0.04890529, a: 1}
     - _VoroController: {r: 1, g: 50, b: 2, a: 0}

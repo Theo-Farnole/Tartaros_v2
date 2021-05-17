@@ -6,6 +6,7 @@
 
 	public abstract class AGoalComposite : AGoalEntity
 	{
+		[ShowInRuntime]
 		Stack<AGoalEntity> _subGoal = new Stack<AGoalEntity>();
 
 

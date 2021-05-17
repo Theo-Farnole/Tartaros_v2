@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 8774480851626937428}
   - component: {fileID: 8980753426503742301}
   - component: {fileID: 7921501516267714427}
+  - component: {fileID: 3469296930533839119}
   m_Layer: 0
   m_Name: Building.Temple
   m_TagString: Untagged
@@ -200,6 +201,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da9d06c7675159468e992e785e846b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3469296930533839119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657609668978460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85a045147fde194a9c92206642056a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoints: []
+  _villagerMalePrefab: {fileID: 2424111454304933240, guid: 38883c3fc37e67141b663bf953595c1c,
+    type: 3}
+  _villagetFemalePrefab: {fileID: 2424111454304933240, guid: 931970120eb577348b20141993ca0a51,
+    type: 3}
 --- !u!1001 &2387191279002509662
 PrefabInstance:
   m_ObjectHideFlags: 0

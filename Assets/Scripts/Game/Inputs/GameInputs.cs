@@ -352,7 +352,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""33a757ec-b2ae-4e24-b408-19f6a0b5b78a"",
                     ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""EnterConstruction"",
@@ -389,6 +389,55 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AddNewWallSections"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Dialogue"",
+            ""id"": ""c0c73167-9c46-44da-83d7-b09e34d72ac9"",
+            ""actions"": [
+                {
+                    ""name"": ""NextSpeech"",
+                    ""type"": ""Button"",
+                    ""id"": ""9243637b-622f-46ad-92f6-1c212020768d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""66c983a7-a269-4188-b25f-df88f4eaae10"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextSpeech"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c43abdc8-873b-4f72-8de3-fe71db10fd6e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextSpeech"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97128086-6a36-4162-bb33-fcbd57740356"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextSpeech"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -482,6 +531,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
         m_Construction_ValidateConstruction = m_Construction.FindAction("ValidateConstruction", throwIfNotFound: true);
         m_Construction_ExitConstruction = m_Construction.FindAction("ExitConstruction", throwIfNotFound: true);
         m_Construction_AddNewWallSections = m_Construction.FindAction("AddNewWallSections", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_NextSpeech = m_Dialogue.FindAction("NextSpeech", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -755,6 +807,39 @@ public class @GameInputs : IInputActionCollection, IDisposable
         }
     }
     public ConstructionActions @Construction => new ConstructionActions(this);
+
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private IDialogueActions m_DialogueActionsCallbackInterface;
+    private readonly InputAction m_Dialogue_NextSpeech;
+    public struct DialogueActions
+    {
+        private @GameInputs m_Wrapper;
+        public DialogueActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextSpeech => m_Wrapper.m_Dialogue_NextSpeech;
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+        public void SetCallbacks(IDialogueActions instance)
+        {
+            if (m_Wrapper.m_DialogueActionsCallbackInterface != null)
+            {
+                @NextSpeech.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnNextSpeech;
+                @NextSpeech.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnNextSpeech;
+                @NextSpeech.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnNextSpeech;
+            }
+            m_Wrapper.m_DialogueActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @NextSpeech.started += instance.OnNextSpeech;
+                @NextSpeech.performed += instance.OnNextSpeech;
+                @NextSpeech.canceled += instance.OnNextSpeech;
+            }
+        }
+    }
+    public DialogueActions @Dialogue => new DialogueActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -827,5 +912,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
         void OnValidateConstruction(InputAction.CallbackContext context);
         void OnExitConstruction(InputAction.CallbackContext context);
         void OnAddNewWallSections(InputAction.CallbackContext context);
+    }
+    public interface IDialogueActions
+    {
+        void OnNextSpeech(InputAction.CallbackContext context);
     }
 }

@@ -8,19 +8,17 @@
 	public class OpenHoverPopupOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		#region Fields
-		[SerializeField]
-		[SuffixLabel("optional")]
-		private HoverPopupDataSO _toShowDataAsset = null;
+		[SerializeField, SuffixLabel("optional")] private HoverPopupDataSO _toShowDataAsset = null;
+		[SerializeField] private HoverPopupManager.HoverPopupPosition _popupPosition = HoverPopupManager.HoverPopupPosition.Top;
 
-		[ShowInRuntime]
 		private HoverPopupData _toShowData = null;
-		private HoverPopupManager _hoverPopup = null;
 
+		private HoverPopupManager _hoverPopup = null;
 		private RectTransform _rectTransform = null;
 		#endregion Fields
 
 		#region Properties
-		public HoverPopupData ToShowData { get => _toShowData; set => _toShowData = value; }
+		[ShowInRuntime] public HoverPopupData ToShowData { get => _toShowData; set => _toShowData = value; }
 		#endregion Properties
 
 		#region Methods
@@ -40,6 +38,7 @@
 
 			if (_toShowData != null)
 			{
+				_hoverPopup.PopupPosition = _popupPosition;
 				_hoverPopup.Show(_toShowData, _rectTransform);
 			}
 			else
@@ -52,6 +51,7 @@
 		{
 			if (_hoverPopup.HoverPopupData == _toShowData)
 			{
+				_hoverPopup.PopupPosition = _popupPosition;
 				_hoverPopup.Hide();
 			}
 		}
