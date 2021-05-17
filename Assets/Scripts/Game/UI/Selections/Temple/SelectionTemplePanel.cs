@@ -84,13 +84,17 @@
 
 		private void SetupSpawnButtons()
 		{
-			ISpawnable[] spawnables = _shownSpawner.Spawnable;
+			ISpawnable[] spawnables = _shownSpawner.Spawnables;
 
 			for (int i = 0, length = _spawnButtons.Length; i < length; i++)
 			{
 				if (i < spawnables.Length)
 				{
 					_spawnButtons[i].Construct(_shownSpawner, spawnables[i]);
+				}
+				else
+				{
+					Debug.LogError("Spawn button has not be initialized.", this);
 				}
 			}
 		}

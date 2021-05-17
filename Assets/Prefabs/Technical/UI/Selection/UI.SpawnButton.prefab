@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 319179461432680273}
   - component: {fileID: 8066193420312537339}
   m_Layer: 5
-  m_Name: TrainingPool
+  m_Name: In queue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 3484509149604103807}
   - component: {fileID: 6950921467215974376}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,6 +461,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada16cc40f5f4ef42ba430693289fb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rootInQueue: {fileID: 1574542085049077335}
+  _inQueue: {fileID: 6950921467215974376}
+  _slider: {fileID: 5886520849148289017}
 --- !u!222 &6422795182827891055
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -508,7 +511,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 7624703297886249334}
   m_OnClick:
     m_PersistentCalls:
