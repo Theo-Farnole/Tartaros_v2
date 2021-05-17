@@ -22,7 +22,7 @@
 
 			if (_vfxPrefab != null)
 			{
-				_vfxPrefab.ExecuteHitEffect(target.Transform.position);
+				_vfxPrefab.ExecuteHitEffect(target.Transform.position, Quaternion.identity);
 			}
 
 			EntityAttack entityAttack = attacker.GetComponent<EntityAttack>();

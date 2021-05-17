@@ -103,7 +103,7 @@
 				return;
 			}
 
-			_hitEffect.ExecuteHitEffect(Destination);
+			_hitEffect.ExecuteHitEffect(Destination, Quaternion.identity);
 
 			IAttackable attacker = _attacker.GetComponent<IAttackable>();
 			_target.TakeDamage(_damage, attacker);

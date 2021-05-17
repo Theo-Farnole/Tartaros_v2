@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parabolaHeight: 8
   _speed: 3
+  _projectileMesh: {fileID: 6503638994500574999}
 --- !u!1001 &7484815203586245514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +125,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f16922e9cabb1604fad03f6377f80570, type: 3}
+--- !u!1 &6503638994500574999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4440257794723437725, guid: f16922e9cabb1604fad03f6377f80570,
+    type: 3}
+  m_PrefabInstance: {fileID: 7484815203586245514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6503638994500574998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4440257794723437724, guid: f16922e9cabb1604fad03f6377f80570,

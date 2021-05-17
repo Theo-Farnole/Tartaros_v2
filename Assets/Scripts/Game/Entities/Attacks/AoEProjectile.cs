@@ -16,9 +16,11 @@
 
 		[SerializeField]
 		private float _parabolaHeight = 5;
-
 		[SerializeField]
 		private float _speed = 1;
+		[SerializeField]
+		private GameObject _projectileMesh = null;
+
 		private GameObject _projectile = null;
 		private Vector3 _velocity = Vector3.zero;
 		private Vector3 _targetPosition = Vector3.zero;
@@ -34,10 +36,8 @@
 
 		private void Update()
 		{
-
 			MoveTowardsTarget();
 			IsTargetReach();
-
 		}
 
 		public void Initialize(IAttackable target, IHitEffect vfx, int damage, float radiusDamage)
@@ -59,11 +59,6 @@
 
 		private void MoveTowardsTarget()
 		{
-			//_projectile.transform.position += _projectile.transform.forward * _speed * Time.deltaTime;
-			//_projectile.transform.LookAt(_targetPosition);
-
-			
-
 			float deltaTime = Time.deltaTime * _speed;
 
 			transform.position = PhysicsHelper.GetParabolaNextPosition(transform.position, _velocity, GRAVITY, deltaTime);
@@ -71,9 +66,10 @@
 
 			_velocity.y += GRAVITY * deltaTime;
 
-			if(_projectileIsMaxHeight == false && _velocity.y <= -2f)
+			if(_projectileIsMaxHeight == false && _velocity.y <= -3f)
 			{
-				_hitEffect.ExecuteHitEffect(transform.position);
+				_hitEffect.ExecuteHitEffect(transform.position, transform.rotation);
+				_projectileMesh.SetActive(false);
 				_projectileIsMaxHeight = true;
 			}
 		}
@@ -105,7 +101,6 @@
 
 			foreach (var target in Entities)
 			{
-				//target.GetComponent<IAttackable>();
 				target.Kill(); 
 			}
 

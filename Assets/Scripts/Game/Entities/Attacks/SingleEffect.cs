@@ -11,7 +11,7 @@
 		#endregion Fields
 
 		#region Methods
-		void IHitEffect.ExecuteHitEffect(Vector3 positionToInstanciate)
+		void IHitEffect.ExecuteHitEffect(Vector3 positionToInstanciate, Quaternion rotationoInstanciate)
 		{
 			if (_vfxPrefab != null)
 			{
