@@ -5,16 +5,16 @@
 
 	public class GateChangeMaterialEffect : MonoBehaviour, IGateEffect
 	{
-
+		[SerializeField] private GameObject _forceField = null;
 
 		void IGateEffect.GateClose()
 		{
-			throw new System.NotImplementedException();
+			_forceField.SetActive(true);
 		}
 
 		void IGateEffect.GateOpen()
 		{
-			throw new System.NotImplementedException();
+			_forceField.SetActive(false);
 		}
 	}
 }

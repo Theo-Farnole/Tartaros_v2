@@ -9,12 +9,12 @@
 
 		void IGateEffect.GateClose()
 		{
-			throw new System.NotImplementedException();
+			
 		}
 
 		void IGateEffect.GateOpen()
 		{
-			throw new System.NotImplementedException();
+			
 		}
 	}
 }

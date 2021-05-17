@@ -10,6 +10,8 @@
 	[DisallowMultipleComponent]
 	public class EntityWallToGate : AEntityBehaviour, IOrderable
 	{
+		//[SerializeField] private int _numberOfWallToInstanciateGate = 2;
+
 		private EntityWallToGateData _data = null;
 		private IconsDatabase _iconsDataBase = null;
 		private IPlayerSectorResources _playerResources = null;
@@ -45,7 +47,10 @@
 
 				GameObject gate = GameObject.Instantiate(_data.GatePrefab, position, transform.rotation);
 
+				_neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>().BackAdjacentWall.GetComponent<Entity>().Kill();
 				_neigboorManager.BackAdjacentWall.GetComponent<Entity>().Kill();
+				_neigboorManager.FrontAdjacentWall.GetComponent<Entity>().Kill();
+
 				this.GetComponent<Entity>().Kill();
 
 				ISelection selction = Services.Instance.Get<CurrentSelection>();
@@ -56,7 +61,15 @@
 
 		public bool HaveEnoughSpace()
 		{
-			return _neigboorManager.FrontAdjacentWall != null && _neigboorManager.BackAdjacentWall != null;
+			if (_neigboorManager.BackAdjacentWall == null || _neigboorManager.FrontAdjacentWall == null)
+			{
+				return false;
+			}
+			
+			var managerFront = _neigboorManager.FrontAdjacentWall.GetComponent<EntityNeigboorWallManager>();
+			var managerBack = _neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
+
+			return managerFront.FrontAdjacentWall != null && managerBack.BackAdjacentWall != null;
 		}
 
 

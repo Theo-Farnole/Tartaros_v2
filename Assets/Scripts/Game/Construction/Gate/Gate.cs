@@ -11,7 +11,6 @@
 
     public class Gate : MonoBehaviour, IOrderable
     {
-  
         private bool _isOpen = false;
         private NavMeshObstacle _navObstacle = null;
 
@@ -40,8 +39,6 @@
                 _navObstacle = GetComponent<NavMeshObstacle>();
                 _navObstacle.carving = true;
             }
-
-            Debug.Log(_navObstacle.carving);
 
             if(_isOpen == false)
             {
