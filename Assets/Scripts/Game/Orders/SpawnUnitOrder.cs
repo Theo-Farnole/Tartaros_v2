@@ -24,7 +24,7 @@
 			{
 				if (spawner.CanSpawn(spawnable, true))
 				{
-					spawner.EnqueueEntitySpawn(spawnable);
+					spawner.EnqueueSpawn(spawnable);
 				}
 			};
 		}

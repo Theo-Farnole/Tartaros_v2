@@ -3,10 +3,11 @@
 	using Tartaros.Entities;
 	using TMPro;
 	using UnityEngine;
+	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
 	[RequireComponent(typeof(Button))]
-	public class SpawnButton : MonoBehaviour
+	public class SpawnButton : MonoBehaviour, IPointerClickHandler
 	{
 		#region Fields
 		[SerializeField] private RectTransform _rootInQueue = null;
@@ -75,7 +76,17 @@
 
 		private void OnButtonClick()
 		{
-			_unitsSpawner.EnqueueEntitySpawn(_toSpawn);
+			_unitsSpawner.EnqueueSpawn(_toSpawn);
+		}
+
+		void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+		{
+			Debug.Log("Poitner click");
+
+			if (eventData.button == PointerEventData.InputButton.Right)
+			{
+				_unitsSpawner.CancelSpawn(_toSpawn);
+			}
 		}
 		#endregion Methods
 	}

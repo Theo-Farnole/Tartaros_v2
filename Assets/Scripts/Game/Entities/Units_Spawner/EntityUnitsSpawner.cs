@@ -92,7 +92,30 @@
 				.Count();
 		}
 
-		public void EnqueueEntitySpawn(ISpawnable prefabToSpawn)
+		public void CancelSpawn(ISpawnable spawnToCancel)
+		{
+			if (_spawningQueue.Contains(spawnToCancel))
+			{
+				var spawningPrefabBefore = CurrentPrefabSpawning;
+
+
+				// 1. refund
+				RefundEntitySpawn(spawnToCancel);
+
+				// 2. remove from queue
+				_spawningQueue = _spawningQueue.RemoveLastOccurenceOf(spawnToCancel);
+
+				// 3. restart queue if needed
+				bool currentSpawnHasChanged = spawningPrefabBefore == spawnToCancel && CurrentPrefabSpawning != spawnToCancel;
+
+				if (currentSpawnHasChanged == true)
+				{
+					SetSpawnTimer();
+				}
+			}
+		}
+
+		public void EnqueueSpawn(ISpawnable prefabToSpawn)
 		{
 			if (CanSpawn(prefabToSpawn, true) == false)
 			{
@@ -109,6 +132,11 @@
 
 			_spawningQueue.Enqueue(prefabToSpawn);
 			SetSpawnTimer();
+		}
+
+		private void RefundEntitySpawn(ISpawnable toRefund)
+		{
+			_playerResources.AddWallet(Data.GetSpawnPrice(toRefund));
 		}
 
 		private void SpawnVillager(ISpawnable prefabToSpawn)
