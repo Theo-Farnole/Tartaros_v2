@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 4b488b12a2818574c9af4434d4708483, type: 3}
+  _size: {x: 5, y: 5}
+  _iconTint: {r: 0.19953722, g: 0.37681383, b: 0.7169812, a: 1}
 --- !u!114 &1304712991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,8 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0527f2a60fb19408a6c7a813bc75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpawnPoint: {fileID: 8441566773944835048}
+  _projectileSpawnPoint: {x: 0, y: 1, z: 0}
   _inflictDamageAnimationEvent: {fileID: 1364691790755559398}
+  _turretTransform: {fileID: 0}
 --- !u!195 &7669539524184917896
 NavMeshAgent:
   m_ObjectHideFlags: 0
