@@ -153,17 +153,82 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: _capturePrice
-      Entry: 6
+      Entry: 7
+      Data: 9|Tartaros.Economy.SectorResourcesWallet, Tartaros
+    - Name: _ressourceAmount
+      Entry: 7
+      Data: 10|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+        Tartaros],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 11|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+        Tartaros]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Tartaros.Map.SectorData, Tartaros
+      Data: 12|Tartaros.Map.SectorData, Tartaros
     - Name: _vertices
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+      Data: 13|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
         mscorlib
     - Name: 
       Entry: 12
@@ -173,7 +238,7 @@ MonoBehaviour:
       Data: 5
     - Name: 
       Entry: 7
-      Data: 11|Tartaros.Map.Vertex2D, Tartaros
+      Data: 14|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -191,7 +256,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|Tartaros.Map.Vertex2D, Tartaros
+      Data: 15|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -209,7 +274,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|Tartaros.Map.Vertex2D, Tartaros
+      Data: 16|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -227,7 +292,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|Tartaros.Map.Vertex2D, Tartaros
+      Data: 17|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -245,7 +310,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|Tartaros.Map.Vertex2D, Tartaros
+      Data: 18|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -263,7 +328,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|Tartaros.Map.Vertex2D, Tartaros
+      Data: 19|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -289,27 +354,82 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: _capturePrice
-      Entry: 6
+      Entry: 7
+      Data: 20|Tartaros.Economy.SectorResourcesWallet, Tartaros
+    - Name: _ressourceAmount
+      Entry: 7
+      Data: 21|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+        Tartaros],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 11
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|Tartaros.Map.SectorData, Tartaros
+      Data: 22|Tartaros.Map.SectorData, Tartaros
     - Name: _vertices
       Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+      Data: 23|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 7
     - Name: 
       Entry: 9
-      Data: 16
+      Data: 19
     - Name: 
       Entry: 7
-      Data: 19|Tartaros.Map.Vertex2D, Tartaros
+      Data: 24|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -327,7 +447,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|Tartaros.Map.Vertex2D, Tartaros
+      Data: 25|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -345,7 +465,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 21|Tartaros.Map.Vertex2D, Tartaros
+      Data: 26|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -363,7 +483,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Tartaros.Map.Vertex2D, Tartaros
+      Data: 27|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -381,7 +501,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 23|Tartaros.Map.Vertex2D, Tartaros
+      Data: 28|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -399,7 +519,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 9
-      Data: 15
+      Data: 18
     - Name: 
       Entry: 13
       Data: 
@@ -414,23 +534,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|Tartaros.Map.SectorData, Tartaros
+      Data: 29|Tartaros.Map.SectorData, Tartaros
     - Name: _vertices
       Entry: 7
-      Data: 25|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+      Data: 30|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 9
     - Name: 
       Entry: 9
-      Data: 15
+      Data: 18
     - Name: 
       Entry: 9
-      Data: 23
+      Data: 28
     - Name: 
       Entry: 7
-      Data: 26|Tartaros.Map.Vertex2D, Tartaros
+      Data: 31|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -448,7 +568,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 27|Tartaros.Map.Vertex2D, Tartaros
+      Data: 32|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -466,7 +586,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 28|Tartaros.Map.Vertex2D, Tartaros
+      Data: 33|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -484,7 +604,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|Tartaros.Map.Vertex2D, Tartaros
+      Data: 34|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -502,7 +622,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 30|Tartaros.Map.Vertex2D, Tartaros
+      Data: 35|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -520,10 +640,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 9
-      Data: 13
+      Data: 16
     - Name: 
       Entry: 9
-      Data: 14
+      Data: 17
     - Name: 
       Entry: 13
       Data: 
@@ -538,26 +658,26 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 31|Tartaros.Map.SectorData, Tartaros
+      Data: 36|Tartaros.Map.SectorData, Tartaros
     - Name: _vertices
       Entry: 7
-      Data: 32|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
+      Data: 37|System.Collections.Generic.List`1[[Tartaros.Map.Vertex2D, Tartaros]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 8
     - Name: 
       Entry: 9
-      Data: 23
+      Data: 28
     - Name: 
       Entry: 9
-      Data: 26
+      Data: 31
     - Name: 
       Entry: 9
-      Data: 27
+      Data: 32
     - Name: 
       Entry: 7
-      Data: 33|Tartaros.Map.Vertex2D, Tartaros
+      Data: 38|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -575,7 +695,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 34|Tartaros.Map.Vertex2D, Tartaros
+      Data: 39|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -593,7 +713,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 35|Tartaros.Map.Vertex2D, Tartaros
+      Data: 40|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -611,7 +731,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 36|Tartaros.Map.Vertex2D, Tartaros
+      Data: 41|Tartaros.Map.Vertex2D, Tartaros
     - Name: _position
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -629,7 +749,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 9
-      Data: 22
+      Data: 27
     - Name: 
       Entry: 13
       Data: 

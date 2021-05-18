@@ -70,7 +70,6 @@
 			{
 				_currentIndex = 0;
 			}
-			Debug.Log(_maxIndex);
 
 			MoveToTargetPoint(_currentIndex);
 		}

@@ -83,7 +83,7 @@
 			}
 		}
 
-		private void AddGlory(Transform sender, int amount)
+		public void AddGlory(Transform sender, int amount)
 		{
 			InstantiateGloryText(sender, amount);
 

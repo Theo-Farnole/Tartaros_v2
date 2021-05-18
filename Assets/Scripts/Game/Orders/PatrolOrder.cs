@@ -47,7 +47,7 @@
 
 					CatchRightClickState state = new CatchRightClickState(gamemodeManager, OrderSetPatrol(entityMovement, position), order);
 
-					Debug.Log("firstPositionEnable");
+
 					gamemodeManager.SetState(state);
 				}
 				else
@@ -61,7 +61,6 @@
 		{
 			return () =>
 			{
-				Debug.Log("secondsPositionEnable");
 				var userErrorLogger = Services.Instance.Get<UserErrorsLogger>();
 
 				RaycastHit hit;
