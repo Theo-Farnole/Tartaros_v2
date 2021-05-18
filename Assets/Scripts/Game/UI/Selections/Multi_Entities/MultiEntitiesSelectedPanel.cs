@@ -40,12 +40,7 @@
 		{
 			if (_currentSelection.SelectedSelectables.Length > 1)
 			{
-				UpdateInformations(_currentSelection.SelectedSelectables);
-				Show();
-			}
-			else
-			{
-				Hide();
+				UpdateInformations(_currentSelection.SelectedSelectables);				
 			}
 		}
 
