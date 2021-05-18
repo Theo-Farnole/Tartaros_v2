@@ -12,6 +12,7 @@
 		[SerializeField] private RectTransform _rootInQueue = null;
 		[SerializeField] private TextMeshProUGUI _inQueue = null;
 		[SerializeField] private Slider _slider = null;
+		[SerializeField] private Image _portrait = null;
 
 		private EntityUnitsSpawner _unitsSpawner = null;
 		private ISpawnable _toSpawn = null;
@@ -69,6 +70,7 @@
 		{
 			_unitsSpawner = unitsSpawner;
 			_toSpawn = toSpawn;
+			_portrait.sprite = toSpawn.Portrait;
 		}
 
 		private void OnButtonClick()
