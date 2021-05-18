@@ -196,7 +196,7 @@
 			if (_wallToHideAndShow != null)
 			{
 				gameplayStartPrefab = _constructable.WallCornerGameplay;
-				_wallToHideAndShow.SetActive(false);
+				_wallToHideAndShow.SetActive(true);
 				//Debug.Log(_wallToHideAndShow, _wallToHideAndShow);
 				_wallToHideAndShow.GetComponent<Entity>().Kill();
 			}
