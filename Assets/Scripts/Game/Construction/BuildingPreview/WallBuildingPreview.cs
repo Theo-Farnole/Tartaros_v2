@@ -20,7 +20,7 @@
 
 		private float _angleLimitation = 4;
 
-		public float DistanceBetweenInstanciate => _toBuild.Size.y;
+		public float DistanceBetweenInstanciate => _toBuild.Size.x;
 
 		public WallBuildingPreview(IConstructable toBuild, Vector3 startPosition, GameObject startPreview)
 		{
@@ -185,23 +185,19 @@
 
 				if (Physics.Raycast(positionV3, Vector3.down, out hit, Mathf.Infinity, NavMesh.AllAreas))
 				{
-					//Debug.DrawRay(positionV3, Vector3.down * 1000, Color.yellow);
+					Debug.DrawRay(positionV3, Vector3.down * 10, Color.yellow, 3);
 					if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
 					{
-						Debug.Log("NotOnNavMesh");
-						//Debug.DrawRay(positionV3, Vector3.down * 1000, Color.yellow);
+						Debug.DrawRay(positionV3, Vector3.down * 10, Color.green, 3);
 
 						if (_objectUnderCursorManager.IsTheSameConstructable() == false)
 						{
-							Debug.Log("NotSameConstrucatble");
 							return false;
 						}
 					}
-					Debug.Log("OnNavMesh");
 				}
 				else
 				{
-					Debug.Log("DontTouchNavMeshAtAll");
 					return false;
 				}
 			}

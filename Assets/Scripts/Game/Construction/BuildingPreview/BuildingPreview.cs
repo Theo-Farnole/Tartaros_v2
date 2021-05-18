@@ -69,19 +69,19 @@
 				float buildingPosX = _buildingPreview.transform.position.x - _toBuild.Size.x / 2;
 				float buildingPosZ = _buildingPreview.transform.position.z - _toBuild.Size.y / 2;
 				Vector3 positionV3 = new Vector3(position.x + buildingPosX, 1, position.y + buildingPosZ);
-	
+
 
 				RaycastHit hit;
 
 				if (Physics.Raycast(positionV3, Vector3.down, out hit, Mathf.Infinity, NavMesh.AllAreas))
 				{
+					Debug.DrawRay(positionV3, Vector3.down * 10, Color.yellow);
 					if (NavMeshHelper.IsPositionOnNavMesh(hit.point) == false)
 					{
-						//Debug.DrawRay(positionV3, Vector3.down * hit.distance, Color.yellow);
 
-						if(_isWallPreview == true)
+						if (_isWallPreview == true)
 						{
-							if(_objectUnderCursorManager.IsTheSameConstructable() == false)
+							if (_objectUnderCursorManager.IsTheSameConstructable() == false)
 							{
 								return false;
 							}
@@ -102,8 +102,8 @@
 
 		private Vector2[] GetPointToCheckTheConstructionViability()
 		{
-			float previewWidght = _toBuild.Size.x - 0.5f;
-			float previewLenght = _toBuild.Size.y - 0.5f;
+			float previewWidght = _toBuild.Size.y - 1f;
+			float previewLenght = _toBuild.Size.x - 1f;
 			List<Vector2> output = new List<Vector2>();
 
 			//center
