@@ -145,14 +145,19 @@
 			//TODO DJ: draw the nav line each start of wave 
 		}
 
-		public void AddIcon(IMiniMapIcon icon)
+		public void AddIcon(IMiniMapIcon icon, Vector2 size)
 		{
-			RectTransform rectTransform = InstantiateIcon(icon);
+			AddIcon(icon, size, Color.white);
+		}
+
+		public void AddIcon(IMiniMapIcon icon, Vector2 size, Color tint)
+		{
+			RectTransform rectTransform = InstantiateIcon(icon, size, tint);
 
 			_icons.Add(icon, rectTransform);
 		}
 
-		private RectTransform InstantiateIcon(IMiniMapIcon icon)
+		private RectTransform InstantiateIcon(IMiniMapIcon icon, Vector2 size, Color tint)
 		{
 			var iconGameObject = GameObject.Instantiate(_prefabIcon, _iconsParent);
 
@@ -160,7 +165,11 @@
 
 			rectTransform.SetParent(_iconsParent, false);
 			rectTransform.localScale = Vector3.one;
-			iconGameObject.GetComponent<Image>().sprite = icon.Icon;
+			rectTransform.sizeDelta = size;
+
+			Image image = iconGameObject.GetComponent<Image>();
+			image.sprite = icon.Icon;
+			image.color = tint;
 
 			return rectTransform;
 		}

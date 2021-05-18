@@ -18,7 +18,7 @@
 		public static bool IsInDebugPause => _isInDebugPause;
 
 		[Cheat]
-		public static void InflictDamageToSelected(int damage)
+		public static void InflictDamageToSelected(int damage = 3)
 		{
 			ISelection currentSelection = Services.Instance.Get<CurrentSelection>();
 

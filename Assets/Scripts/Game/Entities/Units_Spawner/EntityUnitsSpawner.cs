@@ -8,16 +8,16 @@
 	using Tartaros.Population;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using TMPro;
 	using UnityEngine;
 
 	[DisallowMultipleComponent]
 	public class EntityUnitsSpawner : AEntityBehaviour, IOrderable
 	{
 		#region Fields
-		[ShowInRuntime]
-		private Queue<ISpawnable> _spawningQueue = new Queue<ISpawnable>();
-		[ShowInRuntime]
-		private float _spawnNextInQueueSpawn = 0;
+		[ShowInRuntime] private Queue<ISpawnable> _spawningQueue = new Queue<ISpawnable>();
+		[ShowInRuntime] private float _nextSpawnTime = 0;
+		[ShowInRuntime] private float _startSpawnTime = 0;
 
 		private EntityUnitsSpawnerData _data = null;
 		private IPlayerSectorResources _playerResources = null;
@@ -26,8 +26,21 @@
 		#endregion Fields
 
 		#region Properties
-		public ISpawnable[] SpawnablePrefabs => Data.SpawnablePrefabs;
+		public ISpawnable[] Spawnables => Data.SpawnablePrefabs;
 		public EntityUnitsSpawnerData Data { get => _data; set => _data = value; }
+		public ISpawnable CurrentPrefabSpawning => _spawningQueue.Count > 0 ? _spawningQueue.Peek() : null;
+		public float CurrentProgression
+		{
+			get
+			{
+				float current = Time.time;
+				float duration = _nextSpawnTime - _startSpawnTime;
+				float delta = current - _startSpawnTime;
+
+				return delta / duration;
+
+			}
+		}
 		#endregion Properties
 
 		#region Methods
@@ -46,7 +59,7 @@
 
 		private void Update()
 		{
-			if (_spawningQueue.IsPopulated() == true && Time.time >= _spawnNextInQueueSpawn)
+			if (_spawningQueue.IsPopulated() == true && Time.time >= _nextSpawnTime)
 			{
 				Spawn(_spawningQueue.Dequeue());
 
@@ -72,6 +85,13 @@
 
 		public ISectorResourcesWallet GetSpawnPrice(ISpawnable gameObject) => _data.GetSpawnPrice(gameObject);
 
+		public int GetCountSpawnablesInQueue(ISpawnable prefab)
+		{
+			return _spawningQueue
+				.Where(x => x == prefab)
+				.Count();
+		}
+
 		public void EnqueueEntitySpawn(ISpawnable prefabToSpawn)
 		{
 			if (CanSpawn(prefabToSpawn, true) == false)
@@ -82,7 +102,7 @@
 
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
 
-			if(_spawningQueue.IsPopulated() == false)
+			if (_spawningQueue.IsPopulated() == false)
 			{
 				SpawnVillager(prefabToSpawn);
 			}
@@ -151,7 +171,8 @@
 		{
 			if (_spawningQueue.IsEmpty() == true) throw new System.NotSupportedException("Cannot set spawn timer if the queue is empty.");
 
-			_spawnNextInQueueSpawn = Time.time + _data.GetSpawnTime(_spawningQueue.Peek());
+			_startSpawnTime = Time.time;
+			_nextSpawnTime = Time.time + _data.GetSpawnTime(_spawningQueue.Peek());
 		}
 
 		private void Spawn(ISpawnable prefabToSpawn)
@@ -169,7 +190,7 @@
 		{
 			List<Order> orders = new List<Order>();
 
-			foreach (ISpawnable spawnable in SpawnablePrefabs)
+			foreach (ISpawnable spawnable in Spawnables)
 			{
 				orders.Add(new SpawnUnitOrder(spawnable, this));
 			}

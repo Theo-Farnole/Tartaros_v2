@@ -94,7 +94,7 @@
 		void IAttackable.TakeDamage(int damage, IAttackable attackable)
 		{
 			CurrentHealth -= damage;
-			Debug.Log(attackable);
+			
 			DamageTaken?.Invoke(this, new DamageTakenArgs(attackable));
 
 			if (IsDead)

@@ -16,6 +16,10 @@
 		private Queue<AEntityState> _statesQueue = new Queue<AEntityState>();
 		#endregion Fields
 
+		#region Properties
+		public AState<Entity> CurrentState => _finiteStateMachine.CurrentState;
+		#endregion Properties
+
 		#region Methods		
 		private void Start()
 		{

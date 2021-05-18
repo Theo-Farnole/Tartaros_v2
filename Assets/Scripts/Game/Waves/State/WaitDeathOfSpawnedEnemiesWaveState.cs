@@ -29,7 +29,15 @@
 
 			if (IsEverySpawnedEnemiesWaveDead())
 			{
-				_stateOwner.WaveFSM.CurrentState = new WaveCooldownState(_stateOwner);
+				if (_stateOwner.CurrentWaveIndex < _stateOwner.LastWaveIndex)
+				{
+					_stateOwner.WaveFSM.CurrentState = new WaveCooldownState(_stateOwner);
+				}
+				else
+				{
+
+					_stateOwner.WaveFSM.CurrentState = new WaveFinishedState(_stateOwner);
+				}
 			}
 		}
 

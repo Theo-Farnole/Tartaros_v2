@@ -5,8 +5,9 @@
 
     public class MiniMapIcon : MonoBehaviour, IMiniMapIcon
     {
-        [SerializeField]
-        private Sprite _icon = null;
+        [SerializeField] private Sprite _icon = null;
+        [SerializeField] private Vector2 _size = Vector2.one * 5;
+        [SerializeField] private Color _iconTint = Color.white;
 
         private MiniMap _miniMap = null;
 
@@ -30,7 +31,7 @@
 
         void OnEnable()
 		{
-            _miniMap.AddIcon(this);
+            _miniMap.AddIcon(this, _size, _iconTint);
 		}
   
         void OnDisable()
@@ -41,7 +42,7 @@
         private void RefreshIcon()
         {
             _miniMap.RemoveIcon(this);
-            _miniMap.AddIcon(this);
+            _miniMap.AddIcon(this, _size);
         }
 
         //void OnDrawGizmos()

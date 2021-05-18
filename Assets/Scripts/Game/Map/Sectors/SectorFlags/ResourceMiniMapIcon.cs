@@ -45,7 +45,7 @@
 
 		void OnEnable()
 		{
-			_minimap.AddIcon(this);
+			_minimap.AddIcon(this, Vector2.one * 25);
 		}
 
 		void OnDisable()
@@ -58,7 +58,7 @@
 			RefreshCachedIcon();
 
 			_minimap.RemoveIcon(this);
-			_minimap.AddIcon(this);
+			_minimap.AddIcon(this, Vector2.one * 25);
 		}
 
 		private void RefreshCachedIcon()

@@ -297,7 +297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +999
+  m_text: +99
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0916d54e7f9ecbe449c4e52bce5bcbc3, type: 2}
   m_sharedMaterial: {fileID: 8147820133961235295, guid: 0916d54e7f9ecbe449c4e52bce5bcbc3,
@@ -325,12 +325,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 34
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
-  m_fontSizeMax: 10
+  m_fontSizeMax: 15
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999999
+  m_text: 9999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0916d54e7f9ecbe449c4e52bce5bcbc3, type: 2}
   m_sharedMaterial: {fileID: 8147820133961235295, guid: 0916d54e7f9ecbe449c4e52bce5bcbc3,
@@ -480,12 +480,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 34
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 1.37
-  m_fontSizeMax: 10
+  m_fontSizeMax: 15
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -595,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toShowDataAsset: {fileID: 0}
+  _popupPosition: 0
 --- !u!114 &1462576014373249376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPopulation: 0
   _icon: {fileID: 8703934997824605310}
-  _resourceType: 0
+  _resourceType: 2
   _amountText: {fileID: 5494600410416544747}
   _incomeText: {fileID: 2427673151910344905}
   _currentPopulationText: {fileID: 5494600410416544747}

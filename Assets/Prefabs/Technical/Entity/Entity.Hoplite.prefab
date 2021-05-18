@@ -177,6 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 4b488b12a2818574c9af4434d4708483, type: 3}
+  _size: {x: 5, y: 5}
+  _iconTint: {r: 0.19953722, g: 0.37681383, b: 0.7169812, a: 1}
 --- !u!114 &6834013272998221486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectileSpawnPoint: {x: 0, y: 1, z: 0}
   _inflictDamageAnimationEvent: {fileID: 0}
+  _turretTransform: {fileID: 0}
 --- !u!195 &6761392221939020968
 NavMeshAgent:
   m_ObjectHideFlags: 0

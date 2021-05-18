@@ -1,21 +1,21 @@
 ﻿namespace Tartaros.Orders
 {
+	using Sirenix.OdinInspector;
 	using System.Collections.Generic;
-	using Tartaros.Entities;
 	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 
 	public class UIOrderButtonsGenerator : MonoBehaviour
 	{
 		#region Fields 		
-		[SerializeField]
-		private GameObject _prefabButton = null;
+		[Title("References")]
+		[SerializeField] private RectTransform _buttonsRoot = null;
+		[SerializeField] private GameObject _prefabButton = null;
+		[SerializeField] private GameObject _prefabLockedButton = null;
 
-		[SerializeField]
-		private RectTransform _buttonsRoot = null;
-
-		[SerializeField]
-		private bool _destroyRootChildrenBeforeGeneration = true;
+		[Title("Settings")]
+		[SerializeField] private bool _destroyRootChildrenBeforeGeneration = true;
+		[SerializeField] private int _buttonsCount = 2;
 
 		private List<GameObject> _buttons = new List<GameObject>();
 		#endregion Fields
@@ -30,18 +30,36 @@
 
 			DestroyCurrentButtons();
 
-			foreach (Order order in orders)
+			for (int i = 0; i < _buttonsCount; i++)
 			{
-				GenerateButton(order);
+				if (i < orders.Length)
+				{
+					GenerateButton(orders[i]);
+				}
+				else
+				{
+					GenerateLockedButton();
+				}
 			}
 
 		}
+
 		private void DestroyCurrentButtons()
 		{
 			foreach (var button in _buttons)
 			{
 				Destroy(button);
 			}
+
+			_buttons.Clear();
+		}
+
+		private void GenerateLockedButton()
+		{
+			if (_prefabLockedButton == null) return;
+
+			GameObject button = GameObject.Instantiate(_prefabLockedButton, _buttonsRoot);
+			_buttons.Add(button);
 		}
 
 		private void GenerateButton(Order order)
