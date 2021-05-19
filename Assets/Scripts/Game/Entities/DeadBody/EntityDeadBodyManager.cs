@@ -40,7 +40,7 @@
 
 			if (deadbody.TryGetComponent(out AnimationInstancing.AnimationInstancing animationInstancing))
 			{
-				animationInstancing.PlayAnimation(_deathAnimation.name);
+				this.ExecuteAfterFrame(() => animationInstancing.PlayAnimation(_deathAnimation.name));
 			}
 			else
 			{
