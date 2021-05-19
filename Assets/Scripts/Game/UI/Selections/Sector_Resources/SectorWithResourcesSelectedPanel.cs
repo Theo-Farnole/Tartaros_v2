@@ -11,20 +11,11 @@
 	public class SectorWithResourcesSelectedPanel : APanel
 	{
 		#region Fields
-		[SerializeField]
-		private CaptureSectorButton _captureButton = null;
-
-		[SerializeField]
-		private ConstructAtBuildingSlot_Button _constructButton = null;
-
-		[SerializeField]
-		private Image _resourceIcon = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _name = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _description = null;
+		[SerializeField] private CaptureSectorButton _captureButton = null;
+		[SerializeField] private ConstructAtBuildingSlot_Button _constructButton = null;
+		[SerializeField] private Image _resourceIcon = null;
+		[SerializeField] private TextMeshProUGUI _name = null;
+		[SerializeField] private TextMeshProUGUI _description = null;
 
 		private ISelection _currentSelection = null;
 		private IconsDatabase _iconsDatabase = null;
