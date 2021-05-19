@@ -14,7 +14,6 @@
 		[SerializeField] private int  _gloryIncomeOnCapture = 0;
 
 		private int _maxRessourceBeforeEmpty = 0;
-		private IMap _map = null;
 		private IPlayerIncomeManager _playerIncomeManager = null;
 		private PlayerGloryIncomeManager _playerGloryIncomeManager = null;
 		private SectorObject _sectorObject = null;
@@ -38,7 +37,6 @@
 		private void OnEnable()
 		{
 			var sector = _sectorObject.GetSectorOnPosition();
-			Debug.Log(sector);
 
 			sector.Captured -= OnSectorCapture;
 			sector.Captured += OnSectorCapture;

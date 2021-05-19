@@ -35,6 +35,13 @@
 			_inputs.ValidatePerformed -= ValidatePerformed;
 			_inputs.ValidatePerformed += ValidatePerformed;
 
+			_inputs.LeavePerformed -= LeavePerformed;
+			_inputs.LeavePerformed += LeavePerformed;
+		}
+
+		private void LeavePerformed(InputAction.CallbackContext obj)
+		{
+			LeaveState();
 		}
 
 		private void ValidatePerformed(InputAction.CallbackContext obj)
