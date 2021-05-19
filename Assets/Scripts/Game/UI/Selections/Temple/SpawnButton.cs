@@ -55,7 +55,12 @@
 			_unitsSpawner = unitsSpawner;
 			_toSpawn = toSpawn;
 			_portrait.sprite = toSpawn.Portrait;
-			_openHoverPopupOnHover.ToShowData = toSpawn.HoverPopupData;
+
+			_openHoverPopupOnHover.ToShowData = new HoverPopupData(toSpawn.HoverPopupData)
+			{
+				CooldownInSeconds = unitsSpawner.GetSpawnSeconds(toSpawn),
+				SectorResourcesCost = unitsSpawner.GetSpawnPrice(toSpawn)
+			};
 		}
 
 		private void UpdateCountSpawnableRoot()

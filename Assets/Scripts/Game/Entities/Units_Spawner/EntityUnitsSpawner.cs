@@ -89,6 +89,7 @@
 		}
 
 		public ISectorResourcesWallet GetSpawnPrice(ISpawnable gameObject) => _data.GetSpawnPrice(gameObject);
+		public float GetSpawnSeconds(ISpawnable toSpawn) => _data.GetSpawnTime(toSpawn);
 
 		public int GetCountSpawnablesInQueue(ISpawnable prefab)
 		{
