@@ -44,7 +44,7 @@
 			return Vector3.Distance(transform.position, _lastPosition) >= MOVE_DETECTION_THRESHOLD;
 		}
 
-		private ISector GetSectorOnPosition()
+		public ISector GetSectorOnPosition()
 		{
 			return _map.GetSectorOnPosition(transform.position);
 		}

@@ -9,7 +9,7 @@
 		public static readonly int PARAMETER_IS_MOVING = Animator.StringToHash("isMoving");
 		public static readonly int PARAMETER_ATTACK = Animator.StringToHash("attack");
 		public static readonly int PARAMETER_IS_ATTACKING = Animator.StringToHash("isAttacking");
-		public static readonly int PARAMETER_DEAD = Animator.StringToHash("isDead");
+		public static readonly int PARAMETER_IS_DEAD = Animator.StringToHash("isDead");
 
 		private EntityMovement _entityMovement = null;
 		private EntityAttack _entityAttack = null;
@@ -73,7 +73,7 @@
 
 		private void EntityKilled(object sender, Wave.KilledArgs e)
 		{
-			_animator.SetBool(PARAMETER_DEAD, true);
+			_animator.SetBool(PARAMETER_IS_DEAD, true);
 		}
 
 		private void AttackCasted(object sender, EntityAttack.AttackCastedArgs e)

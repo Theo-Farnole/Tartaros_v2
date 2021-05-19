@@ -38,9 +38,9 @@
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
-			if (_currentSelection.SelectedSelectables.Length > 1)
+			if (_currentSelection.ObjectsCount > 1)
 			{
-				UpdateInformations(_currentSelection.SelectedSelectables);				
+				UpdateInformations(_currentSelection.Objects);
 			}
 		}
 

@@ -96,7 +96,7 @@
 		private void UpdateCooldown()
 		{
 			_cooldownLabel.gameObject.SetActive(_displayedData.HasCooldown);
-			_cooldownLabel.text = _displayedData.Cooldown;
+			_cooldownLabel.text = _displayedData.CooldownFormated;
 		}
 
 		private void UpdateCost()

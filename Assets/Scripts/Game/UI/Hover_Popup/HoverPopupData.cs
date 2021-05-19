@@ -11,44 +11,37 @@
 		#region Fields
 		private const string COOLDOWN_FORMAT = "{0}s";
 
-		[SerializeField]
-		private string _name = "Lorem ipsum";
+		[SerializeField] private string _name = "Lorem ipsum";
+		[SerializeField] private string _description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+		[SerializeField] private string _loreDescription = "";
 
-		[SerializeField]
-		private string _description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+		[OdinSerialize] private ISectorResourcesWallet _sectorResourcesCost = null;
 
-		[SerializeField]
-		private string _loreDescription = "";
+		[SerializeField] private int _favorCost = 0;
+		[SerializeField] private float _cooldown = 0;
+		[SerializeField] private bool _hasHotkey = false;
 
-		[OdinSerialize]
-		private ISectorResourcesWallet _sectorResourcesCost = null;
-
-		[SerializeField]
-		private int _favorCost = 0;
-
-		[SerializeField]
-		private float _cooldown = 0;
-
-		[SerializeField]
-		private bool _hasHotkey = false;
-
-		[ShowIf(nameof(_hasHotkey))]
-		[SerializeField]
-		private KeyCode _hotkey = KeyCode.A;
+		[ShowIf(nameof(_hasHotkey))] [SerializeField] private KeyCode _hotkey = KeyCode.A;
 		#endregion Fields
 
 		#region Properties
-		[ShowInInspector]
-		public bool HasName => !string.IsNullOrEmpty(_name);
+		[ShowInInspector] public bool HasName => !string.IsNullOrEmpty(_name);
 		public string Name => _name;
-		[ShowInInspector]
-		public bool HasDescription => !string.IsNullOrEmpty(_description);
+		[ShowInInspector] public bool HasDescription => !string.IsNullOrEmpty(_description);
 		public string Description => _description;
-		[ShowInInspector]
-		public bool HasCooldown => _cooldown != 0;
-		public string Cooldown => string.Format(COOLDOWN_FORMAT, _cooldown);
-		[ShowInInspector]
-		public bool HasCost => HasFavorCost || HasSectorResourcesCost;
+		[ShowInInspector] public bool HasCooldown => _cooldown != 0;
+		public string CooldownFormated => string.Format(COOLDOWN_FORMAT, _cooldown);
+		public float CooldownInSeconds { set => _cooldown = value; }
+		[ShowInInspector] public bool HasCost => HasFavorCost || HasSectorResourcesCost;
+		public ISectorResourcesWallet SectorResourcesCost
+		{
+			set
+			{
+				if (HasFavorCost) throw new System.NotSupportedException("Cannot set a sector resources cost while there is already a glory cost.");
+
+				_sectorResourcesCost = value;
+			}
+		}
 		public string Cost
 		{
 			get
@@ -76,8 +69,6 @@
 
 		private bool HasFavorCost => _favorCost != 0;
 		private bool HasSectorResourcesCost => _sectorResourcesCost != null;
-
-		public ISectorResourcesWallet SectorResourcesCost { get => _sectorResourcesCost; set => _sectorResourcesCost = value; }
 		#endregion Properties
 
 		#region Ctor

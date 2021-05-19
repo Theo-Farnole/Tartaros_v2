@@ -61,9 +61,9 @@
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
-			if (_currentSelection.SelectedSelectables.Length == 1)
+			if (_currentSelection.ObjectsCount == 1)
 			{
-				ISelectable firstSelectable = _currentSelection.SelectedSelectables[0];
+				ISelectable firstSelectable = _currentSelection.Objects[0];
 
 				if ((firstSelectable as MonoBehaviour).GetComponent<ISector>() == null)
 				{

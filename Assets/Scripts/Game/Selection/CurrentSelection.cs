@@ -17,7 +17,24 @@
 		#endregion Fields
 
 		#region Properties
-		ISelectable[] ISelection.SelectedSelectables => _selectedObjets.ToArray();
+		ISelectable[] ISelection.Objects
+		{
+			get
+			{
+				_selectedObjets.RemoveAll(x => x.IsInterfaceDestroyed());
+				return _selectedObjets.Where(x => x.IsInterfaceDestroyed() == false).ToArray();
+			}
+		}
+
+		int ISelection.ObjectsCount
+		{
+			get
+			{
+				_selectedObjets.RemoveAll(x => x.IsInterfaceDestroyed());
+				return _selectedObjets.Where(x => x.IsInterfaceDestroyed() == false).Count();
+			}
+		}
+
 		private ISelection Selection => this as ISelection;
 
 		private event EventHandler<SelectionChangedArgs> SelectionChanged = null;
@@ -25,7 +42,7 @@
 		#endregion Properties
 
 		#region Methods
-		void ISelection.AddToSelection(ISelectable selectable)
+		void ISelection.Add(ISelectable selectable)
 		{
 			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
 
@@ -39,7 +56,7 @@
 
 			if (DoMustClearSelection(selectable))
 			{
-				Selection.ClearSelection();
+				Selection.Clear();
 			}
 
 			UnselectNoMultiSelectables();
@@ -50,7 +67,7 @@
 			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
 		}
 
-		void ISelection.AddToSelection(ISelectable[] selectables)
+		void ISelection.Add(ISelectable[] selectables)
 		{
 			if (selectables is null) throw new ArgumentNullException(nameof(selectables));
 
@@ -58,12 +75,12 @@
 			{
 				if (selectable.CanBeMultiSelected == true)
 				{
-					Selection.AddToSelection(selectable);
+					Selection.Add(selectable);
 				}
 			}
 		}
 
-		void ISelection.RemoveFromSelection(ISelectable selectable)
+		void ISelection.Remove(ISelectable selectable)
 		{
 			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
 
@@ -82,11 +99,11 @@
 			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
 		}
 
-		void ISelection.ClearSelection()
+		void ISelection.Clear()
 		{
 			for (int i = _selectedObjets.Count - 1; i >= 0; i--)
 			{
-				Selection.RemoveFromSelection(_selectedObjets[i]);
+				Selection.Remove(_selectedObjets[i]);
 			}
 		}
 
@@ -97,17 +114,17 @@
 			return _selectedObjets.Contains(selectable);
 		}
 
-		void ISelection.AlternateSelection(ISelectable selectable)
+		void ISelection.Toggle(ISelectable selectable)
 		{
 			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
 
 			if (Selection.IsSelected(selectable))
 			{
-				Selection.RemoveFromSelection(selectable);
+				Selection.Remove(selectable);
 			}
 			else
 			{
-				Selection.AddToSelection(selectable);
+				Selection.Add(selectable);
 			}
 		}
 
@@ -119,7 +136,7 @@
 
 			foreach (var element in elementsToRemove)
 			{
-				Selection.RemoveFromSelection(element);
+				Selection.Remove(element);
 			}
 		}
 

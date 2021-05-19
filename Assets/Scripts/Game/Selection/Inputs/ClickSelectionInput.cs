@@ -43,12 +43,12 @@
 
 			if (EnableAdditiveSelectionPerformed == false)
 			{
-				_selection.ClearSelection();
+				_selection.Clear();
 			}
 
 			if (TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
 			{
-				_selection.AlternateSelection(selectableUnderCursor);
+				_selection.Toggle(selectableUnderCursor);
 			}
 		}
 

@@ -3,7 +3,7 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
-	
+
 	using Tartaros.Entities;
 	using Tartaros.Entities.Attack;
 
@@ -14,7 +14,7 @@
 		private readonly EntityMovement _entityMovement = null;
 		private readonly Animator _animator = null;
 
-		private AnimatorClipInfo _clip;
+		private AnimatorClipInfo _attackClip;
 
 		public StateAttack(Entity stateOwner, IAttackable target) : base(stateOwner)
 		{
@@ -43,7 +43,6 @@
 			if (IsTargetDead() == true)
 			{
 				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
-				Debug.Log("Target dead");
 			}
 			else
 			{
@@ -52,13 +51,14 @@
 					_entityAttack.StartAttacking();
 					StopMovement();
 					_entityAttack.CastAttackIfPossible(_target);
-					_clip = _animator.GetCurrentAnimatorClipInfo(0)[0];
+
+					_attackClip = _animator.GetCurrentAnimatorClipInfo(0)[0];
 				}
 				else
 				{
 					_entityAttack.StopAttacking();
 
-					if(IsCurrentAttackAnimationFinish() == true)
+					if (IsCurrentAttackAnimationFinish() == true)
 					{
 						MoveToTarget();
 					}
@@ -81,13 +81,11 @@
 
 		private bool IsCurrentAttackAnimationFinish()
 		{
-			if(_animator == null)
-			{
-				return true;
-			}
+			if (_animator == null) return true;
+
 			AnimatorClipInfo currentClip = _animator.GetCurrentAnimatorClipInfo(0)[0];
 
-			return currentClip.clip.name != _clip.clip.name;
+			return _attackClip.clip == null || (_attackClip.clip != null && currentClip.clip.name != _attackClip.clip.name);
 		}
 
 		private void MoveToTarget()

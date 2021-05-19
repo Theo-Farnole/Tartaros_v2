@@ -54,8 +54,8 @@
 				this.GetComponent<Entity>().Kill();
 
 				ISelection selction = Services.Instance.Get<CurrentSelection>();
-				selction.ClearSelection();
-				selction.AddToSelection(gate.GetComponent<ISelectable>());
+				selction.Clear();
+				selction.Add(gate.GetComponent<ISelectable>());
 			}
 		}
 

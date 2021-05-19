@@ -1,12 +1,13 @@
 ﻿namespace Tartaros.UI
 {
 	using Tartaros.Entities;
+	using Tartaros.UI.HoverPopup;
 	using TMPro;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
-	[RequireComponent(typeof(Button))]
+	[RequireComponent(typeof(Button), typeof(OpenHoverPopupOnHover))]
 	public class SpawnButton : MonoBehaviour, IPointerClickHandler
 	{
 		#region Fields
@@ -19,12 +20,14 @@
 		private ISpawnable _toSpawn = null;
 
 		private Button _button = null;
+		private OpenHoverPopupOnHover _openHoverPopupOnHover = null;
 		#endregion Fields
 
 		#region Methods
 		private void Awake()
 		{
 			_button = GetComponent<Button>();
+			_openHoverPopupOnHover = GetComponent<OpenHoverPopupOnHover>();
 		}
 
 		private void OnEnable()
@@ -47,6 +50,19 @@
 			}
 		}
 
+		public void Construct(EntityUnitsSpawner unitsSpawner, ISpawnable toSpawn)
+		{
+			_unitsSpawner = unitsSpawner;
+			_toSpawn = toSpawn;
+			_portrait.sprite = toSpawn.Portrait;
+
+			_openHoverPopupOnHover.ToShowData = new HoverPopupData(toSpawn.HoverPopupData)
+			{
+				CooldownInSeconds = unitsSpawner.GetSpawnSeconds(toSpawn),
+				SectorResourcesCost = unitsSpawner.GetSpawnPrice(toSpawn)
+			};
+		}
+
 		private void UpdateCountSpawnableRoot()
 		{
 			int count = _unitsSpawner.GetCountSpawnablesInQueue(_toSpawn);
@@ -67,13 +83,6 @@
 			}
 		}
 
-		public void Construct(EntityUnitsSpawner unitsSpawner, ISpawnable toSpawn)
-		{
-			_unitsSpawner = unitsSpawner;
-			_toSpawn = toSpawn;
-			_portrait.sprite = toSpawn.Portrait;
-		}
-
 		private void OnButtonClick()
 		{
 			_unitsSpawner.EnqueueSpawn(_toSpawn);
@@ -81,8 +90,6 @@
 
 		void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
 		{
-			Debug.Log("Poitner click");
-
 			if (eventData.button == PointerEventData.InputButton.Right)
 			{
 				_unitsSpawner.CancelSpawn(_toSpawn);

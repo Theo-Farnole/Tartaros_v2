@@ -4,6 +4,7 @@
 	using Tartaros.Entities;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using TMPro;
 	using UnityEngine;
 
 	public class SelectionTemplePanel : APanel
@@ -15,6 +16,9 @@
 		[Title("UI References")]
 		[SerializeField] private SpawnButton[] _spawnButtons = null;
 		[SerializeField] private RadialHealthSlider _radialHealthSlider = null;
+		[Space]
+		[SerializeField] private TextMeshProUGUI _name = null;
+		[SerializeField] private TextMeshProUGUI _description = null;
 
 		private EntityUnitsSpawner _shownSpawner = null;
 		private ISelection _selection = null;
@@ -26,6 +30,12 @@
 			base.Awake();
 
 			_selection = Services.Instance.Get<CurrentSelection>();
+		}
+
+		private void Start()
+		{
+			_name.text = TartarosTexts.TEMPLE_NAME;
+			_description.text = TartarosTexts.TEMPLE_DESCRIPTION;
 		}
 
 		private void OnEnable()
@@ -41,9 +51,9 @@
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
-			if (_selection.SelectedSelectables.Length == 1)
+			if (_selection.ObjectsCount == 1)
 			{
-				ISelectable selectable = _selection.SelectedSelectables[0];
+				ISelectable selectable = _selection.Objects[0];
 
 				if (TryGetTemple(selectable, out _shownSpawner))
 				{

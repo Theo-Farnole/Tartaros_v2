@@ -78,7 +78,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0.68, z: 0}
@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1691539649732266130}
   - component: {fileID: 3479119921725111528}
   - component: {fileID: 5123987330241381361}
+  - component: {fileID: 4575075519702532487}
   m_Layer: 0
   m_Name: Entity.Hoplite
   m_TagString: Untagged
@@ -397,6 +398,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4575075519702532487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321277518661800559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970c36bafa26192439ea32067899f253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 919132149392299310}
+  _deathAnimation: {fileID: 1614560178520299633, guid: 33f7a3e6dbab45b4cbcf6c747e349f98,
+    type: 3}
 --- !u!1001 &371615871
 PrefabInstance:
   m_ObjectHideFlags: 0

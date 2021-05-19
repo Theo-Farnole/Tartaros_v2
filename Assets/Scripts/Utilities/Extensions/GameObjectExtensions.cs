@@ -6,6 +6,8 @@
 	{
 		public static bool TryGetComponentInParent<T>(this GameObject gameObject, out T entity)
 		{
+			if (gameObject is null) throw new System.ArgumentNullException(nameof(gameObject));
+
 			entity = gameObject.GetComponentInParent<T>();
 			return entity != null;
 		}

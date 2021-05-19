@@ -7,7 +7,6 @@
 		#region Fields
 		private readonly float GRAVITY = Physics.gravity.y;
 		private const float THRESHOLD_HIT_DISTANCE = 0.3f;
-		private const float THRESHOLD_DELAY_MISS_TARGET = 4;
 
 		[SerializeField]
 		private float _speed = 1;
@@ -18,7 +17,6 @@
 		private Transform _attacker = null;
 		private IAttackable _target = null;
 		private int _damage = -1;
-		private float _delay = 0;
 
 		private IHitEffect _hitEffect = null;
 
@@ -40,20 +38,8 @@
 				return;
 			}
 
-			SecurityArrowMiss();
-
 			MoveTowardsTarget();
 			IsTargetReach();
-		}
-
-		private void SecurityArrowMiss()
-		{
-			_delay += Time.deltaTime;
-
-			if (_delay >= THRESHOLD_DELAY_MISS_TARGET)
-			{
-				Destroy(gameObject);
-			}
 		}
 
 		public void Initialize(Transform attacker, IAttackable target, IHitEffect vfx, int damage)
@@ -78,11 +64,9 @@
 
 		private void IsTargetReach()
 		{
-			float distanceFromTarget = Vector3.Distance(transform.position, Destination);
-
 			Debug.DrawLine(transform.position, Destination);
 
-			if (distanceFromTarget <= THRESHOLD_HIT_DISTANCE)
+			if (transform.position.y < Destination.y)
 			{
 				OnTargetReach();
 			}

@@ -6,20 +6,21 @@
 
 	public interface ISelection
 	{
-		ISelectable[] SelectedSelectables { get; }
+		ISelectable[] Objects { get; }
+		int ObjectsCount { get; }
 
 		event EventHandler<SelectionChangedArgs> SelectionChanged;
 
-		void ClearSelection();
-		void AddToSelection(ISelectable selectable);
-		void AddToSelection(ISelectable[] selectables);
-		void RemoveFromSelection(ISelectable selectable);
+		void Clear();
+		void Add(ISelectable selectable);
+		void Add(ISelectable[] selectables);
+		void Remove(ISelectable selectable);
 		bool IsSelected(ISelectable selectable);
 
 		// TODO: find a better name
 		/// <summary>
 		/// If selectable is selected, unselect it. Else, select it.
 		/// </summary>
-		void AlternateSelection(ISelectable selectable);
+		void Toggle(ISelectable selectable);
 	}
 }

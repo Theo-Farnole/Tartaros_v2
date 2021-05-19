@@ -11,20 +11,11 @@
 	public class SectorWithResourcesSelectedPanel : APanel
 	{
 		#region Fields
-		[SerializeField]
-		private CaptureSectorButton _captureButton = null;
-
-		[SerializeField]
-		private ConstructAtBuildingSlot_Button _constructButton = null;
-
-		[SerializeField]
-		private Image _resourceIcon = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _name = null;
-
-		[SerializeField]
-		private TextMeshProUGUI _description = null;
+		[SerializeField] private CaptureSectorButton _captureButton = null;
+		[SerializeField] private ConstructAtBuildingSlot_Button _constructButton = null;
+		[SerializeField] private Image _resourceIcon = null;
+		[SerializeField] private TextMeshProUGUI _name = null;
+		[SerializeField] private TextMeshProUGUI _description = null;
 
 		private ISelection _currentSelection = null;
 		private IconsDatabase _iconsDatabase = null;
@@ -67,9 +58,9 @@
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
-			if (_currentSelection.SelectedSelectables.Length == 1)
+			if (_currentSelection.ObjectsCount == 1)
 			{
-				ISelectable firtSelectable = _currentSelection.SelectedSelectables[0];
+				ISelectable firtSelectable = _currentSelection.Objects[0];
 
 				if (firtSelectable.GameObject.TryGetComponent(out ISector sector) && sector.ContainsResource())
 				{
