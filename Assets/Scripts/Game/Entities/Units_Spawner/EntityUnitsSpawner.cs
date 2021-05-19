@@ -72,8 +72,7 @@
 				if (_spawningQueue.IsPopulated() == true)
 				{
 					SpawnVillager(_spawningQueue.Peek());
-
-					SetSpawnTimer();
+					ResetSpawnTimer();
 				}
 			}
 		}
@@ -116,7 +115,7 @@
 
 				if (currentSpawnHasChanged == true)
 				{
-					SetSpawnTimer();
+					ResetSpawnTimer();
 				}
 			}
 		}
@@ -130,14 +129,13 @@
 			}
 
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
+			_spawningQueue.Enqueue(prefabToSpawn);
 
-			if (_spawningQueue.IsPopulated() == false)
+			if (_spawningQueue.Count == 1)
 			{
 				SpawnVillager(prefabToSpawn);
+				ResetSpawnTimer();
 			}
-
-			_spawningQueue.Enqueue(prefabToSpawn);
-			SetSpawnTimer();
 		}
 
 		private void RefundEntitySpawn(ISpawnable toRefund)
@@ -201,7 +199,7 @@
 			return _populationManager.CanSpawn(gameObject.PopulationAmount);
 		}
 
-		private void SetSpawnTimer()
+		private void ResetSpawnTimer()
 		{
 			if (_spawningQueue.IsEmpty() == true) throw new System.NotSupportedException("Cannot set spawn timer if the queue is empty.");
 
