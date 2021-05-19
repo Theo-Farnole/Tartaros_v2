@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.UI
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.Entities;
 	using Tartaros.UI.HoverPopup;
 	using TMPro;
@@ -11,10 +12,13 @@
 	public class SpawnButton : MonoBehaviour, IPointerClickHandler
 	{
 		#region Fields
+		[Title("UI References")]
 		[SerializeField] private RectTransform _rootInQueue = null;
 		[SerializeField] private TextMeshProUGUI _inQueue = null;
 		[SerializeField] private Slider _slider = null;
 		[SerializeField] private Image _portrait = null;
+		[Title("Settings")]
+		[SerializeField] private int _sliderValueIfNotSpawning = 0;
 
 		private EntityUnitsSpawner _unitsSpawner = null;
 		private ISpawnable _toSpawn = null;
@@ -79,7 +83,7 @@
 			}
 			else
 			{
-				_slider.value = 1;
+				_slider.value = _sliderValueIfNotSpawning;
 			}
 		}
 

@@ -33,6 +33,19 @@
             }
         }
 
+        public event Action<CallbackContext> LeavePerformed
+        {
+            add
+            {
+                _input.Construction.ExitConstruction.performed += value;
+            }
+
+            remove
+            {
+                _input.Construction.ExitConstruction.performed -= value;
+            }
+        }
+
         public Vector3 GetMousePosition()
         {
             return _mousePosition.GetPreviewPosition();
