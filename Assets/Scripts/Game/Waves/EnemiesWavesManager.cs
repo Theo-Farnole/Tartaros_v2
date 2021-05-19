@@ -68,9 +68,16 @@
 
 		}
 
+		public class EveryWaveAreFinishedArgs : EventArgs
+		{
+
+		}
+
+
 		public event EventHandler<WaveSpawningStartArgs> WaveSpawnStart;
 		public event EventHandler<WaveSpawningFinishedArgs> WaveSpawnFinished;
 		public event EventHandler<WaveStartCooldownArgs> WaveStartCooldown;
+		public event EventHandler<EveryWaveAreFinishedArgs> WavesFinish;
 		// public event EventHandler<KilledArgs> Killed;
 		#endregion Events
 
@@ -120,9 +127,14 @@
 			WaveStartCooldown?.Invoke(this, new WaveStartCooldownArgs());
 		}
 
-		public void InvokeWaveFinished()
+		public void InvokeSpawningWaveFinished()
 		{
 			WaveSpawnFinished?.Invoke(this, new WaveSpawningFinishedArgs());
+		}
+
+		public void InvokeWavesFinished()
+		{
+			WavesFinish?.Invoke(this, new EveryWaveAreFinishedArgs());
 		}
 
 		private void FindEnemiesTarget()

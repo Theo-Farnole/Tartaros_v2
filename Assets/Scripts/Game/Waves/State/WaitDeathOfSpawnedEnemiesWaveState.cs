@@ -35,7 +35,7 @@
 				}
 				else
 				{
-
+					_stateOwner.InvokeWavesFinished();
 					_stateOwner.WaveFSM.CurrentState = new WaveFinishedState(_stateOwner);
 				}
 			}

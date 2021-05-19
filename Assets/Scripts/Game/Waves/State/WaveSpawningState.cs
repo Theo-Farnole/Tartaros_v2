@@ -54,7 +54,7 @@
 
 			if (CheckIfSpawnIsFinish())
 			{
-				_stateOwner.InvokeWaveFinished();
+				_stateOwner.InvokeSpawningWaveFinished();
 				_waveFSM.CurrentState = new WaitDeathOfSpawnedEnemiesWaveState(_stateOwner, _stillAliveManger);
 			}
 		}
