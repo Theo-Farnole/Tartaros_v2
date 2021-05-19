@@ -73,7 +73,7 @@
 			if (IsSelecting == true)
 			{
 				ISelectable[] selectablesInRect = _selectionRectangle.GetSelectablesInRectangle();
-				_selection.AddToSelection(selectablesInRect);
+				_selection.Add(selectablesInRect);
 			}
 
 			_isButtonDown = false;

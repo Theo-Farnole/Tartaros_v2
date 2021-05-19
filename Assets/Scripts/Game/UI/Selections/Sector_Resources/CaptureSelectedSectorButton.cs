@@ -43,7 +43,7 @@
 
 		void OnCaptureButtonClick()
 		{
-			foreach (ISelectable selected in _currentSelection.SelectedSelectables)
+			foreach (ISelectable selected in _currentSelection.Objects)
 			{
 				if (selected.GameObject.TryGetComponent(out ISector sector))
 				{

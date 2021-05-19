@@ -23,6 +23,9 @@
 		private IPlayerSectorResources _playerResources = null;
 		private IPopulationManager _populationManager = null;
 		private VillagerSpawnerManager _villagerSpawner = null;
+
+		private ISelectable _selectable = null;
+		private ISelection _selectionManager = null;
 		#endregion Fields
 
 		#region Properties
@@ -46,6 +49,9 @@
 		#region Methods
 		private void Awake()
 		{
+			_selectable = GetComponent<ISelectable>();
+			_selectionManager = Services.Instance.Get<CurrentSelection>() as ISelection;
+
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
 
@@ -74,7 +80,7 @@
 
 		private void OnGUI()
 		{
-			if ((Services.Instance.Get<CurrentSelection>() as ISelection).SelectedSelectables.Contains(GetComponent<ISelectable>()) == true)
+			if (_selectionManager.IsSelected(_selectable) == true)
 			{
 				foreach (var toSpawn in _spawningQueue)
 				{

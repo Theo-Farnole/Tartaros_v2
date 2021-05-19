@@ -27,13 +27,13 @@
 		private void OnGUI()
 		{
 			if (_selection == null) return;
-			if (_selection.SelectedSelectables.Length == 0) return;
+			if (_selection.ObjectsCount == 0) return;
 
 			BeginArea();
 			{
 				GUILayout.Label("<b>Selection</b>");
 
-				foreach (ISelectable selected in _selection.SelectedSelectables)
+				foreach (ISelectable selected in _selection.Objects)
 				{
 					GUILayout.Label(selected.GameObject.name);
 				}

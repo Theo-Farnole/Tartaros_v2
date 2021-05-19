@@ -22,7 +22,7 @@
 		{
 			ISelection currentSelection = Services.Instance.Get<CurrentSelection>();
 
-			foreach (var selected in currentSelection.SelectedSelectables)
+			foreach (var selected in currentSelection.Objects)
 			{
 				if (selected is MonoBehaviour selectedMonoBehaviour && selectedMonoBehaviour.TryGetComponent(out IAttackable attackable) == true)
 				{

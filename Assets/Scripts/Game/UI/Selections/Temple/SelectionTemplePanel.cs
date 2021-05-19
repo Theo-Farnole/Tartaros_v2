@@ -41,9 +41,9 @@
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
-			if (_selection.SelectedSelectables.Length == 1)
+			if (_selection.ObjectsCount == 1)
 			{
-				ISelectable selectable = _selection.SelectedSelectables[0];
+				ISelectable selectable = _selection.Objects[0];
 
 				if (TryGetTemple(selectable, out _shownSpawner))
 				{

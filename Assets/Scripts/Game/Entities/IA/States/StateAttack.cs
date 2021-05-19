@@ -42,8 +42,7 @@
 		{
 			if (IsTargetDead() == true)
 			{
-				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();
-				Debug.Log("Target dead");
+				_stateOwner.GetComponent<EntityFSM>().MarkCurrentStateAsFinish();				
 			}
 			else
 			{

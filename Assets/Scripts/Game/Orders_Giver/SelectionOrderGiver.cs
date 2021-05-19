@@ -89,9 +89,11 @@
 
 		private T[] GetSelectablesAs<T>()
 		{
-			List<T> output = new List<T>(_selection.SelectedSelectables.Length);
+			ISelectable[] selectedObjects = _selection.Objects;
 
-			foreach (ISelectable selectable in _selection.SelectedSelectables)
+			List<T> output = new List<T>(selectedObjects.Length);
+
+			foreach (ISelectable selectable in selectedObjects)
 			{
 				if (IsSelectableControllable(selectable) && GetSelectableAs(selectable, out T convertedEntity))
 				{

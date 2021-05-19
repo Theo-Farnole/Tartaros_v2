@@ -75,7 +75,7 @@
 
 		private bool DoMoveableSelected()
 		{
-			return _selection.SelectedSelectables
+			return _selection.Objects
 				.Where(x => (x as MonoBehaviour).GetComponent<IOrderMoveReceiver>() != null)
 				.Count() > 0;
 		}

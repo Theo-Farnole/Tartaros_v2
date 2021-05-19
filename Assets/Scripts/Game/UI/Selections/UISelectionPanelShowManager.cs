@@ -52,9 +52,9 @@
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
-			if (_selection.SelectedSelectables.Length == 1)
+			if (_selection.ObjectsCount == 1)
 			{
-				MonoBehaviour monoBehaviour = _selection.SelectedSelectables[0] as MonoBehaviour;
+				MonoBehaviour monoBehaviour = _selection.Objects[0] as MonoBehaviour;
 
 				if (monoBehaviour.TryGetComponent(out Entity entity))
 				{
@@ -68,7 +68,7 @@
 					}
 				}
 			}
-			else if (_selection.SelectedSelectables.Length > 1)
+			else if (_selection.ObjectsCount > 1)
 			{
 				ShowPanelAndHideOthers(SelectionPanel.MultipleEntities);
 			}

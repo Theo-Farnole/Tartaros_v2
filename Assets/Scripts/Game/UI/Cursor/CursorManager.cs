@@ -232,7 +232,7 @@ public class CursorManager : MonoBehaviour
 	{
 		ISelection currentSelectable = (Services.Instance.Get<CurrentSelection>() as ISelection);
 
-		Entity entity = currentSelectable.SelectedSelectables
+		Entity entity = currentSelectable.Objects
 			.Select(x => (x as MonoBehaviour).GetComponent<Entity>())
 			.Where(x => x != null)
 			.FirstOrDefault();
