@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_FireSmoke
-  m_Shader: {fileID: 4800000, guid: 5626919a90431584a937476750223038, type: 3}
+  m_Name: M_FireSmoke2
+  m_Shader: {fileID: 4800000, guid: da81d57465fec29419043fc44afc0207, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
@@ -45,22 +45,24 @@ Material:
     - _Brightness: 3
     - _Contrast: 0
     - _Cutoff: -0.16
-    - _EmPower: 0.81
+    - _EmPower: 0.93
     - _InvFade: 1
+    - _InverseLength: -0.03
     - _NebulousNoise: 0.1
     - _NebulousScale: 0.5
     - _NoiseScale: 10
     - _Offset: 0
     - _OpacityPatern: -1
     - _PaternAngle: 1
-    - _PaternLerp: 0
-    - _PaternMultiply: 0.5
+    - _PaternLerp: 1.98
+    - _PaternMultiply: 0.79
     - _PaternScale: 1.57
     - _PaternSpeed: 0.1
     - _PaternSpeed1: 0.2
     - _PaternStep: -1
     - _PaternStrength: 1
     - _RadialOpacity: -1
+    - _Tiling: 2.44
     - _VoroScale: 42.01
     - _VoroSpeed: 2
     - __dirty: 0
@@ -69,7 +71,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 2, g: 1.3568628, b: 1.9686275, a: 1}
     - _PaternScale: {r: 5, g: 5, b: 0, a: 0}
-    - _PaternSmoothStep: {r: -0.02, g: 0.04, b: 0, a: 0}
+    - _PaternSmoothStep: {r: -0.64, g: 0.22, b: 0, a: 0}
+    - _SmoothSteps: {r: 0, g: 0.5, b: -0.25, a: 0.5}
     - _TilingOffset: {r: 1, g: 1, b: -0.5, a: -0.5}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
     - _UV_speed: {r: 0.35, g: 0, b: 0, a: 0}

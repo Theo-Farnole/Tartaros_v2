@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [ExecuteInEditMode]
 public class TerrainBlendingBaker : MonoBehaviour
 {
+    public bool automatic = true;
+    public float autoTime = 1.0f;
+
     //Shader that renders object based on distance to camera
     public Shader depthShader;
 
@@ -11,6 +15,21 @@ public class TerrainBlendingBaker : MonoBehaviour
 
     //The camera this script is attached to
     public Camera cam;
+
+    private void Start()
+    {
+        StartCoroutine(myEnum(autoTime));
+    }
+
+    IEnumerator myEnum(float autoTime)
+    {
+        yield return new WaitForSeconds(autoTime);
+
+        if (automatic == true)
+            BakeTerrainDepth();
+
+        StartCoroutine(myEnum(autoTime));
+    }
 
     // The context menu tag allows us to run methods from the inspector (https://docs.unity3d.com/ScriptReference/ContextMenu.html)
     [ContextMenu("Bake Depth Texture")]
