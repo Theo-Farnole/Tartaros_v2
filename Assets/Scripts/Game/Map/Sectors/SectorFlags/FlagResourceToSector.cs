@@ -7,16 +7,21 @@
 	using Tartaros.Entities;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI.MiniMap;
+	using Tartaros.UI.Sectors.Orders;
 	using UnityEngine;
 
 	[RequireComponent(typeof(SectorObject)), InfoBox("Fill constructable of building slot AUTOMATICALLY")]
-	public partial class FlagResourceToSector : MonoBehaviour
+	public partial class FlagResourceToSector : MonoBehaviour, ISectorOrderable
 	{
 		#region Fields
-		[SerializeField]
-		private SectorRessourceType _type = SectorRessourceType.Food;
+		[SerializeField] private SectorRessourceType _type = SectorRessourceType.Food;
 
 		private ResourceMiniMapIcon _miniMapIcon = null;
+		private ISector _sectorOnPosition = null;
+
+		// SERVICES
+		private IMap _map = null;
+		private BuildingsDatabase _buildingsDatabase = null;
 		#endregion Fields
 
 		#region Properties
@@ -35,6 +40,10 @@
 		#region Methods
 		private void Awake()
 		{
+			_map = Services.Instance.Get<IMap>();
+			_buildingsDatabase = Services.Instance.Get<BuildingsDatabase>();
+			_sectorOnPosition = _map.GetSectorOnPosition(transform.position);
+
 			_miniMapIcon = gameObject.GetOrAddComponent<ResourceMiniMapIcon>();
 			_miniMapIcon.ResourceType = _type;
 
@@ -44,29 +53,34 @@
 
 		private void SetBuildingSlotConstructable()
 		{
-			IMap map = Services.Instance.Get<IMap>();
-			BuildingsDatabase buildingsDatabase = Services.Instance.Get<BuildingsDatabase>();
-
-			ISector sector = map.GetSectorOnPosition(transform.position);
-			BuildingSlot buildingSlot = sector.GetBuildingSlotAvailable();
+			BuildingSlot buildingSlot = _sectorOnPosition.GetBuildingSlotAvailable();
 
 			if (buildingSlot != null)
 			{
-				buildingSlot.Constructable = buildingsDatabase.GetResourceBuildingAsConstructable(_type);
+				buildingSlot.Constructable = _buildingsDatabase.GetResourceBuildingAsConstructable(_type);
 			}
 		}
 
 		private void CheckIfBuildingSlotIsMissing()
 		{
-			IMap map = Services.Instance.Get<IMap>();
-			ISector sector = map.GetSectorOnPosition(transform.position);
+			Debug.Assert(_sectorOnPosition != null, "Resource flag must be placed on a sector.", this);
 
-			Debug.Assert(sector != null, "Resource flag must be placed on a sector.", this);
-
-			if (sector != null)
+			if (_sectorOnPosition != null)
 			{
-				int slotCount = sector.GetBuildingSlots().Count();
+				int slotCount = _sectorOnPosition.GetBuildingSlots().Count();
 				Debug.Assert(slotCount > 0, "There is no building slot whereas we have a flag resource to sector! Please add one.", this);
+			}
+		}
+
+		SectorOrder ISectorOrderable.GenerateSectorOrder()
+		{
+			if (_sectorOnPosition.ContainsAvailableBuildingSlot())
+			{
+				return new ConstructAtBuildingSlotOrder(_sectorOnPosition.GetBuildingSlotAvailable());
+			}
+			else
+			{
+				return null;
 			}
 		}
 		#endregion Methods

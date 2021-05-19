@@ -1,6 +1,8 @@
 ﻿namespace Tartaros.UI
 {
+	using Sirenix.OdinInspector;
 	using System;
+	using TMPro;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -8,6 +10,8 @@
 	public abstract class AButtonActionAttacher : MonoBehaviour
 	{
 		#region Fields
+		[SerializeField, SuffixLabel("optional")] private TextMeshProUGUI _label = null;
+
 		private Button _button = null;
 		#endregion Fields
 
@@ -32,6 +36,8 @@
 		/// Invoked after the button has done its stuff.
 		/// </summary>
 		public event EventHandler<LateButtonClickedArgs> LateButtonClicked = null;
+
+		protected TextMeshProUGUI Label => _label;
 		#endregion Events
 
 		#region Methods

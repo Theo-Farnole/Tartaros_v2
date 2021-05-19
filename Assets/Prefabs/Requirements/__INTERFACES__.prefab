@@ -185,9 +185,9 @@ GameObject:
   - component: {fileID: 8931241435247312037}
   - component: {fileID: 8176056018378003462}
   - component: {fileID: 2676111358273059407}
-  - component: {fileID: 4720571622948132723}
+  - component: {fileID: 7560937474939281469}
   m_Layer: 5
-  m_Name: Construct
+  m_Name: Sector Order
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4720571622948132723
+--- !u!114 &7560937474939281469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,10 +302,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 457054101461832467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8777b02d23a09754daa38e613208d861, type: 3}
+  m_Script: {fileID: 11500000, guid: 04c69fa7d264196489880b837a69ab1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _constructPriceLabel: {fileID: 5929869016685662373}
+  _label: {fileID: 5929869016685662373}
 --- !u!1 &484749249090547259
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328c9bdb0b0254547a1987c0bc81b49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _label: {fileID: 0}
 --- !u!1 &689037599388857114
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecf2f26753950d4c8ed0416a0bfee04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _label: {fileID: 0}
   _panel: {fileID: 7286826985491843977}
 --- !u!114 &492528099153243552
 MonoBehaviour:
@@ -3588,7 +3590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7548ee023bc45c47bb87e9cddc1cbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 2529656039280448533}
+  _label: {fileID: 2529656039280448533}
 --- !u!1 &2529656038439522454
 GameObject:
   m_ObjectHideFlags: 0
@@ -6583,7 +6585,7 @@ GameObject:
   - component: {fileID: 2529656039298120456}
   - component: {fileID: 2529656039298120463}
   m_Layer: 5
-  m_Name: Selection Resource Sector
+  m_Name: Selection Sector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6623,11 +6625,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2529656039298120457}
   _showAtStart: 0
-  _captureButton: {fileID: 5426078735370317608}
-  _constructButton: {fileID: 4720571622948132723}
   _resourceIcon: {fileID: 2529656039708632079}
   _name: {fileID: 2529656039058404770}
   _description: {fileID: 2529656038266884821}
+  _captureButton: {fileID: 5426078735370317608}
+  _orderButton: {fileID: 7560937474939281469}
 --- !u!223 &2529656039298120457
 Canvas:
   m_ObjectHideFlags: 0

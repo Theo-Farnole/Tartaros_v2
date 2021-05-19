@@ -54,6 +54,10 @@
 				_constructable.InstantiateConstructionKit(transform.position);
 				_isAvailable = false;
 			}
+			else
+			{
+				Debug.LogError("Cannot construct.", this);
+			}
 		}
 
 		private void OnDrawGizmos()

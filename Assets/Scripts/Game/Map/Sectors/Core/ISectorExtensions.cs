@@ -47,7 +47,22 @@
 				}
 			}
 
-			return null;
+			throw new System.NotSupportedException("No available building slot found on sector {0}.".Format(sector));
+		}
+
+		public static bool ContainsAvailableBuildingSlot(this ISector sector)
+		{
+			IEnumerable<BuildingSlot> slots = sector.EnumerateObjectsOfType<BuildingSlot>();
+
+			foreach (BuildingSlot slot in slots)
+			{
+				if (slot.IsAvailable == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		public static Entity[] GetEntitiesInSector(this ISector sector)

@@ -5,6 +5,7 @@
 	using TMPro;
 	using UnityEngine;
 
+	[Obsolete("Use SectorOrder instead.")]
 	public class ConstructAtBuildingSlot_Button : AButtonActionAttacher
 	{
 		#region Fields

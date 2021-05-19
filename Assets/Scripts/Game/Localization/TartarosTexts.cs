@@ -29,5 +29,10 @@
 			SectorRessourceType resourceType = sector.GetResourceType();
 			return string.Format("Generates {0}<color={1}>{2}</color>.", resourceType.GetRichTextSprite(), RESOURCE_COLOR_HEX, resourceType);
 		}
+
+		public static string GetSectorConstructLabel(ISectorResourcesWallet constructionPrice)
+		{
+			return "{0} {1}".Format(CONSTRUCT, constructionPrice.ToRichTextString());
+		}
 	}
 }

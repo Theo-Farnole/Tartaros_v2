@@ -1,21 +1,25 @@
 ﻿namespace Tartaros.UI
 {
+	using Sirenix.OdinInspector;
 	using Tartaros.Economy;
 	using Tartaros.Map;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI.Sectors.Orders;
 	using TMPro;
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public class SectorWithResourcesSelectedPanel : APanel
+	public class SectorSelectedPanel : APanel
 	{
 		#region Fields
-		[SerializeField] private CaptureSectorButton _captureButton = null;
-		[SerializeField] private ConstructAtBuildingSlot_Button _constructButton = null;
+		[Title("UI Informations References")]
 		[SerializeField] private Image _resourceIcon = null;
 		[SerializeField] private TextMeshProUGUI _name = null;
 		[SerializeField] private TextMeshProUGUI _description = null;
+		[Title("Buttons References")]
+		[SerializeField] private CaptureSectorButton _captureButton = null;
+		[SerializeField] private SectorOrderButton _orderButton = null;
 
 		private ISelection _currentSelection = null;
 		private IconsDatabase _iconsDatabase = null;
@@ -36,9 +40,6 @@
 			_currentSelection.SelectionChanged -= SelectionChanged;
 			_currentSelection.SelectionChanged += SelectionChanged;
 
-			_constructButton.LateButtonClicked -= OnAnyButtonClick;
-			_constructButton.LateButtonClicked += OnAnyButtonClick;
-
 			_captureButton.LateButtonClicked -= OnAnyButtonClick;
 			_captureButton.LateButtonClicked += OnAnyButtonClick;
 		}
@@ -47,7 +48,6 @@
 		{
 			_currentSelection.SelectionChanged -= SelectionChanged;
 
-			_constructButton.LateButtonClicked -= OnAnyButtonClick;
 			_captureButton.LateButtonClicked -= OnAnyButtonClick;
 		}
 
@@ -62,7 +62,7 @@
 			{
 				ISelectable firtSelectable = _currentSelection.Objects[0];
 
-				if (firtSelectable.GameObject.TryGetComponent(out ISector sector) && sector.ContainsResource())
+				if (firtSelectable.GameObject.TryGetComponent(out ISector sector))
 				{
 					_displaySector = sector;
 					UpdateShowInformations();
@@ -81,33 +81,49 @@
 
 		private void UpdateShowInformations()
 		{
-			SectorRessourceType resourceType = _displaySector.GetResourceType();
-
-			_resourceIcon.sprite = _iconsDatabase.Data.GetResourceIcon(resourceType);
-			_name.text = TartarosTexts.GetResourceSectorName(_displaySector);
-			_description.text = TartarosTexts.GetResourceSectorDescription(_displaySector);
-
-			UpdateButtons();
-
-			void UpdateButtons()
+			if (_displaySector.TryGetResourceTypeOfSector(out SectorRessourceType resourceType))
 			{
-				_captureButton.gameObject.SetActive(!_displaySector.IsCaptured);
-				_captureButton.Sector = _displaySector;
+				_resourceIcon.sprite = _iconsDatabase.Data.GetResourceIcon(resourceType);
+				_name.text = TartarosTexts.GetResourceSectorName(_displaySector);
+				_description.text = TartarosTexts.GetResourceSectorDescription(_displaySector);
+			}
 
+			UpdateOrderButton();
+			UpdateCaptureButton();
+		}
 
-				BuildingSlot slot = _displaySector.GetBuildingSlotAvailable();
-				_constructButton.gameObject.SetActive(_displaySector.IsCaptured && slot != null);
+		private void UpdateOrderButton()
+		{
+			if (_displaySector.IsCaptured == true)
+			{
+				ISectorOrderable[] sectorOrderables = _displaySector.FindObjectsInSectorOfType<ISectorOrderable>();
 
-				if (slot != null)
+				if (sectorOrderables.Length > 1) throw new System.NotSupportedException("A sector must contains zero or one sector orderable.");
+
+				bool sectorContainsOrder = sectorOrderables.Length == 1;
+
+				if (sectorContainsOrder == true)
 				{
-					_constructButton.Sector = _displaySector;
+					SectorOrder sectorOrder = sectorOrderables[0].GenerateSectorOrder();
+
+					_orderButton.gameObject.SetActive(sectorOrder.IsAvailable);
+					_orderButton.SectorOrder = sectorOrder;
 				}
-
-				if (_captureButton.isActiveAndEnabled == false && _constructButton.isActiveAndEnabled == false)
+				else
 				{
-					Debug.LogWarning("Capture and construct buttons are hide. There is maybe a problem.");
+					_orderButton.gameObject.SetActive(false);
 				}
 			}
+			else
+			{
+				_orderButton.gameObject.SetActive(false);
+			}
+		}
+
+		private void UpdateCaptureButton()
+		{
+			_captureButton.gameObject.SetActive(!_displaySector.IsCaptured);
+			_captureButton.Sector = _displaySector;
 		}
 		#endregion Methods
 	}

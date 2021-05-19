@@ -1,19 +1,12 @@
 ﻿namespace Tartaros.UI
 {
-	using Sirenix.OdinInspector;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
-	using TMPro;
-	using UnityEngine;
 	using UnityEngine.UI;
 
 	public class CaptureSectorButton : AButtonActionAttacher
 	{
-		#region Fields		
-		[SerializeField]
-		[Required]
-		private TextMeshProUGUI _text = null;
-
+		#region Fields
 		private ISector _sector = null;
 		private ISectorsCaptureManager _sectorsCaptureManager = null;
 		#endregion Fields
@@ -73,12 +66,12 @@
 		{
 			if (_sector.IsCaptured)
 			{
-				_text.text = TartarosTexts.SECTOR_CAPTURED;
+				Label.text = TartarosTexts.SECTOR_CAPTURED;
 			}
 			else
 			{
 				string price = _sector.CapturePrice.ToRichTextString();
-				_text.text = string.Format("{1} ({0})", price, TartarosTexts.CAPTURE_SECTOR);
+				Label.text = string.Format("{1} ({0})", price, TartarosTexts.CAPTURE_SECTOR);
 			}
 		}
 		#endregion Methods
