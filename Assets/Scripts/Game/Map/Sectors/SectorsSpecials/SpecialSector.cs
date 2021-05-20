@@ -7,9 +7,9 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(SpecialSectorIncome))]
-	public class SpecialSector : MonoBehaviour, ISectorUIStylizer
+	public class SpecialSector : MonoBehaviour, ISectorUIStylizer, ISectorUIContent
 	{
-		public enum God
+		private enum God
 		{
 			Hephaistos,
 			Poseidon
@@ -25,8 +25,6 @@
 		#endregion Fields
 
 		#region Properties
-		public SpecialSectorIncome SpecialSectorIncome => _specialSectorIncome;
-		public string SectorGodName => _godSector.ToString();
 		SectorStyle ISectorUIStylizer.SectorStyle
 		{
 			get
@@ -45,6 +43,10 @@
 
 			}
 		}
+
+		string ISectorUIContent.Name => _godSector.ToString();
+
+		string ISectorUIContent.Description => TartarosTexts.GetSpecialSectorDescription(this);
 		#endregion Properties
 
 		#region Methods

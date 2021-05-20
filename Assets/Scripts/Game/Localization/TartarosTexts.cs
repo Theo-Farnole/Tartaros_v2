@@ -37,5 +37,13 @@
 		{
 			return "{0} {1}".Format(CONSTRUCT, constructionPrice.ToRichTextString());
 		}
+
+		public static string GetSpecialSectorDescription(SpecialSector specialSector)
+		{
+			var specialSectorIncome = specialSector.GetComponent<SpecialSectorIncome>();
+			IIncomeGenerator incomeGenerator = specialSectorIncome;
+
+			return "Earn {0} glory on capture. Give frenquently {1}{2}.".Format(specialSectorIncome.GloryIncomeOnCapture, incomeGenerator.SectorRessourceType.GetRichTextSprite(), incomeGenerator.ResourcesPerTick);
+		}
 	}
 }

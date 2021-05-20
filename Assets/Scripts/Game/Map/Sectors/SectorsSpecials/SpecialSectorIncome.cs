@@ -17,8 +17,7 @@
 		private IPlayerIncomeManager _playerIncomeManager = null;
 		private PlayerGloryIncomeManager _playerGloryIncomeManager = null;
 		private SectorObject _sectorObject = null;
-
-		public IIncomeGenerator RessourcesIncome => this;
+		
 		public int GloryIncomeOnCapture => _gloryIncomeOnCapture;
 
 		SectorRessourceType IIncomeGenerator.SectorRessourceType => _ressourceType;
