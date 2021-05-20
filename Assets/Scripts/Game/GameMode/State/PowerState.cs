@@ -3,7 +3,7 @@
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using Tartaros.Power;
+	using Tartaros.Powers;
 	using Tartaros.Economy;
 	using UnityEngine;
 	using UnityEngine.InputSystem;

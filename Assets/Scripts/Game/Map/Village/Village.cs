@@ -8,6 +8,7 @@
 	using System;
 	using Tartaros.Dialogue;
 	using Tartaros.UI.Sectors.Orders;
+	using Tartaros.Powers;
 
 	public class Village : MonoBehaviour, ISectorUIStylizer, ISectorUIContentProvider, ISectorOrderable
 	{
@@ -16,6 +17,7 @@
 		[SerializeField] private VillageData _data = null;
 		[SerializeField] private BuildingSlot _buildingSlot = null;
 		[SerializeField] private bool _ENABLE_DIALOGUE_STATE_EDITOR = false;
+		[SerializeField] private Power _onCapturePowerUnlocked = Power.None;
 
 		private ISector _sector = null;
 
@@ -24,6 +26,7 @@
 		private IPopulationManager _populationManager = null;
 		private DialogueManager _dialogueManager = null;
 		private UIStyles _uiStyles = null;
+		private PowerManager _powerManager = null;
 		#endregion Fields
 
 		#region Properties
@@ -43,20 +46,25 @@
 		#region Methods		
 		private void Awake()
 		{
+			if (_buildingSlot is null) throw new UnassignedReferenceException(nameof(_buildingSlot));
+			if (_data is null) throw new UnassignedReferenceException(nameof(_data));
+
 			_map = Services.Instance.Get<IMap>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
 			_uiStyles = Services.Instance.Get<UIStyles>();
+			_powerManager = Services.Instance.Get<PowerManager>();
 
-			_data = GetComponent<Entity>().GetBehaviourData<VillageData>();
 			_dialogueManager = FindObjectOfType<DialogueManager>();
+
+			_sector = _map.GetSectorOnPosition(transform.position);
 		}
 
 		private void Start()
 		{
-			_sector = _map.GetSectorOnPosition(transform.position);
-
-			if (_buildingSlot is null) throw new UnassignedReferenceException(nameof(_buildingSlot));
-			if (_data is null) throw new UnassignedReferenceException(nameof(_data));
+			if (_sector.IsCaptured == true)
+			{
+				UnlockPower();
+			}
 		}
 
 		private void OnEnable()
@@ -82,6 +90,7 @@
 		private void OnCaptureSector(object sender, CapturedArgs e)
 		{
 			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
+			UnlockPower();
 
 			if (_dialogueManager != null)
 			{
@@ -92,6 +101,14 @@
 			}
 
 			VillageCaptured?.Invoke(this, new VillageCapturedArgs());
+		}
+
+		private void UnlockPower()
+		{
+			if (_onCapturePowerUnlocked != Power.None)
+			{
+				_powerManager.UnlockPower(_onCapturePowerUnlocked);				
+			}
 		}
 
 		SectorOrder ISectorOrderable.GenerateSectorOrder()

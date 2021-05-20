@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Power
+﻿namespace Tartaros.Powers
 {
     using Sirenix.OdinInspector;
     using System.Collections;

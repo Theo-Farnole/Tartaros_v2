@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Power
+﻿namespace Tartaros.Powers
 {
 	using UnityEngine;
 	using UnityEngine.AI;
@@ -19,7 +19,6 @@
 			if(_destination != Vector3.zero)
 			{
 				MoveToTarget();
-				Debug.Log(_destination);
 
 				if(IsDestinationReach() == true)
 				{

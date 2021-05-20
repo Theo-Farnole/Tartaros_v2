@@ -1,13 +1,10 @@
-﻿namespace Tartaros.Power
+﻿namespace Tartaros.Powers
 {
-    using Sirenix.OdinInspector;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.InputSystem;
+	using Sirenix.OdinInspector;
+	using UnityEngine;
+	using UnityEngine.InputSystem;
 
-    public class powerCast_test : SerializedMonoBehaviour
+	public class powerCast_test : SerializedMonoBehaviour
     {
         [SerializeField]
         private PowerManager _powerManager = null;
@@ -26,14 +23,15 @@
 
         private void EnterConstruction_performed(InputAction.CallbackContext obj)
         {
-            if (_powerManager.CanCastSpell(_power))
-            {
-                _powerManager.Cast(_power);
-            }
-            else
-            {
-                Debug.LogError("Don't have the Ressources to construct this Entity");
-            }
+            throw new System.NotImplementedException();
+            //if (_powerManager.CanCastSpell(_power))
+            //{
+            //    _powerManager.Cast(_power);
+            //}
+            //else
+            //{
+            //    Debug.LogError("Don't have the Ressources to construct this Entity");
+            //}
         }
     }
 }

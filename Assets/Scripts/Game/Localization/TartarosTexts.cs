@@ -19,7 +19,7 @@
 		private static readonly string UNITS_COLOR_HEX = Color.red.ToHex();
 
 		public static readonly string VILLAGE = "Village";
-		public static readonly string VILLAGE_DESCRIPTION = "Unlock a spell when captured.";
+		public static readonly string VILLAGE_DESCRIPTION = string.Format("Unlock a <color={0}>spell</color> when captured.", Color.magenta.ToHex());
 
 		public static readonly string DEFAULT_SECTOR_NAME = "Empty sector";
 		public static readonly string DEFAULT_SECTOR_DESCRIPTION = "";
