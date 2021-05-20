@@ -93,15 +93,20 @@
 			if (stylizer != null)
 			{
 				SectorStyle sectorStyle = stylizer.SectorStyle;
+
 				_icon.sprite = sectorStyle.Icon;
 				_background.sprite = sectorStyle.Background;
 
-				(_captureButton.Button.targetGraphic as Image).sprite = sectorStyle.ButtonDefault;
-				_captureButton.Button.spriteState = sectorStyle.ButtonTransition;
-
-				(_orderButton.Button.targetGraphic as Image).sprite = sectorStyle.ButtonDefault;
-				_orderButton.Button.spriteState = sectorStyle.ButtonTransition;
+				SetStyleToButton(_captureButton, sectorStyle);
+				SetStyleToButton(_orderButton, sectorStyle);
 			}
+		}
+
+		private void SetStyleToButton(AButtonActionAttacher button, SectorStyle style)
+		{
+			button.Label.color = style.ButtonTextColor;
+			button.Button.spriteState = style.ButtonTransition;
+			(button.Button.targetGraphic as Image).sprite = style.ButtonDefault;
 		}
 
 		private void UpdateOrderButton()
@@ -114,8 +119,15 @@
 				{
 					SectorOrder sectorOrder = sectorOrderable.GenerateSectorOrder();
 
-					_orderButton.gameObject.SetActive(sectorOrder.IsAvailable);
-					_orderButton.SectorOrder = sectorOrder;
+					if (sectorOrder != null)
+					{
+						_orderButton.gameObject.SetActive(sectorOrder.IsAvailable);
+						_orderButton.SectorOrder = sectorOrder;
+					}
+					else
+					{
+						_orderButton.gameObject.SetActive(false);
+					}
 				}
 				else
 				{

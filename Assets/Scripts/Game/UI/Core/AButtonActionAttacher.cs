@@ -28,6 +28,7 @@
 				return _button;
 			}
 		}
+		public TextMeshProUGUI Label => _label;
 		#endregion Properties
 
 		#region Events
@@ -36,8 +37,6 @@
 		/// Invoked after the button has done its stuff.
 		/// </summary>
 		public event EventHandler<LateButtonClickedArgs> LateButtonClicked = null;
-
-		protected TextMeshProUGUI Label => _label;
 		#endregion Events
 
 		#region Methods
@@ -60,7 +59,7 @@
 			LateButtonClicked?.Invoke(this, new LateButtonClickedArgs());
 		}
 
-		protected abstract void OnButtonClick();
+		protected abstract void OnButtonClick();		
 		#endregion Methods
 	}
 }
