@@ -27,7 +27,6 @@
 		[SerializeField] private SectorOrderButton _orderButton = null;
 
 		private ISelection _currentSelection = null;
-		private IconsDatabase _iconsDatabase = null;
 		private ISector _displaySector = null;
 		#endregion Fields
 
@@ -37,7 +36,6 @@
 			base.Awake();
 
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
-			_iconsDatabase = Services.Instance.Get<IconsDatabase>();
 		}
 
 		private void OnEnable()
