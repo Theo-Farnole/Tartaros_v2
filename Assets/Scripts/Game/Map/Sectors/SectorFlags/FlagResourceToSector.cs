@@ -1,6 +1,5 @@
 ﻿namespace Tartaros.Map
 {
-	using Assets.Scripts.Game.UI.Selections.Sector.Style;
 	using Sirenix.OdinInspector;
 	using System.Linq;
 	using Tartaros.Construction;

@@ -1,6 +1,5 @@
 ﻿namespace Tartaros.ServicesLocator
 {
-	using Assets.Scripts.Game.UI.Selections.Sector.Style;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -14,6 +13,7 @@
 	using Tartaros.Selection;
 	using Tartaros.UI.HoverPopup;
 	using Tartaros.UI.MiniMap;
+	using Tartaros.UI.Sectors.Orders;
 	using Tartaros.Wave;
 	using UnityEngine;
 

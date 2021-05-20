@@ -14,9 +14,9 @@
 		#endregion Fields
 
 		#region Properties
-		public SectorStyle Village => _village;
-		public SectorStyle Hephaistos => _hephaistos;
-		public SectorStyle Poseidon => _poseidon;
+		public SectorStyle Village => new SectorStyle(_village);
+		public SectorStyle Hephaistos => new SectorStyle(_hephaistos);
+		public SectorStyle Poseidon => new SectorStyle(_poseidon);
 		#endregion Properties
 
 		#region Methods
@@ -26,7 +26,7 @@
 			output.Icon = resourceType.GetIcon();
 
 			return output;
-		} 
+		}
 		#endregion Methods
 	}
 }

@@ -94,6 +94,7 @@
 			{
 				SectorStyle sectorStyle = stylizer.SectorStyle;
 
+				_icon.enabled = sectorStyle.Icon != null;
 				_icon.sprite = sectorStyle.Icon;
 				_background.sprite = sectorStyle.Background;
 

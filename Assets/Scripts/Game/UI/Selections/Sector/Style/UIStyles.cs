@@ -1,6 +1,5 @@
-﻿namespace Assets.Scripts.Game.UI.Selections.Sector.Style
+﻿namespace Tartaros.UI.Sectors.Orders
 {
-	using Tartaros.UI.Sectors.Orders;
 	using UnityEngine;
 
 	public class UIStyles : MonoBehaviour
