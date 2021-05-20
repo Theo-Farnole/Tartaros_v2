@@ -39,7 +39,7 @@
 		public ISelectable[] GetSelectablesInRectangle()
 		{
 			ISelectable[] selectablesInGame = GetAllSelectablesInWorld();
-			ISelectable[] selectablesInViewport = KeepSelectablesInRectangle(selectablesInGame);
+			ISelectable[] selectablesInViewport = SelectionHelper.KeepSelectablesInRectangle(selectablesInGame, SelectionRect);
 
 			return selectablesInViewport;
 		}
@@ -49,18 +49,7 @@
 			return ObjectsFinder.FindObjectsOfInterface<ISelectable>();
 		}
 
-		private ISelectable[] KeepSelectablesInRectangle(ISelectable[] selectablesToFiltrer)
-		{
-			// We cache variables for performance reasons
-			Camera camera = Camera.main;
-			Bounds selectionRect = SelectionRect;
-
-			ISelectable[] selectablesInRectangle = selectablesToFiltrer
-				.Where(selectable => camera.IsInWorldPointInBounds(selectionRect, selectable.Position))
-				.ToArray();
-
-			return selectablesInRectangle;
-		}		
+				
 		#endregion Methods
 	}
 }

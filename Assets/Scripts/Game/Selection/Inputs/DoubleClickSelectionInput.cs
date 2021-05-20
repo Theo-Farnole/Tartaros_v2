@@ -1,11 +1,11 @@
 ﻿namespace Tartaros.Selection
 {
-	using Sirenix.OdinInspector;
+	using System.Collections;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
 	using UnityEngine.InputSystem;
 
-	public class ClickSelectionInput : SerializedMonoBehaviour
+	public class DoubleClickSelectionInput : MonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -29,22 +29,11 @@
 		{
 			_gameInputs.Selection.Enable();
 
-			_gameInputs.Selection.SelectEntity.performed -= OnSelectEntity;
-			_gameInputs.Selection.SelectEntity.performed += OnSelectEntity;
-
-			
-
+			_gameInputs.Selection.DoubleClickSelection.performed -= DoubleClickSelection;
+			_gameInputs.Selection.DoubleClickSelection.performed += DoubleClickSelection;
 		}
 
-		
-
-		private void OnDisable()
-		{
-			_gameInputs.Selection.SelectEntity.performed -= OnSelectEntity;
-
-		}
-
-		private void OnSelectEntity(InputAction.CallbackContext obj)
+		private void DoubleClickSelection(InputAction.CallbackContext obj)
 		{
 			if (_rectangleSelection.IsSelecting == true) return;
 
@@ -60,7 +49,6 @@
 				_selection.Toggle(selectableUnderCursor);
 			}
 		}
-
 		private bool TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor)
 		{
 			if (RaycastUnderCursor(out RaycastHit hit))
@@ -75,6 +63,7 @@
 			return false;
 		}
 
+
 		private bool RaycastUnderCursor(out RaycastHit hit)
 		{
 			Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -82,6 +71,7 @@
 
 			return Physics.Raycast(ray, out hit, Mathf.Infinity);
 		}
+
 
 		private bool CanSelect()
 		{
@@ -99,6 +89,7 @@
 				return EventSystem.current.IsPointerOverGameObject(-1);
 			}
 		}
-		#endregion Methods
+
+		#endregion
 	}
 }
