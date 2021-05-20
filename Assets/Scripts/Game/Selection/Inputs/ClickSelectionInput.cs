@@ -10,7 +10,7 @@
 		#region Fields
 		[SerializeField]
 		private ISelection _selection = null;
-
+		private RectangleSelectionInput _rectangleSelection = null;
 		private GameInputs _gameInputs = null;
 		#endregion Fields
 
@@ -22,6 +22,7 @@
 		private void Awake()
 		{
 			_gameInputs = new GameInputs();
+			_rectangleSelection = GetComponent<RectangleSelectionInput>();
 		}
 
 		private void OnEnable()
@@ -30,15 +31,23 @@
 
 			_gameInputs.Selection.SelectEntity.performed -= OnSelectEntity;
 			_gameInputs.Selection.SelectEntity.performed += OnSelectEntity;
+
+			
+
 		}
+
+		
 
 		private void OnDisable()
 		{
 			_gameInputs.Selection.SelectEntity.performed -= OnSelectEntity;
+
 		}
 
 		private void OnSelectEntity(InputAction.CallbackContext obj)
 		{
+			if (_rectangleSelection.IsSelecting == true) return;
+
 			if (CanSelect() == false) return;
 
 			if (EnableAdditiveSelectionPerformed == false)

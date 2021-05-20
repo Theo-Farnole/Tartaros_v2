@@ -165,15 +165,15 @@
 			}
 		}
 
-		public static ISectorUIContent GetUIContent(this ISector sector)
+		public static SectorUIContent GetUIContent(this ISector sector)
 		{
-			ISectorUIContent[] content = sector.FindObjectsInSectorOfType<ISectorUIContent>();
+			ISectorUIContentProvider[] content = sector.FindObjectsInSectorOfType<ISectorUIContentProvider>();
 
 			if (content.Length > 1) throw new System.NotSupportedException("A sector cannot contains more than one UI content. Please remove one.");
 
 			if (content.Length > 0)
 			{
-				return content[0];
+				return content[0].GetSectorContent();
 			}
 			else
 			{

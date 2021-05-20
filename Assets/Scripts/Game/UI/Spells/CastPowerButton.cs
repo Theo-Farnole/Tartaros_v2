@@ -2,7 +2,7 @@
 {
 	using Sirenix.OdinInspector;
 	using Tartaros.Map.Village;
-	using Tartaros.Power;
+	using Tartaros.Powers;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 	using UnityEngine.UI;
@@ -28,20 +28,7 @@
 
 		private void Start()
 		{
-			if (_powerToCast == Power.ControlledAoE && _powerManager.IsAVillageToCaptureOnTheScene() == true)
-			{
-				_button.interactable = false;
-			}
-
-			_showCostOnPointerEnter.GloryCost = _powerManager.GetGloryCost(_powerToCast);
-		}
-
-		private void Update()
-		{
-			if (_button.interactable == false && _powerManager.IsVillageCaptured() == true)
-			{
-				_button.interactable = true;
-			}
+			_showCostOnPointerEnter.GloryCost = _powerManager.GetGloryPrice(_powerToCast);
 		}
 
 		private void OnEnable()
@@ -60,22 +47,6 @@
 			CastPower();
 		}
 
-		public void EnablePower()
-		{
-			if (_powerToCast == Power.ControlledAoE)
-			{
-				_button.interactable = true;
-			}
-		}
-
-		public void DisablePower()
-		{
-			if (_powerToCast == Power.ControlledAoE)
-			{
-				_button.interactable = false;
-			}
-		}
-
 
 		private void CastPower()
 		{
@@ -88,6 +59,9 @@
 				case Power.ControlledAoE:
 					_powerManager.CastControlledAoE();
 					break;
+
+				case Power.None:
+					throw new System.NotSupportedException("The power that want to be cast is the value None.");					
 
 				default:
 					throw new System.NotImplementedException();

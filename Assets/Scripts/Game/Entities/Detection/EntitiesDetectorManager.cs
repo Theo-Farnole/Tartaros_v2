@@ -63,9 +63,6 @@
 
 			foreach (Entity entity in entitiesOfTeam)
 			{
-				
-				
-
 				float distance = Vector3.Distance(position, entity.transform.position);
 				float targetRadius = entity.GetComponent<IAttackable>().SizeRadius;
 
@@ -73,17 +70,10 @@
 				{
 					output.Add(entity);
 				}
-
-				//if (Vector3.Distance(position, entity.transform.position) <= radius)
-				//{
-				//	output.Add(entity);
-				//}
 			}
 
 			return output.ToArray();
 		}
-
-		
 
 		public bool IsTheTwoRadiusAreOverlapping(float entityRadius, float targetRadius, float distance)
 		{

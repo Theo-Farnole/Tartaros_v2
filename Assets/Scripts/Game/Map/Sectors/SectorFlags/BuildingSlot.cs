@@ -51,7 +51,7 @@
 			if (CanConstruct() == true)
 			{
 				_playerWallet.Buy(_constructionPrice);
-				_constructable.InstantiateConstructionKit(transform.position);
+				_constructable.InstantiateConstructionKit(transform.position, transform.rotation);
 				_isAvailable = false;
 			}
 			else
@@ -63,6 +63,44 @@
 		private void OnDrawGizmos()
 		{
 			Gizmos.DrawIcon(transform.position, "gear-hammer.png");
+
+			// TODO TF: clean
+			var previewMeshFilter = GetPreviewMeshFilterInConstructableEntity();
+
+			if (previewMeshFilter != null)
+			{
+				var previewMesh = previewMeshFilter.sharedMesh;
+
+				Color yellow = Color.yellow;
+				yellow.a = 0.5f;
+				Gizmos.color = yellow;
+
+				for (int i = 0; i < previewMesh.subMeshCount; i++)
+				{
+
+					Vector3 position = transform.position + previewMesh.bounds.center;
+					position.y = transform.position.y;
+					Gizmos.DrawMesh(previewMesh, 0, position, transform.rotation);
+				}
+
+				UnityEditor.Handles.Label(transform.position + Vector3.right, "preview");
+			}
+		}
+
+		private MeshFilter GetPreviewMeshFilterInConstructableEntity()
+		{
+			if (_constructableEntity == null) return null;
+
+			if (_constructableEntity.TryGetBehaviour(out IConstructable constructable) == true)
+			{
+				if (constructable.PreviewPrefab == null) return null;
+
+				return constructable.PreviewPrefab.GetComponentInChildren<MeshFilter>();
+			}
+			else
+			{
+				return null;
+			}
 		}
 		#endregion Methods
 	}

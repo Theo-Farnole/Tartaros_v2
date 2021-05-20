@@ -9,7 +9,7 @@
 	using Tartaros.Map;
 	using Tartaros.OrderGiver;
 	using Tartaros.Population;
-	using Tartaros.Power;
+	using Tartaros.Powers;
 	using Tartaros.Selection;
 	using Tartaros.UI.HoverPopup;
 	using Tartaros.UI.MiniMap;

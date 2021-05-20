@@ -11,18 +11,18 @@
 	{
 		[SerializeField] private SectorRessourceType _ressourceType = SectorRessourceType.Iron;
 		[SerializeField] private int _ressourcePerTick = 5;
-		[SerializeField] private int  _gloryIncomeOnCapture = 0;
+		[SerializeField] private int _gloryIncomeOnCapture = 0;
 
 		private int _maxRessourceBeforeEmpty = 0;
 		private IPlayerIncomeManager _playerIncomeManager = null;
 		private PlayerGloryIncomeManager _playerGloryIncomeManager = null;
 		private SectorObject _sectorObject = null;
-		
+
 		public int GloryIncomeOnCapture => _gloryIncomeOnCapture;
 
 		SectorRessourceType IIncomeGenerator.SectorRessourceType => _ressourceType;
 
-		int IIncomeGenerator.ResourcesPerTick =>_ressourcePerTick;
+		int IIncomeGenerator.ResourcesPerTick => _ressourcePerTick;
 
 		int IIncomeGenerator.MaxRessourcesBeforeEmpty => _maxRessourceBeforeEmpty;
 
@@ -45,13 +45,11 @@
 		{
 			AddIncome();
 			AddGlory();
-
-			Debug.Log("income granted");
 		}
 
 		public void AddIncome()
 		{
-			if(_playerIncomeManager != null)
+			if (_playerIncomeManager != null)
 			{
 				_playerIncomeManager.AddGeneratorIncome(this);
 			}
@@ -59,7 +57,7 @@
 
 		public void RemoveIncome()
 		{
-			if(_playerIncomeManager != null)
+			if (_playerIncomeManager != null)
 			{
 				_playerIncomeManager.RemoveGeneratorIncome(this);
 			}
@@ -67,7 +65,7 @@
 
 		public void AddGlory()
 		{
-			if(_playerGloryIncomeManager != null)
+			if (_playerGloryIncomeManager != null)
 			{
 				_playerGloryIncomeManager.AddGlory(transform, _gloryIncomeOnCapture);
 			}
@@ -75,7 +73,7 @@
 
 		void IIncomeGenerator.RessourcesIsEmpty()
 		{
-			
+
 		}
 	}
 }

@@ -49,6 +49,14 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DoubleClickSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""f528b6bb-0196-4978-bd04-e7722293f6f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -56,7 +64,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""7c330169-dd3c-4c2e-81be-d9917817d339"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SelectEntity"",
@@ -93,6 +101,17 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""EnableAdditiveSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""656f1254-bd98-4f9f-96ce-ec6d626d25d7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoubleClickSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -166,7 +185,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""83ed9969-d854-4857-a4d8-01837c6f218a"",
-                    ""path"": ""<Keyboard>/#(Z)"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -232,7 +251,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""eff7bd46-28a9-480c-b166-2d3782196f33"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -513,6 +532,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
         m_Selection_StartSelectionRectangle = m_Selection.FindAction("StartSelectionRectangle", throwIfNotFound: true);
         m_Selection_EndSelectionRectangle = m_Selection.FindAction("EndSelectionRectangle", throwIfNotFound: true);
         m_Selection_EnableAdditiveSelection = m_Selection.FindAction("EnableAdditiveSelection", throwIfNotFound: true);
+        m_Selection_DoubleClickSelection = m_Selection.FindAction("DoubleClickSelection", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
@@ -587,6 +607,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Selection_StartSelectionRectangle;
     private readonly InputAction m_Selection_EndSelectionRectangle;
     private readonly InputAction m_Selection_EnableAdditiveSelection;
+    private readonly InputAction m_Selection_DoubleClickSelection;
     public struct SelectionActions
     {
         private @GameInputs m_Wrapper;
@@ -595,6 +616,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
         public InputAction @StartSelectionRectangle => m_Wrapper.m_Selection_StartSelectionRectangle;
         public InputAction @EndSelectionRectangle => m_Wrapper.m_Selection_EndSelectionRectangle;
         public InputAction @EnableAdditiveSelection => m_Wrapper.m_Selection_EnableAdditiveSelection;
+        public InputAction @DoubleClickSelection => m_Wrapper.m_Selection_DoubleClickSelection;
         public InputActionMap Get() { return m_Wrapper.m_Selection; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -616,6 +638,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @EnableAdditiveSelection.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEnableAdditiveSelection;
                 @EnableAdditiveSelection.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEnableAdditiveSelection;
                 @EnableAdditiveSelection.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnEnableAdditiveSelection;
+                @DoubleClickSelection.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnDoubleClickSelection;
+                @DoubleClickSelection.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnDoubleClickSelection;
+                @DoubleClickSelection.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnDoubleClickSelection;
             }
             m_Wrapper.m_SelectionActionsCallbackInterface = instance;
             if (instance != null)
@@ -632,6 +657,9 @@ public class @GameInputs : IInputActionCollection, IDisposable
                 @EnableAdditiveSelection.started += instance.OnEnableAdditiveSelection;
                 @EnableAdditiveSelection.performed += instance.OnEnableAdditiveSelection;
                 @EnableAdditiveSelection.canceled += instance.OnEnableAdditiveSelection;
+                @DoubleClickSelection.started += instance.OnDoubleClickSelection;
+                @DoubleClickSelection.performed += instance.OnDoubleClickSelection;
+                @DoubleClickSelection.canceled += instance.OnDoubleClickSelection;
             }
         }
     }
@@ -891,6 +919,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
         void OnStartSelectionRectangle(InputAction.CallbackContext context);
         void OnEndSelectionRectangle(InputAction.CallbackContext context);
         void OnEnableAdditiveSelection(InputAction.CallbackContext context);
+        void OnDoubleClickSelection(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

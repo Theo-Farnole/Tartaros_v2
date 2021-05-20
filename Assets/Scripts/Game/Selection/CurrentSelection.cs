@@ -13,6 +13,7 @@
 		[SerializeField]
 		private List<Team> _selectableTeams = new List<Team>();
 
+
 		List<ISelectable> _selectedObjets = new List<ISelectable>();
 		#endregion Fields
 
@@ -69,6 +70,7 @@
 
 		void ISelection.Add(ISelectable[] selectables)
 		{
+			
 			if (selectables is null) throw new ArgumentNullException(nameof(selectables));
 
 			foreach (ISelectable selectable in selectables)

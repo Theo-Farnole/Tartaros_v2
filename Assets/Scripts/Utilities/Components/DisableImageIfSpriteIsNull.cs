@@ -15,7 +15,7 @@
 
 		private void Update()
 		{
-			_image.color = _image.overrideSprite != null ? Color.white : Color.clear;
+			_image.enabled = _image.overrideSprite != null;
 		}
 	}
 }

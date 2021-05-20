@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Power
+﻿namespace Tartaros.Powers
 {
 	using UnityEngine;
 

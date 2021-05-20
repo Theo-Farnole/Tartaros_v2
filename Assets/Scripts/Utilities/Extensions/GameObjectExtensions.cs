@@ -12,6 +12,14 @@
 			return entity != null;
 		}
 
+		public static bool TryGetComponentInChildren<T>(this GameObject gameObject, out T entity)
+		{
+			if (gameObject is null) throw new System.ArgumentNullException(nameof(gameObject));
+
+			entity = gameObject.GetComponentInChildren<T>();
+			return entity != null;
+		}
+
 		/// <summary>
 		/// Get component. If no component is attached, add one.
 		/// </summary>

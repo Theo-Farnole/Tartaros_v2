@@ -7,55 +7,70 @@
 	using UnityEngine;
 	using System;
 	using Tartaros.Dialogue;
+	using Tartaros.UI.Sectors.Orders;
+	using Tartaros.Powers;
 
-	public class Village : MonoBehaviour
+	public class Village : MonoBehaviour, ISectorUIStylizer, ISectorUIContentProvider, ISectorOrderable
 	{
 		#region Fields
 
-		[SerializeField]
-		private VillageData _data = null;
-
+		[SerializeField] private VillageData _data = null;
+		[SerializeField] private BuildingSlot _buildingSlot = null;
 		[SerializeField] private bool _ENABLE_DIALOGUE_STATE_EDITOR = false;
+		[SerializeField] private Power _onCapturePowerUnlocked = Power.None;
 
-		private IMap _map = null;
 		private ISector _sector = null;
+
+		// SERVICES
+		private IMap _map = null;
 		private IPopulationManager _populationManager = null;
 		private DialogueManager _dialogueManager = null;
+		private UIStyles _uiStyles = null;
+		private PowerManager _powerManager = null;
 		#endregion Fields
 
 		#region Properties
 		private int PopulationToIncrease => _data.PopulationAmount;
-		public VillageData Data { get => _data; set => _data = value; }
+
+		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.Village;
 		#endregion Properties
 
-
-
+		#region Events
 		public class VillageCapturedArgs : EventArgs
 		{
 		}
-		public event EventHandler<VillageCapturedArgs> VillageCaptured;
+		public event EventHandler<VillageCapturedArgs> VillageCaptured = null;
+		#endregion Events
 
 
 		#region Methods		
-
 		private void Awake()
 		{
+			if (_buildingSlot is null) throw new UnassignedReferenceException(nameof(_buildingSlot));
+			if (_data is null) throw new UnassignedReferenceException(nameof(_data));
+
 			_map = Services.Instance.Get<IMap>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
-			_data = GetComponent<Entity>().GetBehaviourData<VillageData>();
-			_dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
+			_uiStyles = Services.Instance.Get<UIStyles>();
+			_powerManager = Services.Instance.Get<PowerManager>();
+
+			_dialogueManager = FindObjectOfType<DialogueManager>();
+
+			_sector = _map.GetSectorOnPosition(transform.position);
 		}
 
 		private void Start()
 		{
-			_sector = _map.GetSectorOnPosition(transform.position);
+			if (_sector.IsCaptured == true)
+			{
+				UnlockPower();
+			}
+		}
 
+		private void OnEnable()
+		{
 			_sector.Captured -= OnCaptureSector;
 			_sector.Captured += OnCaptureSector;
-
-			//Debug.Log(PopulationToIncrease);
-
-			UpdateAbilityToSpawnUnits();
 		}
 
 		private void OnDisable()
@@ -63,29 +78,52 @@
 			_sector.Captured -= OnCaptureSector;
 		}
 
-		private void OnCaptureSector(object sender, CapturedArgs e)
+		private void OnDrawGizmos()
 		{
-			VillageCaptured?.Invoke(this, new VillageCapturedArgs());
-			
-			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
-			UpdateAbilityToSpawnUnits();
-
-			if(_dialogueManager != null && _ENABLE_DIALOGUE_STATE_EDITOR == true)
+			if (_buildingSlot != null)
 			{
-				_dialogueManager.EnterDialogueState();
+				Gizmos.color = Color.green;
+				Gizmos.DrawLine(transform.position, _buildingSlot.transform.position);
 			}
 		}
 
-		private void UpdateAbilityToSpawnUnits()
+		private void OnCaptureSector(object sender, CapturedArgs e)
 		{
-			if (TryGetComponent(out EntityUnitsSpawner entityUnitsSpawner))
+			_populationManager.IncrementMaxPopulation(PopulationToIncrease);
+			UnlockPower();
+
+			if (_dialogueManager != null)
 			{
-				entityUnitsSpawner.enabled = _sector.IsCaptured;
+#if UNITY_EDITOR
+				if (_ENABLE_DIALOGUE_STATE_EDITOR == true)
+#endif
+					_dialogueManager.EnterDialogueState();
 			}
-			else
+
+			VillageCaptured?.Invoke(this, new VillageCapturedArgs());
+		}
+
+		private void UnlockPower()
+		{
+			if (_onCapturePowerUnlocked != Power.None)
 			{
-				Debug.LogErrorFormat("Missing entity spawner on village {0}. The village will not be able to spawn units.");
+				_powerManager.UnlockPower(_onCapturePowerUnlocked);				
 			}
+		}
+
+		SectorOrder ISectorOrderable.GenerateSectorOrder()
+		{
+			if (_buildingSlot == null) throw new System.NotSupportedException("Missing building slot in inspector.");
+
+			return new ConstructAtBuildingSlotOrder(_buildingSlot);
+		}
+
+		SectorUIContent ISectorUIContentProvider.GetSectorContent()
+		{
+			string name = TartarosTexts.VILLAGE;
+			string description = TartarosTexts.VILLAGE_DESCRIPTION;
+
+			return new SectorUIContent(name, description);
 		}
 		#endregion Methods
 	}

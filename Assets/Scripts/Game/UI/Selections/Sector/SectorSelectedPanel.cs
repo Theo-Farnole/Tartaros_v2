@@ -14,6 +14,8 @@
 	public class SectorSelectedPanel : APanel
 	{
 		#region Fields
+		public static readonly SectorUIContent FALLBACK_CONTENT = new SectorUIContent(TartarosTexts.DEFAULT_SECTOR_NAME, TartarosTexts.DEFAULT_SECTOR_DESCRIPTION);
+
 		[Title("UI Styles References")]
 		[SerializeField] private Image _icon = null;
 		[SerializeField] private Image _background = null;
@@ -23,11 +25,15 @@
 		[SerializeField] private TextMeshProUGUI _description = null;
 
 		[Title("Buttons References")]
+		[SerializeField] private RectTransform _buttonsRoot = null;
 		[SerializeField] private CaptureSectorButton _captureButton = null;
 		[SerializeField] private SectorOrderButton _orderButton = null;
 
-		private ISelection _currentSelection = null;
 		private ISector _displaySector = null;
+
+		// SERVICES
+		private ISelection _currentSelection = null;
+		private UIStyles _uiStyles = null;
 		#endregion Fields
 
 		#region Methods
@@ -36,6 +42,7 @@
 			base.Awake();
 
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
+			_uiStyles = Services.Instance.Get<UIStyles>();
 		}
 
 		private void OnEnable()
@@ -76,24 +83,35 @@
 		private void UpdateUI()
 		{
 			UpdateContent();
+			UpdateStyle();
 
 			UpdateOrderButton();
 			UpdateCaptureButton();
-			UpdateStyle();
+
+			_buttonsRoot.gameObject.SetActive(_captureButton.gameObject.activeSelf || _orderButton.gameObject.activeSelf);
 		}
 
 		private void UpdateContent()
 		{
-			ISectorUIContent uiContent = _displaySector.GetUIContent();
+			var uiContent = _displaySector.GetUIContent();
 
 			if (uiContent != null)
 			{
-				_name.text = uiContent.Name;
-				_description.text = uiContent.Description;
+				ApplyContent(uiContent);
 			}
+			else
+			{
+				ApplyContent(FALLBACK_CONTENT);
+			}			
+		}
 
-			_name.enabled = uiContent != null;
-			_description.enabled = uiContent != null;
+		private void ApplyContent(SectorUIContent content)
+		{
+			_name.text = content.name;
+			_description.text = content.description;
+
+			_name.enabled = content != null;
+			_description.enabled = content != null;
 		}
 
 		private void UpdateStyle()
@@ -102,15 +120,22 @@
 
 			if (stylizer != null)
 			{
-				SectorStyle sectorStyle = stylizer.SectorStyle;
-
-				_icon.enabled = sectorStyle.Icon != null;
-				_icon.sprite = sectorStyle.Icon;
-				_background.sprite = sectorStyle.Background;
-
-				SetStyleToButton(_captureButton, sectorStyle);
-				SetStyleToButton(_orderButton, sectorStyle);
+				ApplyStyle(stylizer.SectorStyle);
 			}
+			else
+			{
+				ApplyStyle(_uiStyles.SectorStyles.DefaultSector);
+			}
+		}
+
+		private void ApplyStyle(SectorStyle sectorStyle)
+		{
+			_icon.enabled = sectorStyle.Icon != null;
+			_icon.sprite = sectorStyle.Icon;
+			_background.sprite = sectorStyle.Background;
+
+			SetStyleToButton(_captureButton, sectorStyle);
+			SetStyleToButton(_orderButton, sectorStyle);
 		}
 
 		private void SetStyleToButton(AButtonActionAttacher button, SectorStyle style)
