@@ -75,15 +75,25 @@
 
 		private void UpdateUI()
 		{
-			if (_displaySector.TryGetResourceType(out SectorRessourceType resourceType))
-			{
-				_name.text = TartarosTexts.GetResourceSectorName(_displaySector);
-				_description.text = TartarosTexts.GetResourceSectorDescription(_displaySector);
-			}
+			UpdateContent();
 
 			UpdateOrderButton();
 			UpdateCaptureButton();
 			UpdateStyle();
+		}
+
+		private void UpdateContent()
+		{
+			ISectorUIContent uiContent = _displaySector.GetUIContent();
+
+			if (uiContent != null)
+			{
+				_name.text = uiContent.Name;
+				_description.text = uiContent.Description;
+			}
+
+			_name.enabled = uiContent != null;
+			_description.enabled = uiContent != null;
 		}
 
 		private void UpdateStyle()

@@ -11,7 +11,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(SectorObject)), InfoBox("Fill constructable of building slot AUTOMATICALLY")]
-	public partial class FlagResourceToSector : MonoBehaviour, ISectorOrderable, ISectorUIStylizer
+	public partial class FlagResourceToSector : MonoBehaviour, ISectorOrderable, ISectorUIStylizer, ISectorUIContent
 	{
 		#region Fields
 		[SerializeField] private SectorRessourceType _type = SectorRessourceType.Food;
@@ -38,6 +38,10 @@
 		}
 
 		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.GetResourceStyle(_type);
+
+		string ISectorUIContent.Name => TartarosTexts.GetResourceSectorName(_type);
+
+		string ISectorUIContent.Description => TartarosTexts.GetResourceSectorDescription(_type);
 		#endregion Properties
 
 		#region Methods

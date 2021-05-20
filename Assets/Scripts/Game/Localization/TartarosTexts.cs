@@ -19,14 +19,17 @@
 		private static readonly string UNITS_COLOR_HEX = Color.red.ToHex();
 
 
-		public static string GetResourceSectorName(ISector sector)
+		public static string GetResourceSectorName(ISector sector) => GetResourceSectorName(sector.GetResourceType());
+
+		public static string GetResourceSectorName(SectorRessourceType type)
 		{
-			return string.Format("{0} sector", sector.GetResourceType());
+			return string.Format("{0} sector", type);
 		}
 
-		public static string GetResourceSectorDescription(ISector sector)
+		public static string GetResourceSectorDescription(ISector sector) => GetResourceSectorDescription(sector.GetResourceType());
+
+		public static string GetResourceSectorDescription(SectorRessourceType resourceType)
 		{
-			SectorRessourceType resourceType = sector.GetResourceType();
 			return string.Format("Generates {0}<color={1}>{2}</color>.", resourceType.GetRichTextSprite(), RESOURCE_COLOR_HEX, resourceType);
 		}
 
