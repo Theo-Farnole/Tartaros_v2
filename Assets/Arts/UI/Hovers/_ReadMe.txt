@@ -1,0 +1,1 @@
+UI_CIRCLE and UI_DIAMOND are intended to be reused for similar button shapes.
