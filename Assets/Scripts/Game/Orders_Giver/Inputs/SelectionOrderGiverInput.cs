@@ -68,8 +68,9 @@
 			}
 			else if (MouseHelper.GetHitUnderCursor(out RaycastHit hit))
 			{
-				_selectionOrderGiver.Move(hit.point);
-				PlayVFX(hit.point);
+				var position = MouseHelper.GetPositionOnGroundUnderCursor();
+				_selectionOrderGiver.Move(position);
+				PlayVFX(position);
 			}
 		}
 

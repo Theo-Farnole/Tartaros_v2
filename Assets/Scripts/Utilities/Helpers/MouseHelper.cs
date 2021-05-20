@@ -1,6 +1,7 @@
 ﻿namespace Tartaros
 {
 	using UnityEngine;
+	using UnityEngine.AI;
 	using UnityEngine.InputSystem;
 
 	public static class MouseHelper
@@ -65,6 +66,28 @@
 		{
 			Ray ray = Camera.main.ScreenPointToRay(CursorPosition);
 			return Physics.Raycast(ray, out hit);
+		}
+
+		public static Vector3 GetPositionOnGroundUnderCursor()
+		{
+			Ray ray = Camera.main.ScreenPointToRay(CursorPosition);
+			RaycastHit hit;
+			NavMeshHit navHit;
+
+			Physics.Raycast(ray, out hit);
+
+			Vector3 hitPointWithHeight = new Vector3(hit.point.x, hit.point.y + 2, hit.point.z);
+
+
+			if(NavMesh.Raycast(hitPointWithHeight, Vector3.down * 10, out navHit, NavMesh.AllAreas))
+			{
+				return hit.point;
+			}
+			else
+			{
+				return NavMeshHelper.AdjustPositionToFitNavMesh(hit.point);
+			}
+
 		}
 	}
 }
