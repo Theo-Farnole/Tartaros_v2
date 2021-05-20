@@ -1,7 +1,9 @@
 ﻿namespace Tartaros.UI
 {
 	using Sirenix.OdinInspector;
+	using System.Collections.Generic;
 	using Tartaros.Entities;
+	using Tartaros.Map;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -14,7 +16,8 @@
 			None,
 			Temple,
 			OneEntity,
-			MultipleEntities
+			MultipleEntities,
+			Sector
 		}
 		#endregion Enums
 
@@ -23,20 +26,27 @@
 		[SerializeField] private SelectionTemplePanel _selectionTemplePanel = null;
 		[SerializeField] private OneSelectedPanel _oneSelectedPanel = null;
 		[SerializeField] private MultiEntitiesSelectedPanel _multiEntitiesSelectedPanel = null;
+		[SerializeField] private SectorSelectedPanel _sectorPanel = null;
 
 		[Title("Data ")]
 		[SerializeField] private EntityData _templeData = null;
 
 		private ISelection _selection = null;
-		#endregion Fields
 
-		// SectorWithResourcesSelectedPanel
-		// MultiEntitiesSleectedPanel
+		private Dictionary<SelectionPanel, APanel> _panels = null;
+		#endregion Fields
 
 		#region Methods
 		private void Awake()
 		{
 			_selection = Services.Instance.Get<CurrentSelection>();
+			_panels = new Dictionary<SelectionPanel, APanel>()
+			{
+				{ SelectionPanel.Temple, _selectionTemplePanel },
+				{ SelectionPanel.OneEntity, _oneSelectedPanel },
+				{ SelectionPanel.MultipleEntities, _multiEntitiesSelectedPanel},
+				{ SelectionPanel.Sector, _sectorPanel },
+			};
 		}
 
 		private void OnEnable()
@@ -67,6 +77,10 @@
 						ShowPanelAndHideOthers(SelectionPanel.OneEntity);
 					}
 				}
+				else if (monoBehaviour.TryGetComponent(out ISector sector))
+				{
+					ShowPanelAndHideOthers(SelectionPanel.Sector);
+				}
 			}
 			else if (_selection.ObjectsCount > 1)
 			{
@@ -76,19 +90,15 @@
 
 		private void ShowPanelAndHideOthers(SelectionPanel panelToShow)
 		{
-			ManageActivation(_oneSelectedPanel, SelectionPanel.OneEntity);
-			ManageActivation(_selectionTemplePanel, SelectionPanel.Temple);
-			ManageActivation(_multiEntitiesSelectedPanel, SelectionPanel.MultipleEntities);
-
-			void ManageActivation(APanel panel, SelectionPanel associatedPanel)
+			foreach (var kvp in _panels)
 			{
-				if (panelToShow == associatedPanel)
+				if (kvp.Key == panelToShow)
 				{
-					panel.Show();
+					kvp.Value.Show();
 				}
 				else
 				{
-					panel.Hide();
+					kvp.Value.Hide();
 				}
 			}
 		}

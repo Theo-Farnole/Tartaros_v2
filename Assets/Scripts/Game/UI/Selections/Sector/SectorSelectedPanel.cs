@@ -69,16 +69,7 @@
 				{
 					_displaySector = sector;
 					UpdateUI();
-					Show();
 				}
-				else
-				{
-					Hide();
-				}
-			}
-			else
-			{
-				Hide();
 			}
 		}
 
