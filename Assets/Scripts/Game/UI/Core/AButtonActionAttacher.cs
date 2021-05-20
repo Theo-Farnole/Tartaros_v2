@@ -16,7 +16,7 @@
 		#endregion Fields
 
 		#region Properties
-		protected Button Button
+		public Button Button
 		{
 			get
 			{

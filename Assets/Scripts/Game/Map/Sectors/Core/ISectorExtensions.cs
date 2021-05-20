@@ -6,6 +6,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Map;
+	using Tartaros.UI.Sectors.Orders;
 	using UnityEngine;
 
 	public static class ISectorExtensions
@@ -145,6 +146,22 @@
 			else
 			{
 				throw new System.NotSupportedException(string.Format("There is {0} resources flags on sector {1}. This is not supported.", flags.Length, sector.ToString()));
+			}
+		}
+
+		public static ISectorUIStylizer GetUIStylizer(this ISector sector)
+		{
+			ISectorUIStylizer[] stylizers = sector.FindObjectsInSectorOfType<ISectorUIStylizer>();
+
+			if (stylizers.Length > 1) throw new System.NotSupportedException("A sector cannot contains more than one UI stylizer. Please remove one.");
+
+			if (stylizers.Length > 0)
+			{
+				return stylizers[0];
+			}
+			else
+			{
+				return null;
 			}
 		}
 

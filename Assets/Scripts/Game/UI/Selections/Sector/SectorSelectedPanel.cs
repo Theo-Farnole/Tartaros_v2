@@ -14,10 +14,14 @@
 	public class SectorSelectedPanel : APanel
 	{
 		#region Fields
-		[Title("UI Informations References")]
-		[SerializeField] private Image _resourceIcon = null;
+		[Title("UI Styles References")]
+		[SerializeField] private Image _icon = null;
+		[SerializeField] private Image _background = null;
+
+		[Title("UI Texts References")]
 		[SerializeField] private TextMeshProUGUI _name = null;
 		[SerializeField] private TextMeshProUGUI _description = null;
+
 		[Title("Buttons References")]
 		[SerializeField] private CaptureSectorButton _captureButton = null;
 		[SerializeField] private SectorOrderButton _orderButton = null;
@@ -54,7 +58,7 @@
 
 		private void OnAnyButtonClick(object sender, AButtonActionAttacher.LateButtonClickedArgs e)
 		{
-			UpdateShowInformations();
+			UpdateUI();
 		}
 
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
@@ -66,7 +70,7 @@
 				if (firtSelectable.GameObject.TryGetComponent(out ISector sector))
 				{
 					_displaySector = sector;
-					UpdateShowInformations();
+					UpdateUI();
 					Show();
 				}
 				else
@@ -80,17 +84,35 @@
 			}
 		}
 
-		private void UpdateShowInformations()
+		private void UpdateUI()
 		{
 			if (_displaySector.TryGetResourceType(out SectorRessourceType resourceType))
 			{
-				_resourceIcon.sprite = _iconsDatabase.Data.GetResourceIcon(resourceType);
 				_name.text = TartarosTexts.GetResourceSectorName(_displaySector);
 				_description.text = TartarosTexts.GetResourceSectorDescription(_displaySector);
 			}
 
 			UpdateOrderButton();
 			UpdateCaptureButton();
+			UpdateStyle();
+		}
+
+		private void UpdateStyle()
+		{
+			ISectorUIStylizer stylizer = _displaySector.GetUIStylizer();
+
+			if (stylizer != null)
+			{
+				SectorStyle sectorStyle = stylizer.SectorStyle;
+				_icon.sprite = sectorStyle.Icon;
+				_background.sprite = sectorStyle.Background;
+
+				(_captureButton.Button.targetGraphic as Image).sprite = sectorStyle.ButtonDefault;
+				_captureButton.Button.spriteState = sectorStyle.ButtonTransition;
+
+				(_orderButton.Button.targetGraphic as Image).sprite = sectorStyle.ButtonDefault;
+				_orderButton.Button.spriteState = sectorStyle.ButtonTransition;
+			}
 		}
 
 		private void UpdateOrderButton()
