@@ -32,7 +32,7 @@
 
 		private void InstanciateGameplayPrefab()
 		{
-			GameObject.Instantiate(_constructable.GameplayPrefab, transform.position, Quaternion.identity);
+			GameObject.Instantiate(_constructable.GameplayPrefab, transform.position, transform.rotation);
 			Destroy(this.gameObject);
 		}
 	}

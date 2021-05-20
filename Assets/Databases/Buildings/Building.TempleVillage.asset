@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25baa4b43884c9947b4a9bb38f59d7a3, type: 3}
-  m_Name: Building.Temple
+  m_Name: Building.TempleVillage
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 5657609668978460668, guid: 792750a5111312a4da38e3eae8838e9d, type: 3}
+    - {fileID: 5812336634359571665, guid: 988c510d4ddc21d4c95d21b16d5b9174, type: 3}
+    - {fileID: 5657609668978460668, guid: af2fa67ba1b380b468b455599eb1c95a, type: 3}
     - {fileID: 11400000, guid: 69c05a069b696be49b0616a67f00bff7, type: 2}
     - {fileID: 11400000, guid: ef88a5278bc6e0d469c259828f48c5ad, type: 2}
     SerializedBytesString: 
@@ -67,8 +69,8 @@ MonoBehaviour:
       Entry: 10
       Data: 0
     - Name: _gameplayPrefab
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: _wallCornerModel
       Entry: 6
       Data: 
@@ -76,14 +78,14 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: _constructionKitModel
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 2
     - Name: _hoverPopupData
       Entry: 6
       Data: 
     - Name: _timeToConstruct
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: _IsChained
       Entry: 5
       Data: false
@@ -171,7 +173,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 10
-      Data: 1
+      Data: 3
     - Name: $v
       Entry: 7
       Data: 10|Tartaros.Entities.SpawnSettings, Tartaros
@@ -257,7 +259,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 10
-      Data: 2
+      Data: 4
     - Name: $v
       Entry: 7
       Data: 14|Tartaros.Entities.SpawnSettings, Tartaros
@@ -365,7 +367,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 5812336634359571665, guid: 988c510d4ddc21d4c95d21b16d5b9174, type: 3}
   _portrait: {fileID: 0}
   _population: 1
   _hoverPopupData: {fileID: 0}

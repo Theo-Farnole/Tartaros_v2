@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 7921501516267714427}
   - component: {fileID: 3469296930533839119}
   m_Layer: 0
-  m_Name: Building.Temple
+  m_Name: Building.MainTemple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +42,7 @@ Transform:
   m_Children:
   - {fileID: 220135045778203774}
   - {fileID: 2095884609570247417}
+  - {fileID: 961672209558225350}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -218,6 +219,62 @@ MonoBehaviour:
     type: 3}
   _villagetFemalePrefab: {fileID: 2424111454304933240, guid: 931970120eb577348b20141993ca0a51,
     type: 3}
+--- !u!1 &8883402107132078439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 961672209558225350}
+  - component: {fileID: 3719549833140695704}
+  - component: {fileID: 718711145753551986}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &961672209558225350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8883402107132078439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5657609668978460671}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3719549833140695704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8883402107132078439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ac8a3912c7e9848a22da7f67230e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &718711145753551986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8883402107132078439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e745c78327ba774497317aed14aa649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2387191279002509662
 PrefabInstance:
   m_ObjectHideFlags: 0
