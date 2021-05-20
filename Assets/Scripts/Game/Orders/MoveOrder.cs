@@ -36,9 +36,9 @@
 			return () =>
 			{
 				var userErrorLogger = Services.Instance.Get<UserErrorsLogger>();
-				RaycastHit hit;
-				bool gameObjectUnderCursor = MouseHelper.GetHitUnderCursor(out hit);
-				Vector3 position = hit.point;
+				//RaycastHit hit;
+				//bool gameObjectUnderCursor = MouseHelper.GetHitUnderCursor(out hit);
+				Vector3 position = MouseHelper.GetPositionOnGroundUnderCursor();
 
 				if (entityMovement.CanMoveToPoint(position))
 				{
