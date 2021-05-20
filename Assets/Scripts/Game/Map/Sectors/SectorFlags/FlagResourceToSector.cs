@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Map
 {
+	using Assets.Scripts.Game.UI.Selections.Sector.Style;
 	using Sirenix.OdinInspector;
 	using System.Linq;
 	using Tartaros.Construction;
@@ -11,7 +12,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(SectorObject)), InfoBox("Fill constructable of building slot AUTOMATICALLY")]
-	public partial class FlagResourceToSector : MonoBehaviour, ISectorOrderable
+	public partial class FlagResourceToSector : MonoBehaviour, ISectorOrderable, ISectorUIStylizer
 	{
 		#region Fields
 		[SerializeField] private SectorRessourceType _type = SectorRessourceType.Food;
@@ -22,6 +23,7 @@
 		// SERVICES
 		private IMap _map = null;
 		private BuildingsDatabase _buildingsDatabase = null;
+		private UIStyles _uiStyles = null;
 		#endregion Fields
 
 		#region Properties
@@ -35,6 +37,8 @@
 				_miniMapIcon.ResourceType = _type;
 			}
 		}
+
+		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.GetResourceStyle(_type);
 		#endregion Properties
 
 		#region Methods
@@ -42,6 +46,8 @@
 		{
 			_map = Services.Instance.Get<IMap>();
 			_buildingsDatabase = Services.Instance.Get<BuildingsDatabase>();
+			_uiStyles = Services.Instance.Get<UIStyles>();
+
 			_sectorOnPosition = _map.GetSectorOnPosition(transform.position);
 
 			_miniMapIcon = gameObject.GetOrAddComponent<ResourceMiniMapIcon>();
