@@ -23,6 +23,7 @@
 		[SerializeField] private TextMeshProUGUI _description = null;
 
 		[Title("Buttons References")]
+		[SerializeField] private RectTransform _buttonsRoot = null;
 		[SerializeField] private CaptureSectorButton _captureButton = null;
 		[SerializeField] private SectorOrderButton _orderButton = null;
 
@@ -76,10 +77,13 @@
 		private void UpdateUI()
 		{
 			UpdateContent();
+			UpdateStyle();
 
 			UpdateOrderButton();
 			UpdateCaptureButton();
-			UpdateStyle();
+
+
+			_buttonsRoot.gameObject.SetActive(_captureButton.gameObject.activeSelf || _orderButton.gameObject.activeSelf);
 		}
 
 		private void UpdateContent()
