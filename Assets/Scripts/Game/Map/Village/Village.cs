@@ -7,33 +7,43 @@
 	using UnityEngine;
 	using System;
 	using Tartaros.Dialogue;
+	using Tartaros.UI.Sectors.Orders;
 
-	public class Village : MonoBehaviour
+	public class Village : MonoBehaviour, ISectorUIStylizer, ISectorUIContent
 	{
 		#region Fields
 
-		[SerializeField]
-		private VillageData _data = null;
-
+		[SerializeField] private VillageData _data = null;
 		[SerializeField] private bool _ENABLE_DIALOGUE_STATE_EDITOR = false;
 
-		private IMap _map = null;
 		private ISector _sector = null;
+
+		// SERVICES
+		private IMap _map = null;
 		private IPopulationManager _populationManager = null;
 		private DialogueManager _dialogueManager = null;
+		private UIStyles _uiStyles = null;
 		#endregion Fields
 
 		#region Properties
 		private int PopulationToIncrease => _data.PopulationAmount;
 		public VillageData Data { get => _data; set => _data = value; }
+
+		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.Village;
+
+		string ISectorUIContent.Name => TartarosTexts.VILLAGE;
+
+		string ISectorUIContent.Description => TartarosTexts.VILLAGE_DESCRIPTION;
 		#endregion Properties
 
 
 
+		#region Events
 		public class VillageCapturedArgs : EventArgs
 		{
 		}
-		public event EventHandler<VillageCapturedArgs> VillageCaptured;
+		public event EventHandler<VillageCapturedArgs> VillageCaptured; 
+		#endregion Events
 
 
 		#region Methods		
@@ -42,6 +52,8 @@
 		{
 			_map = Services.Instance.Get<IMap>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
+			_uiStyles = Services.Instance.Get<UIStyles>();
+
 			_data = GetComponent<Entity>().GetBehaviourData<VillageData>();
 			_dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
 		}

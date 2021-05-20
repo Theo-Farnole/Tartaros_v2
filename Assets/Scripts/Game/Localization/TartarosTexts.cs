@@ -18,6 +18,10 @@
 		private static readonly string RESOURCE_COLOR_HEX = Color.green.ToHex();
 		private static readonly string UNITS_COLOR_HEX = Color.red.ToHex();
 
+		public static readonly string VILLAGE = "Village";
+		public static readonly string VILLAGE_DESCRIPTION = "Unlock a spell when captured.";
+
+
 
 		public static string GetResourceSectorName(ISector sector) => GetResourceSectorName(sector.GetResourceType());
 
