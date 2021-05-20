@@ -9,7 +9,7 @@
 	using Tartaros.Dialogue;
 	using Tartaros.UI.Sectors.Orders;
 
-	public class Village : MonoBehaviour, ISectorUIStylizer, ISectorUIContent, ISectorOrderable
+	public class Village : MonoBehaviour, ISectorUIStylizer, ISectorUIContentProvider, ISectorOrderable
 	{
 		#region Fields
 
@@ -30,10 +30,6 @@
 		private int PopulationToIncrease => _data.PopulationAmount;
 
 		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.Village;
-
-		string ISectorUIContent.Name => TartarosTexts.VILLAGE;
-
-		string ISectorUIContent.Description => TartarosTexts.VILLAGE_DESCRIPTION;
 		#endregion Properties
 
 		#region Events
@@ -103,6 +99,14 @@
 			if (_buildingSlot == null) throw new System.NotSupportedException("Missing building slot in inspector.");
 
 			return new ConstructAtBuildingSlotOrder(_buildingSlot);
+		}
+
+		SectorUIContent ISectorUIContentProvider.GetSectorContent()
+		{
+			string name = TartarosTexts.VILLAGE;
+			string description = TartarosTexts.VILLAGE_DESCRIPTION;
+
+			return new SectorUIContent(name, description);
 		}
 		#endregion Methods
 	}

@@ -21,6 +21,9 @@
 		public static readonly string VILLAGE = "Village";
 		public static readonly string VILLAGE_DESCRIPTION = "Unlock a spell when captured.";
 
+		public static readonly string DEFAULT_SECTOR_NAME = "Empty sector";
+		public static readonly string DEFAULT_SECTOR_DESCRIPTION = "";
+
 
 
 		public static string GetResourceSectorName(ISector sector) => GetResourceSectorName(sector.GetResourceType());

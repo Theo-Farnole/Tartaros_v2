@@ -7,7 +7,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(SpecialSectorIncome))]
-	public class SpecialSector : MonoBehaviour, ISectorUIStylizer, ISectorUIContent
+	public class SpecialSector : MonoBehaviour, ISectorUIStylizer, ISectorUIContentProvider
 	{
 		private enum God
 		{
@@ -43,10 +43,6 @@
 
 			}
 		}
-
-		string ISectorUIContent.Name => _godSector.ToString();
-
-		string ISectorUIContent.Description => TartarosTexts.GetSpecialSectorDescription(this);
 		#endregion Properties
 
 		#region Methods
@@ -83,6 +79,14 @@
 				default:
 					throw new System.NotImplementedException();
 			}
+		}
+
+		SectorUIContent ISectorUIContentProvider.GetSectorContent()
+		{
+			string name = _godSector.ToString();
+			string description = TartarosTexts.GetSpecialSectorDescription(this);
+
+			return new SectorUIContent(name, description);			
 		}
 		#endregion Methods
 	}

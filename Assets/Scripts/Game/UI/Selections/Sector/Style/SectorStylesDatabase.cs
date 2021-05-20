@@ -11,12 +11,14 @@
 		[SerializeField] private SectorStyle _village = null;
 		[SerializeField] private SectorStyle _hephaistos = null;
 		[SerializeField] private SectorStyle _poseidon = null;
+		[SerializeField] private SectorStyle _defaultSector = null;
 		#endregion Fields
 
 		#region Properties
 		public SectorStyle Village => new SectorStyle(_village);
 		public SectorStyle Hephaistos => new SectorStyle(_hephaistos);
 		public SectorStyle Poseidon => new SectorStyle(_poseidon);
+		public SectorStyle DefaultSector => new SectorStyle(_defaultSector);
 		#endregion Properties
 
 		#region Methods
