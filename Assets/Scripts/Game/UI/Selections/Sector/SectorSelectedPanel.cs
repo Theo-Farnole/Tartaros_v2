@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.UI
 {
 	using Sirenix.OdinInspector;
+	using System.Threading;
 	using Tartaros.Economy;
 	using Tartaros.Map;
 	using Tartaros.Selection;
@@ -81,7 +82,7 @@
 
 		private void UpdateShowInformations()
 		{
-			if (_displaySector.TryGetResourceTypeOfSector(out SectorRessourceType resourceType))
+			if (_displaySector.TryGetResourceType(out SectorRessourceType resourceType))
 			{
 				_resourceIcon.sprite = _iconsDatabase.Data.GetResourceIcon(resourceType);
 				_name.text = TartarosTexts.GetResourceSectorName(_displaySector);
@@ -96,15 +97,11 @@
 		{
 			if (_displaySector.IsCaptured == true)
 			{
-				ISectorOrderable[] sectorOrderables = _displaySector.FindObjectsInSectorOfType<ISectorOrderable>();
+				ISectorOrderable sectorOrderable = GetSectorOrderable();
 
-				if (sectorOrderables.Length > 1) throw new System.NotSupportedException("A sector must contains zero or one sector orderable.");
-
-				bool sectorContainsOrder = sectorOrderables.Length == 1;
-
-				if (sectorContainsOrder == true)
+				if (sectorOrderable != null)
 				{
-					SectorOrder sectorOrder = sectorOrderables[0].GenerateSectorOrder();
+					SectorOrder sectorOrder = sectorOrderable.GenerateSectorOrder();
 
 					_orderButton.gameObject.SetActive(sectorOrder.IsAvailable);
 					_orderButton.SectorOrder = sectorOrder;
@@ -117,6 +114,22 @@
 			else
 			{
 				_orderButton.gameObject.SetActive(false);
+			}
+		}
+
+		private ISectorOrderable GetSectorOrderable()
+		{
+			ISectorOrderable[] sectorOrderables = _displaySector.FindObjectsInSectorOfType<ISectorOrderable>();
+
+			if (sectorOrderables.Length > 1) throw new System.NotSupportedException("A sector cannot more than one ISectorOrderable.");
+
+			if (sectorOrderables.Length > 0)
+			{
+				return sectorOrderables[0];
+			}
+			else
+			{
+				return null;
 			}
 		}
 

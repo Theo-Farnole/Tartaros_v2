@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.ServicesLocator
 {
+	using Assets.Scripts.Game.UI.Selections.Sector.Style;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -36,6 +37,7 @@
 
 			RegisterFromHierarchy<MiniMap>();
 			RegisterFromHierarchy<NavigationPathMiniMap>();
+			RegisterFromHierarchy<UIStyles>();
 
 			RegisterFromChildren<BuildingsDatabase>();
 			RegisterFromChildren<HoverPopupsDatabase>();

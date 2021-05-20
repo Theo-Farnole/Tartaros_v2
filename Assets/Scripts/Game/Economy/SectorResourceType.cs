@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Economy
 {
+	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 	public enum SectorRessourceType
@@ -39,6 +40,11 @@
 		public static void DrawIcon(this SectorRessourceType type, Vector3 center)
 		{
 			Gizmos.DrawIcon(center, type.GetGizmosIconName());
+		}
+
+		public static Sprite GetIcon(this SectorRessourceType type)
+		{
+			return Services.Instance.Get<IconsDatabase>().Data.GetResourceIcon(type);
 		}
 
 		private static string GetGizmosIconName(this SectorRessourceType type)

@@ -148,7 +148,7 @@
 			}
 		}
 
-		public static bool TryGetResourceTypeOfSector(this ISector sector, out SectorRessourceType type)
+		public static bool TryGetResourceType(this ISector sector, out SectorRessourceType type)
 		{
 			FlagResourceToSector[] flags = sector.FindObjectsInSectorOfType<FlagResourceToSector>();
 
