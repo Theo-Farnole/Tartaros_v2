@@ -8,7 +8,6 @@
 	{
 		public static Vector2 CursorPosition => Mouse.current.position.ReadValue();
 
-
 		public static bool IsCursorOverWindow()
 		{
 			if (Camera.main == null)
@@ -79,7 +78,7 @@
 			Vector3 hitPointWithHeight = new Vector3(hit.point.x, hit.point.y + 2, hit.point.z);
 
 
-			if(NavMesh.Raycast(hitPointWithHeight, Vector3.down * 10, out navHit, NavMesh.AllAreas))
+			if (NavMesh.Raycast(hitPointWithHeight, Vector3.down * 10, out navHit, NavMesh.AllAreas))
 			{
 				return hit.point;
 			}

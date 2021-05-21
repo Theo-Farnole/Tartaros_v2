@@ -33,9 +33,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _AngleSpeed: 3
-    - _CircularLerp: 1.5
-    - _CircularLerp1: 2
+    - _AngleSpeed: 2
+    - _CircularLerp: 2
+    - _CircularLerp1: 0.18
     - _ColorMask: 15
     - _ColorsLerp: 2
     - _InnerThickness: 0.05
@@ -47,7 +47,7 @@ Material:
     - _SquareFromUVtilling: -0.85
     - _SquarePower: 0.46
     - _SquareRadius: 0.04
-    - _SquaredFadeInner: 2.5
+    - _SquaredFadeInner: 4
     - _SquaredFadeOuter: 5.03
     - _Stencil: 0
     - _StencilComp: 8
@@ -55,7 +55,7 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
-    - _VoroScale: 0.5
+    - _VoroScale: 2
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

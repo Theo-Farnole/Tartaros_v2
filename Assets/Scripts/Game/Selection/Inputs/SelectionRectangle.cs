@@ -39,7 +39,7 @@
 		public ISelectable[] GetSelectablesInRectangle()
 		{
 			ISelectable[] selectablesInGame = GetAllSelectablesInWorld();
-			ISelectable[] selectablesInViewport = SelectionHelper.KeepSelectablesInRectangle(selectablesInGame, SelectionRect);
+			ISelectable[] selectablesInViewport = SelectionHelper.GetSelectablesInRectangle(selectablesInGame, SelectionRect);
 
 			return selectablesInViewport;
 		}
