@@ -1,11 +1,13 @@
 ﻿namespace Tartaros.Selection
 {
+	using Sirenix.OdinInspector;
 	using System.Collections;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
 	using UnityEngine.InputSystem;
 
-	public class DoubleClickSelectionInput : MonoBehaviour
+	public class DoubleClickSelectionInput : SerializedMonoBehaviour
 	{
 		#region Fields
 		[SerializeField]
@@ -16,6 +18,7 @@
 
 		#region Properties
 		private bool EnableAdditiveSelectionPerformed => _gameInputs.Selection.EnableAdditiveSelection.phase == InputActionPhase.Performed;
+		public Bounds BoundsCamera => GUIRectDrawer.GetViewportBounds(Camera.main, new Vector2(0, 0), new Vector2(Screen.width, Screen.height));
 		#endregion Properties
 
 		#region Methods
@@ -23,6 +26,8 @@
 		{
 			_gameInputs = new GameInputs();
 			_rectangleSelection = GetComponent<RectangleSelectionInput>();
+
+
 		}
 
 		private void OnEnable()
@@ -46,7 +51,7 @@
 
 			if (TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor) == true)
 			{
-				_selection.Toggle(selectableUnderCursor);
+				SelectSelectableOnCamera(selectableUnderCursor);
 			}
 		}
 		private bool TryGetISelectableUnderCursor(out ISelectable selectableUnderCursor)
@@ -60,7 +65,21 @@
 			}
 
 			selectableUnderCursor = null;
+			
 			return false;
+		}
+
+		private void SelectSelectableOnCamera(ISelectable selectable)
+		{
+			ISelectable[] selectablesInGame = GetAllSelectablesInWorld();
+			ISelectable[] selectablesInRect = SelectionHelper.GetSelectablesInRectangle(selectablesInGame, BoundsCamera);
+
+			_selection.Add(SelectionHelper.GetSelectablesOfTheSameData(selectable, selectablesInRect));
+		}
+
+		private ISelectable[] GetAllSelectablesInWorld()
+		{
+			return ObjectsFinder.FindObjectsOfInterface<ISelectable>();
 		}
 
 
@@ -89,6 +108,8 @@
 				return EventSystem.current.IsPointerOverGameObject(-1);
 			}
 		}
+
+		
 
 		#endregion
 	}

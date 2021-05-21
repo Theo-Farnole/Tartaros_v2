@@ -400,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4e7dc539920aa4b96b9d7a14e7ded1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unlockedPowers: 01000000
   _lightningBoltPrefab: {fileID: 818020849120785679, guid: 5628a6f2192a6ea42a14d34a3146c802,
     type: 3}
   _controlledAoEPrefab: {fileID: 232756025107487623, guid: 1842a862c8694c64e95bfa0e01701190,
@@ -714,6 +715,7 @@ GameObject:
   - component: {fileID: 1450499037111056601}
   - component: {fileID: 1450499037111056599}
   - component: {fileID: 1450499037111056598}
+  - component: {fileID: 6131314008166524428}
   m_Layer: 0
   m_Name: CurrentSelection + Inputs
   m_TagString: Untagged
@@ -785,6 +787,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a190c89b9655bd4e952706ed0d64a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1450499037111056601}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _selection
+      Entry: 10
+      Data: 0
+--- !u!114 &6131314008166524428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450499037111056600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b3f0f3b34d2e74b819de77b1a83d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
