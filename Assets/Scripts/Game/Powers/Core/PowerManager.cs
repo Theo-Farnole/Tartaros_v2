@@ -20,8 +20,7 @@
 		[Title("Prefabs References")]
 		[SerializeField, AssetsOnly] private GameObject _lightningBoltPrefab = null;
 		[SerializeField, AssetsOnly] private GameObject _controlledAoEPrefab = null;
-
-		private Village _OnCaptureVillageUnlockPower = null;
+		
 		private Dictionary<Power, GameObject> _powersPrefab = null;
 
 		// SERVICES

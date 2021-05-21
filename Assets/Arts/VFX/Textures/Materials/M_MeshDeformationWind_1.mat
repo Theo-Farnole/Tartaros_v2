@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_MeshDeformationWind_1
-  m_Shader: {fileID: 4800000, guid: 5c02ea9e0ea74eb479c33f09525969bd, type: 3}
+  m_Shader: {fileID: 4800000, guid: ff8b3224865496c48ad6837e0c38024e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,11 +20,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 78b00181d387822498c24b1dd194dc76, type: 3}
+        m_Texture: {fileID: 2800000, guid: dfa1f2c4a858a9f43bca55ccb6b2676b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 4ca70df55688f7043a13af3d8b551669, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: dfa1f2c4a858a9f43bca55ccb6b2676b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -35,8 +39,10 @@ Material:
     - _BendStrength: 1
     - _Cutoff: 0.35
     - _EdgeLength: 15
+    - _Float0: 0
     - _Power: 2
-    - _VertexPosition: 0.1
+    - _ScaleVoronoi: 3
+    - _VertexPosition: 0.5
     - _WindDirection: 1
     - __dirty: 0
     - _yPosStrength: 0
