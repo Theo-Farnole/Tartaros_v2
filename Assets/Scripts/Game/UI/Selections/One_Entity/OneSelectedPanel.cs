@@ -43,12 +43,20 @@
 
 			Entity.AnyEntityKilled -= Entity_AnyEntityKilled;
 			Entity.AnyEntityKilled += Entity_AnyEntityKilled;
+
+			_sideButtons.AnyButtonClicked -= AnyOrderButtonClicked;
+			_sideButtons.AnyButtonClicked += AnyOrderButtonClicked;
+
+			_topButtons.AnyButtonClicked -= AnyOrderButtonClicked;
+			_topButtons.AnyButtonClicked += AnyOrderButtonClicked;
 		}
 
 		private void OnDisable()
 		{
 			Entity.AnyEntityKilled -= Entity_AnyEntityKilled;
 			_currentSelection.SelectionChanged -= SelectionChanged;
+			_topButtons.AnyButtonClicked -= AnyOrderButtonClicked;
+			_sideButtons.AnyButtonClicked -= AnyOrderButtonClicked;
 		}
 
 		private void Entity_AnyEntityKilled(object sender, Entity.EntityKilledArgs e)
@@ -73,6 +81,12 @@
 				}
 			}
 		}
+
+		private void AnyOrderButtonClicked(object sender, UIOrderButtonsGenerator.AnyButtonClickedArgs e)
+		{
+			UpdatePanelInformations();
+		}
+
 
 		private void UpdatePanelInformations()
 		{
