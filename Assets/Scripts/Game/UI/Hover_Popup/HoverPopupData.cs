@@ -42,6 +42,16 @@
 				_sectorResourcesCost = value;
 			}
 		}
+
+		public int GloryCost
+		{
+			set
+			{
+				if (HasSectorResourcesCost) throw new System.NotSupportedException("Cannot set a glory cost while there is already a sector resources cost.");
+
+				_favorCost = value;
+			}
+		}
 		public string Cost
 		{
 			get

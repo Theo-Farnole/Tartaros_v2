@@ -15,6 +15,7 @@
 
 		private HoverPopupManager _hoverPopup = null;
 		private RectTransform _rectTransform = null;
+		private ICanvasRaycastFilter _canvasRaycastable = null;
 		#endregion Fields
 
 		#region Properties
@@ -26,6 +27,7 @@
 		{
 			_hoverPopup = Services.Instance.Get<HoverPopupManager>();
 			_rectTransform = GetComponent<RectTransform>();
+			_canvasRaycastable = GetComponent<ICanvasRaycastFilter>();
 
 			if (_toShowDataAsset != null)
 			{
@@ -33,9 +35,21 @@
 			}
 		}
 
-		void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+		void OnEnable()
 		{
+			if (_canvasRaycastable != null && _canvasRaycastable.IsRaycastLocationValid(MouseHelper.CursorPosition, Camera.main))
+			{
+				Show();
+			}
+		}
 
+		void OnDisable()
+		{
+			Hide();
+		}
+
+		private void Show()
+		{
 			if (_toShowData != null)
 			{
 				_hoverPopup.PopupPosition = _popupPosition;
@@ -47,13 +61,24 @@
 			}
 		}
 
-		void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+
+		private void Hide()
 		{
 			if (_hoverPopup.HoverPopupData == _toShowData)
 			{
 				_hoverPopup.PopupPosition = _popupPosition;
 				_hoverPopup.Hide();
 			}
+		}
+
+		void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+		{
+			Show();
+		}
+
+		void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+		{
+			Hide();
 		}
 		#endregion Methods
 	}

@@ -1,9 +1,11 @@
 ﻿namespace Tartaros.Orders
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using System.Collections.Generic;
 	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
+	using UnityEngine.UI;
 
 	public class UIOrderButtonsGenerator : MonoBehaviour
 	{
@@ -20,13 +22,24 @@
 		private List<GameObject> _buttons = new List<GameObject>();
 		#endregion Fields
 
+		#region Events
+		public class AnyButtonClickedArgs : EventArgs { }
+		public event EventHandler<AnyButtonClickedArgs> AnyButtonClicked = null;
+		#endregion Events
+
 		#region Methods		
 		public void SetOrders(Order[] orders)
 		{
 			if (_destroyRootChildrenBeforeGeneration == true)
 			{
+				foreach (var buttonGameObject in _buttons)
+				{
+					buttonGameObject.GetComponent<Button>().onClick.RemoveListener(OnAnyButtonClicked);
+				}
+
 				_buttonsRoot.DestroyChildren();
 			}
+
 
 			DestroyCurrentButtons();
 
@@ -64,11 +77,20 @@
 
 		private void GenerateButton(Order order)
 		{
-			GameObject button = GameObject.Instantiate(_prefabButton, _buttonsRoot);
-			_buttons.Add(button);
+			GameObject buttonGameObject = GameObject.Instantiate(_prefabButton, _buttonsRoot);
+			_buttons.Add(buttonGameObject);
 
-			button.GetOrAddComponent<OrderButton>().Order = order;
-			button.GetOrAddComponent<OpenHoverPopupOnHover>().ToShowData = order.HoverPopupData;
+			buttonGameObject.GetOrAddComponent<OrderButton>().Order = order;
+			buttonGameObject.GetOrAddComponent<OpenHoverPopupOnHover>().ToShowData = order.HoverPopupData;
+			var button = buttonGameObject.GetComponent<Button>();
+
+			button.onClick.RemoveListener(OnAnyButtonClicked);
+			button.onClick.AddListener(OnAnyButtonClicked);
+		}
+
+		private void OnAnyButtonClicked()
+		{
+			AnyButtonClicked?.Invoke(this, new AnyButtonClickedArgs());
 		}
 		#endregion Methods
 	}
