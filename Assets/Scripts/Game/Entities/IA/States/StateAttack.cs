@@ -27,7 +27,7 @@
 
 			_entityMovement = stateOwner.GetComponent<EntityMovement>();
 			_entityAttack = stateOwner.GetComponent<EntityAttack>();
-			_animator = stateOwner.GetComponent<Animator>();
+			_animator = stateOwner.GetComponentInChildren<Animator>();
 		}
 
 		public override void OnStateExit()
