@@ -11,7 +11,7 @@
 	{
 		private readonly float GRAVITY = Physics.gravity.y;
 		
-		private const float THRESHOLD_HIT_DISTANCE = 0.3f;
+		private const float THRESHOLD_HIT_DISTANCE = 0.7f;
 		private const float THRESHOLD_DELAY_MISS_TARGET = 4;
 
 		[SerializeField]
@@ -95,7 +95,6 @@
 		private void InflictDamageToTarget()
 		{
 			//_hitEffect.ExecuteHitEffect(_targetPosition);
-			Debug.Log(_targetPosition);
 
 			var Entities = _detector.GetEveryEntityInRadius(Team.Enemy, _targetPosition, _radiusDamage);
 
