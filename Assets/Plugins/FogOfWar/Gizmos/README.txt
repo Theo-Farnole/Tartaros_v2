@@ -1,0 +1,1 @@
+Move this folder to Assets/ in order to make gizmos visible.
