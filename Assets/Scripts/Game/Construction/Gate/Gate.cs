@@ -11,7 +11,7 @@
 
 	public class Gate : MonoBehaviour, IOrderable
 	{
-		private bool _isOpen = false;
+		private bool _isOpen = true;
 		private NavMeshObstacle _navObstacle = null;
 
 		private IGateEffect[] _gateEffects = null;
@@ -40,7 +40,7 @@
 				_navObstacle.carving = true;
 			}
 
-			if (_isOpen == false)
+			if (_isOpen == true)
 			{
 				_navObstacle.enabled = false;
 			}

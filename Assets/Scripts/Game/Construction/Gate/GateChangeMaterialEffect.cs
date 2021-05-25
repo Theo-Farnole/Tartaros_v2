@@ -9,11 +9,13 @@
 
 		void IGateEffect.GateClose()
 		{
+			Debug.Log("Close");
 			_forceField.SetActive(true);
 		}
 
 		void IGateEffect.GateOpen()
 		{
+			Debug.Log("Open");
 			_forceField.SetActive(false);
 		}
 	}
