@@ -36,9 +36,9 @@
 				sectorToCapture.IsCaptured = true;
 			}
 			else
-            {
+			{
 				Debug.LogFormat("Cannot capture sector {0}.", sectorToCapture.ToString());
-            }
+			}
 		}
 
 		bool ISectorsCaptureManager.CanCapture(ISector sector)
@@ -67,7 +67,7 @@
 
 			if (sector.CapturePrice == null)
 			{
-				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);				
+				Debug.LogErrorFormat("Capture price is not set on sector {0}. The sector is unlocked for free.", name);
 				return true;
 			}
 
@@ -76,6 +76,8 @@
 
 		void ISectorsCaptureManager.ForceCapture(ISector sectorToCapture)
 		{
+			if (sectorToCapture is null) throw new System.ArgumentNullException(nameof(sectorToCapture), "Cannot capture because not on a sector.");
+
 			sectorToCapture.IsCaptured = true;
 		}
 		#endregion Methods
