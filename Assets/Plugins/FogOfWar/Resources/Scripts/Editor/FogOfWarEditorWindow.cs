@@ -590,7 +590,7 @@ public class FogOfWarEditorWindow : EditorWindow
             Terrain terrain = t.AddComponent<Terrain>();
             TerrainData terrainData = new TerrainData();
 
-            Material TerrainMaterial = new Material(Shader.Find("UltimateFogOfWar/Terrain/Diffuse"));
+            Material TerrainMaterial = new Material(Shader.Find("UFoW/Terrain/Diffuse"));
             TerrainMaterial.name = "TerrainMaterial";
 
             string PathOnly = FileLocation;
