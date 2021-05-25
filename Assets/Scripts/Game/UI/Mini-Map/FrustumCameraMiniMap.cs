@@ -19,6 +19,12 @@
 		private RectTransform _rootTransform = null;
 		private DrawLineUI _drawLine = null;
 
+		private void Awake()
+		{
+			GameObject cameraLine = GameObject.Instantiate(_navigationLine, _frustumRoot.transform);
+			_drawLine = cameraLine.GetComponent<DrawLineUI>();
+		}
+
 		private void Update()
 		{
 			UpdateLineUIPosition();
@@ -89,10 +95,7 @@
 		{
 			StartSetUp();
 
-			var cameraCorners = GetVectors2(GetViewportCorner());
-
-			GameObject cameraLine = GameObject.Instantiate(_navigationLine, _frustumRoot.transform);
-			_drawLine = cameraLine.GetComponent<DrawLineUI>();
+			var cameraCorners = GetVectors2(GetViewportCorner());			
 
 
 			_drawLine.Setup(

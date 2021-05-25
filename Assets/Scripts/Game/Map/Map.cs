@@ -33,6 +33,8 @@
 		{
 			_logger = Services.Instance.Get<UserErrorsLogger>();
 			SpawnSectors();
+
+			if (_mapData is null) throw new System.NullReferenceException("Assign a map data.");
 		}
 
 		private void OnDrawGizmos()
@@ -91,9 +93,13 @@
 
 		private void SpawnSectors()
 		{
-			_sectors = new ISector[_mapData.Sectors.Length];
+			if (_mapData is null) throw new System.NullReferenceException("Cannot spawn sectors. Assign a map data.");
 
-			for (int i = 0; i < _mapData.Sectors.Length; i++)
+			_sectors = new ISector[_mapData.SectorsCount];
+
+			SectorData[] sectors = _mapData.Sectors;
+
+			for (int i = 0; i < _mapData.SectorsCount; i++)
 			{
 				// because polygon normal are forward, we must rotate to make them look up
 				GameObject sectorGameObject = Instantiate(_sectorPrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
@@ -103,7 +109,7 @@
 				{
 					_sectors[i] = sector;
 
-					SectorData sectorData = _mapData.Sectors[i];
+					SectorData sectorData = sectors[i];
 					sector.Initialize(sectorData);
 				}
 				else

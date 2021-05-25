@@ -19,6 +19,7 @@
 		#region Properties
 		public Vector2 MapSize => _mapSize;
 		public SectorData[] Sectors => _sectorsData.ToArray();
+		public int SectorsCount => _sectorsData?.Count ?? throw new System.NotSupportedException("Sectors data is null.");
 		public Vertex2D[] Vertices => _sectorsData.SelectMany(x => x.Vertices).ToArray();
 		#endregion Properties
 
