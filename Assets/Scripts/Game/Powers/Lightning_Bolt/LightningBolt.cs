@@ -17,6 +17,7 @@
 
 		private GameObject _castVFX = null;
 		private EntitiesDetectorManager _kdTree = null;
+		private Animator _animator = null;
 		#endregion
 
 		#region Properties
@@ -48,8 +49,12 @@
 			InstanciateCastVFX();
 
 			yield return new WaitForSeconds(_data.TimeBeforeAppliedDamage);
+			int time = _animator.GetCurrentAnimatorClipInfo(0).Length;
+
+			yield return new WaitForSeconds(time);
 
 			ApplyDamage();
+			Debug.Log("damage");
 
 			yield return DestroyVFXAfterDelay();
 		}
@@ -57,6 +62,7 @@
 		private void InstanciateCastVFX()
 		{
 			_castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
+			_animator = _castVFX.GetComponent<Animator>();
 		}
 
 		private void ApplyDamage()
@@ -73,7 +79,17 @@
 		// TODO TF: create auto destroy VFX component, set it on cast vfx; then remove this method
 		IEnumerator DestroyVFXAfterDelay()
 		{
-			yield return new WaitForSeconds(_data.VFXLifeTime);
+			for (float i = 0; i < _data.VFXLifeTime; i += _data.AttackFrequency)
+			{
+				ApplyDamage();
+				yield return new WaitForSeconds(_data.AttackFrequency);
+			}
+
+			_animator.SetBool("isFinish", true);
+
+			int time = _animator.GetCurrentAnimatorClipInfo(0).Length;
+
+			yield return new WaitForSeconds(time);
 
 			Destroy(gameObject);
 		}
