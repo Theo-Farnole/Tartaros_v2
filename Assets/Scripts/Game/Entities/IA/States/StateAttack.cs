@@ -52,7 +52,15 @@
 					StopMovement();
 					_entityAttack.CastAttackIfPossible(_target);
 
-					_attackClip = _animator.GetCurrentAnimatorClipInfo(0)[0];
+					if(_animator != null)
+					{
+						AnimatorClipInfo[] animatorClipInfos = _animator.GetCurrentAnimatorClipInfo(0);
+
+						if (animatorClipInfos.Length > 0)
+						{
+							_attackClip = animatorClipInfos[0];
+						}
+					}
 				}
 				else
 				{
@@ -68,7 +76,7 @@
 
 		private bool IsTargetDead()
 		{
-			return _target == null || _target.IsAlive == false;
+			return _target == null || _target.IsAlive == false || _target.IsInterfaceDestroyed<IAttackable>();
 		}
 
 		private void StopMovement()
