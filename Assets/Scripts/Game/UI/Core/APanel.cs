@@ -16,6 +16,8 @@
 
 		#region Properties
 		public bool IsShow => _canvas.enabled;
+		public bool IsHide => !IsShow;
+		protected Canvas Canvas => _canvas;
 		#endregion Properties
 
 		#region Methods
@@ -36,12 +38,16 @@
 
 		public void Show()
 		{
+			if (IsShow) return;
+
 			_canvas.enabled = true;
 			OnShow();
 		}
 
 		public void Hide()
 		{
+			if (IsHide) return;
+
 			_canvas.enabled = false;
 			OnHide();
 		}

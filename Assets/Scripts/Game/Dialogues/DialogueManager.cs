@@ -64,7 +64,7 @@
 			}
 		}
 
-		public void InvokeNewDialogueEvent(NextDialogueArgs args) => NewDialogue.Invoke(this, args);
+		public void InvokeNewDialogueEvent(NextDialogueArgs args) => NewDialogue?.Invoke(this, args);
 		public void InvokeDialogueOver(DialogueOverArgs args) => DialogueOver?.Invoke(this, args);
 		#endregion Methods
 	}

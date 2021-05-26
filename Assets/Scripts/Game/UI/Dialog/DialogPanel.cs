@@ -1,5 +1,7 @@
 ﻿namespace Tartaros.UI.Dialog
 {
+	using System.Collections.Generic;
+	using System.Linq;
 	using Tartaros.Dialogue;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI;
@@ -75,6 +77,20 @@
 			_speakerName.text = speechSequence.SpeakerName;
 			_speakerAvatar.sprite = speechSequence.SpeakerAvatar;
 			_content.text = speechSequence.Speech;
+		}
+
+		protected override void OnShow()
+		{
+			base.OnShow();
+
+			CanvasHelper.SetActiveAllCanvasInScene(false, Canvas);
+		}
+
+		protected override void OnHide()
+		{
+			base.OnHide();
+
+			CanvasHelper.SetActiveAllCanvasInScene(true, Canvas);
 		}
 		#endregion Methods
 	}
