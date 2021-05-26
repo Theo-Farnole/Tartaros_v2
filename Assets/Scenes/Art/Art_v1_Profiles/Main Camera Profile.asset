@@ -120,7 +120,7 @@ MonoBehaviour:
     overrideState: 1
     value: 0.05
   contrast:
-    overrideState: 1
+    overrideState: 0
     value: 4
   mixerRedOutRedIn:
     overrideState: 1
@@ -154,10 +154,10 @@ MonoBehaviour:
     value: {x: 1, y: 0.8311741, z: 0.8376191, w: 0}
   gamma:
     overrideState: 0
-    value: {x: 0.944479, y: 1, z: 0.85017806, w: 0}
+    value: {x: 1, y: 0.9912567, z: 0.79971874, w: 0.23255812}
   gain:
     overrideState: 0
-    value: {x: 0.41610467, y: 0.67214245, z: 1, w: 0}
+    value: {x: 0.8120328, y: 0.93409485, z: 1, w: -0.13289034}
   masterCurve:
     overrideState: 0
     value:
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
