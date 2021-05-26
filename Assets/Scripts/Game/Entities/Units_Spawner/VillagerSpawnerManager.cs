@@ -6,7 +6,7 @@
 
 	public class VillagerSpawnerManager : MonoBehaviour
 	{
-		private const float THRESHOLD_DISTANCE = 0.5f;
+		private const float THRESHOLD_DISTANCE = 1;
 
 		[SerializeField]
 		private Transform[] _spawnPoints = null;
@@ -92,8 +92,14 @@
 				Debug.Log("notOnNav");
 				return NavMeshHelper.AdjustPositionToFitNavMesh(position);
 			}
+		}
 
-			
+		public void SetSpawnPoint(Transform[] spawnPoints) 
+		{
+			if(spawnPoints != null)
+			{
+				_spawnPoints = spawnPoints;
+			}
 		}
 
 		private void AsReachDestination()

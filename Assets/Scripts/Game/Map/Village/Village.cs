@@ -16,6 +16,7 @@
 
 		[SerializeField] private VillageData _data = null;
 		[SerializeField] private BuildingSlot _buildingSlot = null;
+		[SerializeField] private CaptureBuilding _buildingCapture = null;
 		[SerializeField] private bool _ENABLE_DIALOGUE_STATE_EDITOR = false;
 		[SerializeField] private Power _onCapturePowerUnlocked = Power.None;
 
@@ -100,6 +101,11 @@
 					_dialogueManager.EnterDialogueState();
 			}
 
+			if(_buildingCapture != null && _buildingCapture.CanCapture() == true && _buildingCapture.IsAvailable == true)
+			{
+				_buildingCapture.Capture();
+			}
+
 			VillageCaptured?.Invoke(this, new VillageCapturedArgs());
 		}
 
@@ -115,6 +121,7 @@
 		{
 			if (_buildingSlot == null) throw new System.NotSupportedException("Missing building slot in inspector.");
 
+			if (_buildingCapture != null) return null;
 			return new ConstructAtBuildingSlotOrder(_buildingSlot);
 		}
 
