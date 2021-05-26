@@ -62,7 +62,7 @@
 		public void ShowNextSpeech()
 		{
 			if (IsThereSpeechToShow() == true)
-			{				
+			{
 				_currentSpeechIndex++;
 
 				Dialogue speech = _dialogueSequence.GetDialogue(_currentSpeechIndex);
@@ -70,13 +70,13 @@
 			}
 			else
 			{
-				LeaveState();				
+				LeaveState();
 			}
 		}
 
 		private bool IsThereSpeechToShow()
 		{
-			return _currentSpeechIndex < _dialogueSequence.DialoguesCount;
+			return _currentSpeechIndex + 1 < _dialogueSequence.DialoguesCount;
 		}
 
 		private void PauseGame(bool enablePause)

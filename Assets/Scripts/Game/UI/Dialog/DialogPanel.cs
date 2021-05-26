@@ -36,6 +36,9 @@
 			_dialogueManager.NewDialogue -= NewSpeech;
 			_dialogueManager.NewDialogue += NewSpeech;
 
+			_dialogueManager.DialogueOver -= OnDialogueOver;
+			_dialogueManager.DialogueOver += OnDialogueOver;
+
 			_nextButton.onClick.RemoveListener(OnNextButtonClicked);
 			_nextButton.onClick.AddListener(OnNextButtonClicked);
 		}
@@ -43,6 +46,7 @@
 		private void OnDisable()
 		{
 			_dialogueManager.NewDialogue -= NewSpeech;
+			_dialogueManager.DialogueOver -= OnDialogueOver;
 
 			_nextButton.onClick.RemoveListener(OnNextButtonClicked);
 		}
@@ -51,6 +55,13 @@
 		{
 			_dialogueManager.ShowNextLine();
 		}
+
+
+		private void OnDialogueOver(object sender, DialogueManager.DialogueOverArgs e)
+		{
+			Hide();
+		}
+
 
 		private void NewSpeech(object sender, DialogueManager.NextDialogueArgs e)
 		{
