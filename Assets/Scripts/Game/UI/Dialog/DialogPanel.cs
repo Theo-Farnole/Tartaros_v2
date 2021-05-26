@@ -3,6 +3,7 @@
 	using DG.Tweening;
 	using DG.Tweening.Core;
 	using DG.Tweening.Plugins.Options;
+	using Sirenix.OdinInspector;
 	using Tartaros.Dialogue;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI;
@@ -13,12 +14,16 @@
 	public class DialogPanel : APanel
 	{
 		#region Fields
-		[SerializeField] private TextMeshProUGUI _speakerName = null;
-		[SerializeField] private Image _speakerAvatar = null;
-		[SerializeField] private TextMeshProUGUI _content = null;
-		[SerializeField] private Button _nextButton = null;
 
-		[SerializeField] private BlackBorder[] _blackBorders = new BlackBorder[0];
+		[Title("Settings")]
+		[SerializeField] private float _textAnimationDurationPerCharacter = 0.01f;
+
+		[Title("UI References")]
+		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _speakerName = null;
+		[SerializeField, SceneObjectsOnly] private Image _speakerAvatar = null;
+		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _content = null;
+		[SerializeField, SceneObjectsOnly] private Button _nextButton = null;
+		[SerializeField, SceneObjectsOnly] private BlackBorder[] _blackBorders = new BlackBorder[0];
 
 		// SERVICES
 		private DialogueManager _dialogueManager = null;
@@ -28,7 +33,7 @@
 		protected override void Awake()
 		{
 			base.Awake();
-			_dialogueManager = Services.Instance.Get<DialogueManager>();			
+			_dialogueManager = Services.Instance.Get<DialogueManager>();
 
 			if (_speakerAvatar is null) throw new MissingReferenceException(nameof(_speakerAvatar));
 			if (_speakerName is null) throw new MissingReferenceException(nameof(_speakerName));
@@ -78,7 +83,15 @@
 		{
 			_speakerName.text = speechSequence.SpeakerName;
 			_speakerAvatar.sprite = speechSequence.SpeakerAvatar;
-			_content.text = speechSequence.Speech;
+
+			if (_textAnimationDurationPerCharacter <= 0)
+			{
+				_content.text = speechSequence.Speech;
+			}
+			else
+			{
+				_content.SetTextAnimated(speechSequence.Speech, _textAnimationDurationPerCharacter);
+			}
 		}
 
 		protected override void OnShow()
