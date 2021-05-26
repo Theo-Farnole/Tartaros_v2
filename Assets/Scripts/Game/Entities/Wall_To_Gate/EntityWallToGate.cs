@@ -33,10 +33,14 @@
 
 		Order[] IOrderable.GenerateOrders()
 		{
-			List<Order> orders = new List<Order>();
+			if (HaveEnoughSpace() == true)
+			{
+				List<Order> orders = new List<Order>();
 
-			orders.Add(new InstanciateGateOrder(this));
-			return orders.ToArray();
+				orders.Add(new InstanciateGateOrder(this));
+				return orders.ToArray();
+			}
+			return null; 
 		}
 
 		public void InstanciateGate()
@@ -65,7 +69,7 @@
 			{
 				return false;
 			}
-			
+
 			var managerFront = _neigboorManager.FrontAdjacentWall.GetComponent<EntityNeigboorWallManager>();
 			var managerBack = _neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
 
