@@ -48,6 +48,8 @@
 
 		public void EnterDialogueState(string dialogueID)
 		{
+			if (_gamemodeManager.CurrentState is DialogueState) throw new NotSupportedException("The gamemode manager is already in a dialogue state.");
+
 			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data.GetDialoguesSequence(dialogueID), _cameraTarget));
 			_indexDialogue++;
 		}

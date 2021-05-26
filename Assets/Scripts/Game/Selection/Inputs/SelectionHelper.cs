@@ -7,7 +7,7 @@
 	using Tartaros.Selection;
 	using UnityEngine;
 
-	public static class SelectionHelper 
+	public static class SelectionHelper
 	{
 		public static ISelectable[] GetSelectablesInRectangle(ISelectable[] selectablesToFiltrer, Bounds bounds)
 		{
@@ -17,27 +17,35 @@
 
 			ISelectable[] selectablesInRectangle = selectablesToFiltrer
 				.Where(selectable => camera.IsInWorldPointInBounds(selectionRect, selectable.Position))
-				.ToArray();			
+				.ToArray();
 
 			return selectablesInRectangle;
 		}
 
 		public static ISelectable[] GetSelectablesOfTheSameData(ISelectable entitySelected, ISelectable[] selectableInRectangle)
 		{
-			var entityData = entitySelected.GameObject.GetComponent<Entity>().EntityData;
-			List<ISelectable> selectablesSameData = new List<ISelectable>();
-
-			foreach (var selectable in selectableInRectangle)
+			if (entitySelected.GameObject.TryGetComponent(out Entity entity))
 			{
-				var selectableData = selectable.GameObject.GetComponent<Entity>().EntityData;
+				EntityData entityData = entity.EntityData;
+				List<ISelectable> selectablesSameData = new List<ISelectable>();
 
-				if(selectableData == entityData)
+				foreach (var selectable in selectableInRectangle)
 				{
-					selectablesSameData.Add(selectable);
-				}
-			}
+					var selectableData = selectable.GameObject.GetComponent<Entity>().EntityData;
 
-			return selectablesSameData.ToArray();
+					if (selectableData == entityData)
+					{
+						selectablesSameData.Add(selectable);
+					}
+				}
+
+				return selectablesSameData.ToArray();
+			}
+			else
+			{
+				Debug.LogWarning("Method doesn't not support selectable that is not an entity.");
+				return new ISelectable[0];
+			}
 		}
 	}
 }

@@ -1,11 +1,11 @@
 ﻿namespace Tartaros.UI.Dialog
 {
-	using System.Collections.Generic;
-	using System.Linq;
+	using DG.Tweening;
+	using DG.Tweening.Core;
+	using DG.Tweening.Plugins.Options;
 	using Tartaros.Dialogue;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI;
-	using Tartaros.Wave;
 	using TMPro;
 	using UnityEngine;
 	using UnityEngine.UI;
@@ -18,6 +18,8 @@
 		[SerializeField] private TextMeshProUGUI _content = null;
 		[SerializeField] private Button _nextButton = null;
 
+		[SerializeField] private BlackBorder[] _blackBorders = new BlackBorder[0];
+
 		// SERVICES
 		private DialogueManager _dialogueManager = null;
 		#endregion Fields
@@ -26,7 +28,7 @@
 		protected override void Awake()
 		{
 			base.Awake();
-			_dialogueManager = Services.Instance.Get<DialogueManager>();
+			_dialogueManager = Services.Instance.Get<DialogueManager>();			
 
 			if (_speakerAvatar is null) throw new MissingReferenceException(nameof(_speakerAvatar));
 			if (_speakerName is null) throw new MissingReferenceException(nameof(_speakerName));
@@ -84,6 +86,7 @@
 			base.OnShow();
 
 			CanvasHelper.SetActiveAllCanvasInScene(false, Canvas);
+			ShowBlackBorder(true);
 		}
 
 		protected override void OnHide()
@@ -91,6 +94,15 @@
 			base.OnHide();
 
 			CanvasHelper.SetActiveAllCanvasInScene(true, Canvas);
+			ShowBlackBorder(false);
+		}
+
+		private void ShowBlackBorder(bool show)
+		{
+			foreach (var blackBorder in _blackBorders)
+			{
+				blackBorder.Show(show);
+			}
 		}
 		#endregion Methods
 	}
