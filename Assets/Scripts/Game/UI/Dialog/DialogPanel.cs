@@ -25,6 +25,9 @@
 		[SerializeField, SceneObjectsOnly] private Button _nextButton = null;
 		[SerializeField, SceneObjectsOnly] private BlackBorder[] _blackBorders = new BlackBorder[0];
 
+		private Coroutine _textAnimationCoroutine = null;
+		private Dialogue _dialogue = null;
+
 		// SERVICES
 		private DialogueManager _dialogueManager = null;
 		#endregion Fields
@@ -62,7 +65,15 @@
 
 		private void OnNextButtonClicked()
 		{
-			_dialogueManager.ShowNextLine();
+			if (_content.text == _dialogue.Speech)
+			{
+				_dialogueManager.ShowNextLine();
+			}
+			else
+			{
+				StopCoroutine(_textAnimationCoroutine);
+				_content.text = _dialogue.Speech;
+			}
 		}
 
 
@@ -76,21 +87,28 @@
 		{
 			Show();
 
-			SetSpeech(e.speech);
+			SetSpeech(e.dialogue);
 		}
 
-		private void SetSpeech(Dialogue speechSequence)
+		private void SetSpeech(Dialogue dialogue)
 		{
-			_speakerName.text = speechSequence.SpeakerName;
-			_speakerAvatar.sprite = speechSequence.SpeakerAvatar;
+			_dialogue = dialogue;
+
+			if (_textAnimationCoroutine != null)
+			{
+				StopCoroutine(_textAnimationCoroutine);
+			}
+
+			_speakerName.text = dialogue.SpeakerName;
+			_speakerAvatar.sprite = dialogue.SpeakerAvatar;
 
 			if (_textAnimationDurationPerCharacter <= 0)
 			{
-				_content.text = speechSequence.Speech;
+				_content.text = dialogue.Speech;
 			}
 			else
 			{
-				_content.SetTextAnimated(speechSequence.Speech, _textAnimationDurationPerCharacter, true);
+				_textAnimationCoroutine = _content.SetTextAnimated(dialogue.Speech, _textAnimationDurationPerCharacter, true);
 			}
 		}
 

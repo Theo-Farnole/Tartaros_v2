@@ -21,11 +21,11 @@
 		#region Events
 		public class NextDialogueArgs : EventArgs
 		{
-			public readonly Dialogue speech = null;
+			public readonly Dialogue dialogue = null;
 
 			public NextDialogueArgs(Dialogue speech)
 			{
-				this.speech = speech;
+				this.dialogue = speech;
 			}
 		}
 		public event EventHandler<NextDialogueArgs> NewDialogue = null;
