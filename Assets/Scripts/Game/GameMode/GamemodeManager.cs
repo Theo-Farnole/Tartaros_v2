@@ -11,7 +11,7 @@
 
 	public class GamemodeManager : MonoBehaviour
 	{
-		private GamemodeFSM _gamemodeFSM = null;
+		[ShowInRuntime] private GamemodeFSM _gamemodeFSM = null;
 
 		public AState<GamemodeManager> CurrentState => _gamemodeFSM.CurrentState;
 

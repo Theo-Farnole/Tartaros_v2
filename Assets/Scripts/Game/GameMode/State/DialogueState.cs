@@ -4,30 +4,32 @@
 	using System.Collections.Generic;
 	using Tartaros.CameraSystem;
 	using Tartaros.Dialogue;
+	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 	public class DialogueState : AGameState
 	{
 
 		#region Fields
-		private DialoguesData _data = null;
-		private DialogueInputs _inputs = null;
-		private Transform _cameraTarget = null;
-		private int _indexDialogue = 0;
-
-
 		private int _currentSpeechIndex = 0;
-		private bool _isInDebugPause = false; 
+		private bool _isInDebugPause = false;
+
+		private readonly DialoguesData _data = null;
+		private readonly Transform _cameraTarget = null;
+		private readonly int _indexDialogue = 0;
+
+		// SERVICES
+		private readonly DialogueManager _dialogueManager = null;
 		#endregion
 
 		#region Ctor
 		public DialogueState(GamemodeManager stateOwner, DialoguesData data, int indexDialogue, Transform cameraTarget) : base(stateOwner)
 		{
 			_data = data;
-			_inputs = new DialogueInputs();
 			_indexDialogue = indexDialogue;
 			_cameraTarget = cameraTarget;
-		} 
+			_dialogueManager = Services.Instance.Get<DialogueManager>();
+		}
 		#endregion
 
 		#region Methods
@@ -35,25 +37,21 @@
 		{
 			base.OnStateEnter();
 
-			SetTimeFreeze();
+			ToggleTimeFreeze();
 
-			if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
+			if (_indexDialogue < _data.Dialogues.Length)
 			{
-				SetCameraFollowTargetMode(true);
-			}
+				ShowNextLine();
 
-			if (_data.Dialogues.Length - 1 <= _indexDialogue)
-			{
-				NextLines();
+				if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
+				{
+					SetCameraFollowTargetMode(true);
+				}
 			}
 			else
 			{
-				Debug.LogWarning("there is no more Dialogues to instancaite");
-				LeaveState();
+				throw new System.NotSupportedException("There is no dialogue to display.");
 			}
-
-			_inputs.ValidatePerformed -= InputPressed;
-			_inputs.ValidatePerformed += InputPressed;
 
 		}
 
@@ -61,7 +59,7 @@
 		{
 			base.OnStateExit();
 
-			SetTimeFreeze();
+			ToggleTimeFreeze();
 			if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
 			{
 				SetCameraFollowTargetMode(false);
@@ -69,37 +67,30 @@
 			Debug.Log("dialogueStateFinish");
 		}
 
-		private void InputPressed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+		public void ShowNextLine()
 		{
-			if (IsDialogueFinish() != true)
+			if (IsDialogueFinish() == true)
 			{
-				NextLines();
+				_dialogueManager.InvokeDialogueOver(new DialogueManager.DialogueOverArgs());
+				LeaveState();
 			}
 			else
 			{
-				LeaveState();
+				_currentSpeechIndex += 1;
+
+				SpeechSequence speech = _data.Dialogues[_indexDialogue].Dialogue[_currentSpeechIndex];
+				_dialogueManager.InvokeNewSpeech(new DialogueManager.NewSpeechArgs(speech));
 			}
-		}
-
-		private void NextLines()
-		{
-			var currentDialogue = _data.Dialogues[_indexDialogue];
-			var characterName = currentDialogue.Dialogue[_currentSpeechIndex].Character.name;
-			var speech = currentDialogue.Dialogue[_currentSpeechIndex].Speech;
-
-			TEST_ShowLinesAndAvatar(characterName, speech);
-
-			_currentSpeechIndex += 1;
 		}
 
 		private bool IsDialogueFinish()
 		{
 			var currentDialogue = _data.Dialogues[_indexDialogue];
 
-			return _currentSpeechIndex > currentDialogue.Dialogue.Length - 1;
+			return _currentSpeechIndex + 1 < currentDialogue.Dialogue.Length;
 		}
 
-		private void SetTimeFreeze()
+		private void ToggleTimeFreeze()
 		{
 			_isInDebugPause = !_isInDebugPause;
 
@@ -111,16 +102,11 @@
 			}
 		}
 
-		private void TEST_ShowLinesAndAvatar(string name, string dialogue)
-		{
-			Debug.LogFormat("{0}: {1}", name, dialogue);
-		}
-
 		private void SetCameraFollowTargetMode(bool mode)
 		{
 			if (Camera.main.TryGetComponent<CameraController>(out CameraController cameraController))
 			{
-				if(_cameraTarget != null)
+				if (_cameraTarget != null)
 				{
 					cameraController.SetCameraTarget(_cameraTarget);
 					cameraController.SetCameraFollowTargetMode(mode);
@@ -135,6 +121,6 @@
 				Debug.LogError("Dialogue State don't find cameraController");
 			}
 		}
-	} 
+	}
 	#endregion
 }

@@ -10,7 +10,8 @@
 		[SerializeField] CharacterActorData _character = null;
 		[SerializeField] private string _speech = null;
 
-		public CharacterActorData Character => _character;
+		public Sprite SpeakerAvatar => _character.Avatar;
+		public string SpeakerName => _character.Name;
 		public string Speech => _speech;
 	}
 
