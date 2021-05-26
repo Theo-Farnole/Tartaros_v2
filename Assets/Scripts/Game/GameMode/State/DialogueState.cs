@@ -20,6 +20,7 @@
 		private readonly ISelection _currentSelection = null;
 		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
 		private readonly ClickSelectionInput _clickSelectionInput = null;
+		private readonly CameraController _cameraController = null;
 		#endregion
 
 		#region Ctor
@@ -34,6 +35,12 @@
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
 			_rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
 			_clickSelectionInput = GameObject.FindObjectOfType<ClickSelectionInput>();
+			_cameraController = Camera.main.GetComponent<CameraController>();
+
+			if (_cameraController == null)
+			{
+				Debug.LogError("Dialogue state don't find camera controller.");
+			}
 		}
 		#endregion
 
@@ -45,6 +52,7 @@
 			_currentSelection.Clear();
 			_rectangleSelectionInput.enabled = false;
 			_clickSelectionInput.enabled = false;
+			_cameraController.EnableInputs = false;
 
 			PauseGame(true);
 
@@ -63,6 +71,7 @@
 
 			_rectangleSelectionInput.enabled = true;
 			_clickSelectionInput.enabled = true;
+			_cameraController.EnableInputs = true;
 
 			PauseGame(false);
 
@@ -106,21 +115,14 @@
 
 		private void SetCameraFollowTargetMode(bool mode)
 		{
-			if (Camera.main.TryGetComponent<CameraController>(out CameraController cameraController))
+			if (_cameraTarget != null)
 			{
-				if (_cameraTarget != null)
-				{
-					cameraController.SetCameraTarget(_cameraTarget);
-					cameraController.SetCameraFollowTargetMode(mode);
-				}
-				else
-				{
-					Debug.LogWarning("there is no cameraTarget in DialogueManager");
-				}
+				_cameraController.SetCameraTarget(_cameraTarget);
+				_cameraController.SetCameraFollowTargetMode(mode);
 			}
 			else
 			{
-				Debug.LogError("Dialogue State don't find cameraController");
+				Debug.LogWarning("there is no cameraTarget in DialogueManager");
 			}
 		}
 	}

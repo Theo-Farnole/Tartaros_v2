@@ -24,6 +24,20 @@
 		#region Properties
 		private float DeltaTime => _useUnscaledDeltaTime ? Time.unscaledDeltaTime : Time.deltaTime;
 		public bool UseUnscaledDeltaTime { get => _useUnscaledDeltaTime; set => _useUnscaledDeltaTime = value; }
+		public bool EnableInputs
+		{
+			set
+			{
+				if (value == true)
+				{
+					_input.Camera.Enable();
+				}
+				else
+				{
+					_input.Camera.Disable();
+				}
+			}
+		}
 		#endregion Propeties
 
 		#region Ctor

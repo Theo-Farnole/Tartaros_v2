@@ -58,6 +58,8 @@
 		{
 			_gameInputs.Selection.StartSelectionRectangle.performed -= StartSelectionRectangle_performed;
 			_gameInputs.Selection.EndSelectionRectangle.performed -= EndSelectionRectangle_performed;
+
+			_isButtonDown = false;
 		}
 
 		private void StartSelectionRectangle_performed(InputAction.CallbackContext obj)
