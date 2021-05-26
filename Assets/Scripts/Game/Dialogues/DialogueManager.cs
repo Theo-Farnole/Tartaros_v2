@@ -11,9 +11,6 @@
 	{
 		#region Fields
 		[SerializeField] private DialoguesData _data = null;
-		[SerializeField] private Transform _cameraTarget = null;
-
-		private int _indexDialogue = 0;
 
 		private GamemodeManager _gamemodeManager = null;
 		#endregion Fields
@@ -50,8 +47,7 @@
 		{
 			if (_gamemodeManager.CurrentState is DialogueState) throw new NotSupportedException("The gamemode manager is already in a dialogue state.");
 
-			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data.GetDialoguesSequence(dialogueID), _cameraTarget));
-			_indexDialogue++;
+			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data.GetDialoguesSequence(dialogueID)));			
 		}
 
 		public void ShowNextLine()

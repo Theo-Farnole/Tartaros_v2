@@ -13,7 +13,6 @@
 		private int _currentSpeechIndex = -1;
 
 		private readonly DialoguesSequence _dialogueSequence = null;
-		private readonly Transform _cameraTarget = null;
 
 		// SERVICES
 		private readonly DialogueManager _dialogueManager = null;
@@ -21,21 +20,22 @@
 		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
 		private readonly ClickSelectionInput _clickSelectionInput = null;
 		private readonly CameraController _cameraController = null;
+		private readonly CinematicCameraController _cinematicCameraController = null;
 		#endregion
 
 		#region Ctor
-		public DialogueState(GamemodeManager stateOwner, DialoguesSequence sequence, Transform cameraTarget) : base(stateOwner)
+		public DialogueState(GamemodeManager stateOwner, DialoguesSequence sequence) : base(stateOwner)
 		{
 			if (stateOwner is null) throw new System.ArgumentNullException(nameof(stateOwner));
 
 			_dialogueSequence = sequence ?? throw new System.ArgumentNullException(nameof(sequence));
-			_cameraTarget = cameraTarget ?? throw new System.ArgumentNullException(nameof(cameraTarget));
 
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
 			_rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
 			_clickSelectionInput = GameObject.FindObjectOfType<ClickSelectionInput>();
 			_cameraController = Camera.main.GetComponent<CameraController>();
+			_cinematicCameraController = Camera.main.GetComponent<CinematicCameraController>();
 
 			if (_cameraController == null)
 			{
@@ -58,10 +58,7 @@
 
 			ShowNextSpeech();
 
-			if (_dialogueSequence.IsCameraTarget == true)
-			{
-				SetCameraFollowTargetMode(true);
-			}
+			// TODO TF: camera focus before
 
 		}
 
@@ -74,11 +71,6 @@
 			_cameraController.EnableInputs = true;
 
 			PauseGame(false);
-
-			if (_dialogueSequence.IsCameraTarget == true)
-			{
-				SetCameraFollowTargetMode(false);
-			}
 
 			_dialogueManager.InvokeDialogueOver(new DialogueManager.DialogueOverArgs());
 		}
@@ -98,6 +90,13 @@
 			}
 		}
 
+		protected override void LeaveState()
+		{
+			// TODO TF: camera focus after
+
+			base.LeaveState();
+		}
+
 		private bool IsThereSpeechToShow()
 		{
 			return _currentSpeechIndex + 1 < _dialogueSequence.DialoguesCount;
@@ -110,19 +109,6 @@
 			if (Camera.main.TryGetComponent(out CameraController cameraController))
 			{
 				cameraController.UseUnscaledDeltaTime = enablePause;
-			}
-		}
-
-		private void SetCameraFollowTargetMode(bool mode)
-		{
-			if (_cameraTarget != null)
-			{
-				_cameraController.SetCameraTarget(_cameraTarget);
-				_cameraController.SetCameraFollowTargetMode(mode);
-			}
-			else
-			{
-				Debug.LogWarning("there is no cameraTarget in DialogueManager");
 			}
 		}
 	}

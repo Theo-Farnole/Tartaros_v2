@@ -4,12 +4,15 @@
 
 	public class DialoguesSequence : ScriptableObject
 	{
-		[SerializeField] private Dialogue[] _dialogues = null;
-		[SerializeField] private bool _isCameraTarget = false;
 
-		public bool IsCameraTarget => _isCameraTarget;
+		[SerializeField] private CameraFocus _beforeDialogueFocus = CameraFocus.None;
+		[SerializeField] private CameraFocus _afterDialogueFocus = CameraFocus.None;
+		[SerializeField] private Dialogue[] _dialogues = null;
+
 		public int DialoguesCount => _dialogues.Length;
 
+		public CameraFocus BeforeDialogueFocus => _beforeDialogueFocus;
+		public CameraFocus AfterDialogueFocus => _afterDialogueFocus;
 
 		public Dialogue GetDialogue(int dialogueIndex)
 		{
