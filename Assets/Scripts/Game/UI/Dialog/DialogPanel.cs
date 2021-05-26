@@ -90,7 +90,7 @@
 			}
 			else
 			{
-				_content.SetTextAnimated(speechSequence.Speech, _textAnimationDurationPerCharacter);
+				_content.SetTextAnimated(speechSequence.Speech, _textAnimationDurationPerCharacter, true);
 			}
 		}
 

@@ -2,6 +2,7 @@
 {
 	using Tartaros.CameraSystem;
 	using Tartaros.Dialogue;
+	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
@@ -16,6 +17,9 @@
 
 		// SERVICES
 		private readonly DialogueManager _dialogueManager = null;
+		private readonly ISelection _currentSelection = null;
+		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
+		private readonly ClickSelectionInput _clickSelectionInput = null;
 		#endregion
 
 		#region Ctor
@@ -25,7 +29,11 @@
 
 			_dialogueSequence = sequence ?? throw new System.ArgumentNullException(nameof(sequence));
 			_cameraTarget = cameraTarget ?? throw new System.ArgumentNullException(nameof(cameraTarget));
+
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
+			_currentSelection = Services.Instance.Get<CurrentSelection>();
+			_rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
+			_clickSelectionInput = GameObject.FindObjectOfType<ClickSelectionInput>();
 		}
 		#endregion
 
@@ -34,7 +42,11 @@
 		{
 			base.OnStateEnter();
 
-			PauseGame(false);
+			_currentSelection.Clear();
+			_rectangleSelectionInput.enabled = false;
+			_clickSelectionInput.enabled = false;
+
+			PauseGame(true);
 
 			ShowNextSpeech();
 
@@ -48,6 +60,9 @@
 		public override void OnStateExit()
 		{
 			base.OnStateExit();
+
+			_rectangleSelectionInput.enabled = true;
+			_clickSelectionInput.enabled = true;
 
 			PauseGame(false);
 
