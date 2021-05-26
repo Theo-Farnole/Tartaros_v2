@@ -97,7 +97,7 @@
 #if UNITY_EDITOR
 				if (_ENABLE_DIALOGUE_STATE_EDITOR == true)
 #endif
-					_dialogueManager.EnterDialogueState();
+					_dialogueManager.EnterDialogueState("sector_capture");
 			}
 
 			VillageCaptured?.Invoke(this, new VillageCapturedArgs());

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0d23757d373aa48a39c6b945a87df6, type: 3}
+  m_Name: Test.Sequence
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - _character: {fileID: 11400000, guid: 81b87fe4d8b504042a1a45ec3f689438, type: 2}
+    _speech: "Aujourd\u2019hui, et bien c\u2019est le jour de mon 111e anniversaire
+      ! "
+  - _character: {fileID: 11400000, guid: 6b39b4b2d2576c744b6f09d94673328f, type: 2}
+    _speech: "Mais h\xE9las 111 ans ce fut un temps trop court \xE0 passer en compagnie
+      de si excellents et si admirables hobbits\u2026"
+  - _character: {fileID: 11400000, guid: a6c0b93918219b94abfbf90ca4de3153, type: 2}
+    _speech: "e ne connais pas la moiti\xE9 d\u2019entre vous autant que je le voudrais,
+      mais j\u2019aime moins la moiti\xE9 d\u2019entre vous \xE0 moiti\xE9 moins
+      que vous ne le m\xE9ritez !"
+  _isCameraTarget: 0

@@ -19,16 +19,16 @@
 		#endregion Fields
 
 		#region Events
-		public class NewSpeechArgs : EventArgs
+		public class NextDialogueArgs : EventArgs
 		{
-			public readonly SpeechSequence speech = null;
+			public readonly Dialogue speech = null;
 
-			public NewSpeechArgs(SpeechSequence speech)
+			public NextDialogueArgs(Dialogue speech)
 			{
 				this.speech = speech;
 			}
 		}
-		public event EventHandler<NewSpeechArgs> NewSpeech = null;
+		public event EventHandler<NextDialogueArgs> NewDialogue = null;
 
 		public class DialogueOverArgs : EventArgs { }
 		public event EventHandler<DialogueOverArgs> DialogueOver = null;
@@ -46,9 +46,9 @@
 			_gamemodeManager = Services.Instance.Get<GamemodeManager>();
 		}
 
-		public void EnterDialogueState()
+		public void EnterDialogueState(string dialogueID)
 		{
-			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data, _indexDialogue, _cameraTarget));
+			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data.GetDialoguesSequence(dialogueID), _cameraTarget));
 			_indexDialogue++;
 		}
 
@@ -56,7 +56,7 @@
 		{
 			if (_gamemodeManager.CurrentState is DialogueState dialogueState)
 			{
-				dialogueState.ShowNextLine();
+				dialogueState.ShowNextSpeech();
 			}
 			else
 			{
@@ -64,7 +64,7 @@
 			}
 		}
 
-		public void InvokeNewSpeech(NewSpeechArgs args) => NewSpeech.Invoke(this, args);
+		public void InvokeNewDialogueEvent(NextDialogueArgs args) => NewDialogue.Invoke(this, args);
 		public void InvokeDialogueOver(DialogueOverArgs args) => DialogueOver?.Invoke(this, args);
 		#endregion Methods
 	}

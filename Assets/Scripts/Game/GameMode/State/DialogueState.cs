@@ -1,7 +1,5 @@
 ﻿namespace Tartaros.Gamemode.State
 {
-	using System.Collections;
-	using System.Collections.Generic;
 	using Tartaros.CameraSystem;
 	using Tartaros.Dialogue;
 	using Tartaros.ServicesLocator;
@@ -11,23 +9,22 @@
 	{
 
 		#region Fields
-		private int _currentSpeechIndex = 0;
-		private bool _isInDebugPause = false;
+		private int _currentSpeechIndex = -1;
 
-		private readonly DialoguesData _data = null;
+		private readonly DialoguesSequence _dialogueSequence = null;
 		private readonly Transform _cameraTarget = null;
-		private readonly int _indexDialogue = 0;
 
 		// SERVICES
 		private readonly DialogueManager _dialogueManager = null;
 		#endregion
 
 		#region Ctor
-		public DialogueState(GamemodeManager stateOwner, DialoguesData data, int indexDialogue, Transform cameraTarget) : base(stateOwner)
+		public DialogueState(GamemodeManager stateOwner, DialoguesSequence sequence, Transform cameraTarget) : base(stateOwner)
 		{
-			_data = data;
-			_indexDialogue = indexDialogue;
-			_cameraTarget = cameraTarget;
+			if (stateOwner is null) throw new System.ArgumentNullException(nameof(stateOwner));
+
+			_dialogueSequence = sequence ?? throw new System.ArgumentNullException(nameof(sequence));
+			_cameraTarget = cameraTarget ?? throw new System.ArgumentNullException(nameof(cameraTarget));
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
 		}
 		#endregion
@@ -37,20 +34,13 @@
 		{
 			base.OnStateEnter();
 
-			ToggleTimeFreeze();
+			PauseGame(false);
 
-			if (_indexDialogue < _data.Dialogues.Length)
-			{
-				ShowNextLine();
+			ShowNextSpeech();
 
-				if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
-				{
-					SetCameraFollowTargetMode(true);
-				}
-			}
-			else
+			if (_dialogueSequence.IsCameraTarget == true)
 			{
-				throw new System.NotSupportedException("There is no dialogue to display.");
+				SetCameraFollowTargetMode(true);
 			}
 
 		}
@@ -59,46 +49,43 @@
 		{
 			base.OnStateExit();
 
-			ToggleTimeFreeze();
-			if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
+			PauseGame(false);
+
+			if (_dialogueSequence.IsCameraTarget == true)
 			{
 				SetCameraFollowTargetMode(false);
 			}
-			Debug.Log("dialogueStateFinish");
+
+			_dialogueManager.InvokeDialogueOver(new DialogueManager.DialogueOverArgs());
 		}
 
-		public void ShowNextLine()
+		public void ShowNextSpeech()
 		{
-			if (IsDialogueFinish() == true)
-			{
-				_dialogueManager.InvokeDialogueOver(new DialogueManager.DialogueOverArgs());
-				LeaveState();
+			if (IsThereSpeechToShow() == true)
+			{				
+				_currentSpeechIndex++;
+
+				Dialogue speech = _dialogueSequence.GetDialogue(_currentSpeechIndex);
+				_dialogueManager.InvokeNewDialogueEvent(new DialogueManager.NextDialogueArgs(speech));
 			}
 			else
 			{
-				_currentSpeechIndex += 1;
-
-				SpeechSequence speech = _data.Dialogues[_indexDialogue].Dialogue[_currentSpeechIndex];
-				_dialogueManager.InvokeNewSpeech(new DialogueManager.NewSpeechArgs(speech));
+				LeaveState();				
 			}
 		}
 
-		private bool IsDialogueFinish()
+		private bool IsThereSpeechToShow()
 		{
-			var currentDialogue = _data.Dialogues[_indexDialogue];
-
-			return _currentSpeechIndex + 1 < currentDialogue.Dialogue.Length;
+			return _currentSpeechIndex < _dialogueSequence.DialoguesCount;
 		}
 
-		private void ToggleTimeFreeze()
+		private void PauseGame(bool enablePause)
 		{
-			_isInDebugPause = !_isInDebugPause;
-
-			Time.timeScale = _isInDebugPause ? 0 : 1;
+			Time.timeScale = enablePause ? 0 : 1;
 
 			if (Camera.main.TryGetComponent(out CameraController cameraController))
 			{
-				cameraController.UseUnscaledDeltaTime = _isInDebugPause;
+				cameraController.UseUnscaledDeltaTime = enablePause;
 			}
 		}
 

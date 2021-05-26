@@ -33,8 +33,8 @@
 
 		private void OnEnable()
 		{
-			_dialogueManager.NewSpeech -= NewSpeech;
-			_dialogueManager.NewSpeech += NewSpeech;
+			_dialogueManager.NewDialogue -= NewSpeech;
+			_dialogueManager.NewDialogue += NewSpeech;
 
 			_nextButton.onClick.RemoveListener(OnNextButtonClicked);
 			_nextButton.onClick.AddListener(OnNextButtonClicked);
@@ -42,7 +42,7 @@
 
 		private void OnDisable()
 		{
-			_dialogueManager.NewSpeech -= NewSpeech;
+			_dialogueManager.NewDialogue -= NewSpeech;
 
 			_nextButton.onClick.RemoveListener(OnNextButtonClicked);
 		}
@@ -52,14 +52,14 @@
 			_dialogueManager.ShowNextLine();
 		}
 
-		private void NewSpeech(object sender, DialogueManager.NewSpeechArgs e)
+		private void NewSpeech(object sender, DialogueManager.NextDialogueArgs e)
 		{
 			Show();
 
 			SetSpeech(e.speech);
 		}
 
-		private void SetSpeech(SpeechSequence speechSequence)
+		private void SetSpeech(Dialogue speechSequence)
 		{
 			_speakerName.text = speechSequence.SpeakerName;
 			_speakerAvatar.sprite = speechSequence.SpeakerAvatar;
