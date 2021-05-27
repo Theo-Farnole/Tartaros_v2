@@ -66,6 +66,8 @@
 			}
 		}
 
+		
+
 		private void CheckIfBuildingSlotIsMissing()
 		{
 			Debug.Assert(_sectorOnPosition != null, "Resource flag must be placed on a sector.", this);

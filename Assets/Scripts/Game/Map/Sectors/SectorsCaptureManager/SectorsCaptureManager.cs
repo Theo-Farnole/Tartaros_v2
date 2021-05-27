@@ -22,6 +22,16 @@
 			_userErrorsLogger = Services.Instance.Get<UserErrorsLogger>();
 		}
 
+		private void CaptureSectorBuilding(ISector sector) 
+		{
+			BuildingSlot buildingSlot = sector.GetBuildingSlotAvailable();
+
+			if (buildingSlot != null && buildingSlot.CanConstruct() == true)
+			{
+				buildingSlot.Construct();
+			}
+		}
+
 		void ISectorsCaptureManager.Capture(ISector sectorToCapture)
 		{
 			if (sectorToCapture.IsCaptured == true) return;
@@ -33,6 +43,7 @@
 					_playerWallet.Buy(sectorToCapture.CapturePrice);
 				}
 
+				CaptureSectorBuilding(sectorToCapture);
 				sectorToCapture.IsCaptured = true;
 			}
 			else
