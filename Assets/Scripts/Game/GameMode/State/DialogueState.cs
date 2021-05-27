@@ -4,6 +4,7 @@
 	using Tartaros.Dialogue;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI;
 	using UnityEngine;
 
 	public class DialogueState : AGameState
@@ -20,6 +21,7 @@
 		private readonly ISelection _currentSelection = null;
 		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
 		private readonly ClickSelectionInput _clickSelectionInput = null;
+		private readonly UIManager _uiManager = null;
 		#endregion
 
 		#region Ctor
@@ -31,6 +33,8 @@
 
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
+			_uiManager = Services.Instance.Get<UIManager>();
+
 			_rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
 			_clickSelectionInput = GameObject.FindObjectOfType<ClickSelectionInput>();
 			_cameraController = Camera.main.GetComponent<CameraController>();
@@ -48,6 +52,8 @@
 		{
 			base.OnStateEnter();
 
+			CanvasHelper.HideAllMenus();
+
 			_cinematicCameraController.DestinationReached -= DestinationReached;
 			_cinematicCameraController.DestinationReached += DestinationReached;
 
@@ -55,6 +61,8 @@
 			_rectangleSelectionInput.enabled = false;
 			_clickSelectionInput.enabled = false;
 			_cameraController.EnableInputs = false;
+
+			_uiManager.ShowBlackBorders();
 
 			PauseGame(true);
 
@@ -73,11 +81,15 @@
 		{
 			base.OnStateExit();
 
+			CanvasHelper.ShowAllMenus();
+
 			_cinematicCameraController.DestinationReached -= DestinationReached;
 
 			_rectangleSelectionInput.enabled = true;
 			_clickSelectionInput.enabled = true;
 			_cameraController.EnableInputs = true;
+
+			_uiManager.HideBlackBorders();
 
 			PauseGame(false);
 
@@ -100,6 +112,8 @@
 		}
 		private void DestinationReached(object sender, CinematicCameraController.DestinationReachedArgs e)
 		{
+			Debug.Log(nameof(DestinationReached));
+
 			ShowNextSpeech();
 		}
 

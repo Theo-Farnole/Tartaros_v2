@@ -2,47 +2,54 @@
 {
 	using System;
 	using System.Linq;
+	using Tartaros.UI;
 	using UnityEngine;
 
 	public static class CanvasHelper
 	{
-		private static Canvas[] _deactivatedCanvases = null;
+		private static APanel[] _desactivatedPanels = null;
 
-		public static void SetActiveAllCanvasInScene(bool active, params Canvas[] canvasesToIgnore)
+		public static void HideAllMenus(params APanel[] panelsToIgnore)
 		{
-			if (active == false)
-			{
-				Canvas[] canvases = GameObject.FindObjectsOfType<Canvas>()
-					.Where(canvas => IsCanvasIgnored(canvas))
+			var panels = UnityEngine.Object.FindObjectsOfType<APanel>()
+					.Where(x => IsCanvasIgnored(x))
 					.ToArray();
 
-				// check for errors
-				if (canvases.Length == 0)
-				{
-					Debug.LogWarning("Trying to active all canvas in the scene while they are all deactivated or there is no canvas. Method aborted");
-					return;
-				}
-
-				// when canvas are desactivated, FindObjectsOfType doesn't work
-				// so we must register them in a field
-				_deactivatedCanvases = canvases;
+			// check for errors
+			if (panels.Length == 0)
+			{
+				Debug.LogWarning("Trying to active all canvas in the scene while they are all deactivated or there is no canvas. Method aborted");
+				return;
 			}
 
+			// when canvas are desactivated, FindObjectsOfType doesn't work
+			// so we must register them in a field
+			_desactivatedPanels = panels;
+
+			foreach (var panel in panels)
+			{
+				panel.Hide();
+			}
+
+
+			bool IsCanvasIgnored(APanel panel)
+			{
+				return Array.Exists(panelsToIgnore, x => x == panel) == false;
+			}
+		}
+
+		public static void ShowAllMenus()
+		{
 			// check for errors
-			if (_deactivatedCanvases == null)
+			if (_desactivatedPanels == null)
 			{
 				if (Time.timeSinceLevelLoad > 0) throw new System.NotSupportedException("Cannot reactive canvas in scene while they have not be deasactivated.");
 				else return; // skip the error if it's the first Hide
 			}
 
-			foreach (Canvas canvas in _deactivatedCanvases)
+			foreach (var panel in _desactivatedPanels)
 			{
-				canvas.gameObject.SetActive(active);
-			}
-
-			bool IsCanvasIgnored(Canvas canvas)
-			{
-				return Array.Exists(canvasesToIgnore, x => x == canvas) == false;
+				panel.Show();
 			}
 		}
 	}

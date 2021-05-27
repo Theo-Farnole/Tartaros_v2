@@ -17,7 +17,7 @@
 		#region Properties
 		public bool IsShow => _canvas.enabled;
 		public bool IsHide => !IsShow;
-		protected Canvas Canvas => _canvas;
+		public Canvas Canvas => _canvas;
 		#endregion Properties
 
 		#region Methods

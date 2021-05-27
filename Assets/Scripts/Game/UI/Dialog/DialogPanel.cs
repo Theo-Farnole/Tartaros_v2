@@ -23,13 +23,13 @@
 		[SerializeField, SceneObjectsOnly] private Image _speakerAvatar = null;
 		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _content = null;
 		[SerializeField, SceneObjectsOnly] private Button _nextButton = null;
-		[SerializeField, SceneObjectsOnly] private BlackBorder[] _blackBorders = new BlackBorder[0];
 
 		private Coroutine _textAnimationCoroutine = null;
 		private Dialogue _dialogue = null;
 
 		// SERVICES
 		private DialogueManager _dialogueManager = null;
+		private UIManager _uiManager = null;
 		#endregion Fields
 
 		#region Methods
@@ -37,6 +37,7 @@
 		{
 			base.Awake();
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
+			_uiManager = Services.Instance.Get<UIManager>();
 
 			if (_speakerAvatar is null) throw new MissingReferenceException(nameof(_speakerAvatar));
 			if (_speakerName is null) throw new MissingReferenceException(nameof(_speakerName));
@@ -116,24 +117,19 @@
 		{
 			base.OnShow();
 
-			CanvasHelper.SetActiveAllCanvasInScene(false, Canvas);
-			ShowBlackBorder(true);
+			_uiManager.ShowBlackBorders();
 		}
 
 		protected override void OnHide()
 		{
 			base.OnHide();
 
-			CanvasHelper.SetActiveAllCanvasInScene(true, Canvas);
-			ShowBlackBorder(false);
-		}
-
-		private void ShowBlackBorder(bool show)
-		{
-			foreach (var blackBorder in _blackBorders)
+			if (_uiManager == null)
 			{
-				blackBorder.Show(show);
+				_uiManager = Services.Instance.Get<UIManager>();
 			}
+
+			_uiManager.HideBlackBorders();
 		}
 		#endregion Methods
 	}
