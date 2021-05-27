@@ -53,13 +53,13 @@
 		}
 
 		[Cheat]
-		public static void EnterDialogueState()
+		public static void EnterDialogueState(string dialogueID = "test")
 		{
 			var dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
 
 			if(dialogueManager != null)
 			{
-				dialogueManager.EnterDialogueState();
+				dialogueManager.EnterDialogueState(dialogueID);
 			}
 			else
 			{

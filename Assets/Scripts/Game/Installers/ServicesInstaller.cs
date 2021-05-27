@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.ServicesLocator
 {
 	using Tartaros.Construction;
+	using Tartaros.Dialogue;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
@@ -11,6 +12,7 @@
 	using Tartaros.Population;
 	using Tartaros.Powers;
 	using Tartaros.Selection;
+	using Tartaros.UI;
 	using Tartaros.UI.HoverPopup;
 	using Tartaros.UI.MiniMap;
 	using Tartaros.UI.Sectors.Orders;
@@ -34,10 +36,12 @@
 		{
 			RegisterFromHierarchy<IMap>();
 			RegisterFromHierarchy<EnemiesWavesManager>();
+			RegisterFromHierarchy<UIManager>();
 
 			RegisterFromHierarchy<MiniMap>();
 			RegisterFromHierarchy<NavigationPathMiniMap>();
 			RegisterFromHierarchy<UIStyles>();
+			RegisterFromHierarchy<HoverPopupManager>();
 
 			RegisterFromChildren<BuildingsDatabase>();
 			RegisterFromChildren<HoverPopupsDatabase>();
@@ -56,7 +60,7 @@
 			RegisterFromChildren<CurrentSelection>();
 			RegisterFromChildren<IconsDatabase>();
 			RegisterFromChildren<UserErrorsLogger>();
-			RegisterFromHierarchy<HoverPopupManager>();
+			RegisterFromChildren<DialogueManager>();
 		}
 
 		private void RegisterFromHierarchy<T>()

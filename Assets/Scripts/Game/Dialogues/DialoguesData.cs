@@ -1,13 +1,16 @@
 ﻿namespace Tartaros.Dialogue
 {
 	using Sirenix.OdinInspector;
-	using System.Collections;
+	using System.Collections.Generic;
 	using UnityEngine;
 
 	public class DialoguesData : SerializedScriptableObject
 	{
-		[SerializeField] private DialogueSequence[] _dialogues = null;
-
-		public DialogueSequence[] Dialogues => _dialogues;
+		[SerializeField] private Dictionary<string, DialoguesSequence> _idByDialogue = null;
+		
+		public DialoguesSequence GetDialoguesSequence(string id)
+		{
+			return _idByDialogue[id];
+		}
 	}
 }

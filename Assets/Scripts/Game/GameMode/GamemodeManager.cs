@@ -4,14 +4,12 @@
 	using Tartaros.Construction;
 	using Tartaros.Gamemode.State;
 	using Tartaros.Orders;
-	using Tartaros.ServicesLocator;
 
 	using UnityEngine;
-	using UnityEngine.Playables;
 
 	public class GamemodeManager : MonoBehaviour
 	{
-		private GamemodeFSM _gamemodeFSM = null;
+		[ShowInRuntime] private GamemodeFSM _gamemodeFSM = null;
 
 		public AState<GamemodeManager> CurrentState => _gamemodeFSM.CurrentState;
 

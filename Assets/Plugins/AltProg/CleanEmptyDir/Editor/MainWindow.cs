@@ -107,14 +107,6 @@ namespace AltProg.CleanEmptyDir
 				}
 				EditorGUILayout.EndHorizontal();
 
-
-				bool cleanOnSave = GUILayout.Toggle(lastCleanOnSave, " Clean Empty Dirs Automatically On Save");
-				if (cleanOnSave != lastCleanOnSave)
-				{
-					lastCleanOnSave = cleanOnSave;
-					Core.CleanOnSave = cleanOnSave;
-				}
-
 				GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(1));
 
 				if (!hasNoEmptyDir)

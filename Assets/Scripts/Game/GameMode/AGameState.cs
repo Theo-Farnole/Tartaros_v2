@@ -25,7 +25,7 @@
 
 		}
 
-		protected void LeaveState()
+		protected virtual void LeaveState()
 		{
 			_stateOwner.SetState(new PlayState(_stateOwner));
 		}

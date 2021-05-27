@@ -1,33 +1,50 @@
 ﻿namespace Tartaros.Gamemode.State
 {
-	using System.Collections;
-	using System.Collections.Generic;
 	using Tartaros.CameraSystem;
 	using Tartaros.Dialogue;
+	using Tartaros.Selection;
+	using Tartaros.ServicesLocator;
+	using Tartaros.UI;
 	using UnityEngine;
 
 	public class DialogueState : AGameState
 	{
-
 		#region Fields
-		private DialoguesData _data = null;
-		private DialogueInputs _inputs = null;
-		private Transform _cameraTarget = null;
-		private int _indexDialogue = 0;
+		private int _currentSpeechIndex = -1;
 
+		private readonly DialoguesSequence _dialogueSequence = null;
+		private readonly CameraController _cameraController = null;
+		private readonly CinematicCameraController _cinematicCameraController = null;
 
-		private int _currentSpeechIndex = 0;
-		private bool _isInDebugPause = false; 
+		// SERVICES
+		private readonly DialogueManager _dialogueManager = null;
+		private readonly ISelection _currentSelection = null;
+		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
+		private readonly ClickSelectionInput _clickSelectionInput = null;
+		private readonly UIManager _uiManager = null;
 		#endregion
 
 		#region Ctor
-		public DialogueState(GamemodeManager stateOwner, DialoguesData data, int indexDialogue, Transform cameraTarget) : base(stateOwner)
+		public DialogueState(GamemodeManager stateOwner, DialoguesSequence sequence) : base(stateOwner)
 		{
-			_data = data;
-			_inputs = new DialogueInputs();
-			_indexDialogue = indexDialogue;
-			_cameraTarget = cameraTarget;
-		} 
+			if (stateOwner is null) throw new System.ArgumentNullException(nameof(stateOwner));
+
+			_dialogueSequence = sequence ?? throw new System.ArgumentNullException(nameof(sequence));
+
+			_dialogueManager = Services.Instance.Get<DialogueManager>();
+			_currentSelection = Services.Instance.Get<CurrentSelection>();
+			_uiManager = Services.Instance.Get<UIManager>();
+
+			_rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
+			_clickSelectionInput = GameObject.FindObjectOfType<ClickSelectionInput>();
+			_cameraController = Camera.main.GetComponent<CameraController>();
+			_cinematicCameraController = Camera.main.GetComponent<CinematicCameraController>();
+
+			if (_cameraController == null)
+			{
+				Debug.LogError("Dialogue state don't find camera controller.");
+			}
+		}
 		#endregion
 
 		#region Methods
@@ -35,106 +52,85 @@
 		{
 			base.OnStateEnter();
 
-			SetTimeFreeze();
+			CanvasHelper.HideAllMenus();
 
-			if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
-			{
-				SetCameraFollowTargetMode(true);
-			}
+			_cinematicCameraController.DestinationReached -= DestinationReached;
+			_cinematicCameraController.DestinationReached += DestinationReached;
 
-			if (_data.Dialogues.Length - 1 <= _indexDialogue)
+			_currentSelection.Clear();
+			_rectangleSelectionInput.enabled = false;
+			_clickSelectionInput.enabled = false;
+			_cameraController.EnableInputs = false;
+
+			_uiManager.ShowBlackBorders();
+
+			PauseGame(true);
+
+			Vector3? destination = _dialogueSequence.BeforeDialogueCameraDestination;
+			if (destination is Vector3 valueOfDestination)
 			{
-				NextLines();
+				_cinematicCameraController.MoveTo(valueOfDestination);
 			}
 			else
 			{
-				Debug.LogWarning("there is no more Dialogues to instancaite");
-				LeaveState();
+				ShowNextSpeech();
 			}
-
-			_inputs.ValidatePerformed -= InputPressed;
-			_inputs.ValidatePerformed += InputPressed;
-
 		}
 
 		public override void OnStateExit()
 		{
 			base.OnStateExit();
 
-			SetTimeFreeze();
-			if (_data.Dialogues[_indexDialogue].IsCameraTarget == true)
-			{
-				SetCameraFollowTargetMode(false);
-			}
-			Debug.Log("dialogueStateFinish");
+			CanvasHelper.ShowAllMenus();
+
+			_cinematicCameraController.DestinationReached -= DestinationReached;
+
+			_rectangleSelectionInput.enabled = true;
+			_clickSelectionInput.enabled = true;
+			_cameraController.EnableInputs = true;
+
+			_uiManager.HideBlackBorders();
+
+			PauseGame(false);
+
+			_dialogueManager.InvokeDialogueOver(new DialogueManager.DialogueOverArgs());
 		}
 
-		private void InputPressed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+		public void ShowNextSpeech()
 		{
-			if (IsDialogueFinish() != true)
+			if (IsThereSpeechToShow() == true)
 			{
-				NextLines();
+				_currentSpeechIndex++;
+
+				Dialogue speech = _dialogueSequence.GetDialogue(_currentSpeechIndex);
+				_dialogueManager.InvokeNewDialogueEvent(new DialogueManager.NextDialogueArgs(speech));
 			}
 			else
 			{
 				LeaveState();
 			}
 		}
-
-		private void NextLines()
+		private void DestinationReached(object sender, CinematicCameraController.DestinationReachedArgs e)
 		{
-			var currentDialogue = _data.Dialogues[_indexDialogue];
-			var characterName = currentDialogue.Dialogue[_currentSpeechIndex].Character.name;
-			var speech = currentDialogue.Dialogue[_currentSpeechIndex].Speech;
+			Debug.Log(nameof(DestinationReached));
 
-			TEST_ShowLinesAndAvatar(characterName, speech);
-
-			_currentSpeechIndex += 1;
+			ShowNextSpeech();
 		}
 
-		private bool IsDialogueFinish()
+		private bool IsThereSpeechToShow()
 		{
-			var currentDialogue = _data.Dialogues[_indexDialogue];
-
-			return _currentSpeechIndex > currentDialogue.Dialogue.Length - 1;
+			return _currentSpeechIndex + 1 < _dialogueSequence.DialoguesCount;
 		}
 
-		private void SetTimeFreeze()
+		private void PauseGame(bool enablePause)
 		{
-			_isInDebugPause = !_isInDebugPause;
-
-			Time.timeScale = _isInDebugPause ? 0 : 1;
+			Time.timeScale = enablePause ? 0 : 1;
 
 			if (Camera.main.TryGetComponent(out CameraController cameraController))
 			{
-				cameraController.UseUnscaledDeltaTime = _isInDebugPause;
+				cameraController.UseUnscaledDeltaTime = enablePause;
 			}
 		}
-
-		private void TEST_ShowLinesAndAvatar(string name, string dialogue)
-		{
-			Debug.LogFormat("{0}: {1}", name, dialogue);
-		}
-
-		private void SetCameraFollowTargetMode(bool mode)
-		{
-			if (Camera.main.TryGetComponent<CameraController>(out CameraController cameraController))
-			{
-				if(_cameraTarget != null)
-				{
-					cameraController.SetCameraTarget(_cameraTarget);
-					cameraController.SetCameraFollowTargetMode(mode);
-				}
-				else
-				{
-					Debug.LogWarning("there is no cameraTarget in DialogueManager");
-				}
-			}
-			else
-			{
-				Debug.LogError("Dialogue State don't find cameraController");
-			}
-		}
-	} 
+	}
 	#endregion
 }
