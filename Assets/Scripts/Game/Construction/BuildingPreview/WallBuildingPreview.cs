@@ -12,6 +12,7 @@
 		private CheckObjectUnderCursorManager _objectUnderCursorManager = null;
 		private GameObject _wallCantConstruct = null;
 		private bool _canConstruct = true;
+		private List<MeshRenderer> _meshRenderers = new List<MeshRenderer>();
 
 		private List<GameObject> _buildingsPreview = new List<GameObject>();
 		private Vector3 _startPosition = Vector3.zero;
@@ -80,6 +81,7 @@
 		{
 			GameObject wallInstance = GameObject.Instantiate(_buildingPreview, position, Quaternion.identity);
 			AddPreviewWall(wallInstance);
+			AddMeshRenderer(wallInstance.GetComponentInChildren<MeshRenderer>());
 
 			if (_wallCantConstruct == null && IsValidPositionToBuild(wallInstance.transform.position) == false)
 			{
@@ -92,6 +94,7 @@
 		{
 			GameObject wallInstance = GameObject.Instantiate(_startBuildingPreview, position, Quaternion.identity);
 			AddPreviewWall(wallInstance);
+			AddMeshRenderer(wallInstance.GetComponentInChildren<MeshRenderer>());
 		}
 
 		private void SetPositionRotationOfPreviews(Vector3 end)
@@ -140,6 +143,8 @@
 		{
 			if (_buildingsPreview.Count - 1 > 0)
 			{
+				RemoveMeshRenderer(_buildingsPreview[_buildingsPreview.Count - 1].GetComponentInChildren<MeshRenderer>());
+
 				GameObject.Destroy(_buildingsPreview[_buildingsPreview.Count - 1]);
 				_buildingsPreview.RemoveAt(_buildingsPreview.Count - 1);
 			}
@@ -231,6 +236,23 @@
 
 			return output.ToArray();
 		}
+		
+
+		public MeshRenderer[] GetMeshRenderes()
+		{
+			return _meshRenderers.ToArray();
+		}
+
+		private void AddMeshRenderer(MeshRenderer mesh)
+		{
+			_meshRenderers.Add(mesh);
+		}
+
+		private void RemoveMeshRenderer(MeshRenderer mesh)
+		{
+			_meshRenderers.Remove(mesh);
+		}
+
 
 		public void DestroyMethod()
 		{

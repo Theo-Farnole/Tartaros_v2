@@ -17,6 +17,7 @@
 		private List<GameObject> _wallSections = new List<GameObject>();
 		private WallBuildingPreview _wallSectionPreview = null;
 		private GameObject _wallToHideAndShow = null;
+		private List<MeshRenderer> _meshRenders = new List<MeshRenderer>();
 
 		private readonly IConstructable _constructable = null;
 		private readonly ConstructionInputs _inputs = null;
@@ -59,6 +60,46 @@
 
 			SetWallSectionPreview();
 			SetFirstBuildingPreview();
+			SetFeedbackConstructionColorMaterial();
+		}
+
+		private void SetFeedbackConstructionColorMaterial()
+		{
+			if (_wallSectionPreview != null)
+			{
+				if (CanConstructHere() == true)
+				{
+					ShaderHelper.ChangeMeshColorMaterials(_wallSectionPreview.GetMeshRenderes(), Color.green);
+				}
+				else
+				{
+					ShaderHelper.ChangeMeshColorMaterials(_wallSectionPreview.GetMeshRenderes(), Color.red);
+				}
+			}
+
+			if (_buildingPreview != null)
+			{
+				if (CanConstructHere() == true)
+				{
+					ShaderHelper.ChangeMeshColorMaterials(_buildingPreview.GetMeshRenderers(), Color.green);
+				}
+				else
+				{
+					ShaderHelper.ChangeMeshColorMaterials(_buildingPreview.GetMeshRenderers(), Color.red);
+				}
+			}
+
+			if (_meshRenders.Count >= 1)
+			{
+				if (CanConstructHere() == true)
+				{
+					ShaderHelper.ChangeMeshColorMaterials(_meshRenders.ToArray(), Color.green);
+				}
+				else
+				{
+					ShaderHelper.ChangeMeshColorMaterials(_meshRenders.ToArray(), Color.red);
+				}
+			}
 		}
 
 		public override void OnStateExit()
@@ -112,7 +153,8 @@
 			}
 		}
 
-		
+
+
 
 		private void ContinueWallPreview()
 		{
@@ -177,6 +219,11 @@
 				foreach (GameObject wallCorner in _wallSectionPreview.GetAllCornerPreview())
 				{
 					_wallCorners.Add(wallCorner);
+				}
+
+				foreach (var meshRenderer in _wallSectionPreview.GetMeshRenderes())
+				{
+					_meshRenders.Add(meshRenderer);
 				}
 			}
 		}
