@@ -33,17 +33,22 @@
 
 		public void Show(bool show)
 		{
+			//return;
 			if (_tweener != null)
 			{
-				_tweener.Kill();
+				_tweener.Kill(true);
 			}
 
+			// set default size
 			_rectTransform.sizeDelta = show == true ? HideSize : ShowSize;
+
+
 			Vector2 targetSize = show == true ? ShowSize : HideSize;
 
 			_tweener = _rectTransform
 				.DOSizeDelta(targetSize, _easeDurationInSeconds)
-				.SetEase(_ease);
+				.SetEase(_ease)
+				.SetUpdate(true);
 		}
 		#endregion Methods
 	}
