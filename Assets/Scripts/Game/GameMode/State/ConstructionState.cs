@@ -50,7 +50,6 @@ namespace Tartaros.Construction
 		private void InputLeavePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 		{
 			LeaveState();
-
 		}
 
 		public override void OnStateExit()
@@ -66,6 +65,30 @@ namespace Tartaros.Construction
 			base.OnUpdate();
 
 			_buildingPreview.SetBuildingPreviewPosition(_constructionInput.GetMousePosition());
+
+			if(CanConstructHere() == true) 
+			{
+				ChangeColorOfMaterial(Color.green);
+			}
+			else
+			{
+				ChangeColorOfMaterial(Color.red);
+			}
+
+		}
+
+		private void ChangeColorOfMaterial(Color color)
+		{
+			if(_buildingPreview != null && _buildingPreview.GetMeshRenderers() != null)
+			{
+
+				var buildingMeshsRender = _buildingPreview.GetMeshRenderers();
+				var buildingSkinnedMeshRender = _buildingPreview.GetSkinnedMeshRenderers();
+
+
+				ShaderHelper.ChangeMeshColorMaterials(buildingMeshsRender, color);
+				ShaderHelper.ChangeSkinnedMeshColorMaterials(buildingSkinnedMeshRender, color);
+			}
 		}
 
 

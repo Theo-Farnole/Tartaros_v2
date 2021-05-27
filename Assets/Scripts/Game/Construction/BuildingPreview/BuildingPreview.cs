@@ -15,6 +15,8 @@
 		private CheckObjectUnderCursorManager _objectUnderCursorManager = null;
 		private IConstructable _toBuild = null;
 		private Vector2[] _pointsToCheck = null;
+		private MeshRenderer[] _meshRenderers = null;
+		private SkinnedMeshRenderer[] _skinnedMeshRenderers = null;
 
 		public BuildingPreview(IConstructable toBuild, Vector3 positionToInstancate)
 		{
@@ -23,9 +25,13 @@
 			_toBuild = toBuild;
 			_isWallPreview = toBuild.IsWall;
 			_buildingPreview = buildingPreview;
+			_meshRenderers = _buildingPreview.GetComponentsInChildren<MeshRenderer>();
+			_skinnedMeshRenderers = _buildingPreview.GetComponentsInChildren<SkinnedMeshRenderer>();
 			_objectUnderCursorManager = new CheckObjectUnderCursorManager(toBuild);
 			_pointsToCheck = GetPointToCheckTheConstructionViability();
 		}
+
+		
 
 		public void SetBuildingPreviewPosition(Vector3 position)
 		{
@@ -57,6 +63,16 @@
 		public GameObject GetObjectUnderCursor()
 		{
 			return _objectUnderCursorManager.GetObjectUnderCursor();
+		}
+
+		public MeshRenderer[] GetMeshRenderers()
+		{
+			return _meshRenderers;
+		}
+
+		public SkinnedMeshRenderer[] GetSkinnedMeshRenderers()
+		{
+			return _skinnedMeshRenderers;
 		}
 
 		public bool IsConstructableHere()

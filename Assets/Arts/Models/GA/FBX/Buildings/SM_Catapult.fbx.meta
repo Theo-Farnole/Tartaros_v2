@@ -3,7 +3,12 @@ guid: 5c573ad3bf84c09458c7d5d1573cba44
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Tower_Crossbow
+    second: {fileID: 2100000, guid: 199b9e7c97755ff4e93fb7c6bb7eb5c1, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
