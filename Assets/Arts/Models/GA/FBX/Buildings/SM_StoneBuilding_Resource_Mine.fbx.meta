@@ -3,7 +3,22 @@ guid: 4461e028a7156ba4daeb3ab60d1fbdc9
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Rock_resource
+    second: {fileID: 2100000, guid: 55da01e99c78f7849ac082cffc82ff9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StoneBuilding_Resource_Mine
+    second: {fileID: 2100000, guid: 360bd51ea43223042bb95eaafb14a9d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StoneBuilding_Resource_Mine_Rock
+    second: {fileID: 2100000, guid: 299413081999f5747835811ede654823, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

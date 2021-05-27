@@ -28,7 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8892704172102287217}
+  - {fileID: 3818542678790265949}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,78 +45,78 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7, y: 5, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &8999179594237417626
+--- !u!1001 &3707739201451277238
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1934355408172695052}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 769e0c78e150d834d80d00091431a7a8,
+    - target: {fileID: 919132149155446097, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
         type: 3}
       propertyPath: m_Name
-      value: SM_StoneBuilding_Resource_StoneCareer
+      value: SM_StoneBuilding_Resource_Carrer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 769e0c78e150d834d80d00091431a7a8, type: 3}
---- !u!4 &8892704172102287217 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 6d5fcceb7a0e7a045b15dc54edd23727, type: 3}
+--- !u!4 &3818542678790265949 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 769e0c78e150d834d80d00091431a7a8,
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d5fcceb7a0e7a045b15dc54edd23727,
     type: 3}
-  m_PrefabInstance: {fileID: 8999179594237417626}
+  m_PrefabInstance: {fileID: 3707739201451277238}
   m_PrefabAsset: {fileID: 0}

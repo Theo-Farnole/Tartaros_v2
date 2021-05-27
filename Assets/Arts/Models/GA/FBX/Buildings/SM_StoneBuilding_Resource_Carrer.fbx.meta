@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 769e0c78e150d834d80d00091431a7a8
+guid: 6d5fcceb7a0e7a045b15dc54edd23727
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StoneBuilding_Resource_Career
+    second: {fileID: 2100000, guid: 82483bad0fc03274cbc96792cba04a24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StoneBuilding_Rock_Career
+    second: {fileID: 2100000, guid: b34f448c78b521c4793d456a22d5162b, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
