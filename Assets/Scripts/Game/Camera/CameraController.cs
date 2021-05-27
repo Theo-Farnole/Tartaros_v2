@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.CameraSystem
 {
+	using System;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
@@ -12,19 +13,48 @@
 		[SerializeField]
 		private CameraData _cameraData = null;
 
+
+		private bool _enableScreenEdgeMovement = false;
+		private bool _useUnscaledDeltaTime = false;
+
 		private GameInputs _input = null;
 		private Camera _camera = null;
 		private IMap _Imap = null;
-		private bool _enableScreenEdgeMovement = false;
-		private bool _useUnscaledDeltaTime = false;
-		private bool _isInFollowTargetMode = false;
-		private Transform _targetDestination = null;
 		#endregion
 
 		#region Properties
 		private float DeltaTime => _useUnscaledDeltaTime ? Time.unscaledDeltaTime : Time.deltaTime;
 		public bool UseUnscaledDeltaTime { get => _useUnscaledDeltaTime; set => _useUnscaledDeltaTime = value; }
+		public bool EnableInputs
+		{
+			set
+			{
+				if (value == true)
+				{
+					_input.Camera.Enable();
+				}
+				else
+				{
+					_input.Camera.Disable();
+				}
+			}
+		}
 		#endregion Propeties
+
+		#region Events
+		public class DestinationReachedArgs : EventArgs
+		{
+			public readonly Vector3 destination = default;
+
+			public DestinationReachedArgs(Vector3 destination)
+			{
+				this.destination = destination;
+			}
+		}
+
+		public event EventHandler<DestinationReachedArgs> DestinationReached = null;
+		#endregion Events
+
 
 		#region Ctor
 		public CameraController(CameraData data, Camera camera)
@@ -36,8 +66,6 @@
 		#endregion
 
 		#region Methods
-
-
 		private void Awake()
 		{
 			_camera = GetComponent<Camera>();
@@ -56,15 +84,7 @@
 
 		private void Update()
 		{
-			if (_isInFollowTargetMode == false)
-			{
-				MovementManager();
-			}
-			else
-			{
-				FollowTargetTactical();
-			}
-
+			MovementManager();
 
 		}
 
@@ -165,24 +185,6 @@
 		{
 			//finalPosition.z = Mathf.Clamp(finalPosition.z, _cameraData.CameraZoomData.ZoomBounds.min, _cameraData.CameraZoomData.ZoomBounds.max);
 			return finalPosition;
-		}
-
-		public void SetCameraFollowTargetMode(bool mode)
-		{
-			_isInFollowTargetMode = mode;
-		}
-
-		public void SetCameraTarget(Transform target)
-		{
-			_targetDestination = target;
-		}
-
-		private void FollowTargetTactical()
-		{
-			float lerpRange = 10;
-			var distanceToTarget = Vector3.Distance(transform.position, _targetDestination.position);
-			Vector3 distanceBetweenCameraAndTarget = _targetDestination.position - transform.forward * distanceToTarget;
-			transform.position = Vector3.Lerp(transform.position, distanceBetweenCameraAndTarget, lerpRange * DeltaTime);
 		}
 		#endregion
 	}

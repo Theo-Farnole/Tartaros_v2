@@ -90,7 +90,6 @@
 				Debug.LogFormat("Ressources {0} has no maximum ressources values", income.SectorRessourceType);
 			}
 
-			Debug.LogFormat("Player Income changed: it is now {0}.", _incomePerTick.ToString());
 		}
 
 		void IPlayerIncomeManager.RemoveGeneratorIncome(IIncomeGenerator income)

@@ -17,25 +17,6 @@ namespace AltProg.CleanEmptyDir
         public static event Action OnAutoClean;
 
         // UnityEditor.AssetModificationProcessor
-        public static string[] OnWillSaveAssets(string[] paths)
-        {
-            if ( CleanOnSave )
-            {
-                List<DirectoryInfo> emptyDirs;
-                FillEmptyDirList( out emptyDirs );
-                if ( emptyDirs != null && emptyDirs.Count > 0 )
-                {
-                    DeleteAllEmptyDirAndMeta( ref emptyDirs );
-
-                    Debug.Log( "[Clean] Cleaned Empty Directories on Save" );
-
-                    if ( OnAutoClean != null )
-                        OnAutoClean();
-                }
-            }
-
-            return paths;
-        }
 
 
         public static bool CleanOnSave

@@ -98,7 +98,7 @@
 #if UNITY_EDITOR
 				if (_ENABLE_DIALOGUE_STATE_EDITOR == true)
 #endif
-					_dialogueManager.EnterDialogueState();
+					_dialogueManager.EnterDialogueState("sector_capture");
 			}
 
 			if(_buildingCapture != null && _buildingCapture.CanCapture() == true && _buildingCapture.IsAvailable == true)
