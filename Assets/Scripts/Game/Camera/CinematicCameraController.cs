@@ -9,13 +9,11 @@
 		#region Fields
 		[SerializeField] private CameraData _cameraData = null;
 
-		private Transform _destination = null;
-		#endregion Fields
+		[ShowInRuntime] private Vector3 _destination = default;
+		[ShowInRuntime] private bool _moveTo = false;
 
-		#region Properties
-		[ShowInRuntime]
-		public Transform Destination { get => _destination; set => _destination = value; }
-		#endregion Properties
+		private CameraController _cameraController = null;
+		#endregion Fields
 
 		#region Events
 		public class DestinationReachedArgs : EventArgs
@@ -32,17 +30,57 @@
 		#endregion Events
 
 		#region Methods
+		private void Awake()
+		{
+			_cameraController = GetComponent<CameraController>();
+		}
+
 		private void Update()
 		{
-			if (_destination != null)
+			if (_moveTo == true)
 			{
-				transform.position = Vector3.MoveTowards(transform.position, _destination.position, _cameraData.SpeedEdgePan * Time.deltaTime);
+				transform.position = Vector3.MoveTowards(transform.position, _destination, _cameraData.SpeedInCinematics * Time.unscaledDeltaTime);
 
-				if (Vector3.Distance(transform.position, _destination.position) < 0.03f)
+				if (Vector3.Distance(transform.position, _destination) < 0.03f)
 				{
-					DestinationReached?.Invoke(this, new DestinationReachedArgs(_destination.position));
-					_destination = null;
+					Stop();
+					DestinationReached?.Invoke(this, new DestinationReachedArgs(_destination));
 				}
+			}
+		}
+
+		public void Stop()
+		{
+			if (_cameraController != null)
+			{
+				_cameraController.enabled = true;
+			}
+
+			_moveTo = false;
+		}
+
+		public void MoveTo(Vector3 destination)
+		{
+			// A .___. B
+			//	 |  /
+			//	 | /
+			// C |/			
+
+
+			float radiansB = transform.eulerAngles.x * Mathf.Deg2Rad;
+			float sinRadiansB = Mathf.Sin(radiansB);
+			float edgeOpposedToB = Mathf.Abs(transform.position.y - destination.y); // opposé
+
+			// we are looking for this
+			// sin = opposed / hypotenuse <=> hyp = opposé / sin
+			float hypotenuse = edgeOpposedToB / sinRadiansB;
+
+			_destination = destination + -transform.forward * hypotenuse;
+			_moveTo = true;
+
+			if (_cameraController != null)
+			{
+				_cameraController.enabled = false;
 			}
 		}
 		#endregion Methods

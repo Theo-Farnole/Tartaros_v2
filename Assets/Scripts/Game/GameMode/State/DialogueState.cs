@@ -8,19 +8,18 @@
 
 	public class DialogueState : AGameState
 	{
-
 		#region Fields
 		private int _currentSpeechIndex = -1;
 
 		private readonly DialoguesSequence _dialogueSequence = null;
+		private readonly CameraController _cameraController = null;
+		private readonly CinematicCameraController _cinematicCameraController = null;
 
 		// SERVICES
 		private readonly DialogueManager _dialogueManager = null;
 		private readonly ISelection _currentSelection = null;
 		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
 		private readonly ClickSelectionInput _clickSelectionInput = null;
-		private readonly CameraController _cameraController = null;
-		private readonly CinematicCameraController _cinematicCameraController = null;
 		#endregion
 
 		#region Ctor
@@ -49,6 +48,9 @@
 		{
 			base.OnStateEnter();
 
+			_cinematicCameraController.DestinationReached -= DestinationReached;
+			_cinematicCameraController.DestinationReached += DestinationReached;
+
 			_currentSelection.Clear();
 			_rectangleSelectionInput.enabled = false;
 			_clickSelectionInput.enabled = false;
@@ -56,15 +58,22 @@
 
 			PauseGame(true);
 
-			ShowNextSpeech();
-
-			// TODO TF: camera focus before
-
+			Vector3? destination = _dialogueSequence.BeforeDialogueCameraDestination;
+			if (destination is Vector3 valueOfDestination)
+			{
+				_cinematicCameraController.MoveTo(valueOfDestination);
+			}
+			else
+			{
+				ShowNextSpeech();
+			}
 		}
 
 		public override void OnStateExit()
 		{
 			base.OnStateExit();
+
+			_cinematicCameraController.DestinationReached -= DestinationReached;
 
 			_rectangleSelectionInput.enabled = true;
 			_clickSelectionInput.enabled = true;
@@ -89,12 +98,9 @@
 				LeaveState();
 			}
 		}
-
-		protected override void LeaveState()
+		private void DestinationReached(object sender, CinematicCameraController.DestinationReachedArgs e)
 		{
-			// TODO TF: camera focus after
-
-			base.LeaveState();
+			ShowNextSpeech();
 		}
 
 		private bool IsThereSpeechToShow()

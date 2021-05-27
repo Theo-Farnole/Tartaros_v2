@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0d23757d373aa48a39c6b945a87df6, type: 3}
   m_Name: Test.Sequence
   m_EditorClassIdentifier: 
+  _beforeDialogueFocus: 1
+  _afterDialogueFocus: 0
   _dialogues:
   - _character: {fileID: 11400000, guid: 81b87fe4d8b504042a1a45ec3f689438, type: 2}
     _speech: "Aujourd\u2019hui, et bien c\u2019est le jour de mon 111e anniversaire
@@ -23,4 +25,3 @@ MonoBehaviour:
     _speech: "e ne connais pas la moiti\xE9 d\u2019entre vous autant que je le voudrais,
       mais j\u2019aime moins la moiti\xE9 d\u2019entre vous \xE0 moiti\xE9 moins
       que vous ne le m\xE9ritez !"
-  _isCameraTarget: 0

@@ -6,13 +6,11 @@
 	{
 
 		[SerializeField] private CameraFocus _beforeDialogueFocus = CameraFocus.None;
-		[SerializeField] private CameraFocus _afterDialogueFocus = CameraFocus.None;
 		[SerializeField] private Dialogue[] _dialogues = null;
 
 		public int DialoguesCount => _dialogues.Length;
 
-		public CameraFocus BeforeDialogueFocus => _beforeDialogueFocus;
-		public CameraFocus AfterDialogueFocus => _afterDialogueFocus;
+		public Vector3? BeforeDialogueCameraDestination => _beforeDialogueFocus.GetDestination();
 
 		public Dialogue GetDialogue(int dialogueIndex)
 		{
