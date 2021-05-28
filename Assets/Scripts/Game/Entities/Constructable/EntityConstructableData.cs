@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.UI
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -52,7 +53,7 @@
 		private Vector2 _size = Vector2.one;
 
 		[SerializeField]
-		private IConstructionRule[] _rules = new IConstructionRule[0];		
+		private IConstructionRule[] _rules = new IConstructionRule[0];
 		#endregion Fields
 
 		#region Properties
@@ -68,7 +69,7 @@
 
 		bool IConstructable.IsWall => _IsChained;
 
-		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
+		GameObject IConstructable.GameplayPrefab => _gameplayPrefab ?? throw new NullReferenceException("Gameplay prefab is not set.");
 
 		GameObject IConstructable.WallCornerModel => _wallCornerModel;
 
