@@ -89,7 +89,6 @@
 			}
 			else
 			{
-				Debug.Log("notOnNav");
 				return NavMeshHelper.AdjustPositionToFitNavMesh(position);
 			}
 		}

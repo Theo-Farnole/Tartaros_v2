@@ -54,6 +54,12 @@
 
 			CheckIfBuildingSlotIsMissing();
 			SetBuildingSlotConstructable();
+			
+		}
+
+		private void OnEnable()
+		{
+			CheckIfCaptureBuildingIsHere();
 		}
 
 		private void SetBuildingSlotConstructable()
@@ -63,10 +69,21 @@
 			if (buildingSlot != null)
 			{
 				buildingSlot.Constructable = _buildingsDatabase.GetResourceBuildingAsConstructable(_type);
+				buildingSlot.Sector = _sectorOnPosition;
 			}
 		}
 
-		
+		private void CheckIfCaptureBuildingIsHere()
+		{
+			bool captureBuildingAvailable = _sectorOnPosition.ContainsAvailablCaptureBuilding();
+
+			if (captureBuildingAvailable == true)
+			{
+				_sectorOnPosition.GetBuildingSlotAvailable().IsAvailable = false;
+			}
+		}
+
+
 
 		private void CheckIfBuildingSlotIsMissing()
 		{

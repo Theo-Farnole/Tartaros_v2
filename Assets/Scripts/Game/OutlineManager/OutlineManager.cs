@@ -48,7 +48,6 @@
 			if (MouseHelper.IsCursorOverWindow() == true && MouseHelper.GetGameObjectUnderCursor() != null)
 			{
 				var entity = MouseHelper.GetGameObjectUnderCursor().GetComponentInParent<Entity>();
-				Debug.Log(MouseHelper.GetGameObjectUnderCursor());
 
 				if (entity != null)
 				{

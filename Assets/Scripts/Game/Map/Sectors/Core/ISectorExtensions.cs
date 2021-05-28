@@ -3,6 +3,7 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
+	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.Map;
@@ -58,6 +59,7 @@
 
 			foreach (CaptureBuilding capture in captureBuildings)
 			{
+				Debug.Log("here");
 				if (capture.IsAvailable == true)
 				{
 					return true;
@@ -80,6 +82,28 @@
 			}
 
 			return false;
+		}
+
+		public static Entity GetConstructableInSector(this ISector sector, IConstructable constructable)
+		{
+			Entity[] entities = GetEntitiesInSector(sector);
+
+
+			foreach (var entity in entities)
+			{
+				
+				if(entity.EntityType == EntityType.Building)
+				{
+					Debug.Log(entity.GetBehaviourData<IConstructable>());
+				}
+
+				if (entity.EntityType == EntityType.Building && entity.GetBehaviourData<IConstructable>() == constructable)
+				{
+					return entity;
+				}
+			}
+
+			return null;
 		}
 
 		public static Entity[] GetEntitiesInSector(this ISector sector)

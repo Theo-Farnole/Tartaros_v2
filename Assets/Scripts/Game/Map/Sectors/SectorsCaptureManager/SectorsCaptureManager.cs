@@ -24,8 +24,14 @@
 
 		private void CaptureSectorBuilding(ISector sector) 
 		{
-			BuildingSlot buildingSlot = sector.GetBuildingSlotAvailable();
+
+			if (sector.ContainsAvailableBuildingSlot() == false)
+			{
+				return;
+			}
+
 			bool captureBuildingAvailable = sector.ContainsAvailablCaptureBuilding();
+			BuildingSlot buildingSlot = sector.GetBuildingSlotAvailable();
 
 			if (captureBuildingAvailable == false && buildingSlot != null && buildingSlot.CanConstruct() == true)
 			{
