@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
+	using System.Collections;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -13,14 +14,19 @@
 		#region Fields
 		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;
 		[SerializeField, SuffixLabel("get IConstructable from behaviour")] private EntityData _constructableEntity = null;
+		[SerializeField] private bool _isAvailable = true;
 
 		private IConstructable _constructable = null;
-		private bool _isAvailable = true;
 		private IPlayerSectorResources _playerWallet = null;
+		private Entity _instanciateBuilding = null;
+		private ISector _sector = null;
+
 		#endregion Fields
 
 		#region Properties
-		public bool IsAvailable => _isAvailable;
+		public bool IsAvailable { get => _isAvailable; set => _isAvailable = value; }
+
+		public ISector Sector { get => _sector; set => _sector = value; }
 		public ISectorResourcesWallet ConstructionPrice => _constructionPrice;
 
 		public IConstructable Constructable { get => _constructable; set => _constructable = value; }
@@ -53,11 +59,24 @@
 				_playerWallet.Buy(_constructionPrice);
 				_constructable.InstantiateConstructionKit(transform.position, transform.rotation);
 				_isAvailable = false;
+
+				
+				StartCoroutine(SetInstanciateBuildingEntity(_constructable.TimeToConstruct + 0.5f));
 			}
 			else
 			{
 				Debug.LogError("Cannot construct.", this);
 			}
+		}
+
+		private void _instanciateBuilding_EntityKilled(object sender, Wave.KilledArgs e)
+		{
+			_isAvailable = true;
+			if (_instanciateBuilding != null)
+			{
+				_instanciateBuilding.EntityKilled -= _instanciateBuilding_EntityKilled;
+			}
+
 		}
 
 		private void OnDrawGizmos()
@@ -103,5 +122,20 @@
 			}
 		}
 		#endregion Methods
+
+		IEnumerator SetInstanciateBuildingEntity(float time)
+		{
+			yield return new WaitForSeconds(time + 1);
+
+			Debug.Log(_constructable);
+			_instanciateBuilding = _sector.GetConstructableInSector(_constructable);
+
+			if(_instanciateBuilding != null)
+			{
+				_instanciateBuilding.EntityKilled += _instanciateBuilding_EntityKilled;
+			}
+		}
+
+		
 	}
 }
