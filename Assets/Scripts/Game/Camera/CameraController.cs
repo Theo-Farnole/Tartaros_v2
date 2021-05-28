@@ -10,16 +10,17 @@
 	public class CameraController : MonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		private CameraData _cameraData = null;
-
+		[SerializeField] private CameraData _cameraData = null;
+		[SerializeField] private Bounds2D _cameraMargins = null;
 
 		private bool _enableScreenEdgeMovement = false;
 		private bool _useUnscaledDeltaTime = false;
 
 		private GameInputs _input = null;
-		private Camera _camera = null;
-		private IMap _Imap = null;
+		private Bounds2D _cameraBounds = null;
+
+		// SERVICES
+		private IMap _map = null;
 		#endregion
 
 		#region Properties
@@ -55,20 +56,9 @@
 		public event EventHandler<DestinationReachedArgs> DestinationReached = null;
 		#endregion Events
 
-
-		#region Ctor
-		public CameraController(CameraData data, Camera camera)
-		{
-			_cameraData = data;
-			_camera = camera;
-
-		}
-		#endregion
-
 		#region Methods
 		private void Awake()
 		{
-			_camera = GetComponent<Camera>();
 			_input = new GameInputs();
 			_input.Camera.Enable();
 			_enableScreenEdgeMovement = _cameraData.EnableScreenEdgeMovement;
@@ -76,16 +66,19 @@
 
 		private void Start()
 		{
-			if (Services.Instance.TryGet<IMap>(out IMap map))
-			{
-				_Imap = map;
-			}
+			_map = Services.Instance.Get<IMap>();
+
+			_cameraBounds = _map.MapBounds;
+			_cameraBounds.boundsX.min += _cameraMargins.boundsX.min;
+			_cameraBounds.boundsX.max -= _cameraMargins.boundsX.max;
+
+			_cameraBounds.boundsY.min += _cameraMargins.boundsY.min;
+			_cameraBounds.boundsY.max -= _cameraMargins.boundsY.max;
 		}
 
 		private void Update()
 		{
 			MovementManager();
-
 		}
 
 		private void MovementManager()
@@ -172,10 +165,10 @@
 
 		private Vector3 ClampMapBoundsMovement(Vector3 finalPosition)
 		{
-			if (_Imap != null)
+			if (_map != null)
 			{
-				finalPosition.x = Mathf.Clamp(finalPosition.x, _Imap.MapBounds.boundsX.min, _Imap.MapBounds.boundsX.max);
-				finalPosition.z = Mathf.Clamp(finalPosition.z, _Imap.MapBounds.boundsY.min, _Imap.MapBounds.boundsY.max);
+				finalPosition.x = Mathf.Clamp(finalPosition.x, _cameraBounds.boundsX.min, _cameraBounds.boundsX.max);
+				finalPosition.z = Mathf.Clamp(finalPosition.z, _cameraBounds.boundsY.min, _cameraBounds.boundsY.max);
 				finalPosition.y = Mathf.Clamp(finalPosition.y, _cameraData.ZoomBounds.min, _cameraData.ZoomBounds.max);
 			}
 			return finalPosition;
