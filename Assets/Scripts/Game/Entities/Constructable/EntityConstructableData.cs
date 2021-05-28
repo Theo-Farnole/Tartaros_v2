@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.UI
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
@@ -12,47 +13,22 @@
 	public class EntityConstructableData : IEntityBehaviourData, IConstructable
 	{
 		#region Fields
+		[Title("Main Settings")]
+		[SerializeField, PreviewField] private Sprite _portrait = null;
+		[SerializeField] private bool _IsChained = false;
+		[SerializeField] private int _timeToConstruct = 1;
 
-		[SerializeField]
-		[PreviewField]
-		private Sprite _portrait = null;
+		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;
+		[SerializeField] private Vector2 _size = Vector2.one;
+		[SerializeField] private IConstructionRule[] _rules = new IConstructionRule[0];
 
-		[SerializeField]
-		private GameObject _modelPrefab = null;
-
-		[SerializeField]
-		private GameObject _gameplayPrefab = null;
-
-		[SerializeField]
-		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallCornerModel = null;
-
-		[SerializeField]
-		[ShowIf(nameof(_IsChained))]
-		private GameObject _wallCornerGameplay = null;
-
-
-		[SerializeField]
-		private GameObject _constructionKitModel = null;
-
-		[SerializeField]
-		private HoverPopupDataSO _hoverPopupData = null;
-
-		[SerializeField]
-		private int _timeToConstruct = 1;
-
-
-		[SerializeField]
-		private bool _IsChained = false;
-
-		[SerializeField]
-		private ISectorResourcesWallet _constructionPrice = null;
-
-		[SerializeField]
-		private Vector2 _size = Vector2.one;
-
-		[SerializeField]
-		private IConstructionRule[] _rules = new IConstructionRule[0];		
+		[SerializeField, FoldoutGroup("Prefabs")] private GameObject _modelPrefab = null;
+		[SerializeField, FoldoutGroup("Prefabs")] private GameObject _gameplayPrefab = null;
+		[SerializeField, FoldoutGroup("Prefabs"), ShowIf(nameof(_IsChained))] private GameObject _wallCornerModel = null;
+		[SerializeField, FoldoutGroup("Prefabs"), ShowIf(nameof(_IsChained))] private GameObject _wallCornerGameplay = null;
+		[SerializeField, FoldoutGroup("Prefabs")] private GameObject _constructionKitModel = null;
+		[Space]
+		[SerializeField, FoldoutGroup("Prefabs")] private HoverPopupDataSO _hoverPopupData = null;
 		#endregion Fields
 
 		#region Properties
@@ -68,7 +44,7 @@
 
 		bool IConstructable.IsWall => _IsChained;
 
-		GameObject IConstructable.GameplayPrefab => _gameplayPrefab;
+		GameObject IConstructable.GameplayPrefab => _gameplayPrefab ?? throw new NullReferenceException("Gameplay prefab is not set.");
 
 		GameObject IConstructable.WallCornerModel => _wallCornerModel;
 
