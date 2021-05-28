@@ -94,7 +94,7 @@ MonoBehaviour:
   m_normalTextureSize: 4
   m_normalTextureSizePx: 1024
   m_normalCompress: 1
-  m_globalDetailNormalMapIdx: 11
+  m_globalDetailNormalMapIdx: 12
   m_globalDetailNormalMap: {fileID: 2800000, guid: 34f66994040def1499e148b92d4f3b07,
     type: 3}
   m_snowAlbedoTextureIdx: -1
@@ -505,57 +505,57 @@ MonoBehaviour:
   - m_isOpenInEditor: 1
     m_textureIdx: 11
     m_name: A_StoneWay
-    m_detailPower: 0
+    m_detailPower: 0.175
     m_snowReductionPower: 0
     m_geologicalPower: 1
     m_triplanar: 0
     m_tint: {r: 1, g: 1, b: 1, a: 1}
-    m_tintBrightness: 2
-    m_smoothness: 0.7
-    m_albedoIdx: -1
-    m_albedoTilingClose: 0
+    m_tintBrightness: 1
+    m_smoothness: 0
+    m_albedoIdx: 16
+    m_albedoTilingClose: 6
     m_albedoTilingFar: 0
-    m_albedoAverage: {x: 0.56471163, y: 0.3813261, z: 0.29613832, w: 1}
+    m_albedoAverage: {x: 0.5457246, y: 0.33245158, z: 0.23074007, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: 6400bd4488da2cc4aae1c6cf4857d9c5, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
-    m_normalIdx: -1
-    m_normalStrength: 0
-    m_normalTexture: {fileID: 0}
-    m_heightIdx: -1
+    m_normalIdx: 10
+    m_normalStrength: 1.31
+    m_normalTexture: {fileID: 2800000, guid: fd1c16d9c86a8df419f35d31a22d04d8, type: 3}
+    m_heightIdx: 17
     m_heightDepth: 10
     m_heightContrast: 10
     m_heightBlendClose: 10
     m_heightBlendFar: 10
     m_heightTesselationDepth: 0
-    m_heightMin: 0
+    m_heightMin: 0.2
     m_heightMax: 1
-    m_heightTexture: {fileID: 0}
+    m_heightTexture: {fileID: 2800000, guid: 0cc6b6ebbada4d84fb2bb6540c44b968, type: 3}
     m_aoIdx: -1
     m_aoPower: 1
     m_aoTexture: {fileID: 0}
     m_emissionIdx: -1
     m_emissionStrength: 1
     m_emissionTexture: {fileID: 0}
-  - m_isOpenInEditor: 0
+  - m_isOpenInEditor: 1
     m_textureIdx: 12
     m_name: A_Grass_Forest
-    m_detailPower: 1
+    m_detailPower: 0.462
     m_snowReductionPower: 0
     m_geologicalPower: 1
     m_triplanar: 0
     m_tint: {r: 1, g: 1, b: 1, a: 1}
     m_tintBrightness: 1
-    m_smoothness: 1
-    m_albedoIdx: 16
-    m_albedoTilingClose: 2
-    m_albedoTilingFar: 3
+    m_smoothness: 0
+    m_albedoIdx: 18
+    m_albedoTilingClose: 30
+    m_albedoTilingFar: 2.4
     m_albedoAverage: {x: 0.06662595, y: 0.10946172, z: 0.02121901, w: 1}
     m_albedoTexture: {fileID: 2800000, guid: ea9011ab8da70814cb2c50123ef278b0, type: 3}
     m_smoothnessTexture: {fileID: 0}
     m_roughnessTexture: {fileID: 0}
-    m_normalIdx: 10
-    m_normalStrength: 1
+    m_normalIdx: 11
+    m_normalStrength: 0.64
     m_normalTexture: {fileID: 2800000, guid: 5bc9044241392324fb60eb02fe79d092, type: 3}
     m_heightIdx: -1
     m_heightDepth: 8
@@ -576,20 +576,21 @@ MonoBehaviour:
   m_replacementTerrainNormals: []
   m_albedosTextureArray: {fileID: 18700000, guid: 845b5c8be7f1a244fb9fea4369292338,
     type: 2}
-  m_needsAlbedosArrayUpdate: 1
+  m_needsAlbedosArrayUpdate: 0
   m_normalsTextureArray: {fileID: 18700000, guid: 5f4a0fc9a2ed315469126b408cc471a9,
     type: 2}
   m_needsNormalsArrayUpdate: 0
   cachedTerrainLayers:
-  - {fileID: 8574412962073106934, guid: 62b6fa34f73322847b2f7df452c47329, type: 2}
-  - {fileID: 8574412962073106934, guid: 4fede0b130bcf3444bc702ffb05d5d99, type: 2}
-  - {fileID: 8574412962073106934, guid: 19a177910df5a494581c8c55a40fb8cb, type: 2}
-  - {fileID: 8574412962073106934, guid: ac0ff7364d238d14981e76f761166728, type: 2}
-  - {fileID: 8574412962073106934, guid: 75bb7bb7036d9f548bba9efcc65a9bb1, type: 2}
-  - {fileID: 8574412962073106934, guid: cba8fa006f428b84b8d59bf71f167661, type: 2}
-  - {fileID: 8574412962073106934, guid: 39541582d619f454190981138230a3eb, type: 2}
-  - {fileID: 8574412962073106934, guid: d8f88b7597622fd40bb8356b7701befa, type: 2}
-  - {fileID: 8574412962073106934, guid: f79830b8e4c42a545a9459dca94a920c, type: 2}
-  - {fileID: 8574412962073106934, guid: 1be6a6bfc602e504d933b2d15e32d001, type: 2}
-  - {fileID: 8574412962073106934, guid: 821e2a0e2dc20e9468494201292d079c, type: 2}
-  - {fileID: 8574412962073106934, guid: 15142d86e854efa4ea1a49b13bf9faa0, type: 2}
+  - {fileID: 8574412962073106934, guid: 017cafad93121d84ebb76cb20bd58977, type: 2}
+  - {fileID: 8574412962073106934, guid: 96680972842800845be4d7e2ec86caa7, type: 2}
+  - {fileID: 8574412962073106934, guid: 20823260de53e5647b7934fe466dfb1d, type: 2}
+  - {fileID: 8574412962073106934, guid: cf265869b41df1442be12e84705fd857, type: 2}
+  - {fileID: 8574412962073106934, guid: 2dfa77fccec6a584e906535aec6470ce, type: 2}
+  - {fileID: 8574412962073106934, guid: 2653bf901fc6d504593cc8cf498b1c86, type: 2}
+  - {fileID: 8574412962073106934, guid: 882042455da89ae4aa1929b6411fe8c8, type: 2}
+  - {fileID: 8574412962073106934, guid: d4ad98ddab3b47e4ebbbdd6e39343fa0, type: 2}
+  - {fileID: 8574412962073106934, guid: 634884202c6e5e048b1a00486d83e042, type: 2}
+  - {fileID: 8574412962073106934, guid: a1083434444524e4f9ea32f22de2dbf5, type: 2}
+  - {fileID: 8574412962073106934, guid: 1fb9726b263ef534cba244c13e9c6a01, type: 2}
+  - {fileID: 8574412962073106934, guid: b28ca6e73ac285c4286b6e52fac03a11, type: 2}
+  - {fileID: 8574412962073106934, guid: 9fc1adae379de364cb9933b1a5980219, type: 2}
