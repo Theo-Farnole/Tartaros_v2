@@ -81,6 +81,18 @@
 			MovementManager();
 		}
 
+		private void OnDrawGizmos()
+		{
+			if (_cameraBounds != null)
+			{
+				Vector3 center = new Vector3(_cameraBounds.CenterX, 1, _cameraBounds.CenterY);
+				Vector3 size = new Vector3(_cameraBounds.boundsX.Size, 0, _cameraBounds.boundsY.Size);
+
+				Gizmos.color = Color.red;
+				Gizmos.DrawWireCube(center, size);
+			}
+		}
+
 		private void MovementManager()
 		{
 			float deltaTime = DeltaTime;
