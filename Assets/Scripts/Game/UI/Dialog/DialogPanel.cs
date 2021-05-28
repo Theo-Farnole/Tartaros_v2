@@ -15,17 +15,21 @@
 	{
 		#region Fields
 
-		[Title("Settings")]
+		[Title("Animation Settings")]
 		[SerializeField] private float _textAnimationDurationPerCharacter = 0.01f;
+		[SerializeField] private float _backgroundFadeInDuration = 0.3f;
+		[SerializeField] private Ease _backgroundEase = Ease.InSine;
 
 		[Title("UI References")]
 		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _speakerName = null;
+		[SerializeField, SceneObjectsOnly] private Image _background = null;
 		[SerializeField, SceneObjectsOnly] private Image _speakerAvatar = null;
 		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _content = null;
 		[SerializeField, SceneObjectsOnly] private Button _nextButton = null;
 
 		private Coroutine _textAnimationCoroutine = null;
 		private Dialogue _dialogue = null;
+		private float _backgroundAlpha = 0.8f;
 
 		// SERVICES
 		private DialogueManager _dialogueManager = null;
@@ -38,6 +42,7 @@
 			base.Awake();
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
 			_uiManager = Services.Instance.Get<UIManager>();
+			_backgroundAlpha = _background.color.a;
 
 			if (_speakerAvatar is null) throw new MissingReferenceException(nameof(_speakerAvatar));
 			if (_speakerName is null) throw new MissingReferenceException(nameof(_speakerName));
@@ -118,6 +123,11 @@
 			base.OnShow();
 
 			_uiManager.ShowBlackBorders();
+
+			_background.SetAlpha(0);
+			_background.DOFade(_backgroundAlpha, _backgroundFadeInDuration)
+				.SetUpdate(true)
+				.SetEase(_backgroundEase);
 		}
 
 		protected override void OnHide()
@@ -129,7 +139,7 @@
 				_uiManager = Services.Instance.Get<UIManager>();
 			}
 
-			_uiManager.HideBlackBorders();
+			_uiManager.HideBlackBorders();			
 		}
 		#endregion Methods
 	}

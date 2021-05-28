@@ -15,9 +15,20 @@
 		#endregion Fields
 
 		#region Properties
-		public bool IsShow => _canvas.enabled;
+		public bool IsShow => Canvas.enabled;
 		public bool IsHide => !IsShow;
-		public Canvas Canvas => _canvas;
+		public Canvas Canvas
+		{
+			get
+			{
+				if (_canvas == null)
+				{
+					_canvas = GetComponent<Canvas>();
+				}
+
+				return _canvas;
+			}
+		}
 		#endregion Properties
 
 		#region Methods
