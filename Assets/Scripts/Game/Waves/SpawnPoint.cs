@@ -17,6 +17,8 @@
 		SpawnPointIdentifier ISpawnPoint.Identifier => _identifier;
 
 		Vector3 ISpawnPoint.SpawnPoint => Random.insideUnitCircle.ToXZ() * _randomRadius + transform.position;
+
+		Vector3[] ISpawnPoint.Waypoints => throw new System.NotImplementedException();
 		#endregion Properties
 	}
 
