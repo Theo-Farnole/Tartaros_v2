@@ -52,6 +52,21 @@
 			throw new System.NotSupportedException("No available building slot found on sector {0}.".Format(sector));
 		}
 
+		public static bool ContainsAvailablCaptureBuilding(this ISector sector)
+		{
+			IEnumerable<CaptureBuilding> captureBuildings = sector.EnumerateObjectsOfType<CaptureBuilding>();
+
+			foreach (CaptureBuilding capture in captureBuildings)
+			{
+				if (capture.IsAvailable == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public static bool ContainsAvailableBuildingSlot(this ISector sector)
 		{
 			IEnumerable<BuildingSlot> slots = sector.EnumerateObjectsOfType<BuildingSlot>();
