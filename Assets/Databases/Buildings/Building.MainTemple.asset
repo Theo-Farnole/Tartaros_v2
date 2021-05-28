@@ -17,6 +17,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 5657609668978460668, guid: 792750a5111312a4da38e3eae8838e9d, type: 3}
+    - {fileID: 5657609668978460668, guid: b63fa58d82c328e40b19570e38e87185, type: 3}
+    - {fileID: 5657609668978460668, guid: af2fa67ba1b380b468b455599eb1c95a, type: 3}
     - {fileID: 11400000, guid: 69c05a069b696be49b0616a67f00bff7, type: 2}
     - {fileID: 11400000, guid: ef88a5278bc6e0d469c259828f48c5ad, type: 2}
     SerializedBytesString: 
@@ -63,30 +65,12 @@ MonoBehaviour:
     - Name: _portrait
       Entry: 6
       Data: 
-    - Name: _modelPrefab
-      Entry: 10
-      Data: 0
-    - Name: _gameplayPrefab
-      Entry: 6
-      Data: 
-    - Name: _wallCornerModel
-      Entry: 6
-      Data: 
-    - Name: _wallCornerGameplay
-      Entry: 6
-      Data: 
-    - Name: _constructionKitModel
-      Entry: 6
-      Data: 
-    - Name: _hoverPopupData
-      Entry: 6
-      Data: 
-    - Name: _timeToConstruct
-      Entry: 3
-      Data: 0
     - Name: _IsChained
       Entry: 5
       Data: false
+    - Name: _timeToConstruct
+      Entry: 3
+      Data: 0
     - Name: _constructionPrice
       Entry: 7
       Data: 4|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -146,6 +130,24 @@ MonoBehaviour:
     - Name: _rules
       Entry: 6
       Data: 
+    - Name: _modelPrefab
+      Entry: 10
+      Data: 0
+    - Name: _gameplayPrefab
+      Entry: 10
+      Data: 1
+    - Name: _wallCornerModel
+      Entry: 6
+      Data: 
+    - Name: _wallCornerGameplay
+      Entry: 6
+      Data: 
+    - Name: _constructionKitModel
+      Entry: 10
+      Data: 2
+    - Name: _hoverPopupData
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -171,7 +173,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 10
-      Data: 1
+      Data: 3
     - Name: $v
       Entry: 7
       Data: 10|Tartaros.Entities.SpawnSettings, Tartaros
@@ -257,7 +259,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 10
-      Data: 2
+      Data: 4
     - Name: $v
       Entry: 7
       Data: 14|Tartaros.Entities.SpawnSettings, Tartaros

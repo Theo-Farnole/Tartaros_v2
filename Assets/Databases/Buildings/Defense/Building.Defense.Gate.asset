@@ -30,7 +30,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Entities.IEntityBehaviourData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 5
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Entities.EntityHealthData, Tartaros
@@ -55,30 +55,12 @@ MonoBehaviour:
     - Name: _portrait
       Entry: 10
       Data: 0
-    - Name: _modelPrefab
-      Entry: 10
-      Data: 1
-    - Name: _gameplayPrefab
-      Entry: 10
-      Data: 2
-    - Name: _wallCornerModel
-      Entry: 6
-      Data: 
-    - Name: _wallCornerGameplay
-      Entry: 6
-      Data: 
-    - Name: _constructionKitModel
-      Entry: 10
-      Data: 3
-    - Name: _hoverPopupData
-      Entry: 6
-      Data: 
-    - Name: _timeToConstruct
-      Entry: 3
-      Data: 2
     - Name: _IsChained
       Entry: 5
       Data: false
+    - Name: _timeToConstruct
+      Entry: 3
+      Data: 2
     - Name: _constructionPrice
       Entry: 7
       Data: 3|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -162,6 +144,24 @@ MonoBehaviour:
     - Name: _rules
       Entry: 6
       Data: 
+    - Name: _modelPrefab
+      Entry: 10
+      Data: 1
+    - Name: _gameplayPrefab
+      Entry: 10
+      Data: 2
+    - Name: _wallCornerModel
+      Entry: 6
+      Data: 
+    - Name: _wallCornerGameplay
+      Entry: 6
+      Data: 
+    - Name: _constructionKitModel
+      Entry: 10
+      Data: 3
+    - Name: _hoverPopupData
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -170,22 +170,13 @@ MonoBehaviour:
       Data: 6|Tartaros.Entities.EntityGloryIncomeData, Tartaros
     - Name: _gloryIncome
       Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 7|Tartaros.Entities.EntityGloryIncomeData, Tartaros
-    - Name: _gloryIncome
-      Entry: 3
       Data: 10
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|Tartaros.Entities.Informations.EntityInformationsData, Tartaros
+      Data: 7|Tartaros.Entities.Informations.EntityInformationsData, Tartaros
     - Name: _name
       Entry: 1
       Data: NONE
@@ -197,17 +188,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Tartaros.Entities.EntityHealWithCostData, Tartaros
+      Data: 8|Tartaros.Entities.EntityHealWithCostData, Tartaros
     - Name: _fulllifeCost
       Entry: 7
-      Data: 10|Tartaros.Economy.SectorResourcesWallet, Tartaros
+      Data: 9|Tartaros.Economy.SectorResourcesWallet, Tartaros
     - Name: _ressourceAmount
       Entry: 7
-      Data: 11|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
+      Data: 10|System.Collections.Generic.Dictionary`2[[Tartaros.Economy.SectorRessourceType,
         Tartaros],[System.Int32, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 12|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
+      Data: 11|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Economy.SectorRessourceType,
         Tartaros]], mscorlib
     - Name: 
       Entry: 12
