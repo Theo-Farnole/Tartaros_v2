@@ -27,7 +27,8 @@
 		private void OnDrawGizmos()
 		{
 			Gizmos.DrawIcon(transform.position, "skull-crossed-bones.png");
-			Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, _randomRadius, Color.white);
+			Editor.HandlesHelper.DrawWireCircle(transform.position, Vector3.up, _randomRadius, Color.white);			
+			UnityEditor.Handles.Label(transform.position, _identifier.ToString());
 		}
 		#endregion Methods
 	}
