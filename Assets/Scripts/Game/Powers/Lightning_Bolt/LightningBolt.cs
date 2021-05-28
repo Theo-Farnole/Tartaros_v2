@@ -54,7 +54,6 @@
 			yield return new WaitForSeconds(time);
 
 			ApplyDamage();
-			Debug.Log("damage");
 
 			yield return DestroyVFXAfterDelay();
 		}

@@ -18,6 +18,7 @@
 		private GameObject _castVFX = null;
 		private ControlledAoEMovement _movement = null;
 		private EntitiesDetectorManager _kdTree = null;
+		private Animator _animator = null;
 		#endregion
 
 		#region Properties
@@ -79,6 +80,7 @@
 		{
 			_castVFX = GameObject.Instantiate(_data.CastVFXPrefab, transform.position, Quaternion.identity, gameObject.transform);
 			_castVFX.transform.localScale = Vector3.one * _data.SpellRadius * 2;
+			_animator = _castVFX.GetComponent<Animator>();
 		}
 
 		private void AppliedDamage()
@@ -98,6 +100,11 @@
 		{
 			InstanciateCastVFX();
 			yield return new WaitForSeconds(_data.TimeBeforeAppliedDamage);
+
+			int time = _animator.GetCurrentAnimatorClipInfo(0).Length;
+
+			yield return new WaitForSeconds(time);
+			
 			StartCoroutine(ApplyDamageFrequently());
 		}
 
@@ -108,6 +115,12 @@
 				AppliedDamage();
 				yield return new WaitForSeconds(_data.AttackFrequency);
 			}
+
+			_animator.SetBool("isFinish", true);
+
+			int time = _animator.GetCurrentAnimatorClipInfo(0).Length;
+
+			yield return new WaitForSeconds(time);
 
 			Destroy(gameObject);
 		}
