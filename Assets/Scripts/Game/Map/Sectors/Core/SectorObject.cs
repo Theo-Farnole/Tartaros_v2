@@ -13,6 +13,10 @@
 		private Vector3 _lastPosition = Vector3.zero;
 		#endregion Fields
 
+		#region Properties
+		[ShowInRuntime] private string SectorName => _currentSector != null ? _currentSector.ToString() : "NO SECTOR";
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{

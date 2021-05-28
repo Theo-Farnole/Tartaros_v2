@@ -46,7 +46,7 @@
 
 			Circle circle = new Circle(new Vector2(1, 1.5f), 0.1f);
 
-			Assert.IsTrue(CollisionOverlapCalculator.DoOverlap(polygon, circle));
+			Assert.IsFalse(CollisionOverlapCalculator.DoOverlap(polygon, circle));
 		}
 
 		private static ConvexPolygon CreateSquarePolygon()
