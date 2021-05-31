@@ -11,6 +11,9 @@
 
 		[SerializeField]
 		private SpawnPointIdentifier _identifier;
+
+		[SerializeField]
+		private Vector3[] _waypoints = null;
 		#endregion Fields
 
 		#region Properties
@@ -18,7 +21,9 @@
 
 		Vector3 ISpawnPoint.SpawnPoint => Random.insideUnitCircle.ToXZ() * _randomRadius + transform.position;
 
-		Vector3[] ISpawnPoint.Waypoints => throw new System.NotImplementedException();
+		Vector3[] ISpawnPoint.Waypoints => _waypoints;
+
+		
 		#endregion Properties
 	}
 
