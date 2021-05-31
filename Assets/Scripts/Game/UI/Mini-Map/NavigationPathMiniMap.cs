@@ -92,8 +92,6 @@
 			return list;
 		}
 
-
-
 		private Vector3[] GetCornersNavigationPath(NavMeshPath path)
 		{
 			List<Vector3> vertex = new List<Vector3>();
@@ -112,6 +110,30 @@
 
 			foreach (ISpawnPoint point in _spawnPoints)
 			{
+				for (int i = 0; i < point.Waypoints.Length; i++)
+				{
+					var pathWaypoint = new NavMeshPath();
+
+					NavMeshHit hitWaypoint;
+					Vector3 positionWaypoint = Vector3.zero;
+					if (NavMesh.SamplePosition(point.Waypoints[i], out hitWaypoint, 50, NavMesh.AllAreas))
+					{
+						positionWaypoint = hitWaypoint.position;
+					}
+
+					if(i - 1 < 0)
+					{
+						Debug.Log(point.Waypoints[i]);
+						NavMesh.CalculatePath(point.SpawnPoint, positionWaypoint, NavMesh.AllAreas, pathWaypoint);
+					}
+					else
+					{
+						NavMesh.CalculatePath(point.Waypoints[i - 1], positionWaypoint, NavMesh.AllAreas, pathWaypoint);
+					}
+
+					navPath.Add(pathWaypoint);
+				}
+
 				var path = new NavMeshPath();
 
 				NavMeshHit hit;
@@ -121,7 +143,7 @@
 					position = hit.position;
 				}
 
-				NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
+				NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
 
 				navPath.Add(path);
 			}

@@ -91,7 +91,10 @@ public class CursorManager : MonoBehaviour
 
 	private void Update()
 	{
-		SetCursorModel();
+		if(MouseHelper.IsCursorOverWindow() == true)
+		{
+			SetCursorModel();
+		}
 	}
 
 	private void SetCursorModel()
