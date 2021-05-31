@@ -1,6 +1,5 @@
 ﻿namespace Tartaros
 {
-	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Construction;
@@ -8,7 +7,6 @@
 	using Tartaros.Entities;
 	using Tartaros.Map;
 	using Tartaros.UI.Sectors.Orders;
-	using UnityEditor.PackageManager;
 	using UnityEngine;
 
 	public static class ISectorExtensions

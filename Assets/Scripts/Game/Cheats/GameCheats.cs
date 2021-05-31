@@ -4,8 +4,6 @@
 	using Tartaros.Dialogue;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
-	using Tartaros.Gamemode;
-	using Tartaros.Gamemode.State;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;
@@ -16,6 +14,8 @@
 		private static bool _isInDebugPause = false;
 
 		public static bool IsInDebugPause => _isInDebugPause;
+
+		public static bool HasFPSCounter => FPSCounter.HasInstance;
 
 		[Cheat]
 		public static void InflictDamageToSelected(int damage = 3)
@@ -28,6 +28,15 @@
 				{
 					attackable.TakeDamage(damage, null);
 				}
+			}
+		}
+
+		[Cheat("HasFPSCounter")]
+		public static void ToggleFPS()
+		{
+			if (FPSCounter.HasInstance == true)
+			{
+				FPSCounter.Instance.DisplayFPS = !FPSCounter.Instance.DisplayFPS;
 			}
 		}
 
@@ -57,7 +66,7 @@
 		{
 			var dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
 
-			if(dialogueManager != null)
+			if (dialogueManager != null)
 			{
 				dialogueManager.EnterDialogueState(dialogueID);
 			}

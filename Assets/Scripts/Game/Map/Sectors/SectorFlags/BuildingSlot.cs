@@ -9,7 +9,7 @@
 	using UnityEngine;
 
 	[RequireComponent(typeof(SectorObject))]
-	public class BuildingSlot : SerializedMonoBehaviour
+	public partial class BuildingSlot : SerializedMonoBehaviour
 	{
 		#region Fields
 		[SerializeField] private ISectorResourcesWallet _constructionPrice = null;
@@ -79,6 +79,40 @@
 
 		}
 
+		private MeshFilter GetPreviewMeshFilterInConstructableEntity()
+		{
+			if (_constructableEntity == null) return null;
+
+			if (_constructableEntity.TryGetBehaviour(out IConstructable constructable) == true)
+			{
+				if (constructable.PreviewPrefab == null) return null;
+
+				return constructable.PreviewPrefab.GetComponentInChildren<MeshFilter>();
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		IEnumerator SetInstanciateBuildingEntity(float time)
+		{
+			yield return new WaitForSeconds(time + 1);
+
+			Debug.Log(_constructable);
+			_instanciateBuilding = _sector.GetConstructableInSector(_constructable);
+
+			if(_instanciateBuilding != null)
+			{
+				_instanciateBuilding.EntityKilled += _instanciateBuilding_EntityKilled;
+			}
+		}
+		#endregion Methods		
+	}
+
+#if UNITY_EDITOR
+	public partial class BuildingSlot
+	{
 		private void OnDrawGizmos()
 		{
 			Gizmos.DrawIcon(transform.position, "gear-hammer.png");
@@ -105,37 +139,6 @@
 				UnityEditor.Handles.Label(transform.position + Vector3.right, "preview");
 			}
 		}
-
-		private MeshFilter GetPreviewMeshFilterInConstructableEntity()
-		{
-			if (_constructableEntity == null) return null;
-
-			if (_constructableEntity.TryGetBehaviour(out IConstructable constructable) == true)
-			{
-				if (constructable.PreviewPrefab == null) return null;
-
-				return constructable.PreviewPrefab.GetComponentInChildren<MeshFilter>();
-			}
-			else
-			{
-				return null;
-			}
-		}
-		#endregion Methods
-
-		IEnumerator SetInstanciateBuildingEntity(float time)
-		{
-			yield return new WaitForSeconds(time + 1);
-
-			Debug.Log(_constructable);
-			_instanciateBuilding = _sector.GetConstructableInSector(_constructable);
-
-			if(_instanciateBuilding != null)
-			{
-				_instanciateBuilding.EntityKilled += _instanciateBuilding_EntityKilled;
-			}
-		}
-
-		
 	}
+#endif
 }

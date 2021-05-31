@@ -7,18 +7,16 @@
 	/// Display FPS on GUI.
 	/// Code from https://wiki.unity3d.com/index.php/FramesPerSecond
 	/// </summary>
-	public class FPSCounter : MonoBehaviour
+	public class FPSCounter : Singleton<FPSCounter>
 	{
-		#region Fields
-		[SerializeField]
-		private bool _displayFPS = true;
-
-		[SerializeField]
-		[SuffixLabel("% of the screen's height")]
-		private float _fontsize = 5;
+		#region Fields		
+		[SerializeField] private bool _displayFPS = true;
+		[SerializeField, SuffixLabel("% of the screen's height")] private float _fontsize = 5;
 
 		float deltaTime = 0.0f;
 		#endregion Fields
+
+		public bool DisplayFPS { get => _displayFPS; set => _displayFPS = value; }
 
 		#region Methods
 		// must be called from referenced class
