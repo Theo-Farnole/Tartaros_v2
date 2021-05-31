@@ -13,21 +13,32 @@
 		[SerializeField] private float _easeDurationInSeconds = 1f;
 
 		private float _height = -1;
-		private RectTransform _rectTransform = null;
-
 		private TweenerCore<Vector2, Vector2, VectorOptions> _tweener = null;
+
+		private RectTransform _rectTransform = null;
 		#endregion Fields
 
 		#region Properties
-		public Vector2 HideSize => new Vector2(_rectTransform.sizeDelta.x, 0);
-		public Vector2 ShowSize => new Vector2(_rectTransform.sizeDelta.x, _height);
+		public Vector2 HideSize => new Vector2(RectTransform.sizeDelta.x, 0);
+		public Vector2 ShowSize => new Vector2(RectTransform.sizeDelta.x, _height);
+
+		public RectTransform RectTransform
+		{
+			get
+			{
+				if (_rectTransform == null)
+				{
+					_rectTransform = GetComponent<RectTransform>();
+				}
+
+				return _rectTransform;
+			}
+		}
 		#endregion Properties
 
 		#region Methods
 		private void Awake()
 		{
-			_rectTransform = GetComponent<RectTransform>();
-
 			_height = _rectTransform.sizeDelta.y;
 		}
 
