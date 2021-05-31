@@ -39,7 +39,7 @@
 		#region Methods
 		private void Awake()
 		{
-			_height = _rectTransform.sizeDelta.y;
+			_height = RectTransform.sizeDelta.y;
 		}
 
 		public void Show(bool show)
@@ -51,12 +51,12 @@
 			}
 
 			// set default size
-			_rectTransform.sizeDelta = show == true ? HideSize : ShowSize;
+			RectTransform.sizeDelta = show == true ? HideSize : ShowSize;
 
 
 			Vector2 targetSize = show == true ? ShowSize : HideSize;
 
-			_tweener = _rectTransform
+			_tweener = RectTransform
 				.DOSizeDelta(targetSize, _easeDurationInSeconds)
 				.SetEase(_ease)
 				.SetUpdate(true);
