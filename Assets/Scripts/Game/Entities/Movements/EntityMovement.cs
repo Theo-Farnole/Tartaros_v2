@@ -20,7 +20,7 @@
 
 		private NavMeshAgent _navMeshAgent = null;
 		private EntityFSM _entityFSM = null;
-		
+
 		private NavMeshCollisionMoving _navMeshCollisionMoving = null;
 		#endregion
 
@@ -70,10 +70,16 @@
 
 		private void Update()
 		{
-			if (_navMeshAgent.isStopped == false && _navMeshAgent.HasReachedDestination() == true)
+			if (_navMeshAgent.isStopped == false)
 			{
-				StopMovement();
-				DestinationReached?.Invoke(this, new DestinationReachedArgs());
+
+				//if (_navMeshAgent.)
+
+				if (_navMeshAgent.HasReachedDestination() == true)
+				{
+					StopMovement();
+					DestinationReached?.Invoke(this, new DestinationReachedArgs());
+				}
 			}
 		}
 

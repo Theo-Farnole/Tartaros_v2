@@ -5463,6 +5463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomRadius: 8.25
   _identifier: 5
+  _waypoints: []
 --- !u!4 &120241778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 59076d9f0a8fe8e43a0e2a55f865cd54,
@@ -11175,6 +11176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomRadius: 8.25
   _identifier: 3
+  _waypoints: []
 --- !u!1001 &224087944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19961,6 +19963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomRadius: 8.25
   _identifier: 6
+  _waypoints: []
 --- !u!4 &365869909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7977366003078769245, guid: 64a1392a6ad32414ba807521fe106ad6,
@@ -22045,6 +22048,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791618484923487475, guid: 3b6b3b394f1e31240baee6116d67c61f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4791618484923487478, guid: 3b6b3b394f1e31240baee6116d67c61f,
         type: 3}
@@ -26733,6 +26741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomRadius: 8.25
   _identifier: 7
+  _waypoints: []
 --- !u!1001 &456636373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28579,6 +28588,384 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 480575112}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &482396588
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CTS/CTS Terrain Shader Advanced:CTS_Profile_Terrain
+  m_Shader: {fileID: 4800000, guid: 5928845464a53fc4f97518f3cae3ecad, type: 3}
+  m_ShaderKeywords: _USE_AO_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Global_Color_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Global_Normal_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Array_Albedo:
+        m_Texture: {fileID: 18700000, guid: 845b5c8be7f1a244fb9fea4369292338, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Array_Normal:
+        m_Texture: {fileID: 18700000, guid: 5f4a0fc9a2ed315469126b408cc471a9, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Geological_Map:
+        m_Texture: {fileID: 2800000, guid: a8b026679658e0a458404f9f86468a66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Glitter:
+        m_Texture: {fileID: 2800000, guid: 0dd347c4b5067a2428dea9a70c418d05, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_1:
+        m_Texture: {fileID: 8482846698438895039, guid: 26eeb24e4d4e3cb4fa3ed761e2c751d3,
+          type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_2:
+        m_Texture: {fileID: 4178261478719300593, guid: 26eeb24e4d4e3cb4fa3ed761e2c751d3,
+          type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_3:
+        m_Texture: {fileID: -3335307328894622791, guid: 26eeb24e4d4e3cb4fa3ed761e2c751d3,
+          type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Ambient_Occlusion_Power: 1
+    - _Geological_Map_Close_Power: 0.05
+    - _Geological_Map_Far_Power: 0.05
+    - _Geological_Map_Offset_Close: 0.028
+    - _Geological_Map_Offset_Far: 0
+    - _Geological_Tiling_Close: 142
+    - _Geological_Tiling_Far: 100
+    - _Gliter_Color_Power: 0.2
+    - _Glitter_Noise_Threshold: 0.991
+    - _Glitter_Refreshing_Speed: 4
+    - _Glitter_Smoothness: 0.9
+    - _Glitter_Specular: 0.2
+    - _Glitter_Tiling: 2.5
+    - _Global_Color_Map_Close_Power: 0
+    - _Global_Color_Map_Far_Power: 0
+    - _Global_Color_Map_Scale: 1
+    - _Global_Color_Opacity_Power: 0
+    - _Global_Normalmap_Power: 0
+    - _Perlin_Normal_Power: 1
+    - _Perlin_Normal_Power_Close: 1
+    - _Perlin_Normal_Tiling_Close: 60
+    - _Perlin_Normal_Tiling_Far: 300
+    - _Snow_Ambient_Occlusion_Power: 1
+    - _Snow_Amount: 0
+    - _Snow_Blend_Normal: 0.9
+    - _Snow_Height_Contrast: 1
+    - _Snow_Heightblend_Close: 1
+    - _Snow_Heightblend_Far: 1
+    - _Snow_Heightmap_Depth: 8
+    - _Snow_Maximum_Angle: 22.9
+    - _Snow_Maximum_Angle_Hardness: 1
+    - _Snow_Min_Height: 145
+    - _Snow_Min_Height_Blending: 27
+    - _Snow_Noise_Power: 0.8
+    - _Snow_Noise_Tiling: 0.02
+    - _Snow_Normal_Scale: 1
+    - _Snow_Perlin_Power: 1
+    - _Snow_Specular: 1
+    - _Snow_Tiling: 6.9
+    - _Snow_Tiling_Far_Multiplier: 3
+    - _Terrain_Smoothness: 1
+    - _Terrain_Specular: 1
+    - _Texture_10_AO_Power: 1
+    - _Texture_10_Albedo_Index: 13
+    - _Texture_10_Far_Multiplier: 3
+    - _Texture_10_Geological_Power: 1
+    - _Texture_10_H_AO_Index: 14
+    - _Texture_10_Height_Contrast: 0.97
+    - _Texture_10_Heightblend_Close: 10
+    - _Texture_10_Heightblend_Far: 10
+    - _Texture_10_Heightmap_Depth: 10
+    - _Texture_10_Normal_Index: 8
+    - _Texture_10_Normal_Power: 1.6
+    - _Texture_10_Perlin_Power: 0.401
+    - _Texture_10_Snow_Reduction: 0
+    - _Texture_10_Tiling: 8
+    - _Texture_10_Triplanar: 0
+    - _Texture_11_AO_Power: 1
+    - _Texture_11_Albedo_Index: 15
+    - _Texture_11_Far_Multiplier: 3
+    - _Texture_11_Geological_Power: 1
+    - _Texture_11_H_AO_Index: -1
+    - _Texture_11_Height_Contrast: 1
+    - _Texture_11_Heightblend_Close: 1
+    - _Texture_11_Heightblend_Far: 1
+    - _Texture_11_Heightmap_Depth: 8
+    - _Texture_11_Normal_Index: 9
+    - _Texture_11_Normal_Power: 1.2
+    - _Texture_11_Perlin_Power: 0.25
+    - _Texture_11_Snow_Reduction: 0
+    - _Texture_11_Tiling: 30
+    - _Texture_11_Triplanar: 0
+    - _Texture_12_AO_Power: 1
+    - _Texture_12_Albedo_Index: 16
+    - _Texture_12_Far_Multiplier: 0
+    - _Texture_12_Geological_Power: 1
+    - _Texture_12_H_AO_Index: 17
+    - _Texture_12_Height_Contrast: 10
+    - _Texture_12_Heightblend_Close: 10
+    - _Texture_12_Heightblend_Far: 10
+    - _Texture_12_Heightmap_Depth: 10
+    - _Texture_12_Normal_Index: 10
+    - _Texture_12_Normal_Power: 1.31
+    - _Texture_12_Perlin_Power: 0.175
+    - _Texture_12_Snow_Reduction: 0
+    - _Texture_12_Tiling: 6
+    - _Texture_12_Triplanar: 0
+    - _Texture_13_AO_Power: 1
+    - _Texture_13_Albedo_Index: 18
+    - _Texture_13_Far_Multiplier: 2.4
+    - _Texture_13_Geological_Power: 1
+    - _Texture_13_H_AO_Index: -1
+    - _Texture_13_Height_Contrast: 1
+    - _Texture_13_Heightblend_Close: 1
+    - _Texture_13_Heightblend_Far: 1
+    - _Texture_13_Heightmap_Depth: 8
+    - _Texture_13_Normal_Index: 11
+    - _Texture_13_Normal_Power: 0.64
+    - _Texture_13_Perlin_Power: 0.462
+    - _Texture_13_Snow_Reduction: 0
+    - _Texture_13_Tiling: 30
+    - _Texture_13_Triplanar: 0
+    - _Texture_14_AO_Power: 1
+    - _Texture_14_Albedo_Index: -1
+    - _Texture_14_Far_Multiplier: 3
+    - _Texture_14_Geological_Power: 1
+    - _Texture_14_H_AO_Index: -1
+    - _Texture_14_Height_Contrast: 1
+    - _Texture_14_Heightblend_Close: 5
+    - _Texture_14_Heightblend_Far: 5
+    - _Texture_14_Heightmap_Depth: 1
+    - _Texture_14_Normal_Index: -1
+    - _Texture_14_Normal_Power: 1
+    - _Texture_14_Perlin_Power: 0
+    - _Texture_14_Snow_Reduction: 0
+    - _Texture_14_Tiling: 15
+    - _Texture_14_Triplanar: 0
+    - _Texture_15_AO_Power: 1
+    - _Texture_15_Albedo_Index: -1
+    - _Texture_15_Far_Multiplier: 3
+    - _Texture_15_Geological_Power: 1
+    - _Texture_15_H_AO_Index: -1
+    - _Texture_15_Height_Contrast: 1
+    - _Texture_15_Heightblend_Close: 5
+    - _Texture_15_Heightblend_Far: 5
+    - _Texture_15_Heightmap_Depth: 1
+    - _Texture_15_Normal_Index: -1
+    - _Texture_15_Normal_Power: 1
+    - _Texture_15_Perlin_Power: 0
+    - _Texture_15_Snow_Reduction: 0
+    - _Texture_15_Tiling: 15
+    - _Texture_15_Triplanar: 0
+    - _Texture_16_AO_Power: 1
+    - _Texture_16_Albedo_Index: -1
+    - _Texture_16_Far_Multiplier: 3
+    - _Texture_16_Geological_Power: 1
+    - _Texture_16_H_AO_Index: -1
+    - _Texture_16_Height_Contrast: 1
+    - _Texture_16_Heightblend_Close: 5
+    - _Texture_16_Heightblend_Far: 5
+    - _Texture_16_Heightmap_Depth: 1
+    - _Texture_16_Normal_Index: -1
+    - _Texture_16_Normal_Power: 1
+    - _Texture_16_Perlin_Power: 0
+    - _Texture_16_Snow_Reduction: 0
+    - _Texture_16_Tiling: 15
+    - _Texture_16_Triplanar: 0
+    - _Texture_1_AO_Power: 1
+    - _Texture_1_Albedo_Index: 0
+    - _Texture_1_Far_Multiplier: 3
+    - _Texture_1_Geological_Power: 1
+    - _Texture_1_H_AO_Index: 1
+    - _Texture_1_Height_Contrast: 0.3
+    - _Texture_1_Heightblend_Close: 1
+    - _Texture_1_Heightblend_Far: 1
+    - _Texture_1_Heightmap_Depth: 0
+    - _Texture_1_Normal_Index: 0
+    - _Texture_1_Normal_Power: 1.3
+    - _Texture_1_Perlin_Power: 0.2
+    - _Texture_1_Snow_Reduction: 0
+    - _Texture_1_Tiling: 17
+    - _Texture_1_Triplanar: 0
+    - _Texture_2_AO_Power: 1
+    - _Texture_2_Albedo_Index: 2
+    - _Texture_2_Far_Multiplier: 3
+    - _Texture_2_Geological_Power: 1
+    - _Texture_2_H_AO_Index: 3
+    - _Texture_2_Height_Contrast: 2.16
+    - _Texture_2_Heightblend_Close: 4.6
+    - _Texture_2_Heightblend_Far: 1
+    - _Texture_2_Heightmap_Depth: 1.91
+    - _Texture_2_Normal_Index: 1
+    - _Texture_2_Normal_Power: 1.2
+    - _Texture_2_Perlin_Power: 0.25
+    - _Texture_2_Snow_Reduction: 0
+    - _Texture_2_Tiling: 30
+    - _Texture_2_Triplanar: 0
+    - _Texture_3_AO_Power: 1
+    - _Texture_3_Albedo_Index: -1
+    - _Texture_3_Far_Multiplier: 3
+    - _Texture_3_Geological_Power: 1
+    - _Texture_3_H_AO_Index: 5
+    - _Texture_3_Height_Contrast: 0.97
+    - _Texture_3_Heightblend_Close: 10
+    - _Texture_3_Heightblend_Far: 10
+    - _Texture_3_Heightmap_Depth: 10
+    - _Texture_3_Normal_Index: -1
+    - _Texture_3_Normal_Power: 1.45
+    - _Texture_3_Perlin_Power: 0.45
+    - _Texture_3_Snow_Reduction: 1
+    - _Texture_3_Tiling: 8
+    - _Texture_3_Triplanar: 0
+    - _Texture_4_AO_Power: 1
+    - _Texture_4_Albedo_Index: 4
+    - _Texture_4_Far_Multiplier: 3
+    - _Texture_4_Geological_Power: 1
+    - _Texture_4_H_AO_Index: 5
+    - _Texture_4_Height_Contrast: 1.73
+    - _Texture_4_Heightblend_Close: 7.26
+    - _Texture_4_Heightblend_Far: 1
+    - _Texture_4_Heightmap_Depth: 3.22
+    - _Texture_4_Normal_Index: 2
+    - _Texture_4_Normal_Power: 1.2
+    - _Texture_4_Perlin_Power: 0.4
+    - _Texture_4_Snow_Reduction: 1
+    - _Texture_4_Tiling: 8
+    - _Texture_4_Triplanar: 0
+    - _Texture_5_AO_Power: 1
+    - _Texture_5_Albedo_Index: 6
+    - _Texture_5_Far_Multiplier: 3
+    - _Texture_5_Geological_Power: 1
+    - _Texture_5_H_AO_Index: -1
+    - _Texture_5_Height_Contrast: 0.3
+    - _Texture_5_Heightblend_Close: 1
+    - _Texture_5_Heightblend_Far: 1
+    - _Texture_5_Heightmap_Depth: 8
+    - _Texture_5_Normal_Index: 3
+    - _Texture_5_Normal_Power: 1.2
+    - _Texture_5_Perlin_Power: 0.25
+    - _Texture_5_Snow_Reduction: 0
+    - _Texture_5_Tiling: 30
+    - _Texture_5_Triplanar: 0
+    - _Texture_6_AO_Power: 1
+    - _Texture_6_Albedo_Index: 7
+    - _Texture_6_Far_Multiplier: 3
+    - _Texture_6_Geological_Power: 1
+    - _Texture_6_H_AO_Index: -1
+    - _Texture_6_Height_Contrast: 1
+    - _Texture_6_Heightblend_Close: 1
+    - _Texture_6_Heightblend_Far: 1
+    - _Texture_6_Heightmap_Depth: 8
+    - _Texture_6_Normal_Index: 4
+    - _Texture_6_Normal_Power: 1.2
+    - _Texture_6_Perlin_Power: 0.25
+    - _Texture_6_Snow_Reduction: 0
+    - _Texture_6_Tiling: 30
+    - _Texture_6_Triplanar: 0
+    - _Texture_7_AO_Power: 1
+    - _Texture_7_Albedo_Index: 8
+    - _Texture_7_Far_Multiplier: 3
+    - _Texture_7_Geological_Power: 1
+    - _Texture_7_H_AO_Index: -1
+    - _Texture_7_Height_Contrast: 1
+    - _Texture_7_Heightblend_Close: 1
+    - _Texture_7_Heightblend_Far: 1
+    - _Texture_7_Heightmap_Depth: 8
+    - _Texture_7_Normal_Index: 5
+    - _Texture_7_Normal_Power: 1.2
+    - _Texture_7_Perlin_Power: 0.25
+    - _Texture_7_Snow_Reduction: 0
+    - _Texture_7_Tiling: 30
+    - _Texture_7_Triplanar: 0
+    - _Texture_8_AO_Power: 1
+    - _Texture_8_Albedo_Index: 9
+    - _Texture_8_Far_Multiplier: 3
+    - _Texture_8_Geological_Power: 1
+    - _Texture_8_H_AO_Index: 10
+    - _Texture_8_Height_Contrast: 1.73
+    - _Texture_8_Heightblend_Close: 7.26
+    - _Texture_8_Heightblend_Far: 1
+    - _Texture_8_Heightmap_Depth: 3.22
+    - _Texture_8_Normal_Index: 6
+    - _Texture_8_Normal_Power: 1.2
+    - _Texture_8_Perlin_Power: 0.4
+    - _Texture_8_Snow_Reduction: 0
+    - _Texture_8_Tiling: 8
+    - _Texture_8_Triplanar: 0
+    - _Texture_9_AO_Power: 1
+    - _Texture_9_Albedo_Index: 11
+    - _Texture_9_Far_Multiplier: 3
+    - _Texture_9_Geological_Power: 1
+    - _Texture_9_H_AO_Index: 12
+    - _Texture_9_Height_Contrast: 1.73
+    - _Texture_9_Heightblend_Close: 7.26
+    - _Texture_9_Heightblend_Far: 1
+    - _Texture_9_Heightmap_Depth: 3.22
+    - _Texture_9_Normal_Index: 7
+    - _Texture_9_Normal_Power: 1.2
+    - _Texture_9_Perlin_Power: 0.4
+    - _Texture_9_Snow_Reduction: 0
+    - _Texture_9_Tiling: 8
+    - _Texture_9_Triplanar: 0
+    - _Texture_Perlin_Normal_Index: 12
+    - _Texture_Snow_H_AO_Index: -1
+    - _Texture_Snow_Index: -1
+    - _Texture_Snow_Normal_Index: -1
+    - _UV_Mix_Power: 3
+    - _UV_Mix_Start_Distance: 400.00183
+    - _Use_AO: 1
+    - _Use_AO_Texture: 0
+    - __dirty: 1
+    m_Colors:
+    - _Global_Color_Map_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Snow_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_10_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_11_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_12_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_13_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_14_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_15_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_16_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_1_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_2_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_3_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_4_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_5_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_6_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_7_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_8_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_9_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Texture_Snow_Average: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &486752679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34945,6 +35332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomRadius: 8.25
   _identifier: 4
+  _waypoints: []
 --- !u!1001 &609508410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54538,384 +54926,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1053030210}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1054385290
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: CTS/CTS Terrain Shader Advanced:CTS_Profile_Terrain
-  m_Shader: {fileID: 4800000, guid: 5928845464a53fc4f97518f3cae3ecad, type: 3}
-  m_ShaderKeywords: _USE_AO_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _Global_Color_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Global_Normal_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Array_Albedo:
-        m_Texture: {fileID: 18700000, guid: 845b5c8be7f1a244fb9fea4369292338, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Array_Normal:
-        m_Texture: {fileID: 18700000, guid: 5f4a0fc9a2ed315469126b408cc471a9, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Geological_Map:
-        m_Texture: {fileID: 2800000, guid: a8b026679658e0a458404f9f86468a66, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Glitter:
-        m_Texture: {fileID: 2800000, guid: 0dd347c4b5067a2428dea9a70c418d05, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_1:
-        m_Texture: {fileID: 8482846698438895039, guid: 26eeb24e4d4e3cb4fa3ed761e2c751d3,
-          type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_2:
-        m_Texture: {fileID: 4178261478719300593, guid: 26eeb24e4d4e3cb4fa3ed761e2c751d3,
-          type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_3:
-        m_Texture: {fileID: -3335307328894622791, guid: 26eeb24e4d4e3cb4fa3ed761e2c751d3,
-          type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_4:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Ambient_Occlusion_Power: 1
-    - _Geological_Map_Close_Power: 0.05
-    - _Geological_Map_Far_Power: 0.05
-    - _Geological_Map_Offset_Close: 0.028
-    - _Geological_Map_Offset_Far: 0
-    - _Geological_Tiling_Close: 142
-    - _Geological_Tiling_Far: 100
-    - _Gliter_Color_Power: 0.2
-    - _Glitter_Noise_Threshold: 0.991
-    - _Glitter_Refreshing_Speed: 4
-    - _Glitter_Smoothness: 0.9
-    - _Glitter_Specular: 0.2
-    - _Glitter_Tiling: 2.5
-    - _Global_Color_Map_Close_Power: 0
-    - _Global_Color_Map_Far_Power: 0
-    - _Global_Color_Map_Scale: 1
-    - _Global_Color_Opacity_Power: 0
-    - _Global_Normalmap_Power: 0
-    - _Perlin_Normal_Power: 1
-    - _Perlin_Normal_Power_Close: 1
-    - _Perlin_Normal_Tiling_Close: 60
-    - _Perlin_Normal_Tiling_Far: 300
-    - _Snow_Ambient_Occlusion_Power: 1
-    - _Snow_Amount: 0
-    - _Snow_Blend_Normal: 0.9
-    - _Snow_Height_Contrast: 1
-    - _Snow_Heightblend_Close: 1
-    - _Snow_Heightblend_Far: 1
-    - _Snow_Heightmap_Depth: 8
-    - _Snow_Maximum_Angle: 22.9
-    - _Snow_Maximum_Angle_Hardness: 1
-    - _Snow_Min_Height: 145
-    - _Snow_Min_Height_Blending: 27
-    - _Snow_Noise_Power: 0.8
-    - _Snow_Noise_Tiling: 0.02
-    - _Snow_Normal_Scale: 1
-    - _Snow_Perlin_Power: 1
-    - _Snow_Specular: 1
-    - _Snow_Tiling: 6.9
-    - _Snow_Tiling_Far_Multiplier: 3
-    - _Terrain_Smoothness: 1
-    - _Terrain_Specular: 1
-    - _Texture_10_AO_Power: 1
-    - _Texture_10_Albedo_Index: 13
-    - _Texture_10_Far_Multiplier: 3
-    - _Texture_10_Geological_Power: 1
-    - _Texture_10_H_AO_Index: 14
-    - _Texture_10_Height_Contrast: 0.97
-    - _Texture_10_Heightblend_Close: 10
-    - _Texture_10_Heightblend_Far: 10
-    - _Texture_10_Heightmap_Depth: 10
-    - _Texture_10_Normal_Index: 8
-    - _Texture_10_Normal_Power: 1.6
-    - _Texture_10_Perlin_Power: 0.401
-    - _Texture_10_Snow_Reduction: 0
-    - _Texture_10_Tiling: 8
-    - _Texture_10_Triplanar: 0
-    - _Texture_11_AO_Power: 1
-    - _Texture_11_Albedo_Index: 15
-    - _Texture_11_Far_Multiplier: 3
-    - _Texture_11_Geological_Power: 1
-    - _Texture_11_H_AO_Index: -1
-    - _Texture_11_Height_Contrast: 1
-    - _Texture_11_Heightblend_Close: 1
-    - _Texture_11_Heightblend_Far: 1
-    - _Texture_11_Heightmap_Depth: 8
-    - _Texture_11_Normal_Index: 9
-    - _Texture_11_Normal_Power: 1.2
-    - _Texture_11_Perlin_Power: 0.25
-    - _Texture_11_Snow_Reduction: 0
-    - _Texture_11_Tiling: 30
-    - _Texture_11_Triplanar: 0
-    - _Texture_12_AO_Power: 1
-    - _Texture_12_Albedo_Index: 16
-    - _Texture_12_Far_Multiplier: 0
-    - _Texture_12_Geological_Power: 1
-    - _Texture_12_H_AO_Index: 17
-    - _Texture_12_Height_Contrast: 10
-    - _Texture_12_Heightblend_Close: 10
-    - _Texture_12_Heightblend_Far: 10
-    - _Texture_12_Heightmap_Depth: 10
-    - _Texture_12_Normal_Index: 10
-    - _Texture_12_Normal_Power: 1.31
-    - _Texture_12_Perlin_Power: 0.175
-    - _Texture_12_Snow_Reduction: 0
-    - _Texture_12_Tiling: 6
-    - _Texture_12_Triplanar: 0
-    - _Texture_13_AO_Power: 1
-    - _Texture_13_Albedo_Index: 18
-    - _Texture_13_Far_Multiplier: 2.4
-    - _Texture_13_Geological_Power: 1
-    - _Texture_13_H_AO_Index: -1
-    - _Texture_13_Height_Contrast: 1
-    - _Texture_13_Heightblend_Close: 1
-    - _Texture_13_Heightblend_Far: 1
-    - _Texture_13_Heightmap_Depth: 8
-    - _Texture_13_Normal_Index: 11
-    - _Texture_13_Normal_Power: 0.64
-    - _Texture_13_Perlin_Power: 0.462
-    - _Texture_13_Snow_Reduction: 0
-    - _Texture_13_Tiling: 30
-    - _Texture_13_Triplanar: 0
-    - _Texture_14_AO_Power: 1
-    - _Texture_14_Albedo_Index: -1
-    - _Texture_14_Far_Multiplier: 3
-    - _Texture_14_Geological_Power: 1
-    - _Texture_14_H_AO_Index: -1
-    - _Texture_14_Height_Contrast: 1
-    - _Texture_14_Heightblend_Close: 5
-    - _Texture_14_Heightblend_Far: 5
-    - _Texture_14_Heightmap_Depth: 1
-    - _Texture_14_Normal_Index: -1
-    - _Texture_14_Normal_Power: 1
-    - _Texture_14_Perlin_Power: 0
-    - _Texture_14_Snow_Reduction: 0
-    - _Texture_14_Tiling: 15
-    - _Texture_14_Triplanar: 0
-    - _Texture_15_AO_Power: 1
-    - _Texture_15_Albedo_Index: -1
-    - _Texture_15_Far_Multiplier: 3
-    - _Texture_15_Geological_Power: 1
-    - _Texture_15_H_AO_Index: -1
-    - _Texture_15_Height_Contrast: 1
-    - _Texture_15_Heightblend_Close: 5
-    - _Texture_15_Heightblend_Far: 5
-    - _Texture_15_Heightmap_Depth: 1
-    - _Texture_15_Normal_Index: -1
-    - _Texture_15_Normal_Power: 1
-    - _Texture_15_Perlin_Power: 0
-    - _Texture_15_Snow_Reduction: 0
-    - _Texture_15_Tiling: 15
-    - _Texture_15_Triplanar: 0
-    - _Texture_16_AO_Power: 1
-    - _Texture_16_Albedo_Index: -1
-    - _Texture_16_Far_Multiplier: 3
-    - _Texture_16_Geological_Power: 1
-    - _Texture_16_H_AO_Index: -1
-    - _Texture_16_Height_Contrast: 1
-    - _Texture_16_Heightblend_Close: 5
-    - _Texture_16_Heightblend_Far: 5
-    - _Texture_16_Heightmap_Depth: 1
-    - _Texture_16_Normal_Index: -1
-    - _Texture_16_Normal_Power: 1
-    - _Texture_16_Perlin_Power: 0
-    - _Texture_16_Snow_Reduction: 0
-    - _Texture_16_Tiling: 15
-    - _Texture_16_Triplanar: 0
-    - _Texture_1_AO_Power: 1
-    - _Texture_1_Albedo_Index: 0
-    - _Texture_1_Far_Multiplier: 3
-    - _Texture_1_Geological_Power: 1
-    - _Texture_1_H_AO_Index: 1
-    - _Texture_1_Height_Contrast: 0.3
-    - _Texture_1_Heightblend_Close: 1
-    - _Texture_1_Heightblend_Far: 1
-    - _Texture_1_Heightmap_Depth: 0
-    - _Texture_1_Normal_Index: 0
-    - _Texture_1_Normal_Power: 1.3
-    - _Texture_1_Perlin_Power: 0.2
-    - _Texture_1_Snow_Reduction: 0
-    - _Texture_1_Tiling: 17
-    - _Texture_1_Triplanar: 0
-    - _Texture_2_AO_Power: 1
-    - _Texture_2_Albedo_Index: 2
-    - _Texture_2_Far_Multiplier: 3
-    - _Texture_2_Geological_Power: 1
-    - _Texture_2_H_AO_Index: 3
-    - _Texture_2_Height_Contrast: 2.16
-    - _Texture_2_Heightblend_Close: 4.6
-    - _Texture_2_Heightblend_Far: 1
-    - _Texture_2_Heightmap_Depth: 1.91
-    - _Texture_2_Normal_Index: 1
-    - _Texture_2_Normal_Power: 1.2
-    - _Texture_2_Perlin_Power: 0.25
-    - _Texture_2_Snow_Reduction: 0
-    - _Texture_2_Tiling: 30
-    - _Texture_2_Triplanar: 0
-    - _Texture_3_AO_Power: 1
-    - _Texture_3_Albedo_Index: -1
-    - _Texture_3_Far_Multiplier: 3
-    - _Texture_3_Geological_Power: 1
-    - _Texture_3_H_AO_Index: 5
-    - _Texture_3_Height_Contrast: 0.97
-    - _Texture_3_Heightblend_Close: 10
-    - _Texture_3_Heightblend_Far: 10
-    - _Texture_3_Heightmap_Depth: 10
-    - _Texture_3_Normal_Index: -1
-    - _Texture_3_Normal_Power: 1.45
-    - _Texture_3_Perlin_Power: 0.45
-    - _Texture_3_Snow_Reduction: 1
-    - _Texture_3_Tiling: 8
-    - _Texture_3_Triplanar: 0
-    - _Texture_4_AO_Power: 1
-    - _Texture_4_Albedo_Index: 4
-    - _Texture_4_Far_Multiplier: 3
-    - _Texture_4_Geological_Power: 1
-    - _Texture_4_H_AO_Index: 5
-    - _Texture_4_Height_Contrast: 1.73
-    - _Texture_4_Heightblend_Close: 7.26
-    - _Texture_4_Heightblend_Far: 1
-    - _Texture_4_Heightmap_Depth: 3.22
-    - _Texture_4_Normal_Index: 2
-    - _Texture_4_Normal_Power: 1.2
-    - _Texture_4_Perlin_Power: 0.4
-    - _Texture_4_Snow_Reduction: 1
-    - _Texture_4_Tiling: 8
-    - _Texture_4_Triplanar: 0
-    - _Texture_5_AO_Power: 1
-    - _Texture_5_Albedo_Index: 6
-    - _Texture_5_Far_Multiplier: 3
-    - _Texture_5_Geological_Power: 1
-    - _Texture_5_H_AO_Index: -1
-    - _Texture_5_Height_Contrast: 0.3
-    - _Texture_5_Heightblend_Close: 1
-    - _Texture_5_Heightblend_Far: 1
-    - _Texture_5_Heightmap_Depth: 8
-    - _Texture_5_Normal_Index: 3
-    - _Texture_5_Normal_Power: 1.2
-    - _Texture_5_Perlin_Power: 0.25
-    - _Texture_5_Snow_Reduction: 0
-    - _Texture_5_Tiling: 30
-    - _Texture_5_Triplanar: 0
-    - _Texture_6_AO_Power: 1
-    - _Texture_6_Albedo_Index: 7
-    - _Texture_6_Far_Multiplier: 3
-    - _Texture_6_Geological_Power: 1
-    - _Texture_6_H_AO_Index: -1
-    - _Texture_6_Height_Contrast: 1
-    - _Texture_6_Heightblend_Close: 1
-    - _Texture_6_Heightblend_Far: 1
-    - _Texture_6_Heightmap_Depth: 8
-    - _Texture_6_Normal_Index: 4
-    - _Texture_6_Normal_Power: 1.2
-    - _Texture_6_Perlin_Power: 0.25
-    - _Texture_6_Snow_Reduction: 0
-    - _Texture_6_Tiling: 30
-    - _Texture_6_Triplanar: 0
-    - _Texture_7_AO_Power: 1
-    - _Texture_7_Albedo_Index: 8
-    - _Texture_7_Far_Multiplier: 3
-    - _Texture_7_Geological_Power: 1
-    - _Texture_7_H_AO_Index: -1
-    - _Texture_7_Height_Contrast: 1
-    - _Texture_7_Heightblend_Close: 1
-    - _Texture_7_Heightblend_Far: 1
-    - _Texture_7_Heightmap_Depth: 8
-    - _Texture_7_Normal_Index: 5
-    - _Texture_7_Normal_Power: 1.2
-    - _Texture_7_Perlin_Power: 0.25
-    - _Texture_7_Snow_Reduction: 0
-    - _Texture_7_Tiling: 30
-    - _Texture_7_Triplanar: 0
-    - _Texture_8_AO_Power: 1
-    - _Texture_8_Albedo_Index: 9
-    - _Texture_8_Far_Multiplier: 3
-    - _Texture_8_Geological_Power: 1
-    - _Texture_8_H_AO_Index: 10
-    - _Texture_8_Height_Contrast: 1.73
-    - _Texture_8_Heightblend_Close: 7.26
-    - _Texture_8_Heightblend_Far: 1
-    - _Texture_8_Heightmap_Depth: 3.22
-    - _Texture_8_Normal_Index: 6
-    - _Texture_8_Normal_Power: 1.2
-    - _Texture_8_Perlin_Power: 0.4
-    - _Texture_8_Snow_Reduction: 0
-    - _Texture_8_Tiling: 8
-    - _Texture_8_Triplanar: 0
-    - _Texture_9_AO_Power: 1
-    - _Texture_9_Albedo_Index: 11
-    - _Texture_9_Far_Multiplier: 3
-    - _Texture_9_Geological_Power: 1
-    - _Texture_9_H_AO_Index: 12
-    - _Texture_9_Height_Contrast: 1.73
-    - _Texture_9_Heightblend_Close: 7.26
-    - _Texture_9_Heightblend_Far: 1
-    - _Texture_9_Heightmap_Depth: 3.22
-    - _Texture_9_Normal_Index: 7
-    - _Texture_9_Normal_Power: 1.2
-    - _Texture_9_Perlin_Power: 0.4
-    - _Texture_9_Snow_Reduction: 0
-    - _Texture_9_Tiling: 8
-    - _Texture_9_Triplanar: 0
-    - _Texture_Perlin_Normal_Index: 12
-    - _Texture_Snow_H_AO_Index: -1
-    - _Texture_Snow_Index: -1
-    - _Texture_Snow_Normal_Index: -1
-    - _UV_Mix_Power: 3
-    - _UV_Mix_Start_Distance: 400.0028
-    - _Use_AO: 1
-    - _Use_AO_Texture: 0
-    - __dirty: 1
-    m_Colors:
-    - _Global_Color_Map_Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _Snow_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_10_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_11_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_12_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_13_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_14_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_15_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_16_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_1_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_2_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_3_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_4_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_5_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_6_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_7_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_8_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_9_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Texture_Snow_Average: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1061924795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72083,7 +72093,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 1054385290}
+  m_MaterialTemplate: {fileID: 482396588}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -104099,6 +104109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village
       objectReference: {fileID: 0}
+    - target: {fileID: 2117897160694990056, guid: fb50fb0691714984791244dd37e821e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2117897160694990059, guid: fb50fb0691714984791244dd37e821e6,
         type: 3}
       propertyPath: m_RootOrder
@@ -105412,6 +105427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomRadius: 8.25
   _identifier: 8
+  _waypoints: []
 --- !u!1001 &2111787038
 PrefabInstance:
   m_ObjectHideFlags: 0
