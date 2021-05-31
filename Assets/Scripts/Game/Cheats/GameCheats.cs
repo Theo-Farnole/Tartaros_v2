@@ -31,7 +31,7 @@
 			}
 		}
 
-		[Cheat("HasFPSCounter")]
+		[Cheat]
 		public static void ToggleFPS()
 		{
 			if (FPSCounter.HasInstance == true)

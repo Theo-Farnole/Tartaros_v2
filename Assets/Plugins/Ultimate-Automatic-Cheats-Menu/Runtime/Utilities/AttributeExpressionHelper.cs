@@ -37,11 +37,6 @@
 		{
 			FieldInfo fieldInfo = type.GetField(attributeExpression, FLAGS);
 
-			foreach (var field in type.GetFields(FLAGS))
-			{
-				Debug.Log("Field " + field);
-			}
-
 			if (fieldInfo == null)
 			{
 				Debug.LogErrorFormat("Cannot find the field '{0}' of type {1}.", attributeExpression, type);
