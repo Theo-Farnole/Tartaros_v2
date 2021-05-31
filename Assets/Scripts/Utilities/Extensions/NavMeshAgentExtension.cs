@@ -1,5 +1,6 @@
 ﻿namespace Tartaros
 {
+	using DG.Tweening;
 	using UnityEngine.AI;
 
 	public static class NavMeshAgentExtension
@@ -18,6 +19,15 @@
 			}
 
 			return false;
+		}
+
+		public static DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> DORadius(this NavMeshAgent agent, float radius, float duration)
+		{
+			return DOTween.To(
+				() => agent.radius,
+				x => agent.radius = x,
+				radius,
+				duration);
 		}
 	}
 

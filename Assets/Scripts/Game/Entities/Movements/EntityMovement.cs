@@ -13,12 +13,15 @@
 	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderable
 	{
 		#region Fields
+		[SerializeField] private AgentCollisionMovingData _agentCollisionData = null;
+
 		private int _navMeshArea = -1;
 		private EntityMovementData _entityMovementData = null;
 
 		private NavMeshAgent _navMeshAgent = null;
 		private EntityFSM _entityFSM = null;
-		private Animator _animator = null;
+		
+		private NavMeshCollisionMoving _navMeshCollisionMoving = null;
 		#endregion
 
 		#region Properties
@@ -60,7 +63,7 @@
 		{
 			_navMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
 			_entityFSM = GetComponent<EntityFSM>();
-			_animator = GetComponent<Animator>();
+			_navMeshCollisionMoving = new NavMeshCollisionMoving(_navMeshAgent, _agentCollisionData);
 
 			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
 		}
@@ -90,6 +93,7 @@
 
 				if (wasStopped == true)
 				{
+					_navMeshCollisionMoving.ReduceCollision();
 					StartMoving?.Invoke(this, new StartMovingArgs());
 				}
 			}
@@ -105,6 +109,7 @@
 
 			if (wasStopped == false)
 			{
+				_navMeshCollisionMoving.GrowCollisionToNormal();
 				StopMoving?.Invoke(this, new StopMovingArgs());
 			}
 		}
