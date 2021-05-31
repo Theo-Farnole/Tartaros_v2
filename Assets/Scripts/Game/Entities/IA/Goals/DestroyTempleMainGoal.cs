@@ -2,6 +2,7 @@
 {
 	using System.Collections;
 	using Tartaros.Entities.Detection;
+	using UnityEditor.UIElements;
 	using UnityEngine;
 	using UnityEngine.AI;
 
@@ -12,13 +13,16 @@
 		private AGoalComposite _currentMoveToTemple = null;
 		private EntityDetection _entityDetection = null;
 		private DestroyTarget _destroyTempleGoal = null;
+		private Vector3[] _waypoints = null;
 		private bool _completed = false;
+		private int _indexWaypoints = 1;
 
-		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition, IAttackable targetTemple) : base(goalOwner)
+		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition, IAttackable targetTemple, Vector3[] waypoints) : base(goalOwner)
 		{
 			_templePosition = templePosition;
 			_entityDetection = _goalOwner.GetComponent<EntityDetection>();
 			_templeTarget = targetTemple;
+			_waypoints = waypoints;
 		}
 
 		public override void OnEnter()
@@ -144,6 +148,13 @@
 
 		private Vector3 GoalPosition()
 		{
+			if(_waypoints.Length >= _indexWaypoints)
+			{
+				Vector3 pos =  NavMeshHelper.LastPositionOnPartialNavMesh(_goalOwner.transform.position, _waypoints[_indexWaypoints - 1]);
+				_indexWaypoints++;
+				return pos;
+			}
+
 			return NavMeshHelper.LastPositionOnPartialNavMesh(_goalOwner.transform.position, _templePosition);
 		}
 
