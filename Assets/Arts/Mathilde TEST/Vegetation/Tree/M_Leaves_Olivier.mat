@@ -48,6 +48,7 @@ Material:
     - _BendStrength1: 0
     - _Cutoff: 0.5
     - _EdgeLength: 15
+    - _NoiseScale: 10
     - _ScaleVoronoi: 3
     - _ScaleVoronoi1: 3
     - _Speed: 0.2
@@ -60,6 +61,8 @@ Material:
     - _Translucency: 1
     - _VertexPosition: 1
     - _VertexPosition1: 1
+    - _VoroPower: 0.5
+    - _VoroScale: 5
     - _WindDensity: 0.8
     - _WindDirection: 2
     - _WindDirection1: 10
@@ -69,4 +72,9 @@ Material:
     - _yPosStrength1: 0
     m_Colors:
     - _AlbedoColor: {r: 2, g: 1.003922, b: 0, a: 0.1}
+    - _Color: {r: 1, g: 0.2889685, b: 0, a: 1}
+    - _NoiseSpeed: {r: 0, g: -0.1, b: 0, a: 0}
+    - _SmoothStepParticleShape: {r: 0.9, g: 1, b: 0, a: 0}
+    - _SmoothStepVoronoi: {r: 0.9, g: 1, b: 0, a: 0}
     - _Vector1: {r: 6, g: 0, b: 0, a: 0}
+    - _VoroSpeed: {r: -0.1, g: -0.5, b: 0, a: 0}
