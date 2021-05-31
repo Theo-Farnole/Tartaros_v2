@@ -137,12 +137,12 @@
 			_entityFSM.Stop();
 		}
 
-		void IWaveSpawnable.Attack(IAttackable attackable)
+		void IWaveSpawnable.Attack(IAttackable attackable, Vector3[] waypoints)
 		{
 			//GetComponent<IOrderAttackReceiver>().Attack(attackable);
 
 			var position = attackable.Transform.position;
-			_entityFSM.SetStateGoalPattern(position, attackable);
+			_entityFSM.SetStateGoalPattern(position, attackable, waypoints);
 
 
 		}

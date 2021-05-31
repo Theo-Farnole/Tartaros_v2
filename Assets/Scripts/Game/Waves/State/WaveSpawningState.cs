@@ -120,10 +120,10 @@
 
 				IWaveSpawnable waveSpawnable = spawnedEntity.GetComponent<IWaveSpawnable>();
 
-				var entityMovementSpawned = spawnedEntity.GetComponent<EntityMovement>();
-				entityMovementSpawned.NavMeshArea = (int)spawnPoint.Identifier;
+				//var entityMovementSpawned = spawnedEntity.GetComponent<EntityMovement>();
+				//entityMovementSpawned.NavMeshArea = (int)spawnPoint.Identifier;
 
-				waveSpawnable.Attack(_stateOwner.EnemiesTarget);
+				waveSpawnable.Attack(_stateOwner.EnemiesTarget, spawnPoint.Waypoints);
 				_stillAliveManger.AddEnemyWave(waveSpawnable);
 
 
