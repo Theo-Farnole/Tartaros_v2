@@ -17,11 +17,11 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: b84f554f028390f409c8654d4563df65, type: 3}
+    - {fileID: 11400000}
     - {fileID: 5781224918604581195, guid: b9b2dee965749f8439375ab3438e7336, type: 3}
     - {fileID: 7859859454919395600, guid: d699f8ac58525494ebfca53d8acd10bb, type: 3}
     - {fileID: 5657609668978460668, guid: af2fa67ba1b380b468b455599eb1c95a, type: 3}
     - {fileID: 11400000, guid: 1f67af3b14f260443919eda09ed41054, type: 2}
-    - {fileID: 11400000}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -73,30 +73,12 @@ MonoBehaviour:
     - Name: _portrait
       Entry: 10
       Data: 0
-    - Name: _modelPrefab
-      Entry: 10
-      Data: 1
-    - Name: _gameplayPrefab
-      Entry: 10
-      Data: 2
-    - Name: _wallCornerModel
-      Entry: 6
-      Data: 
-    - Name: _wallCornerGameplay
-      Entry: 6
-      Data: 
-    - Name: _constructionKitModel
-      Entry: 10
-      Data: 3
-    - Name: _hoverPopupData
-      Entry: 10
-      Data: 4
-    - Name: _timeToConstruct
-      Entry: 3
-      Data: 2
     - Name: _IsChained
       Entry: 5
       Data: false
+    - Name: _timeToConstruct
+      Entry: 3
+      Data: 2
     - Name: _constructionPrice
       Entry: 7
       Data: 4|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -197,7 +179,7 @@ MonoBehaviour:
       Data: 9|Tartaros.Construction.SameBuildingsCountLimitOnSectorRule, Tartaros
     - Name: _buildingToCheck
       Entry: 10
-      Data: 5
+      Data: 1
     - Name: _buildingMaxCount
       Entry: 3
       Data: 1
@@ -210,6 +192,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: _modelPrefab
+      Entry: 10
+      Data: 2
+    - Name: _gameplayPrefab
+      Entry: 10
+      Data: 3
+    - Name: _wallCornerModel
+      Entry: 6
+      Data: 
+    - Name: _wallCornerGameplay
+      Entry: 6
+      Data: 
+    - Name: _constructionKitModel
+      Entry: 10
+      Data: 4
+    - Name: _hoverPopupData
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -227,10 +227,10 @@ MonoBehaviour:
       Data: 11|Tartaros.Entities.Informations.EntityInformationsData, Tartaros
     - Name: _name
       Entry: 1
-      Data: NONE
+      Data: Iron Mine
     - Name: _description
       Entry: 1
-      Data: NONE
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -315,6 +315,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _prefab: {fileID: 0}
-  _portrait: {fileID: 0}
+  _portrait: {fileID: 21300000, guid: b84f554f028390f409c8654d4563df65, type: 3}
   _population: 1
   _hoverPopupData: {fileID: 0}

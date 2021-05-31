@@ -41,6 +41,9 @@ MonoBehaviour:
     - Name: _resourcesPerTick
       Entry: 3
       Data: 0
+    - Name: _maxRessourcesBeforeEmpty
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -68,27 +71,12 @@ MonoBehaviour:
     - Name: _portrait
       Entry: 10
       Data: 0
-    - Name: _modelPrefab
-      Entry: 10
-      Data: 1
-    - Name: _gameplayPrefab
-      Entry: 10
-      Data: 2
-    - Name: _wallCornerModel
-      Entry: 6
-      Data: 
-    - Name: _wallCornerGameplay
-      Entry: 6
-      Data: 
-    - Name: _constructionKitModel
-      Entry: 10
-      Data: 3
-    - Name: _timeToConstruct
-      Entry: 3
-      Data: 2
     - Name: _IsChained
       Entry: 5
       Data: false
+    - Name: _timeToConstruct
+      Entry: 3
+      Data: 2
     - Name: _constructionPrice
       Entry: 7
       Data: 4|Tartaros.Economy.SectorResourcesWallet, Tartaros
@@ -172,6 +160,24 @@ MonoBehaviour:
     - Name: _rules
       Entry: 6
       Data: 
+    - Name: _modelPrefab
+      Entry: 10
+      Data: 1
+    - Name: _gameplayPrefab
+      Entry: 10
+      Data: 2
+    - Name: _wallCornerModel
+      Entry: 6
+      Data: 
+    - Name: _wallCornerGameplay
+      Entry: 6
+      Data: 
+    - Name: _constructionKitModel
+      Entry: 10
+      Data: 3
+    - Name: _hoverPopupData
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -189,10 +195,10 @@ MonoBehaviour:
       Data: 8|Tartaros.Entities.Informations.EntityInformationsData, Tartaros
     - Name: _name
       Entry: 1
-      Data: NONE
+      Data: Stone Quarry
     - Name: _description
       Entry: 1
-      Data: NONE
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -277,5 +283,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _prefab: {fileID: 0}
-  _portrait: {fileID: 0}
+  _portrait: {fileID: 21300000, guid: a51b2965468688441b990b81837818ad, type: 3}
   _population: 1
+  _hoverPopupData: {fileID: 0}
