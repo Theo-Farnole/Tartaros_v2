@@ -102,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1028313132}
   - component: {fileID: 1028313131}
+  - component: {fileID: 2081439181744270624}
   m_Layer: 0
   m_Name: FogProjector
   m_TagString: Untagged
@@ -130,7 +131,7 @@ Projector:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028313130}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_NearClipPlane: 0.01
   m_FarClipPlane: 200
@@ -142,6 +143,18 @@ Projector:
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 1048592
+--- !u!114 &2081439181744270624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028313130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d89197253980234eaef9b34b801849c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1794654253
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4642404729883086632}
   - component: {fileID: 8629733700730962061}
   - component: {fileID: 5775319368776397895}
+  - component: {fileID: 7766206195393562930}
+  - component: {fileID: 8850438213332703612}
   m_Layer: 0
   m_Name: SM_Tree_Olivier
   m_TagString: Untagged
@@ -80,3 +82,28 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7766206195393562930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415281880385066386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439cccdf5ae6ae34ab7d407b7d89beb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 5775319368776397895}
+--- !u!114 &8850438213332703612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415281880385066386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437a6e41acd02ca4185d0176626de8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

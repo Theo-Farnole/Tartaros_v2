@@ -40,9 +40,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ASEOutlineWidth: -10.9
     - _BendStrength: 1
     - _BendStrength1: 1
     - _Cutoff: 0.5
+    - _EnableFakeFoWProjection: 0
+    - _EnableFakeFogOfWarProjection: 0
+    - _FakeFogOfWarProjection: 0
     - _ScaleVoronoi: 3
     - _ScaleVoronoi1: 3
     - _Speed: 0.2
@@ -63,4 +67,7 @@ Material:
     - _yPosStrength: 1
     - _yPosStrength1: 0
     m_Colors:
+    - _ASEOutlineColor: {r: 1, g: 1, b: 1, a: 0}
+    - _ProjectorColor: {r: 1, g: 0, b: 0, a: 0}
+    - _TintColor: {r: 0, g: 0, b: 0, a: 0}
     - _Vector1: {r: 6, g: 0, b: 0, a: 0}
