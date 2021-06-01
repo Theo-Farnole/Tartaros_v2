@@ -39,9 +39,6 @@
 			foreach(Vector2 corner in corners)
 			{
 				GameObject ping = GameObject.Instantiate(_pingPrefab, _mapBackground.transform);
-
-				Debug.Log(ping);
-
 				RectTransform rectPing = ping.GetComponent<RectTransform>();
 				rectPing.SetParent(_mapBackground.transform, false);
 				rectPing.localScale = Vector3.one;
@@ -59,8 +56,6 @@
 			List<Vector2> list = new List<Vector2>();
 			foreach (Vector3 corner in corners)
 			{
-				Debug.Log(corner);
-				Debug.Log(_miniMap.WordToUiPosition(corner));
 				list.Add(_miniMap.WordToUiPosition(corner));
 			}
 			return list;

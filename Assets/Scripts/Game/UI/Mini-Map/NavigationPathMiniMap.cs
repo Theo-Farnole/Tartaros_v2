@@ -22,7 +22,6 @@
 		private RectTransform _rootTransform = null;
 		private ISpawnPoint[] _spawnPoints = null;
 		private List<GameObject> _navigationLineInstanciate = new List<GameObject>();
-		private GameObject[] _pingArray = null;
 		//TODO DJ: Give the position of the Temple automaticaly 
 
 
@@ -74,6 +73,7 @@
 				Mathf.RoundToInt(_rootTransform.rect.height));
 
 				navPath.SetNavigationPoints(vertexs);
+				navPath.SetThickness(5);
 				_navigationLineInstanciate.Add(navLine);
 			}
 

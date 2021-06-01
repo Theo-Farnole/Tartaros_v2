@@ -25,6 +25,22 @@
 			return centroid;
 		}
 
+		public static Vector2 CalculateCentroidVector2(Vector2[] points)
+		{
+			Vector2 centroid = Vector2.zero;
+
+			foreach (var point in points)
+			{
+				centroid += point;
+			}
+
+			centroid /= points.Length;
+
+
+			return centroid;
+
+		}
+
 		public static Vector3 SnapXZToAxis(Vector3 direction, float axisCount)
 		{
 			// Calculate the decrees in between the options
