@@ -4,6 +4,7 @@
 	using Tartaros.Dialogue;
 	using Tartaros.Economy;
 	using Tartaros.Entities;
+	using Tartaros.FogOfWar;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;
@@ -73,6 +74,28 @@
 			else
 			{
 				Debug.LogWarning("there is no sialogueManager on the scene");
+			}
+		}
+
+		private static FogOfWarSizeAdapter _sizeAdapter = null;
+
+		[Cheat]
+		public static void ToggleFog()
+		{
+			if (_sizeAdapter == null)
+			{
+				_sizeAdapter = GameObject.FindObjectOfType<FogOfWarSizeAdapter>();
+			}
+
+			FogOfWarManager fogOfWar = Services.Instance.Get<FogOfWarManager>();
+
+			bool isFogActive = fogOfWar.enabled;
+
+			fogOfWar.enabled = !isFogActive;		
+			
+			if (_sizeAdapter != null)
+			{
+				_sizeAdapter.gameObject.SetActive(!isFogActive);
 			}
 		}
 	}
