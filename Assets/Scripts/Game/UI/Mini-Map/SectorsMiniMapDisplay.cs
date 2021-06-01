@@ -70,7 +70,10 @@
 				GameObject sectorDisplay = GameObject.Instantiate(_drawLinePrefab, _miniMapBackground.transform);
 				DrawLineUI drawLineUI = sectorDisplay.GetComponent<DrawLineUI>();
 
-				List<Vector2> listOfVertice = GetVectorOnUI(sector.ConvexPolygon.vertices);
+
+				List<Vector2> listOfVertice = GetVectorOnUI(SetVerticeNearCentroid(sector.ConvexPolygon.vertices));
+				//List<Vector2> listOfVertice = GetVectorOnUI(sector.ConvexPolygon.vertices);
+
 				listOfVertice.Add(listOfVertice.ToArray()[0]);
 
 				drawLineUI.Setup(
@@ -80,11 +83,27 @@
 				SetOutline(drawLineUI);
 
 				drawLineUI.SetNavigationPoints(listOfVertice);
+				drawLineUI.SetThickness(5);
 
 				_sectorsLines.Add(new SectorDrawMiniMap(sector, drawLineUI));
 				sector.Captured -= SectorCaptured;
 				sector.Captured += SectorCaptured;
 			}
+		}
+
+		private List<Vector2> SetVerticeNearCentroid(List<Vector2> polygon)
+		{
+			var centroid = MathHelper.CalculateCentroidVector2(polygon.ToArray());
+			List<Vector2> output = new List<Vector2>();
+
+			foreach (var vertice in polygon)
+			{
+				var direction = (vertice - centroid).normalized;
+
+				output.Add(vertice - direction * 3);
+			}
+
+			return output;
 		}
 
 		private void SetOutline(DrawLineUI drawLineUI)

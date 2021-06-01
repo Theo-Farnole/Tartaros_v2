@@ -91,6 +91,11 @@
             SetVerticesDirty();
         }
 
+        public void SetThickness(float thicknes)
+		{
+            _thickness = thicknes;
+		}
+
         public void Setup(int width, int height)
         {
             _gridSize.x = width;

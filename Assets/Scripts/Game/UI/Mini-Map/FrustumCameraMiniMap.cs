@@ -100,7 +100,7 @@
 				Mathf.RoundToInt(_rootTransform.rect.height));
 
 			_drawLine.SetColor(Color.white);
-
+			_drawLine.SetThickness(5);
 			_drawLine.SetNavigationPoints(cameraCorners);
 		}
 
