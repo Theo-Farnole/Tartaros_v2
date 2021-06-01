@@ -34,6 +34,7 @@
 		private EnemiesWavesManager _enemiesWaveManager = null;
 		private FrustumCameraMiniMap _frustrumCamera = null;
 		private PingWaveMiniMap _pingWave = null;
+		private MoveOnClickMiniMap _moveOnClick = null;
 
 		public RectTransform RootTransform => _rootTransform;
 
@@ -62,9 +63,10 @@
 				_navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
 				_frustrumCamera = GetComponent<FrustumCameraMiniMap>();
 				_pingWave = GetComponent<PingWaveMiniMap>();
+				_moveOnClick = GetComponent<MoveOnClickMiniMap>();
+
 				_frustrumCamera.InstanciateLineUI();
 				_sectorDisplayer.DisplaySectors();
-				//DrawWavePathNavigation();
 			}
 
 			if (_enemiesWaveManager == null)
@@ -139,6 +141,19 @@
 			var y = _rootTransform.rect.height * worldPosition.y / _map.MapBounds.boundsY.max;
 
 			return new Vector2(x, y);
+		}
+
+		public Vector3 UIToWorldPosition(Vector2 UIPosition)
+		{
+			var x = _rootTransform.rect.width * UIPosition.x / _map.MapBounds.boundsX.max;
+			var z = _rootTransform.rect.height * UIPosition.y / _map.MapBounds.boundsY.max;
+
+			return new Vector3(x, 1, z);
+		}
+
+		public void MoveCamera(Vector2 position)
+		{
+			_moveOnClick.MoveCameraOnPosition(position);
 		}
 
 		public void DrawWavePathNavigation()
