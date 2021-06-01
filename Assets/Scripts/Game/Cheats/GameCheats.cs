@@ -5,6 +5,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Entities;
 	using Tartaros.FogOfWar;
+	using Tartaros.Powers;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;
@@ -38,6 +39,19 @@
 			if (FPSCounter.HasInstance == true)
 			{
 				FPSCounter.Instance.DisplayFPS = !FPSCounter.Instance.DisplayFPS;
+			}
+		}
+
+		[Cheat]
+		public static void UnlockAllPowers()
+		{
+			if (Services.Instance.TryGet(out PowerManager powerManager))
+			{
+				powerManager.UnlockAllPowers();
+			}
+			else
+			{
+				Debug.LogError("Cannot unlock all powers: Power Manager is missing.");
 			}
 		}
 
@@ -91,8 +105,8 @@
 
 			bool isFogActive = fogOfWar.enabled;
 
-			fogOfWar.enabled = !isFogActive;		
-			
+			fogOfWar.enabled = !isFogActive;
+
 			if (_sizeAdapter != null)
 			{
 				_sizeAdapter.gameObject.SetActive(!isFogActive);
