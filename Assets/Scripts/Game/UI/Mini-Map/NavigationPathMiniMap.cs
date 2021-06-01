@@ -73,7 +73,7 @@
 				Mathf.RoundToInt(_rootTransform.rect.height));
 
 				navPath.SetNavigationPoints(vertexs);
-				navPath.SetThickness(5);
+				navPath.SetThickness(5)
 				_navigationLineInstanciate.Add(navLine);
 			}
 
@@ -139,7 +139,14 @@
 					position = hit.position;
 				}
 
-				NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
+				if (point.Waypoints.Length == 0)
+				{
+					NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
+				}
+				else
+				{
+					NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
+				}
 
 				navPath.Add(path);
 			}
