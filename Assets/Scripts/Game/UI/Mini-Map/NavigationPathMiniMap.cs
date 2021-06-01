@@ -73,7 +73,7 @@
 				Mathf.RoundToInt(_rootTransform.rect.height));
 
 				navPath.SetNavigationPoints(vertexs);
-				navPath.SetThickness(5)
+				navPath.SetThickness(5);
 				_navigationLineInstanciate.Add(navLine);
 			}
 
