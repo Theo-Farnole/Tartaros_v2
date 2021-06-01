@@ -42,6 +42,7 @@
 			RegisterFromHierarchy<NavigationPathMiniMap>();
 			RegisterFromHierarchy<UIStyles>();
 			RegisterFromHierarchy<HoverPopupManager>();
+			RegisterFromHierarchy<GloryGemsManagerUI>();
 
 			RegisterFromChildren<BuildingsDatabase>();
 			RegisterFromChildren<HoverPopupsDatabase>();

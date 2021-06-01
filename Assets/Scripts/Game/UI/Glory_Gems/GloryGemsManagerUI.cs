@@ -20,6 +20,10 @@
 		private IPlayerGloryWallet _playerGlory = null;
 		#endregion Fields
 
+		#region Properties
+		public int MaxGloryPerGem => _maxGloryPerGem;
+		#endregion Properties
+
 		#region Methods
 		private void Awake()
 		{

@@ -11,6 +11,18 @@ TextureImporter:
   - first:
       213: 8740438760564848878
     second: FontsIcons_Spritesheet_2
+  - first:
+      213: -5232978144479819463
+    second: Font.Icons.Resources.Spritesheet_0
+  - first:
+      213: 8255911972832917662
+    second: Font.Icons.Resources.Spritesheet_1
+  - first:
+      213: -798978467156309261
+    second: Font.Icons.Resources.Spritesheet_2
+  - first:
+      213: -8315415582749787405
+    second: Font.Icons.Resources.Spritesheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,7 +68,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -96,7 +108,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FontsIcons_Spritesheet_0
+      name: Font.Icons.Resources.Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -110,14 +122,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5983fe743f9586510800000000000000
-      internalID: 1542581773793179797
+      spriteID: 939c5e46a1ab067b0800000000000000
+      internalID: -5232978144479819463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FontsIcons_Spritesheet_1
+      name: Font.Icons.Resources.Spritesheet_1
       rect:
         serializedVersion: 2
         x: 258
@@ -131,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2f6f277842b14f10800000000000000
-      internalID: 2252277312968945455
+      spriteID: e98b9959234e29270800000000000000
+      internalID: 8255911972832917662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FontsIcons_Spritesheet_2
+      name: Font.Icons.Resources.Spritesheet_2
       rect:
         serializedVersion: 2
         x: 516
@@ -152,8 +164,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee8f5807eb64c4970800000000000000
-      internalID: 8740438760564848878
+      spriteID: 3fa46f9315579e4f0800000000000000
+      internalID: -798978467156309261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font.Icons.Resources.Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 0
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fa737e9595b99c80800000000000000
+      internalID: -8315415582749787405
       vertices: []
       indices: 
       edges: []
