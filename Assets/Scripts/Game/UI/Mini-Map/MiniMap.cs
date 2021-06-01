@@ -33,6 +33,7 @@
 		private IMap _map = null;
 		private EnemiesWavesManager _enemiesWaveManager = null;
 		private FrustumCameraMiniMap _frustrumCamera = null;
+		private PingWaveMiniMap _pingWave = null;
 
 		public RectTransform RootTransform => _rootTransform;
 
@@ -60,6 +61,7 @@
 
 				_navigationPathCalcule = Services.Instance.Get<NavigationPathMiniMap>();
 				_frustrumCamera = GetComponent<FrustumCameraMiniMap>();
+				_pingWave = GetComponent<PingWaveMiniMap>();
 				_frustrumCamera.InstanciateLineUI();
 				_sectorDisplayer.DisplaySectors();
 				//DrawWavePathNavigation();
@@ -93,6 +95,7 @@
 		private void WaveCooldownStart(object sender, EnemiesWavesManager.WaveStartCooldownArgs e)
 		{
 			DrawWavePathNavigation();
+			_pingWave.PingStartWaveCooldown();
 		}
 
 		private void Update()
