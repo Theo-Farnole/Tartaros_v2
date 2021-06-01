@@ -1,25 +1,29 @@
 ﻿namespace Tartaros.Powers
 {
 	using UnityEngine;
-
-	public class PowerPreview
+    
+	public class PowerPreview : MonoBehaviour
     {
-        private GameObject _preview = null;
+        [SerializeField] private SpriteRenderer _rangeSprite = null;
 
-        public PowerPreview(float rangeRadius, Vector3 positionToInstanciate)
-        {
+        private float _range = -1;
 
-            _preview = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        }
+        // equivalent of constructor for MonoBehaviour
+        public void Construct(float range)
+		{
+            _range = range;
+
+            _rangeSprite.transform.localScale = _range * Vector3.one;
+		}
 
         public void SetPreviewPosition(Vector3 position)
         {
-            _preview.transform.position = position;
+            transform.position = position;
         }
 
-        public void DestroyMethods()
+        public void Destroy()
         {
-            GameObject.Destroy(_preview);
+            GameObject.Destroy(gameObject);
         }
     }
 }

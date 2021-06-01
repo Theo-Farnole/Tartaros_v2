@@ -18,9 +18,11 @@
 		[SerializeField] private List<Power> _unlockedPowers = new List<Power>() { Power.LightningBolt };
 
 		[Title("Prefabs References")]
+		[SerializeField, AssetsOnly] private GameObject _previewPrefab = null;
+		[Space]
 		[SerializeField, AssetsOnly] private GameObject _lightningBoltPrefab = null;
 		[SerializeField, AssetsOnly] private GameObject _controlledAoEPrefab = null;
-		
+
 		private Dictionary<Power, GameObject> _powersPrefab = null;
 
 		// SERVICES
@@ -28,6 +30,10 @@
 		private UserErrorsLogger _userErrorsLogger = null;
 		private IPlayerGloryWallet _gloryWallet = null;
 		#endregion Fields
+
+		#region Properties
+		public GameObject PreviewPrefab => _previewPrefab;
+		#endregion Properties
 
 		#region Methods
 		private void Awake()

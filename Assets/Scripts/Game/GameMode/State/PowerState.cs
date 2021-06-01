@@ -18,19 +18,21 @@
 
 		public PowerState(GamemodeManager gamemodeManager, IPower power) : base(gamemodeManager)
 		{
+			PowerManager powerManager = Services.Instance.Get<PowerManager>();
+			_playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
+
 			_power = power;
 
 			_inputs = new PowerInputs();
-			_preview = new PowerPreview(power.Range, _inputs.GetMousePosition());
-
-			_playerGloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
+			_preview = GameObject.Instantiate(powerManager.PreviewPrefab, _inputs.GetMousePosition(), Quaternion.identity).GetComponent<PowerPreview>();
+			_preview.Construct(power.Range);
 		}
 
 		public override void OnStateEnter()
 		{
 			base.OnStateEnter();
 
-            _stateOwner.InvokePowerStateEnable(this);
+			_stateOwner.InvokePowerStateEnable(this);
 
 			_inputs.ValidatePerformed -= ValidatePerformed;
 			_inputs.ValidatePerformed += ValidatePerformed;
@@ -81,7 +83,7 @@
 		{
 			GameObject powerInstanciate = GameObject.Instantiate(_power.PrefabPower, _inputs.GetMousePosition() + new Vector3(0, 0.1f, 0), Quaternion.identity);
 			_playerGloryWallet.Spend(_power.Price);
-			_preview.DestroyMethods();
+			_preview.Destroy();
 			_stateOwner.SetState(new PlayState(_stateOwner));
 		}
 	}
