@@ -190,21 +190,5 @@
 				Debug.LogErrorFormat("Trying to remove {0} icon, but it is not in minimap's icons list.", icon.ToString());
 			}
 		}
-
-
-		private void ApplyMask()
-		{
-			throw new System.NotImplementedException();
-		}
-
-		private void DrawMask()
-		{
-			throw new System.NotImplementedException();
-		}
-
-		private void DrawPolygon()
-		{
-			throw new System.NotImplementedException();
-		}
 	}
 }

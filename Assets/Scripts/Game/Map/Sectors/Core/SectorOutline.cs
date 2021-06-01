@@ -16,7 +16,13 @@
 		private SectorOutlineData _data = null;
 
 		[SerializeField]
-		private float _outlineHeightOffset = 0.1f;
+		private float _defaultOutlineHeightOffset = 0.1f;
+
+		[SerializeField]
+		private float _capturedOutlineHeightOffset = 0.3f;
+
+		[SerializeField]
+		private float _selectedOutlineHeightOffset = 0.5f;
 
 		[SerializeField]
 		private LineRenderer _lineRenderer = null;
@@ -46,6 +52,7 @@
 			{
 				_capturedOutlineColor = _data.CapturedSectorsColor;
 				_uncapturedOutlineColor = _data.UnCapturedSectorsColor;
+				_selectedOutlineColor = _data.CapturedSectorSelectedColor;
 			}
 			else
 			{
@@ -79,9 +86,21 @@
 			}
 		}
 
+		private void SetLineRendererHeight(float height)
+		{
+			for (int i = 0; i < _lineRenderer.positionCount; i++)
+			{
+				var linePos = _lineRenderer.GetPosition(i);
+				var newLinePos = new Vector3(linePos.x, height, linePos.z);
+
+				_lineRenderer.SetPosition(i, newLinePos);
+			}
+		}
+
 		private void SetSelectedColor()
 		{
 			_lineRenderer.SetColor(_selectedOutlineColor);
+			SetLineRendererHeight(_selectedOutlineHeightOffset);
 		}
 
 		private void SetUnselectedColor()
@@ -89,21 +108,25 @@
 			if (_sector.IsCaptured == true)
 			{
 				_lineRenderer.SetColor(_capturedOutlineColor);
+				SetLineRendererHeight(_capturedOutlineHeightOffset);
 			}
 			else
 			{
 				_lineRenderer.SetColor(_uncapturedOutlineColor);
+				SetLineRendererHeight(_defaultOutlineHeightOffset);
 			}
 		}
 
 		private void SetupLinePoints()
 		{
 			Vector3[] positions = _sector.GetPointsWrappedSnappedToGround()
-				.Select(x => x + Vector3.up * _outlineHeightOffset)
+				.Select(x => x + Vector3.up * _defaultOutlineHeightOffset)
 				.ToArray();
 
 			_lineRenderer.positionCount = positions.Length;
 			_lineRenderer.SetPositions(positions);
+
+			_lineRenderer.startWidth = 0.5f;
 		}
 
 		void ISelectionEffect.OnSelected()
