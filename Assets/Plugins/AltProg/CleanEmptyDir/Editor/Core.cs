@@ -7,8 +7,7 @@ using System.Linq;
 using System.IO;
 
 namespace AltProg.CleanEmptyDir
-{
-    [InitializeOnLoad]
+{    
     public class Core : UnityEditor.AssetModificationProcessor
     {
         const string CLEAN_ON_SAVE_KEY = "k1";

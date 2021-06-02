@@ -25,6 +25,22 @@
 			return centroid;
 		}
 
+		public static Vector2 CalculateCentroidVector2(Vector2[] points)
+		{
+			Vector2 centroid = Vector2.zero;
+
+			foreach (var point in points)
+			{
+				centroid += point;
+			}
+
+			centroid /= points.Length;
+
+
+			return centroid;
+
+		}
+
 		public static Vector3 SnapXZToAxis(Vector3 direction, float axisCount)
 		{
 			// Calculate the decrees in between the options
@@ -85,11 +101,13 @@
 		//The list describing the polygon has to be sorted either clockwise or counter-clockwise because we have to identify its edges
 		public static bool IsPointInPolygon(List<Vector2> polygonPoints, Vector2 point)
 		{
+			int polygonPointsCount = polygonPoints.Count;
+
 			//Step 1. Find a point outside of the polygon
 			//Pick a point with a x position larger than the polygons max x position, which is always outside
 			Vector2 maxXPosVertex = polygonPoints[0];
 
-			for (int i = 1; i < polygonPoints.Count; i++)
+			for (int i = 1; i < polygonPointsCount; i++)
 			{
 				if (polygonPoints[i].x > maxXPosVertex.x)
 				{
@@ -107,7 +125,7 @@
 			//Step 3. Find out how many edges of the polygon this edge is intersecting
 			int numberOfIntersections = 0;
 
-			for (int i = 0; i < polygonPoints.Count; i++)
+			for (int i = 0; i < polygonPointsCount; i++)
 			{
 				//Line 2
 				Vector2 l2_p1 = polygonPoints[i];
@@ -137,7 +155,7 @@
 
 		//Clamp list indices
 		//Will even work if index is larger/smaller than listSize, so can loop multiple times
-		private  static int ClampListIndex(int index, int listSize)
+		private static int ClampListIndex(int index, int listSize)
 		{
 			index = ((index % listSize) + listSize) % listSize;
 

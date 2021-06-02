@@ -45,6 +45,31 @@
 		#region Methods
 		void ISelection.Add(ISelectable selectable)
 		{
+			_Add(selectable, true);
+		}
+
+		void ISelection.Add(ISelectable[] selectables)
+		{
+			if (selectables is null) throw new ArgumentNullException(nameof(selectables));
+
+			foreach (ISelectable selectable in selectables)
+			{
+				if (selectable.CanBeMultiSelected == true)
+				{
+					_Add(selectable, false);
+				}
+			}
+
+			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+		}
+
+		void ISelection.Remove(ISelectable selectable)
+		{
+			_Remove(selectable, true);
+		}
+
+		private void _Add(ISelectable selectable, bool invokeEvent)
+		{
 			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
 
 			if (Selection.IsSelected(selectable) == true)
@@ -65,24 +90,13 @@
 			_selectedObjets.Add(selectable);
 			selectable.OnSelected();
 
-			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
-		}
-
-		void ISelection.Add(ISelectable[] selectables)
-		{
-			
-			if (selectables is null) throw new ArgumentNullException(nameof(selectables));
-
-			foreach (ISelectable selectable in selectables)
+			if (invokeEvent == true)
 			{
-				if (selectable.CanBeMultiSelected == true)
-				{
-					Selection.Add(selectable);
-				}
+				SelectionChanged?.Invoke(this, new SelectionChangedArgs());
 			}
 		}
 
-		void ISelection.Remove(ISelectable selectable)
+		private void _Remove(ISelectable selectable, bool invokeEvent)
 		{
 			if (selectable is null) throw new ArgumentNullException(nameof(selectable));
 
@@ -98,15 +112,20 @@
 			_selectedObjets.Remove(selectable);
 			selectable.OnUnselected();
 
-			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+			if (invokeEvent == true)
+			{
+				SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+			}
 		}
 
 		void ISelection.Clear()
 		{
 			for (int i = _selectedObjets.Count - 1; i >= 0; i--)
 			{
-				Selection.Remove(_selectedObjets[i]);
+				_Remove(_selectedObjets[i], false);
 			}
+
+			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
 		}
 
 		bool ISelection.IsSelected(ISelectable selectable)

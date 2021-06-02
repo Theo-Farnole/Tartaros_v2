@@ -4,6 +4,8 @@
 	using Sirenix.Utilities;
 	using Tartaros.Economy;
 	using Tartaros.Map;
+	using Tartaros.ServicesLocator;
+	using Tartaros.UI;
 	using UnityEngine;
 
 	public static class TartarosTexts
@@ -25,6 +27,8 @@
 
 		public static readonly string DEFAULT_SECTOR_NAME = "Empty sector";
 		public static readonly string DEFAULT_SECTOR_DESCRIPTION = "";
+
+		private static readonly string ICON_GLORY = "<sprite name=\"glory\">";
 
 
 
@@ -52,7 +56,7 @@
 			var specialSectorIncome = specialSector.GetComponent<SpecialSectorIncome>();
 			IIncomeGenerator incomeGenerator = specialSectorIncome;
 
-			return "Earn {0} glory on capture. Give frenquently {1}.".Format(
+			return "Earn {0} on capture. Give frenquently {1}.".Format(
 				GetGloryText(specialSectorIncome.GloryIncomeOnCapture),
 				GetResourceText(incomeGenerator.ResourcesPerTick, incomeGenerator.SectorRessourceType));
 		}
@@ -64,7 +68,9 @@
 
 		public static string GetGloryText(int amount)
 		{
-			return "<color={0}>{1}</color>".Format(SPELLS_COLOR_HEX, amount);
+			int gemAmount = amount / Services.Instance.Get<GloryGemsManagerUI>().MaxGloryPerGem;
+
+			return "{2}<color={0}>{1}</color>".Format(SPELLS_COLOR_HEX, gemAmount, ICON_GLORY);
 		}
 	}
 }

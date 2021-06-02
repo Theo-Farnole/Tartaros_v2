@@ -22,6 +22,19 @@
 			UpdateCoverablesVisibility();
 		}
 
+		private void OnDisable()
+		{
+			UncoverAllCoverables();
+		}
+
+		private void UncoverAllCoverables()
+		{
+			foreach (var coverable in _coverables)
+			{
+				coverable.IsCovered = false;
+			}
+		}
+
 		public void AddVision(IFogVision vision)
 		{
 			if (_visions.Contains(vision) == true)
@@ -68,6 +81,7 @@
 
 		private void UpdateCoverablesVisibility()
 		{
+			// TODO TF: (performance) cache this
 			IShape[] visions = _visions.Select(x => x.VisionShape).ToArray();
 
 			foreach (IFogCoverable coverable in _coverables)

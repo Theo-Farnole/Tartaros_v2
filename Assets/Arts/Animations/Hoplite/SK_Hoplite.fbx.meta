@@ -3,7 +3,17 @@ guid: a6c91c0f4a81bb64095ac9f941267bb8
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Hoplite
+    second: {fileID: 2100000, guid: 84cbed3d93fb09d468a478a6af58b81a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 84cbed3d93fb09d468a478a6af58b81a, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

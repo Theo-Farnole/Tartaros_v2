@@ -52,34 +52,31 @@
 
 		public void DrawPathNavigation()
 		{
-			if (_spawnPoints.Length != 0)
+			if (_spawnPoints.Length == 0) return;
+
+			if (_rootTransform == null)
 			{
-				if (_rootTransform == null)
-				{
-					_rootTransform = _miniMap.RootTransform;
-				}
-
-				foreach (NavMeshPath path in GetNavigationsPaths())
-				{
-					Vector3[] corners = GetCornersNavigationPath(path);
-					List<Vector2> vertexs = GetVectors2(corners);
-					//Debug.Log(vertexs.Count);
-
-					GameObject navLine = GameObject.Instantiate(_navigationLine, _mapBackground.transform);
-					DrawLineUI navPath = navLine.GetComponent<DrawLineUI>();
-
-					navPath.Setup(
-					Mathf.RoundToInt(_rootTransform.rect.width),
-					Mathf.RoundToInt(_rootTransform.rect.height));
-
-					navPath.SetNavigationPoints(vertexs);
-					_navigationLineInstanciate.Add(navLine);
-				}
+				_rootTransform = _miniMap.RootTransform;
 			}
-			else
+
+			foreach (NavMeshPath path in GetNavigationsPaths())
 			{
-				return;
+				Vector3[] corners = GetCornersNavigationPath(path);
+				List<Vector2> vertexs = GetVectors2(corners);
+				//Debug.Log(vertexs.Count);
+
+				GameObject navLine = GameObject.Instantiate(_navigationLine, _mapBackground.transform);
+				DrawLineUI navPath = navLine.GetComponent<DrawLineUI>();
+
+				navPath.Setup(
+				Mathf.RoundToInt(_rootTransform.rect.width),
+				Mathf.RoundToInt(_rootTransform.rect.height));
+
+				navPath.SetNavigationPoints(vertexs);
+				navPath.SetThickness(5);
+				_navigationLineInstanciate.Add(navLine);
 			}
+
 		}
 
 		private List<Vector2> GetVectors2(Vector3[] corners)
@@ -121,9 +118,8 @@
 						positionWaypoint = hitWaypoint.position;
 					}
 
-					if(i - 1 < 0)
+					if (i - 1 < 0)
 					{
-						Debug.Log(point.Waypoints[i]);
 						NavMesh.CalculatePath(point.SpawnPoint, positionWaypoint, NavMesh.AllAreas, pathWaypoint);
 					}
 					else
@@ -143,7 +139,14 @@
 					position = hit.position;
 				}
 
-				NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
+				if (point.Waypoints.Length == 0)
+				{
+					NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
+				}
+				else
+				{
+					NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
+				}
 
 				navPath.Add(path);
 			}
