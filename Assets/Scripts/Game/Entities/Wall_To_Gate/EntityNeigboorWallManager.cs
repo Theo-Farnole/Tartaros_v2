@@ -173,8 +173,9 @@
 				&& hit.transform.gameObject.GetComponentInParent<Entity>().EntityData.TryGetBehaviour<EntityConstructableData>(out EntityConstructableData data))
 			{
 				IConstructable constructable = hit.transform.gameObject.GetComponentInParent<Entity>().EntityData.GetBehaviour<EntityConstructableData>() as IConstructable;
+				var wallNeighbour = hit.transform.gameObject.GetComponentInParent<EntityNeigboorWallManager>();
 
-				if (_constructable == constructable)
+				if (wallNeighbour != null && _constructable == constructable)
 				{
 					return hit.transform.gameObject.GetComponentInParent<Entity>();
 				}
