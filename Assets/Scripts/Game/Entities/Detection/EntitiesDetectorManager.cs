@@ -106,7 +106,7 @@
 			// if the nearest entity has not a IAttackable component, let's use the hard way
 			else
 			{
-				Debug.Log(string.Format("Nearest entity using KD-Tree is {0} of team {1}. It is not a attackable.", nearestOpponent.name, team), nearestOpponent);
+				//Debug.Log(string.Format("Nearest entity using KD-Tree is {0} of team {1}. It is not a attackable.", nearestOpponent.name, team), nearestOpponent);
 
 				Entity[] entitiesInRange = this.GetEveryEntityInRadius(team, transform.position, radius);
 
