@@ -54,6 +54,22 @@
 			return _powersPrefab[power].GetComponent<IPower>().Price;
 		}
 
+		public void UnlockAllPowers()
+		{
+			foreach (Power power in EnumHelper.GetValues<Power>())
+			{
+				if (IsPowerUnlock(power))
+				{
+					UnlockPower(power);
+				}
+			}
+		}
+
+		public bool IsPowerUnlock(Power power)
+		{
+			return _unlockedPowers.Contains(power);
+		}
+
 		public void UnlockPower(Power power)
 		{
 			if (power == Power.None) return;
