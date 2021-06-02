@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 7032176481039760311}
   - component: {fileID: 6356215081659614489}
   - component: {fileID: 7258171856972684099}
-  - component: {fileID: 5984636632109656817}
   - component: {fileID: 7004378787413141332}
   - component: {fileID: 2728149883149680789}
   - component: {fileID: 2203876633589763659}
@@ -136,22 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _canBeMultiSelected: 1
---- !u!114 &5984636632109656817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4740395784054915281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8412799fbbdc44094be91881567ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _backAdjacentWall: {fileID: 0}
-  _frontAdjacentWall: {fileID: 0}
-  _rightAdjacecntWall: {fileID: 0}
-  _leftAdjacentWall: {fileID: 0}
 --- !u!114 &7004378787413141332
 MonoBehaviour:
   m_ObjectHideFlags: 0

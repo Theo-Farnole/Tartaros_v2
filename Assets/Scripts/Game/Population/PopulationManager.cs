@@ -74,7 +74,7 @@
 		{
 			if (popAmount < 0) throw new System.ArgumentException("PopAmount must be positive");
 
-			if (_currentPopulation - popAmount > 0)
+			if (_currentPopulation - popAmount >= 0)
 			{
 				_currentPopulation -= popAmount;
 				CurrentPopulationChanged?.Invoke(this, new CurrentPopulationChangedArgs());

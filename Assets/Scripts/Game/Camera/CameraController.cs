@@ -152,6 +152,13 @@
 			}
 		}
 
+		public void MoveCameraAtTargetPosition(Vector3 targetPosition)
+		{
+			if (targetPosition == null) return;
+
+			transform.position = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
+		}
+
 		private void TranslateCamera(Vector3 position)
 		{
 			Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);

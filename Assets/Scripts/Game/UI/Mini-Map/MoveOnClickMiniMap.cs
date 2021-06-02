@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.UI.MiniMap
 {
 	using System.Collections;
+	using Tartaros.CameraSystem;
 	using UnityEngine;
 
 	public class MoveOnClickMiniMap : MonoBehaviour
@@ -17,9 +18,15 @@
 
 		public void MoveCameraOnPosition(Vector2 mapPosition)
 		{
-			var test = _miniMap.UIToWorldPosition(mapPosition);
+			var worldPosition = _miniMap.UIToWorldPosition(mapPosition);
+			Debug.DrawRay(worldPosition, Vector3.up * 50, Color.red, Mathf.Infinity);
 
-			Debug.Log(test);
+			if(worldPosition != null)
+			{
+				_camera.GetComponent<CameraController>().MoveCameraAtTargetPosition(worldPosition);
+			}
+
+			Debug.Log(worldPosition);
 		}
 
 		private Vector3 GetWorldPosition(Vector2 mapPosition)

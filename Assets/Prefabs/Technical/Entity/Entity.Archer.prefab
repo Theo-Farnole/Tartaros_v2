@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 1364691790755559398}
   - component: {fileID: 5867453042301369172}
   - component: {fileID: 6801364222663149889}
+  - component: {fileID: 4483044657272090508}
   m_Layer: 0
   m_Name: Entity.Archer
   m_TagString: Untagged
@@ -16389,6 +16390,18 @@ MonoBehaviour:
     - {x: 0.68466395, y: 0.720747, z: 0.108439416}
     - {x: 0.6592679, y: 0.7207493, z: 0.21421055}
     - {x: 0.6846339, y: 0.7207761, z: 0.108435184}
+--- !u!114 &4483044657272090508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812927556283947172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b997af4d82253040817d76bd5c8219f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6812927557317958458
 GameObject:
   m_ObjectHideFlags: 0

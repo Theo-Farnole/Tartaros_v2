@@ -70,10 +70,10 @@
 				return false;
 			}
 
-			var managerFront = _neigboorManager.FrontAdjacentWall.GetComponent<EntityNeigboorWallManager>();
 			var managerBack = _neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
+			var managerDoubleBack = managerBack.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
 
-			return managerFront.FrontAdjacentWall != null && managerBack.BackAdjacentWall != null;
+			return managerDoubleBack.FrontAdjacentWall != null && managerBack.BackAdjacentWall != null;
 		}
 
 

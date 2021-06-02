@@ -50,17 +50,13 @@
 		private void Awake()
 		{
 			_selectable = GetComponent<ISelectable>();
-			_selectionManager = Services.Instance.Get<CurrentSelection>() as ISelection;
+			_villagerSpawner = GetComponent<VillagerSpawnerManager>();
 
+			_selectionManager = Services.Instance.Get<CurrentSelection>() as ISelection;
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
 
 			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
-		}
-
-		private void OnEnable()
-		{
-			_villagerSpawner = GetComponent<VillagerSpawnerManager>();
 		}
 
 		private void Update()
@@ -104,6 +100,7 @@
 			{
 				var spawningPrefabBefore = CurrentPrefabSpawning;
 
+				_populationManager.RemoveCurrentPopulation(spawnToCancel.PopulationAmount);
 
 				// 1. refund
 				RefundEntitySpawn(spawnToCancel);
@@ -131,6 +128,7 @@
 
 			_playerResources.RemoveWallet(Data.GetSpawnPrice(prefabToSpawn));
 			_spawningQueue.Enqueue(prefabToSpawn);
+			_populationManager.AddCurrentPopulation(prefabToSpawn.PopulationAmount);
 
 			if (_spawningQueue.Count == 1)
 			{
@@ -210,6 +208,7 @@
 
 		private void Spawn(ISpawnable prefabToSpawn)
 		{
+			_populationManager.RemoveCurrentPopulation(prefabToSpawn.PopulationAmount);
 			Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
 		}
 
