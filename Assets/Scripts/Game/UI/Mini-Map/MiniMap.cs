@@ -145,8 +145,8 @@
 
 		public Vector3 UIToWorldPosition(Vector2 UIPosition)
 		{
-			var x = _rootTransform.rect.width * UIPosition.x / _map.MapBounds.boundsX.max;
-			var z = _rootTransform.rect.height * UIPosition.y / _map.MapBounds.boundsY.max;
+			var x =   _map.MapBounds.boundsX.max / _rootTransform.rect.width * UIPosition.x  ;
+			var z =   _map.MapBounds.boundsY.max / _rootTransform.rect.height  * UIPosition.y ;
 
 			return new Vector3(x, 1, z);
 		}
