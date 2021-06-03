@@ -16,6 +16,7 @@
 		[Title("Settings")]
 		[SerializeField] private Vector3 _projectileSpawnPoint = Vector3.up;
 		[Title("References")]
+		[SerializeField] private float _inflictDamageDelay = 0f;
 		[SerializeField] private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
 		[SerializeField] private Transform _turretTransform = null;
 		[SerializeField, FoldoutGroup("Sounds")] private AudioSource _attackAudioSource = null;
@@ -119,8 +120,16 @@
 
 			if (DoInflictDamageOnSpecificKey() == false)
 			{
-				InflictDamageToTarget(); // inflict damage now
+				if (_inflictDamageDelay > 0)
+				{
+					this.ExecuteAfterTime(_inflictDamageDelay, InflictDamageToTarget);
+				}
+				else
+				{
+					InflictDamageToTarget(); // inflict damage now
+				}
 			}
+
 
 			AttackCasted?.Invoke(this, new AttackCastedArgs());
 		}
