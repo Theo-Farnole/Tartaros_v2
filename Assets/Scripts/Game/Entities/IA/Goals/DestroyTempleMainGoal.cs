@@ -30,7 +30,6 @@
 			base.OnEnter();
 
 			AddMoveToTemple();
-
 		}
 		public override void OnUpdate()
 		{
@@ -77,15 +76,7 @@
 			}
 			else
 			{
-				if (IsThePathPatrial() == true)
-				{
-					//AddClearPath();
-					AddMoveToTemple();
-				}
-				else
-				{
-					AddMoveToTemple();
-				}
+				AddMoveToTemple();
 			}
 		}
 
@@ -116,6 +107,7 @@
 		{
 			Vector3 targetPosition = GoalPosition();
 
+			Debug.Log("AddMoveTemple");
 			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, targetPosition);
 
 			base.AddSubGoal(_currentMoveToTemple);
@@ -123,9 +115,9 @@
 
 		private bool FinalDestinationIsReach()
 		{
-			float distance = Vector3.Distance(_goalOwner.transform.position, _templePosition);
+			float distance = Vector3.Distance(_goalOwner.transform.position, new Vector3(_templePosition.x, 0, _templePosition.z));
 
-			return distance <= 10;
+			return distance <= 12;
 		}
 
 		private void DestroyObstacle()
