@@ -51,6 +51,8 @@
 
 			ISector sector = (this as IMap).GetSectorOnPosition(buildingPosition);
 
+			if (sector == null) return false;
+
 			if (sector.IsCaptured == false)
 			{
 				_logger.Log("Cannot build on a uncaptured sector.", buildingPosition, sector.ToString());
