@@ -22,6 +22,7 @@
 		private RectTransform _rootTransform = null;
 		private ISpawnPoint[] _spawnPoints = null;
 		private List<GameObject> _navigationLineInstanciate = new List<GameObject>();
+		private EnemiesWavesManager _waveManager = null;
 		//TODO DJ: Give the position of the Temple automaticaly 
 
 
@@ -29,6 +30,7 @@
 		{
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
 			FindTargetPosition();
+			_waveManager = _miniMap.WaveManager;
 		}
 
 		private void FindTargetPosition()
@@ -107,51 +109,73 @@
 
 			foreach (ISpawnPoint point in _spawnPoints)
 			{
-				for (int i = 0; i < point.Waypoints.Length; i++)
+				if (IsSpawnPointIsActive(point) == true)
 				{
-					var pathWaypoint = new NavMeshPath();
-
-					NavMeshHit hitWaypoint;
-					Vector3 positionWaypoint = Vector3.zero;
-					if (NavMesh.SamplePosition(point.Waypoints[i], out hitWaypoint, 50, NavMesh.AllAreas))
+					for (int i = 0; i < point.Waypoints.Length; i++)
 					{
-						positionWaypoint = hitWaypoint.position;
+						var pathWaypoint = new NavMeshPath();
+
+						NavMeshHit hitWaypoint;
+						Vector3 positionWaypoint = Vector3.zero;
+						if (NavMesh.SamplePosition(point.Waypoints[i], out hitWaypoint, 50, NavMesh.AllAreas))
+						{
+							positionWaypoint = hitWaypoint.position;
+						}
+
+						if (i - 1 < 0)
+						{
+							NavMesh.CalculatePath(point.SpawnPoint, positionWaypoint, NavMesh.AllAreas, pathWaypoint);
+						}
+						else
+						{
+							NavMesh.CalculatePath(point.Waypoints[i - 1], positionWaypoint, NavMesh.AllAreas, pathWaypoint);
+						}
+
+						navPath.Add(pathWaypoint);
 					}
 
-					if (i - 1 < 0)
+					var path = new NavMeshPath();
+
+					NavMeshHit hit;
+					Vector3 position = Vector3.zero;
+					if (NavMesh.SamplePosition(_targetPosition.position, out hit, 50, NavMesh.AllAreas))
 					{
-						NavMesh.CalculatePath(point.SpawnPoint, positionWaypoint, NavMesh.AllAreas, pathWaypoint);
+						position = hit.position;
+					}
+
+					if (point.Waypoints.Length == 0)
+					{
+						NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
 					}
 					else
 					{
-						NavMesh.CalculatePath(point.Waypoints[i - 1], positionWaypoint, NavMesh.AllAreas, pathWaypoint);
+						NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
 					}
 
-					navPath.Add(pathWaypoint);
+					navPath.Add(path);
 				}
-
-				var path = new NavMeshPath();
-
-				NavMeshHit hit;
-				Vector3 position = Vector3.zero;
-				if (NavMesh.SamplePosition(_targetPosition.position, out hit, 50, NavMesh.AllAreas))
-				{
-					position = hit.position;
-				}
-
-				if (point.Waypoints.Length == 0)
-				{
-					NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
-				}
-				else
-				{
-					NavMesh.CalculatePath(point.Waypoints[point.Waypoints.Length - 1], position, NavMesh.AllAreas, path);
-				}
-
-				navPath.Add(path);
 			}
 
 			return navPath.ToArray();
+		}
+
+		private bool IsSpawnPointIsActive(ISpawnPoint spawnPoint)
+		{
+			if (_waveManager == null) _waveManager = _miniMap.WaveManager;
+
+			WaveData waveData = _waveManager.WaveSpawnerData.Waves[_waveManager.CurrentWaveIndex];
+			SpawnPointIdentifier[] pointsUses = waveData.GetSpawnPointActiveInTheWave();
+
+
+			foreach (SpawnPointIdentifier identifier in pointsUses)
+			{
+				if (identifier == spawnPoint.Identifier)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		public void DisablePathLine()
