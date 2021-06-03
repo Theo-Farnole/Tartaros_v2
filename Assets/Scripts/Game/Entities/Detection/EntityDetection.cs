@@ -190,13 +190,13 @@
 
 		public Entity[] GetEveryOpponentInRange()
 		{
-			foreach (var entity in _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange))
+			foreach (var entity in _entitiesKDTrees.GetEntitiesInRadius(OpponentTeam, transform.position, AttackRange))
 			{
 				Vector3 direction = transform.position - entity.gameObject.transform.position;
 
 				Debug.DrawRay(transform.position, -direction, Color.cyan);
 			}
-			return _entitiesKDTrees.GetEveryEntityInRadius(OpponentTeam, transform.position, AttackRange);
+			return _entitiesKDTrees.GetEntitiesInRadius(OpponentTeam, transform.position, AttackRange);
 		}
 		
 		private IEnumerable<Entity> GetOpponentsOrderByDistance()

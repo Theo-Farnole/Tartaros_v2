@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using System.Collections.Generic;
 	using Tartaros.Entities.Movement;
@@ -13,6 +14,10 @@
 	public class EntityMovement : AEntityBehaviour, IOrderMoveAggresivellyReceiver, IOrderMoveReceiver, IOrderPatrolReceiver, IOrderable
 	{
 		#region Fields
+		[Title("Settings")]
+		[SerializeField] private bool _enableDynamicAvoidance = true;
+		[SerializeField] private bool _enableTransitiveStop = true;
+		[Title("Data")]
 		[SerializeField] private AgentCollisionMovingData _agentCollisionData = null;
 
 		private int _navMeshArea = -1;
@@ -22,6 +27,7 @@
 		private EntityFSM _entityFSM = null;
 
 		private NavMeshCollisionMoving _navMeshCollisionMoving = null;
+		private TransitiveStopEmitter _transitiveStopEmitter = null;
 		#endregion
 
 		#region Properties
@@ -44,6 +50,10 @@
 				SetAreaMask(value);
 			}
 		}
+
+		public bool IsMoving => !_navMeshAgent.isStopped;
+		public Vector3 Destination => _navMeshAgent.destination;
+		public float AvoidanceRadius => _navMeshAgent.radius;
 		#endregion Properties
 
 		#region Events
@@ -63,7 +73,9 @@
 		{
 			_navMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
 			_entityFSM = GetComponent<EntityFSM>();
+
 			_navMeshCollisionMoving = new NavMeshCollisionMoving(_navMeshAgent, _agentCollisionData);
+			_transitiveStopEmitter = new TransitiveStopEmitter(this);
 
 			EntityMovementData = Entity.GetBehaviourData<EntityMovementData>();
 		}
@@ -99,7 +111,11 @@
 
 				if (wasStopped == true)
 				{
-					_navMeshCollisionMoving.ReduceCollision();
+					if (_enableDynamicAvoidance == true)
+					{
+						_navMeshCollisionMoving.ReduceCollision();
+					}
+
 					StartMoving?.Invoke(this, new StartMovingArgs());
 				}
 			}
@@ -115,9 +131,27 @@
 
 			if (wasStopped == false)
 			{
-				_navMeshCollisionMoving.GrowCollisionToNormal();
+				if (_enableDynamicAvoidance == true)
+				{
+					_navMeshCollisionMoving.GrowCollisionToNormal();
+				}
+
+				if (_enableTransitiveStop == true)
+				{
+					_transitiveStopEmitter.EmitStop();
+				}
+
+
 				StopMoving?.Invoke(this, new StopMovingArgs());
 			}
+		}
+
+		public void StopMovementFromTransitiveStop(GameObject emitter)
+		{
+			if (IsMoving == false) return; // must be moving
+
+			StopMovement();
+			DestinationReached?.Invoke(this, new DestinationReachedArgs());
 		}
 
 		private void SetAreaMask(int value)

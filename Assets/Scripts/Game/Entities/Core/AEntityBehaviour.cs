@@ -7,7 +7,7 @@
 	{
 		private Entity _entity = null;
 
-		protected Entity Entity
+		public Entity Entity
 		{
 			get
 			{

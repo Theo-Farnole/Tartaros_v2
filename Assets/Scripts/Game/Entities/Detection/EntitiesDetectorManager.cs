@@ -1,4 +1,4 @@
-﻿namespace Tartaros.Entities.Detection
+namespace Tartaros.Entities.Detection
 {
 	using System;
 	using System.Collections.Generic;
@@ -56,7 +56,7 @@
 		private void RemoveEntityFromKDTree(Team team, Entity entity) => _kdTrees[team].RemoveAll(x => x == entity);
 
 		// TODO TF: (perf)
-		public Entity[] GetEveryEntityInRadius(Team team, Vector3 position, float radius)
+		public Entity[] GetEntitiesInRadius(Team team, Vector3 position, float radius)
 		{
 			var entitiesOfTeam = FindAllEntitiesOfTeam(team);
 			List<Entity> output = new List<Entity>();
@@ -64,9 +64,8 @@
 			foreach (Entity entity in entitiesOfTeam)
 			{
 				float distance = Vector3.Distance(position, entity.transform.position);
-				float targetRadius = entity.GetComponent<IAttackable>().SizeRadius;
 
-				if(IsTheTwoRadiusAreOverlapping(radius, targetRadius, distance))
+				if (distance <= radius)
 				{
 					output.Add(entity);
 				}
@@ -108,7 +107,7 @@
 			{
 				//Debug.Log(string.Format("Nearest entity using KD-Tree is {0} of team {1}. It is not a attackable.", nearestOpponent.name, team), nearestOpponent);
 
-				Entity[] entitiesInRange = this.GetEveryEntityInRadius(team, transform.position, radius);
+				Entity[] entitiesInRange = this.GetEntitiesInRadius(team, transform.position, radius);
 
 				foreach (Entity entity in entitiesInRange)
 				{
