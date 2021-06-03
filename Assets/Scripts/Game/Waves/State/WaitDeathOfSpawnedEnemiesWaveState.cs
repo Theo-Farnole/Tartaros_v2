@@ -31,12 +31,13 @@
 			{
 				if (_stateOwner.CurrentWaveIndex < _stateOwner.LastWaveIndex)
 				{
-					_stateOwner.InvokeWaveDefeated();
+					_stateOwner.InvokeWaveFinish();
 					_stateOwner.WaveFSM.CurrentState = new WaveCooldownState(_stateOwner);
 				}
 				else
 				{
-					_stateOwner.InvokeWavesFinished();
+					_stateOwner.InvokeWaveFinish();
+					_stateOwner.InvokeGameFinished();
 					_stateOwner.WaveFSM.CurrentState = new WaveFinishedState(_stateOwner);
 				}
 			}
