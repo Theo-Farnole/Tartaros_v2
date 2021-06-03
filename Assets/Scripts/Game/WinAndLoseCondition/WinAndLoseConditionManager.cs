@@ -25,8 +25,8 @@
 
 		private void OnEnable()
 		{
-			_waveManager.WavesFinish -= WavesFinished;
-			_waveManager.WavesFinish += WavesFinished;
+			_waveManager.GameFinish -= WavesFinished;
+			_waveManager.GameFinish += WavesFinished;
 		}
 
 		private void Update()

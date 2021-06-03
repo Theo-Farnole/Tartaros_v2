@@ -12,12 +12,15 @@
 		#region Fields
 		[SerializeField] private CameraData _cameraData = null;
 		[SerializeField] private Bounds2D _cameraMargins = null;
+		[SerializeField] private AudioListener _audioListener = null;
 
 		private bool _enableScreenEdgeMovement = false;
 		private bool _useUnscaledDeltaTime = false;
 
 		private GameInputs _input = null;
 		private Bounds2D _cameraBounds = null;
+
+		private Plane _groundPlane = new Plane(Vector3.up, Vector3.zero);
 
 		// SERVICES
 		private IMap _map = null;
@@ -62,6 +65,11 @@
 			_input = new GameInputs();
 			_input.Camera.Enable();
 			_enableScreenEdgeMovement = _cameraData.EnableScreenEdgeMovement;
+
+			if (_audioListener.gameObject == this.gameObject)
+			{
+				Debug.LogError("The audio listener cannot be on the same GameObject of the camera.", gameObject);
+			}
 		}
 
 		private void Start()
@@ -79,6 +87,18 @@
 		private void Update()
 		{
 			MovementManager();
+			SetAudioListenerOnGround();
+		}
+
+		private void SetAudioListenerOnGround()
+		{
+			Ray ray = new Ray(transform.position, transform.forward);
+
+			if (_groundPlane.Raycast(ray, out float enter))
+			{
+				Vector3 hitPoint = ray.GetPoint(enter);
+				_audioListener.transform.position = hitPoint;
+			}
 		}
 
 		private void OnDrawGizmos()

@@ -96,7 +96,7 @@
 		{
 			//_hitEffect.ExecuteHitEffect(_targetPosition);
 
-			var Entities = _detector.GetEveryEntityInRadius(Team.Enemy, _targetPosition, _radiusDamage);
+			var Entities = _detector.GetEntitiesInRadius(Team.Enemy, _targetPosition, _radiusDamage);
 
 			foreach (var target in Entities)
 			{

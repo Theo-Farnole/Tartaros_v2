@@ -46,7 +46,7 @@
 		{
 			Entity[] entitiesInRadius = SpawnEntitiesInRadius();
 
-			Entity[] output = _entitiesDetector.GetEveryEntityInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
+			Entity[] output = _entitiesDetector.GetEntitiesInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
 
 			foreach (Entity entityInRadius in entitiesInRadius)
 			{
@@ -57,7 +57,7 @@
 		[Test]
 		public void When_EntitiesNoInScene_Should_ReturnEmpty()
 		{
-			Entity[] output = _entitiesDetector.GetEveryEntityInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
+			Entity[] output = _entitiesDetector.GetEntitiesInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
 
 			Assert.AreEqual(0, output.Length);
 		}
@@ -67,7 +67,7 @@
 		{
 			SpawnEntitiesNotInRadius();
 
-			Entity[] output = _entitiesDetector.GetEveryEntityInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
+			Entity[] output = _entitiesDetector.GetEntitiesInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
 
 			Assert.AreEqual(0, output.Length);
 		}
@@ -78,7 +78,7 @@
 			Entity[] entitiesInRadius = SpawnEntitiesInRadius();
 			Entity[] entitiesNotInRadius = SpawnEntitiesNotInRadius();
 
-			Entity[] output = _entitiesDetector.GetEveryEntityInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
+			Entity[] output = _entitiesDetector.GetEntitiesInRadius(Team.Player, Vector3.zero, DETECTOR_RADIUS);
 
 			foreach (Entity entityInRadius in entitiesInRadius)
 			{

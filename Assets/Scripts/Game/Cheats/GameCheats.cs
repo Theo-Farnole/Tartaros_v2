@@ -10,6 +10,7 @@
 	using Tartaros.ServicesLocator;
 	using TF.CheatsGUI;
 	using UnityEngine;
+	using UnityEngine.SceneManagement;
 
 	public static class GameCheats
 	{
@@ -88,6 +89,19 @@
 			else
 			{
 				Debug.LogWarning("there is no sialogueManager on the scene");
+			}
+		}
+
+		[Cheat]
+		public static void LoadGameScene(string sceneName = "MainLevel")
+		{
+			if(SceneManager.GetSceneByName(sceneName) != null)
+			{
+				SceneManager.LoadScene(sceneName);
+			}
+			else
+			{
+				Debug.LogErrorFormat("The name {0} isnt valable and returning to no scene", sceneName);
 			}
 		}
 

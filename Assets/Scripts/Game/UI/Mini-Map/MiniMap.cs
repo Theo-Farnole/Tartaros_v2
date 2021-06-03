@@ -37,6 +37,7 @@
 		private MoveOnClickMiniMap _moveOnClick = null;
 
 		public RectTransform RootTransform => _rootTransform;
+		public EnemiesWavesManager WaveManager => _enemiesWaveManager;
 
 		private void Awake()
 		{

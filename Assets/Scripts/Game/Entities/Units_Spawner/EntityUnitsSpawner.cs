@@ -8,6 +8,7 @@
 	using Tartaros.Population;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using Tartaros.SoundSystem;
 	using TMPro;
 	using UnityEngine;
 
@@ -15,17 +16,19 @@
 	public class EntityUnitsSpawner : AEntityBehaviour, IOrderable
 	{
 		#region Fields
+		[SerializeField] private Vector3 _unitSpawn = Vector3.zero;
+
 		[ShowInRuntime] private Queue<ISpawnable> _spawningQueue = new Queue<ISpawnable>();
 		[ShowInRuntime] private float _nextSpawnTime = 0;
 		[ShowInRuntime] private float _startSpawnTime = 0;
 
 		private EntityUnitsSpawnerData _data = null;
-		private IPlayerSectorResources _playerResources = null;
-		private IPopulationManager _populationManager = null;
-		private VillagerSpawnerManager _villagerSpawner = null;
 
-		private ISelectable _selectable = null;
-		private ISelection _selectionManager = null;
+		// SERVICES & COMPONENTS
+		private VillagerSpawnerManager _villagerSpawner = null;
+		private IPopulationManager _populationManager = null;
+		private IPlayerSectorResources _playerResources = null;
+		private SoundsHandler _soundsHandler = null;
 		#endregion Fields
 
 		#region Properties
@@ -49,12 +52,11 @@
 		#region Methods
 		private void Awake()
 		{
-			_selectable = GetComponent<ISelectable>();
 			_villagerSpawner = GetComponent<VillagerSpawnerManager>();
 
-			_selectionManager = Services.Instance.Get<CurrentSelection>() as ISelection;
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
 			_populationManager = Services.Instance.Get<IPopulationManager>();
+			_soundsHandler = Services.Instance.Get<SoundsHandler>();
 
 			_data = Entity.GetBehaviourData<EntityUnitsSpawnerData>();
 		}
@@ -69,17 +71,6 @@
 				{
 					SpawnVillager(_spawningQueue.Peek());
 					ResetSpawnTimer();
-				}
-			}
-		}
-
-		private void OnGUI()
-		{
-			if (_selectionManager.IsSelected(_selectable) == true)
-			{
-				foreach (var toSpawn in _spawningQueue)
-				{
-					GUILayout.Label(toSpawn.ToString());
 				}
 			}
 		}
@@ -210,11 +201,15 @@
 		{
 			_populationManager.RemoveCurrentPopulation(prefabToSpawn.PopulationAmount);
 			Instantiate(prefabToSpawn.Prefab, GetSpawnPoint(), Quaternion.identity);
+			_soundsHandler.PlayOneShot(SoundsSystem.Sound.UnitSpawn);
 		}
 
 		private Vector3 GetSpawnPoint()
 		{
-			return transform.position + Vector3.right * 2;
+			var randomeCircle = Random.insideUnitCircle * 2;
+
+			return (transform.position + _unitSpawn) + new Vector3(randomeCircle.x, 0, randomeCircle.y);
+			//return transform.position + Vector3.forward * 5;
 		}
 
 		#region IOrderable

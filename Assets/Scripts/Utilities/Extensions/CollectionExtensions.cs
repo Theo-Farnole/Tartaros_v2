@@ -17,6 +17,16 @@
 			return collection.Count > 0;
 		}
 
+
+		public static T GetRandom<T>(this T[] array)
+		{
+			if (array.Length == 0) throw new System.NotSupportedException("Cannot get random element on a empty array.");
+
+			int randomIndex = UnityEngine.Random.Range(0, array.Length);
+
+			return array[randomIndex];
+		}
+
 		public static bool IsEmpty<T>(this Queue<T> queue) => queue.Count == 0;
 
 		/// <summary>

@@ -303,6 +303,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0d2d776f38e424583f3318bb5e46d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDynamicAvoidance: 1
+  _enableTransitiveStop: 1
+  _agentCollisionData:
+    _growingTime: 2
+    _reducedRadius: 0.1
+    _reducingTime: 0.1
 --- !u!114 &5147011089507111393
 MonoBehaviour:
   m_ObjectHideFlags: 0

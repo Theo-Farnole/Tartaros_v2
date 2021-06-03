@@ -17,13 +17,14 @@
 
 		private RectTransform _rootTransform = null;
 		private ISpawnPoint[] _spawnPoints = null;
-		private List<GameObject> _navigationLineInstanciate = new List<GameObject>();
 		private GameObject[] _pingArray = null;
+		private EnemiesWavesManager _waveManager = null;
 
 		private void Awake()
 		{
 			_miniMap = GetComponent<MiniMap>();
 			_spawnPoints = ObjectsFinder.FindObjectsOfInterface<ISpawnPoint>();
+			_waveManager = _miniMap.WaveManager;
 		}
 
 		private void Start()
@@ -67,10 +68,32 @@
 
 			foreach (var spawn in _spawnPoints)
 			{
-				output.Add(spawn.SpawnPoint);
+				if(IsSpawnPointIsActive(spawn) == true)
+				{
+					output.Add(spawn.SpawnPoint);
+				}
 			}
 
 			return output.ToArray();
+		}
+
+		private bool IsSpawnPointIsActive(ISpawnPoint spawnPoint)
+		{
+			if (_waveManager == null) _waveManager = _miniMap.WaveManager;
+
+			WaveData waveData = _waveManager.WaveSpawnerData.Waves[_waveManager.CurrentWaveIndex];
+			SpawnPointIdentifier[] pointsUses = waveData.GetSpawnPointActiveInTheWave();
+
+
+			foreach (SpawnPointIdentifier identifier in pointsUses)
+			{
+				if (identifier == spawnPoint.Identifier)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		private void DestroyPings()
