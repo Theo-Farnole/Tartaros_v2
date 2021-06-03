@@ -23,15 +23,14 @@
 			_waveManager.WaveSpawnStart -= _waveManager_WaveSpawnStart;
 			_waveManager.WaveSpawnStart += _waveManager_WaveSpawnStart;
 
-			_waveManager.WaveDefeated -= _waveManager_WaveDefeated;
-			_waveManager.WaveDefeated += _waveManager_WaveDefeated;
+			_waveManager.WaveFinish -= _waveManager_WaveFinish;
+			_waveManager.WaveFinish += _waveManager_WaveFinish;
 		}
-
 
 		private void OnDisable()
 		{
+			_waveManager.WaveFinish -= _waveManager_WaveFinish;
 			_waveManager.WaveSpawnStart -= _waveManager_WaveSpawnStart;
-			_waveManager.WaveDefeated -= _waveManager_WaveDefeated;
 		}
 
 		private void _waveManager_WaveSpawnStart(object sender, EnemiesWavesManager.WaveSpawningStartArgs e)
@@ -39,9 +38,10 @@
 			_soundsHandler.PlayOneShot(SoundsSystem.Sound.WaveStart);
 		}
 
-		private void _waveManager_WaveDefeated(object sender, EnemiesWavesManager.WaveDefeatedArgs e)
+		private void _waveManager_WaveFinish(object sender, EnemiesWavesManager.WaveIsFinishArgs e)
 		{
 			_soundsHandler.PlayOneShot(SoundsSystem.Sound.WaveEnd);
 		}
+
 	}
 }

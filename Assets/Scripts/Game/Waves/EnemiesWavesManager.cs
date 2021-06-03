@@ -131,11 +131,6 @@
 			WaveStartCooldown?.Invoke(this, new WaveStartCooldownArgs());
 		}
 
-		public void InvokeWaveDefeated()
-		{
-			WaveDefeated.Invoke(this, new WaveDefeatedArgs());
-		}
-
 		public void InvokeSpawningWaveFinished()
 		{
 			WaveSpawnFinished?.Invoke(this, new WaveSpawningFinishedArgs());
