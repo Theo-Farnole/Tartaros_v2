@@ -10,10 +10,13 @@
 	public class DoubleClickSelectionInput : SerializedMonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		private ISelection _selection = null;
+		[SerializeField] private ISelection _selection = null;
+		[SerializeField] private float _cancelMouseThreshold = 30; // move 30px = cancel double click
+
 		private RectangleSelectionInput _rectangleSelection = null;
 		private GameInputs _gameInputs = null;
+
+		private Vector2 _startMousePosition = Vector2.zero;
 		#endregion Fields
 
 		#region Properties
@@ -34,11 +37,25 @@
 		{
 			_gameInputs.Selection.Enable();
 
-			_gameInputs.Selection.DoubleClickSelection.performed -= DoubleClickSelection;
-			_gameInputs.Selection.DoubleClickSelection.performed += DoubleClickSelection;
+			_gameInputs.Selection.DoubleClickSelection.started -= DoubleClickSelection_started;
+			_gameInputs.Selection.DoubleClickSelection.started += DoubleClickSelection_started;
+
+			_gameInputs.Selection.DoubleClickSelection.performed -= DoubleClickSelection_performed;
+			_gameInputs.Selection.DoubleClickSelection.performed += DoubleClickSelection_performed;
 		}
 
-		private void DoubleClickSelection(InputAction.CallbackContext obj)
+		private void OnDisable()
+		{
+			_gameInputs.Selection.DoubleClickSelection.performed -= DoubleClickSelection_performed;
+			_gameInputs.Selection.DoubleClickSelection.started -= DoubleClickSelection_started;
+		}
+
+		private void DoubleClickSelection_started(InputAction.CallbackContext obj)
+		{
+			_startMousePosition = MouseHelper.CursorPosition;
+		}
+
+		private void DoubleClickSelection_performed(InputAction.CallbackContext obj)
 		{
 			if (_rectangleSelection.IsSelecting == true) return;
 
@@ -65,7 +82,7 @@
 			}
 
 			selectableUnderCursor = null;
-			
+
 			return false;
 		}
 
@@ -94,7 +111,7 @@
 
 		private bool CanSelect()
 		{
-			return IsPointerOverUI() == false;
+			return Vector2.Distance(_startMousePosition, MouseHelper.CursorPosition) <= _cancelMouseThreshold && IsPointerOverUI() == false;
 		}
 
 		private bool IsPointerOverUI()
@@ -109,7 +126,7 @@
 			}
 		}
 
-		
+
 
 		#endregion
 	}

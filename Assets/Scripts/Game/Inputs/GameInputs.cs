@@ -108,7 +108,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""656f1254-bd98-4f9f-96ce-ec6d626d25d7"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""MultiTap"",
+                    ""interactions"": ""MultiTap(tapDelay=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DoubleClickSelection"",
