@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities.Attack
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using Tartaros.Entities;
 	using Tartaros.Entities.Detection;
@@ -12,14 +13,13 @@
 	public partial class EntityAttack : AEntityBehaviour, IOrderAttackReceiver, IOrderable
 	{
 		#region Fields
-		[SerializeField]
-		private Vector3 _projectileSpawnPoint = Vector3.up;
-
-		[SerializeField]
-		private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
-
-		[SerializeField]
-		private Transform _turretTransform = null;
+		[Title("Settings")]
+		[SerializeField] private Vector3 _projectileSpawnPoint = Vector3.up;
+		[Title("References")]
+		[SerializeField] private InflictDamageAnimationEvent _inflictDamageAnimationEvent = null;
+		[SerializeField] private Transform _turretTransform = null;
+		[SerializeField, FoldoutGroup("Sounds")] private AudioSource _attackAudioSource = null;
+		[SerializeField, FoldoutGroup("Sounds")] private AudioClip[] _attackAudioClips = null;
 
 		private EntityAttackData _entityAttackData = null;
 		private EntityDetection _entityDetection = null;
@@ -137,14 +137,31 @@
 
 		private void InflictDamageToTarget()
 		{
+			PlayAttackSound();
+
 			_entityAttackData.AttackMode.Attack(transform, _target);
+		}
+
+		private void PlayAttackSound()
+		{
+			if (_attackAudioSource != null)
+			{
+				if (_attackAudioClips.Length > 0)
+				{
+					_attackAudioSource.PlayOneShot(_attackAudioClips.GetRandom());
+				}
+				else
+				{
+					Debug.LogWarning("There is an attack audio source referenced in EntityAttack, but there is no sound to play.", gameObject);
+				}
+			}
 		}
 
 		private void LookAt(IAttackable target)
 		{
 			if (target != null)
 			{
-				if(_turretTransform == null)
+				if (_turretTransform == null)
 				{
 					transform.forward = (target.Transform.position - transform.position);
 				}
