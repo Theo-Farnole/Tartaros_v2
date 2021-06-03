@@ -16,6 +16,8 @@
 	public class EntityUnitsSpawner : AEntityBehaviour, IOrderable
 	{
 		#region Fields
+		[SerializeField] private Vector3 _unitSpawn = Vector3.zero;
+
 		[ShowInRuntime] private Queue<ISpawnable> _spawningQueue = new Queue<ISpawnable>();
 		[ShowInRuntime] private float _nextSpawnTime = 0;
 		[ShowInRuntime] private float _startSpawnTime = 0;
@@ -204,7 +206,10 @@
 
 		private Vector3 GetSpawnPoint()
 		{
-			return transform.position + Vector3.right * 2;
+			var randomeCircle = Random.insideUnitCircle * 2;
+
+			return (transform.position + _unitSpawn) + new Vector3(randomeCircle.x, 0, randomeCircle.y);
+			//return transform.position + Vector3.forward * 5;
 		}
 
 		#region IOrderable
