@@ -31,6 +31,7 @@
 			{
 				if (_stateOwner.CurrentWaveIndex < _stateOwner.LastWaveIndex)
 				{
+					_stateOwner.InvokeWaveDefeated();
 					_stateOwner.WaveFSM.CurrentState = new WaveCooldownState(_stateOwner);
 				}
 				else

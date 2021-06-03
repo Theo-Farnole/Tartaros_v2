@@ -12,6 +12,7 @@
 	using Tartaros.Population;
 	using Tartaros.Powers;
 	using Tartaros.Selection;
+	using Tartaros.SoundSystem;
 	using Tartaros.UI;
 	using Tartaros.UI.HoverPopup;
 	using Tartaros.UI.MiniMap;
@@ -45,6 +46,7 @@
 			RegisterFromHierarchy<GloryGemsManagerUI>();
 
 			RegisterFromChildren<BuildingsDatabase>();
+			RegisterFromChildren<SoundsHandler>();
 			RegisterFromChildren<HoverPopupsDatabase>();
 			RegisterFromChildren<ConstructionManager>();
 			RegisterFromChildren<IPlayerGloryWallet>();

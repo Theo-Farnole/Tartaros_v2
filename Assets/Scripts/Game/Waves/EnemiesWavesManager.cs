@@ -78,6 +78,9 @@
 		public event EventHandler<WaveSpawningFinishedArgs> WaveSpawnFinished;
 		public event EventHandler<WaveStartCooldownArgs> WaveStartCooldown;
 		public event EventHandler<EveryWaveAreFinishedArgs> WavesFinish;
+
+		public class WaveDefeatedArgs : EventArgs { }
+		public event EventHandler<WaveDefeatedArgs> WaveDefeated = null;
 		// public event EventHandler<KilledArgs> Killed;
 		#endregion Events
 
@@ -125,6 +128,11 @@
 		{
 			_currentWaveIndex++;
 			WaveStartCooldown?.Invoke(this, new WaveStartCooldownArgs());
+		}
+
+		public void InvokeWaveDefeated()
+		{
+			WaveDefeated.Invoke(this, new WaveDefeatedArgs());
 		}
 
 		public void InvokeSpawningWaveFinished()
