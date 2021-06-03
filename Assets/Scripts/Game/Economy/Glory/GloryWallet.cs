@@ -6,6 +6,7 @@
 	{
 		#region Fields
 		private int _gloryAmount = 0;
+		private int _maxGloryAmount = 100;
 		#endregion Fields
 
 		#region Properties
@@ -16,6 +17,8 @@
 		#region Methods
 		void IGloryWallet.AddAmount(int amount)
 		{
+			if (_gloryAmount + amount > _maxGloryAmount) return;
+
 			_gloryAmount += amount;
 			AmountChanged?.Invoke(this, new GloryAmountChangedArgs());
 		}

@@ -33,8 +33,8 @@
 		public class CameraMoveStartArgs : EventArgs { }
 		public event EventHandler<CameraMoveStartArgs> CameraMoveStart = null;
 
-		public class CameraMoveEndArgs : EventArgs { }
-		public event EventHandler<CameraMoveEndArgs> CameraMoveEnd = null;
+		//public class CameraMoveEndArgs : EventArgs { }
+		//public event EventHandler<CameraMoveEndArgs> CameraMoveEnd = null;
 		#endregion Events
 
 		#region Methods
