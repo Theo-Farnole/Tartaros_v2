@@ -14,7 +14,7 @@
 	{
 		#region Fields
 		[Title("Main Settings")]
-		[SerializeField, PreviewField] private Sprite _portrait = null;
+		[SerializeField, PreviewField, AssetsOnly] private Sprite _portrait = null;
 		[SerializeField] private bool _IsChained = false;
 		[SerializeField] private int _timeToConstruct = 1;
 
@@ -22,13 +22,13 @@
 		[SerializeField] private Vector2 _size = Vector2.one;
 		[SerializeField] private IConstructionRule[] _rules = new IConstructionRule[0];
 
-		[SerializeField, FoldoutGroup("Prefabs")] private GameObject _modelPrefab = null;
-		[SerializeField, FoldoutGroup("Prefabs")] private GameObject _gameplayPrefab = null;
-		[SerializeField, FoldoutGroup("Prefabs"), ShowIf(nameof(_IsChained))] private GameObject _wallCornerModel = null;
-		[SerializeField, FoldoutGroup("Prefabs"), ShowIf(nameof(_IsChained))] private GameObject _wallCornerGameplay = null;
-		[SerializeField, FoldoutGroup("Prefabs")] private GameObject _constructionKitModel = null;
+		[SerializeField, FoldoutGroup("Prefabs"), AssetsOnly] private GameObject _modelPrefab = null;
+		[SerializeField, FoldoutGroup("Prefabs"), AssetsOnly] private GameObject _gameplayPrefab = null;
+		[SerializeField, FoldoutGroup("Prefabs"), AssetsOnly, ShowIf(nameof(_IsChained))] private GameObject _wallCornerModel = null;
+		[SerializeField, FoldoutGroup("Prefabs"), AssetsOnly, ShowIf(nameof(_IsChained))] private GameObject _wallCornerGameplay = null;
+		[SerializeField, FoldoutGroup("Prefabs"), AssetsOnly] private GameObject _constructionKitModel = null;
 		[Space]
-		[SerializeField, FoldoutGroup("Prefabs")] private HoverPopupDataSO _hoverPopupData = null;
+		[SerializeField, FoldoutGroup("Prefabs"), AssetsOnly] private HoverPopupDataSO _hoverPopupData = null;
 		#endregion Fields
 
 		#region Properties
