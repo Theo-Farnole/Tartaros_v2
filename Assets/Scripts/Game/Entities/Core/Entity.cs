@@ -23,7 +23,7 @@
 
 		[Title("References")]
 		[SerializeField] private EntityData _entityData = null;
-		[SerializeField] private AudioSourceList _deathSound = null; 
+		[SerializeField] private AudioSourceList _deathSound = null;
 
 		private EntityFSM _entityFSM = null;
 		private bool _destroyWithKillMethod = false;
@@ -101,8 +101,11 @@
 			}
 
 			StartCoroutine(Kill_Coroutine());
-			
-			_deathSound.PlayClipWithoutInstance();
+
+			if (_deathSound != null)
+			{
+				_deathSound.PlayClipWithoutInstance();
+			}
 
 			_destroyWithKillMethod = true;
 			_isKilled = true;
