@@ -92,7 +92,7 @@
 			_applicationIsQuiting = true;
 		}
 
-		public void Kill()
+		public void Kill(bool playSound = true)
 		{
 			if (_isKilled == true)
 			{
@@ -102,7 +102,7 @@
 
 			StartCoroutine(Kill_Coroutine());
 
-			if (_deathSound != null)
+			if (playSound == true && _deathSound != null)
 			{
 				_deathSound.PlayClipWithoutInstance();
 			}

@@ -40,7 +40,7 @@
 				orders.Add(new InstanciateGateOrder(this));
 				return orders.ToArray();
 			}
-			return null; 
+			return null;
 		}
 
 		public void InstanciateGate()
@@ -51,11 +51,11 @@
 
 				GameObject gate = GameObject.Instantiate(_data.GatePrefab, position, transform.rotation);
 
-				_neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>().BackAdjacentWall.GetComponent<Entity>().Kill();
-				_neigboorManager.BackAdjacentWall.GetComponent<Entity>().Kill();
-				_neigboorManager.FrontAdjacentWall.GetComponent<Entity>().Kill();
+				_neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>().BackAdjacentWall.GetComponent<Entity>().Kill(false);
+				_neigboorManager.BackAdjacentWall.GetComponent<Entity>().Kill(false);
+				_neigboorManager.FrontAdjacentWall.GetComponent<Entity>().Kill(false);
 
-				this.GetComponent<Entity>().Kill();
+				this.GetComponent<Entity>().Kill(false);
 
 				ISelection selction = Services.Instance.Get<CurrentSelection>();
 				selction.Clear();
