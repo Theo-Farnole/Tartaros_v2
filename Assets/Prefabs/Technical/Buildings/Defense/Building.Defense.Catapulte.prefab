@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: -6293229806712192634}
   - component: {fileID: 5687534545091865090}
   - component: {fileID: 139051328158723536}
+  - component: {fileID: 8602971466247023567}
   m_Layer: 0
   m_Name: Building.Defense.Catapulte
   m_TagString: Untagged
@@ -136,8 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpawnPoint: {x: 0, y: 9.75, z: 0}
-  _inflictDamageAnimationEvent: {fileID: 0}
-  _turretTransform: {fileID: 724455837779842884}
+  _inflictDamageDelay: 0
+  _inflictDamageAnimationEvent: {fileID: 3618578264129383569}
+  _turretTransform: {fileID: 8674000650996931598}
   _attackAudioSource: {fileID: 669126472113998605}
   _attackAudioClips:
   - {fileID: 8300000, guid: c72f22c243bc85d4aa5c351d62b352ed, type: 3}
@@ -16194,6 +16196,18 @@ MonoBehaviour:
     - {x: 0.68466395, y: 0.720747, z: 0.108439416}
     - {x: 0.6592679, y: 0.7207493, z: 0.21421055}
     - {x: 0.6846339, y: 0.7207761, z: 0.108435184}
+--- !u!114 &8602971466247023567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622053809958350417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db30b58c1ec8a4943b50ef3ae2c5de2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4178316617046683385
 GameObject:
   m_ObjectHideFlags: 0
@@ -16406,12 +16420,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4897343814929541699}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &724455837779842884 stripped
+--- !u!4 &8674000650996931598 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5330877672015248647, guid: 94b35ba774d328646a05a469b22e9ec1,
+  m_CorrespondingSourceObject: {fileID: 4293867656596502093, guid: 94b35ba774d328646a05a469b22e9ec1,
     type: 3}
   m_PrefabInstance: {fileID: 4897343814929541699}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3618578264129383569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8196860846261225170, guid: 94b35ba774d328646a05a469b22e9ec1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4897343814929541699}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d12a33c6129ce4d80f3e0b89341d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6698948318052773574
 PrefabInstance:
   m_ObjectHideFlags: 0
