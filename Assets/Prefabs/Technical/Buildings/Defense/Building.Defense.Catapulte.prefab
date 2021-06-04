@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0527f2a60fb19408a6c7a813bc75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpawnPoint: {x: 0, y: 9.75, z: 0}
+  _projectileSpawnPoint: {x: 0, y: 15, z: 0}
   _inflictDamageDelay: 0
   _inflictDamageAnimationEvent: {fileID: 3618578264129383569}
   _turretTransform: {fileID: 8674000650996931598}
@@ -16431,6 +16431,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3622053809958350416}
     m_Modifications:
+    - target: {fileID: 774150603904018494, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.0016025603
+      objectReference: {fileID: 0}
+    - target: {fileID: 774150603904018494, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.0073720627
+      objectReference: {fileID: 0}
+    - target: {fileID: 774150603904018494, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1.0339115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511075507723194222, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 3622053809958350416, guid: 94b35ba774d328646a05a469b22e9ec1,
         type: 3}
       propertyPath: m_RootOrder
@@ -16491,6 +16511,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building.Defense.Catapulte.Model
       objectReference: {fileID: 0}
+    - target: {fileID: 4226187713771964663, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -8.174053
+      objectReference: {fileID: 0}
     - target: {fileID: 7273672269944958404, guid: 94b35ba774d328646a05a469b22e9ec1,
         type: 3}
       propertyPath: m_Size.y
@@ -16500,6 +16525,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452843017609031463, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -10.95197
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452843017609031463, guid: 94b35ba774d328646a05a469b22e9ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94b35ba774d328646a05a469b22e9ec1, type: 3}

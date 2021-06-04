@@ -168,7 +168,9 @@
 			if (MouseHelper.IsCursorOverWindow())
 			{
 				float inputDelta = _input.Camera.Zoom.ReadValue<Vector2>().y;
-				deltaPosition.y += inputDelta * deltaTime * _cameraData.ZoomSpeed;
+
+				float pos = Mathf.Lerp(inputDelta * deltaTime * _cameraData.ZoomSpeed, deltaPosition.y, 0.8f);
+				deltaPosition.y = pos;
 			}
 		}
 
