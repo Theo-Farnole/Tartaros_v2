@@ -6,6 +6,7 @@
 	using Tartaros.Map;
 	using Tartaros.OrderGiver;
 	using Tartaros.Orders;
+	using Tartaros.SoundsSystem;
 	using Tartaros.Wave;
 	using UnityEngine;
 	using UnityEngine.UI;
@@ -16,14 +17,13 @@
 	public partial class Entity : MonoBehaviour, ITeamable, IOrderStopReceiver, IWaveSpawnable, IOrderable
 	{
 		#region Fields
-		[SerializeField]
-		private EntityData _entityData = null;
+		[Title("Settings")]
+		[SerializeField] private Team _team = Team.Player;
+		[SerializeField] private EntityType _entityType = EntityType.Unit;
 
-		[SerializeField]
-		private Team _team = Team.Player;
-
-		[SerializeField]
-		private EntityType _entityType = EntityType.Unit;
+		[Title("References")]
+		[SerializeField] private EntityData _entityData = null;
+		[SerializeField] private AudioSourceList _deathSound = null; 
 
 		private EntityFSM _entityFSM = null;
 		private bool _destroyWithKillMethod = false;
@@ -101,6 +101,8 @@
 			}
 
 			StartCoroutine(Kill_Coroutine());
+			
+			_deathSound.PlayClipWithoutInstance();
 
 			_destroyWithKillMethod = true;
 			_isKilled = true;
