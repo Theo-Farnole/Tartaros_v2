@@ -55,7 +55,7 @@
 
 			if (sector.IsCaptured == false)
 			{
-				_logger.Log("Cannot build on a uncaptured sector.", buildingPosition, sector.ToString());
+				//_logger.Log("Cannot build on a uncaptured sector.", buildingPosition, sector.ToString());
 				return false;
 			}
 

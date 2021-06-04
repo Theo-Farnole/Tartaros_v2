@@ -40,6 +40,7 @@ Transform:
   m_Children:
   - {fileID: 542595967767183004}
   - {fileID: 1269426216974774044}
+  - {fileID: 9099639283567964432}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,9 +56,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64de5000312a62b4a89a4c83a1890c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityData: {fileID: 11400000, guid: 266102ea2d9e0e549adf693dd2d41a5f, type: 2}
   _team: 1
   _entityType: 1
+  _entityData: {fileID: 11400000, guid: 266102ea2d9e0e549adf693dd2d41a5f, type: 2}
+  _deathSound: {fileID: 8796032171819639523}
 --- !u!114 &6474260231024514300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16414,3 +16416,90 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4301115802656705851}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7515351472540525118
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7141674708461386793}
+    m_Modifications:
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.683
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054815009424065473, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_Name
+      value: Destroy Audio Source
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e47af709977db7f49a71a89b0922e59f, type: 3}
+--- !u!4 &9099639283567964432 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1586267554819511086, guid: e47af709977db7f49a71a89b0922e59f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7515351472540525118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8796032171819639523 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1322418852185440477, guid: e47af709977db7f49a71a89b0922e59f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7515351472540525118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca964781690a9e4e9c0a5c6bc89d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

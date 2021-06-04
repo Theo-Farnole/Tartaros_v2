@@ -10,7 +10,7 @@
 	{
 		public static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.SelfKillIcon;
 
-		public SelfKillOrder(Entity entity) : base(Icon, entity.Kill, Services.Instance.Get<HoverPopupsDatabase>().Database.SelfKill)
+		public SelfKillOrder(Entity entity) : base(Icon, () => entity.Kill(false), Services.Instance.Get<HoverPopupsDatabase>().Database.SelfKill)
 		{ }
 	}
 }

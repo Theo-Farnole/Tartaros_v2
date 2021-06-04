@@ -107,7 +107,6 @@
 		{
 			Vector3 targetPosition = GoalPosition();
 
-			Debug.Log("AddMoveTemple");
 			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, targetPosition);
 
 			base.AddSubGoal(_currentMoveToTemple);
