@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Entities
 {
 	using System.Collections;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.AI;
 
@@ -20,7 +21,7 @@
 
 		private EntityUnitsSpawner _spawner = null;
 		private Vector3 _targetPosition = Vector3.zero;
-		private GameObject _villager = null;
+		private List<GameObject> _villagers = new List<GameObject>();
 		//private GameObject _particleSystem = null;
 
 		private void Start()
@@ -37,7 +38,7 @@
 
 		private void Update()
 		{
-			if(_villager != null)
+			if(_villagers.Count != 0)
 			{
 				AsReachDestination();
 			}
@@ -69,7 +70,7 @@
 		{
 			Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length - 1)];
 			GameObject villager = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-			_villager = villager;
+			_villagers.Add(villager);
 			SetDestinationToVillager(villager);
 		}
 
@@ -103,15 +104,21 @@
 
 		private void AsReachDestination()
 		{
-			if(_villager == null)
+			foreach (var villager in _villagers)
 			{
-				return;
-			}
-			var distanceFromTargetPoint = Vector3.Distance(_villager.transform.position, _targetPosition);
+				Debug.Log(villager);
 
-			if(distanceFromTargetPoint <= THRESHOLD_DISTANCE)
-			{
-				Destroy(_villager);
+				if (villager != null)
+				{
+					var distanceFromTargetPoint = Vector3.Distance(villager.transform.position, _targetPosition);
+
+					Debug.Log(distanceFromTargetPoint);
+
+					if (distanceFromTargetPoint <= 3)
+					{
+						Destroy(villager);
+					}
+				}
 			}
 		}
 	}
