@@ -1,4 +1,4 @@
-﻿namespace Tartaros.SoundSystem
+﻿namespace Tartaros.SoundsSystem
 {
 	using Sirenix.OdinInspector;
 	using Sirenix.Utilities;
@@ -17,6 +17,7 @@
 		[SerializeField] private AudioSource[] _ordersMove = new AudioSource[0];
 		[SerializeField] private AudioSource[] _ordersMoveAttack = new AudioSource[0];
 		[SerializeField] private AudioSource[] _ordersAttack = new AudioSource[0];
+		[SerializeField] private AudioSource[] _buttonClicked = new AudioSource[0];
 
 		private Dictionary<Sound, AudioSource[]> _audioSources = null;
 		#endregion Fields
@@ -34,6 +35,7 @@
 				{ Sound.OrderMove, _ordersMove },
 				{ Sound.OrderMoveAttack, _ordersMoveAttack },
 				{ Sound.OrderAttack, _ordersAttack },
+				{ Sound.ButtonClick, _buttonClicked },
 			};
 
 			CheckAudioSourcesErrors();

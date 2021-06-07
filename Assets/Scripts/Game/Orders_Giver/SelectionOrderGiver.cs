@@ -8,7 +8,7 @@
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
 	using Tartaros.SoundsSystem;
-	using Tartaros.SoundSystem;
+	using Tartaros.SoundsSystem;
 	using UnityEngine;
 
 	public class SelectionOrderGiver : SerializedMonoBehaviour

@@ -10,6 +10,7 @@
 		OrderStop,
 		OrderMove,
 		OrderMoveAttack,
-		OrderAttack
+		OrderAttack,
+		ButtonClick
 	}
 }
