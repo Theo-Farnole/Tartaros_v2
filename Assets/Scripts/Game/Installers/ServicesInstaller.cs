@@ -12,7 +12,7 @@
 	using Tartaros.Population;
 	using Tartaros.Powers;
 	using Tartaros.Selection;
-	using Tartaros.SoundSystem;
+	using Tartaros.SoundsSystem;
 	using Tartaros.UI;
 	using Tartaros.UI.HoverPopup;
 	using Tartaros.UI.MiniMap;

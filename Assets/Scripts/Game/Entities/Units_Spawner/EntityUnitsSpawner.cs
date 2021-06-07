@@ -8,7 +8,7 @@
 	using Tartaros.Population;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
-	using Tartaros.SoundSystem;
+	using Tartaros.SoundsSystem;
 	using TMPro;
 	using UnityEngine;
 

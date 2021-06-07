@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 1966242278938305619}
   - component: {fileID: 5788351959444912333}
   - component: {fileID: 3585559508408492116}
+  - component: {fileID: 1800786466665475123}
   m_Layer: 5
   m_Name: UI.OneEntity.OrderButton
   m_TagString: Untagged
@@ -326,3 +327,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toShowDataAsset: {fileID: 0}
   _popupPosition: 0
+--- !u!114 &1800786466665475123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199583524872428170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85a36b97b5e6274fae77f696dec4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _label: {fileID: 0}
+  _sound: 9

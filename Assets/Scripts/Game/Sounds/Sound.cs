@@ -5,6 +5,12 @@
 		None = 0,
 		WaveStart,
 		WaveEnd,
-		UnitSpawn
+		UnitSpawn,
+		OrderPatrol,
+		OrderStop,
+		OrderMove,
+		OrderMoveAttack,
+		OrderAttack,
+		ButtonClick
 	}
 }

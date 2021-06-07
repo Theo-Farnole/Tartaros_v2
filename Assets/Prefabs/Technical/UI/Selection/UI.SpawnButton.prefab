@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 2440596981374073546}
   - component: {fileID: 9014724152866004136}
   - component: {fileID: 5451580863650096844}
+  - component: {fileID: 3770808589451023484}
   m_Layer: 5
   m_Name: UI.SpawnButton
   m_TagString: Untagged
@@ -467,6 +468,7 @@ MonoBehaviour:
   _inQueue: {fileID: 6950921467215974376}
   _slider: {fileID: 5886520849148289017}
   _portrait: {fileID: 6253062052194481355}
+  _sliderValueIfNotSpawning: 0
 --- !u!222 &6422795182827891055
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -547,6 +549,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toShowDataAsset: {fileID: 0}
   _popupPosition: 0
+--- !u!114 &3770808589451023484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380681037260856478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85a36b97b5e6274fae77f696dec4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _label: {fileID: 0}
+  _sound: 9
 --- !u!1 &4647409299600901421
 GameObject:
   m_ObjectHideFlags: 0

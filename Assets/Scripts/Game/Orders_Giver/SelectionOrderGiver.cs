@@ -7,16 +7,16 @@
 	using Tartaros.Entities.Movement;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using Tartaros.SoundsSystem;
+	using Tartaros.SoundsSystem;
 	using UnityEngine;
 
 	public class SelectionOrderGiver : SerializedMonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		private Team _controllableTeam = Team.Player;
-
-		[SerializeField]
-		private ISelection _selection = null;
+		[SerializeField] private Team _controllableTeam = Team.Player;
+		[SerializeField] private ISelection _selection = null;
+		[SerializeField] private SoundsHandler _soundsHandler = null;
 		#endregion Fields
 
 		#region Properties
@@ -24,59 +24,75 @@
 		#endregion Properties
 
 		#region Methods		
+		private void Awake()
+		{
+			_soundsHandler = Services.Instance.Get<SoundsHandler>();
+		}
+
 		public void Stop()
 		{
 			CallAction<IOrderStopReceiver>(ctx => ctx.Stop());
+			_soundsHandler.Play(Sound.OrderStop);
 		}
 
 		public void Move(Vector3 position)
 		{
 			CallAction<IOrderMoveReceiver>(ctx => ctx.Move(position));
+			_soundsHandler.Play(Sound.OrderMove);
 		}
 
 		public void Move(Transform target)
 		{
 			CallAction<IOrderMoveReceiver>(ctx => ctx.Follow(target));
+			_soundsHandler.Play(Sound.OrderMove);
 		}
 
 		public void MoveAdditive(Vector3 position)
 		{
 			CallAction<IOrderMoveReceiver>(ctx => ctx.EnqueueMove(position));
+			_soundsHandler.Play(Sound.OrderMove);
 		}
 
 		public void MoveAdditive(Transform target)
 		{
 			CallAction<IOrderMoveReceiver>(ctx => ctx.EnqueueFollow(target));
+			_soundsHandler.Play(Sound.OrderMove);
 		}
 
 		public void Attack(IAttackable attackable)
 		{
 			CallAction<IOrderAttackReceiver>(ctx => ctx.Attack(attackable));
+			_soundsHandler.Play(Sound.OrderAttack);
 		}
 
 		public void AttackAdditive(IAttackable attackable)
 		{
 			CallAction<IOrderAttackReceiver>(ctx => ctx.AttackAdditive(attackable));
+			_soundsHandler.Play(Sound.OrderAttack);
 		}
 
 		public void MoveAggressively(Vector3 position)
 		{
 			CallAction<IOrderMoveAggresivellyReceiver>(ctx => ctx.MoveAggressively(position));
+			_soundsHandler.Play(Sound.OrderMove);
 		}
 
 		public void MoveAggressivelyAdditive(Vector3 position)
 		{
 			CallAction<IOrderMoveAggresivellyReceiver>(ctx => ctx.MoveAggressivelyAdditive(position));
+			_soundsHandler.Play(Sound.OrderMove);
 		}
 
 		public void Patrol(PatrolPoints patrolPoints)
 		{
 			CallAction<IOrderPatrolReceiver>(ctx => ctx.Patrol(patrolPoints));
+			_soundsHandler.Play(Sound.OrderPatrol);
 		}
 
 		public void PatrolAdditive(PatrolPoints patrolPoints)
 		{
 			CallAction<IOrderPatrolReceiver>(ctx => ctx.EnqueuePatrol(patrolPoints));
+			_soundsHandler.Play(Sound.OrderPatrol);
 		}
 
 		private void CallAction<T>(Action<T> action)

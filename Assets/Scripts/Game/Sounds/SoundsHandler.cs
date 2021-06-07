@@ -1,4 +1,4 @@
-﻿namespace Tartaros.SoundSystem
+﻿namespace Tartaros.SoundsSystem
 {
 	using Sirenix.OdinInspector;
 	using Sirenix.Utilities;
@@ -12,6 +12,12 @@
 		[SerializeField] private AudioSource[] _waveStart = new AudioSource[0];
 		[SerializeField] private AudioSource[] _waveEnd = new AudioSource[0];
 		[SerializeField] private AudioSource[] _unitSpawn = new AudioSource[0];
+		[SerializeField] private AudioSource[] _ordersPatrols = new AudioSource[0];
+		[SerializeField] private AudioSource[] _ordersStop = new AudioSource[0];
+		[SerializeField] private AudioSource[] _ordersMove = new AudioSource[0];
+		[SerializeField] private AudioSource[] _ordersMoveAttack = new AudioSource[0];
+		[SerializeField] private AudioSource[] _ordersAttack = new AudioSource[0];
+		[SerializeField] private AudioSource[] _buttonClicked = new AudioSource[0];
 
 		private Dictionary<Sound, AudioSource[]> _audioSources = null;
 		#endregion Fields
@@ -24,6 +30,12 @@
 				{ Sound.WaveStart, _waveStart },
 				{ Sound.WaveEnd, _waveEnd },
 				{ Sound.UnitSpawn, _unitSpawn },
+				{ Sound.OrderPatrol, _ordersPatrols },
+				{ Sound.OrderStop, _ordersStop },
+				{ Sound.OrderMove, _ordersMove },
+				{ Sound.OrderMoveAttack, _ordersMoveAttack },
+				{ Sound.OrderAttack, _ordersAttack },
+				{ Sound.ButtonClick, _buttonClicked },
 			};
 
 			CheckAudioSourcesErrors();
@@ -31,11 +43,23 @@
 
 		public void PlayOneShot(Sound sound)
 		{
-			AudioSource audioSource = _audioSources[sound].GetRandom();
-			audioSource.PlayOneShot(audioSource.clip);
+			if (_audioSources.IsEmpty() == false)
+			{
+				AudioSource audioSource = _audioSources[sound].GetRandom();
+				audioSource.PlayOneShot(audioSource.clip);
 
-			Debug.Assert(audioSource.clip != null, "Audio source {0} to play is unset.".Format(audioSource.clip));
-			Debug.LogFormat("Audio {0} played.", audioSource.name);
+				Debug.Assert(audioSource.clip != null, "Audio source {0} to play is unset.".Format(audioSource.clip));
+				Debug.LogFormat("Audio {0} played.", audioSource.name);
+			}
+		}
+
+		public void Play(Sound sound)
+		{
+			if (_audioSources.IsEmpty() == false)
+			{
+				AudioSource audioSource = _audioSources[sound].GetRandom();
+				audioSource.Play();
+			}
 		}
 
 		private void CheckAudioSourcesErrors()

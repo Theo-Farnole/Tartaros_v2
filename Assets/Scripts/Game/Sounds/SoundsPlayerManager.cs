@@ -1,4 +1,4 @@
-﻿namespace Tartaros.SoundSystem
+﻿namespace Tartaros.SoundsSystem
 {
 	using Tartaros.ServicesLocator;
 	using Tartaros.Wave;
