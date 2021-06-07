@@ -3,12 +3,17 @@
 	using Sirenix.OdinInspector;
 	using Sirenix.Utilities;
 	using System.Collections.Generic;
+	using Tartaros.Entities;
+	using Tartaros.Selection;
 	using Tartaros.SoundsSystem;
 	using UnityEngine;
 
 	public class SoundsHandler : MonoBehaviour
 	{
 		#region Fields
+		[Title("Data")]
+		[SerializeField] private SoundsData _soundsData = null;
+		[Title("References")]
 		[SerializeField] private AudioSource[] _waveStart = new AudioSource[0];
 		[SerializeField] private AudioSource[] _waveEnd = new AudioSource[0];
 		[SerializeField] private AudioSource[] _unitSpawn = new AudioSource[0];
@@ -18,6 +23,8 @@
 		[SerializeField] private AudioSource[] _ordersMoveAttack = new AudioSource[0];
 		[SerializeField] private AudioSource[] _ordersAttack = new AudioSource[0];
 		[SerializeField] private AudioSource[] _buttonClicked = new AudioSource[0];
+		[Space]
+		[SerializeField] private AudioSource _selectionAudioSource = null;
 
 		private Dictionary<Sound, AudioSource[]> _audioSources = null;
 		#endregion Fields
@@ -41,6 +48,12 @@
 			CheckAudioSourcesErrors();
 		}
 
+		public void PlaySelection(ISelectable selected)
+		{
+			AudioClip audioClip = _soundsData.GetSelectionClip(selected);
+			_selectionAudioSource.PlayOneShot(audioClip);
+		}
+
 		public void PlayOneShot(Sound sound)
 		{
 			if (_audioSources.IsEmpty() == false)
@@ -55,7 +68,7 @@
 
 		public void Play(Sound sound)
 		{
-			if (_audioSources.IsEmpty() == false)
+			if (_audioSources[sound].Length > 0)
 			{
 				AudioSource audioSource = _audioSources[sound].GetRandom();
 				audioSource.Play();
