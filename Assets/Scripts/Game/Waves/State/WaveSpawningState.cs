@@ -101,8 +101,6 @@
 				yield return new WaitForSeconds(sequence.SecondsBeforeSpawn);
 				yield return SpawnUnits(spawnPoint, sequence);
 			}
-
-			Debug.Log(spawnPoint.Identifier);
 			_pendingSpawnPointsCount--;
 		}
 
@@ -134,7 +132,6 @@
 
 		private bool CheckIfSpawnIsFinish()
 		{
-			Debug.Log(_pendingSpawnPointsCount);
 			return (_pendingSpawnPointsCount == 0);
 		}
 		#endregion Methods

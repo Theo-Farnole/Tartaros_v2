@@ -9,7 +9,6 @@
 
         public int GetStillAliveEnemiesCount()
         {
-            Debug.Log(_stillAliveEnemies.Count);
             return _stillAliveEnemies.Count;
         }
 
