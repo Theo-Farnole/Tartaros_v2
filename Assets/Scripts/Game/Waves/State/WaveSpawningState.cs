@@ -72,6 +72,7 @@
 		private void SpawnWave(MonoBehaviour coroutineOwner)
 		{
 			SpawnPointIdentifier[] pointsUses = _waveData.GetSpawnPointActiveInTheWave();
+			_pendingSpawnPointsCount = pointsUses.Length;
 
 			if (_waveData.DoSpawnPointsIsMissingInScene(_spawnPoints) == true)
 			{
@@ -101,6 +102,7 @@
 				yield return SpawnUnits(spawnPoint, sequence);
 			}
 
+			Debug.Log(spawnPoint.Identifier);
 			_pendingSpawnPointsCount--;
 		}
 
@@ -126,13 +128,13 @@
 				waveSpawnable.Attack(_stateOwner.EnemiesTarget, spawnPoint.Waypoints);
 				_stillAliveManger.AddEnemyWave(waveSpawnable);
 
-
 				yield return new WaitForSeconds(unitSequence.SecondsBetweenUnits);
 			}
 		}
 
 		private bool CheckIfSpawnIsFinish()
 		{
+			Debug.Log(_pendingSpawnPointsCount);
 			return (_pendingSpawnPointsCount == 0);
 		}
 		#endregion Methods

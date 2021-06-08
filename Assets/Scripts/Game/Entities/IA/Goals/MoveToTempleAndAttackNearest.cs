@@ -31,7 +31,6 @@
 
 		private void GetDamage(object sender, EntityHealth.DamageTakenArgs e)
 		{
-			Debug.Log("OnDmg");
 			bool isDestroyAlreadyEnable = GetSubGoals().Count > 1;
 
 			if (isDestroyAlreadyEnable == false && e.attacker != null)

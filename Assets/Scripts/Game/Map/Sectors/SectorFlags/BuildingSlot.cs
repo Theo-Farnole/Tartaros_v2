@@ -99,7 +99,6 @@
 		{
 			yield return new WaitForSeconds(time + 1);
 
-			Debug.Log(_constructable);
 			_instanciateBuilding = _sector.GetConstructableInSector(_constructable);
 
 			if(_instanciateBuilding != null)
