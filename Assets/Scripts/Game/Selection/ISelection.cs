@@ -2,7 +2,16 @@
 {
 	using System;
 	public class SelectionChangedArgs : EventArgs
-	{ }
+	{
+		public readonly ISelectable[] added = null;
+		public readonly ISelectable[] removed = null;
+
+		public SelectionChangedArgs(ISelectable[] added, ISelectable[] removed)
+		{
+			this.added = added ?? new ISelectable[0];
+			this.removed = removed ?? new ISelectable[0];
+		}
+	}
 
 	public interface ISelection
 	{

@@ -60,7 +60,7 @@
 				}
 			}
 
-			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+			SelectionChanged?.Invoke(this, new SelectionChangedArgs(selectables, null));
 		}
 
 		void ISelection.Remove(ISelectable selectable)
@@ -92,7 +92,7 @@
 
 			if (invokeEvent == true)
 			{
-				SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+				SelectionChanged?.Invoke(this, new SelectionChangedArgs(new ISelectable[] { selectable }, null));
 			}
 		}
 
@@ -114,18 +114,20 @@
 
 			if (invokeEvent == true)
 			{
-				SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+				SelectionChanged?.Invoke(this, new SelectionChangedArgs(null, new ISelectable[] { selectable }));
 			}
 		}
 
 		void ISelection.Clear()
 		{
+			ISelectable[] previousSelectables = _selectedObjets.ToArray();
+
 			for (int i = _selectedObjets.Count - 1; i >= 0; i--)
 			{
 				_Remove(_selectedObjets[i], false);
 			}
 
-			SelectionChanged?.Invoke(this, new SelectionChangedArgs());
+			SelectionChanged?.Invoke(this, new SelectionChangedArgs(null, previousSelectables));
 		}
 
 		bool ISelection.IsSelected(ISelectable selectable)
