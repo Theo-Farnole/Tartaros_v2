@@ -146,9 +146,12 @@
 
 		private void InflictDamageToTarget()
 		{
-			PlayAttackSound();
+			if (_target.IsInterfaceDestroyed() == false)
+			{
+				PlayAttackSound();
 
-			_entityAttackData.AttackMode.Attack(transform, _target);
+				_entityAttackData.AttackMode.Attack(transform, _target);
+			}
 		}
 
 		private void PlayAttackSound()

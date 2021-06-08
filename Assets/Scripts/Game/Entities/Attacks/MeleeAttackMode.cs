@@ -19,6 +19,7 @@
 		void IAttackMode.Attack(Transform attacker, IAttackable target)
 		{
 			if (target is null) throw new System.ArgumentNullException(nameof(target));
+			if (target.IsInterfaceDestroyed() == true) throw new System.NotSupportedException("Target args is not null but destroy in Unity.");
 
 			if (_vfxPrefab != null)
 			{
