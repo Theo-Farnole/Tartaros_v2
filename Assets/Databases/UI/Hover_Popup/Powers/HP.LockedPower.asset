@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 818789223aab9bb45bfa1e6207b38fd7, type: 3}
-  m_Name: HP.ControlledAoE
+  m_Name: HP.LockedPower
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,19 +26,19 @@ MonoBehaviour:
       Data: 0|Tartaros.UI.HoverPopup.HoverPopupData, Tartaros
     - Name: _name
       Entry: 1
-      Data: Controlled AoE
+      Data: Locked power
     - Name: _description
       Entry: 1
-      Data: Capture a village to unlock this power.
+      Data: Unlock this power while progressing in the scenario.
     - Name: _loreDescription
-      Entry: 1
+      Entry: 6
       Data: 
     - Name: _sectorResourcesCost
       Entry: 6
       Data: 
     - Name: _favorCost
       Entry: 3
-      Data: 20
+      Data: 0
     - Name: _cooldown
       Entry: 4
       Data: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
       Data: false
     - Name: _hotkey
       Entry: 3
-      Data: 97
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

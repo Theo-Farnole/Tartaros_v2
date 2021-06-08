@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Powers
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using System.Collections.Generic;
 	using Tartaros.Economy;
 	using Tartaros.Gamemode;
@@ -35,6 +36,20 @@
 		public GameObject PreviewPrefab => _previewPrefab;
 		#endregion Properties
 
+		#region Events
+		public class PowerUnlockedArgs : EventArgs
+		{
+			public readonly Power powerUnlocked = Power.None;
+
+			public PowerUnlockedArgs(Power powerUnlocked)
+			{
+				this.powerUnlocked = powerUnlocked;
+			}
+		}
+
+		public event EventHandler<PowerUnlockedArgs> PowerUnlocked = null;
+		#endregion Events
+
 		#region Methods
 		private void Awake()
 		{
@@ -58,7 +73,7 @@
 		{
 			foreach (Power power in EnumHelper.GetValues<Power>())
 			{
-				if (IsPowerUnlock(power))
+				if (IsPowerUnlock(power) == false)
 				{
 					UnlockPower(power);
 				}
@@ -79,6 +94,7 @@
 			if (addSuccesful == true)
 			{
 				Debug.LogFormat("Power {0} unlocked.", power.ToString());
+				PowerUnlocked?.Invoke(this, new PowerUnlockedArgs(power));
 			}
 			else
 			{
