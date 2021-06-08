@@ -8,6 +8,7 @@
 		#region Fields
 		[SerializeField, Required] private GameObject _model = null;
 		[SerializeField, Required] private AnimationClip _deathAnimation = null;
+		[SerializeField] private DeadbodyData _deadbodyData = null;
 		#endregion Fields
 
 		#region Methods
@@ -37,6 +38,7 @@
 			//GameObject deadbody = Instantiate(_model, _model.transform.position, _model.transform.rotation, null);
 			GameObject deadbody = _model;
 			deadbody.transform.parent = null;
+			deadbody.GetOrAddComponent<Deadbody>().Data = _deadbodyData;
 
 			if (deadbody.TryGetComponent(out AnimationInstancing.AnimationInstancing animationInstancing))
 			{
