@@ -89,12 +89,6 @@
 
 			foreach (var entity in entities)
 			{
-				
-				if(entity.EntityType == EntityType.Building)
-				{
-					Debug.Log(entity.GetBehaviourData<IConstructable>());
-				}
-
 				if (entity.EntityType == EntityType.Building && entity.GetBehaviourData<IConstructable>() == constructable)
 				{
 					return entity;
