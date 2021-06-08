@@ -65,12 +65,12 @@
 
 		void OnDrawGizmos()
 		{
-			Gizmos.color = Color.red;
-			Gizmos.DrawRay(transform.position, Vector3.up * 3);
-
 #if UNITY_EDITOR
 			if (Application.isPlaying == true && _isCovered == true)
 			{
+
+				Gizmos.color = Color.red;
+				Gizmos.DrawRay(transform.position, Vector3.up * 3);
 				Vector3 handleDeltaPosition = Vector3.up * 0.5f;
 
 				GUIStyle style = new GUIStyle("BoldLabel");

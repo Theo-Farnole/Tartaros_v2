@@ -1,56 +1,45 @@
-﻿//namespace Tartaros.Wave
-//{
-//	using Sirenix.OdinInspector.Editor;
-//	using System.Collections;
-//	using Tartaros.Editor;
-//	using UnityEditor;
-//	using UnityEngine;
+﻿namespace Tartaros.Wave
+{
+	using Sirenix.OdinInspector.Editor;
+	using UnityEditor;
+	using UnityEngine;
 
-//	[CustomEditor(typeof(SpawnPoint))]
-//	public class SpawnPointEditor : OdinEditor
-//	{
-//		public const float HANDLE_SIZE = 0.5f;
-//		public static readonly Color HANDLE_COLOR = Color.red;
-//		public static readonly Quaternion HANDLE_ROTATION = Quaternion.Euler(90, 0, 0);
+	[CustomEditor(typeof(SpawnPoint))]
+	public class SpawnPointEditor : OdinEditor
+	{
+		private Vector3[] _editingWaypoints = null;
 
-//		#region Properties
-//		public SpawnPoint Spawn => target as SpawnPoint;
-//		#endregion Properties
+		#region Properties
+		public SpawnPoint SpawnPoint => target as SpawnPoint;
+		#endregion Properties
 
 
+		#region Methods
+		private void OnSceneGUI()
+		{
+			EditorGUI.BeginChangeCheck();
 
+			_editingWaypoints = DrawWaypointsHandles();
 
-//		private void OnSceneGUI()
-//		{
-			
-//		}
+			if (EditorGUI.EndChangeCheck())
+			{
+				Undo.RecordObject(SpawnPoint, "Moving waypoints");
+				SpawnPoint.Waypoints = _editingWaypoints;
+			}
+		} 
 
-//		private void DrawVerticesMoveHandle()
-//		{
-//			//foreach (Vector3 vertex in Spawn.)
-//			//{
-//			//	DrawVertexMoveHandle(vertex);
-//			//}
+		private Vector3[] DrawWaypointsHandles()
+		{
+			Vector3[] waypoints = SpawnPoint.Waypoints;
+			Vector3[] output = new Vector3[waypoints.Length];
 
+			for (int i = 0, length = waypoints.Length; i < length; i++)
+			{
+				output[i] = Handles.PositionHandle(waypoints[i], Quaternion.identity);
+			}
 
-//		}
-
-//		private void DrawVertexMoveHandle(Vector3 vertex)
-//		{
-//			//EditorGUI.BeginChangeCheck();
-
-//			//HandlesHelper.PushColor(HANDLE_COLOR);
-//			//Vector3 position = Handles.FreeMoveHandle(vertex, HANDLE_ROTATION, HANDLE_SIZE, vertex, Handles.DotHandleCap);
-//			//HandlesHelper.PopColor();
-
-//			//if (EditorGUI.EndChangeCheck())
-//			//{
-//			//	Undo.RecordObject(Map.MapData, "Move position");
-
-//			//	vertex.WorldPosition = position;
-//			//	EditorUtility.SetDirty(Map.MapData);
-//			//}
-//		}
-
-//	}
-//}
+			return output;
+		}
+		#endregion Methods
+	}
+}
