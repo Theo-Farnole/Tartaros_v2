@@ -21,6 +21,12 @@
 		public static bool HasFPSCounter => FPSCounter.HasInstance;
 
 		[Cheat]
+		public static void SetTimeScale(float timeScale = 1)
+		{
+			Time.timeScale = timeScale;
+		}
+
+		[Cheat]
 		public static void InflictDamageToSelected(int damage = 3)
 		{
 			ISelection currentSelection = Services.Instance.Get<CurrentSelection>();

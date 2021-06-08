@@ -22,6 +22,28 @@
 
 		private EntityUnitsSpawner _shownSpawner = null;
 		private ISelection _selection = null;
+
+		public EntityUnitsSpawner ShownSpawner
+		{
+			get => _shownSpawner;
+
+			private set
+			{
+				if (_shownSpawner != null)
+				{
+					_shownSpawner.GetComponent<Entity>().EntityKilled -= SelectionTemplePanel_EntityKilled;
+				}
+
+				_shownSpawner = value;
+
+				if (_shownSpawner != null)
+				{
+					Entity entity = _shownSpawner.GetComponent<Entity>();
+					entity.EntityKilled -= SelectionTemplePanel_EntityKilled;
+					entity.EntityKilled += SelectionTemplePanel_EntityKilled;
+				}
+			}
+		}
 		#endregion Fields
 
 		#region Methods
@@ -49,24 +71,31 @@
 			_selection.SelectionChanged -= SelectionChanged;
 		}
 
+		private void SelectionTemplePanel_EntityKilled(object sender, Wave.KilledArgs e)
+		{
+			Hide();
+			ShownSpawner = null;
+		}
+
 		private void SelectionChanged(object sender, SelectionChangedArgs e)
 		{
 			if (_selection.ObjectsCount == 1)
 			{
 				ISelectable selectable = _selection.Objects[0];
 
-				if (TryGetTemple(selectable, out _shownSpawner))
+				if (TryGetTemple(selectable, out EntityUnitsSpawner selectedSpawner))
 				{
+					ShownSpawner = selectedSpawner;
 					UpdatePanel();
 				}
 				else
 				{
-					_shownSpawner = null;
+					ShownSpawner = null;
 				}
 			}
 			else
 			{
-				_shownSpawner = null;
+				ShownSpawner = null;
 			}
 		}
 
@@ -89,18 +118,18 @@
 		private void UpdatePanel()
 		{
 			SetupSpawnButtons();
-			_radialHealthSlider.Healthable = _shownSpawner.GetComponent<IHealthable>();
+			_radialHealthSlider.Healthable = ShownSpawner.GetComponent<IHealthable>();
 		}
 
 		private void SetupSpawnButtons()
 		{
-			ISpawnable[] spawnables = _shownSpawner.Spawnables;
+			ISpawnable[] spawnables = ShownSpawner.Spawnables;
 
 			for (int i = 0, length = _spawnButtons.Length; i < length; i++)
 			{
 				if (i < spawnables.Length)
 				{
-					_spawnButtons[i].Construct(_shownSpawner, spawnables[i]);
+					_spawnButtons[i].Construct(ShownSpawner, spawnables[i]);
 				}
 				else
 				{
