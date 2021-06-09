@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2777397671504999714}
   - component: {fileID: 2777397671504999717}
   - component: {fileID: 2777397671504999716}
+  - component: {fileID: 7795111091306498979}
   m_Layer: 5
   m_Name: ResourcesBar.Canvas
   m_TagString: Untagged
@@ -81,6 +82,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &7795111091306498979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777397671504999718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f57ffc815dc2a46bd94f60f6998cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2777397671589670962
 GameObject:
   m_ObjectHideFlags: 0
