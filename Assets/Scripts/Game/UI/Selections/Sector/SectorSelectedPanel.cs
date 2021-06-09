@@ -10,6 +10,7 @@
 	using TMPro;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using UnityEngine.Video;
 
 	public class SectorSelectedPanel : APanel
 	{
@@ -43,6 +44,11 @@
 
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
 			_uiStyles = Services.Instance.Get<UIStyles>();
+		}
+
+		private void Update()
+		{
+			UpdateContent(); // update the resources amount (bad way, we should use event for eg)
 		}
 
 		private void OnEnable()

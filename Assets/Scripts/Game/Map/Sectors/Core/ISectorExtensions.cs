@@ -181,6 +181,20 @@
 			}
 		}
 
+		public static int GetAvailableResources(this ISector sector)
+		{
+			FlagResourceToSector[] flags = sector.FindObjectsInSectorOfType<FlagResourceToSector>();
+
+			if (flags.Length == 1)
+			{
+				return flags[0].AvailableResources;
+			}
+			else
+			{
+				throw new System.NotSupportedException(string.Format("There is {0} resources flags on sector {1}. This is not supported.", flags.Length, sector.ToString()));
+			}
+		}
+
 		public static ISectorUIStylizer GetUIStylizer(this ISector sector)
 		{
 			ISectorUIStylizer[] stylizers = sector.FindObjectsInSectorOfType<ISectorUIStylizer>();

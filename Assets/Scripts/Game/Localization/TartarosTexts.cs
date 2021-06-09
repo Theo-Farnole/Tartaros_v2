@@ -39,11 +39,12 @@
 			return string.Format("{0} sector", type);
 		}
 
-		public static string GetResourceSectorDescription(ISector sector) => GetResourceSectorDescription(sector.GetResourceType());
-
-		public static string GetResourceSectorDescription(SectorRessourceType resourceType)
+		public static string GetResourceSectorDescription(ISector sector)
 		{
-			return string.Format("Generates {0}<color={1}>{2}</color>.", resourceType.GetRichTextSprite(), RESOURCE_COLOR_HEX, resourceType);
+			var resourceType = sector.GetResourceType();
+			var remainingAmount = sector.GetAvailableResources();
+
+			return string.Format("Generates {0}. There is {1} available.", GetTypeResourceText(resourceType), GetAmountResourceText(remainingAmount, resourceType));
 		}
 
 		public static string GetSectorConstructLabel(ISectorResourcesWallet constructionPrice)
@@ -58,12 +59,17 @@
 
 			return "Earn {0} on capture. Give frenquently {1}.".Format(
 				GetGloryText(specialSectorIncome.GloryIncomeOnCapture),
-				GetResourceText(incomeGenerator.ResourcesPerTick, incomeGenerator.SectorRessourceType));
+				GetAmountResourceText(incomeGenerator.ResourcesPerTick, incomeGenerator.SectorRessourceType));
 		}
 
-		public static string GetResourceText(int amount, SectorRessourceType type)
+		public static string GetAmountResourceText(int amount, SectorRessourceType type)
 		{
 			return "{1}<color={0}>{2}</color>".Format(RESOURCE_COLOR_HEX, type.GetRichTextSprite(), amount);
+		}
+
+		public static string GetTypeResourceText(SectorRessourceType resourceType)
+		{
+			return "{0}<color={1}>{2}</color>".Format(resourceType.GetRichTextSprite(), RESOURCE_COLOR_HEX, resourceType);
 		}
 
 		public static string GetGloryText(int amount)

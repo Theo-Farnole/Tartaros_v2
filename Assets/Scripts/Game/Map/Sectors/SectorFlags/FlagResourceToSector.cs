@@ -15,6 +15,7 @@
 	{
 		#region Fields
 		[SerializeField] private SectorRessourceType _type = SectorRessourceType.Food;
+		[SerializeField] private int _availableResources = 1000;
 
 		private ResourceMiniMapIcon _miniMapIcon = null;
 		private ISector _sectorOnPosition = null;
@@ -38,6 +39,8 @@
 		}
 
 		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.GetResourceStyle(_type);
+
+		public int AvailableResources { get => _availableResources; set => _availableResources = Mathf.Max(0, value); }
 		#endregion Properties
 
 		#region Methods
@@ -54,12 +57,17 @@
 
 			CheckIfBuildingSlotIsMissing();
 			SetBuildingSlotConstructable();
-			
+
 		}
 
 		private void OnEnable()
 		{
 			CheckIfCaptureBuildingIsHere();
+		}
+
+		public bool IsDepleted()
+		{
+			return _availableResources <= 0;
 		}
 
 		private void SetBuildingSlotConstructable()
@@ -111,7 +119,7 @@
 		SectorUIContent ISectorUIContentProvider.GetSectorContent()
 		{
 			string name = TartarosTexts.GetResourceSectorName(_type);
-			string description = TartarosTexts.GetResourceSectorDescription(_type);
+			string description = TartarosTexts.GetResourceSectorDescription(_sectorOnPosition);
 
 			return new SectorUIContent(name, description);
 		}
