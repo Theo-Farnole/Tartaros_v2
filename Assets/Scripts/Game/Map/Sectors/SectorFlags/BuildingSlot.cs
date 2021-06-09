@@ -56,7 +56,6 @@
 
 			if (CanConstruct() == true)
 			{
-				Debug.Log(_constructionPrice);
 				_playerWallet.Buy(_constructionPrice);
 				_constructable.InstantiateConstructionKit(transform.position, transform.rotation);
 				_isAvailable = false;
