@@ -26,7 +26,6 @@
 		{
 			_hoverPopup = Services.Instance.Get<HoverPopupManager>();
 			_rectTransform = GetComponent<RectTransform>();
-			_canvasRaycastable = GetComponent<ICanvasRaycastFilter>();
 
 			if (_toShowDataAsset != null)
 			{
