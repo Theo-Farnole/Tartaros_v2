@@ -320,6 +320,9 @@ namespace AnimationInstancing
             for (int i = 0; i != aniInstancingList.Count; ++i)
             {
                 AnimationInstancing instance = aniInstancingList[i];
+
+                if (instance is null) continue;
+
                 if (!instance.IsPlaying())
                     continue;
                 if (instance.aniIndex < 0 && instance.parentInstance == null)
