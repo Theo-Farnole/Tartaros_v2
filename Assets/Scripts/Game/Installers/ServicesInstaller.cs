@@ -46,6 +46,7 @@
 			RegisterFromHierarchy<GloryGemsManagerUI>();
 
 			RegisterFromChildren<BuildingsDatabase>();
+			RegisterFromChildren<PlayerIncomeDisplayAmount>();
 			RegisterFromChildren<SoundsHandler>();
 			RegisterFromChildren<HoverPopupsDatabase>();
 			RegisterFromChildren<ConstructionManager>();
