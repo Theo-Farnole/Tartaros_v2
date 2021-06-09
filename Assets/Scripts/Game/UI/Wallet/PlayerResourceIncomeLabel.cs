@@ -16,7 +16,7 @@
 		[SerializeField]
 		private SectorRessourceType _sectorRessourceType = SectorRessourceType.Food;
 
-		private IPlayerIncomeManager _playerIncome = null;
+		private PlayerIncomeDisplayAmount _playerIncome = null;
 		#endregion Fields
 
 		#region Properties
@@ -38,7 +38,7 @@
 		#region Methods
 		private void Awake()
 		{
-			_playerIncome = Services.Instance.Get<IPlayerIncomeManager>();
+			_playerIncome = Services.Instance.Get<PlayerIncomeDisplayAmount>();
 		}
 
 		private void Start()
@@ -83,7 +83,7 @@
 			}
 			else
 			{
-				return "~";
+				return "";
 			}
 		}
 		#endregion Methods

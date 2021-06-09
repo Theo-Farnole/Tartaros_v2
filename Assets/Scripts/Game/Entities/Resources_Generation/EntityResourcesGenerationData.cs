@@ -1,9 +1,7 @@
 ﻿namespace Tartaros.Entities.ResourcesGeneration
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
 	using Tartaros.Economy;
+	using UnityEngine;
 
 	public class EntityResourcesGenerationData : IEntityBehaviourData
 	{

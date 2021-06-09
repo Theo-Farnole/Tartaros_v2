@@ -4,6 +4,7 @@
 	using Tartaros.Economy;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
+	using Tartaros.UI;
 	using UnityEngine;
 
 	[DisallowMultipleComponent]
@@ -15,6 +16,7 @@
 
 		// SERVICES
 		private IPlayerSectorResources _playerResources = null;
+		private PlayerIncomeDisplayAmount _playerIncomeDisplayAmount = null;
 		#endregion Fields
 
 		#region Properties
@@ -33,6 +35,7 @@
 		private void Awake()
 		{
 			_playerResources = Services.Instance.Get<IPlayerSectorResources>();
+			_playerIncomeDisplayAmount = Services.Instance.Get<PlayerIncomeDisplayAmount>();
 
 			_data = Entity.GetBehaviourData<EntityResourcesGenerationData>();
 			_flagResourceToSector = GetComponent<SectorObject>().GetSectorOnPosition().FindObjectsInSectorOfType<FlagResourceToSector>()[0];
@@ -43,6 +46,16 @@
 		private void Start()
 		{
 			StartCoroutine(GenerationCoroutine());
+		}
+
+		private void OnEnable()
+		{
+			_playerIncomeDisplayAmount.AddIncomeAmount(_data.ResourcesType, _data.ResourcesPerTick);
+		}
+
+		private void OnDisable()
+		{
+			_playerIncomeDisplayAmount.RemoveIncomeAmount(_data.ResourcesType, _data.ResourcesPerTick);		
 		}
 
 		private IEnumerator GenerationCoroutine()

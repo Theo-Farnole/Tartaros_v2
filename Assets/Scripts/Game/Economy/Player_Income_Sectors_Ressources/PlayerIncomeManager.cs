@@ -21,8 +21,11 @@
 
 		#region Properties
 		public PlayerIncomeManagerData Data { get => _data; set => _data = value; }
-		public event EventHandler<IncomeChangedArgs> IncomeChanged = null;
 		#endregion Properties
+
+		#region Events
+		public event EventHandler<IncomeChangedArgs> IncomeChanged = null;
+		#endregion Events
 
 		#region Methods
 		private void Awake()
@@ -57,13 +60,13 @@
 
 		public void RemoveIncomeChecker(IncomeGenerationEmptyChecker checker)
 		{
-			if(_incomesEmptyCheckers.Count != 0)
+			if (_incomesEmptyCheckers.Count != 0)
 			{
 				_incomesEmptyCheckers.Remove(checker);
 			}
 		}
 
-		
+
 
 		void IPlayerIncomeManager.AddGeneratorIncome(IIncomeGenerator income)
 		{
@@ -72,14 +75,14 @@
 				Debug.LogErrorFormat("Cannot add generator: Income generator {0} is already in incomes generator list.", income.ToString());
 				return;
 			}
-		
+
 
 			_incomesGiver.Add(income);
 			_incomePerTick.AddAmount(income.SectorRessourceType, income.ResourcesPerTick);
 
 			IncomeChanged?.Invoke(this, new IncomeChangedArgs());
 
-			if(income.MaxRessourcesBeforeEmpty != 0)
+			if (income.MaxRessourcesBeforeEmpty != 0)
 			{
 				var emptyChecker = new IncomeGenerationEmptyChecker(income, _data.TickInvervalInSeconds, this);
 				emptyChecker.StartEmptyCheckerCoroutine(this);
