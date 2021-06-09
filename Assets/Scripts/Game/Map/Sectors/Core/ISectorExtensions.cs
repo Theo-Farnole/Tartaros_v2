@@ -213,6 +213,8 @@
 
 		public static SectorUIContent GetUIContent(this ISector sector)
 		{
+			if (sector is null)throw new System.ArgumentNullException(nameof(sector));			
+
 			ISectorUIContentProvider[] content = sector.FindObjectsInSectorOfType<ISectorUIContentProvider>();
 
 			if (content.Length > 1) throw new System.NotSupportedException("A sector cannot contains more than one UI content. Please remove one.");
