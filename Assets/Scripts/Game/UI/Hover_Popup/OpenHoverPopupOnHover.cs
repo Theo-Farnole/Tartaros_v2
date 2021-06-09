@@ -15,7 +15,6 @@
 
 		private HoverPopupManager _hoverPopup = null;
 		private RectTransform _rectTransform = null;
-		private ICanvasRaycastFilter _canvasRaycastable = null;
 		#endregion Fields
 
 		#region Properties
@@ -32,14 +31,6 @@
 			if (_toShowDataAsset != null)
 			{
 				_toShowData = _toShowDataAsset.HoverPopupData;
-			}
-		}
-
-		void OnEnable()
-		{
-			if (_canvasRaycastable != null && _canvasRaycastable.IsRaycastLocationValid(MouseHelper.CursorPosition, Camera.main))
-			{
-				Show();
 			}
 		}
 

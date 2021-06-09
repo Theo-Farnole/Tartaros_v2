@@ -7,7 +7,11 @@
 
 	public static class MouseHelper
 	{
-		public static Vector2 CursorPosition => Mouse.current.position.ReadValue();
+		public static Vector2 CursorPosition
+		{
+			get => Mouse.current.position.ReadValue();
+			set => Mouse.current.WarpCursorPosition(value);
+		}
 
 		public static bool IsCursorOverWindow()
 		{
@@ -61,7 +65,7 @@
 		}
 
 
-		
+
 
 		public static bool GetHitUnderCursor(out RaycastHit hit)
 		{
