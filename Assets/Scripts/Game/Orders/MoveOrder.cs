@@ -16,6 +16,8 @@
 
 		public MoveOrder(EntityMovement entityMovement) : base(Icon, Services.Instance.Get<HoverPopupsDatabase>().Database.Move)
 		{
+			if (entityMovement is null) throw new ArgumentNullException(nameof(entityMovement));
+
 			_executeAction = Create(entityMovement, this);
 		}
 
