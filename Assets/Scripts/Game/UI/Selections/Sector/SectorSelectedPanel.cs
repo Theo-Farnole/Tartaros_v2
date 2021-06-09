@@ -48,7 +48,10 @@
 
 		private void Update()
 		{
-			UpdateContent(); // update the resources amount (bad way, we should use event for eg)
+			if (IsShow == true)
+			{
+				UpdateContent(); // update the resources amount (bad way, we should use event for eg)
+			}
 		}
 
 		private void OnEnable()
@@ -108,7 +111,7 @@
 			else
 			{
 				ApplyContent(FALLBACK_CONTENT);
-			}			
+			}
 		}
 
 		private void ApplyContent(SectorUIContent content)
