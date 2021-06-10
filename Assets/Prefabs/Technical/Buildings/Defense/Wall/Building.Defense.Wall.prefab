@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5810600384853675110
 Transform:
@@ -16214,6 +16214,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4125110190285586142, guid: f63531dd88f368e48a1de23a7d34113e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5810600384853675110, guid: f63531dd88f368e48a1de23a7d34113e,
         type: 3}
       propertyPath: m_RootOrder
@@ -16273,6 +16278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building.Defense.Wall.Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810600384853675113, guid: f63531dd88f368e48a1de23a7d34113e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6411335066361364757, guid: f63531dd88f368e48a1de23a7d34113e,
         type: 3}
@@ -16359,6 +16369,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Destroy Audio Source
       objectReference: {fileID: 0}
+    - target: {fileID: 9054815009424065473, guid: e47af709977db7f49a71a89b0922e59f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e47af709977db7f49a71a89b0922e59f, type: 3}
 --- !u!4 &3999869508569578233 stripped
@@ -16386,10 +16401,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5810600384853675110}
     m_Modifications:
+    - target: {fileID: 4338956697103899549, guid: eed3d5e92f968d64ba1812ff20abad4c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338956697114401751, guid: eed3d5e92f968d64ba1812ff20abad4c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4338956697469875107, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
       propertyPath: m_Name
       value: HealthSlider.Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338956697469875107, guid: eed3d5e92f968d64ba1812ff20abad4c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4338956697469875111, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
@@ -16496,6 +16526,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4338956697552451255, guid: eed3d5e92f968d64ba1812ff20abad4c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4338956697785774180, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -16505,6 +16540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338956697785774181, guid: eed3d5e92f968d64ba1812ff20abad4c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7825420229053398653, guid: eed3d5e92f968d64ba1812ff20abad4c,
         type: 3}

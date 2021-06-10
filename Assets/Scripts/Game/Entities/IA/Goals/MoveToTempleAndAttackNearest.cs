@@ -5,25 +5,28 @@
 	using Tartaros.Entities.Detection;
 	using Tartaros.Entities.Health;
 	using UnityEngine;
+	using UnityEngine.AI;
 
 	public class MoveToTempleAndAttackNearest : AGoalComposite
 	{
 		private Vector3 _templePosition = Vector3.zero;
 		private EntityDetection _entityDetection = null;
 		private EntityHealth _entityHealth = null;
+		private NavMeshPath _path = null;
 
-		public MoveToTempleAndAttackNearest(Entity goalOwner, Vector3 templePosition) : base(goalOwner)
+		public MoveToTempleAndAttackNearest(Entity goalOwner, Vector3 templePosition, NavMeshPath path) : base(goalOwner)
 		{
 			_templePosition = templePosition;
 			_entityDetection = goalOwner.GetComponent<EntityDetection>();
 			_entityHealth = goalOwner.GetComponent<EntityHealth>();
+			_path = path;
 		}
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
 
-			base.AddSubGoal(new MoveToDestination(_goalOwner, _templePosition));
+			base.AddSubGoal(new MoveToDestination(_goalOwner, _templePosition, _path));
 
 			_entityHealth.DamageTaken -= GetDamage;
 			_entityHealth.DamageTaken += GetDamage;

@@ -122,8 +122,7 @@
 
 				//var entityMovementSpawned = spawnedEntity.GetComponent<EntityMovement>();
 				//entityMovementSpawned.NavMeshArea = (int)spawnPoint.Identifier;
-
-				waveSpawnable.Attack(_stateOwner.EnemiesTarget, spawnPoint.Waypoints);
+				waveSpawnable.Attack(_stateOwner.EnemiesTarget, spawnPoint.Waypoints, spawnPoint.NavPaths);
 				_stillAliveManger.AddEnemyWave(waveSpawnable);
 
 				yield return new WaitForSeconds(unitSequence.SecondsBetweenUnits);

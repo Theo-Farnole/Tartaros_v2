@@ -16,13 +16,15 @@
 		private Vector3[] _waypoints = null;
 		private bool _completed = false;
 		private int _indexWaypoints = 1;
+		private NavMeshPath[] _paths = null;
 
-		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition, IAttackable targetTemple, Vector3[] waypoints) : base(goalOwner)
+		public DestroyTempleMainGoal(Entity goalOwner, Vector3 templePosition, IAttackable targetTemple, Vector3[] waypoints, NavMeshPath[] paths) : base(goalOwner)
 		{
 			_templePosition = templePosition;
 			_entityDetection = _goalOwner.GetComponent<EntityDetection>();
 			_templeTarget = targetTemple;
 			_waypoints = waypoints;
+			_paths = paths;
 		}
 
 		public override void OnEnter()
@@ -106,8 +108,9 @@
 		private void AddMoveToTemple()
 		{
 			Vector3 targetPosition = GoalPosition();
+			NavMeshPath path = Path();
 
-			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, targetPosition);
+			_currentMoveToTemple = new MoveToTempleAndAttackNearest(_goalOwner, targetPosition, path);
 
 			base.AddSubGoal(_currentMoveToTemple);
 		}
@@ -147,6 +150,22 @@
 			}
 
 			return NavMeshHelper.LastPositionOnPartialNavMesh(_goalOwner.transform.position, _templePosition);
+		}
+
+		private NavMeshPath Path()
+		{
+
+			if(_paths.Length >= _indexWaypoints)
+			{
+				NavMeshPath path = _paths[_indexWaypoints - 1];
+				_indexWaypoints++;
+				return path;
+			}
+
+			NavMeshPath output = new NavMeshPath();
+			NavMesh.CalculatePath(_goalOwner.transform.position, _templePosition, NavMesh.AllAreas, output);
+
+			return output;
 		}
 
 		private void AddDestroySubGoal(IAttackable target)
