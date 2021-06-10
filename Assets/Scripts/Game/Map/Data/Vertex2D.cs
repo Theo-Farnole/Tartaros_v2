@@ -15,6 +15,8 @@
 			set => _position = new Vector2(value.x, value.z);
 		}
 
+		public Vector2 Position2D => _position;
+
 		public Vertex2D(Vector3 worldPosition)
 		{
 			WorldPosition = worldPosition;

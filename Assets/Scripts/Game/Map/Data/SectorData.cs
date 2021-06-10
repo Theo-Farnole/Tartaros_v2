@@ -20,7 +20,7 @@
 		private ISectorResourcesWallet _capturePrice = null;
 
 		private Vector3[] _allWorldsPoints = null;
-		private ConvexPolygon? _convexPolygon = default;
+		private ConvexPolygon? _convexPolygon = null;
 		#endregion Fields
 
 		#region Properties
@@ -50,7 +50,7 @@
 			{
 				if (_convexPolygon is null)
 				{
-					_convexPolygon = new ConvexPolygon(AllWorldsPoint.Select(vector => new Vector2(vector.x, vector.z)).ToArray());
+					_convexPolygon = new ConvexPolygon(_vertices.Select(x => x.Position2D).ToArray());
 				}
 
 				return (ConvexPolygon)_convexPolygon;

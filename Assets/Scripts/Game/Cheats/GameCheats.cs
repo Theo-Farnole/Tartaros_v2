@@ -21,7 +21,7 @@
 		public static bool HasFPSCounter => FPSCounter.HasInstance;
 
 		[Cheat]
-		public static void SetTimeScale(float timeScale = 1)
+		public static void SetTimeScale(float timeScale = 3)
 		{
 			Time.timeScale = timeScale;
 		}
