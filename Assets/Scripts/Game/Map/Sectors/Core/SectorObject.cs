@@ -1,12 +1,13 @@
 ﻿namespace Tartaros.Map
 {
+	using System;
 	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 	public class SectorObject : MonoBehaviour
 	{
 		#region Fields
-		private const float MOVE_DETECTION_THRESHOLD = 0.01f;
+		private const float MOVE_DETECTION_THRESHOLD = 0.1f;
 
 		private ISector _currentSector = null;
 		private IMap _map = null;
@@ -17,13 +18,33 @@
 		[ShowInRuntime] private string SectorName => _currentSector != null ? _currentSector.ToString() : "NO SECTOR";
 		#endregion Properties
 
+		#region Events
+		public class SectorMovedArgs : EventArgs
+		{
+			public readonly ISector previousSector = null;
+			public readonly ISector newSector = null;
+
+			public SectorMovedArgs(ISector previousSector, ISector newSector)
+			{
+				this.previousSector = previousSector;
+				this.newSector = newSector;
+			}
+		}
+
+		public event EventHandler<SectorMovedArgs> SectorMoved = null;
+		#endregion Events
+
 		#region Methods
 		private void Awake()
 		{
 			_map = Services.Instance.Get<IMap>();
+		}
+
+		private void Start()
+		{
+			_lastPosition = transform.position;
 
 			SetCurrentSector(GetSectorOnPosition());
-			_lastPosition = transform.position;
 		}
 
 		private void Update()
@@ -55,6 +76,10 @@
 
 		private void SetCurrentSector(ISector sector)
 		{
+			if (sector == _currentSector) return;
+
+			ISector previousSector = _currentSector;
+
 			if (_currentSector != null)
 			{
 				_currentSector.RemoveObjectInSector(gameObject);
@@ -66,6 +91,8 @@
 			{
 				_currentSector.AddObjectInSector(gameObject);
 			}
+
+			SectorMoved?.Invoke(this, new SectorMovedArgs(previousSector, _currentSector));
 		}
 		#endregion Methods
 	}
