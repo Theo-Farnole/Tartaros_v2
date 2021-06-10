@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
+	using System.Collections.Generic;
 	using Tartaros.FogOfWar;
 	using Tartaros.Map;
 	using UnityEngine;
@@ -8,13 +9,12 @@
 	public class SectorVisionManager : MonoBehaviour
 	{
 		#region Fields
-		[SerializeField]
-		[ChildGameObjectsOnly]
-		private MeshFilter _meshFiltrer = null;
+		[SerializeField, ChildGameObjectsOnly] private MeshFilter _meshFiltrer = null;
 
 		private MeshRenderer _meshRenderer = null;
 		private Sector _sector = null;
 		private FogConvexPolygonVision _fogVision = null;
+		private List<ISectorVisionEnabler> _enablers = new List<ISectorVisionEnabler>();
 		#endregion Fields
 
 		#region Methods
@@ -25,7 +25,7 @@
 			_meshRenderer = _meshFiltrer.GetComponent<MeshRenderer>();
 		}
 
-		private void Update()
+		private void Start()
 		{
 			UpdateFogOfWarVisibility();
 		}
@@ -37,12 +37,48 @@
 
 			_sector.Initialized -= Initialized;
 			_sector.Initialized += Initialized;
+
+			_sector.ObjectAdded -= OnObjectAdded;
+			_sector.ObjectAdded += OnObjectAdded;
+
+			_sector.ObjectRemoved -= OnObjectRemoved;
+			_sector.ObjectRemoved += OnObjectRemoved;
 		}
 
 		private void OnDisable()
 		{
 			_sector.Initialized -= Initialized;
 			_sector.Captured -= SectorCaptured;
+			_sector.ObjectAdded -= OnObjectAdded;
+			_sector.ObjectRemoved -= OnObjectRemoved;
+		}
+
+		private void OnObjectAdded(object sender, ObjectAddedArgs e)
+		{
+			if (e.addedObject.TryGetComponent(out ISectorVisionEnabler enabler))
+			{
+				AddSectorVisionEnabler(enabler);
+			}
+		}
+
+		private void OnObjectRemoved(object sender, ObjectRemovedArgs e)
+		{
+			if (e.removedObject.TryGetComponent(out ISectorVisionEnabler enabler))
+			{
+				RemoveSectorVisionEnabler(enabler);
+			}
+		}
+
+		private void AddSectorVisionEnabler(ISectorVisionEnabler enabler)
+		{
+			_enablers.TryAddWithoutDuplicate(enabler);
+			UpdateFogOfWarVisibility();
+		}
+
+		private void RemoveSectorVisionEnabler(ISectorVisionEnabler enabler)
+		{
+			_enablers.Remove(enabler);
+			UpdateFogOfWarVisibility();
 		}
 
 		private void Initialized(object sender, Sector.InitializedArgs e)
@@ -77,8 +113,7 @@
 			}
 			else
 			{
-				ISectorVisionEnabler[] enablers = _sector.FindObjectsInSectorOfType<ISectorVisionEnabler>();
-				return enablers.Length > 0;
+				return _enablers.Count > 0;
 			}
 		}
 

@@ -2,6 +2,7 @@
 {
 	using System;
 	using Tartaros.ServicesLocator;
+	using UnityEditor;
 	using UnityEngine;
 
 	public class SectorObject : MonoBehaviour
@@ -15,14 +16,19 @@
 		#endregion Fields
 
 		#region Properties
+#pragma warning disable IDE0051 // Remove unused private members
 		[ShowInRuntime] private string SectorName => _currentSector != null ? _currentSector.ToString() : "NO SECTOR";
+#pragma warning restore IDE0051 // Remove unused private members
 		#endregion Properties
 
 		#region Events
 		public class SectorMovedArgs : EventArgs
 		{
-			public readonly ISector previousSector = null;
-			public readonly ISector newSector = null;
+			private readonly ISector previousSector = null;
+			private readonly ISector newSector = null;
+
+			public ISector PreviousSector => previousSector;
+			public ISector NewSector => newSector;
 
 			public SectorMovedArgs(ISector previousSector, ISector newSector)
 			{
