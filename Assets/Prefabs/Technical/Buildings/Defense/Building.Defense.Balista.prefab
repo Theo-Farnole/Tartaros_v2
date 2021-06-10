@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectileSpawnPoint: {x: 0, y: 9.7, z: 1}
   _inflictDamageDelay: 0
-  _inflictDamageAnimationEvent: {fileID: 0}
+  _inflictDamageAnimationEvent: {fileID: 7815259613023682290}
   _turretTransform: {fileID: 1104824603615874156}
   _attackAudioSource: {fileID: 3656619363030865170}
   _attackAudioClips:
@@ -16370,6 +16370,18 @@ Transform:
   m_Father: {fileID: 5657609668978460671}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7815259613023682290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128668157592944252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d12a33c6129ce4d80f3e0b89341d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1582207056110208319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16535,6 +16547,12 @@ Transform:
 --- !u!4 &1104824603615874156 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1570033226544106703, guid: 40135a875b18b894893b8965e1eb5987,
+    type: 3}
+  m_PrefabInstance: {fileID: 1917619717638062243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7128668157592944252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8679242504008974047, guid: 40135a875b18b894893b8965e1eb5987,
     type: 3}
   m_PrefabInstance: {fileID: 1917619717638062243}
   m_PrefabAsset: {fileID: 0}

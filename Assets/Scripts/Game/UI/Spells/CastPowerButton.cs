@@ -13,6 +13,7 @@
 		#region Fields
 		[SerializeField, SuffixLabel("self if null")] private Button _button = null;
 		[SerializeField] private Power _powerToCast = Power.LightningBolt;
+		[SerializeField] private Image _lockImage = null;
 
 		private ShowCostOnPointerEnter _showCostOnPointerEnter = null;
 		private OpenHoverPopupOnHover _openHover = null;
@@ -36,8 +37,19 @@
 
 		private void Start()
 		{
+			if (_lockImage != null)
+			{
+				bool lockToShow = IsPowerToCastUnlocked() == false;
+				_lockImage.gameObject.SetActive(lockToShow);
+			}
+
 			_showCostOnPointerEnter.GloryCost = _powerManager.GetGloryPrice(_powerToCast);
 			SetToShowData();
+		}
+
+		private bool IsPowerToCastUnlocked()
+		{
+			return _powerManager.IsPowerUnlock(_powerToCast);
 		}
 
 		private void SetToShowData()
@@ -53,11 +65,23 @@
 		{
 			_button.onClick.RemoveListener(OnButtonClick);
 			_button.onClick.AddListener(OnButtonClick);
+
+			_powerManager.PowerUnlocked -= PowerUnlocked;
+			_powerManager.PowerUnlocked += PowerUnlocked;
 		}
 
 		private void OnDisable()
 		{
+			_powerManager.PowerUnlocked -= PowerUnlocked;
 			_button.onClick.RemoveListener(OnButtonClick);
+		}
+
+		private void PowerUnlocked(object sender, PowerManager.PowerUnlockedArgs e)
+		{
+			if (e.powerUnlocked == _powerToCast && _lockImage != null)
+			{
+				_lockImage.gameObject.SetActive(false);
+			}
 		}
 
 		private void OnButtonClick()

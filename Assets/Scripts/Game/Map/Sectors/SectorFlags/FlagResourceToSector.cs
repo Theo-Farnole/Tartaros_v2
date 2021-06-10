@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Map
 {
 	using Sirenix.OdinInspector;
+	using System;
 	using System.Linq;
 	using Tartaros.Construction;
 	using Tartaros.Economy;
@@ -15,6 +16,9 @@
 	{
 		#region Fields
 		[SerializeField] private SectorRessourceType _type = SectorRessourceType.Food;
+		[SerializeField] private int _resourcesAvailableAtStart = 1000;
+
+		private int _currentAvailableResources = 1000;
 
 		private ResourceMiniMapIcon _miniMapIcon = null;
 		private ISector _sectorOnPosition = null;
@@ -38,11 +42,31 @@
 		}
 
 		SectorStyle ISectorUIStylizer.SectorStyle => _uiStyles.SectorStyles.GetResourceStyle(_type);
+
+		public int AvailableResources
+		{
+			get => _currentAvailableResources; 
+			
+			set
+			{
+				_currentAvailableResources = Mathf.Max(0, value);
+				AvailableResourcesChanged?.Invoke(this, new AvailableResourcesChangedArgs());
+			}
+		}
+		public float AvailableResourcesPercent => _currentAvailableResources / ResourcesAvailableAtStart;
+		public int ResourcesAvailableAtStart => _resourcesAvailableAtStart;
 		#endregion Properties
+
+		#region Events
+		public class AvailableResourcesChangedArgs : EventArgs { }
+		public event EventHandler<AvailableResourcesChangedArgs> AvailableResourcesChanged = null;
+		#endregion Events
 
 		#region Methods
 		private void Awake()
 		{
+			_currentAvailableResources = ResourcesAvailableAtStart;
+
 			_map = Services.Instance.Get<IMap>();
 			_buildingsDatabase = Services.Instance.Get<BuildingsDatabase>();
 			_uiStyles = Services.Instance.Get<UIStyles>();
@@ -54,12 +78,16 @@
 
 			CheckIfBuildingSlotIsMissing();
 			SetBuildingSlotConstructable();
-			
 		}
 
 		private void OnEnable()
 		{
 			CheckIfCaptureBuildingIsHere();
+		}
+
+		public bool IsDepleted()
+		{
+			return _currentAvailableResources <= 0;
 		}
 
 		private void SetBuildingSlotConstructable()
@@ -111,7 +139,7 @@
 		SectorUIContent ISectorUIContentProvider.GetSectorContent()
 		{
 			string name = TartarosTexts.GetResourceSectorName(_type);
-			string description = TartarosTexts.GetResourceSectorDescription(_type);
+			string description = TartarosTexts.GetResourceSectorDescription(_sectorOnPosition);
 
 			return new SectorUIContent(name, description);
 		}

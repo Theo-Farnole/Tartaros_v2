@@ -5,16 +5,15 @@ AnimationInstancing.cs - The core part of the Animation Instancing library
 ©2017 Jin Xiaoyu. All Rights Reserved.
 */
 
-using UnityEngine;
-using UnityEngine.Rendering;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace AnimationInstancing
 {
-    [AddComponentMenu("AnimationInstancingMgr")]
+	[AddComponentMenu("AnimationInstancingMgr")]
     public class AnimationInstancingMgr : Singleton<AnimationInstancingMgr>
     {
         // array[index base on texture][package index][instance index]
@@ -320,6 +319,9 @@ namespace AnimationInstancing
             for (int i = 0; i != aniInstancingList.Count; ++i)
             {
                 AnimationInstancing instance = aniInstancingList[i];
+
+                if (instance == null) continue;
+
                 if (!instance.IsPlaying())
                     continue;
                 if (instance.aniIndex < 0 && instance.parentInstance == null)

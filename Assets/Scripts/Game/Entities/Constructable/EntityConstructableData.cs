@@ -8,8 +8,7 @@
 	using Tartaros.UI.HoverPopup;
 	using UnityEngine;
 	using UnityEngine.AI;
-
-	[System.Serializable]
+	
 	public class EntityConstructableData : IEntityBehaviourData, IConstructable
 	{
 		#region Fields

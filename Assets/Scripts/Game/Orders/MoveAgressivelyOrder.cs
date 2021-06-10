@@ -14,6 +14,8 @@
 		private static Sprite Icon => Services.Instance.Get<IconsDatabase>().Data.MoveAgressivelyIcon;
 		public MoveAgressivelyOrder(EntityMovement entityMovement) : base(Icon, Services.Instance.Get<HoverPopupsDatabase>().Database.MoveAggressively)
 		{
+			if (entityMovement is null) throw new ArgumentNullException(nameof(entityMovement));
+
 			_executeAction = Create(entityMovement, this);
 		}
 		private static Action Create(EntityMovement entityMovement, Order order)

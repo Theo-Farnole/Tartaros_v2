@@ -89,12 +89,6 @@
 
 			foreach (var entity in entities)
 			{
-				
-				if(entity.EntityType == EntityType.Building)
-				{
-					Debug.Log(entity.GetBehaviourData<IConstructable>());
-				}
-
 				if (entity.EntityType == EntityType.Building && entity.GetBehaviourData<IConstructable>() == constructable)
 				{
 					return entity;
@@ -187,6 +181,20 @@
 			}
 		}
 
+		public static int GetAvailableResources(this ISector sector)
+		{
+			FlagResourceToSector[] flags = sector.FindObjectsInSectorOfType<FlagResourceToSector>();
+
+			if (flags.Length == 1)
+			{
+				return flags[0].AvailableResources;
+			}
+			else
+			{
+				throw new System.NotSupportedException(string.Format("There is {0} resources flags on sector {1}. This is not supported.", flags.Length, sector.ToString()));
+			}
+		}
+
 		public static ISectorUIStylizer GetUIStylizer(this ISector sector)
 		{
 			ISectorUIStylizer[] stylizers = sector.FindObjectsInSectorOfType<ISectorUIStylizer>();
@@ -205,6 +213,8 @@
 
 		public static SectorUIContent GetUIContent(this ISector sector)
 		{
+			if (sector is null)throw new System.ArgumentNullException(nameof(sector));			
+
 			ISectorUIContentProvider[] content = sector.FindObjectsInSectorOfType<ISectorUIContentProvider>();
 
 			if (content.Length > 1) throw new System.NotSupportedException("A sector cannot contains more than one UI content. Please remove one.");

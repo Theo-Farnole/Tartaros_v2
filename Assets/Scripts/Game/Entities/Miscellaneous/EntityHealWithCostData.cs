@@ -4,7 +4,6 @@
 	using Tartaros.Economy;
 	using UnityEngine;
 
-	[Serializable]
 	public class EntityHealWithCostData : IEntityBehaviourData
 	{
 		#region Fields

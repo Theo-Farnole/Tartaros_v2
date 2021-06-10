@@ -25,8 +25,6 @@
 			{
 				_camera.GetComponent<CameraController>().MoveCameraAtTargetPosition(worldPosition);
 			}
-
-			Debug.Log(worldPosition);
 		}
 
 		private Vector3 GetWorldPosition(Vector2 mapPosition)
