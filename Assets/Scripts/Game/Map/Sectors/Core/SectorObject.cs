@@ -38,13 +38,12 @@
 		private void Awake()
 		{
 			_map = Services.Instance.Get<IMap>();
+			SetCurrentSector(GetSectorOnPosition());
 		}
 
 		private void Start()
 		{
 			_lastPosition = transform.position;
-
-			SetCurrentSector(GetSectorOnPosition());
 		}
 
 		private void Update()
