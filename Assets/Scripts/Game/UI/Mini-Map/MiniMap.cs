@@ -130,23 +130,30 @@
 
 		public Vector2 WordToUiPosition(Vector3 worldPosition)
 		{
-			var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
-			var y = _rootTransform.rect.height * worldPosition.z / _map.MapBounds.boundsY.max;
-
-			return new Vector2(x, y);
+			return WorldToUiPosition(worldPosition.x, worldPosition.z);
 		}
 
 		public Vector2 WordToUiPosition(Vector2 worldPosition)
 		{
-			var x = _rootTransform.rect.width * worldPosition.x / _map.MapBounds.boundsX.max;
-			var y = _rootTransform.rect.height * worldPosition.y / _map.MapBounds.boundsY.max;
+			return WorldToUiPosition(worldPosition.x, worldPosition.y);
+		}
+
+		private Vector3 WorldToUiPosition(float worldX, float worldY)
+		{
+			Bounds1D boundsX = _map.GameplayBounds.boundsX;
+			Bounds1D boundsY = _map.GameplayBounds.boundsY;
+			var xPercent = (worldX - boundsX.min) / (boundsX.max - boundsX.min);
+			var yPercent = (worldY - boundsY.min) / (boundsY.max - boundsY.min);
+
+			var x = _rootTransform.rect.width * xPercent;
+			var y = _rootTransform.rect.height * yPercent;
 
 			return new Vector2(x, y);
 		}
 
 		public Vector3 UIToWorldPosition(Vector2 UIPosition)
 		{
-			var x =   _map.MapBounds.boundsX.max / _rootTransform.rect.width * UIPosition.x  ;
+			var x =   _map.MapBounds.boundsX.max / _rootTransform.rect.width * UIPosition.x;
 			var z =   _map.MapBounds.boundsY.max / _rootTransform.rect.height  * UIPosition.y ;
 
 			return new Vector3(x, 1, z);
