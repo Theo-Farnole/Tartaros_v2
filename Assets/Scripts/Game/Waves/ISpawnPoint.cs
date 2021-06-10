@@ -1,11 +1,14 @@
 ﻿namespace Tartaros.Wave
 {
     using UnityEngine;
+	using UnityEngine.AI;
 
-    public interface ISpawnPoint
+	public interface ISpawnPoint
     {
         SpawnPointIdentifier Identifier { get; }
         Vector3 SpawnPoint { get; }
         Vector3[] Waypoints { get; }
+
+        NavMeshPath[] NavPaths { get; }
     }
 }

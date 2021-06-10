@@ -9,6 +9,7 @@
 	using Tartaros.SoundsSystem;
 	using Tartaros.Wave;
 	using UnityEngine;
+	using UnityEngine.AI;
 	using UnityEngine.UI;
 
 	[SelectionBase]
@@ -71,6 +72,7 @@
 		private void Awake()
 		{
 			gameObject.GetOrAddComponent<SectorObject>();
+			//NavMesh.pathfindingIterationsPerFrame = Mathf.Infinity;
 		}
 
 		private void Start()
@@ -142,12 +144,12 @@
 			_entityFSM.Stop();
 		}
 
-		void IWaveSpawnable.Attack(IAttackable attackable, Vector3[] waypoints)
+		void IWaveSpawnable.Attack(IAttackable attackable, Vector3[] waypoints, NavMeshPath[] paths)
 		{
 			//GetComponent<IOrderAttackReceiver>().Attack(attackable);
 
 			var position = attackable.Transform.position;
-			_entityFSM.SetStateGoalPattern(position, attackable, waypoints);
+			_entityFSM.SetStateGoalPattern(position, attackable, waypoints, paths);
 
 
 		}

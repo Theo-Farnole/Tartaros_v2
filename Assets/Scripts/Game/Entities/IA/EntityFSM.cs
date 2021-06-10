@@ -5,6 +5,7 @@
 	using Tartaros.Entities.Movement;
 	using Tartaros.Entities.State;
 	using UnityEngine;
+	using UnityEngine.AI;
 
 	[DisallowMultipleComponent]
 	public partial class EntityFSM : AEntityBehaviour
@@ -118,9 +119,9 @@
 			SetState(InstantiateDefaultState());
 		}
 
-		public void SetStateGoalPattern(Vector3 position, IAttackable target, Vector3[] waypoints)
+		public void SetStateGoalPattern(Vector3 position, IAttackable target, Vector3[] waypoints, NavMeshPath[] paths)
 		{
-			SetState(new StateAttackTemple(Entity, position, target, waypoints));
+			SetState(new StateAttackTemple(Entity, position, target, waypoints, paths));
 		}
 
 		private AEntityState InstantiateDefaultState()

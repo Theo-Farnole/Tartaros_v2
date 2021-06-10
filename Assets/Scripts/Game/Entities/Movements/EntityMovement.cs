@@ -104,6 +104,7 @@
 		{
 			if (CanMoveToPoint(point))
 			{
+				_navMeshAgent.updatePosition = true;
 				bool wasStopped = _navMeshAgent.isStopped;
 
 				_navMeshAgent.isStopped = false;
@@ -124,8 +125,56 @@
 				Debug.LogErrorFormat("Entity {0} can't move to {1}.", name, point);
 			}
 		}
+
+		public void MoveToPointSatyr(NavMeshPath point)
+		{
+
+			bool wasStopped = _navMeshAgent.isStopped;
+
+			_navMeshAgent.isStopped = false;
+			_navMeshAgent.SetPath(point);
+			Debug.Log(_navMeshAgent.SetPath(point));
+
+			if (wasStopped == true)
+			{
+				if (_enableDynamicAvoidance == true)
+				{
+					_navMeshCollisionMoving.ReduceCollision();
+				}
+
+				StartMoving?.Invoke(this, new StartMovingArgs());
+			}
+		}
+		public void MoveToPointSatyr(Vector3 point)
+		{
+			if (CanMoveToPoint(point))
+			{
+				bool wasStopped = _navMeshAgent.isStopped;
+				_navMeshAgent.updatePosition = true;
+
+				_navMeshAgent.isStopped = false;
+				_navMeshAgent.nextPosition = point;
+
+				if (wasStopped == true)
+				{
+					if (_enableDynamicAvoidance == true)
+					{
+						_navMeshCollisionMoving.ReduceCollision();
+					}
+
+					StartMoving?.Invoke(this, new StartMovingArgs());
+				}
+			}
+			else
+			{
+				Debug.LogErrorFormat("Entity {0} can't move to {1}.", name, point);
+			}
+		}
+
+
 		public void StopMovement()
 		{
+			_navMeshAgent.updatePosition = true;
 			bool wasStopped = _navMeshAgent.isStopped;
 			_navMeshAgent.isStopped = true;
 
