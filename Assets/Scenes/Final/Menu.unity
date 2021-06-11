@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 437394720}
   - component: {fileID: 437394721}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: VLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,6 +826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1208126121}
   - component: {fileID: 1208126122}
+  - component: {fileID: 1208126123}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -896,6 +897,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1208126123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208126120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725a9abc1a0c409449961d6468c241fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _label: {fileID: 0}
 --- !u!1 &1376618202
 GameObject:
   m_ObjectHideFlags: 0

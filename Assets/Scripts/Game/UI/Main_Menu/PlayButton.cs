@@ -14,10 +14,14 @@
 
 		private void Start()
 		{
-			if (_loadAsyncOnStart == true)
+			if (_loadAsyncOnStart == true && _asyncOperation == null)
 			{
-				_asyncOperation = SceneManager.LoadSceneAsync(_sceneToLoad.ScenePath);
-				_asyncOperation.allowSceneActivation = false;
+				// If we don't wait, the scene load and ignore allowSceneActivation property
+				this.ExecuteAfterFrame(() =>
+				{
+					_asyncOperation = SceneManager.LoadSceneAsync(_sceneToLoad.ScenePath);
+					_asyncOperation.allowSceneActivation = false;
+				}, 10);
 			}
 		}
 
@@ -25,7 +29,7 @@
 		{
 			if (_asyncOperation != null)
 			{
-				_asyncOperation.allowSceneActivation = true;
+				_asyncOperation.allowSceneActivation = true;				
 			}
 			else
 			{
