@@ -16,7 +16,7 @@
 		#endregion Fields
 
 		#region Properties
-		public int PolygonsCount => visionsPolygonStartIndexes.Length; 
+		public int PolygonsCount => visionsPolygonStartIndexes.Length;
 		#endregion Properties
 
 		/// <summary>
@@ -62,13 +62,17 @@
 				visionsPolygonVertices.Add(polygon.vertices[j]);
 			}
 
-			Assert.AreEqual(visionsPolygonStartIndexes.Length, PolygonsCount);
-			Assert.AreEqual(visionsPolygonLength.Length, PolygonsCount);
+			Assert.AreEqual(PolygonsCount, visionsPolygonStartIndexes.Length);
+			Assert.AreEqual(PolygonsCount, visionsPolygonLength.Length);
+			Assert.AreEqual(visionsPolygonLength.Length, visionsPolygonStartIndexes.Length);
 		}
 
 		public NativeSlice<Vector2> GetPolygonVertices(int index)
 		{
-			NativeSlice<Vector2> vertices = new NativeSlice<Vector2>(visionsPolygonVertices, visionsPolygonStartIndexes[index], visionsPolygonLength[index]);
+			int start = visionsPolygonStartIndexes[index];
+			int length = visionsPolygonLength[index];
+
+			NativeSlice<Vector2> vertices = new NativeSlice<Vector2>(visionsPolygonVertices, start, length);
 
 			return vertices;
 		}

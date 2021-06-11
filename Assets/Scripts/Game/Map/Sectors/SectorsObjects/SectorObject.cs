@@ -13,6 +13,8 @@
 		private ISector _currentSector = null;
 		private IMap _map = null;
 		private Vector3 _lastCheckPosition = Vector3.zero;
+
+		private SectorObjectsManager _sectorObjectsManager = null;
 		#endregion Fields
 
 		#region Properties
@@ -45,6 +47,8 @@
 		private void Awake()
 		{
 			_map = Services.Instance.Get<IMap>();
+			_sectorObjectsManager = Services.Instance.Get<SectorObjectsManager>();
+
 			SetCurrentSector(GetSectorOnPosition());
 		}
 
@@ -53,24 +57,17 @@
 			_lastCheckPosition = transform.position;
 		}
 
-		private void Update()
+		private void OnEnable()
 		{
-			if (HasMoved() == true)
-			{
-				ISector sectorOnPosition = GetSectorOnPosition();
-
-				bool isOnNewSector = _currentSector != sectorOnPosition;
-
-				if (isOnNewSector == true)
-				{
-					SetCurrentSector(sectorOnPosition);
-				}
-
-				_lastCheckPosition = transform.position;
-			}
+			_sectorObjectsManager.AddSectorObject(this);
 		}
 
-		private bool HasMoved()
+		private void OnDisable()
+		{
+			_sectorObjectsManager.RemoveSectorObject(this);
+		}
+
+		public bool HasMoved()
 		{
 			return Vector3.Distance(transform.position, _lastCheckPosition) >= MOVE_DETECTION_THRESHOLD;
 		}
@@ -80,7 +77,7 @@
 			return _map.GetSectorOnPosition(transform.position);
 		}
 
-		private void SetCurrentSector(ISector sector)
+		public void SetCurrentSector(ISector sector)
 		{
 			if (sector == _currentSector) return;
 
@@ -97,6 +94,9 @@
 			{
 				_currentSector.AddObjectInSector(gameObject);
 			}
+
+			_lastCheckPosition = transform.position;
+			Debug.Log("Set current sector");
 
 			SectorMoved?.Invoke(this, new SectorMovedArgs(previousSector, _currentSector));
 		}
