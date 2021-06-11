@@ -14,6 +14,7 @@
 		private readonly EntityMovement _entityMovement;
 		private readonly EntitiesDetectorManager _entitiesDetectorManager;
 		private readonly float _stopRadius = 0.7f;
+		private readonly Entity _entity = null;
 		#endregion Fields
 
 		#region Properties
@@ -26,6 +27,7 @@
 			_entityMovement = entityMovement;
 			_stopRadius = entityMovement.AvoidanceRadius * 2 + TRANSITIVE_STOP_RADIUS_THRESHOLD;
 			_entitiesDetectorManager = Services.Instance.Get<EntitiesDetectorManager>();
+			_entity = entityMovement.Entity;
 		}
 		#endregion Ctor
 
@@ -40,6 +42,8 @@
 			for (int i = 0, length = entities.Length; i < length; i++)
 			{
 				Entity entity = entities[i];
+
+				if (entity == _entity) continue;
 
 				if (entity.TryGetComponent(out EntityMovement movement))
 				{
