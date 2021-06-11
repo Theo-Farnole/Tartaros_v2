@@ -35,7 +35,7 @@
 
 		private void OnEnable()
 		{
-			var sector = _sectorObject.GetSectorOnPosition();
+			var sector = _sectorObject.CurrentSector;
 
 			sector.Captured -= OnSectorCapture;
 			sector.Captured += OnSectorCapture;

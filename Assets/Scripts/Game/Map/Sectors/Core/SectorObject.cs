@@ -12,13 +12,14 @@
 
 		private ISector _currentSector = null;
 		private IMap _map = null;
-		private Vector3 _lastPosition = Vector3.zero;
+		private Vector3 _lastCheckPosition = Vector3.zero;
 		#endregion Fields
 
 		#region Properties
 #pragma warning disable IDE0051 // Remove unused private members
 		[ShowInRuntime] private string SectorName => _currentSector != null ? _currentSector.ToString() : "NO SECTOR";
 #pragma warning restore IDE0051 // Remove unused private members
+		public ISector CurrentSector => _currentSector;
 		#endregion Properties
 
 		#region Events
@@ -49,7 +50,7 @@
 
 		private void Start()
 		{
-			_lastPosition = transform.position;
+			_lastCheckPosition = transform.position;
 		}
 
 		private void Update()
@@ -64,17 +65,17 @@
 				{
 					SetCurrentSector(sectorOnPosition);
 				}
-			}
 
-			_lastPosition = transform.position;
+				_lastCheckPosition = transform.position;
+			}
 		}
 
 		private bool HasMoved()
 		{
-			return Vector3.Distance(transform.position, _lastPosition) >= MOVE_DETECTION_THRESHOLD;
+			return Vector3.Distance(transform.position, _lastCheckPosition) >= MOVE_DETECTION_THRESHOLD;
 		}
 
-		public ISector GetSectorOnPosition()
+		private ISector GetSectorOnPosition()
 		{
 			return _map.GetSectorOnPosition(transform.position);
 		}
