@@ -7,6 +7,9 @@
 	public interface IMap
 	{
 		Bounds2D MapBounds { get; }
+
+		Bounds2D GameplayBounds { get; }
+
 		ISector[] Sectors { get; }
 
 		bool CanBuild(Vector3 buildingPosition, Vector2 buildingSize);

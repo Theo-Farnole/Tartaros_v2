@@ -9,15 +9,15 @@
 	public class MapData : SerializedScriptableObject
 	{
 		#region Fields
-		[OdinSerialize]
-		private List<SectorData> _sectorsData = new List<SectorData>(0);
+		[OdinSerialize] private List<SectorData> _sectorsData = new List<SectorData>(0);
 
-		[SerializeField]
-		private Vector2 _mapSize = new Vector2(10, 10);
+		[SerializeField] private Vector2 _mapSize = new Vector2(10, 10);
+		[SerializeField] private Bounds2D _gameplayBounds = null;
 		#endregion Fields
 
 		#region Properties
 		public Vector2 MapSize => _mapSize;
+		public Bounds2D GameplayBounds => _gameplayBounds ?? throw new System.NullReferenceException("Set a gameplay bounds in asset {0}.".Format(name));
 		public SectorData[] Sectors => _sectorsData.ToArray();
 		public Vertex2D[] Vertices => _sectorsData.SelectMany(x => x.Vertices).ToArray();
 		#endregion Properties

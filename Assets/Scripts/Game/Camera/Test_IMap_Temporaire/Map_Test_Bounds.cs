@@ -15,6 +15,8 @@
 		Bounds2D IMap.MapBounds => _bounds2D;
 
 		ISector[] IMap.Sectors => throw new System.NotImplementedException();
+
+		Bounds2D IMap.GameplayBounds => _bounds2D;
 		#endregion Properties
 
 		#region Methods

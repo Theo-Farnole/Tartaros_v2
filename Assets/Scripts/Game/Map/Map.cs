@@ -26,6 +26,8 @@
 		public MapData MapData => _mapData;
 		Bounds2D IMap.MapBounds => new Bounds2D(0, _mapData.MapSize.x, 0, _mapData.MapSize.y);
 		ISector[] IMap.Sectors => _sectors;
+
+		Bounds2D IMap.GameplayBounds => _mapData.GameplayBounds;
 		#endregion Properties
 
 		#region Methods
@@ -40,8 +42,21 @@
 			if (_mapData != null)
 			{
 				Gizmos.color = Color.green;
+				DrawMapSize();
+				DrawGameplayBounds();
+			}
+
+			void DrawMapSize()
+			{
 				Vector3 size = new Vector3(_mapData.MapSize.x, 0, _mapData.MapSize.y);
 				Gizmos.DrawWireCube(size / 2, size);
+			}
+
+			void DrawGameplayBounds()
+			{
+				Vector3 size = new Vector3(_mapData.GameplayBounds.boundsX.Size, 0, _mapData.GameplayBounds.boundsY.Size);
+				Vector3 position = new Vector3(_mapData.GameplayBounds.MinX, 0, _mapData.GameplayBounds.MinY) + size / 2;
+				Gizmos.DrawWireCube(position, size);
 			}
 		}
 
