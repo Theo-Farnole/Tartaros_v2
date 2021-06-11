@@ -81,20 +81,6 @@
 
 			_coverables.Remove(coverable);
 		}
-
-		private void UpdateCoverablesVisibility()
-		{
-			// TODO TF: (performance) cache this
-			IShape[] visions = _visions.Select(x => x.VisionShape).ToArray();
-
-			foreach (IFogCoverable coverable in _coverables)
-			{
-				IShape coverableShape = coverable.ModelBounds;
-
-				bool isVisible = CollisionOverlapCalculator.DoOverlap(coverableShape, visions);
-				coverable.IsCovered = !isVisible;
-			}
-		}
 		#endregion Methods
 	}
 }

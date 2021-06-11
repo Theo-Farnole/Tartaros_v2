@@ -103,13 +103,13 @@
 	class FOWCalculator
 	{
 		#region Fields
-		private NativeArray<Circle> visionsCircle;
+		private NativeList<Circle> visionsCircle;
 		private NativeArray<Vector2> coverablesPosition;
 		private NativeArray<bool> isCoverResult;
 
 		private NativeList<Vector2> visionsPolygonVertices;
-		private NativeArray<int> visionsPolygonStartIndexes;
-		private NativeArray<int> visionsPolygonLength;
+		private NativeList<int> visionsPolygonStartIndexes;
+		private NativeList<int> visionsPolygonLength;
 		private int polygonCount;
 
 		private JobHandle handle;
@@ -118,15 +118,11 @@
 		#region Methods
 		public void Update(List<IFogVision> _visions, List<IFogCoverable> coverables)
 		{
-			IEnumerable<IShape> visionsShapes = _visions.Select(x => x.VisionShape);
-
-			Circle[] circles = visionsShapes.OfType<Circle>().ToArray();
-
-			visionsCircle = new NativeArray<Circle>(circles, Allocator.TempJob);
 			isCoverResult = new NativeArray<bool>(coverables.Count, Allocator.TempJob);
 
+			CreateContainer_Circles(_visions);
 			CreateContainer_CoverablesPosition(coverables);
-			CreateContainer_PolygonVisions(visionsShapes);
+			CreateContainer_PolygonVisions(_visions);
 
 			CalculateFogVisibilityJob job = new CalculateFogVisibilityJob
 			{
@@ -142,6 +138,7 @@
 
 			handle = job.Schedule(coverablesPosition.Length, 64);
 		}
+
 		public void LateUpdate(List<IFogCoverable> coverables)
 		{
 			handle.Complete();
@@ -159,55 +156,61 @@
 			visionsPolygonLength.Dispose();
 		}
 
-		private void CreateContainer_PolygonVisions(IEnumerable<IShape> visionsShape)
+		private void CreateContainer_Circles(List<IFogVision> _visions)
 		{
-			ConvexPolygon[] polygons = visionsShape.OfType<ConvexPolygon>().ToArray();
+			visionsCircle = new NativeList<Circle>(_visions.Count, Allocator.TempJob);
 
-			polygonCount = polygons.Length;
-			visionsPolygonVertices = new NativeList<Vector2>(0, Allocator.TempJob);
-			visionsPolygonStartIndexes = new NativeArray<int>(polygonCount, Allocator.TempJob);
-			visionsPolygonLength = new NativeArray<int>(polygonCount, Allocator.TempJob);
-
-			int polygonSum = 0;
-
-			for (int i = 0; i < polygonCount; i++)
+			for (int i = 0, length = _visions.Count; i < length; i++)
 			{
-				ConvexPolygon polygon = polygons[i];
-				int verticesCount = polygon.vertices.Count;
-
-				visionsPolygonStartIndexes[i] = polygonSum;
-				visionsPolygonLength[i] = verticesCount;
-
-				polygonSum += verticesCount;
-
-				for (int j = 0; j < verticesCount; j++)
+				if (_visions[i].VisionShape is Circle circle)
 				{
-					visionsPolygonVertices.Add(polygon.vertices[j]);
-				}
-			}
-
-			for (int i = 0; i < polygonCount; i++)
-			{
-				NativeSlice<Vector2> s = new NativeSlice<Vector2>(visionsPolygonVertices, visionsPolygonStartIndexes[i], visionsPolygonLength[i]);
-
-				Assert.AreEqual(polygons[i].vertices.Count, s.Length);
-
-				for (int j = 0; j < polygons[i].vertices.Count; j++)
-				{
-					Assert.AreEqual(polygons[i].vertices[j], s[j]);
+					visionsCircle.Add(circle);
 				}
 			}
 		}
 
+		private void CreateContainer_PolygonVisions(List<IFogVision> _visions)
+		{
+			visionsPolygonVertices = new NativeList<Vector2>(0, Allocator.TempJob);
+			visionsPolygonStartIndexes = new NativeList<int>(polygonCount, Allocator.TempJob);
+			visionsPolygonLength = new NativeList<int>(polygonCount, Allocator.TempJob);
+
+			polygonCount = 0;
+
+			int polygonSum = 0;
+
+			for (int i = 0, length = _visions.Count; i < length; i++)
+			{
+				if (_visions[i].VisionShape is ConvexPolygon polygon)
+				{
+					int verticesCount = polygon.vertices.Count;
+
+					visionsPolygonStartIndexes.Add(polygonSum);
+					visionsPolygonLength.Add(verticesCount);
+
+					polygonSum += verticesCount;
+
+					for (int j = 0; j < verticesCount; j++)
+					{
+						visionsPolygonVertices.Add(polygon.vertices[j]);
+					}
+
+					polygonCount++;
+				}
+			}
+
+			Assert.AreEqual(visionsPolygonStartIndexes.Length, polygonCount);
+			Assert.AreEqual(visionsPolygonLength.Length, polygonCount);
+		}
+
 		private void CreateContainer_CoverablesPosition(List<IFogCoverable> coverables)
 		{
-			Vector2[] coverablesPosition = coverables
-				.Select(x => x.ModelBounds)
-				.OfType<Circle>()
-				.Select(x => x.position)
-				.ToArray();
+			coverablesPosition = new NativeArray<Vector2>(coverables.Count, Allocator.TempJob);
 
-			this.coverablesPosition = new NativeArray<Vector2>(coverablesPosition, Allocator.TempJob);
+			for (int i = 0, length = coverables.Count; i < length; i++)
+			{
+				coverablesPosition[i] = coverables[i].Position;
+			}
 		}
 		#endregion
 	}
