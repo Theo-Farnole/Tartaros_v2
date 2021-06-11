@@ -12,16 +12,16 @@
 	[BurstCompile]
 	struct CalculateFogVisibilityJob : IJobParallelFor
 	{
+		#region Fields
 		[ReadOnly] public NativeArray<Circle> visionsCircle;
+		[ReadOnly] public PolygonsContainer polygonsContainer;
 		[ReadOnly] public NativeArray<Vector2> coverablesPosition;
 
-		[ReadOnly] public int polygonCount;
-		[ReadOnly] public NativeList<Vector2> visionsPolygonVertices;
-		[ReadOnly] public NativeArray<int> visionsPolygonStartIndexes;
-		[ReadOnly] public NativeArray<int> visionsPolygonLength;
-
 		public NativeArray<bool> isCoverResult;
+		#endregion Fields
 
+
+		#region Methods
 		void IJobParallelFor.Execute(int index)
 		{
 			Vector2 coverablePoint = coverablesPosition[index];
@@ -53,9 +53,9 @@
 
 		private bool OverlapPolygons(Vector2 coverablePoint)
 		{
-			for (int i = 0, length = polygonCount; i < length; i++)
+			for (int i = 0, length = polygonsContainer.PolygonsCount; i < length; i++)
 			{
-				NativeSlice<Vector2> vertices = new NativeSlice<Vector2>(visionsPolygonVertices, visionsPolygonStartIndexes[i], visionsPolygonLength[i]);
+				NativeSlice<Vector2> vertices = polygonsContainer.GetPolygonVertices(i);
 
 				bool overlap = DoPolygonOverlapPoint(vertices, coverablePoint.x, coverablePoint.y);
 
@@ -98,6 +98,7 @@
 			}
 			return collision;
 		}
+		#endregion Methods
 	}
 
 	class FOWCalculator
@@ -107,10 +108,7 @@
 		private NativeArray<Vector2> coverablesPosition;
 		private NativeArray<bool> isCoverResult;
 
-		private NativeList<Vector2> visionsPolygonVertices;
-		private NativeList<int> visionsPolygonStartIndexes;
-		private NativeList<int> visionsPolygonLength;
-		private int polygonCount;
+		private PolygonsContainer polygonsContainer;		
 
 		private JobHandle handle;
 		#endregion Fields
@@ -120,19 +118,15 @@
 		{
 			isCoverResult = new NativeArray<bool>(coverables.Count, Allocator.TempJob);
 
-			CreateContainer_Circles(_visions);
-			CreateContainer_CoverablesPosition(coverables);
-			CreateContainer_PolygonVisions(_visions);
+			CreateContainer_Visions(_visions);
+			CreateContainer_Coverables(coverables);
 
 			CalculateFogVisibilityJob job = new CalculateFogVisibilityJob
 			{
 				visionsCircle = visionsCircle,
-				visionsPolygonVertices = visionsPolygonVertices,
-				visionsPolygonStartIndexes = visionsPolygonStartIndexes,
-				visionsPolygonLength = visionsPolygonLength,
 				coverablesPosition = coverablesPosition,
 				isCoverResult = isCoverResult,
-				polygonCount = polygonCount
+				polygonsContainer = polygonsContainer
 			};
 
 
@@ -151,14 +145,13 @@
 			visionsCircle.Dispose();
 			coverablesPosition.Dispose();
 			isCoverResult.Dispose();
-			visionsPolygonVertices.Dispose();
-			visionsPolygonStartIndexes.Dispose();
-			visionsPolygonLength.Dispose();
+			polygonsContainer.Dispose();
 		}
 
-		private void CreateContainer_Circles(List<IFogVision> _visions)
+		private void CreateContainer_Visions(List<IFogVision> _visions)
 		{
 			visionsCircle = new NativeList<Circle>(_visions.Count, Allocator.TempJob);
+			polygonsContainer.Clear();
 
 			for (int i = 0, length = _visions.Count; i < length; i++)
 			{
@@ -166,44 +159,14 @@
 				{
 					visionsCircle.Add(circle);
 				}
-			}
-		}
-
-		private void CreateContainer_PolygonVisions(List<IFogVision> _visions)
-		{
-			visionsPolygonVertices = new NativeList<Vector2>(0, Allocator.TempJob);
-			visionsPolygonStartIndexes = new NativeList<int>(polygonCount, Allocator.TempJob);
-			visionsPolygonLength = new NativeList<int>(polygonCount, Allocator.TempJob);
-
-			polygonCount = 0;
-
-			int polygonSum = 0;
-
-			for (int i = 0, length = _visions.Count; i < length; i++)
-			{
-				if (_visions[i].VisionShape is ConvexPolygon polygon)
+				else if (_visions[i].VisionShape is ConvexPolygon polygon)
 				{
-					int verticesCount = polygon.vertices.Count;
-
-					visionsPolygonStartIndexes.Add(polygonSum);
-					visionsPolygonLength.Add(verticesCount);
-
-					polygonSum += verticesCount;
-
-					for (int j = 0; j < verticesCount; j++)
-					{
-						visionsPolygonVertices.Add(polygon.vertices[j]);
-					}
-
-					polygonCount++;
+					polygonsContainer.AddPolygon(polygon);
 				}
 			}
-
-			Assert.AreEqual(visionsPolygonStartIndexes.Length, polygonCount);
-			Assert.AreEqual(visionsPolygonLength.Length, polygonCount);
 		}
 
-		private void CreateContainer_CoverablesPosition(List<IFogCoverable> coverables)
+		private void CreateContainer_Coverables(List<IFogCoverable> coverables)
 		{
 			coverablesPosition = new NativeArray<Vector2>(coverables.Count, Allocator.TempJob);
 
