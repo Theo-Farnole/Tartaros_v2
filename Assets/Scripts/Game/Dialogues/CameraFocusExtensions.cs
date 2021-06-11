@@ -1,6 +1,7 @@
 ﻿namespace Tartaros
 {
 	using Tartaros.Dialogue;
+	using Tartaros.Map;
 	using Tartaros.Map.Village;
 	using UnityEngine;
 
@@ -15,6 +16,9 @@
 
 				case CameraFocus.FirstVillage:
 					return Object.FindObjectOfType<Village>().transform.position;
+
+				case CameraFocus.Poseidon:
+					return Object.FindObjectOfType<SpecialSector>().transform.position;
 
 				default:
 					throw new System.NotImplementedException(cameraFocus.ToString());
