@@ -1,12 +1,13 @@
 ﻿namespace Tartaros.Map
 {
-	using System.Linq;
 	using Tartaros.Math;
+	using Unity.Burst;
 	using Unity.Collections;
 	using Unity.Jobs;
 	using UnityEngine;
 
-	struct SetSectorJobs : IJobParallelFor
+	[BurstCompile]
+	struct CalculateSectorOnPositionsJob : IJobParallelFor
 	{
 		[ReadOnly] public NativeArray<Vector2> objectsPosition;
 		[ReadOnly] public PolygonsContainer polygons;

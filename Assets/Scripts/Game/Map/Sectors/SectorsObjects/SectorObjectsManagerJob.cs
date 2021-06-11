@@ -33,7 +33,7 @@
 			CreateContainer_Polygons();
 			_objectsSectorIndexes = new NativeArray<int>(sectorObjects.Count, Allocator.TempJob);
 
-			SetSectorJobs job = new SetSectorJobs()
+			CalculateSectorOnPositionsJob job = new CalculateSectorOnPositionsJob()
 			{
 				objectsPosition = _objectsPosition,
 				objectsSectorIndexes = _objectsSectorIndexes,
