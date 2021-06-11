@@ -2,7 +2,6 @@
 {
 	using System;
 	using Tartaros.ServicesLocator;
-	using UnityEditor;
 	using UnityEngine;
 
 	public class SectorObject : MonoBehaviour

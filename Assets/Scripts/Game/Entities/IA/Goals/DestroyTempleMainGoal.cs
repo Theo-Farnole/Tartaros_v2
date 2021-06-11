@@ -1,8 +1,6 @@
 ﻿namespace Tartaros.Entities
 {
-	using System.Collections;
 	using Tartaros.Entities.Detection;
-	using UnityEditor.UIElements;
 	using UnityEngine;
 	using UnityEngine.AI;
 

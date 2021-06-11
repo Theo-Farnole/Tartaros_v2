@@ -6,7 +6,6 @@
 //  Copyright © 2018 Chris Nolet. All rights reserved.
 //
 
-using Sirenix.OdinInspector.Editor.StateUpdaters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
