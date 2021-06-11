@@ -12,23 +12,16 @@
 
 	public class MiniMap : MonoBehaviour
 	{
-		[SerializeField]
-		private RectTransform _rootTransform = null;
+		[SerializeField] private RectTransform _rootTransform = null;
 
-		[SerializeField]
-		private RectTransform _iconsParent = null;
+		[SerializeField] private RectTransform _iconsParent = null;
 
-		[BoxGroup("Prefabs")]
-		[SerializeField]
-		private GameObject _prefabIcon = null;
-		[SerializeField]
-		private SectorsMiniMapDisplay _sectorDisplayer = null;
+		[BoxGroup("Prefabs"), SerializeField] private GameObject _prefabIcon = null;
+		[SerializeField] private SectorsMiniMapDisplay _sectorDisplayer = null;
 
-		[ShowInRuntime]
-		private Dictionary<IMiniMapIcon, RectTransform> _icons = new Dictionary<IMiniMapIcon, RectTransform>();
+		[ShowInRuntime] private Dictionary<IMiniMapIcon, RectTransform> _icons = new Dictionary<IMiniMapIcon, RectTransform>();
 
-		[SerializeField]
-		private NavigationPathMiniMap _navigationPathCalcule = null;
+		[SerializeField] private NavigationPathMiniMap _navigationPathCalcule = null;
 
 		private IMap _map = null;
 		private EnemiesWavesManager _enemiesWaveManager = null;
@@ -108,24 +101,16 @@
 
 		private void SetPositionIcons()
 		{
-			RemoveDestroyedMinimapIcons();
-
-			foreach (var icon in _icons)
+			foreach (KeyValuePair<IMiniMapIcon, RectTransform> icon in _icons)
 			{
+				if (icon.Key.IsInterfaceDestroyed() == true) continue;
+
 				RectTransform iconTransform = icon.Value;
 				Vector3 iconWorldPosition = icon.Key.WorldPosition;
 				Vector2 iconUIPosition = WordToUiPosition(iconWorldPosition);
 
 				iconTransform.anchoredPosition = iconUIPosition;
 			}
-		}
-
-		private void RemoveDestroyedMinimapIcons()
-		{
-			// source: https://stackoverflow.com/questions/16340818/remove-item-from-dictionary-where-value-is-empty-list
-			_icons = _icons
-				.Where(x => x.Key.IsInterfaceDestroyed() == false)
-				.ToDictionary(x => x.Key, x => x.Value);
 		}
 
 		public Vector2 WordToUiPosition(Vector3 worldPosition)
@@ -153,8 +138,8 @@
 
 		public Vector3 UIToWorldPosition(Vector2 UIPosition)
 		{
-			var x =   _map.MapBounds.boundsX.max / _rootTransform.rect.width * UIPosition.x;
-			var z =   _map.MapBounds.boundsY.max / _rootTransform.rect.height  * UIPosition.y ;
+			var x = _map.MapBounds.boundsX.max / _rootTransform.rect.width * UIPosition.x;
+			var z = _map.MapBounds.boundsY.max / _rootTransform.rect.height * UIPosition.y;
 
 			return new Vector3(x, 1, z);
 		}

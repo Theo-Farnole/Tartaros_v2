@@ -66,7 +66,7 @@
 
 			_velocity.y += GRAVITY * deltaTime;
 
-			if(_projectileIsMaxHeight == false && _velocity.y <= -3f)
+			if(_projectileIsMaxHeight == false && _velocity.y <= -5f)
 			{
 				_hitEffect.ExecuteHitEffect(transform.position, transform.rotation);
 				_projectileMesh.SetActive(false);

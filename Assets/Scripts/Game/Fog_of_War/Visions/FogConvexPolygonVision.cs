@@ -8,7 +8,7 @@
 	public partial class FogConvexPolygonVision : MonoBehaviour, IFogVision
 	{
 		#region Fields
-		private ConvexPolygon _convexPolygon = null;
+		private ConvexPolygon _convexPolygon = default;
 		private FogOfWarManager _fogOfWarManager = null;
 		#endregion Fields
 

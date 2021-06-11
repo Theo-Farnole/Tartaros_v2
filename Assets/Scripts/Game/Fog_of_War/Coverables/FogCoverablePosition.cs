@@ -38,7 +38,7 @@
 			}
 		}
 
-		IShape IFogCoverable.ModelBounds => new Circle(transform.position, 0.1f);
+		Vector2 IFogCoverable.Position => new Vector2(transform.position.x, transform.position.z);
 		#endregion Properties
 
 		#region Methods

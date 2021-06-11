@@ -1,8 +1,6 @@
 ﻿namespace Tartaros.Map
 {
 	using UnityEngine;
-	
-	using Tartaros.Map;
 
 	public interface IMap
 	{

@@ -21,6 +21,23 @@
 			return entitiesInSector;
 		}
 
+		public static bool TryGetSectorVisionManager(this ISector sector, out SectorVisionManager sectorVision)
+		{
+			sectorVision = sector.EnumerateObjectsOfType<SectorVisionManager>().FirstOrDefault();
+
+			return sectorVision != null;			
+		}
+
+		public static int GetCountOfObjectsOfType<T>(this ISector sector)
+		{
+			int count = sector.ObjectsInSector
+				.Select(x => x.GetComponent<T>())
+				.Where(x => x != null)
+				.Count();
+
+			return count;
+		}
+
 		public static IEnumerable<T> EnumerateObjectsOfType<T>(this ISector sector)
 		{
 			return sector.ObjectsInSector

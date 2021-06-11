@@ -3,11 +3,11 @@ namespace Tartaros.Math
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public class ConvexPolygon : IContainable, IShape
+	public struct ConvexPolygon : IContainable, IShape
 	{
 		#region Fields
 		public static ConvexPolygon OneSquare => new ConvexPolygon(new Vector2(1, 1), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-1, 1));
-		public List<Vector2> vertices = new List<Vector2>();
+		public List<Vector2> vertices;
 		#endregion Fields
 
 		#region Properties

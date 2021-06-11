@@ -26,6 +26,32 @@
             }
         }
 
+		event EventHandler<ObjectAddedArgs> ISector.ObjectAdded
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+
+			remove
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		event EventHandler<ObjectRemovedArgs> ISector.ObjectRemoved
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+
+			remove
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		void ISector.AddObjectInSector(GameObject gameObject)
 		{
 			throw new NotImplementedException();

@@ -2,12 +2,12 @@
 {
 	using UnityEngine;
 
-	public class Rectangle
+	public struct Rectangle : IShape
 	{
 		#region Fields
 		public static Rectangle OneSquare => new Rectangle(Vector2.zero, Vector2.one);
 
-		private Rect rect = default;
+		private Rect rect;
 		#endregion Fields
 
 		#region Properties

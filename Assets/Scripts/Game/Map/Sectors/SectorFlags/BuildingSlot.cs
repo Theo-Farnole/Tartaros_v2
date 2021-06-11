@@ -37,6 +37,11 @@
 		{
 			_playerWallet = Services.Instance.Get<IPlayerSectorResources>();
 
+			if (_constructionPrice != null)
+			{
+				_constructionPrice = SectorResourcesWallet.Zero;
+			}
+
 			if (_constructableEntity != null && _constructable == null)
 			{
 				_constructable = _constructableEntity.GetBehaviour<IConstructable>();
@@ -60,7 +65,7 @@
 				_constructable.InstantiateConstructionKit(transform.position, transform.rotation);
 				_isAvailable = false;
 
-				
+
 				StartCoroutine(SetInstanciateBuildingEntity(_constructable.TimeToConstruct + 0.5f));
 			}
 			else
@@ -101,7 +106,7 @@
 
 			_instanciateBuilding = _sector.GetConstructableInSector(_constructable);
 
-			if(_instanciateBuilding != null)
+			if (_instanciateBuilding != null)
 			{
 				_instanciateBuilding.EntityKilled += _instanciateBuilding_EntityKilled;
 			}
