@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7074fb2a5f4c4134ca2136b04fa6f826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 5
+  _radius: 4.7
 --- !u!1 &1043745366
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7093ddca2a2524c438a7bb6ddd4d575e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 227249773}
+  _model: {fileID: 227249770}
 --- !u!114 &1722900333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,6 +705,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1949675460}
   - component: {fileID: 1949675461}
+  - component: {fileID: 1949675463}
+  - component: {fileID: 1949675462}
   m_Layer: 0
   m_Name: FogOfWar
   m_TagString: Untagged
@@ -738,4 +740,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7babd9a23336a4198de8323561c9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 961fd35639e4d1c48ad4d95e5314e2fc, type: 2}
+--- !u!114 &1949675462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949675459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11454be57a72b0f409a66bc6ff5fa7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1949675463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949675459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f07c7c00480154d8fe735c36d0587c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _services: {fileID: 1949675462}
+  _silentMissingServiceError: 1

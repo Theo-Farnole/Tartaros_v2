@@ -2,10 +2,12 @@
 {
 	using Sirenix.OdinInspector;
 	using System.IO;
+	using System.Linq;
 	using Tartaros.Map;
 	using Tartaros.ServicesLocator;
 
 	using UnityEngine;
+	using UnityEngine.Assertions;
 
 	public partial class Map : MonoBehaviour, IMap
 	{
@@ -89,7 +91,6 @@
 				}
 			}
 
-			//Debug.LogFormat("No sector found at position {0}", position);
 			return null;
 		}
 
@@ -127,6 +128,31 @@
 				{
 					Debug.LogWarningFormat("Missing Sector component on prefab {0}.", _sectorPrefab.name);
 				}
+			}
+
+			OptimizeSectorsOrder();
+		}
+
+		/// <summary>
+		/// Move the sectors with low vertices count to the beginning. It make GetSectorPosition more optimized.
+		/// </summary>
+		private void OptimizeSectorsOrder()
+		{
+			_sectors = _sectors.OrderBy((x) =>
+			{
+				if (x is Sector sector)
+				{
+					return sector.ConvexPolygon.vertices.Count;
+				}
+				else
+				{
+					return _sectors.Length;
+				}
+			}).ToArray();
+
+			if (_sectors.Length > 2 && _sectors[0] is Sector firstSector && _sectors[1] is Sector secondSector)
+			{
+				Assert.IsTrue(firstSector.ConvexPolygon.vertices.Count < secondSector.ConvexPolygon.vertices.Count);
 			}
 		}
 		#endregion Methods

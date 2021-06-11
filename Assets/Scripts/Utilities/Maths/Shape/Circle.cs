@@ -2,11 +2,11 @@
 {
 	using UnityEngine;
 
-	public class Circle : IShape
+	public struct Circle : IShape
 	{
 		#region Fields
-		public Vector2 position = Vector2.zero;
-		public float radius = 1;
+		public Vector2 position;
+		public float radius;
 		#endregion Fields
 
 		#region Properties

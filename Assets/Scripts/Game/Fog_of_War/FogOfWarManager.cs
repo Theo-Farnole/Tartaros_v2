@@ -3,23 +3,26 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Tartaros.Math;
-	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 	public class FogOfWarManager : MonoBehaviour
 	{
 		#region Fields
-		[ShowInRuntime]
-		private List<IFogVision> _visions = new List<IFogVision>();
+		[ShowInRuntime] private List<IFogVision> _visions = new List<IFogVision>();
+		[ShowInRuntime] private List<IFogCoverable> _coverables = new List<IFogCoverable>();
 
-		[ShowInRuntime]
-		private List<IFogCoverable> _coverables = new List<IFogCoverable>();
+		private FOWCalculator _fowCalculator = new FOWCalculator();
 		#endregion Fields
 
 		#region Methods
 		private void Update()
 		{
-			UpdateCoverablesVisibility();
+			_fowCalculator.Update(_visions, _coverables);
+		}
+
+		private void LateUpdate()
+		{
+			_fowCalculator.LateUpdate(_coverables);
 		}
 
 		private void OnDisable()
@@ -77,20 +80,6 @@
 			}
 
 			_coverables.Remove(coverable);
-		}
-
-		private void UpdateCoverablesVisibility()
-		{
-			// TODO TF: (performance) cache this
-			IShape[] visions = _visions.Select(x => x.VisionShape).ToArray();
-
-			foreach (IFogCoverable coverable in _coverables)
-			{
-				IShape coverableShape = coverable.ModelBounds;
-
-				bool isVisible = CollisionOverlapCalculator.DoOverlap(coverableShape, visions);
-				coverable.IsCovered = !isVisible;
-			}
 		}
 		#endregion Methods
 	}

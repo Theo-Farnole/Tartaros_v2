@@ -1,14 +1,11 @@
 namespace Tartaros.Map
 {
+	using System;
 	using System.Collections.Generic;
+	using Tartaros.Economy;
+	using Tartaros.Math;
 	using Tartaros.Selection;
 	using UnityEngine;
-	using Tartaros.Economy;
-	using Tartaros.ServicesLocator;
-	using Tartaros.Map;
-	using Tartaros.Math;
-	using System.Linq;
-	using System;
 
 	public class Sector : MonoBehaviour, ISector
 	{
@@ -68,22 +65,13 @@ namespace Tartaros.Map
 		public event EventHandler<InitializedArgs> Initialized = null;
 
 		public event EventHandler<CapturedArgs> Captured = null;
+		public event EventHandler<ObjectAddedArgs> ObjectAdded = null;
+		public event EventHandler<ObjectRemovedArgs> ObjectRemoved = null;
 
 
-
-		event EventHandler<CapturedArgs> ISector.Captured
-		{
-			add
-			{
-				Captured += value;
-			}
-
-			remove
-			{
-				Captured -= value;
-			}
-		}
-
+		event EventHandler<CapturedArgs> ISector.Captured { add => Captured += value; remove => Captured -= value; }
+		event EventHandler<ObjectAddedArgs> ISector.ObjectAdded { add => ObjectAdded += value; remove => ObjectAdded -= value; }
+		event EventHandler<ObjectRemovedArgs> ISector.ObjectRemoved { add => ObjectRemoved += value; remove => ObjectRemoved -= value; }
 
 		#endregion Events
 
@@ -159,6 +147,10 @@ namespace Tartaros.Map
 			{
 				Debug.LogErrorFormat("Cannot add the GameObject {0} to the sector {1} because it is already in the list.", gameObject.name, name);
 			}
+			else
+			{
+				ObjectAdded?.Invoke(this, new ObjectAddedArgs(gameObject));
+			}
 
 		}
 
@@ -167,12 +159,13 @@ namespace Tartaros.Map
 			if (_objectsInSector.Contains(gameObject) == true)
 			{
 				_objectsInSector.Remove(gameObject);
+				ObjectRemoved?.Invoke(this, new ObjectRemovedArgs(gameObject));
 			}
 			else
 			{
 				Debug.LogErrorFormat("Cannot remove the GameObject {0} to the sector {1} because it is not in the sector list.", gameObject, name);
 			}
-		} 
+		}
 		#endregion
 		#endregion Methods
 	}

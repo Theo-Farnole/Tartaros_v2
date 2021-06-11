@@ -38,7 +38,7 @@
 			_playerIncomeDisplayAmount = Services.Instance.Get<PlayerIncomeDisplayAmount>();
 
 			_data = Entity.GetBehaviourData<EntityResourcesGenerationData>();
-			_flagResourceToSector = GetComponent<SectorObject>().GetSectorOnPosition().FindObjectsInSectorOfType<FlagResourceToSector>()[0];
+			_flagResourceToSector = GetComponent<SectorObject>().CurrentSector.FindObjectsInSectorOfType<FlagResourceToSector>()[0];
 
 			// TODO TF: Log warning if entity.Team is Enemy: The enemy will generate resource for the player
 		}
