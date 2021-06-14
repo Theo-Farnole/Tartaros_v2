@@ -74,7 +74,7 @@
 			}
 		}
 
-	
+
 
 		IEnumerator DelayAfterTakingDamage()
 		{
@@ -84,23 +84,16 @@
 			yield return new WaitForSeconds(delayBeforeEnableRepair);
 			_healBlocked = false;
 
-			
+
 		}
 
 
 		Order[] IOrderable.GenerateOrders()
 		{
-			if (_healthable.IsFullLife())
+			return new Order[]
 			{
-				return null;
-			}
-			else
-			{
-				return new Order[]
-				{
 					new HealOrder(this)
-				};
-			}
+			};
 		}
 		#endregion Methods
 	}
