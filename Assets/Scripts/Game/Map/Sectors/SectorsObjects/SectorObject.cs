@@ -95,7 +95,6 @@
 			}
 
 			_lastCheckPosition = transform.position;
-			Debug.Log("Set current sector");
 
 			SectorMoved?.Invoke(this, new SectorMovedArgs(previousSector, _currentSector));
 		}
