@@ -3,6 +3,7 @@
 	public enum CameraFocus
 	{
 		None = 0,
-		FirstVillage
+		FirstVillage,
+		Poseidon
 	}
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2018 Chris Nolet. All rights reserved.
 //
 
-using Sirenix.OdinInspector.Editor.StateUpdaters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,26 +91,6 @@ public class Outline : MonoBehaviour
 
 	void Awake()
 	{
-
-		//foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
-		//{
-		//	if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)
-		//	{
-		//		//skinnedMeshRenderer.sharedMesh.subMeshCount = skinnedMeshRenderer.sharedMesh.subMeshCount + 1;
-		//		skinnedMeshRenderer.sharedMesh.SetTriangles(skinnedMeshRenderer.sharedMesh.triangles, skinnedMeshRenderer.sharedMesh.subMeshCount - 1);
-		//	}
-
-		//}
-
-		//foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
-		//{
-		//	if (meshFilter.sharedMesh.subMeshCount > 1)
-		//	{
-		//		//meshFilter.sharedMesh.subMeshCount = meshFilter.sharedMesh.subMeshCount + 1;
-		//		meshFilter.sharedMesh.SetTriangles(meshFilter.sharedMesh.triangles, meshFilter.sharedMesh.subMeshCount - 1);
-		//	}
-		//}
-
 		// Cache renderers
 		renderers = GetComponentsInChildren<Renderer>();
 

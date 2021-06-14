@@ -83,7 +83,7 @@
 			{
 				foreach (var soundEnum in EnumHelper.GetValues<Sound>())
 				{
-					if (_audioSources.ContainsKey(soundEnum) == false)
+					if (soundEnum != Sound.None && _audioSources.ContainsKey(soundEnum) == false)
 					{
 						Debug.LogErrorFormat("Missing audio sources for sound {0}.", soundEnum);
 					}

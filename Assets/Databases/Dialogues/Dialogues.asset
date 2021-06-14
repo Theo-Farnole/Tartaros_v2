@@ -16,8 +16,11 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 86d0f53927c28b34ab4328a5fe972a41, type: 2}
-    - {fileID: 11400000, guid: 34a7506b85408104ea378d0522d91954, type: 2}
+    - {fileID: 11400000, guid: b74a3f536f51fbd46a9b4356f4723758, type: 2}
+    - {fileID: 11400000, guid: 2a1cb8dcddac3184bba7c2fd5d77039d, type: 2}
+    - {fileID: 11400000, guid: a9d05f6006bb9a54da7971a79d7d830c, type: 2}
+    - {fileID: 11400000, guid: d600a0fa196fa2a4b95cb8ec1b5ae12b, type: 2}
+    - {fileID: 11400000, guid: e13ba247338342941bfb24da2213dc3d, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -36,13 +39,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 1
-      Data: test
+      Data: 'StartSequence '
     - Name: $v
       Entry: 10
       Data: 0
@@ -54,10 +57,46 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: test2
+      Data: SigneVillageToCapture
     - Name: $v
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SignPoseidon
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ZeusTaunt
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: VillageCaptured
+    - Name: $v
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 

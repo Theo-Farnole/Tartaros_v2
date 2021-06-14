@@ -2,7 +2,6 @@
 {
 	using System;
 	using Tartaros.ServicesLocator;
-	using UnityEditor;
 	using UnityEngine;
 
 	public class SectorObject : MonoBehaviour
@@ -96,7 +95,6 @@
 			}
 
 			_lastCheckPosition = transform.position;
-			Debug.Log("Set current sector");
 
 			SectorMoved?.Invoke(this, new SectorMovedArgs(previousSector, _currentSector));
 		}
