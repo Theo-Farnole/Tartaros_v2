@@ -58,7 +58,7 @@
 			{
 				if (HasFavorCost)
 				{
-					return string.Format("{0} {1}", _favorCost, TartarosTexts.FAVOR);
+					return string.Format("{0} {1}", TartarosTexts.FAVOR, _favorCost);
 				}
 				else if (HasSectorResourcesCost)
 				{

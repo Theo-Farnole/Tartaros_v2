@@ -60,7 +60,7 @@
 				{
 					string richTextSprite = resourceType.GetRichTextSprite();
 
-					sb.AppendFormat("{0}{1}", amount, richTextSprite);
+					sb.AppendFormat("{0}{1}", richTextSprite, amount);
 					sb.AppendFormat(" ");
 				}
 
