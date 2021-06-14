@@ -8,17 +8,17 @@
 	public class IconsDatabaseData : SerializedScriptableObject
 	{
 		#region Fields
-		[SerializeField] private Sprite _attackIcon = null;
-		[SerializeField] private Sprite _moveIcon = null;
-		[SerializeField] private Sprite _moveAgressivelyIcon = null;
-		[SerializeField] private Sprite _patrolIcon = null;
-		[SerializeField] private Sprite _instanciateGateIcon = null;
-		[SerializeField] private Sprite _openDoorIcon = null;
-		[SerializeField] private Sprite _closeDoorIcon = null;
+		[SerializeField, PreviewField] private Sprite _attackIcon = null;
+		[SerializeField, PreviewField] private Sprite _moveIcon = null;
+		[SerializeField, PreviewField] private Sprite _moveAgressivelyIcon = null;
+		[SerializeField, PreviewField] private Sprite _patrolIcon = null;
+		[SerializeField, PreviewField] private Sprite _instanciateGateIcon = null;
+		[SerializeField, PreviewField] private Sprite _openDoorIcon = null;
+		[SerializeField, PreviewField] private Sprite _closeDoorIcon = null;
 		[SerializeField] private Dictionary<SectorRessourceType, Sprite> _icons = new Dictionary<SectorRessourceType, Sprite>();
-		[SerializeField] private Sprite _healIcon = null;
-		[SerializeField] private Sprite _selfKillIcon = null;
-		[SerializeField] private Sprite _populationIcon = null;
+		[SerializeField, PreviewField] private Sprite _healIcon = null;
+		[SerializeField, PreviewField] private Sprite _selfKillIcon = null;
+		[SerializeField, PreviewField] private Sprite _populationIcon = null;
 		#endregion Fields
 
 		#region Properties
