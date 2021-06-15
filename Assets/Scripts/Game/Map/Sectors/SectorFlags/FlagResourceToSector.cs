@@ -17,6 +17,7 @@
 		#region Fields
 		[SerializeField] private SectorRessourceType _type = SectorRessourceType.Food;
 		[SerializeField] private int _resourcesAvailableAtStart = 1000;
+		[SerializeField] private bool _autoCapture = false;
 
 		private int _currentAvailableResources = 1000;
 
@@ -80,9 +81,21 @@
 			SetBuildingSlotConstructable();
 		}
 
+	
+
 		private void OnEnable()
 		{
 			CheckIfCaptureBuildingIsHere();
+		}
+
+		private void Start()
+		{
+			if (_autoCapture == true)
+			{
+				ISector sector = _map.GetSectorOnPosition(transform.position);
+				sector.IsCaptured = true;
+				sector.GetBuildingSlotAvailable().Construct();
+			}
 		}
 
 		public bool IsDepleted()

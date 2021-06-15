@@ -12,6 +12,7 @@
 		[SerializeField] private SectorRessourceType _ressourceType = SectorRessourceType.Iron;
 		[SerializeField] private int _ressourcePerTick = 5;
 		[SerializeField] private int _gloryIncomeOnCapture = 0;
+		[SerializeField] private bool _autoCapture = false;
 
 		private int _maxRessourceBeforeEmpty = 0;
 		private IPlayerIncomeManager _playerIncomeManager = null;
@@ -39,6 +40,16 @@
 
 			sector.Captured -= OnSectorCapture;
 			sector.Captured += OnSectorCapture;
+		}
+
+		private void Start()
+		{
+			if(_autoCapture == true)
+			{
+				var sector = _sectorObject.CurrentSector;
+
+				sector.IsCaptured = true;
+			}
 		}
 
 		private void OnSectorCapture(object sender, CapturedArgs e)

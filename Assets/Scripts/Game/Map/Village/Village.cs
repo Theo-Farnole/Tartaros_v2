@@ -19,6 +19,7 @@
 		[SerializeField] private CaptureBuilding _buildingCapture = null;
 		[SerializeField] private bool _ENABLE_DIALOGUE_STATE_EDITOR = false;
 		[SerializeField] private Power _onCapturePowerUnlocked = Power.None;
+		[SerializeField] private bool _autoCaptured = false;
 
 		private ISector _sector = null;
 
@@ -62,6 +63,11 @@
 
 		private void Start()
 		{
+			if(_autoCaptured == true)
+			{
+				_sector.IsCaptured = true;
+			}
+
 			if (_sector.IsCaptured == true)
 			{
 				UnlockPower();

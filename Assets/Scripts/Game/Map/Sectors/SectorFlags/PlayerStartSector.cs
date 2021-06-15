@@ -21,6 +21,7 @@
 		{
 			ISector sector = _map.GetSectorOnPosition(transform.position);
 			_captureManager.ForceCapture(sector);
+			//sector.IsCaptured = true;
 		}
 
 		private void OnDrawGizmos()
