@@ -145,7 +145,7 @@
 
 					if (point.Waypoints.Length == 0)
 					{
-						NavMesh.CalculatePath(point.SpawnPoint, position, NavMesh.AllAreas, path);
+						NavMesh.CalculatePath(point.TransformPoint, position, NavMesh.AllAreas, path);
 					}
 					else
 					{

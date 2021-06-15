@@ -6,7 +6,7 @@
 	{
 		#region Fields
 		private int _gloryAmount = 0;
-		private int _maxGloryAmount = 100;
+		private int _maxGloryAmount = 220;
 		#endregion Fields
 
 		#region Properties

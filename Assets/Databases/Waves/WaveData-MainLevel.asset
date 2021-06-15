@@ -27,7 +27,7 @@ MonoBehaviour:
       Data: 0|Tartaros.Wave.WaveData[], Tartaros
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|Tartaros.Wave.WaveData, Tartaros
@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
@@ -130,26 +130,48 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Tartaros.Wave.WaveData, Tartaros
+    - Name: _sequencesBySpawnPoint
+      Entry: 7
+      Data: 9|System.Collections.Generic.Dictionary`2[[Tartaros.Wave.SpawnPointIdentifier,
+        Tartaros],[Tartaros.Wave.UnitSequence[], Tartaros]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 3
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 8
+      Data: 6
     - Name: $v
       Entry: 7
-      Data: 8|Tartaros.Wave.UnitSequence[], Tartaros
+      Data: 10|Tartaros.Wave.UnitSequence[], Tartaros
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 9|Tartaros.Wave.UnitSequence, Tartaros
+      Data: 11|Tartaros.Wave.UnitSequence, Tartaros
     - Name: _prefabToSpawn
       Entry: 10
       Data: 0
     - Name: _entitiesCount
       Entry: 3
-      Data: 50
+      Data: 75
     - Name: _secondsBetweenUnits
       Entry: 4
       Data: 0.02
@@ -169,33 +191,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|Tartaros.Wave.WaveData, Tartaros
-    - Name: _sequencesBySpawnPoint
-      Entry: 7
-      Data: 11|System.Collections.Generic.Dictionary`2[[Tartaros.Wave.SpawnPointIdentifier,
-        Tartaros],[Tartaros.Wave.UnitSequence[], Tartaros]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 3
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 6
+      Data: 7
     - Name: $v
       Entry: 7
       Data: 12|Tartaros.Wave.UnitSequence[], Tartaros
@@ -234,7 +234,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 7
+      Data: 8
     - Name: $v
       Entry: 7
       Data: 14|Tartaros.Wave.UnitSequence[], Tartaros
@@ -273,7 +273,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 8
+      Data: 3
     - Name: $v
       Entry: 7
       Data: 16|Tartaros.Wave.UnitSequence[], Tartaros
@@ -291,10 +291,10 @@ MonoBehaviour:
       Data: 75
     - Name: _secondsBetweenUnits
       Entry: 4
-      Data: 0.02
+      Data: 0.5
     - Name: _secondsBeforeSpawn
       Entry: 4
-      Data: 0
+      Data: 45
     - Name: 
       Entry: 8
       Data: 
@@ -312,7 +312,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 3
+      Data: 4
     - Name: $v
       Entry: 7
       Data: 18|Tartaros.Wave.UnitSequence[], Tartaros
@@ -333,7 +333,7 @@ MonoBehaviour:
       Data: 0.5
     - Name: _secondsBeforeSpawn
       Entry: 4
-      Data: 30
+      Data: 45
     - Name: 
       Entry: 8
       Data: 
@@ -351,7 +351,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 4
+      Data: 5
     - Name: $v
       Entry: 7
       Data: 20|Tartaros.Wave.UnitSequence[], Tartaros
@@ -366,336 +366,13 @@ MonoBehaviour:
       Data: 0
     - Name: _entitiesCount
       Entry: 3
-      Data: 75
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 30
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 5
-    - Name: $v
-      Entry: 7
-      Data: 22|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 23|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
       Data: 30
     - Name: _secondsBetweenUnits
       Entry: 4
       Data: 0.5
     - Name: _secondsBeforeSpawn
       Entry: 4
-      Data: 30
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 24|Tartaros.Wave.WaveData, Tartaros
-    - Name: _sequencesBySpawnPoint
-      Entry: 7
-      Data: 25|System.Collections.Generic.Dictionary`2[[Tartaros.Wave.SpawnPointIdentifier,
-        Tartaros],[Tartaros.Wave.UnitSequence[], Tartaros]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 26|System.Collections.Generic.EnumEqualityComparer`1[[Tartaros.Wave.SpawnPointIdentifier,
-        Tartaros]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 7
-      Data: 27|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 28|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 29|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 4
-    - Name: $v
-      Entry: 7
-      Data: 30|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 31|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 5
-    - Name: $v
-      Entry: 7
-      Data: 32|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 33|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 6
-    - Name: $v
-      Entry: 7
-      Data: 34|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 35|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 7
-    - Name: $v
-      Entry: 7
-      Data: 36|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 37|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 8
-    - Name: $v
-      Entry: 7
-      Data: 38|Tartaros.Wave.UnitSequence[], Tartaros
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 39|Tartaros.Wave.UnitSequence, Tartaros
-    - Name: _prefabToSpawn
-      Entry: 10
-      Data: 0
-    - Name: _entitiesCount
-      Entry: 3
-      Data: 30
-    - Name: _secondsBetweenUnits
-      Entry: 4
-      Data: 0.5
-    - Name: _secondsBeforeSpawn
-      Entry: 4
-      Data: 0
+      Data: 45
     - Name: 
       Entry: 8
       Data: 

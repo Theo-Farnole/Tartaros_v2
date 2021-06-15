@@ -34,6 +34,8 @@
 
 		NavMeshPath[] ISpawnPoint.NavPaths => _navPath;
 
+		Vector3 ISpawnPoint.TransformPoint => transform.position;
+
 		#endregion Properties
 
 		private void Start()
