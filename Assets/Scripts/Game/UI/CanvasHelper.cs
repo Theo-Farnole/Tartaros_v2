@@ -12,7 +12,7 @@
 		public static void HideAllMenus(params APanel[] panelsToIgnore)
 		{
 			var panels = UnityEngine.Object.FindObjectsOfType<APanel>()
-					.Where(x => IsCanvasIgnored(x))
+					.Where(x => IsCanvasIgnored(x) && x.IsShow)
 					.ToArray();
 
 			// check for errors
