@@ -13,9 +13,20 @@
 		#endregion Fields
 
 		#region Methods
-		private void Start()
+		private void Awake()
 		{
 			_audioSource = GetComponent<AudioSource>();
+		}
+
+		public void Play()
+		{
+			_audioSource.clip = _audioClips.GetRandom();
+			_audioSource.Play();
+		}
+
+		public void Stop()
+		{
+			_audioSource.Stop();
 		}
 
 		public void PlayOneShot()

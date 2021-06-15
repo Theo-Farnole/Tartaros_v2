@@ -46,6 +46,7 @@
 			RegisterFromHierarchy<GloryGemsManagerUI>();
 
 			RegisterFromChildren<BuildingsDatabase>();
+			RegisterFromChildren<MusicManager>();
 			RegisterFromChildren<SectorObjectsManager>();
 			RegisterFromChildren<PlayerIncomeDisplayAmount>();
 			RegisterFromChildren<SoundsHandler>();

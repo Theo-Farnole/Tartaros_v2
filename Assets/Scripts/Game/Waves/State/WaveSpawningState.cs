@@ -3,6 +3,8 @@
 	using System.Collections;
 	using System.Linq;
 	using Tartaros.Entities;
+	using Tartaros.ServicesLocator;
+	using Tartaros.SoundsSystem;
 	using UnityEngine;
 
 	public class WaveSpawningState : AWaveSpawnerState
@@ -16,6 +18,7 @@
 		private readonly ISpawnPoint[] _spawnPoints = null;
 		private readonly WavesEnemiesStillAliveManager _stillAliveManger = null;
 		private readonly WaveSpawnerFSM _waveFSM = null;
+		private readonly MusicManager _musicManager = null;
 		#endregion Fields
 
 		#region Ctor
@@ -36,6 +39,7 @@
 			_pendingSpawnPointsCount = _spawnPoints.Length;
 			_stillAliveManger = new WavesEnemiesStillAliveManager();
 			_waveFSM = stateOwner.WaveFSM;
+			_musicManager = Services.Instance.Get<MusicManager>();
 		}
 		#endregion Ctor
 
@@ -46,6 +50,8 @@
 
 			_stateOwner.InvokeWaveSpawn();
 			SpawnWave(_stateOwner);
+
+			_musicManager.CurrentMusic = MusicManager.MusicPhase.Defend;
 		}
 
 		public override void OnUpdate()
