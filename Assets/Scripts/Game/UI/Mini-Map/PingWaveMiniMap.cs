@@ -41,8 +41,8 @@
 			{
 				GameObject ping = GameObject.Instantiate(_pingPrefab, _mapBackground.transform);
 				RectTransform rectPing = ping.GetComponent<RectTransform>();
-				rectPing.SetParent(_mapBackground.transform, false);
-				rectPing.localScale = Vector3.one;
+				//rectPing.SetParent(_mapBackground.transform, false);
+				//rectPing.localScale = Vector3.one;
 				//rectPing.sizeDelta = size;
 				rectPing.anchoredPosition = corner;
 				pings.Add(ping);
@@ -70,7 +70,7 @@
 			{
 				if(IsSpawnPointIsActive(spawn) == true)
 				{
-					output.Add(spawn.SpawnPoint);
+					output.Add(spawn.TransformPoint);
 				}
 			}
 
