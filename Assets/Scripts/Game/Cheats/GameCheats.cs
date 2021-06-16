@@ -84,7 +84,7 @@
 		}
 
 		[Cheat]
-		public static void EnterDialogueState(string dialogueID = "test")
+		public static void EnterDialogueState(string dialogueID = "VillageCaptured")
 		{
 			var dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
 

@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Gamemode.State
 {
+	using DG.Tweening;
 	using Tartaros.CameraSystem;
 	using Tartaros.Dialogue;
 	using Tartaros.Selection;
@@ -25,6 +26,7 @@
 		private readonly ClickSelectionInput _clickSelectionInput = null;
 		private readonly UIManager _uiManager = null;
 		private readonly MusicManager _musicManager = null;
+		private readonly float _startingVolume = -1;
 		#endregion
 
 		#region Ctor
@@ -35,6 +37,7 @@
 			_dialogueSequence = sequence ?? throw new System.ArgumentNullException(nameof(sequence));
 
 			_backgroundAudioSource = backgroundAudioSource;
+			_startingVolume = _backgroundAudioSource.volume;
 
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
@@ -70,8 +73,6 @@
 
 			_uiManager.ShowBlackBorders();
 
-			_musicManager.Pause();
-
 			PauseGame(true);
 
 			Vector3? destination = _dialogueSequence.BeforeDialogueCameraDestination;
@@ -98,7 +99,6 @@
 			_cameraController.EnableInputs = true;
 
 			_backgroundAudioSource.Stop();
-			_musicManager.Unpause();
 
 			_uiManager.HideBlackBorders();
 
@@ -114,18 +114,36 @@
 				_currentSpeechIndex++;
 
 				Dialogue speech = _dialogueSequence.GetDialogue(_currentSpeechIndex);
-
-				_backgroundAudioSource.Stop();
-				_backgroundAudioSource.clip = speech.BackgroundAudio;
-				_backgroundAudioSource.Play();
-
 				_dialogueManager.InvokeNewDialogueEvent(new DialogueManager.NextDialogueArgs(speech));
+				PlaySpeechMusic(speech);
 			}
 			else
 			{
 				LeaveState();
 			}
 		}
+
+		private void PlaySpeechMusic(Dialogue speech)
+		{
+			
+
+			_backgroundAudioSource.DOVolume(0, 0.1f)
+				.SetUpdate(true)
+				.OnComplete(() =>
+			{
+				_backgroundAudioSource.clip = speech.BackgroundAudio;
+				_backgroundAudioSource.DOVolume(_startingVolume, 0.1f)
+					.SetUpdate(true); ;
+
+				if (_backgroundAudioSource.isPlaying == false)
+				{
+					_backgroundAudioSource.Play();
+				}
+			});
+
+
+		}
+
 		private void DestinationReached(object sender, CinematicCameraController.DestinationReachedArgs e)
 		{
 			Debug.Log(nameof(DestinationReached));
