@@ -7,7 +7,7 @@
 	public static class GloryCheats
 	{
 		[Cheat]
-		public static void GiveGlory(int amount = 10)
+		public static void GiveGlory(int amount = 30)
 		{
 			IPlayerGloryWallet gloryWallet = Services.Instance.Get<IPlayerGloryWallet>();
 			gloryWallet.AddAmount(amount);
