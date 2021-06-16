@@ -11,6 +11,16 @@
 		[SerializeField]
 		private Dictionary<SpawnPointIdentifier, UnitSequence[]> _sequencesBySpawnPoint;
 
+		[SerializeField]
+		private bool _isDialogueEnable = false;
+
+		[ShowIf(nameof(_isDialogueEnable)), SerializeField]
+		private string _dialogue_ID = "default";
+
+		[SerializeField]
+		private bool _lauchAtStart = false;
+
+
 		public UnitSequence[] GetUnitSequences(SpawnPointIdentifier identifier)
 		{
 			return _sequencesBySpawnPoint[identifier];
