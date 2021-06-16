@@ -1,16 +1,17 @@
 ﻿namespace Tartaros.Dialogue
 {
+	using Sirenix.OdinInspector;
 	using System;
 	using Tartaros.Gamemode;
 	using Tartaros.Gamemode.State;
 	using Tartaros.ServicesLocator;
-	using Tartaros.Wave;
 	using UnityEngine;
 
 	public class DialogueManager : MonoBehaviour
 	{
 		#region Fields
-		[SerializeField] private DialoguesData _data = null;
+		[SerializeField, Required] private DialoguesData _data = null;
+		[SerializeField, Required] private AudioSource _backgroundAudioSource = null;
 
 		private GamemodeManager _gamemodeManager = null;
 		#endregion Fields
@@ -47,7 +48,7 @@
 		{
 			if (_gamemodeManager.CurrentState is DialogueState) throw new NotSupportedException("The gamemode manager is already in a dialogue state.");
 
-			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data.GetDialoguesSequence(dialogueID)));			
+			_gamemodeManager.SetState(new DialogueState(_gamemodeManager, _data.GetDialoguesSequence(dialogueID), _backgroundAudioSource));
 		}
 
 		public void ShowNextLine()

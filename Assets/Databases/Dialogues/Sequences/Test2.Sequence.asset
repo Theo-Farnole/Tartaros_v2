@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0d23757d373aa48a39c6b945a87df6, type: 3}
   m_Name: Test2.Sequence
   m_EditorClassIdentifier: 
+  _beforeDialogueFocus: 0
   _dialogues:
   - _character: {fileID: 11400000, guid: 81b87fe4d8b504042a1a45ec3f689438, type: 2}
     _speech: "Et c'est le deuxi\xE8me test!"
-  _isCameraTarget: 0
+    _useCharacterActor: 1
+    _backgroundAudio: {fileID: 0}

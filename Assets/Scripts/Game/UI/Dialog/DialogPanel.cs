@@ -18,7 +18,7 @@
 		[Title("Animation Settings")]
 		[SerializeField] private float _textAnimationDurationPerCharacter = 0.01f;
 		[SerializeField] private float _backgroundFadeInDuration = 0.3f;
-		[SerializeField] private Ease _backgroundEase = Ease.InSine;
+		[SerializeField] private Ease _backgroundEase = Ease.InSine;		
 
 		[Title("UI References")]
 		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _speakerName = null;
@@ -37,6 +37,7 @@
 		#endregion Fields
 
 		#region Methods
+		#region Mono Callbacks
 		protected override void Awake()
 		{
 			base.Awake();
@@ -67,8 +68,10 @@
 			_dialogueManager.DialogueOver -= OnDialogueOver;
 
 			_nextButton.onClick.RemoveListener(OnNextButtonClicked);
-		}
+		} 
+		#endregion
 
+		#region Events
 		private void OnNextButtonClicked()
 		{
 			if (_content.text == _dialogue.Speech)
@@ -94,7 +97,8 @@
 			Show();
 
 			SetSpeech(e.dialogue);
-		}
+		} 
+		#endregion
 
 		private void SetSpeech(Dialogue dialogue)
 		{

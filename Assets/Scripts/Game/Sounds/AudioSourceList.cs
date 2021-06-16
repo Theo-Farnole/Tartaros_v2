@@ -24,6 +24,16 @@
 			_audioSource.Play();
 		}
 
+		public void Pause()
+		{
+			_audioSource.Pause();
+		}
+
+		public void Unpause()
+		{
+			_audioSource.UnPause();
+		}
+
 		public void Stop()
 		{
 			_audioSource.Stop();

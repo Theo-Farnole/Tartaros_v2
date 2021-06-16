@@ -18,7 +18,6 @@
 		[SerializeField] private AudioSourceList _constructionMusics = null;
 		[SerializeField] private AudioSourceList _defendMusics = null;
 		[Space]
-		[SerializeField] private float _volumeFadeDuration = 1f;
 		[SerializeField] private MusicPhase _defaultPhase = MusicPhase.Construction;
 
 		private Dictionary<MusicPhase, AudioSourceList> _musicsByPhase = null;
@@ -72,6 +71,22 @@
 				{
 					audioList.Stop();
 				}
+			}
+		}
+
+		public void Unpause()
+		{
+			foreach (var kvp in _musicsByPhase)
+			{
+				kvp.Value.Unpause();
+			}
+		}
+
+		public void Pause()
+		{
+			foreach (var kvp in _musicsByPhase)
+			{
+				kvp.Value.Pause();
 			}
 		}
 		#endregion Methods

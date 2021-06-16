@@ -4,6 +4,7 @@
 	using Tartaros.Dialogue;
 	using Tartaros.Selection;
 	using Tartaros.ServicesLocator;
+	using Tartaros.SoundsSystem;
 	using Tartaros.UI;
 	using UnityEngine;
 
@@ -15,6 +16,7 @@
 		private readonly DialoguesSequence _dialogueSequence = null;
 		private readonly CameraController _cameraController = null;
 		private readonly CinematicCameraController _cinematicCameraController = null;
+		private readonly AudioSource _backgroundAudioSource = null;
 
 		// SERVICES
 		private readonly DialogueManager _dialogueManager = null;
@@ -22,18 +24,22 @@
 		private readonly RectangleSelectionInput _rectangleSelectionInput = null;
 		private readonly ClickSelectionInput _clickSelectionInput = null;
 		private readonly UIManager _uiManager = null;
+		private readonly MusicManager _musicManager = null;
 		#endregion
 
 		#region Ctor
-		public DialogueState(GamemodeManager stateOwner, DialoguesSequence sequence) : base(stateOwner)
+		public DialogueState(GamemodeManager stateOwner, DialoguesSequence sequence, AudioSource backgroundAudioSource) : base(stateOwner)
 		{
 			if (stateOwner is null) throw new System.ArgumentNullException(nameof(stateOwner));
 
 			_dialogueSequence = sequence ?? throw new System.ArgumentNullException(nameof(sequence));
 
+			_backgroundAudioSource = backgroundAudioSource;
+
 			_dialogueManager = Services.Instance.Get<DialogueManager>();
 			_currentSelection = Services.Instance.Get<CurrentSelection>();
 			_uiManager = Services.Instance.Get<UIManager>();
+			_musicManager = Services.Instance.Get<MusicManager>();
 
 			_rectangleSelectionInput = GameObject.FindObjectOfType<RectangleSelectionInput>();
 			_clickSelectionInput = GameObject.FindObjectOfType<ClickSelectionInput>();
@@ -64,6 +70,8 @@
 
 			_uiManager.ShowBlackBorders();
 
+			_musicManager.Pause();
+
 			PauseGame(true);
 
 			Vector3? destination = _dialogueSequence.BeforeDialogueCameraDestination;
@@ -89,6 +97,9 @@
 			_clickSelectionInput.enabled = true;
 			_cameraController.EnableInputs = true;
 
+			_backgroundAudioSource.Stop();
+			_musicManager.Unpause();
+
 			_uiManager.HideBlackBorders();
 
 			PauseGame(false);
@@ -103,6 +114,11 @@
 				_currentSpeechIndex++;
 
 				Dialogue speech = _dialogueSequence.GetDialogue(_currentSpeechIndex);
+
+				_backgroundAudioSource.Stop();
+				_backgroundAudioSource.clip = speech.BackgroundAudio;
+				_backgroundAudioSource.Play();
+
 				_dialogueManager.InvokeNewDialogueEvent(new DialogueManager.NextDialogueArgs(speech));
 			}
 			else
