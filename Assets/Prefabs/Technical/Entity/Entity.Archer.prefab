@@ -135,7 +135,8 @@ AudioSource:
   m_GameObject: {fileID: 2573062413219895113}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2851758921879477292, guid: 295856eff9321eb4e8c1e0e030f4db81,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5cf2da2e75c8cc14d96062414d680708, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.335
@@ -559,6 +560,8 @@ MonoBehaviour:
   _model: {fileID: 1583263601730606468}
   _deathAnimation: {fileID: 1614560178520299633, guid: ab62220f5d500924ab9d57568bf89aac,
     type: 3}
+  _deadbodyData:
+    _lifetime: 3
 --- !u!114 &6801364222663149889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16654,7 +16657,8 @@ AudioSource:
   m_GameObject: {fileID: 7091015768777353311}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2851758921879477292, guid: 295856eff9321eb4e8c1e0e030f4db81,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5cf2da2e75c8cc14d96062414d680708, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.335
