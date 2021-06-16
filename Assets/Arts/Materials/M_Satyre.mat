@@ -24,11 +24,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: c3194d9f8f243bf41b034e11a9a1c4e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7b9a47bdccd2cb14e9d667e5bebd032c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AmbientOcclusion:
-        m_Texture: {fileID: 2800000, guid: c9cf2ce5d446a9c49a3d1b526ebbc5de, type: 3}
+        m_Texture: {fileID: 2800000, guid: fc230915cb6694249bbec055acd62ffb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
-        m_Texture: {fileID: 2800000, guid: 03f8fcd8ef6de324ca8c54f98445dd67, type: 3}
+        m_Texture: {fileID: 2800000, guid: 693206556cca8a44d9d8e693bc8e1c39, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 2896bf1ea1023bb41ba05d369f6b5d2b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4c3aaa90e987eab45bca00d87cd89677, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -76,7 +76,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Roughness:
-        m_Texture: {fileID: 2800000, guid: 06fe44c04d6ea97448de51ada0588708, type: 3}
+        m_Texture: {fileID: 2800000, guid: 95807e447fe906642bf393bba8663200, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -92,10 +92,11 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
+    - _MetallicFactor: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RoughnessFactor: 1
+    - _RoughnessFactor: 0.654
     - _Shininess: 0.078125
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
