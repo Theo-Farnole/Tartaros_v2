@@ -2,8 +2,11 @@
 {
 	using Sirenix.OdinInspector;
 	using System;
+	using System.Collections;
 	using System.IO;
+	using Tartaros.Dialogue;
 	using Tartaros.Entities;
+	using Tartaros.ServicesLocator;
 	using UnityEngine;
 
 
@@ -20,6 +23,10 @@
 		private ISpawnPoint[] _spawnPoints = null;
 		private IWaveSpawnable[] _spawnedEnemies = null;
 		private IAttackable _enemiesTarget = null;
+
+		private DialogueManager _dialogueManager = null;
+
+		private bool _waitingForDialogueToEnd = false;
 		#endregion Fields
 
 		#region Properties
@@ -93,6 +100,13 @@
 		private void Start()
 		{
 			FindEnemiesTarget();
+
+			StartCoroutine(LateStart());
+		}
+
+		IEnumerator LateStart()
+		{
+			yield return new WaitForSeconds(0.01f);
 
 			if (_waveSpawnerData.PlayWaveAtStart == true)
 			{
