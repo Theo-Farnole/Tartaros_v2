@@ -2,11 +2,8 @@
 {
 	using Sirenix.OdinInspector;
 	using System;
-	using System.Collections;
 	using System.IO;
 	using Tartaros.Entities;
-	using Tartaros.ServicesLocator;
-
 	using UnityEngine;
 
 
@@ -96,7 +93,16 @@
 		private void Start()
 		{
 			FindEnemiesTarget();
-			WaveFSM.CurrentState = new WaveCooldownState(this);
+
+			if (_waveSpawnerData.PlayWaveAtStart == true)
+			{
+				_currentWaveIndex++;
+				StartNewWave();
+			}
+			else
+			{
+				WaveFSM.CurrentState = new WaveCooldownState(this);
+			}
 		}
 
 		private void Update()
@@ -112,7 +118,7 @@
 		public void StartNewWave()
 		{
 			if (IsThereWavesToSpawn() == true)
-			{				
+			{
 				_waveFSM.CurrentState = new WaveSpawningState(this);
 			}
 			else
