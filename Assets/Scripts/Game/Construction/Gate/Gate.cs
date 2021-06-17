@@ -37,7 +37,7 @@
 			if (_navObstacle == null)
 			{
 				_navObstacle = GetComponent<NavMeshObstacle>();
-				_navObstacle.carving = true;
+				//_navObstacle.carving = true;
 			}
 
 			if (_isOpen == true)
@@ -46,7 +46,7 @@
 			}
 			else
 			{
-				_navObstacle.enabled = true;
+				//_navObstacle.enabled = true;
 			}
 		}
 

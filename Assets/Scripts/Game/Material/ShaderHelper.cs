@@ -70,7 +70,7 @@
 						if (meshRenderer.material.color != color)
 						{
 							meshRenderer.material.color = color;
-							ShaderHelper.ChangeRenderMode(meshRenderer.material, ShaderHelper.BlendMode.Transparent);
+							//ShaderHelper.ChangeRenderMode(meshRenderer.material, ShaderHelper.BlendMode.Transparent);
 						}
 					}
 				}
@@ -89,7 +89,7 @@
 					foreach (var meshRenderer in meshRenderers)
 					{
 						meshRenderer.material.color = color;
-						ShaderHelper.ChangeRenderMode(meshRenderer.material, ShaderHelper.BlendMode.Transparent);
+						//ShaderHelper.ChangeRenderMode(meshRenderer.material, ShaderHelper.BlendMode.Transparent);
 					}
 				}
 			}

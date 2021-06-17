@@ -99,7 +99,7 @@
 		}
 
 		[Cheat]
-		public static void LoadGameScene(string sceneName = "MainLevel")
+		public static void LoadGameScene(string sceneName = "MainLevel_LateGame")
 		{
 			if(SceneManager.GetSceneByName(sceneName) != null)
 			{
