@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Entities
 {
+	using System;
 	using System.Collections.Generic;
 	using Tartaros.Economy;
 	using Tartaros.Orders;
@@ -65,15 +66,22 @@
 
 		public bool HaveEnoughSpace()
 		{
-			if (_neigboorManager.BackAdjacentWall == null || _neigboorManager.FrontAdjacentWall == null)
+			try
+			{
+				if (_neigboorManager != null && _neigboorManager.BackAdjacentWall == null || _neigboorManager.FrontAdjacentWall == null)
+				{
+					return false;
+				}
+
+				var managerBack = _neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
+				var managerDoubleBack = managerBack.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
+
+				return managerDoubleBack.FrontAdjacentWall != null && managerBack.BackAdjacentWall != null;
+			}
+			catch (NullReferenceException e)
 			{
 				return false;
 			}
-
-			var managerBack = _neigboorManager.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
-			var managerDoubleBack = managerBack.BackAdjacentWall.GetComponent<EntityNeigboorWallManager>();
-
-			return managerDoubleBack.FrontAdjacentWall != null && managerBack.BackAdjacentWall != null;
 		}
 
 

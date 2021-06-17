@@ -1,6 +1,7 @@
 ﻿namespace Tartaros.Economy
 {
 	using System;
+	using UnityEngine;
 
 	public class GloryWallet : IGloryWallet
 	{
@@ -17,9 +18,9 @@
 		#region Methods
 		void IGloryWallet.AddAmount(int amount)
 		{
-			if (_gloryAmount + amount > _maxGloryAmount) return;
-
 			_gloryAmount += amount;
+			_gloryAmount = Mathf.Clamp(_gloryAmount, 0, _gloryAmount);
+
 			AmountChanged?.Invoke(this, new GloryAmountChangedArgs());
 		}
 
