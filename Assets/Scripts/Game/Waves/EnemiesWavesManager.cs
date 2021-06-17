@@ -29,6 +29,7 @@
 		public WavesSpawnerData WaveSpawnerData => _waveSpawnerData;
 		public ISpawnPoint[] SpawnPoints => _spawnPoints;
 		public int CurrentWaveIndex => _currentWaveIndex;
+		public WaveData CurrentWave => _waveSpawnerData.Waves[CurrentWaveIndex];
 		public int LastWaveIndex => _waveSpawnerData.LastWaveIndex;
 		public bool IsInWaveCooldown => _waveFSM.CurrentState is WaveCooldownState;
 		public float PassedSecondsBeforeWave

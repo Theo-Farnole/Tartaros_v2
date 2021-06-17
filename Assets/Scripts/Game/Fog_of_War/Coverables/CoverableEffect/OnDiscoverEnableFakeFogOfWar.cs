@@ -9,23 +9,17 @@
 		public static readonly int ENABLE_FAKE_FOG_OF_WAR_PROJECTION = Shader.PropertyToID("_EnableFakeFoWProjection");
 
 		[SerializeField, Required] private MeshRenderer _meshRenderer = null;
-
-		private bool _hasBeenVisible = false;
 		#endregion Fields
 
 		#region Methods
 		void ICoverableEffect.OnBecomeCover()
 		{
-			if (_hasBeenVisible == false)
-			{
-				EnableFakeProjection(true);
-			}
+			EnableFakeProjection(true);
 		}
 
 		void ICoverableEffect.OnBecomeVisible()
 		{
 			EnableFakeProjection(false);
-			_hasBeenVisible = true;
 		}
 
 		private void EnableFakeProjection(bool enable)

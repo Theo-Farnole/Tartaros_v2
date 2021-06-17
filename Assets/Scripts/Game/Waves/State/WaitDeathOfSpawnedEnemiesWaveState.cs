@@ -1,5 +1,6 @@
 ﻿namespace Tartaros.Wave
 {
+	using Tartaros.Dialogue;
 	using Tartaros.ServicesLocator;
 	using Tartaros.SoundsSystem;
 	using UnityEngine.Networking;
@@ -9,13 +10,16 @@
 		#region Fields
 		private readonly WavesEnemiesStillAliveManager _stillAliveManager = null;
 		private readonly MusicManager _musicManager = null;
+		private readonly DialogueManager _dialogueManager = null;
 		#endregion Fields
 
 		#region Ctor
 		public WaitDeathOfSpawnedEnemiesWaveState(EnemiesWavesManager stateOwner, WavesEnemiesStillAliveManager stillAliveManager) : base(stateOwner)
 		{
 			_stillAliveManager = stillAliveManager;
+
 			_musicManager = Services.Instance.Get<MusicManager>();
+			_dialogueManager = Services.Instance.Get<DialogueManager>();
 		}
 		#endregion Ctor
 
@@ -30,6 +34,13 @@
 			base.OnStateExit();
 
 			_musicManager.CurrentMusic = MusicManager.MusicPhase.Construction;
+
+			var currentWave = _stateOwner.CurrentWave;
+
+			if (currentWave.LaunchDialogueWhenWaveOver)
+			{
+				_dialogueManager.EnterDialogueState(currentWave.DialogueID);
+			}
 		}
 
 		public override void OnUpdate()

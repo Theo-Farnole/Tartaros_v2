@@ -8,19 +8,20 @@
 	using UnityEngine;
 	public class WaveData
 	{
-		[SerializeField]
-		private Dictionary<SpawnPointIdentifier, UnitSequence[]> _sequencesBySpawnPoint;
-
-		[SerializeField]
-		private bool _isDialogueEnable = false;
-
-		[ShowIf(nameof(_isDialogueEnable)), SerializeField]
-		private string _dialogue_ID = "default";
-
-		[SerializeField]
-		private bool _lauchAtStart = false;
+		#region Fields
+		[SerializeField] private Dictionary<SpawnPointIdentifier, UnitSequence[]> _sequencesBySpawnPoint;
+		[SerializeField] private bool _launchDialogueWhenWaveOver = false;
+		[SerializeField, ShowIf(nameof(_launchDialogueWhenWaveOver))] private string _dialogue_ID = "default";		
+		#endregion Fields
 
 
+		#region Properties
+		public bool LaunchDialogueWhenWaveOver => _launchDialogueWhenWaveOver;
+		public string DialogueID => _dialogue_ID; 
+		#endregion Properties
+
+
+		#region Methods
 		public UnitSequence[] GetUnitSequences(SpawnPointIdentifier identifier)
 		{
 			return _sequencesBySpawnPoint[identifier];
@@ -62,6 +63,7 @@
 			}
 
 			return false;
-		}
+		} 
+		#endregion Methods
 	}
 }
