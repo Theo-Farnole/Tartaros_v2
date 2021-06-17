@@ -6,9 +6,9 @@
 	using UnityEngine;
 
 	public class DialoguesData : SerializedScriptableObject
-	{
+	{		
 		[SerializeField] private Dictionary<string, DialoguesSequence> _idByDialogue = null;
-		
+
 		public DialoguesSequence GetDialoguesSequence(string id)
 		{
 			if (_idByDialogue.ContainsKey(id) == false) throw new System.Exception("No dialogue corresponding to id \"{0}\".".Format(id));

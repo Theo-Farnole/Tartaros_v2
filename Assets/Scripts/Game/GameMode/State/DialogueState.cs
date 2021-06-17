@@ -105,6 +105,11 @@
 			PauseGame(false);
 
 			_dialogueManager.InvokeDialogueOver(new DialogueManager.DialogueOverArgs());
+
+			if (_dialogueSequence.IsNextDialogue == true)
+			{
+				_dialogueManager.ExecuteAfterFrame(() => _dialogueManager.EnterDialogueState(_dialogueSequence.NextDialogue));
+			}
 		}
 
 		public void ShowNextSpeech()
