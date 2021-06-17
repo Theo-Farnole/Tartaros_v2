@@ -11,10 +11,12 @@
 
 		public static void HideAllMenus(params APanel[] panelsToIgnore)
 		{
+
 			var panels = UnityEngine.Object.FindObjectsOfType<APanel>()
-					.Where(x => IsCanvasIgnored(x) && x.IsShow)
+					.Where(x => x.IsShow)// && IsCanvasIgnored(x) == false)
 					.ToArray();
 
+			Debug.LogFormat("{1} / {0}", UnityEngine.Object.FindObjectsOfType<APanel>().Length, panels.Length);
 			// check for errors
 			if (panels.Length == 0)
 			{
@@ -34,7 +36,7 @@
 
 			bool IsCanvasIgnored(APanel panel)
 			{
-				return Array.Exists(panelsToIgnore, x => x == panel) == false;
+				return panelsToIgnore.Contains(panel);
 			}
 		}
 

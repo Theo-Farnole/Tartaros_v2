@@ -61,8 +61,6 @@
 		{
 			base.OnStateEnter();
 
-			CanvasHelper.HideAllMenus();
-
 			_cinematicCameraController.DestinationReached -= DestinationReached;
 			_cinematicCameraController.DestinationReached += DestinationReached;
 
@@ -89,8 +87,6 @@
 		public override void OnStateExit()
 		{
 			base.OnStateExit();
-
-			CanvasHelper.ShowAllMenus();
 
 			_cinematicCameraController.DestinationReached -= DestinationReached;
 

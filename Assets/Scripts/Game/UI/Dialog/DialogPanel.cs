@@ -4,6 +4,7 @@
 	using DG.Tweening.Core;
 	using DG.Tweening.Plugins.Options;
 	using Sirenix.OdinInspector;
+	using System.Collections.Generic;
 	using Tartaros.Dialogue;
 	using Tartaros.ServicesLocator;
 	using Tartaros.UI;
@@ -18,7 +19,7 @@
 		[Title("Animation Settings")]
 		[SerializeField] private float _textAnimationDurationPerCharacter = 0.01f;
 		[SerializeField] private float _backgroundFadeInDuration = 0.3f;
-		[SerializeField] private Ease _backgroundEase = Ease.InSine;		
+		[SerializeField] private Ease _backgroundEase = Ease.InSine;
 
 		[Title("UI References")]
 		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _speakerName = null;
@@ -27,9 +28,13 @@
 		[SerializeField, SceneObjectsOnly] private TextMeshProUGUI _content = null;
 		[SerializeField, SceneObjectsOnly] private Button _nextButton = null;
 
+		[SerializeField, SceneObjectsOnly] private Canvas[] _canvasesToHide = null;
+
 		private Coroutine _textAnimationCoroutine = null;
 		private Dialogue _dialogue = null;
 		private float _backgroundAlpha = 0.8f;
+
+		private List<Canvas> _disabledCanvases = new List<Canvas>(10);
 
 		// SERVICES
 		private DialogueManager _dialogueManager = null;
@@ -68,7 +73,7 @@
 			_dialogueManager.DialogueOver -= OnDialogueOver;
 
 			_nextButton.onClick.RemoveListener(OnNextButtonClicked);
-		} 
+		}
 		#endregion
 
 		#region Events
@@ -97,7 +102,7 @@
 			Show();
 
 			SetSpeech(e.dialogue);
-		} 
+		}
 		#endregion
 
 		private void SetSpeech(Dialogue dialogue)
@@ -125,6 +130,7 @@
 		protected override void OnShow()
 		{
 			base.OnShow();
+			HideOthersPanels();
 
 			_uiManager.ShowBlackBorders();
 
@@ -137,13 +143,48 @@
 		protected override void OnHide()
 		{
 			base.OnHide();
+			ShowDisabledPanels();
 
 			if (_uiManager == null)
 			{
 				_uiManager = Services.Instance.Get<UIManager>();
 			}
 
-			_uiManager.HideBlackBorders();			
+			_uiManager.HideBlackBorders();
+		}
+
+		private void HideOthersPanels()
+		{
+			foreach (Canvas canvas in _canvasesToHide)
+			{
+				if (canvas.TryGetComponent(out APanel panel))
+				{
+					panel.Hide();
+				}
+				else
+				{
+					canvas.enabled = false;
+				}
+
+				_disabledCanvases.Add(canvas);
+			}
+		}
+
+		private void ShowDisabledPanels()
+		{
+			foreach (var canvas in _disabledCanvases)
+			{
+				if (canvas.TryGetComponent(out APanel panel))
+				{
+					panel.Hide();				
+				}
+				else
+				{
+					canvas.enabled = true;
+				}
+			}
+
+			_disabledCanvases.Clear();
 		}
 		#endregion Methods
 	}
