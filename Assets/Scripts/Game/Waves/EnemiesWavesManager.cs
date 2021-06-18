@@ -154,7 +154,6 @@
 
 		public void InvokeSpawningWaveFinished()
 		{
-			Debug.Log("finishSPawn");
 			WaveSpawnFinished?.Invoke(this, new WaveSpawningFinishedArgs());
 		}
 
