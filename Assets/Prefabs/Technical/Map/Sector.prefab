@@ -119,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4103014584774180702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.49381253, z: 0.4215799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5511430529155595144}
@@ -188,8 +188,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9811321, g: 0, b: 0, a: 1}
-      key1: {r: 0.9811321, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -299,11 +299,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: f51c2fbd074507048a18e4aff2553917, type: 2}
-  _outlineHeightOffset: 0
+  _defaultOutlineHeightOffset: 0.1
+  _capturedOutlineHeightOffset: 0.3
+  _selectedOutlineHeightOffset: 0.5
   _lineRenderer: {fileID: 8778109537714895836}
   _sector: {fileID: 7736608417416095626}
-  _selectedOutlineColor: {r: 0, g: 0.039997578, b: 1, a: 1}
-  _capturedOutlineColor: {r: 1, g: 0, b: 0, a: 1}
+  _selectedOutlineColor: {r: 0.5764507, g: 0.5915808, b: 0.9622642, a: 0.7372549}
+  _capturedOutlineColor: {r: 0.5330188, g: 0.95347494, b: 1, a: 1}
   _uncapturedOutlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &449023178508813542
 MonoBehaviour:
