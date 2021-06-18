@@ -13,20 +13,14 @@ MonoBehaviour:
   m_Name: Build_CompleteGame_Dev
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2b010b00000069006e0069007400690061006c0069007a0065006400012701090000006200750069006c00640052006f006f007400017200000044003a002f005f005f005300430048004f004f004c002f00330065006d0065005f0061006e006e00650065002f005f005f0057004f0052004b00530048004f00500053002f0032003000320031002d005400610072007400610072006f0073002f0055006e00690074007900500072006f006a0065006300740073002f005400610072007400610072006f0073005f00760032002f004200750069006c00640073002f00500072006f006d00650074006800650075007300200055006e0062006f0075006e006400730020002800310039002d0036002d00320031002900200031002f00
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: initialized
-      Entry: 5
-      Data: true
-    - Name: buildRoot
-      Entry: 1
-      Data: D:/git/PFE_Tartaros_LE_BEST/Tartaros_v2/Builds/Prometheus Unbounds (15-6-21)/
+    SerializationNodes: []
   appName: Prometheus Unbound
   pipelineRootRel: Builds
   scenes:
@@ -40,10 +34,10 @@ MonoBehaviour:
     scene: {fileID: 102900000, guid: c9bb63b56b53ebf44bba1f93b3073670, type: 3}
   - enabled: 1
     scene: {fileID: 102900000, guid: d050af279a3703b4c86bb97c1b71a13c, type: 3}
-  developmentBuild: 1
+  developmentBuild: 0
   autoconnectProfiler: 0
   strictMode: 0
-  overrideOptions: 1
+  overrideOptions: 0
   buildConfigs:
   - enabled: 1
     name: prometheus_unbound
