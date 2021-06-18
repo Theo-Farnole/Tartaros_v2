@@ -1,4 +1,4 @@
-﻿/*
+/*
 THIS FILE IS PART OF Animation Instancing PROJECT
 AnimationInstancing.cs - The core part of the Animation Instancing library
 
@@ -46,7 +46,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private static bool applicationIsQuitting = false;
 
-    public void OnDestroy()
+    protected virtual void OnDestroy()
     {
         applicationIsQuitting = true;
     }

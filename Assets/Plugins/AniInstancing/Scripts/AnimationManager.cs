@@ -67,7 +67,14 @@ namespace AnimationInstancing
             m_requestList.Clear();
         }
 
-        public InstanceAnimationInfo FindAnimationInfo(GameObject prefab, AnimationInstancing instance)
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+
+            m_mainBundle.Unload(true);
+		}
+
+		public InstanceAnimationInfo FindAnimationInfo(GameObject prefab, AnimationInstancing instance)
         {
             Debug.Assert(prefab != null);
             InstanceAnimationInfo info = null;
